@@ -1,0 +1,19 @@
+---
+description: Пайплайны импорта, рейтингов, LLM
+globs: "**/apps/api/**/import/**,**/apps/api/**/rankings/**,**/apps/api/**/context*/**,**/apps/api/**/llm/**,**/apps/api/**/queues/**,**/apps/api/**/processors/**"
+alwaysApply: false
+---
+
+# Пайплайны
+
+Канон:
+
+- `docs/tech/import-pipeline.md` (Open Library + Wikidata)
+- `docs/tech/rankings-aggregation.md` + ADR 0002
+- `docs/tech/llm-context-reading.md`
+
+- UNMATCHED → MatchQueue, батч продолжает работу
+- Matching: ExternalId → ISBN → fuzzy → queue
+- Admin needsContext важнее LLM classify
+- Whitelist доменов для context fetch
+- Jobs через BullMQ, идемпотентные processors

@@ -1,0 +1,78 @@
+# Стек и архитектура (MVP)
+
+Связано: [ADR 0001](../adr/0001-stack-mvp.md), [продуктовая спека](../product/mvp-spec.md).
+
+## Решения
+
+| Слой | Выбор | Notes |
+|------|--------|--------|
+| Frontend | Next.js (App Router) + TypeScript + React | Отдельное приложение; SSR/SEO публичных страниц; PWA |
+| Backend | NestJS + TypeScript | Отдельный API + workers |
+| ORM / БД | Prisma + PostgreSQL | |
+| Поиск | PostgreSQL Full-Text Search (русский конфиг) | Meilisearch — отдельный ADR при росте |
+| Auth | На Nest (Passport / стратегии credentials + Google + Yandex); сессия или JWT в httpOnly cookie для Next | Вариант A: бэкенд — источник истины по identity |
+| Jobs | BullMQ + Redis | Импорт, агрегация рейтингов, LLM |
+| LLM | OpenAI API за абстракцией `LlmProvider` | Смена модели без переписывания пайплайнов |
+| Админка | UI во фронте (`/admin`), данные через admin API Nest | Role check только на бэкенде |
+| Деплой MVP | Local first (Docker Compose: Next, Nest, Postgres, Redis); cloud позже без привязки к вендору | |
+
+## Высокоуровневая схема
+
+```mermaid
+flowchart LR
+  Browser[Browser_PWA] --> Next[Nextjs_Frontend]
+  Next --> Nest[NestJS_API]
+  Nest --> Pg[(PostgreSQL)]
+  Nest --> Redis[(Redis)]
+  Worker[Nest_BullMQ_Workers] --> Redis
+  Worker --> Pg
+  Worker --> OL[Open_Library_etc]
+  Worker --> OpenAI[OpenAI]
+  AdminUI[Admin_in_Next] --> Nest
+```
+
+## Границы репозитория (ориентир)
+
+Монорепо или два корня — на выбор при старте кода; логически:
+
+```
+apps/web/          # Next.js — UI, PWA, /admin pages
+apps/api/          # NestJS — REST API, auth, BullMQ processors
+packages/…         # опционально shared types / zod-схемы
+docker-compose.yml # postgres, redis, api, web (dev)
+```
+
+Фронт **не** milкает в БД: только HTTP к Nest.
+
+## Auth
+
+- Роли: guest (нет сессии), `user`, `admin` (`User.role`).
+- Провайдеры MVP: email+password, Google, Yandex.
+- Nest выдаёт/валидирует сессию (предпочтительно httpOnly cookie на API-домене + CORS/credentials из Next; либо BFF-proxy в Next на `/api/*` → Nest, чтобы cookie была first-party).
+- `isPremium` boolean в User без биллинга.
+- Защита `/admin` UI — редирект на фронте; **обязательная** проверка role на Nest admin routes.
+
+## Jobs (BullMQ)
+
+| Очередь / job | Триггер | Результат |
+|---------------|---------|-----------|
+| `catalog.import.batch` | admin | Works/Editions/Authors + ExternalId |
+| `rankings.import.source` | admin | ExternalRankingSource entries |
+| `rankings.aggregate.publish` | admin / после импорта | AggregatedScore + Ranking |
+| `context.classify.need` | admin / batch | needs_context на Work |
+| `context.extract.publish` | admin / batch | ContextReading published + admin metadata |
+
+Workers — отдельный Nest process или тот же app с `处理器` (в local compose — отдельный сервис `worker`).
+
+## Языковая политика
+
+- UI и канонические названия для пользователя — **ru**.
+- Сырые поля источников — только admin API.
+- Matching: ISBN / ExternalId → fuzzy → опционально LLM.
+
+## Что не в MVP
+
+- Микросервисы сверх `web` / `api` / `worker`.
+- GraphQL (REST + OpenAPI достаточно).
+- Meilisearch, биллинг, подписки/лента, интерактивный граф.
+- Жёсткая привязка к Vercel/AWS в docs — cloud выбираем позже.

@@ -1,0 +1,64 @@
+---
+description: Git flow develop/master — ветки, PR, коммиты с bd
+alwaysApply: true
+---
+
+# Git Flow (develop / master)
+
+## Ветки
+
+| Ветка | Назначение |
+|-------|------------|
+| `master` | Продакшен, только release/hotfix |
+| `develop` | Интеграция, база для feature |
+| `feature/bd-<id>/<slug>` | Задачи и фичи |
+| `fix/bd-<id>/<slug>` | Исправление багов |
+| `release/*` | Подготовка релиза (develop → master) |
+| `hotfix/*` | Срочные исправления в проде (от `master`) |
+
+## Именование веток
+
+```
+feature/bd-123/add-auth
+fix/bd-456/update-auth
+```
+
+- `bd-<id>` — id issue в Beads
+- `<slug>` — короткий kebab-case на английском
+
+## Workflow
+
+1. **Feature**: `git checkout develop` → `git checkout -b feature/bd-123/add-auth`
+2. **Fix**: `git checkout develop` → `git checkout -b fix/bd-456/update-auth`
+3. Работа, коммиты; перед push — **все тесты зелёные**
+4. Push feature/fix-ветки → **PR → `develop`** (не в `master`)
+5. **Release**: `release/x.y.z` от `develop` → PR в `master` + back-merge в `develop`
+6. **Hotfix**: `hotfix/x.y.z` от `master` → PR в `master` + back-merge в `develop`
+
+Merge: **merge commit** (`--no-ff`), не squash и не rebase в shared-ветки.
+
+## Commit message
+
+Conventional Commits, описание на русском, ссылка на bd-issue:
+
+```
+feat: bd-123 добавить авторизацию через Google
+fix: bd-456 исправить падение поиска при пустом запросе
+chore: bd-789 обновить зависимости api
+```
+
+Типы: `feat`, `fix`, `chore`, `docs`, `refactor`, `test`.
+
+## Ограничения для агента
+
+- **Не пушить** напрямую в `develop` и `master`
+- **Не пушить** feature/fix-ветку, пока хотя бы один тест красный — только когда все тесты зелёные
+- **Не делать** force push (особенно в `develop`/`master`)
+- **Не мержить** `develop`/`master` локально — только через PR
+- Feature/fix-ветки создавать от **`develop`**, не от `master`
+
+## Связь с Beads
+
+- Перед работой: `bd update <id> --claim`
+- Ветка и коммиты ссылаются на bd-id (`feature/bd-123/add-auth`, `feat: bd-123 …`)
+- После merge: `bd close <id>`, в конце сессии `bd dolt push`

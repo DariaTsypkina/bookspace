@@ -1,0 +1,19 @@
+---
+description: Продуктовые инварианты Книжной вселенной
+alwaysApply: true
+---
+
+# Продукт
+
+Русскоязычный веб+PWA: коллекция читателя, закрытый каталог, связи, публичные рейтинги/подборки, ContextReading через LLM.
+
+## Инварианты
+
+- Roles: guest / user / admin. User не пишет в каталог, рейтинги и подборки приложения.
+- Коллекция публична на `/u/[slug]`. Notes: PUBLIC | PRIVATE.
+- ContextReading только при PUBLISHED; source/url/model — только admin.
+- Spoiler gate: cookie ~30 дней (`spoilers_ok`).
+- Auth: email+password, Google, Yandex. `isPremium` без биллинга.
+- Нет в MVP: feed/subscriptions, graph, timeline, user catalog edits, billing.
+
+Канон: `docs/product/mvp-spec.md`.

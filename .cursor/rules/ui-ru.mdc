@@ -1,0 +1,16 @@
+---
+description: UI русский язык, навигация, PWA
+globs: "**/apps/web/**,**/components/**"
+alwaysApply: false
+---
+
+# UI / UX
+
+- Язык UI: русский; локаль дат/чисел `ru`
+- Tab-bar: Главная · Поиск · Рейтинги · Подборки · Профиль
+- Минимализм «читальня»; mobile first
+- Не показывать пользователю источники рейтингов/LLM
+- Секция «Для понимания» только при published ContextReading
+- Spoiler cookie ~30 дней; PWA: shell + recent pages, не весь каталог
+
+Экраны: `docs/tech/screens.md`.

@@ -1,0 +1,17 @@
+---
+description: Стек FE/BE и границы приложений
+alwaysApply: true
+---
+
+# Стек
+
+- `apps/web` (или аналог): Next.js + TypeScript — UI, PWA, `/admin` pages
+- `apps/api`: NestJS + TypeScript + Prisma + PostgreSQL + FTS
+- Jobs: BullMQ + Redis (worker process)
+- Auth на Nest (credentials + Google + Yandex); Next не ходит в БД
+- LLM: OpenAI через `LlmProvider`
+- Local: Docker Compose; cloud без вендор-лока в docs
+
+Следуй `docs/tech/stack-and-architecture.md` и `docs/adr/0001-stack-mvp.md`.
+
+Не вводи микросервисы сверх web/api/worker и не подключай Meilisearch без ADR.

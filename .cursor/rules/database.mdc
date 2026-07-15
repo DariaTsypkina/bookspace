@@ -1,0 +1,18 @@
+---
+description: Схема данных Prisma/домен
+globs: "**/prisma/**,**/apps/api/**"
+alwaysApply: false
+---
+
+# Схема БД
+
+Канон: `docs/tech/database-schema.md`.
+
+- Soft-delete `deletedAt`; публично только `Work.status = PUBLISHED`
+- Titles MVP: `titleRu` + `titleOrig` (не таблица переводов)
+- ExternalId unique `(source, externalKey)`
+- ContextReading: whyText RU; source* не в public API
+- User ratings не в AggregatedScore MVP
+- AuditLog на merge и publish/unpublish критичных сущностей
+
+Ломающие изменения схемы — через ADR + миграцию Prisma.
