@@ -1,8 +1,8 @@
 # Design: Agent development flow (TDD + browser)
 
 Дата: 2026-07-15  
-Статус: draft — на ревью  
-Цель после approval: канон в `docs/tech/agent-dev-flow.md` + `.cursor/rules/agent-dev-flow.mdc` + ссылка в `AGENTS.md` / `docs/README.md`.
+Статус: approved — внедрено  
+Канон: [docs/tech/agent-dev-flow.md](../../tech/agent-dev-flow.md) + `.cursor/rules/agent-dev-flow.mdc` + ссылки в `AGENTS.md` / `docs/README.md`.
 
 ## Контекст
 

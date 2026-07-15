@@ -1,0 +1,28 @@
+---
+description: TDD и browser-проверка — обязательный флоу фич для агентов
+alwaysApply: true
+---
+
+# Agent dev flow (TDD)
+
+Канон: [docs/tech/agent-dev-flow.md](docs/tech/agent-dev-flow.md).
+
+## Инварианты
+
+- Prod-код (`apps/**`, shared runtime) — только после **падающего** теста на поведение; исключений нет.
+- Docs / rules / skills без runtime-изменений тестами не требуют.
+- Вертикальный срез: red → green по слою, затем следующий слой.
+
+## На feature-ветку обязательно
+
+- Backend: unit + API/integration
+- Frontend unit (если UI)
+- Playwright smoke (если UI) — агент пишет и гоняет
+- E2E web↔api
+- Ручной чеклист: `apps/web/e2e/manual/<feature>.md` (для человека; агент только пишет файл)
+
+## Стенд и browser
+
+- Docker: Postgres + Redis; локально: `api` + `web`. UI-check только после health.
+- Exploratory в Cursor Browser — итеративно при UI + финал перед push/PR.
+- Перед push/PR: все тесты фичи green + browser-проход.

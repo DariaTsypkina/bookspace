@@ -26,6 +26,7 @@
 - [Пайплайн импорта](tech/import-pipeline.md)
 - [Агрегация рейтингов](tech/rankings-aggregation.md)
 - [LLM / ContextReading](tech/llm-context-reading.md)
+- [Процесс разработки для агентов (TDD + browser)](tech/agent-dev-flow.md)
 
 ### Функции
 

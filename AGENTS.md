@@ -9,6 +9,7 @@
 3. ADR: [docs/adr/](docs/adr/)
 4. Фичи: [docs/features/](docs/features/) (этап 9)
 5. Чеклист: [чеклист_документация_и_agent-setup.md](чеклист_документация_и_agent-setup.md)
+6. Процесс разработки и тесты: [docs/tech/agent-dev-flow.md](docs/tech/agent-dev-flow.md)
 
 При конфликте с кодом — обнови код под docs или предложи ADR.
 
