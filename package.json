@@ -14,7 +14,7 @@
     "check": "pnpm run format:check && pnpm run lint && pnpm run typecheck",
     "check:precommit": "pnpm run format:check",
     "check:prepush": "pnpm run check",
-    "test": "pnpm -r test"
+    "test": "pnpm --filter api test && pnpm --filter web test"
   },
   "devDependencies": {
     "concurrently": "^9.2.1",

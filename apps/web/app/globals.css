@@ -1,17 +1,17 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #f7f5f0;
+  --foreground: #1c1917;
+  --muted: #57534e;
+  --border: #d6d3d1;
+  --surface: #ffffff;
+  --accent: #292524;
+  --accent-text: #fafaf9;
+  --error: #b42318;
 }
 
 html {
   height: 100%;
+  color-scheme: light;
 }
 
 html,
@@ -26,7 +26,7 @@ body {
   flex-direction: column;
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -38,12 +38,116 @@ body {
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+.home-page {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.home-page h1 {
+  font-size: 1.75rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--foreground);
+}
+
+.auth-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem 1rem;
+  max-width: 24rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.auth-page h1 {
+  font-size: 1.75rem;
+  font-weight: 400;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+}
+
+.auth-form label {
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+.auth-form input {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  background: var(--surface);
+  color: var(--foreground);
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+.auth-form input:focus {
+  outline: 2px solid var(--foreground);
+  outline-offset: 1px;
+}
+
+.auth-form button {
+  margin-top: 0.5rem;
+  padding: 0.65rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  background: var(--accent);
+  color: var(--accent-text);
+  font-size: 1rem;
+  cursor: pointer;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+.auth-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.auth-error {
+  color: var(--error);
+  font-size: 0.9rem;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+.auth-page > p {
+  font-size: 0.95rem;
+  color: var(--muted);
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
 }
