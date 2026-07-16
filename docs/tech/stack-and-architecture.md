@@ -16,6 +16,12 @@
 | Админка | UI во фронте (`/admin`), данные через admin API Nest | Role check только на бэкенде |
 | Деплой MVP | Local first (Docker Compose: Next, Nest, Postgres, Redis); cloud позже без привязки к вендору | |
 
+## Переменные окружения
+
+- Репозиторий содержит `.env.example` (корень, `apps/api`, `apps/web`) — шаблон для local dev.
+- Файлы `.env` в git не попадают.
+- **Prod:** никогда не копировать `.env.example` в prod как есть — только как шаблон с новыми значениями (БД, секреты auth, OAuth, LLM keys).
+
 ## Высокоуровневая схема
 
 ```mermaid
