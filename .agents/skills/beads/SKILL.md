@@ -15,6 +15,11 @@ Run:
 bd prime
 ```
 
+`bd prime` is the single source of truth for operational commands and session workflow.
+
+Full feature orchestration (epic → brainstorm → plan → review → finish; skip steps forbidden): `docs/tech/feature-workflow.md`.  
+Update `PROJECT-STATUS.md` on claim / close / new task / phase complete.
+
 If that prints nothing, check whether the repository has an active Beads workspace:
 
 ```bash
@@ -51,6 +56,8 @@ bd update <id> --claim
 
 ```bash
 bd create "Short title" --description="Why this exists and what needs to be done" --type=task --priority=2
+bd create -t epic "Goal"   # large goals only (Auth, Catalog, …); children via --parent
+bd dep add <issue> <depends-on>
 ```
 
 5. Close completed work:

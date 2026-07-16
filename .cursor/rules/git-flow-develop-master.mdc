@@ -28,7 +28,7 @@ fix/bd-456/update-auth
 
 ## Workflow
 
-1. **Feature**: `git checkout develop` → `git checkout -b feature/bd-123/add-auth`
+1. **Feature**: `git checkout develop` → `git checkout -b feature/bd-123/add-auth` (для нетривиальной работы — worktree, см. [feature-workflow](docs/tech/feature-workflow.md))
 2. **Fix**: `git checkout develop` → `git checkout -b fix/bd-456/update-auth`
 3. Работа, коммиты; перед push — **все тесты зелёные**
 4. Push feature/fix-ветки → **PR → `develop`** (не в `master`)

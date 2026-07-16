@@ -30,4 +30,6 @@
 
 ## Статус
 
-Документация по чеклисту (этапы 0–9) закрыта. Реализация кода — следующий трек.
+Живой дашборд: [PROJECT-STATUS.md](PROJECT-STATUS.md).  
+Оркестрация фич: [docs/tech/feature-workflow.md](docs/tech/feature-workflow.md).  
+Документация по чеклисту (этапы 0–9) закрыта.
