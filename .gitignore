@@ -1,6 +1,23 @@
-
 # Beads / Dolt files (added by bd init)
 .dolt/
 *.db
 .beads-credential-key
 .beads/proxieddb/
+
+# Node / pnpm
+node_modules/
+.pnpm-store/
+
+# Build outputs
+.next/
+dist/
+coverage/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Prisma
+prisma/dev.db
+prisma/dev.db-journal

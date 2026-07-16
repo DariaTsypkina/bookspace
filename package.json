@@ -1,0 +1,24 @@
+{
+  "name": "bookspace",
+  "private": true,
+  "packageManager": "pnpm@10.14.0",
+  "scripts": {
+    "prepare": "husky",
+    "dev": "concurrently -n api,web -c blue,green \"pnpm --filter api start:dev\" \"pnpm --filter web dev\"",
+    "dev:all": "pnpm run dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm --filter web run typecheck && pnpm --filter api run typecheck",
+    "format": "pnpm --filter web run format && pnpm --filter api run format && prettier --write \"AGENTS.md\" \"docs/tech/agent-dev-flow.md\" \".github/**/*.md\" \".github/**/*.yml\" \"package.json\"",
+    "format:check": "pnpm --filter web run format:check && pnpm --filter api run format:check && prettier --check \"AGENTS.md\" \"docs/tech/agent-dev-flow.md\" \".github/**/*.md\" \".github/**/*.yml\" \"package.json\"",
+    "check": "pnpm run format:check && pnpm run lint && pnpm run typecheck",
+    "check:precommit": "pnpm run format:check",
+    "check:prepush": "pnpm run check",
+    "test": "pnpm -r test"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "husky": "^9.1.7",
+    "prettier": "^3.6.2"
+  }
+}
