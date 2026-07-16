@@ -1,7 +1,7 @@
 import { ConflictException, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
-import { UserRole } from '@prisma/client';
+import { Prisma, UserRole } from '@prisma/client';
 import { compare } from 'bcryptjs';
 import { AuthService } from './auth.service';
 import { PrismaService } from '../prisma/prisma.service';
@@ -111,18 +111,13 @@ describe('AuthService', () => {
       expect(prisma.user.findUnique).toHaveBeenCalledWith({
         where: { email: 'new@example.com' },
       });
-      expect(prisma.user.create).toHaveBeenCalledWith(
-        expect.objectContaining({
-          data: expect.objectContaining({ email: 'new@example.com' }),
-        }),
-      );
+      const createArgs = prisma.user.create.mock.calls[0] as
+        [{ data: { email: string } }] | undefined;
+      expect(createArgs?.[0].data.email).toBe('new@example.com');
     });
 
     it('maps unique constraint race to ConflictException', async () => {
       prisma.user.findUnique.mockResolvedValue(null);
-      const { Prisma } = jest.requireActual(
-        '@prisma/client',
-      ) as typeof import('@prisma/client');
       prisma.user.create.mockRejectedValue(
         new Prisma.PrismaClientKnownRequestError('Unique constraint failed', {
           code: 'P2002',
