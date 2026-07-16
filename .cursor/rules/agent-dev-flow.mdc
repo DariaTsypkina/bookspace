@@ -5,13 +5,17 @@ alwaysApply: true
 
 # Agent dev flow (TDD)
 
-Канон: [docs/tech/agent-dev-flow.md](docs/tech/agent-dev-flow.md).
+Канон TDD: [docs/tech/agent-dev-flow.md](docs/tech/agent-dev-flow.md).  
+Оркестрация (эпик → plan → review → finish, скипать нельзя): [docs/tech/feature-workflow.md](docs/tech/feature-workflow.md), rule `feature-workflow.mdc`.
 
 ## Инварианты
 
 - Prod-код (`apps/**`, shared runtime) — только после **падающего** теста на поведение; исключений нет.
 - Docs / rules / skills без runtime-изменений тестами не требуют.
-- Вертикальный срез: red → green по слою, затем следующий слой.
+- Вертикальный срез (после claim): red → green по слою, затем следующий слой.
+- Для каждой feature (`bd`-issue с runtime-изменениями): **1 main subagent на feature** (может иметь child subagents).
+- В issue/PR обязательно фиксировать маппинг `feature (bd-id) -> main subagent`.
+- Handoff обязателен только с тремя полями: тесты/проверки, их результаты, изменённые файлы.
 
 ## На feature-ветку обязательно
 
@@ -24,5 +28,6 @@ alwaysApply: true
 ## Стенд и browser
 
 - Docker: Postgres + Redis; локально: `api` + `web`. UI-check только после health.
+- `.env.example` — только шаблон; **prod:** не копировать как есть, задать новые секреты (см. канон §4).
 - Exploratory в Cursor Browser — итеративно при UI + финал перед push/PR.
-- Перед push/PR: все тесты фичи green + browser-проход.
+- Перед commit/push/PR: все обязательные проверки (lint, typecheck, формат) и тесты фичи green + browser-проход.
