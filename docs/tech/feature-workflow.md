@@ -88,7 +88,7 @@ For detailed docs: see [AGENTS.md](../../AGENTS.md), this file, [agent-dev-flow.
 - [ ] Все обязательные тестовые слои green ([agent-dev-flow](agent-dev-flow.md))
 - [ ] Handoff: tests / results / changed files
 - [ ] `PROJECT-STATUS.md` обновлён
-- [ ] Issue закрыт в bd после merge/принятия работы (по профилю: conservative — close после явного ok владельца)
+- [ ] Issue закрыт в bd после merge/принятия работы; при конце сессии — Session Completion в AGENTS.md (**включая `git push`**)
 
 Эпик закрыт только если:
 

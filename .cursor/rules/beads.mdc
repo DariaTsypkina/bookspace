@@ -38,7 +38,7 @@ bd dolt push                          # Sync with the Dolt remote
 2. `bd ready` → claim → TDD (см. agent-dev-flow)
 3. Review → verify → finish branch → close issue; epic close когда дети ✅
 4. Обновлять PROJECT-STATUS.md при claim/close/новой задаче
-5. Sync: `bd dolt push` (по профилю / явной просьбе)
+5. Sync: `bd dolt push`; session end — обязательный `git push` текущей ветки (см. AGENTS.md Session Completion)
 
 ## Context Loading
 

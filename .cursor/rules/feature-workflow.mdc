@@ -43,3 +43,4 @@ Run `bd prime` — single source of truth for operational commands and session w
 - Не заявлять «готово» без verification (evidence).
 - Не закрывать эпик с открытыми детьми.
 - Не пропускать обновление `PROJECT-STATUS.md`.
+- Конец сессии: Session Completion в AGENTS.md — **работа не завершена, пока `git push` не успешен**.
