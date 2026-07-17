@@ -125,4 +125,5 @@ npm-скрипты (`test`, `test:e2e`, `test:smoke`) фиксируются п�
 - **Feature-docs** (`docs/features/*`): продуктовые критерии приёмки. Не заменяют автотесты. Ручной чеклист — рядом с e2e, не в feature-doc.
 - **Git-flow:** push только на зелёных; этот документ уточняет какие тесты и порядок TDD.
 - **Beads:** claim → работа → close после merge; эпик закрывать только когда все дети закрыты.
+- **Human intake:** доработки и баги от человека — [human-intake-workflow](human-intake-workflow.md) (классификация, план, ветка от `develop`).
 - **Product mvp-spec:** процесс не расширяет MVP scope и не дублирует продуктовую спеку.

@@ -1,0 +1,22 @@
+---
+description: Приём запросов от человека — доработки, баги, классификация по эпику/фиче
+alwaysApply: true
+---
+
+# Запросы от человека (intake)
+
+Канон: [docs/tech/human-intake-workflow.md](docs/tech/human-intake-workflow.md).  
+**Slash:** `/task` или `/задача` + описание (skill `.cursor/skills/task/SKILL.md`).
+
+Человек описывает задачу → агент **классифицирует** (эпик + feature-doc + тип) → **ставит в план** (`bd create` + `PROJECT-STATUS.md`) → **отдельная ветка** от `develop` → TDD по [agent-dev-flow](docs/tech/agent-dev-flow.md).
+
+## Обязательно
+
+1. Определить эпик (`PROJECT-STATUS`, `bd list`) и feature-doc (`docs/features/`).
+2. Тип: `bug` → ветка `fix/bd-<id>/<slug>`; доработка → `feature`/`task` → `feature/bd-<id>/<slug>`.
+3. Если привязка неочевидна — **остановиться**, сообщить человеку варианты и задать вопросы. Без уточнения не создавать issue и не писать код.
+4. Каждый запрос — отдельный bd-issue и отдельная ветка; PR в `develop`.
+
+## Не путать с новым эпиком
+
+Крупная новая цель вне текущих фаз → полный [feature-workflow](docs/tech/feature-workflow.md) (brainstorm → plan → children), не одиночная task.

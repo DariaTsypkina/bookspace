@@ -6,7 +6,8 @@ alwaysApply: true
 # Agent dev flow (TDD)
 
 Канон TDD: [docs/tech/agent-dev-flow.md](docs/tech/agent-dev-flow.md).  
-Оркестрация (эпик → plan → review → finish, скипать нельзя): [docs/tech/feature-workflow.md](docs/tech/feature-workflow.md), rule `feature-workflow.mdc`.
+Оркестрация (эпик → plan → review → finish, скипать нельзя): [docs/tech/feature-workflow.md](docs/tech/feature-workflow.md), rule `feature-workflow.mdc`.  
+Запросы от человека (доработки, баги): [docs/tech/human-intake-workflow.md](docs/tech/human-intake-workflow.md), rule `human-intake.mdc`.
 
 ## Инварианты
 
