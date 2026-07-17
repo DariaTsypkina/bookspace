@@ -1,0 +1,1 @@
+{"id":"int-d138e3970c74ad77db4c1c4406e1e1c2","kind":"field_change","created_at":"2026-07-17T08:39:07.223202Z","actor":"Daria Tsypkina","issue_id":"bd-384","extra":{"field":"status","new_value":"closed","old_value":"in_progress","reason":"Закоммичено и запушено в feature/bd-384/session-completion-git-push"}}
