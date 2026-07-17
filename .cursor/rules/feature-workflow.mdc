@@ -6,6 +6,7 @@ alwaysApply: true
 # Feature workflow (DoD)
 
 Канон: [docs/tech/feature-workflow.md](docs/tech/feature-workflow.md).  
+Запросы от человека: [docs/tech/human-intake-workflow.md](docs/tech/human-intake-workflow.md).  
 TDD-слои: [docs/tech/agent-dev-flow.md](docs/tech/agent-dev-flow.md).  
 Дашборд: [PROJECT-STATUS.md](PROJECT-STATUS.md).
 

@@ -32,6 +32,12 @@
 
 Сделано до Beads-задач: monorepo `apps/web` + `apps/api`, Docker Postgres/Redis, Prisma seed, quality gates, CI.
 
+Доп. docs (вне фаз продукта):
+
+| Статус | ID | Задача |
+|--------|-----|--------|
+| 🔄 | `bd-rtp` | Docs: human intake workflow и /task skill |
+
 ### 1. Auth — 🔄 · epic `bd-957` · 0 / 3
 
 | Статус | ID | Задача |
@@ -106,6 +112,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-17 | Claim `bd-rtp`, ветка `feature/bd-rtp/human-intake-workflow`: канон human-intake + skill `/task` |
 | 2026-07-16 | Добавлен канон `docs/tech/feature-workflow.md`, rule DoD, `PROJECT-STATUS.md`; создан epic `bd-957` Auth, дети `bd-8jk` / `bd-v2y` / `bd-wlw` |
 | 2026-07-16 | Push ветки `feature/bd-8jk/auth-email-password` (feat + lint fix) |
 | 2026-07-16 | Code review fixes для `bd-8jk` (email normalize, P2002, soft-delete, timing) |

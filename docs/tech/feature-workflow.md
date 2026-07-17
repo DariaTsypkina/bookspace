@@ -5,6 +5,8 @@
 Этот документ — **источник правды** по порядку шагов реализации крупной цели (эпик → план → задачи → код → ревью → finish).  
 Cursor rule `.cursor/rules/feature-workflow.mdc` дублирует только DoD («скипать нельзя»).
 
+**Запросы от человека** (доработки, найденные баги, уточнения фич) — отдельный канон: [human-intake-workflow](human-intake-workflow.md). Там: классификация по эпику/feature-doc, постановка в план, отдельная ветка от `develop`; при неясной привязке — уточнение у человека до кода.
+
 TDD-детали (слои тестов, стенд, browser) — в [agent-dev-flow.md](agent-dev-flow.md). После `claim` выполнение идёт **вертикальный срез** из agent-dev-flow §5.
 
 ## Context Loading
@@ -23,6 +25,8 @@ For detailed docs: see [AGENTS.md](../../AGENTS.md), this file, [agent-dev-flow.
 | **feature** / **task** | Дети эпика: одна реализуемая единица с runtime-изменениями (или docs-only task). |
 
 Эпик **не** пишут в код напрямую. Работают только по детям (`bd ready` → claim).
+
+Запросы от человека тоже становятся **детьми существующего эпика** (или запускают новый эпик, если цель крупная) — см. [human-intake-workflow](human-intake-workflow.md).
 
 ## Обязательный checklist (скипать нельзя)
 
