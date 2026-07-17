@@ -148,6 +148,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-17 | bd-conventions: канон перенесён в `.cursor/rules/bd-conventions.mdc` |
+| 2026-07-17 | Включены bd-conventions: `validation.on-create/on-close=warn`, `create.require-description=true` |
 | 2026-07-17 | Backlog: эпики + feature-задачи на все 45 feature-docs (OAuth в Auth; фазы 2–11); deps между эпиками по порядку фаз |
 | 2026-07-17 | `bd-957.1`: уточнения — редирект `/login` и `/register` → `/u/[slug]` (заглушка); реализацию отложить |
 | 2026-07-17 | `/task`: создан `bd-957.1` — редирект авторизованного с `/login` в профиль (эпик Auth) |

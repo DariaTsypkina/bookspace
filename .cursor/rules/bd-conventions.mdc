@@ -1,0 +1,54 @@
+---
+description: Beads conventions — validation, lint sections, feature/epic practice
+alwaysApply: true
+---
+
+# Beads conventions (Bookspace)
+
+Связано: [feature-workflow](docs/tech/feature-workflow.md), [human-intake-workflow](docs/tech/human-intake-workflow.md), конфиг `.beads/config.yaml`.
+
+## Что включено
+
+| Ключ | Значение | Смысл |
+|------|----------|--------|
+| `validation.on-create` | `warn` | При `bd create` без нужных секций — предупреждение, создание не блокируется |
+| `validation.on-close` | `warn` | То же при `bd close` |
+| `validation.on-sync` | `none` | Не валидировать шаблоны при sync |
+| `create.require-description` | `true` | Без `--description` создать issue нельзя |
+
+Режимы валидации: `none` · `warn` · `error` (error — жёстко блокирует операцию).
+
+## Обязательные секции по типу (`bd lint`)
+
+| Тип | Секции |
+|-----|--------|
+| `feature` / `task` / `bug` | Acceptance Criteria (`--acceptance` или `## Acceptance Criteria` в description) |
+| `epic` | Success Criteria (через `--acceptance` / секция в description) |
+| `bug` | дополнительно Steps to Reproduce |
+| `chore` | без обязательных секций |
+
+## Bookspace-практика
+
+- Эпик = фаза / крупная цель; дети = одна feature-doc → один `feature`/`task`.
+- В description указывать `Feature-doc: docs/features/<slug>.md`.
+- Acceptance брать из критериев приёмки feature-doc.
+- Для runtime-фич: parent = epic; deps через `bd dep add`.
+
+## Команды
+
+```bash
+bd config show | rg 'validation\.|create\.require'
+bd lint                          # проверить открытые issues
+bd lint --status all
+bd create "…" --type=feature --description="…" --acceptance="…" --parent=<epic>
+bd create "…" --validate         # как error для одного вызова
+```
+
+Ужесточить до блокировки:
+
+```bash
+bd config set validation.on-create error
+bd config set validation.on-close error
+```
+
+`bd doctor --check=conventions` (lint + stale + orphans) в embedded-режиме сейчас stub — используйте `bd lint`, `bd stale`, `bd orphans` по отдельности.
