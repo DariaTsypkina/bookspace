@@ -14,7 +14,9 @@
     "check": "pnpm run format:check && pnpm run lint && pnpm run typecheck",
     "check:precommit": "pnpm run format:check",
     "check:prepush": "pnpm run check",
-    "test": "pnpm --filter api test && pnpm --filter web test"
+    "test": "pnpm --filter api test && pnpm --filter web test",
+    "bd:export": "bd export -o .beads/issues.jsonl",
+    "bd:progress": "node scripts/bd-progress-export.mjs"
   },
   "devDependencies": {
     "concurrently": "^9.2.1",
