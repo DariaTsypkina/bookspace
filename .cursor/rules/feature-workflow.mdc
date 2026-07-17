@@ -1,0 +1,46 @@
+---
+description: Обязательный feature workflow — шаги нельзя пропускать
+alwaysApply: true
+---
+
+# Feature workflow (DoD)
+
+Канон: [docs/tech/feature-workflow.md](docs/tech/feature-workflow.md).  
+Запросы от человека: [docs/tech/human-intake-workflow.md](docs/tech/human-intake-workflow.md).  
+TDD-слои: [docs/tech/agent-dev-flow.md](docs/tech/agent-dev-flow.md).  
+Дашборд: [PROJECT-STATUS.md](PROJECT-STATUS.md).
+
+## Скипать нельзя
+
+Для **нового эпика** (крупная цель: Auth, Catalog, …) строго по порядку:
+
+1. `bd create -t epic "Goal"`
+2. `superpowers:brainstorming` **до кода**
+3. `superpowers:writing-plans`
+4. `bd create` на каждую задачу + `bd dep add` / `--parent=<epic>`
+5. `superpowers:using-git-worktrees` (нетривиальная работа)
+6. `bd ready` → claim → TDD RED→GREEN→REFACTOR (вертикальный срез agent-dev-flow)
+7. `superpowers:requesting-code-review`
+8. `superpowers:receiving-code-review`
+9. `superpowers:verification-before-completion`
+10. `superpowers:finishing-a-development-branch`
+11. `bd close <epic-id> --reason="Done"` когда все дети закрыты
+
+Эпик — только крупные цели. Дети — `feature` / `task`.
+
+## PROJECT-STATUS.md
+
+Обновлять обязательно при claim / close / новой задаче / завершении фазы / значимом действии.  
+Историю «Последние действия» не удалять — только добавлять строки сверху.
+
+## Context Loading
+
+Run `bd prime` — single source of truth for operational commands and session workflow.  
+Подробности: AGENTS.md, `docs/tech/feature-workflow.md`, `bd --help`.
+
+## Запреты
+
+- Не начинать prod-код на новом эпике без brainstorm + plan + bd-задач.
+- Не заявлять «готово» без verification (evidence).
+- Не закрывать эпик с открытыми детьми.
+- Не пропускать обновление `PROJECT-STATUS.md`.

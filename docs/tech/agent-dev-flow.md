@@ -1,14 +1,30 @@
 # Процесс разработки для агентов (TDD + browser)
 
-Связано: [design](../superpowers/specs/2026-07-15-agent-dev-flow-design.md), [git-flow](../../.cursor/rules/git-flow-develop-master.mdc), [стек](stack-and-architecture.md).
+Связано: [feature-workflow](feature-workflow.md) (оркестрация эпик→план→ревью), [design](../superpowers/specs/2026-07-15-agent-dev-flow-design.md), [git-flow](../../.cursor/rules/git-flow-develop-master.mdc), [стек](stack-and-architecture.md).
 
 ## 1. Цель и аудитория
 
-Единый обязательный процесс для Cursor-агентов и разработчиков: любая feature/fix-работа с изменением runtime-поведения закрывается тестами (сначала red) и проверкой UI там, где есть UI.
+Единый обязательный процесс **TDD + browser** для Cursor-агентов и разработчиков: любая feature/fix-работа с изменением runtime-поведения закрывается тестами (сначала red) и проверкой UI там, где есть UI.
 
-Этот документ — **источник правды**. Cursor rule `.cursor/rules/agent-dev-flow.mdc` дублирует только инварианты и ссылается сюда.
+Этот документ — **источник правды по TDD-слоям, стенду и browser**.  
+Порядок шагов эпика (brainstorm → plan → worktree → review → finish) и запрет пропуска — в **[feature-workflow.md](feature-workflow.md)**; rule `.cursor/rules/feature-workflow.mdc`.
 
-Пока нет `apps/` и Compose — документ описывает целевое состояние; при scaffold агент создаёт пути из §8.
+Cursor rule `.cursor/rules/agent-dev-flow.mdc` дублирует только инварианты TDD и ссылается сюда.
+
+§5 ниже выполняется **внутри** шага Implement из feature-workflow (после `bd update --claim`).
+
+## 1.1 Политика subagent-per-feature (обязательная)
+
+- Для **каждой фичи** обязателен формат `1 feature = 1 main subagent`.
+- Фича в этом контексте: отдельный `bd`-issue, в котором есть runtime-изменения.
+- Main subagent может поднимать дочерние subagents для внутренних подзадач, но внешняя ответственность за фичу остаётся у main subagent.
+- Для каждой фичи обязательно фиксировать соответствие `feature (bd-id) -> main subagent`:
+  - в процессной документации/правилах;
+  - в артефактах выполнения (issue/PR шаблоны).
+- Handoff по фиче считается неполным без трёх обязательных блоков:
+  - список запущенных тестов/проверок;
+  - результат по каждой проверке (pass/fail + краткий статус);
+  - список изменённых файлов.
 
 ## 1.1 Политика subagent-per-feature (обязательная)
 
@@ -71,7 +87,9 @@ UI-проверку **не начинать**, пока стенд не гото
 
 ## 5. Флоу фичи (вертикальный срез)
 
-1. `bd update <id> --claim`; ветка `feature/bd-<id>/<slug>` от `develop` (см. git-flow).
+Вызывается **после** claim в [feature-workflow](feature-workflow.md) (шаг Implement). Не заменяет brainstorm/plan/ревью на уровне эпика.
+
+1. `bd update <id> --claim`; ветка `feature/bd-<id>/<slug>` от `develop` (см. git-flow); worktree — по feature-workflow.
 2. Red **backend unit** → код → green → commit.
 3. Red **API/integration** → код → green → commit.
 4. Если UI: red **FE unit** → код → green → commit.
@@ -116,7 +134,9 @@ npm-скрипты (`test`, `test:e2e`, `test:smoke`) фиксируются п�
 
 ## 9. Связь с другими docs
 
+- **Feature-workflow:** оркестрация эпик → brainstorm → plan → children → worktree → review → verify → finish → close epic; [PROJECT-STATUS.md](../../PROJECT-STATUS.md).
 - **Feature-docs** (`docs/features/*`): продуктовые критерии приёмки. Не заменяют автотесты. Ручной чеклист — рядом с e2e, не в feature-doc.
 - **Git-flow:** push только на зелёных; этот документ уточняет какие тесты и порядок TDD.
-- **Beads:** claim → работа → close после merge.
+- **Beads:** claim → работа → close после merge; эпик закрывать только когда все дети закрыты.
+- **Human intake:** доработки и баги от человека — [human-intake-workflow](human-intake-workflow.md) (классификация, план, ветка от `develop`).
 - **Product mvp-spec:** процесс не расширяет MVP scope и не дублирует продуктовую спеку.

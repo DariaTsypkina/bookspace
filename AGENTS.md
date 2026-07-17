@@ -9,7 +9,10 @@
 3. ADR: [docs/adr/](docs/adr/)
 4. Фичи: [docs/features/](docs/features/) (этап 9)
 5. Чеклист: [чеклист_документация_и_agent-setup.md](чеклист_документация_и_agent-setup.md)
-6. Процесс разработки и тесты: [docs/tech/agent-dev-flow.md](docs/tech/agent-dev-flow.md)
+6. Оркестрация фич (эпик → plan → review → finish): [docs/tech/feature-workflow.md](docs/tech/feature-workflow.md)
+7. Запросы от человека (доработки, баги): [docs/tech/human-intake-workflow.md](docs/tech/human-intake-workflow.md)
+8. TDD + browser: [docs/tech/agent-dev-flow.md](docs/tech/agent-dev-flow.md)
+9. Статус проекта: [PROJECT-STATUS.md](PROJECT-STATUS.md)
 
 При конфликте с кодом — обнови код под docs или предложи ADR.
 
@@ -33,7 +36,7 @@
 
 Rules: `.cursor/rules/`. Skills (project-only): `.cursor/skills/`.
 
-Обязательная политика исполнения фич: для каждого `bd`-issue с runtime-изменениями используется `1 feature = 1 main subagent` (дочерние subagents допустимы внутри). В issue/PR обязательно фиксировать маппинг `feature (bd-id) -> main subagent` и handoff-доказательства (tests run, results, changed files) по канону `docs/tech/agent-dev-flow.md`.
+Обязательная политика исполнения фич: оркестрация по `docs/tech/feature-workflow.md` (скипать шаги нельзя); для каждого `bd`-issue с runtime-изменениями — `1 feature = 1 main subagent` и handoff (tests / results / changed files) по `docs/tech/agent-dev-flow.md`. **Запросы от человека:** классифицировать по эпику/feature-doc, поставить в план, отдельная ветка от `develop` — `docs/tech/human-intake-workflow.md`. Быстрый ввод: **`/task`** или **`/задача`** + описание в чате. Живой дашборд: `PROJECT-STATUS.md` — обновлять при claim/close/новой задаче.
 
 <!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:970c3bf2 -->
 

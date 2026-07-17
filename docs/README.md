@@ -27,6 +27,9 @@
 - [Агрегация рейтингов](tech/rankings-aggregation.md)
 - [LLM / ContextReading](tech/llm-context-reading.md)
 - [Процесс разработки для агентов (TDD + browser)](tech/agent-dev-flow.md)
+- [Feature workflow (эпик → plan → review → finish)](tech/feature-workflow.md)
+- [Запросы от человека (доработки, баги)](tech/human-intake-workflow.md)
+- [PROJECT-STATUS (дашборд)](../PROJECT-STATUS.md)
 
 ### Функции
 
