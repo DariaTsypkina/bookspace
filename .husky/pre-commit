@@ -1,2 +1,6 @@
 #!/usr/bin/env sh
 pnpm run check:precommit
+# Refresh Beads JSON snapshots for humans/agents (issues.jsonl also via export.auto)
+pnpm run bd:export
+pnpm run bd:progress
+git add .beads/issues.jsonl .beads/progress.json 2>/dev/null || true

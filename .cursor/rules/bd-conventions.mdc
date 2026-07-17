@@ -52,3 +52,15 @@ bd config set validation.on-close error
 ```
 
 `bd doctor --check=conventions` (lint + stale + orphans) в embedded-режиме сейчас stub — используйте `bd lint`, `bd stale`, `bd orphans` по отдельности.
+
+## JSON-снимки задач и прогресса
+
+| Файл | Что внутри | Как обновляется |
+|------|------------|-----------------|
+| `.beads/issues.jsonl` | Полный дамп issues (JSONL) | `export.auto=true` после write; `pnpm run bd:export` |
+| `.beads/progress.json` | Summary + прогресс по эпикам + компактный список | `pnpm run bd:progress` (и pre-commit) |
+
+```bash
+pnpm run bd:export     # .beads/issues.jsonl
+pnpm run bd:progress   # .beads/progress.json
+```

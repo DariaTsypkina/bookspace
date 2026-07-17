@@ -148,6 +148,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-17 | `bd-aud`: автоэкспорт issues.jsonl + progress.json (скрипт, pre-commit) |
 | 2026-07-17 | bd-conventions: канон перенесён в `.cursor/rules/bd-conventions.mdc` |
 | 2026-07-17 | Включены bd-conventions: `validation.on-create/on-close=warn`, `create.require-description=true` |
 | 2026-07-17 | Backlog: эпики + feature-задачи на все 45 feature-docs (OAuth в Auth; фазы 2–11); deps между эпиками по порядку фаз |
