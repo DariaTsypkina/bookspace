@@ -19,7 +19,7 @@ For detailed docs: see [AGENTS.md](../../AGENTS.md), this file, [agent-dev-flow.
 
 ## Гранулярность Beads
 
-Валидация шаблонов и `bd lint`: [bd-conventions.md](bd-conventions.md) (`.beads/config.yaml`: `validation.on-create=warn`).
+Валидация шаблонов и `bd lint`: [.cursor/rules/bd-conventions.mdc](../../.cursor/rules/bd-conventions.mdc) (`.beads/config.yaml`: `validation.on-create=warn`).
 
 | Тип | Когда |
 |-----|--------|

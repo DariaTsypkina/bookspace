@@ -1,6 +1,11 @@
+---
+description: Beads conventions — validation, lint sections, feature/epic practice
+alwaysApply: true
+---
+
 # Beads conventions (Bookspace)
 
-Связано: [feature-workflow](feature-workflow.md), [human-intake-workflow](human-intake-workflow.md), конфиг `.beads/config.yaml`.
+Связано: [feature-workflow](docs/tech/feature-workflow.md), [human-intake-workflow](docs/tech/human-intake-workflow.md), конфиг `.beads/config.yaml`.
 
 ## Что включено
 

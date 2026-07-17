@@ -68,7 +68,7 @@
 sync.remote: "git+https://github.com/DariaTsypkina/bookspace.git"
 
 # Template validation (bd-conventions). Values: none | warn | error
-# See docs/tech/bd-conventions.md
+# See .cursor/rules/bd-conventions.mdc
 validation:
   on-create: warn # missing Acceptance/Success Criteria → warning, create proceeds
   on-close: warn # same check when closing
