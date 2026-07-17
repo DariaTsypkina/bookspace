@@ -19,6 +19,8 @@ For detailed docs: see [AGENTS.md](../../AGENTS.md), this file, [agent-dev-flow.
 
 ## Гранулярность Beads
 
+Валидация шаблонов и `bd lint`: [bd-conventions.md](bd-conventions.md) (`.beads/config.yaml`: `validation.on-create=warn`).
+
 | Тип | Когда |
 |-----|--------|
 | **epic** | Крупная цель: Auth, Catalog, Library, Rankings… Контейнер intent + context. |

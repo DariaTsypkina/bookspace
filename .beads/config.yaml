@@ -66,3 +66,12 @@
 # - github.token    → use GITHUB_TOKEN env var instead
 
 sync.remote: "git+https://github.com/DariaTsypkina/bookspace.git"
+
+# Template validation (bd-conventions). Values: none | warn | error
+# See docs/tech/bd-conventions.md
+validation:
+  on-create: warn # missing Acceptance/Success Criteria → warning, create proceeds
+  on-close: warn # same check when closing
+  on-sync: none # keep none for backwards-compatible sync
+create:
+  require-description: true

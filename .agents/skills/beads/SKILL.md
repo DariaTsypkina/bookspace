@@ -19,7 +19,8 @@ bd prime
 
 Full feature orchestration (epic → brainstorm → plan → review → finish; skip steps forbidden): `docs/tech/feature-workflow.md`.  
 Human requests (bugs, enhancements): classify epic + feature-doc, `bd create`, separate branch from `develop` — `docs/tech/human-intake-workflow.md`; ask the human if placement is unclear.  
-Update `PROJECT-STATUS.md` on claim / close / new task / phase complete.
+Update `PROJECT-STATUS.md` on claim / close / new task / phase complete.  
+Issue templates / validation: `docs/tech/bd-conventions.md` (`validation.on-create=warn`, always pass `--description` and `--acceptance` for feature/task/epic).
 
 If that prints nothing, check whether the repository has an active Beads workspace:
 
