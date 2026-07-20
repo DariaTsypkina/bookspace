@@ -110,7 +110,8 @@ describe('Catalog author (e2e)', () => {
       .get(`/catalog/authors/${author.slug}`)
       .expect(200);
 
-    expect(response.body.works).toEqual([]);
+    const body = response.body as CatalogAuthorResponse;
+    expect(body.works).toEqual([]);
   });
 
   it('GET /catalog/authors/:slug returns 404 for draft author', async () => {

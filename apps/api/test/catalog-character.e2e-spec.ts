@@ -139,8 +139,9 @@ describe('Catalog character (e2e)', () => {
       .get(`/catalog/characters/${character.slug}`)
       .expect(200);
 
-    expect(response.body.appearances).toEqual([]);
-    expect(response.body.relations).toEqual([]);
+    const body = response.body as CatalogCharacterResponse;
+    expect(body.appearances).toEqual([]);
+    expect(body.relations).toEqual([]);
   });
 
   it('GET /catalog/characters/:slug returns 404 for draft character', async () => {
