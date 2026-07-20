@@ -12,6 +12,95 @@ enum UserRole {
   ADMIN
 }
 
+enum WorkStatus {
+  DRAFT
+  PUBLISHED
+  MERGED
+}
+
+enum CatalogEntityStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model Work {
+  id        String     @id @default(uuid())
+  slug      String     @unique
+  titleRu   String
+  titleOrig String?
+  status    WorkStatus @default(DRAFT)
+  deletedAt DateTime?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@index([status, deletedAt])
+}
+
+model Author {
+  id        String              @id @default(uuid())
+  slug      String              @unique
+  nameRu    String
+  nameOrig  String?
+  status    CatalogEntityStatus @default(DRAFT)
+  deletedAt DateTime?
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+
+  @@index([status, deletedAt])
+}
+
+model Series {
+  id        String              @id @default(uuid())
+  slug      String              @unique
+  nameRu    String
+  nameOrig  String?
+  status    CatalogEntityStatus @default(DRAFT)
+  deletedAt DateTime?
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+
+  @@index([status, deletedAt])
+}
+
+model Character {
+  id        String              @id @default(uuid())
+  slug      String              @unique
+  nameRu    String
+  nameOrig  String?
+  status    CatalogEntityStatus @default(DRAFT)
+  deletedAt DateTime?
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+
+  @@index([status, deletedAt])
+}
+
+model World {
+  id        String              @id @default(uuid())
+  slug      String              @unique
+  nameRu    String
+  nameOrig  String?
+  status    CatalogEntityStatus @default(DRAFT)
+  deletedAt DateTime?
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+
+  @@index([status, deletedAt])
+}
+
+model Place {
+  id        String              @id @default(uuid())
+  slug      String              @unique
+  nameRu    String
+  nameOrig  String?
+  status    CatalogEntityStatus @default(DRAFT)
+  deletedAt DateTime?
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+
+  @@index([status, deletedAt])
+}
+
 model User {
   id           String    @id @default(uuid())
   email        String    @unique
