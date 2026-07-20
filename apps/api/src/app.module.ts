@@ -1,3 +1,4 @@
+import { BullModule } from '@nestjs/bullmq';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
@@ -7,9 +8,19 @@ import { CatalogModule } from './catalog/catalog.module';
 import { ContextModule } from './context/context.module';
 import { PrismaModule } from './prisma/prisma.module';
 
+function redisConnection() {
+  const url = process.env.REDIS_URL ?? 'redis://localhost:6379';
+  const parsed = new URL(url);
+  return {
+    host: parsed.hostname,
+    port: Number(parsed.port || 6379),
+  };
+}
+
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    BullModule.forRoot({ connection: redisConnection() }),
     PrismaModule,
     AuthModule,
     CatalogModule,
