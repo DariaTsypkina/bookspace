@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-07-20T14:40:22.174Z",
+  "generated_at": "2026-07-20T14:45:17.957Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 67,
-    "open_issues": 46,
+    "open_issues": 45,
     "in_progress_issues": 4,
-    "closed_issues": 17,
-    "blocked_issues": 44,
+    "closed_issues": 18,
+    "blocked_issues": 43,
     "ready_issues": 2
   },
   "epics": [
@@ -121,11 +121,11 @@
       "status": "open",
       "priority": 2,
       "children_total": 4,
-      "children_closed": 1,
+      "children_closed": 2,
       "children_in_progress": 0,
-      "children_open": 3,
-      "progress": "1 / 4",
-      "percent_closed": 25,
+      "children_open": 2,
+      "progress": "2 / 4",
+      "percent_closed": 50,
       "children": [
         {
           "id": "bd-8s4.1",
@@ -144,7 +144,7 @@
         {
           "id": "bd-8s4.3",
           "title": "ContextReading: Пайплайн extract ContextReading",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 2
         },
@@ -926,11 +926,11 @@
     {
       "id": "bd-8s4.3",
       "title": "ContextReading: Пайплайн extract ContextReading",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-8s4",
-      "updated_at": "2026-07-17T12:36:08Z"
+      "updated_at": "2026-07-20T14:45:07Z"
     },
     {
       "id": "bd-8s4.2",
