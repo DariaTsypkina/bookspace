@@ -24,6 +24,24 @@ enum NeedsContext {
   NO
 }
 
+enum ContextReadingStatus {
+  DRAFT
+  PUBLISHED
+  REJECTED
+}
+
+enum MatchQueueKind {
+  RANKING_ENTRY
+  CONTEXT_CANDIDATE
+  IMPORT_ROW
+}
+
+enum MatchQueueStatus {
+  OPEN
+  RESOLVED
+  DISMISSED
+}
+
 enum CatalogEntityStatus {
   DRAFT
   PUBLISHED
@@ -46,8 +64,45 @@ model Work {
   editions             Edition[]
   characterAppearances CharacterAppearance[]
   places               WorkPlace[]
+  contextReadingsAsSubject     ContextReading[] @relation("ContextSubject")
+  contextReadingsAsRecommended ContextReading[] @relation("ContextRecommended")
+  matchQueueResolved           MatchQueue[]
 
   @@index([status, deletedAt])
+}
+
+model ContextReading {
+  id                String               @id @default(uuid())
+  subjectWorkId     String
+  recommendedWorkId String
+  importanceRank    Int
+  whyText           String
+  status            ContextReadingStatus @default(DRAFT)
+  sourceUrl         String?
+  sourceSnippet     String?
+  llmModel          String?
+  llmRunId          String?
+  publishedAt       DateTime?
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+  subjectWork       Work                 @relation("ContextSubject", fields: [subjectWorkId], references: [id], onDelete: Cascade)
+  recommendedWork   Work                 @relation("ContextRecommended", fields: [recommendedWorkId], references: [id], onDelete: Cascade)
+
+  @@unique([subjectWorkId, recommendedWorkId])
+  @@index([subjectWorkId, status])
+}
+
+model MatchQueue {
+  id             String           @id @default(uuid())
+  kind           MatchQueueKind
+  payload        Json
+  status         MatchQueueStatus @default(OPEN)
+  resolvedWorkId String?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  resolvedWork   Work?            @relation(fields: [resolvedWorkId], references: [id], onDelete: SetNull)
+
+  @@index([kind, status])
 }
 
 model Edition {
