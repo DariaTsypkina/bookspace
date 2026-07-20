@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-20T10:35:06.219Z",
+  "generated_at": "2026-07-20T10:41:32.179Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 65,
+    "total_issues": 66,
     "open_issues": 51,
-    "in_progress_issues": 4,
+    "in_progress_issues": 5,
     "closed_issues": 10,
-    "blocked_issues": 49,
-    "ready_issues": 2
+    "blocked_issues": 50,
+    "ready_issues": 1
   },
   "epics": [
     {
@@ -50,12 +50,12 @@
       "title": "Каталог",
       "status": "open",
       "priority": 1,
-      "children_total": 6,
+      "children_total": 7,
       "children_closed": 2,
-      "children_in_progress": 0,
+      "children_in_progress": 1,
       "children_open": 4,
-      "progress": "2 / 6",
-      "percent_closed": 33,
+      "progress": "2 / 7",
+      "percent_closed": 29,
       "children": [
         {
           "id": "bd-6v0.1",
@@ -98,6 +98,13 @@
           "status": "open",
           "type": "feature",
           "priority": 1
+        },
+        {
+          "id": "bd-6v0.7",
+          "title": "Playwright catalog-search: strict mode на ссылке Гарри Поттер",
+          "status": "in_progress",
+          "type": "bug",
+          "priority": 2
         }
       ]
     },
@@ -593,6 +600,15 @@
       "priority": 1,
       "parent": "bd-957",
       "updated_at": "2026-07-20T07:30:07Z"
+    },
+    {
+      "id": "bd-6v0.7",
+      "title": "Playwright catalog-search: strict mode на ссылке Гарри Поттер",
+      "status": "in_progress",
+      "type": "bug",
+      "priority": 2,
+      "parent": "bd-6v0",
+      "updated_at": "2026-07-20T10:41:24Z"
     },
     {
       "id": "bd-ky6",
