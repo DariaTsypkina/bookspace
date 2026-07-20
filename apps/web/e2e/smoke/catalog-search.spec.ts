@@ -22,7 +22,9 @@ test.describe('Catalog search smoke', () => {
     ).toBeVisible();
     await expect(page.getByText('Произведение')).toBeVisible();
     await expect(
-      page.getByRole('link', { name: /гарри поттер/i }),
+      page.getByRole('link', {
+        name: /гарри поттер и философский камень/i,
+      }),
     ).toBeVisible();
   });
 
