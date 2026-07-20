@@ -18,7 +18,9 @@ import type { SessionUser } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { LoginDto, RegisterDto } from './dto/auth.dto';
 import { GoogleOAuthClient } from './google-oauth.client';
+import { AuthRateLimit } from './decorators/auth-rate-limit.decorator';
 import { AuthGuard } from './guards/auth.guard';
+import { AuthRateLimitGuard } from './guards/auth-rate-limit.guard';
 import { isStrongPassword } from './password.validator';
 import { SESSION_COOKIE } from './session.constants';
 import { YandexOAuthClient } from './yandex-oauth.client';
@@ -39,6 +41,8 @@ export class AuthController {
   ) {}
 
   @Post('register')
+  @AuthRateLimit('register')
+  @UseGuards(AuthRateLimitGuard)
   async register(@Body() body: RegisterDto) {
     if (!isStrongPassword(body.password)) {
       throw new BadRequestException(
@@ -50,6 +54,8 @@ export class AuthController {
   }
 
   @Post('login')
+  @AuthRateLimit('login')
+  @UseGuards(AuthRateLimitGuard)
   @HttpCode(200)
   async login(
     @Body() body: LoginDto,

@@ -25,6 +25,7 @@ describe('Auth Yandex OAuth (e2e)', () => {
 
   beforeAll(async () => {
     process.env.OAUTH_TEST_MODE = 'true';
+    process.env.E2E_THROTTLE_BYPASS = 'true';
     process.env.YANDEX_CALLBACK_URL =
       'http://localhost:8000/auth/yandex/callback';
     process.env.WEB_URL = process.env.WEB_URL ?? 'http://localhost:3000';
@@ -158,6 +159,7 @@ describe('Auth Yandex OAuth (e2e)', () => {
   it('links Yandex Account to existing User with same email', async () => {
     await request(app.getHttpServer())
       .post('/auth/register')
+      .set('X-E2E', '1')
       .send({
         email: 'yandex-e2e-link@bookspace.local',
         password: 'Secure123!',
