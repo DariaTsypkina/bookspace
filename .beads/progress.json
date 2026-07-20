@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-20T14:19:21.854Z",
+  "generated_at": "2026-07-20T14:19:45.438Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 67,
     "open_issues": 48,
-    "in_progress_issues": 5,
-    "closed_issues": 14,
-    "blocked_issues": 47,
-    "ready_issues": 1
+    "in_progress_issues": 4,
+    "closed_issues": 15,
+    "blocked_issues": 46,
+    "ready_issues": 2
   },
   "epics": [
     {
@@ -51,11 +51,11 @@
       "status": "open",
       "priority": 1,
       "children_total": 8,
-      "children_closed": 6,
-      "children_in_progress": 1,
+      "children_closed": 7,
+      "children_in_progress": 0,
       "children_open": 1,
-      "progress": "6 / 8",
-      "percent_closed": 75,
+      "progress": "7 / 8",
+      "percent_closed": 88,
       "children": [
         {
           "id": "bd-6v0.1",
@@ -88,7 +88,7 @@
         {
           "id": "bd-6v0.5",
           "title": "Каталог: Карточка мира",
-          "status": "in_progress",
+          "status": "closed",
           "type": "feature",
           "priority": 1
         },
@@ -521,11 +521,11 @@
     {
       "id": "bd-6v0.5",
       "title": "Каталог: Карточка мира",
-      "status": "in_progress",
+      "status": "closed",
       "type": "feature",
       "priority": 1,
       "parent": "bd-6v0",
-      "updated_at": "2026-07-20T14:15:03Z"
+      "updated_at": "2026-07-20T14:19:42Z"
     },
     {
       "id": "bd-6v0.4",
