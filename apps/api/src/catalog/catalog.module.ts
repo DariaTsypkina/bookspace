@@ -4,6 +4,8 @@ import { CatalogAuthorController } from './catalog-author.controller';
 import { CatalogAuthorService } from './catalog-author.service';
 import { CatalogCharacterController } from './catalog-character.controller';
 import { CatalogCharacterService } from './catalog-character.service';
+import { CatalogPlaceController } from './catalog-place.controller';
+import { CatalogPlaceService } from './catalog-place.service';
 import { CatalogWorldController } from './catalog-world.controller';
 import { CatalogWorldService } from './catalog-world.service';
 import { CatalogSearchController } from './catalog-search.controller';
@@ -19,6 +21,7 @@ import { CatalogWorkService } from './catalog-work.service';
     CatalogAuthorController,
     CatalogCharacterController,
     CatalogWorldController,
+    CatalogPlaceController,
   ],
   providers: [
     CatalogSearchService,
@@ -26,6 +29,7 @@ import { CatalogWorkService } from './catalog-work.service';
     CatalogAuthorService,
     CatalogCharacterService,
     CatalogWorldService,
+    CatalogPlaceService,
   ],
   exports: [
     CatalogSearchService,
@@ -33,6 +37,7 @@ import { CatalogWorkService } from './catalog-work.service';
     CatalogAuthorService,
     CatalogCharacterService,
     CatalogWorldService,
+    CatalogPlaceService,
   ],
 })
 export class CatalogModule {}
