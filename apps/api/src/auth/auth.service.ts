@@ -8,6 +8,8 @@ import { Prisma, UserRole } from '@prisma/client';
 import { compare, hash } from 'bcryptjs';
 import { randomUUID } from 'crypto';
 import { PrismaService } from '../prisma/prisma.service';
+import { GOOGLE_PROVIDER } from './google-oauth.constants';
+import type { GoogleOAuthProfile } from './google-oauth.types';
 import { slugBaseFromEmail } from './slug.util';
 
 export type SafeUser = {
@@ -119,6 +121,110 @@ export class AuthService {
       throw new UnauthorizedException('Неверный email или пароль');
     }
 
+    return this.issueLoginResult(user);
+  }
+
+  /**
+   * Google OAuth: find Account → else link by email → else create User+Account.
+   */
+  async loginWithGoogle(profile: GoogleOAuthProfile): Promise<LoginResult> {
+    const email = normalizeEmail(profile.email);
+    if (!email) {
+      throw new UnauthorizedException(
+        'Google не вернул email — вход невозможен',
+      );
+    }
+    if (!profile.providerAccountId) {
+      throw new UnauthorizedException('Некорректный профиль Google');
+    }
+
+    const existingAccount = await this.prisma.account.findUnique({
+      where: {
+        provider_providerAccountId: {
+          provider: GOOGLE_PROVIDER,
+          providerAccountId: profile.providerAccountId,
+        },
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            email: true,
+            role: true,
+            slug: true,
+            deletedAt: true,
+          },
+        },
+      },
+    });
+
+    if (existingAccount) {
+      if (existingAccount.user.deletedAt) {
+        throw new UnauthorizedException('Необходима авторизация');
+      }
+      return this.issueLoginResult(existingAccount.user);
+    }
+
+    const existingUser = await this.prisma.user.findUnique({
+      where: { email },
+      select: {
+        id: true,
+        email: true,
+        role: true,
+        slug: true,
+        deletedAt: true,
+      },
+    });
+
+    if (existingUser) {
+      if (existingUser.deletedAt) {
+        throw new UnauthorizedException('Необходима авторизация');
+      }
+      await this.prisma.account.create({
+        data: {
+          provider: GOOGLE_PROVIDER,
+          providerAccountId: profile.providerAccountId,
+          userId: existingUser.id,
+        },
+      });
+      return this.issueLoginResult(existingUser);
+    }
+
+    const slug = await this.allocateUniqueSlug(slugBaseFromEmail(email));
+    const created = await this.prisma.$transaction(async (tx) => {
+      const user = await tx.user.create({
+        data: {
+          email,
+          passwordHash: null,
+          role: UserRole.USER,
+          slug,
+        },
+        select: {
+          id: true,
+          email: true,
+          role: true,
+          slug: true,
+        },
+      });
+      await tx.account.create({
+        data: {
+          provider: GOOGLE_PROVIDER,
+          providerAccountId: profile.providerAccountId,
+          userId: user.id,
+        },
+      });
+      return user;
+    });
+
+    return this.issueLoginResult(created);
+  }
+
+  private issueLoginResult(user: {
+    id: string;
+    email: string;
+    role: UserRole;
+    slug: string;
+  }): LoginResult {
     const jti = randomUUID();
     const accessToken = this.jwtService.sign({
       sub: user.id,
