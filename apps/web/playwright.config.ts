@@ -43,6 +43,11 @@ export default defineConfig({
       env: {
         ...process.env,
         SESSION_SECRET: process.env.SESSION_SECRET ?? 'e2e-session-secret',
+        OAUTH_TEST_MODE: 'true',
+        GOOGLE_CALLBACK_URL:
+          process.env.GOOGLE_CALLBACK_URL ??
+          'http://localhost:3000/api/auth/google/callback',
+        WEB_URL: process.env.WEB_URL ?? 'http://localhost:3000',
       },
     },
     {

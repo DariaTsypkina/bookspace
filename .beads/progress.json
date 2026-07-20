@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-20T08:00:26.937Z",
+  "generated_at": "2026-07-20T08:08:21.482Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 65,
-    "open_issues": 55,
+    "open_issues": 54,
     "in_progress_issues": 4,
-    "closed_issues": 6,
+    "closed_issues": 7,
     "blocked_issues": 51,
-    "ready_issues": 4
+    "ready_issues": 3
   },
   "epics": [
     {
@@ -149,11 +149,11 @@
       "status": "open",
       "priority": 1,
       "children_total": 6,
-      "children_closed": 3,
+      "children_closed": 4,
       "children_in_progress": 0,
-      "children_open": 3,
-      "progress": "3 / 6",
-      "percent_closed": 50,
+      "children_open": 2,
+      "progress": "4 / 6",
+      "percent_closed": 67,
       "children": [
         {
           "id": "bd-8jk",
@@ -172,7 +172,7 @@
         {
           "id": "bd-957.2",
           "title": "Auth: Google OAuth",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 2
         },
@@ -984,11 +984,11 @@
     {
       "id": "bd-957.2",
       "title": "Auth: Google OAuth",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-957",
-      "updated_at": "2026-07-17T12:35:53Z"
+      "updated_at": "2026-07-20T08:08:18Z"
     },
     {
       "id": "bd-rtp",
