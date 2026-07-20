@@ -309,3 +309,102 @@ a {
 .search-result-link:hover {
   text-decoration: underline;
 }
+
+.work-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.25rem 1rem 2rem;
+  max-width: 40rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.work-header h1 {
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.work-authors {
+  margin-top: 0.5rem;
+  font-size: 1.05rem;
+}
+
+.work-year,
+.work-series {
+  margin-top: 0.35rem;
+  color: var(--muted);
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-size: 0.95rem;
+}
+
+.work-editions {
+  margin-top: 1.5rem;
+}
+
+.work-editions h2 {
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+.work-editions ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.work-editions li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.85rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-size: 0.95rem;
+}
+
+.edition-language {
+  font-weight: 500;
+}
+
+.edition-translator,
+.edition-isbn,
+.edition-publisher,
+.edition-year {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.work-not-found h1 {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.work-not-found p {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+.work-not-found p + p {
+  margin-top: 1rem;
+}
