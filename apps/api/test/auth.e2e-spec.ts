@@ -11,7 +11,12 @@ const prisma = new PrismaClient();
 describe('Auth (e2e)', () => {
   let app: INestApplication<App>;
 
+  const api = () => request(app.getHttpServer());
+  const authPost = (path: string) => api().post(path).set('X-E2E', '1');
+
   beforeAll(async () => {
+    process.env.E2E_THROTTLE_BYPASS = 'true';
+
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
@@ -50,8 +55,7 @@ describe('Auth (e2e)', () => {
   });
 
   it('POST /auth/register creates USER without returning password', async () => {
-    const response = await request(app.getHttpServer())
-      .post('/auth/register')
+    const response = await authPost('/auth/register')
       .send({
         email: 'e2e-new@bookspace.local',
         password: 'Secure123!',
@@ -75,8 +79,7 @@ describe('Auth (e2e)', () => {
   });
 
   it('POST /auth/register rejects weak password', async () => {
-    await request(app.getHttpServer())
-      .post('/auth/register')
+    await authPost('/auth/register')
       .send({
         email: 'e2e-new@bookspace.local',
         password: 'weak',
@@ -85,16 +88,14 @@ describe('Auth (e2e)', () => {
   });
 
   it('POST /auth/register rejects duplicate email', async () => {
-    await request(app.getHttpServer())
-      .post('/auth/register')
+    await authPost('/auth/register')
       .send({
         email: 'e2e-dup@bookspace.local',
         password: 'Secure123!',
       })
       .expect(201);
 
-    await request(app.getHttpServer())
-      .post('/auth/register')
+    await authPost('/auth/register')
       .send({
         email: 'e2e-dup@bookspace.local',
         password: 'Secure123!',
@@ -103,16 +104,14 @@ describe('Auth (e2e)', () => {
   });
 
   it('POST /auth/login issues session cookie and returns user', async () => {
-    await request(app.getHttpServer())
-      .post('/auth/register')
+    await authPost('/auth/register')
       .send({
         email: 'e2e-new@bookspace.local',
         password: 'Secure123!',
       })
       .expect(201);
 
-    const response = await request(app.getHttpServer())
-      .post('/auth/login')
+    const response = await authPost('/auth/login')
       .send({
         email: 'e2e-new@bookspace.local',
         password: 'Secure123!',
@@ -137,16 +136,14 @@ describe('Auth (e2e)', () => {
   });
 
   it('GET /auth/me returns user for valid session cookie', async () => {
-    await request(app.getHttpServer())
-      .post('/auth/register')
+    await authPost('/auth/register')
       .send({
         email: 'e2e-new@bookspace.local',
         password: 'Secure123!',
       })
       .expect(201);
 
-    const login = await request(app.getHttpServer())
-      .post('/auth/login')
+    const login = await authPost('/auth/login')
       .send({
         email: 'e2e-new@bookspace.local',
         password: 'Secure123!',
@@ -156,7 +153,7 @@ describe('Auth (e2e)', () => {
     const cookie = login.headers['set-cookie'];
     expect(cookie).toBeDefined();
 
-    const me = await request(app.getHttpServer())
+    const me = await api()
       .get('/auth/me')
       .set('Cookie', cookie ?? [])
       .expect(200);
@@ -169,12 +166,11 @@ describe('Auth (e2e)', () => {
   });
 
   it('GET /auth/me rejects guest without cookie', async () => {
-    await request(app.getHttpServer()).get('/auth/me').expect(401);
+    await api().get('/auth/me').expect(401);
   });
 
   it('POST /auth/login rejects invalid credentials', async () => {
-    await request(app.getHttpServer())
-      .post('/auth/login')
+    await authPost('/auth/login')
       .send({
         email: 'missing@bookspace.local',
         password: 'Secure123!',
@@ -183,16 +179,14 @@ describe('Auth (e2e)', () => {
   });
 
   it('POST /auth/logout clears cookie and invalidates session token', async () => {
-    await request(app.getHttpServer())
-      .post('/auth/register')
+    await authPost('/auth/register')
       .send({
         email: 'e2e-session@bookspace.local',
         password: 'Secure123!',
       })
       .expect(201);
 
-    const login = await request(app.getHttpServer())
-      .post('/auth/login')
+    const login = await authPost('/auth/login')
       .send({
         email: 'e2e-session@bookspace.local',
         password: 'Secure123!',
@@ -202,12 +196,12 @@ describe('Auth (e2e)', () => {
     const cookie = login.headers['set-cookie'];
     expect(cookie).toBeDefined();
 
-    await request(app.getHttpServer())
+    await api()
       .get('/auth/me')
       .set('Cookie', cookie ?? [])
       .expect(200);
 
-    const logout = await request(app.getHttpServer())
+    const logout = await api()
       .post('/auth/logout')
       .set('Cookie', cookie ?? [])
       .expect(200);
@@ -217,12 +211,12 @@ describe('Auth (e2e)', () => {
     expect(cleared).toMatch(/^session=/);
     expect(cleared).toMatch(/Max-Age=0|Expires=/i);
 
-    await request(app.getHttpServer())
+    await api()
       .get('/auth/me')
       .set('Cookie', cookie ?? [])
       .expect(401);
 
-    await request(app.getHttpServer())
+    await api()
       .post('/me/library/items')
       .set('Cookie', cookie ?? [])
       .send({ workId: 'work-1' })
@@ -230,21 +224,19 @@ describe('Auth (e2e)', () => {
   });
 
   it('POST /me/library/items requires session; succeeds with cookie', async () => {
-    await request(app.getHttpServer())
+    await api()
       .post('/me/library/items')
       .send({ workId: 'work-guest' })
       .expect(401);
 
-    await request(app.getHttpServer())
-      .post('/auth/register')
+    await authPost('/auth/register')
       .send({
         email: 'e2e-session@bookspace.local',
         password: 'Secure123!',
       })
       .expect(201);
 
-    const login = await request(app.getHttpServer())
-      .post('/auth/login')
+    const login = await authPost('/auth/login')
       .send({
         email: 'e2e-session@bookspace.local',
         password: 'Secure123!',
@@ -253,7 +245,7 @@ describe('Auth (e2e)', () => {
 
     const cookie = login.headers['set-cookie'];
 
-    const created = await request(app.getHttpServer())
+    const created = await api()
       .post('/me/library/items')
       .set('Cookie', cookie ?? [])
       .send({ workId: 'work-1' })
@@ -267,23 +259,21 @@ describe('Auth (e2e)', () => {
   });
 
   it('GET /admin/ping rejects USER with 403 and allows ADMIN', async () => {
-    await request(app.getHttpServer())
-      .post('/auth/register')
+    await authPost('/auth/register')
       .send({
         email: 'e2e-admin-user@bookspace.local',
         password: 'Secure123!',
       })
       .expect(201);
 
-    const userLogin = await request(app.getHttpServer())
-      .post('/auth/login')
+    const userLogin = await authPost('/auth/login')
       .send({
         email: 'e2e-admin-user@bookspace.local',
         password: 'Secure123!',
       })
       .expect(200);
 
-    await request(app.getHttpServer())
+    await api()
       .get('/admin/ping')
       .set('Cookie', userLogin.headers['set-cookie'] ?? [])
       .expect(403);
@@ -293,15 +283,14 @@ describe('Auth (e2e)', () => {
       data: { role: 'ADMIN' },
     });
 
-    const adminLogin = await request(app.getHttpServer())
-      .post('/auth/login')
+    const adminLogin = await authPost('/auth/login')
       .send({
         email: 'e2e-admin-user@bookspace.local',
         password: 'Secure123!',
       })
       .expect(200);
 
-    const ping = await request(app.getHttpServer())
+    const ping = await api()
       .get('/admin/ping')
       .set('Cookie', adminLogin.headers['set-cookie'] ?? [])
       .expect(200);
