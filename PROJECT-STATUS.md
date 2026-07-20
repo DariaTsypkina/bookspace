@@ -15,7 +15,7 @@
 | 1 | Auth | 🔄 | 0 / 6 | `bd-957` |
 | 2 | Каталог | 🔄 | 0 / 6 | `bd-6v0` |
 | 3 | Связи и порядок | 🔒 | 0 / 4 | `bd-azl` |
-| 4 | ContextReading | 🔒 | 0 / 4 | `bd-8s4` |
+| 4 | ContextReading | 🔄 | 1 / 4 | `bd-8s4` |
 | 5 | Библиотека и профиль | 🔒 | 0 / 5 | `bd-cq7` |
 | 6 | Заметки и цель | 🔒 | 0 / 2 | `bd-sf4` |
 | 7 | Рейтинги | 🔒 | 0 / 3 | `bd-es5` |
@@ -73,12 +73,12 @@
 | ⬜ | `bd-azl.3` | Связи: Порядок чтения |
 | ⬜ | `bd-azl.4` | Связи: Spoiler gate |
 
-### 4. ContextReading — 🔒 · epic `bd-8s4` · 0 / 4
+### 4. ContextReading — 🔄 · epic `bd-8s4` · 1 / 4
 
 | Статус | ID | Задача |
 |--------|-----|--------|
 | ⬜ | `bd-8s4.1` | ContextReading: Блок «Для понимания» (UI) |
-| ⬜ | `bd-8s4.2` | ContextReading: Классификация needsContext |
+| ✅ | `bd-8s4.2` | ContextReading: Классификация needsContext |
 | ⬜ | `bd-8s4.3` | ContextReading: Пайплайн extract ContextReading |
 | ⬜ | `bd-8s4.4` | ContextReading: Админка ContextReading |
 
@@ -150,6 +150,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-20 | Закрыт `bd-8s4.2`: needsContext classify (Prisma enum, LlmProvider, admin patch/classify API, unit+e2e); ветка `task/bd-8s4.2-needs-classify` |
 | 2026-07-20 | Закрыт `bd-6v0.4`: GET /catalog/characters/:slug, /characters/[slug], SpoilerGate; ветка `task/bd-6v0.4-character-page` (коммиты dc26f7f, 3627ea8, 05ee22d) |
 | 2026-07-20 | Claim/реализация `bd-6v0.1`: FTS-поиск каталога (API + /search UI, Playwright 8/8); ветка `task/bd-6v0.1-catalog-search` — `bd close` за оркестратором |
 | 2026-07-20 | Claim/реализация `bd-957.3` Яндекс OAuth (Nest fetch, Account linking, OAUTH_TEST_MODE); ветка `task/bd-957.3-yandex-oauth` — `bd close` за оркестратором |
