@@ -1,6 +1,9 @@
 import { BullModule } from '@nestjs/bullmq';
 import { Module } from '@nestjs/common';
 import { AdminWorkController } from '../admin/admin-work.controller';
+import { AuditService } from '../audit/audit.service';
+import { AdminContextController } from './admin-context.controller';
+import { AdminContextService } from './admin-context.service';
 import { AuthModule } from '../auth/auth.module';
 import { FakeLlmProvider } from '../llm/fake-llm.provider';
 import { LLM_PROVIDER } from '../llm/llm.provider';
@@ -30,8 +33,10 @@ function redisConnection() {
       connection: redisConnection(),
     }),
   ],
-  controllers: [AdminWorkController],
+  controllers: [AdminWorkController, AdminContextController],
   providers: [
+    AuditService,
+    AdminContextService,
     ContextClassifyService,
     ContextExtractService,
     ContextJobsService,
