@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-20T15:25:21.829Z",
+  "generated_at": "2026-07-20T15:26:35.166Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 67,
-    "open_issues": 42,
+    "total_issues": 68,
+    "open_issues": 43,
     "in_progress_issues": 4,
     "closed_issues": 21,
     "blocked_issues": 41,
-    "ready_issues": 1
+    "ready_issues": 2
   },
   "epics": [
     {
@@ -162,12 +162,12 @@
       "title": "Auth",
       "status": "open",
       "priority": 1,
-      "children_total": 6,
+      "children_total": 7,
       "children_closed": 6,
       "children_in_progress": 0,
-      "children_open": 0,
-      "progress": "6 / 6",
-      "percent_closed": 100,
+      "children_open": 1,
+      "progress": "6 / 7",
+      "percent_closed": 86,
       "children": [
         {
           "id": "bd-8jk",
@@ -196,6 +196,13 @@
           "status": "closed",
           "type": "feature",
           "priority": 2
+        },
+        {
+          "id": "bd-957.4",
+          "title": "AuthModule: ConfigService не импортирован — e2e AppModule падает",
+          "status": "open",
+          "type": "bug",
+          "priority": 1
         },
         {
           "id": "bd-v2y",
@@ -509,6 +516,15 @@
     }
   ],
   "issues": [
+    {
+      "id": "bd-957.4",
+      "title": "AuthModule: ConfigService не импортирован — e2e AppModule падает",
+      "status": "open",
+      "type": "bug",
+      "priority": 1,
+      "parent": "bd-957",
+      "updated_at": "2026-07-20T15:26:22Z"
+    },
     {
       "id": "bd-6v0.6",
       "title": "Каталог: Карточка локации",

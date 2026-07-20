@@ -150,6 +150,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-20 | Обнаружен `bd-957.4` (discovered-from bd-wlw): ConfigService import missing в auth.module.ts — ломает API e2e |
 | 2026-07-20 | Закрыт `bd-wlw`: rate limit register/login (in-memory, 429); unit 9/9, e2e 23/23, Playwright 12/12; merge в `feat/bookspace-bd-957` |
 | 2026-07-20 | Закрыт `bd-6v0.4`: GET /catalog/characters/:slug, /characters/[slug], SpoilerGate; ветка `task/bd-6v0.4-character-page` (коммиты dc26f7f, 3627ea8, 05ee22d) |
 | 2026-07-20 | Claim/реализация `bd-6v0.1`: FTS-поиск каталога (API + /search UI, Playwright 8/8); ветка `task/bd-6v0.1-catalog-search` — `bd close` за оркестратором |
