@@ -60,7 +60,7 @@
 | 🔄 | `bd-6v0.1` | Каталог: Поиск по каталогу |
 | ⬜ | `bd-6v0.2` | Каталог: Карточка произведения |
 | ⬜ | `bd-6v0.3` | Каталог: Карточка автора |
-| ⬜ | `bd-6v0.4` | Каталог: Карточка персонажа |
+| ✅ | `bd-6v0.4` | Каталог: Карточка персонажа |
 | ⬜ | `bd-6v0.5` | Каталог: Карточка мира |
 | ⬜ | `bd-6v0.6` | Каталог: Карточка локации |
 
@@ -150,6 +150,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-20 | Закрыт `bd-6v0.4`: GET /catalog/characters/:slug, /characters/[slug], SpoilerGate; ветка `task/bd-6v0.4-character-page` (коммиты dc26f7f, 3627ea8, 05ee22d) |
 | 2026-07-20 | Claim/реализация `bd-6v0.1`: FTS-поиск каталога (API + /search UI, Playwright 8/8); ветка `task/bd-6v0.1-catalog-search` — `bd close` за оркестратором |
 | 2026-07-20 | Claim/реализация `bd-957.3` Яндекс OAuth (Nest fetch, Account linking, OAUTH_TEST_MODE); ветка `task/bd-957.3-yandex-oauth` — `bd close` за оркестратором |
 | 2026-07-20 | Реализация `bd-957.2` Google OAuth (Nest code flow без новых deps, Account, BFF Location, Playwright 16/16); ветка `task/bd-957.2-google-oauth` — `bd close` за оркестратором |

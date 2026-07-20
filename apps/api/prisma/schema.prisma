@@ -33,9 +33,10 @@ model Work {
   deletedAt   DateTime?
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
-  authors     WorkAuthor[]
-  seriesLinks WorkSeries[]
-  editions    Edition[]
+  authors              WorkAuthor[]
+  seriesLinks          WorkSeries[]
+  editions             Edition[]
+  characterAppearances CharacterAppearance[]
 
   @@index([status, deletedAt])
 }
@@ -108,17 +109,48 @@ model Series {
   @@index([status, deletedAt])
 }
 
+enum CharacterRelationType {
+  FRIEND
+  ENEMY
+  FAMILY
+  RELATED
+}
+
 model Character {
-  id        String              @id @default(uuid())
-  slug      String              @unique
-  nameRu    String
-  nameOrig  String?
-  status    CatalogEntityStatus @default(DRAFT)
-  deletedAt DateTime?
-  createdAt DateTime            @default(now())
-  updatedAt DateTime            @updatedAt
+  id          String                @id @default(uuid())
+  slug        String                @unique
+  nameRu      String
+  nameOrig    String?
+  status      CatalogEntityStatus   @default(DRAFT)
+  deletedAt   DateTime?
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
+  appearances CharacterAppearance[]
+  relationsFrom CharacterRelation[] @relation("CharacterRelationFrom")
+  relationsTo   CharacterRelation[] @relation("CharacterRelationTo")
 
   @@index([status, deletedAt])
+}
+
+model CharacterAppearance {
+  characterId String
+  workId      String
+  character   Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  work        Work      @relation(fields: [workId], references: [id], onDelete: Cascade)
+
+  @@id([characterId, workId])
+  @@index([workId])
+}
+
+model CharacterRelation {
+  fromCharacterId String
+  toCharacterId   String
+  type            CharacterRelationType
+  fromCharacter   Character             @relation("CharacterRelationFrom", fields: [fromCharacterId], references: [id], onDelete: Cascade)
+  toCharacter     Character             @relation("CharacterRelationTo", fields: [toCharacterId], references: [id], onDelete: Cascade)
+
+  @@id([fromCharacterId, toCharacterId, type])
+  @@index([toCharacterId])
 }
 
 model World {

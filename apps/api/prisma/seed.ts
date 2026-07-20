@@ -129,6 +129,114 @@ async function seedCatalogDemo() {
       status: WorkStatus.DRAFT,
     },
   });
+
+  const harry = await prisma.character.upsert({
+    where: { slug: 'garri-potter' },
+    update: {
+      nameRu: 'Гарри Поттер',
+      nameOrig: 'Harry Potter',
+      status: 'PUBLISHED',
+      deletedAt: null,
+    },
+    create: {
+      slug: 'garri-potter',
+      nameRu: 'Гарри Поттер',
+      nameOrig: 'Harry Potter',
+      status: 'PUBLISHED',
+    },
+  });
+
+  const hermione = await prisma.character.upsert({
+    where: { slug: 'germiona-greindzher' },
+    update: {
+      nameRu: 'Гермиона Грейнджер',
+      nameOrig: 'Hermione Granger',
+      status: 'PUBLISHED',
+      deletedAt: null,
+    },
+    create: {
+      slug: 'germiona-greindzher',
+      nameRu: 'Гермиона Грейнджер',
+      nameOrig: 'Hermione Granger',
+      status: 'PUBLISHED',
+    },
+  });
+
+  const ron = await prisma.character.upsert({
+    where: { slug: 'ron-uizli' },
+    update: {
+      nameRu: 'Рон Уизли',
+      nameOrig: 'Ron Weasley',
+      status: 'PUBLISHED',
+      deletedAt: null,
+    },
+    create: {
+      slug: 'ron-uizli',
+      nameRu: 'Рон Уизли',
+      nameOrig: 'Ron Weasley',
+      status: 'PUBLISHED',
+    },
+  });
+
+  await prisma.characterAppearance.upsert({
+    where: {
+      characterId_workId: {
+        characterId: harry.id,
+        workId: publishedWork.id,
+      },
+    },
+    update: {},
+    create: {
+      characterId: harry.id,
+      workId: publishedWork.id,
+    },
+  });
+
+  await prisma.characterAppearance.upsert({
+    where: {
+      characterId_workId: {
+        characterId: hermione.id,
+        workId: publishedWork.id,
+      },
+    },
+    update: {},
+    create: {
+      characterId: hermione.id,
+      workId: publishedWork.id,
+    },
+  });
+
+  await prisma.characterRelation.upsert({
+    where: {
+      fromCharacterId_toCharacterId_type: {
+        fromCharacterId: harry.id,
+        toCharacterId: hermione.id,
+        type: 'FRIEND',
+      },
+    },
+    update: {},
+    create: {
+      fromCharacterId: harry.id,
+      toCharacterId: hermione.id,
+      type: 'FRIEND',
+    },
+  });
+
+  await prisma.characterRelation.upsert({
+    where: {
+      fromCharacterId_toCharacterId_type: {
+        fromCharacterId: harry.id,
+        toCharacterId: ron.id,
+        type: 'FRIEND',
+      },
+    },
+    update: {},
+    create: {
+      fromCharacterId: harry.id,
+      toCharacterId: ron.id,
+      type: 'FRIEND',
+    },
+  });
 }
 
 async function main() {
