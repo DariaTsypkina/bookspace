@@ -73,11 +73,11 @@
 | ⬜ | `bd-azl.3` | Связи: Порядок чтения |
 | ⬜ | `bd-azl.4` | Связи: Spoiler gate |
 
-### 4. ContextReading — 🔄 · epic `bd-8s4` · 3 / 4
+### 4. ContextReading — 🔄 · epic `bd-8s4` · 4 / 4
 
 | Статус | ID | Задача |
 |--------|-----|--------|
-| ⬜ | `bd-8s4.1` | ContextReading: Блок «Для понимания» (UI) |
+| ✅ | `bd-8s4.1` | ContextReading: Блок «Для понимания» (UI) |
 | ✅ | `bd-8s4.2` | ContextReading: Классификация needsContext |
 | ✅ | `bd-8s4.3` | ContextReading: Пайплайн extract ContextReading |
 | ✅ | `bd-8s4.4` | ContextReading: Админка ContextReading |
@@ -150,6 +150,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-20 | Закрыт `bd-8s4.1`: блок «Для понимания» на карточке произведения (public API client, WorkContextReadingSection, disclaimer, без source URL); web unit 43/43, Playwright context-reading 4/4 (chromium-desktop+mobile); ветка `task/bd-8s4.1-context-ui` |
 | 2026-07-20 | Закрыт `bd-8s4.4`: админка ContextReading (Admin API recent/patch/unpublish/reject + AuditLog, `/admin/context`, BFF, public context-readings); api unit 6/6 + e2e 5/5, web unit 32/32, Playwright 6/6; ветка `task/bd-8s4.4-admin-context` (коммит 65ac14e) |
 | 2026-07-20 | Реализация `bd-8s4.3`: extract pipeline (ContextReading+MatchQueue schema, whitelist→LLM→match→publish/queue, BullMQ jobs, admin POST extract, unit+e2e); ветка `task/bd-8s4.3-extract-pipeline` |
 | 2026-07-20 | Закрыт `bd-8s4.2`: needsContext classify (Prisma enum, LlmProvider, admin patch/classify API, unit+e2e); ветка `task/bd-8s4.2-needs-classify` |

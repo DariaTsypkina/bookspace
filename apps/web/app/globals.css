@@ -409,6 +409,62 @@ a {
   font-size: 0.95rem;
 }
 
+.work-context-reading {
+  margin-top: 1.5rem;
+}
+
+.work-context-reading h2 {
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+.work-context-reading-disclaimer {
+  margin-bottom: 0.75rem;
+  color: var(--muted);
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.work-context-reading ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.work-context-reading li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.85rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-size: 0.95rem;
+}
+
+.work-context-reading-title {
+  font-weight: 500;
+}
+
+.work-context-reading-why {
+  color: var(--muted);
+  line-height: 1.45;
+}
+
 .edition-language {
   font-weight: 500;
 }
