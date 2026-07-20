@@ -8,6 +8,9 @@ test.describe('Auth pages smoke', () => {
     await expect(page.getByLabel('Пароль')).toBeVisible();
     await expect(page.getByRole('button', { name: 'Войти' })).toBeVisible();
     await expect(
+      page.getByRole('link', { name: 'Войти через Google' }),
+    ).toBeVisible();
+    await expect(
       page.getByRole('link', { name: 'Зарегистрироваться' }),
     ).toBeVisible();
   });
@@ -22,7 +25,12 @@ test.describe('Auth pages smoke', () => {
     await expect(
       page.getByRole('button', { name: 'Зарегистрироваться' }),
     ).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Войти' })).toBeVisible();
+    await expect(
+      page.getByRole('link', { name: 'Войти через Google' }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('link', { name: 'Войти', exact: true }),
+    ).toBeVisible();
   });
 
   test('profile stub page renders Russian placeholder', async ({ page }) => {

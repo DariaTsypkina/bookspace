@@ -45,6 +45,11 @@ async function proxyAuth(
     responseHeaders.set('content-type', upstreamType);
   }
 
+  const location = upstream.headers.get('location');
+  if (location) {
+    responseHeaders.set('location', location);
+  }
+
   const setCookies =
     typeof upstream.headers.getSetCookie === 'function'
       ? upstream.headers.getSetCookie()

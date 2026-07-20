@@ -48,7 +48,7 @@
 |--------|-----|--------|
 | ✅ | `bd-8jk` | Auth: email и пароль |
 | 🔄 | `bd-957.1` | Auth: редирект с /login и /register → /u/[slug] |
-| ⬜ | `bd-957.2` | Auth: Google OAuth |
+| 🔄 | `bd-957.2` | Auth: Google OAuth |
 | ⬜ | `bd-957.3` | Auth: Яндекс OAuth |
 | 🔄 | `bd-v2y` | Auth: сессия и защита маршрутов |
 | ⬜ | `bd-wlw` | Auth: rate limit на register/login |
@@ -150,6 +150,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-20 | Реализация `bd-957.2` Google OAuth (Nest code flow без новых deps, Account, BFF Location, Playwright 16/16); ветка `task/bd-957.2-google-oauth` — `bd close` за оркестратором |
 | 2026-07-20 | Claim/реализация `bd-v2y`: guards, logout, BFF, stub library; ветка `task/bd-v2y-auth-session-guards` |
 | 2026-07-20 | Claim/реализация `bd-957.1`: редирект auth → `/u/[slug]` + stub профиля; ветка `task/bd-957.1-auth-redirect-profile` |
 | 2026-07-20 | `bd-8jk`: доводка приёмки — bd conventions, Playwright chromium-desktop+mobile (12/12), unit/e2e green; `bd close` за оркестратором |

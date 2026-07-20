@@ -66,6 +66,12 @@ function LoginForm() {
           {loading ? 'Вход…' : 'Войти'}
         </button>
       </form>
+      <p className="auth-divider">или</p>
+      {/* Full navigation required for OAuth redirect + Set-Cookie via BFF */}
+      {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+      <a className="auth-oauth" href="/api/auth/google">
+        Войти через Google
+      </a>
       <p>
         Нет аккаунта? <Link href="/register">Зарегистрироваться</Link>
       </p>
