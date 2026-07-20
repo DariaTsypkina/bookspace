@@ -15,7 +15,7 @@
 | 1 | Auth | 🔄 | 0 / 6 | `bd-957` |
 | 2 | Каталог | 🔄 | 0 / 6 | `bd-6v0` |
 | 3 | Связи и порядок | 🔒 | 0 / 4 | `bd-azl` |
-| 4 | ContextReading | 🔄 | 2 / 4 | `bd-8s4` |
+| 4 | ContextReading | 🔄 | 3 / 4 | `bd-8s4` |
 | 5 | Библиотека и профиль | 🔒 | 0 / 5 | `bd-cq7` |
 | 6 | Заметки и цель | 🔒 | 0 / 2 | `bd-sf4` |
 | 7 | Рейтинги | 🔒 | 0 / 3 | `bd-es5` |
@@ -73,14 +73,14 @@
 | ⬜ | `bd-azl.3` | Связи: Порядок чтения |
 | ⬜ | `bd-azl.4` | Связи: Spoiler gate |
 
-### 4. ContextReading — 🔄 · epic `bd-8s4` · 2 / 4
+### 4. ContextReading — 🔄 · epic `bd-8s4` · 3 / 4
 
 | Статус | ID | Задача |
 |--------|-----|--------|
 | ⬜ | `bd-8s4.1` | ContextReading: Блок «Для понимания» (UI) |
 | ✅ | `bd-8s4.2` | ContextReading: Классификация needsContext |
 | ✅ | `bd-8s4.3` | ContextReading: Пайплайн extract ContextReading |
-| ⬜ | `bd-8s4.4` | ContextReading: Админка ContextReading |
+| ✅ | `bd-8s4.4` | ContextReading: Админка ContextReading |
 
 ### 5. Библиотека и профиль — 🔒 · epic `bd-cq7` · 0 / 5
 
@@ -150,6 +150,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-20 | Закрыт `bd-8s4.4`: админка ContextReading (Admin API recent/patch/unpublish/reject + AuditLog, `/admin/context`, BFF, public context-readings); api unit 6/6 + e2e 5/5, web unit 32/32, Playwright 6/6; ветка `task/bd-8s4.4-admin-context` (коммит 65ac14e) |
 | 2026-07-20 | Реализация `bd-8s4.3`: extract pipeline (ContextReading+MatchQueue schema, whitelist→LLM→match→publish/queue, BullMQ jobs, admin POST extract, unit+e2e); ветка `task/bd-8s4.3-extract-pipeline` |
 | 2026-07-20 | Закрыт `bd-8s4.2`: needsContext classify (Prisma enum, LlmProvider, admin patch/classify API, unit+e2e); ветка `task/bd-8s4.2-needs-classify` |
 | 2026-07-20 | Закрыт `bd-6v0.4`: GET /catalog/characters/:slug, /characters/[slug], SpoilerGate; ветка `task/bd-6v0.4-character-page` (коммиты dc26f7f, 3627ea8, 05ee22d) |
