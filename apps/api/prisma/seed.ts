@@ -237,6 +237,74 @@ async function seedCatalogDemo() {
       type: 'FRIEND',
     },
   });
+
+  const wizardingWorld = await prisma.world.upsert({
+    where: { slug: 'volshebnyy-mir' },
+    update: {
+      nameRu: 'Волшебный мир',
+      nameOrig: 'Wizarding World',
+      descriptionRu: 'Мир волшебников и магии.',
+      status: 'PUBLISHED',
+      deletedAt: null,
+    },
+    create: {
+      slug: 'volshebnyy-mir',
+      nameRu: 'Волшебный мир',
+      nameOrig: 'Wizarding World',
+      descriptionRu: 'Мир волшебников и магии.',
+      status: 'PUBLISHED',
+    },
+  });
+
+  const hogwarts = await prisma.place.upsert({
+    where: { slug: 'hogvarts' },
+    update: {
+      nameRu: 'Хогвартс',
+      nameOrig: 'Hogwarts',
+      status: 'PUBLISHED',
+      worldId: wizardingWorld.id,
+      deletedAt: null,
+    },
+    create: {
+      slug: 'hogvarts',
+      nameRu: 'Хогвартс',
+      nameOrig: 'Hogwarts',
+      status: 'PUBLISHED',
+      worldId: wizardingWorld.id,
+    },
+  });
+
+  await prisma.place.upsert({
+    where: { slug: 'kosoy-pereulok' },
+    update: {
+      nameRu: 'Косой переулок',
+      nameOrig: 'Diagon Alley',
+      status: 'PUBLISHED',
+      worldId: wizardingWorld.id,
+      deletedAt: null,
+    },
+    create: {
+      slug: 'kosoy-pereulok',
+      nameRu: 'Косой переулок',
+      nameOrig: 'Diagon Alley',
+      status: 'PUBLISHED',
+      worldId: wizardingWorld.id,
+    },
+  });
+
+  await prisma.workPlace.upsert({
+    where: {
+      workId_placeId: {
+        workId: publishedWork.id,
+        placeId: hogwarts.id,
+      },
+    },
+    update: {},
+    create: {
+      workId: publishedWork.id,
+      placeId: hogwarts.id,
+    },
+  });
 }
 
 async function main() {
