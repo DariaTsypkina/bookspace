@@ -13,7 +13,7 @@
 |---|------|--------|----------|------|
 | 0 | Bootstrap (monorepo, docker, CI) | ✅ | — | — |
 | 1 | Auth | 🔄 | 0 / 6 | `bd-957` |
-| 2 | Каталог | 🔒 | 0 / 6 | `bd-6v0` |
+| 2 | Каталог | 🔄 | 0 / 6 | `bd-6v0` |
 | 3 | Связи и порядок | 🔒 | 0 / 4 | `bd-azl` |
 | 4 | ContextReading | 🔒 | 0 / 4 | `bd-8s4` |
 | 5 | Библиотека и профиль | 🔒 | 0 / 5 | `bd-cq7` |
@@ -53,11 +53,11 @@
 | 🔄 | `bd-v2y` | Auth: сессия и защита маршрутов |
 | ⬜ | `bd-wlw` | Auth: rate limit на register/login |
 
-### 2. Каталог — 🔒 · epic `bd-6v0` · 0 / 6
+### 2. Каталог — 🔄 · epic `bd-6v0` · 0 / 6
 
 | Статус | ID | Задача |
 |--------|-----|--------|
-| ⬜ | `bd-6v0.1` | Каталог: Поиск по каталогу |
+| 🔄 | `bd-6v0.1` | Каталог: Поиск по каталогу |
 | ⬜ | `bd-6v0.2` | Каталог: Карточка произведения |
 | ⬜ | `bd-6v0.3` | Каталог: Карточка автора |
 | ⬜ | `bd-6v0.4` | Каталог: Карточка персонажа |
@@ -150,6 +150,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-20 | Claim/реализация `bd-6v0.1`: FTS-поиск каталога (API + /search UI, Playwright 8/8); ветка `task/bd-6v0.1-catalog-search` — `bd close` за оркестратором |
 | 2026-07-20 | Claim/реализация `bd-957.3` Яндекс OAuth (Nest fetch, Account linking, OAUTH_TEST_MODE); ветка `task/bd-957.3-yandex-oauth` — `bd close` за оркестратором |
 | 2026-07-20 | Реализация `bd-957.2` Google OAuth (Nest code flow без новых deps, Account, BFF Location, Playwright 16/16); ветка `task/bd-957.2-google-oauth` — `bd close` за оркестратором |
 | 2026-07-20 | Claim/реализация `bd-v2y`: guards, logout, BFF, stub library; ветка `task/bd-v2y-auth-session-guards` |
