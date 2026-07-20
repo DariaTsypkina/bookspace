@@ -18,6 +18,12 @@ enum WorkStatus {
   MERGED
 }
 
+enum NeedsContext {
+  UNKNOWN
+  YES
+  NO
+}
+
 enum CatalogEntityStatus {
   DRAFT
   PUBLISHED
@@ -29,8 +35,10 @@ model Work {
   titleRu     String
   titleOrig   String?
   yearFirst   Int?
-  status      WorkStatus   @default(DRAFT)
-  deletedAt   DateTime?
+  status                 WorkStatus   @default(DRAFT)
+  needsContext           NeedsContext @default(UNKNOWN)
+  needsContextAdminSetAt DateTime?
+  deletedAt              DateTime?
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
   authors              WorkAuthor[]
