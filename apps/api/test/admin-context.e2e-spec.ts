@@ -6,6 +6,10 @@ import { App } from 'supertest/types';
 import { ContextReadingStatus, PrismaClient, WorkStatus } from '@prisma/client';
 import { AppModule } from '../src/app.module';
 import { AUDIT_ACTION } from '../src/audit/audit.constants';
+import type {
+  AdminContextReadingItem,
+  PublicContextReadingItem,
+} from '../src/context/admin-context.types';
 
 const prisma = new PrismaClient();
 const TEST_PREFIX = 'admin-context-e2e';
@@ -183,7 +187,10 @@ describe('Admin context (e2e)', () => {
     const beforePublic = await request(app.getHttpServer())
       .get(`/catalog/works/${subject.slug}/context-readings`)
       .expect(200);
-    expect(beforePublic.body.items).toHaveLength(1);
+    const beforeBody = beforePublic.body as {
+      items: PublicContextReadingItem[];
+    };
+    expect(beforeBody.items).toHaveLength(1);
 
     await request(app.getHttpServer())
       .post(`/admin/context/${reading.id}/unpublish`)
@@ -193,7 +200,10 @@ describe('Admin context (e2e)', () => {
     const afterPublic = await request(app.getHttpServer())
       .get(`/catalog/works/${subject.slug}/context-readings`)
       .expect(200);
-    expect(afterPublic.body.items).toHaveLength(0);
+    const afterBody = afterPublic.body as {
+      items: PublicContextReadingItem[];
+    };
+    expect(afterBody.items).toHaveLength(0);
 
     const audit = await prisma.auditLog.findFirst({
       where: {
@@ -212,7 +222,8 @@ describe('Admin context (e2e)', () => {
       .set('Cookie', adminCookie)
       .expect(201);
 
-    expect(response.body.status).toBe(ContextReadingStatus.REJECTED);
+    const body = response.body as AdminContextReadingItem;
+    expect(body.status).toBe(ContextReadingStatus.REJECTED);
 
     const audit = await prisma.auditLog.findFirst({
       where: {

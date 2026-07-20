@@ -1,6 +1,7 @@
 import { NotFoundException } from '@nestjs/common';
-import { ContextReadingStatus } from '@prisma/client';
+import { ContextReadingStatus, Prisma } from '@prisma/client';
 import { AUDIT_ACTION, AUDIT_ENTITY } from '../audit/audit.constants';
+import type { AuditLogInput } from '../audit/audit.service';
 import { AuditService } from '../audit/audit.service';
 import { AdminContextService } from './admin-context.service';
 
@@ -60,9 +61,11 @@ describe('AdminContextService', () => {
       expect.objectContaining({
         where: expect.objectContaining({
           status: ContextReadingStatus.PUBLISHED,
-          publishedAt: expect.objectContaining({ gte: expect.any(Date) }),
-        }),
-      }),
+          publishedAt: expect.objectContaining({
+            gte: expect.any(Date) as Date,
+          }) as Prisma.DateTimeFilter,
+        }) as Prisma.ContextReadingWhereInput,
+      }) as Prisma.ContextReadingFindManyArgs,
     );
     expect(result.items).toHaveLength(1);
     expect(result.items[0]).toMatchObject({
@@ -107,15 +110,19 @@ describe('AdminContextService', () => {
     expect(prisma.contextReading.update).toHaveBeenCalledWith({
       where: { id: 'cr-1' },
       data: { importanceRank: 1, whyText: 'Новый текст' },
-      include: expect.any(Object),
+      include: expect.any(Object) as Prisma.ContextReadingInclude,
     });
     expect(audit.log).toHaveBeenCalledWith({
       actorUserId: 'admin-1',
       action: AUDIT_ACTION.CONTEXT_UPDATE,
       entityType: AUDIT_ENTITY.CONTEXT_READING,
       entityId: 'cr-1',
-      before: expect.objectContaining({ whyText: 'Старый текст' }),
-      after: expect.objectContaining({ whyText: 'Новый текст' }),
+      before: expect.objectContaining({
+        whyText: 'Старый текст',
+      }) as AuditLogInput['before'],
+      after: expect.objectContaining({
+        whyText: 'Новый текст',
+      }) as AuditLogInput['after'],
     });
     expect(result.whyText).toBe('Новый текст');
   });
@@ -150,7 +157,7 @@ describe('AdminContextService', () => {
     expect(prisma.contextReading.update).toHaveBeenCalledWith({
       where: { id: 'cr-1' },
       data: { status: ContextReadingStatus.DRAFT, publishedAt: null },
-      include: expect.any(Object),
+      include: expect.any(Object) as Prisma.ContextReadingInclude,
     });
     expect(audit.log).toHaveBeenCalledWith({
       actorUserId: 'admin-1',
@@ -159,8 +166,10 @@ describe('AdminContextService', () => {
       entityId: 'cr-1',
       before: expect.objectContaining({
         status: ContextReadingStatus.PUBLISHED,
-      }),
-      after: expect.objectContaining({ status: ContextReadingStatus.DRAFT }),
+      }) as AuditLogInput['before'],
+      after: expect.objectContaining({
+        status: ContextReadingStatus.DRAFT,
+      }) as AuditLogInput['after'],
     });
     expect(result.status).toBe(ContextReadingStatus.DRAFT);
   });
@@ -198,8 +207,10 @@ describe('AdminContextService', () => {
       action: AUDIT_ACTION.CONTEXT_REJECT,
       entityType: AUDIT_ENTITY.CONTEXT_READING,
       entityId: 'cr-1',
-      before: expect.any(Object),
-      after: expect.objectContaining({ status: ContextReadingStatus.REJECTED }),
+      before: expect.any(Object) as AuditLogInput['before'],
+      after: expect.objectContaining({
+        status: ContextReadingStatus.REJECTED,
+      }) as AuditLogInput['after'],
     });
   });
 
