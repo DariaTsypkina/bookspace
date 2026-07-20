@@ -129,6 +129,182 @@ async function seedCatalogDemo() {
       status: WorkStatus.DRAFT,
     },
   });
+
+  const harry = await prisma.character.upsert({
+    where: { slug: 'garri-potter' },
+    update: {
+      nameRu: 'Гарри Поттер',
+      nameOrig: 'Harry Potter',
+      status: 'PUBLISHED',
+      deletedAt: null,
+    },
+    create: {
+      slug: 'garri-potter',
+      nameRu: 'Гарри Поттер',
+      nameOrig: 'Harry Potter',
+      status: 'PUBLISHED',
+    },
+  });
+
+  const hermione = await prisma.character.upsert({
+    where: { slug: 'germiona-greindzher' },
+    update: {
+      nameRu: 'Гермиона Грейнджер',
+      nameOrig: 'Hermione Granger',
+      status: 'PUBLISHED',
+      deletedAt: null,
+    },
+    create: {
+      slug: 'germiona-greindzher',
+      nameRu: 'Гермиона Грейнджер',
+      nameOrig: 'Hermione Granger',
+      status: 'PUBLISHED',
+    },
+  });
+
+  const ron = await prisma.character.upsert({
+    where: { slug: 'ron-uizli' },
+    update: {
+      nameRu: 'Рон Уизли',
+      nameOrig: 'Ron Weasley',
+      status: 'PUBLISHED',
+      deletedAt: null,
+    },
+    create: {
+      slug: 'ron-uizli',
+      nameRu: 'Рон Уизли',
+      nameOrig: 'Ron Weasley',
+      status: 'PUBLISHED',
+    },
+  });
+
+  await prisma.characterAppearance.upsert({
+    where: {
+      characterId_workId: {
+        characterId: harry.id,
+        workId: publishedWork.id,
+      },
+    },
+    update: {},
+    create: {
+      characterId: harry.id,
+      workId: publishedWork.id,
+    },
+  });
+
+  await prisma.characterAppearance.upsert({
+    where: {
+      characterId_workId: {
+        characterId: hermione.id,
+        workId: publishedWork.id,
+      },
+    },
+    update: {},
+    create: {
+      characterId: hermione.id,
+      workId: publishedWork.id,
+    },
+  });
+
+  await prisma.characterRelation.upsert({
+    where: {
+      fromCharacterId_toCharacterId_type: {
+        fromCharacterId: harry.id,
+        toCharacterId: hermione.id,
+        type: 'FRIEND',
+      },
+    },
+    update: {},
+    create: {
+      fromCharacterId: harry.id,
+      toCharacterId: hermione.id,
+      type: 'FRIEND',
+    },
+  });
+
+  await prisma.characterRelation.upsert({
+    where: {
+      fromCharacterId_toCharacterId_type: {
+        fromCharacterId: harry.id,
+        toCharacterId: ron.id,
+        type: 'FRIEND',
+      },
+    },
+    update: {},
+    create: {
+      fromCharacterId: harry.id,
+      toCharacterId: ron.id,
+      type: 'FRIEND',
+    },
+  });
+
+  const wizardingWorld = await prisma.world.upsert({
+    where: { slug: 'volshebnyy-mir' },
+    update: {
+      nameRu: 'Волшебный мир',
+      nameOrig: 'Wizarding World',
+      descriptionRu: 'Мир волшебников и магии.',
+      status: 'PUBLISHED',
+      deletedAt: null,
+    },
+    create: {
+      slug: 'volshebnyy-mir',
+      nameRu: 'Волшебный мир',
+      nameOrig: 'Wizarding World',
+      descriptionRu: 'Мир волшебников и магии.',
+      status: 'PUBLISHED',
+    },
+  });
+
+  const hogwarts = await prisma.place.upsert({
+    where: { slug: 'hogvarts' },
+    update: {
+      nameRu: 'Хогвартс',
+      nameOrig: 'Hogwarts',
+      status: 'PUBLISHED',
+      worldId: wizardingWorld.id,
+      deletedAt: null,
+    },
+    create: {
+      slug: 'hogvarts',
+      nameRu: 'Хогвартс',
+      nameOrig: 'Hogwarts',
+      status: 'PUBLISHED',
+      worldId: wizardingWorld.id,
+    },
+  });
+
+  await prisma.place.upsert({
+    where: { slug: 'kosoy-pereulok' },
+    update: {
+      nameRu: 'Косой переулок',
+      nameOrig: 'Diagon Alley',
+      status: 'PUBLISHED',
+      worldId: wizardingWorld.id,
+      deletedAt: null,
+    },
+    create: {
+      slug: 'kosoy-pereulok',
+      nameRu: 'Косой переулок',
+      nameOrig: 'Diagon Alley',
+      status: 'PUBLISHED',
+      worldId: wizardingWorld.id,
+    },
+  });
+
+  await prisma.workPlace.upsert({
+    where: {
+      workId_placeId: {
+        workId: publishedWork.id,
+        placeId: hogwarts.id,
+      },
+    },
+    update: {},
+    create: {
+      workId: publishedWork.id,
+      placeId: hogwarts.id,
+    },
+  });
 }
 
 async function main() {

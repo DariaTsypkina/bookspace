@@ -33,9 +33,11 @@ model Work {
   deletedAt   DateTime?
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
-  authors     WorkAuthor[]
-  seriesLinks WorkSeries[]
-  editions    Edition[]
+  authors              WorkAuthor[]
+  seriesLinks          WorkSeries[]
+  editions             Edition[]
+  characterAppearances CharacterAppearance[]
+  places               WorkPlace[]
 
   @@index([status, deletedAt])
 }
@@ -108,28 +110,61 @@ model Series {
   @@index([status, deletedAt])
 }
 
+enum CharacterRelationType {
+  FRIEND
+  ENEMY
+  FAMILY
+  RELATED
+}
+
 model Character {
-  id        String              @id @default(uuid())
-  slug      String              @unique
-  nameRu    String
-  nameOrig  String?
-  status    CatalogEntityStatus @default(DRAFT)
-  deletedAt DateTime?
-  createdAt DateTime            @default(now())
-  updatedAt DateTime            @updatedAt
+  id          String                @id @default(uuid())
+  slug        String                @unique
+  nameRu      String
+  nameOrig    String?
+  status      CatalogEntityStatus   @default(DRAFT)
+  deletedAt   DateTime?
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
+  appearances CharacterAppearance[]
+  relationsFrom CharacterRelation[] @relation("CharacterRelationFrom")
+  relationsTo   CharacterRelation[] @relation("CharacterRelationTo")
 
   @@index([status, deletedAt])
 }
 
+model CharacterAppearance {
+  characterId String
+  workId      String
+  character   Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  work        Work      @relation(fields: [workId], references: [id], onDelete: Cascade)
+
+  @@id([characterId, workId])
+  @@index([workId])
+}
+
+model CharacterRelation {
+  fromCharacterId String
+  toCharacterId   String
+  type            CharacterRelationType
+  fromCharacter   Character             @relation("CharacterRelationFrom", fields: [fromCharacterId], references: [id], onDelete: Cascade)
+  toCharacter     Character             @relation("CharacterRelationTo", fields: [toCharacterId], references: [id], onDelete: Cascade)
+
+  @@id([fromCharacterId, toCharacterId, type])
+  @@index([toCharacterId])
+}
+
 model World {
-  id        String              @id @default(uuid())
-  slug      String              @unique
-  nameRu    String
-  nameOrig  String?
-  status    CatalogEntityStatus @default(DRAFT)
-  deletedAt DateTime?
-  createdAt DateTime            @default(now())
-  updatedAt DateTime            @updatedAt
+  id            String              @id @default(uuid())
+  slug          String              @unique
+  nameRu        String
+  nameOrig      String?
+  descriptionRu String?
+  status        CatalogEntityStatus @default(DRAFT)
+  deletedAt     DateTime?
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+  places        Place[]
 
   @@index([status, deletedAt])
 }
@@ -139,12 +174,26 @@ model Place {
   slug      String              @unique
   nameRu    String
   nameOrig  String?
+  worldId   String?
   status    CatalogEntityStatus @default(DRAFT)
   deletedAt DateTime?
   createdAt DateTime            @default(now())
   updatedAt DateTime            @updatedAt
+  world     World?              @relation(fields: [worldId], references: [id], onDelete: SetNull)
+  works     WorkPlace[]
 
   @@index([status, deletedAt])
+  @@index([worldId])
+}
+
+model WorkPlace {
+  workId  String
+  placeId String
+  work    Work  @relation(fields: [workId], references: [id], onDelete: Cascade)
+  place   Place @relation(fields: [placeId], references: [id], onDelete: Cascade)
+
+  @@id([workId, placeId])
+  @@index([placeId])
 }
 
 model User {
