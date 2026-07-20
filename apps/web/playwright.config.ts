@@ -1,6 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const baseURL = process.env.BASE_URL ?? 'http://localhost:3000';
+const webPort = process.env.WEB_PORT ?? '3000';
+const apiPort = process.env.API_PORT ?? '8000';
+const baseURL = process.env.BASE_URL ?? `http://localhost:${webPort}`;
 
 export default defineConfig({
   testDir: './e2e',
@@ -37,27 +39,33 @@ export default defineConfig({
   webServer: [
     {
       command: 'pnpm --filter api start:dev',
-      url: 'http://localhost:8000/health',
+      url: `http://localhost:${apiPort}/health`,
       reuseExistingServer: !process.env.CI,
       cwd: '../..',
       env: {
         ...process.env,
+        PORT: apiPort,
         SESSION_SECRET: process.env.SESSION_SECRET ?? 'e2e-session-secret',
         OAUTH_TEST_MODE: 'true',
         GOOGLE_CALLBACK_URL:
           process.env.GOOGLE_CALLBACK_URL ??
-          'http://localhost:3000/api/auth/google/callback',
+          `http://localhost:${webPort}/api/auth/google/callback`,
         YANDEX_CALLBACK_URL:
           process.env.YANDEX_CALLBACK_URL ??
-          'http://localhost:3000/api/auth/yandex/callback',
-        WEB_URL: process.env.WEB_URL ?? 'http://localhost:3000',
+          `http://localhost:${webPort}/api/auth/yandex/callback`,
+        WEB_URL: process.env.WEB_URL ?? `http://localhost:${webPort}`,
       },
     },
     {
-      command: 'pnpm --filter web dev',
-      url: 'http://localhost:3000',
+      command: `pnpm --filter web dev --port ${webPort}`,
+      url: baseURL,
       reuseExistingServer: !process.env.CI,
       cwd: '../..',
+      env: {
+        ...process.env,
+        NEXT_PUBLIC_API_URL:
+          process.env.NEXT_PUBLIC_API_URL ?? `http://localhost:${apiPort}`,
+      },
     },
   ],
 });

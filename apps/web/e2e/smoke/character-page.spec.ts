@@ -1,5 +1,19 @@
 import { expect, test } from '@playwright/test';
-import { SPOILERS_OK_COOKIE, SPOILERS_OK_VALUE } from '../../lib/spoiler-gate';
+
+const SPOILERS_OK_COOKIE = 'spoilers_ok';
+const SPOILERS_OK_VALUE = '1';
+
+async function acceptSpoilers(page: import('@playwright/test').Page) {
+  await page.context().addCookies([
+    {
+      name: SPOILERS_OK_COOKIE,
+      value: SPOILERS_OK_VALUE,
+      domain: 'localhost',
+      path: '/',
+      sameSite: 'Lax',
+    },
+  ]);
+}
 
 test.describe('Character page smoke', () => {
   test('published character shows name and clickable appearances', async ({
@@ -58,15 +72,7 @@ test.describe('Character page smoke', () => {
   test('relations stay visible when spoilers_ok cookie is set', async ({
     page,
   }) => {
-    await page.context().addCookies([
-      {
-        name: SPOILERS_OK_COOKIE,
-        value: SPOILERS_OK_VALUE,
-        url: 'http://localhost:3000',
-        path: '/',
-        sameSite: 'Lax',
-      },
-    ]);
+    await acceptSpoilers(page);
     await page.goto('/characters/garri-potter');
 
     await expect(
@@ -78,15 +84,7 @@ test.describe('Character page smoke', () => {
   test('relation link navigates to another character page', async ({
     page,
   }) => {
-    await page.context().addCookies([
-      {
-        name: SPOILERS_OK_COOKIE,
-        value: SPOILERS_OK_VALUE,
-        url: 'http://localhost:3000',
-        path: '/',
-        sameSite: 'Lax',
-      },
-    ]);
+    await acceptSpoilers(page);
     await page.goto('/characters/garri-potter');
     await page.getByRole('link', { name: 'Гермиона Грейнджер' }).click();
     await expect(page).toHaveURL(/\/characters\/germiona-greindzher/);
