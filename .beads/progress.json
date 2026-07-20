@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-07-20T07:11:07.589Z",
+  "generated_at": "2026-07-20T07:18:03.234Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 64,
+    "total_issues": 65,
     "open_issues": 57,
-    "in_progress_issues": 4,
+    "in_progress_issues": 5,
     "closed_issues": 3,
     "blocked_issues": 56,
     "ready_issues": 1
@@ -593,6 +593,15 @@
       "priority": 1,
       "parent": "bd-957",
       "updated_at": "2026-07-16T10:52:17Z"
+    },
+    {
+      "id": "bd-ky6",
+      "title": "Chore: синхронизировать beads interactions.jsonl",
+      "status": "in_progress",
+      "type": "chore",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-20T07:17:49Z"
     },
     {
       "id": "bd-0e6",
