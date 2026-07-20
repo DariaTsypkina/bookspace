@@ -54,6 +54,7 @@ export default defineConfig({
           process.env.YANDEX_CALLBACK_URL ??
           `http://localhost:${webPort}/api/auth/yandex/callback`,
         WEB_URL: process.env.WEB_URL ?? `http://localhost:${webPort}`,
+        E2E_THROTTLE_BYPASS: 'true',
       },
     },
     {
@@ -65,6 +66,7 @@ export default defineConfig({
         ...process.env,
         NEXT_PUBLIC_API_URL:
           process.env.NEXT_PUBLIC_API_URL ?? `http://localhost:${apiPort}`,
+        E2E_THROTTLE_BYPASS: 'true',
       },
     },
   ],
