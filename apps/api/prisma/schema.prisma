@@ -12,6 +12,141 @@ enum UserRole {
   ADMIN
 }
 
+enum WorkStatus {
+  DRAFT
+  PUBLISHED
+  MERGED
+}
+
+enum CatalogEntityStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model Work {
+  id          String       @id @default(uuid())
+  slug        String       @unique
+  titleRu     String
+  titleOrig   String?
+  yearFirst   Int?
+  status      WorkStatus   @default(DRAFT)
+  deletedAt   DateTime?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  authors     WorkAuthor[]
+  seriesLinks WorkSeries[]
+  editions    Edition[]
+
+  @@index([status, deletedAt])
+}
+
+model Edition {
+  id         String   @id @default(uuid())
+  workId     String
+  language   String
+  title      String?
+  translator String?
+  publisher  String?
+  year       Int?
+  isbn13     String?  @unique
+  isbn10     String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  work       Work     @relation(fields: [workId], references: [id], onDelete: Cascade)
+
+  @@index([workId])
+}
+
+model WorkAuthor {
+  workId   String
+  authorId String
+  role     String?
+  position Int      @default(0)
+  work     Work     @relation(fields: [workId], references: [id], onDelete: Cascade)
+  author   Author   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@id([workId, authorId])
+  @@index([authorId])
+}
+
+model WorkSeries {
+  workId           String
+  seriesId         String
+  positionInSeries Int?
+  work             Work   @relation(fields: [workId], references: [id], onDelete: Cascade)
+  series           Series @relation(fields: [seriesId], references: [id], onDelete: Cascade)
+
+  @@id([workId, seriesId])
+  @@index([seriesId])
+}
+
+model Author {
+  id        String              @id @default(uuid())
+  slug      String              @unique
+  nameRu    String
+  nameOrig  String?
+  status    CatalogEntityStatus @default(DRAFT)
+  deletedAt DateTime?
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+  works     WorkAuthor[]
+
+  @@index([status, deletedAt])
+}
+
+model Series {
+  id        String              @id @default(uuid())
+  slug      String              @unique
+  nameRu    String
+  nameOrig  String?
+  status    CatalogEntityStatus @default(DRAFT)
+  deletedAt DateTime?
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+  works     WorkSeries[]
+
+  @@index([status, deletedAt])
+}
+
+model Character {
+  id        String              @id @default(uuid())
+  slug      String              @unique
+  nameRu    String
+  nameOrig  String?
+  status    CatalogEntityStatus @default(DRAFT)
+  deletedAt DateTime?
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+
+  @@index([status, deletedAt])
+}
+
+model World {
+  id        String              @id @default(uuid())
+  slug      String              @unique
+  nameRu    String
+  nameOrig  String?
+  status    CatalogEntityStatus @default(DRAFT)
+  deletedAt DateTime?
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+
+  @@index([status, deletedAt])
+}
+
+model Place {
+  id        String              @id @default(uuid())
+  slug      String              @unique
+  nameRu    String
+  nameOrig  String?
+  status    CatalogEntityStatus @default(DRAFT)
+  deletedAt DateTime?
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+
+  @@index([status, deletedAt])
+}
+
 model User {
   id           String    @id @default(uuid())
   email        String    @unique
