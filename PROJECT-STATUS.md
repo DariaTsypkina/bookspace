@@ -36,6 +36,7 @@
 
 | Статус | ID | Задача |
 |--------|-----|--------|
+| 🔄 | `bd-0e6` | Docs: согласование зависимостей агентом |
 | 🔄 | `bd-rtp` | Docs: human intake workflow и /task skill |
 | 🔄 | `bd-nvi` | Scaffold monorepo dev baseline |
 | ✅ | `bd-384` | Session Completion: git push при конце сессии |
@@ -148,6 +149,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-20 | Claim `bd-0e6`, ветка `feature/bd-0e6/dependency-approval`: rule согласования зависимостей |
 | 2026-07-17 | `bd-aud`: автоэкспорт issues.jsonl + progress.json (скрипт, pre-commit) |
 | 2026-07-17 | bd-conventions: канон перенесён в `.cursor/rules/bd-conventions.mdc` |
 | 2026-07-17 | Включены bd-conventions: `validation.on-create/on-close=warn`, `create.require-description=true` |

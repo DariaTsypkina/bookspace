@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-17T13:03:04.332Z",
+  "generated_at": "2026-07-20T07:11:07.589Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 63,
+    "total_issues": 64,
     "open_issues": 57,
     "in_progress_issues": 4,
-    "closed_issues": 2,
+    "closed_issues": 3,
     "blocked_issues": 56,
     "ready_issues": 1
   },
@@ -595,6 +595,15 @@
       "updated_at": "2026-07-16T10:52:17Z"
     },
     {
+      "id": "bd-0e6",
+      "title": "Docs: согласование зависимостей агентом",
+      "status": "in_progress",
+      "type": "chore",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-20T07:10:52Z"
+    },
+    {
       "id": "bd-i5b.8",
       "title": "Админка: Журнал аудита",
       "status": "open",
@@ -1011,11 +1020,11 @@
     {
       "id": "bd-aud",
       "title": "chore: JSON-снимки Beads (issues.jsonl + progress.json)",
-      "status": "in_progress",
+      "status": "closed",
       "type": "chore",
       "priority": 3,
       "parent": null,
-      "updated_at": "2026-07-17T13:03:00Z"
+      "updated_at": "2026-07-17T13:03:31Z"
     },
     {
       "id": "bd-k9n",

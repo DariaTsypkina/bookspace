@@ -17,6 +17,7 @@ alwaysApply: true
 - Для каждой feature (`bd`-issue с runtime-изменениями): **1 main subagent на feature** (может иметь child subagents).
 - В issue/PR обязательно фиксировать маппинг `feature (bd-id) -> main subagent`.
 - Handoff обязателен только с тремя полями: тесты/проверки, их результаты, изменённые файлы.
+- Новые/заменённые зависимости — только после согласования с пользователем ([dependency-approval.mdc](dependency-approval.mdc), agent-dev-flow §2.1).
 
 ## На feature-ветку обязательно
 
