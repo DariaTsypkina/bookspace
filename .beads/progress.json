@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-20T10:54:15.266Z",
+  "generated_at": "2026-07-20T14:05:59.505Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 67,
-    "open_issues": 51,
-    "in_progress_issues": 4,
+    "open_issues": 50,
+    "in_progress_issues": 5,
     "closed_issues": 12,
     "blocked_issues": 49,
-    "ready_issues": 2
+    "ready_issues": 1
   },
   "epics": [
     {
@@ -52,8 +52,8 @@
       "priority": 1,
       "children_total": 8,
       "children_closed": 4,
-      "children_in_progress": 0,
-      "children_open": 4,
+      "children_in_progress": 1,
+      "children_open": 3,
       "progress": "4 / 8",
       "percent_closed": 50,
       "children": [
@@ -74,7 +74,7 @@
         {
           "id": "bd-6v0.3",
           "title": "Каталог: Карточка автора",
-          "status": "open",
+          "status": "in_progress",
           "type": "feature",
           "priority": 1
         },
@@ -548,11 +548,11 @@
     {
       "id": "bd-6v0.3",
       "title": "Каталог: Карточка автора",
-      "status": "open",
+      "status": "in_progress",
       "type": "feature",
       "priority": 1,
       "parent": "bd-6v0",
-      "updated_at": "2026-07-17T12:35:58Z"
+      "updated_at": "2026-07-20T13:58:14Z"
     },
     {
       "id": "bd-6v0.1",
