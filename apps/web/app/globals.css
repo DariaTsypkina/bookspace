@@ -152,6 +152,13 @@ a {
     sans-serif;
 }
 
+.auth-oauth-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
 .auth-oauth {
   display: block;
   width: 100%;
