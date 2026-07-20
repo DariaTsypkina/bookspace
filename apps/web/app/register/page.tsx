@@ -3,9 +3,10 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
+import { GuestOnly } from '../../components/guest-only';
 import { register, validatePassword } from '../../lib/auth';
 
-export default function RegisterPage() {
+function RegisterForm() {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -78,5 +79,13 @@ export default function RegisterPage() {
         Уже есть аккаунт? <Link href="/login">Войти</Link>
       </p>
     </main>
+  );
+}
+
+export default function RegisterPage() {
+  return (
+    <GuestOnly>
+      <RegisterForm />
+    </GuestOnly>
   );
 }

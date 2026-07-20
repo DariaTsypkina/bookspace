@@ -4,7 +4,12 @@ export type AuthUser = {
   id: string;
   email: string;
   role: 'USER' | 'ADMIN';
+  slug: string;
 };
+
+export function profilePath(slug: string): string {
+  return `/u/${slug}`;
+}
 
 export function validatePassword(password: string): string | null {
   if (password.length < 8) {
@@ -74,4 +79,21 @@ export async function login(
   }
 
   return (await response.json()) as { user: AuthUser };
+}
+
+export async function getCurrentUser(): Promise<AuthUser | null> {
+  const response = await fetch(`${API_URL}/auth/me`, {
+    method: 'GET',
+    credentials: 'include',
+  });
+
+  if (response.status === 401) {
+    return null;
+  }
+
+  if (!response.ok) {
+    return null;
+  }
+
+  return (await response.json()) as AuthUser;
 }
