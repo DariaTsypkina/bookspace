@@ -15,10 +15,19 @@ export default defineConfig({
   },
   projects: [
     {
-      name: 'chromium',
+      name: 'chromium-desktop',
       use: {
         ...devices['Desktop Chrome'],
         // Local: system Chrome. CI: Playwright Chromium (after `playwright install`).
+        ...(process.env.CI || process.env.PLAYWRIGHT_CHROME_CHANNEL === '0'
+          ? {}
+          : { channel: 'chrome' as const }),
+      },
+    },
+    {
+      name: 'chromium-mobile',
+      use: {
+        ...devices['Pixel 7'],
         ...(process.env.CI || process.env.PLAYWRIGHT_CHROME_CHANNEL === '0'
           ? {}
           : { channel: 'chrome' as const }),

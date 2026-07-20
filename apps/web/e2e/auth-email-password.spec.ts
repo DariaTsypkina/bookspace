@@ -51,4 +51,22 @@ test.describe('Auth email/password e2e', () => {
       'Неверный email или пароль',
     );
   });
+
+  test('register shows error for duplicate email', async ({ page }) => {
+    const email = uniqueEmail();
+    const password = 'Secure123!';
+
+    await page.goto('/register');
+    await page.getByLabel('Email').fill(email);
+    await page.getByLabel('Пароль').fill(password);
+    await page.getByRole('button', { name: 'Зарегистрироваться' }).click();
+    await expect(page).toHaveURL('/login');
+
+    await page.goto('/register');
+    await page.getByLabel('Email').fill(email);
+    await page.getByLabel('Пароль').fill(password);
+    await page.getByRole('button', { name: 'Зарегистрироваться' }).click();
+
+    await expect(page.locator('.auth-error')).toContainText('уже существует');
+  });
 });
