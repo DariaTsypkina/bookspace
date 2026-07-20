@@ -438,3 +438,107 @@ a {
 .work-not-found p + p {
   margin-top: 1rem;
 }
+
+.author-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.25rem 1rem 2rem;
+  max-width: 40rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.author-header h1 {
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.author-name-orig {
+  margin-top: 0.35rem;
+  color: var(--muted);
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-size: 0.95rem;
+}
+
+.author-works {
+  margin-top: 1.5rem;
+}
+
+.author-works h2 {
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+.author-works ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.author-works li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.85rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+}
+
+.author-work-link {
+  font-size: 1.05rem;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.author-work-link:hover {
+  text-decoration: underline;
+}
+
+.author-work-year {
+  color: var(--muted);
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-size: 0.9rem;
+}
+
+.author-works-empty {
+  color: var(--muted);
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-size: 0.95rem;
+}
+
+.author-not-found h1 {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.author-not-found p {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+.author-not-found p + p {
+  margin-top: 1rem;
+}
