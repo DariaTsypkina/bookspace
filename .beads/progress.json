@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-20T14:19:45.438Z",
+  "generated_at": "2026-07-20T14:22:42.804Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 67,
-    "open_issues": 48,
-    "in_progress_issues": 4,
+    "open_issues": 47,
+    "in_progress_issues": 5,
     "closed_issues": 15,
     "blocked_issues": 46,
-    "ready_issues": 2
+    "ready_issues": 1
   },
   "epics": [
     {
@@ -52,8 +52,8 @@
       "priority": 1,
       "children_total": 8,
       "children_closed": 7,
-      "children_in_progress": 0,
-      "children_open": 1,
+      "children_in_progress": 1,
+      "children_open": 0,
       "progress": "7 / 8",
       "percent_closed": 88,
       "children": [
@@ -95,7 +95,7 @@
         {
           "id": "bd-6v0.6",
           "title": "Каталог: Карточка локации",
-          "status": "open",
+          "status": "in_progress",
           "type": "feature",
           "priority": 1
         },
@@ -512,11 +512,11 @@
     {
       "id": "bd-6v0.6",
       "title": "Каталог: Карточка локации",
-      "status": "open",
+      "status": "in_progress",
       "type": "feature",
       "priority": 1,
       "parent": "bd-6v0",
-      "updated_at": "2026-07-17T12:36:01Z"
+      "updated_at": "2026-07-20T14:20:50Z"
     },
     {
       "id": "bd-6v0.5",
