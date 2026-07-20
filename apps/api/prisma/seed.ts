@@ -5,10 +5,14 @@ const prisma = new PrismaClient();
 
 async function upsertUser(email: string, password: string, role: UserRole) {
   const passwordHash = await hash(password, 10);
+  const slug = email
+    .split('@')[0]!
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-');
   await prisma.user.upsert({
     where: { email },
-    update: { passwordHash, role },
-    create: { email, passwordHash, role },
+    update: { passwordHash, role, slug },
+    create: { email, passwordHash, role, slug },
   });
 }
 

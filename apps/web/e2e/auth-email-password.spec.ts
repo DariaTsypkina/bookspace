@@ -24,7 +24,7 @@ test.describe('Auth email/password e2e', () => {
 
     await expect(page).toHaveURL('/');
 
-    const cookies = await context.cookies('http://localhost:8000');
+    const cookies = await context.cookies();
     const sessionCookie = cookies.find((cookie) => cookie.name === 'session');
     expect(sessionCookie).toBeDefined();
     expect(sessionCookie?.httpOnly).toBe(true);
@@ -50,5 +50,23 @@ test.describe('Auth email/password e2e', () => {
     await expect(page.locator('.auth-error')).toContainText(
       'Неверный email или пароль',
     );
+  });
+
+  test('register shows error for duplicate email', async ({ page }) => {
+    const email = uniqueEmail();
+    const password = 'Secure123!';
+
+    await page.goto('/register');
+    await page.getByLabel('Email').fill(email);
+    await page.getByLabel('Пароль').fill(password);
+    await page.getByRole('button', { name: 'Зарегистрироваться' }).click();
+    await expect(page).toHaveURL('/login');
+
+    await page.goto('/register');
+    await page.getByLabel('Email').fill(email);
+    await page.getByLabel('Пароль').fill(password);
+    await page.getByRole('button', { name: 'Зарегистрироваться' }).click();
+
+    await expect(page.locator('.auth-error')).toContainText('уже существует');
   });
 });

@@ -3,9 +3,10 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
+import { GuestOnly } from '../../components/guest-only';
 import { login } from '../../lib/auth';
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -65,9 +66,29 @@ export default function LoginPage() {
           {loading ? 'Вход…' : 'Войти'}
         </button>
       </form>
+      <p className="auth-divider">или</p>
+      <div className="auth-oauth-list">
+        {/* Full navigation required for OAuth redirect + Set-Cookie via BFF */}
+        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+        <a className="auth-oauth" href="/api/auth/google">
+          Войти через Google
+        </a>
+        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+        <a className="auth-oauth" href="/api/auth/yandex">
+          Войти через Яндекс
+        </a>
+      </div>
       <p>
         Нет аккаунта? <Link href="/register">Зарегистрироваться</Link>
       </p>
     </main>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <GuestOnly>
+      <LoginForm />
+    </GuestOnly>
   );
 }

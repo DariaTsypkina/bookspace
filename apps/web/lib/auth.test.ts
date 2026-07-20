@@ -1,5 +1,12 @@
-import { describe, expect, it, vi, beforeEach } from 'vitest';
-import { login, register, validatePassword } from './auth';
+import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
+import {
+  getCurrentUser,
+  login,
+  logout,
+  profilePath,
+  register,
+  validatePassword,
+} from './auth';
 
 describe('validatePassword', () => {
   it('accepts strong passwords', () => {
@@ -11,12 +18,22 @@ describe('validatePassword', () => {
   });
 });
 
+describe('profilePath', () => {
+  it('builds public profile URL from slug', () => {
+    expect(profilePath('daria')).toBe('/u/daria');
+  });
+});
+
 describe('register', () => {
   beforeEach(() => {
     vi.stubGlobal('fetch', vi.fn());
   });
 
-  it('posts credentials to API register endpoint', async () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it('posts credentials to BFF register endpoint', async () => {
     const mockFetch = vi.mocked(fetch);
     mockFetch.mockResolvedValue({
       ok: true,
@@ -24,13 +41,14 @@ describe('register', () => {
         id: '1',
         email: 'new@example.com',
         role: 'USER',
+        slug: 'new',
       }),
     } as Response);
 
     const result = await register('new@example.com', 'Secure123!');
 
     expect(mockFetch).toHaveBeenCalledWith(
-      'http://localhost:8000/auth/register',
+      '/api/auth/register',
       expect.objectContaining({
         method: 'POST',
         credentials: 'include',
@@ -42,6 +60,7 @@ describe('register', () => {
       }),
     );
     expect(result.email).toBe('new@example.com');
+    expect(result.slug).toBe('new');
   });
 
   it('throws with API error message on failure', async () => {
@@ -65,24 +84,112 @@ describe('login', () => {
     vi.stubGlobal('fetch', vi.fn());
   });
 
-  it('posts credentials to API login endpoint', async () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it('posts credentials to BFF login endpoint', async () => {
     const mockFetch = vi.mocked(fetch);
     mockFetch.mockResolvedValue({
       ok: true,
       json: async () => ({
-        user: { id: '1', email: 'user@bookspace.local', role: 'USER' },
+        user: {
+          id: '1',
+          email: 'user@bookspace.local',
+          role: 'USER',
+          slug: 'user',
+        },
       }),
     } as Response);
 
     const result = await login('user@bookspace.local', 'User123!');
 
     expect(mockFetch).toHaveBeenCalledWith(
-      'http://localhost:8000/auth/login',
+      '/api/auth/login',
       expect.objectContaining({
         method: 'POST',
         credentials: 'include',
       }),
     );
     expect(result.user.email).toBe('user@bookspace.local');
+    expect(result.user.slug).toBe('user');
+  });
+});
+
+describe('logout', () => {
+  beforeEach(() => {
+    vi.stubGlobal('fetch', vi.fn());
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it('posts to BFF logout endpoint with credentials', async () => {
+    const mockFetch = vi.mocked(fetch);
+    mockFetch.mockResolvedValue({
+      ok: true,
+      json: async () => ({ ok: true }),
+    } as Response);
+
+    await logout();
+
+    expect(mockFetch).toHaveBeenCalledWith(
+      '/api/auth/logout',
+      expect.objectContaining({
+        method: 'POST',
+        credentials: 'include',
+      }),
+    );
+  });
+});
+
+describe('getCurrentUser', () => {
+  beforeEach(() => {
+    vi.stubGlobal('fetch', vi.fn());
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it('returns user when session cookie is valid', async () => {
+    const mockFetch = vi.mocked(fetch);
+    mockFetch.mockResolvedValue({
+      ok: true,
+      json: async () => ({
+        id: '1',
+        email: 'user@bookspace.local',
+        role: 'USER',
+        slug: 'user',
+      }),
+    } as Response);
+
+    const user = await getCurrentUser();
+
+    expect(mockFetch).toHaveBeenCalledWith(
+      '/api/auth/me',
+      expect.objectContaining({
+        method: 'GET',
+        credentials: 'include',
+      }),
+    );
+    expect(user).toEqual({
+      id: '1',
+      email: 'user@bookspace.local',
+      role: 'USER',
+      slug: 'user',
+    });
+  });
+
+  it('returns null for guest (unauthorized)', async () => {
+    const mockFetch = vi.mocked(fetch);
+    mockFetch.mockResolvedValue({
+      ok: false,
+      status: 401,
+      json: async () => ({ message: 'Unauthorized' }),
+    } as Response);
+
+    await expect(getCurrentUser()).resolves.toBeNull();
   });
 });

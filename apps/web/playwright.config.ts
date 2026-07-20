@@ -15,10 +15,19 @@ export default defineConfig({
   },
   projects: [
     {
-      name: 'chromium',
+      name: 'chromium-desktop',
       use: {
         ...devices['Desktop Chrome'],
         // Local: system Chrome. CI: Playwright Chromium (after `playwright install`).
+        ...(process.env.CI || process.env.PLAYWRIGHT_CHROME_CHANNEL === '0'
+          ? {}
+          : { channel: 'chrome' as const }),
+      },
+    },
+    {
+      name: 'chromium-mobile',
+      use: {
+        ...devices['Pixel 7'],
         ...(process.env.CI || process.env.PLAYWRIGHT_CHROME_CHANNEL === '0'
           ? {}
           : { channel: 'chrome' as const }),
@@ -34,6 +43,14 @@ export default defineConfig({
       env: {
         ...process.env,
         SESSION_SECRET: process.env.SESSION_SECRET ?? 'e2e-session-secret',
+        OAUTH_TEST_MODE: 'true',
+        GOOGLE_CALLBACK_URL:
+          process.env.GOOGLE_CALLBACK_URL ??
+          'http://localhost:3000/api/auth/google/callback',
+        YANDEX_CALLBACK_URL:
+          process.env.YANDEX_CALLBACK_URL ??
+          'http://localhost:3000/api/auth/yandex/callback',
+        WEB_URL: process.env.WEB_URL ?? 'http://localhost:3000',
       },
     },
     {
