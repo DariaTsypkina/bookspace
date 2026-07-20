@@ -4,21 +4,33 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Suspense } from 'react';
 
-const REASON_MESSAGES: Record<string, string> = {
-  access_denied: 'Вход через Google отменён.',
-  missing_code:
-    'Не удалось завершить вход через Google: отсутствует код авторизации.',
-  oauth_error: 'Ошибка авторизации Google. Попробуйте ещё раз.',
-  oauth_failed:
-    'Не удалось войти через Google. Попробуйте ещё раз или войдите по email.',
-};
+function providerLabel(provider: string | null): string {
+  if (provider === 'yandex') return 'Яндекс';
+  if (provider === 'google') return 'Google';
+  return 'внешний аккаунт';
+}
+
+function messageFor(reason: string, provider: string | null): string {
+  const name = providerLabel(provider);
+  switch (reason) {
+    case 'access_denied':
+      return `Вход через ${name} отменён.`;
+    case 'missing_code':
+      return `Не удалось завершить вход через ${name}: отсутствует код авторизации.`;
+    case 'oauth_error':
+      return `Ошибка авторизации ${name === 'внешний аккаунт' ? 'OAuth' : name}. Попробуйте ещё раз.`;
+    case 'oauth_failed':
+      return `Не удалось войти через ${name}. Попробуйте ещё раз или войдите по email.`;
+    default:
+      return 'Не удалось войти. Попробуйте ещё раз или войдите по email.';
+  }
+}
 
 function AuthErrorContent() {
   const searchParams = useSearchParams();
   const reason = searchParams.get('reason') ?? 'oauth_error';
-  const message =
-    REASON_MESSAGES[reason] ??
-    'Не удалось войти. Попробуйте ещё раз или войдите по email.';
+  const provider = searchParams.get('provider');
+  const message = messageFor(reason, provider);
 
   return (
     <main className="auth-page">

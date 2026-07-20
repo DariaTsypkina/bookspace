@@ -47,6 +47,9 @@ export default defineConfig({
         GOOGLE_CALLBACK_URL:
           process.env.GOOGLE_CALLBACK_URL ??
           'http://localhost:3000/api/auth/google/callback',
+        YANDEX_CALLBACK_URL:
+          process.env.YANDEX_CALLBACK_URL ??
+          'http://localhost:3000/api/auth/yandex/callback',
         WEB_URL: process.env.WEB_URL ?? 'http://localhost:3000',
       },
     },

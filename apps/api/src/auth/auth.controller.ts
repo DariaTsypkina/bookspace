@@ -21,6 +21,7 @@ import { GoogleOAuthClient } from './google-oauth.client';
 import { AuthGuard } from './guards/auth.guard';
 import { isStrongPassword } from './password.validator';
 import { SESSION_COOKIE } from './session.constants';
+import { YandexOAuthClient } from './yandex-oauth.client';
 
 const SESSION_COOKIE_OPTIONS = {
   httpOnly: true,
@@ -33,6 +34,7 @@ export class AuthController {
   constructor(
     private readonly authService: AuthService,
     private readonly googleOAuth: GoogleOAuthClient,
+    private readonly yandexOAuth: YandexOAuthClient,
     private readonly config: ConfigService,
   ) {}
 
@@ -71,29 +73,35 @@ export class AuthController {
     @Query('error') error: string | undefined,
     @Res() res: Response,
   ) {
-    const webUrl =
-      this.config.get<string>('WEB_URL') ?? 'http://localhost:3000';
+    return this.handleOAuthCallback(res, {
+      provider: 'google',
+      code,
+      error,
+      fetchProfile: (c) => this.googleOAuth.fetchProfile(c),
+      login: (profile) => this.authService.loginWithGoogle(profile),
+    });
+  }
 
-    if (error) {
-      const reason =
-        error === 'access_denied' ? 'access_denied' : 'oauth_error';
-      return res.redirect(
-        `${webUrl}/auth/error?reason=${encodeURIComponent(reason)}`,
-      );
-    }
+  @Get('yandex')
+  yandexStart(@Res() res: Response) {
+    const state = randomUUID();
+    const url = this.yandexOAuth.buildAuthorizeUrl(state);
+    return res.redirect(url);
+  }
 
-    if (!code) {
-      return res.redirect(`${webUrl}/auth/error?reason=missing_code`);
-    }
-
-    try {
-      const profile = await this.googleOAuth.fetchProfile(code);
-      const result = await this.authService.loginWithGoogle(profile);
-      this.setSessionCookie(res, result.accessToken);
-      return res.redirect(`${webUrl}/`);
-    } catch {
-      return res.redirect(`${webUrl}/auth/error?reason=oauth_failed`);
-    }
+  @Get('yandex/callback')
+  async yandexCallback(
+    @Query('code') code: string | undefined,
+    @Query('error') error: string | undefined,
+    @Res() res: Response,
+  ) {
+    return this.handleOAuthCallback(res, {
+      provider: 'yandex',
+      code,
+      error,
+      fetchProfile: (c) => this.yandexOAuth.fetchProfile(c),
+      login: (profile) => this.authService.loginWithYandex(profile),
+    });
   }
 
   @Get('me')
@@ -117,6 +125,52 @@ export class AuthController {
       secure: process.env.NODE_ENV === 'production',
     });
     return { ok: true };
+  }
+
+  private async handleOAuthCallback(
+    res: Response,
+    opts: {
+      provider: 'google' | 'yandex';
+      code: string | undefined;
+      error: string | undefined;
+      fetchProfile: (code: string) => Promise<{
+        providerAccountId: string;
+        email: string;
+      }>;
+      login: (profile: {
+        providerAccountId: string;
+        email: string;
+      }) => Promise<{ accessToken: string }>;
+    },
+  ) {
+    const webUrl =
+      this.config.get<string>('WEB_URL') ?? 'http://localhost:3000';
+    const providerQ = `provider=${encodeURIComponent(opts.provider)}`;
+
+    if (opts.error) {
+      const reason =
+        opts.error === 'access_denied' ? 'access_denied' : 'oauth_error';
+      return res.redirect(
+        `${webUrl}/auth/error?reason=${encodeURIComponent(reason)}&${providerQ}`,
+      );
+    }
+
+    if (!opts.code) {
+      return res.redirect(
+        `${webUrl}/auth/error?reason=missing_code&${providerQ}`,
+      );
+    }
+
+    try {
+      const profile = await opts.fetchProfile(opts.code);
+      const result = await opts.login(profile);
+      this.setSessionCookie(res, result.accessToken);
+      return res.redirect(`${webUrl}/`);
+    } catch {
+      return res.redirect(
+        `${webUrl}/auth/error?reason=oauth_failed&${providerQ}`,
+      );
+    }
   }
 
   private setSessionCookie(res: Response, accessToken: string): void {

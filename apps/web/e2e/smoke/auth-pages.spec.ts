@@ -11,6 +11,9 @@ test.describe('Auth pages smoke', () => {
       page.getByRole('link', { name: 'Войти через Google' }),
     ).toBeVisible();
     await expect(
+      page.getByRole('link', { name: 'Войти через Яндекс' }),
+    ).toBeVisible();
+    await expect(
       page.getByRole('link', { name: 'Зарегистрироваться' }),
     ).toBeVisible();
   });
@@ -27,6 +30,9 @@ test.describe('Auth pages smoke', () => {
     ).toBeVisible();
     await expect(
       page.getByRole('link', { name: 'Войти через Google' }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('link', { name: 'Войти через Яндекс' }),
     ).toBeVisible();
     await expect(
       page.getByRole('link', { name: 'Войти', exact: true }),

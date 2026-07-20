@@ -76,11 +76,17 @@ function RegisterForm() {
         </button>
       </form>
       <p className="auth-divider">или</p>
-      {/* Full navigation required for OAuth redirect + Set-Cookie via BFF */}
-      {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-      <a className="auth-oauth" href="/api/auth/google">
-        Войти через Google
-      </a>
+      <div className="auth-oauth-list">
+        {/* Full navigation required for OAuth redirect + Set-Cookie via BFF */}
+        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+        <a className="auth-oauth" href="/api/auth/google">
+          Войти через Google
+        </a>
+        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+        <a className="auth-oauth" href="/api/auth/yandex">
+          Войти через Яндекс
+        </a>
+      </div>
       <p>
         Уже есть аккаунт? <Link href="/login">Войти</Link>
       </p>

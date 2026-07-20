@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-20T08:08:21.482Z",
+  "generated_at": "2026-07-20T09:39:53.054Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 65,
-    "open_issues": 54,
+    "open_issues": 53,
     "in_progress_issues": 4,
-    "closed_issues": 7,
+    "closed_issues": 8,
     "blocked_issues": 51,
-    "ready_issues": 3
+    "ready_issues": 2
   },
   "epics": [
     {
@@ -149,11 +149,11 @@
       "status": "open",
       "priority": 1,
       "children_total": 6,
-      "children_closed": 4,
+      "children_closed": 5,
       "children_in_progress": 0,
-      "children_open": 2,
-      "progress": "4 / 6",
-      "percent_closed": 67,
+      "children_open": 1,
+      "progress": "5 / 6",
+      "percent_closed": 83,
       "children": [
         {
           "id": "bd-8jk",
@@ -179,7 +179,7 @@
         {
           "id": "bd-957.3",
           "title": "Auth: Яндекс OAuth",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 2
         },
@@ -975,11 +975,11 @@
     {
       "id": "bd-957.3",
       "title": "Auth: Яндекс OAuth",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-957",
-      "updated_at": "2026-07-17T12:35:55Z"
+      "updated_at": "2026-07-20T09:39:49Z"
     },
     {
       "id": "bd-957.2",
