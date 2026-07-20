@@ -8,6 +8,7 @@ import { AuthService } from './auth.service';
 import { GoogleOAuthClient } from './google-oauth.client';
 import { AuthGuard } from './guards/auth.guard';
 import { RolesGuard } from './guards/roles.guard';
+import { YandexOAuthClient } from './yandex-oauth.client';
 
 @Module({
   imports: [
@@ -21,7 +22,13 @@ import { RolesGuard } from './guards/roles.guard';
     }),
   ],
   controllers: [AuthController, AdminController, MeLibraryController],
-  providers: [AuthService, GoogleOAuthClient, AuthGuard, RolesGuard],
+  providers: [
+    AuthService,
+    GoogleOAuthClient,
+    YandexOAuthClient,
+    AuthGuard,
+    RolesGuard,
+  ],
   exports: [AuthService, JwtModule, AuthGuard, RolesGuard],
 })
 export class AuthModule {}

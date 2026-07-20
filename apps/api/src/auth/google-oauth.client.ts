@@ -1,10 +1,10 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { OAUTH_TEST_CODE_PREFIX } from './oauth.constants';
 import {
   GOOGLE_AUTH_URL,
   GOOGLE_TOKEN_URL,
   GOOGLE_USERINFO_URL,
-  OAUTH_TEST_CODE_PREFIX,
 } from './google-oauth.constants';
 import type {
   GoogleOAuthProfile,

@@ -1,3 +1,5 @@
+import type { OAuthProfile } from './oauth.types';
+
 export type GoogleTokenResponse = {
   access_token: string;
   token_type?: string;
@@ -14,7 +16,4 @@ export type GoogleUserInfo = {
   picture?: string;
 };
 
-export type GoogleOAuthProfile = {
-  providerAccountId: string;
-  email: string;
-};
+export type GoogleOAuthProfile = OAuthProfile;

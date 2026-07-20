@@ -9,7 +9,8 @@ import { compare, hash } from 'bcryptjs';
 import { randomUUID } from 'crypto';
 import { PrismaService } from '../prisma/prisma.service';
 import { GOOGLE_PROVIDER } from './google-oauth.constants';
-import type { GoogleOAuthProfile } from './google-oauth.types';
+import type { OAuthProfile } from './oauth.types';
+import { YANDEX_PROVIDER } from './yandex-oauth.constants';
 import { slugBaseFromEmail } from './slug.util';
 
 export type SafeUser = {
@@ -124,24 +125,39 @@ export class AuthService {
     return this.issueLoginResult(user);
   }
 
+  /** Google OAuth: find Account → else link by email → else create User+Account. */
+  async loginWithGoogle(profile: OAuthProfile): Promise<LoginResult> {
+    return this.loginWithOAuth(GOOGLE_PROVIDER, profile, 'Google');
+  }
+
+  /** Yandex OAuth: find Account → else link by email → else create User+Account. */
+  async loginWithYandex(profile: OAuthProfile): Promise<LoginResult> {
+    return this.loginWithOAuth(YANDEX_PROVIDER, profile, 'Яндекс');
+  }
+
   /**
-   * Google OAuth: find Account → else link by email → else create User+Account.
+   * Shared OAuth linking: Account by (provider, providerAccountId) →
+   * else link by email → else create User+Account.
    */
-  async loginWithGoogle(profile: GoogleOAuthProfile): Promise<LoginResult> {
+  private async loginWithOAuth(
+    provider: string,
+    profile: OAuthProfile,
+    providerLabel: string,
+  ): Promise<LoginResult> {
     const email = normalizeEmail(profile.email);
     if (!email) {
       throw new UnauthorizedException(
-        'Google не вернул email — вход невозможен',
+        `${providerLabel} не вернул email — вход невозможен`,
       );
     }
     if (!profile.providerAccountId) {
-      throw new UnauthorizedException('Некорректный профиль Google');
+      throw new UnauthorizedException(`Некорректный профиль ${providerLabel}`);
     }
 
     const existingAccount = await this.prisma.account.findUnique({
       where: {
         provider_providerAccountId: {
-          provider: GOOGLE_PROVIDER,
+          provider,
           providerAccountId: profile.providerAccountId,
         },
       },
@@ -182,7 +198,7 @@ export class AuthService {
       }
       await this.prisma.account.create({
         data: {
-          provider: GOOGLE_PROVIDER,
+          provider,
           providerAccountId: profile.providerAccountId,
           userId: existingUser.id,
         },
@@ -208,7 +224,7 @@ export class AuthService {
       });
       await tx.account.create({
         data: {
-          provider: GOOGLE_PROVIDER,
+          provider,
           providerAccountId: profile.providerAccountId,
           userId: user.id,
         },
