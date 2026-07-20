@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-20T07:30:10.324Z",
+  "generated_at": "2026-07-20T07:40:00.674Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 65,
-    "open_issues": 57,
+    "open_issues": 56,
     "in_progress_issues": 4,
-    "closed_issues": 4,
+    "closed_issues": 5,
     "blocked_issues": 51,
-    "ready_issues": 6
+    "ready_issues": 5
   },
   "epics": [
     {
@@ -149,11 +149,11 @@
       "status": "open",
       "priority": 1,
       "children_total": 6,
-      "children_closed": 1,
+      "children_closed": 2,
       "children_in_progress": 0,
-      "children_open": 5,
-      "progress": "1 / 6",
-      "percent_closed": 17,
+      "children_open": 4,
+      "progress": "2 / 6",
+      "percent_closed": 33,
       "children": [
         {
           "id": "bd-8jk",
@@ -165,7 +165,7 @@
         {
           "id": "bd-957.1",
           "title": "Auth: редирект с /login и /register → /u/[slug]",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 1
         },
@@ -561,11 +561,11 @@
     {
       "id": "bd-957.1",
       "title": "Auth: редирект с /login и /register → /u/[slug]",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 1,
       "parent": "bd-957",
-      "updated_at": "2026-07-17T12:32:46Z"
+      "updated_at": "2026-07-20T07:39:57Z"
     },
     {
       "id": "bd-957",

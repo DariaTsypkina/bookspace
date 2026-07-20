@@ -7,28 +7,34 @@ import { JwtService } from '@nestjs/jwt';
 import { Prisma, UserRole } from '@prisma/client';
 import { compare, hash } from 'bcryptjs';
 import { PrismaService } from '../prisma/prisma.service';
+import { slugBaseFromEmail } from './slug.util';
 
 export type SafeUser = {
   id: string;
   email: string;
   role: UserRole;
+  slug: string;
   isPremium: boolean;
   createdAt: Date;
 };
 
+export type SessionUser = {
+  id: string;
+  email: string;
+  role: UserRole;
+  slug: string;
+};
+
 export type LoginResult = {
   accessToken: string;
-  user: {
-    id: string;
-    email: string;
-    role: UserRole;
-  };
+  user: SessionUser;
 };
 
 const userSelect = {
   id: true,
   email: true,
   role: true,
+  slug: true,
   isPremium: true,
   createdAt: true,
 } as const;
@@ -61,6 +67,7 @@ export class AuthService {
       throw new ConflictException('Пользователь с таким email уже существует');
     }
 
+    const slug = await this.allocateUniqueSlug(slugBaseFromEmail(email));
     const passwordHash = await hash(input.password, 10);
     try {
       return await this.prisma.user.create({
@@ -68,6 +75,7 @@ export class AuthService {
           email,
           passwordHash,
           role: UserRole.USER,
+          slug,
         },
         select: userSelect,
       });
@@ -113,7 +121,59 @@ export class AuthService {
         id: user.id,
         email: user.email,
         role: user.role,
+        slug: user.slug,
       },
     };
+  }
+
+  async getSessionUser(token: string): Promise<SessionUser> {
+    let payload: { sub?: string };
+    try {
+      payload = this.jwtService.verify<{ sub?: string }>(token);
+    } catch {
+      throw new UnauthorizedException('Необходима авторизация');
+    }
+
+    if (!payload.sub) {
+      throw new UnauthorizedException('Необходима авторизация');
+    }
+
+    const user = await this.prisma.user.findUnique({
+      where: { id: payload.sub },
+      select: {
+        id: true,
+        email: true,
+        role: true,
+        slug: true,
+        deletedAt: true,
+      },
+    });
+
+    if (!user || user.deletedAt) {
+      throw new UnauthorizedException('Необходима авторизация');
+    }
+
+    return {
+      id: user.id,
+      email: user.email,
+      role: user.role,
+      slug: user.slug,
+    };
+  }
+
+  private async allocateUniqueSlug(base: string): Promise<string> {
+    let candidate = base;
+    let suffix = 2;
+    while (true) {
+      const taken = await this.prisma.user.findUnique({
+        where: { slug: candidate },
+        select: { id: true },
+      });
+      if (!taken) {
+        return candidate;
+      }
+      candidate = `${base}-${suffix}`;
+      suffix += 1;
+    }
   }
 }
