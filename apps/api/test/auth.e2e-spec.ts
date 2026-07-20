@@ -62,6 +62,7 @@ describe('Auth (e2e)', () => {
     expect(response.body).toMatchObject({
       email: 'e2e-new@bookspace.local',
       role: 'USER',
+      slug: 'e2e-new',
     });
     expect(response.body).not.toHaveProperty('passwordHash');
     expect(response.body).not.toHaveProperty('password');
@@ -70,6 +71,7 @@ describe('Auth (e2e)', () => {
       where: { email: 'e2e-new@bookspace.local' },
     });
     expect(stored?.role).toBe('USER');
+    expect(stored?.slug).toBe('e2e-new');
     expect(stored?.passwordHash).not.toBe('Secure123!');
   });
 
@@ -123,15 +125,52 @@ describe('Auth (e2e)', () => {
     expect(cookie?.[0]).toMatch(/^session=/);
     expect(cookie?.[0]).toMatch(/HttpOnly/);
     const body = response.body as {
-      user: { email: string; role: string };
+      user: { email: string; role: string; slug: string };
     };
     expect(body.user).toMatchObject({
       email: 'e2e-new@bookspace.local',
       role: 'USER',
+      slug: 'e2e-new',
     });
     expect(response.body as Record<string, unknown>).not.toHaveProperty(
       'passwordHash',
     );
+  });
+
+  it('GET /auth/me returns user for valid session cookie', async () => {
+    await request(app.getHttpServer())
+      .post('/auth/register')
+      .send({
+        email: 'e2e-new@bookspace.local',
+        password: 'Secure123!',
+      })
+      .expect(201);
+
+    const login = await request(app.getHttpServer())
+      .post('/auth/login')
+      .send({
+        email: 'e2e-new@bookspace.local',
+        password: 'Secure123!',
+      })
+      .expect(200);
+
+    const cookie = login.headers['set-cookie'];
+    expect(cookie).toBeDefined();
+
+    const me = await request(app.getHttpServer())
+      .get('/auth/me')
+      .set('Cookie', cookie ?? [])
+      .expect(200);
+
+    expect(me.body).toMatchObject({
+      email: 'e2e-new@bookspace.local',
+      role: 'USER',
+      slug: 'e2e-new',
+    });
+  });
+
+  it('GET /auth/me rejects guest without cookie', async () => {
+    await request(app.getHttpServer()).get('/auth/me').expect(401);
   });
 
   it('POST /auth/login rejects invalid credentials', async () => {

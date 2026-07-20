@@ -2,11 +2,14 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Get,
   HttpCode,
   Post,
+  Req,
   Res,
+  UnauthorizedException,
 } from '@nestjs/common';
-import type { Response } from 'express';
+import type { Request, Response } from 'express';
 import { AuthService } from './auth.service';
 import { LoginDto, RegisterDto } from './dto/auth.dto';
 import { isStrongPassword } from './password.validator';
@@ -42,5 +45,16 @@ export class AuthController {
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
     return { user: result.user };
+  }
+
+  @Get('me')
+  async me(@Req() req: Request) {
+    const cookies = req.cookies as
+      Record<string, string | undefined> | undefined;
+    const token = cookies?.[SESSION_COOKIE];
+    if (!token) {
+      throw new UnauthorizedException('Необходима авторизация');
+    }
+    return this.authService.getSessionUser(token);
   }
 }

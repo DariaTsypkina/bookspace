@@ -19,7 +19,7 @@ describe('AuthService', () => {
       create: jest.Mock;
     };
   };
-  let jwtService: { sign: jest.Mock };
+  let jwtService: { sign: jest.Mock; verify: jest.Mock };
 
   beforeEach(async () => {
     prisma = {
@@ -28,7 +28,10 @@ describe('AuthService', () => {
         create: jest.fn(),
       },
     };
-    jwtService = { sign: jest.fn().mockReturnValue('jwt-token') };
+    jwtService = {
+      sign: jest.fn().mockReturnValue('jwt-token'),
+      verify: jest.fn(),
+    };
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -45,10 +48,14 @@ describe('AuthService', () => {
   describe('register', () => {
     it('creates USER with hashed password and returns safe user fields', async () => {
       prisma.user.findUnique.mockResolvedValue(null);
+      prisma.user.findUnique
+        .mockResolvedValueOnce(null) // email
+        .mockResolvedValueOnce(null); // slug availability
       prisma.user.create.mockResolvedValue({
         id: 'user-id',
         email: 'new@example.com',
         role: UserRole.USER,
+        slug: 'new',
         isPremium: false,
         createdAt: new Date('2026-01-01'),
       });
@@ -63,11 +70,13 @@ describe('AuthService', () => {
           email: 'new@example.com',
           passwordHash: 'hashed-password',
           role: UserRole.USER,
+          slug: 'new',
         },
         select: {
           id: true,
           email: true,
           role: true,
+          slug: true,
           isPremium: true,
           createdAt: true,
         },
@@ -76,6 +85,7 @@ describe('AuthService', () => {
         id: 'user-id',
         email: 'new@example.com',
         role: UserRole.USER,
+        slug: 'new',
         isPremium: false,
         createdAt: new Date('2026-01-01'),
       });
@@ -94,11 +104,14 @@ describe('AuthService', () => {
     });
 
     it('normalizes email before lookup and create', async () => {
-      prisma.user.findUnique.mockResolvedValue(null);
+      prisma.user.findUnique
+        .mockResolvedValueOnce(null)
+        .mockResolvedValueOnce(null);
       prisma.user.create.mockResolvedValue({
         id: 'user-id',
         email: 'new@example.com',
         role: UserRole.USER,
+        slug: 'new',
         isPremium: false,
         createdAt: new Date('2026-01-01'),
       });
@@ -117,7 +130,9 @@ describe('AuthService', () => {
     });
 
     it('maps unique constraint race to ConflictException', async () => {
-      prisma.user.findUnique.mockResolvedValue(null);
+      prisma.user.findUnique
+        .mockResolvedValueOnce(null)
+        .mockResolvedValueOnce(null);
       prisma.user.create.mockRejectedValue(
         new Prisma.PrismaClientKnownRequestError('Unique constraint failed', {
           code: 'P2002',
@@ -132,6 +147,30 @@ describe('AuthService', () => {
         }),
       ).rejects.toBeInstanceOf(ConflictException);
     });
+
+    it('suffixes slug when base is already taken', async () => {
+      prisma.user.findUnique
+        .mockResolvedValueOnce(null) // email free
+        .mockResolvedValueOnce({ id: 'taken' }) // slug 'reader' taken
+        .mockResolvedValueOnce(null); // slug 'reader-2' free
+      prisma.user.create.mockResolvedValue({
+        id: 'user-id',
+        email: 'reader@example.com',
+        role: UserRole.USER,
+        slug: 'reader-2',
+        isPremium: false,
+        createdAt: new Date('2026-01-01'),
+      });
+
+      await authService.register({
+        email: 'reader@example.com',
+        password: 'Secure123!',
+      });
+
+      const createArgs = prisma.user.create.mock.calls[0] as
+        [{ data: { slug: string } }] | undefined;
+      expect(createArgs?.[0].data.slug).toBe('reader-2');
+    });
   });
 
   describe('login', () => {
@@ -141,6 +180,7 @@ describe('AuthService', () => {
         email: 'user@bookspace.local',
         passwordHash: 'stored-hash',
         role: UserRole.USER,
+        slug: 'user',
         deletedAt: null,
       });
       (compare as jest.Mock).mockResolvedValue(true);
@@ -156,6 +196,7 @@ describe('AuthService', () => {
           id: 'user-id',
           email: 'user@bookspace.local',
           role: UserRole.USER,
+          slug: 'user',
         },
       });
       expect(jwtService.sign).toHaveBeenCalledWith({
@@ -230,6 +271,58 @@ describe('AuthService', () => {
           email: 'user@bookspace.local',
           password: 'Wrong123!',
         }),
+      ).rejects.toBeInstanceOf(UnauthorizedException);
+    });
+  });
+
+  describe('getSessionUser', () => {
+    it('returns safe user for valid token', async () => {
+      jwtService.verify = jest.fn().mockReturnValue({ sub: 'user-id' });
+      prisma.user.findUnique.mockResolvedValue({
+        id: 'user-id',
+        email: 'user@bookspace.local',
+        role: UserRole.USER,
+        slug: 'user',
+        isPremium: false,
+        createdAt: new Date('2026-01-01'),
+        deletedAt: null,
+      });
+
+      const result = await authService.getSessionUser('jwt-token');
+
+      expect(jwtService.verify).toHaveBeenCalledWith('jwt-token');
+      expect(result).toEqual({
+        id: 'user-id',
+        email: 'user@bookspace.local',
+        role: UserRole.USER,
+        slug: 'user',
+      });
+    });
+
+    it('throws UnauthorizedException for invalid token', async () => {
+      jwtService.verify = jest.fn().mockImplementation(() => {
+        throw new Error('invalid');
+      });
+
+      await expect(
+        authService.getSessionUser('bad-token'),
+      ).rejects.toBeInstanceOf(UnauthorizedException);
+    });
+
+    it('throws UnauthorizedException for soft-deleted user', async () => {
+      jwtService.verify = jest.fn().mockReturnValue({ sub: 'user-id' });
+      prisma.user.findUnique.mockResolvedValue({
+        id: 'user-id',
+        email: 'gone@example.com',
+        role: UserRole.USER,
+        slug: 'gone',
+        isPremium: false,
+        createdAt: new Date('2026-01-01'),
+        deletedAt: new Date('2026-02-01'),
+      });
+
+      await expect(
+        authService.getSessionUser('jwt-token'),
       ).rejects.toBeInstanceOf(UnauthorizedException);
     });
   });
