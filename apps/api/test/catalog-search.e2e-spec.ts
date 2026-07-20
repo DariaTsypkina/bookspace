@@ -5,6 +5,7 @@ import request from 'supertest';
 import { App } from 'supertest/types';
 import { PrismaClient, WorkStatus } from '@prisma/client';
 import { AppModule } from '../src/app.module';
+import type { CatalogSearchResponse } from '../src/catalog/catalog-search.types';
 
 const prisma = new PrismaClient();
 const TEST_PREFIX = 'catalog-search-e2e';
@@ -61,13 +62,12 @@ describe('Catalog search (e2e)', () => {
       .get('/catalog/search')
       .expect(200);
 
-    expect(response.body).toMatchObject({
+    const body = response.body as CatalogSearchResponse;
+    expect(body).toMatchObject({
       query: '',
       items: [],
     });
-    expect(response.body.hints).toEqual(
-      expect.arrayContaining([expect.any(String)]),
-    );
+    expect(body.hints).toEqual(expect.arrayContaining([expect.any(String)]));
   });
 
   it('GET /catalog/search finds published work by titleRu for guest', async () => {
@@ -84,7 +84,8 @@ describe('Catalog search (e2e)', () => {
       .query({ q: 'война' })
       .expect(200);
 
-    expect(response.body.items).toEqual(
+    const body = response.body as CatalogSearchResponse;
+    expect(body.items).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
           type: 'WORK',
@@ -110,7 +111,8 @@ describe('Catalog search (e2e)', () => {
       .query({ q: 'черновик' })
       .expect(200);
 
-    expect(response.body.items).toEqual([]);
+    const body = response.body as CatalogSearchResponse;
+    expect(body.items).toEqual([]);
   });
 
   it('GET /catalog/search returns entity types in items', async () => {
@@ -127,7 +129,8 @@ describe('Catalog search (e2e)', () => {
       .query({ q: 'достоевский' })
       .expect(200);
 
-    expect(response.body.items[0]).toMatchObject({
+    const body = response.body as CatalogSearchResponse;
+    expect(body.items[0]).toMatchObject({
       type: 'AUTHOR',
       id: author.id,
       path: `/authors/${author.slug}`,
