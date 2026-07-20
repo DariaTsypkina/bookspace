@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-07-20T14:25:34.346Z",
+  "generated_at": "2026-07-20T14:40:16.570Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 67,
-    "open_issues": 47,
+    "open_issues": 46,
     "in_progress_issues": 4,
-    "closed_issues": 16,
-    "blocked_issues": 45,
+    "closed_issues": 17,
+    "blocked_issues": 44,
     "ready_issues": 2
   },
   "epics": [
@@ -121,11 +121,11 @@
       "status": "open",
       "priority": 2,
       "children_total": 4,
-      "children_closed": 0,
+      "children_closed": 1,
       "children_in_progress": 0,
-      "children_open": 4,
-      "progress": "0 / 4",
-      "percent_closed": 0,
+      "children_open": 3,
+      "progress": "1 / 4",
+      "percent_closed": 25,
       "children": [
         {
           "id": "bd-8s4.1",
@@ -137,7 +137,7 @@
         {
           "id": "bd-8s4.2",
           "title": "ContextReading: Классификация needsContext",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 2
         },
@@ -935,11 +935,11 @@
     {
       "id": "bd-8s4.2",
       "title": "ContextReading: Классификация needsContext",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-8s4",
-      "updated_at": "2026-07-17T12:36:07Z"
+      "updated_at": "2026-07-20T14:40:10Z"
     },
     {
       "id": "bd-8s4.1",
