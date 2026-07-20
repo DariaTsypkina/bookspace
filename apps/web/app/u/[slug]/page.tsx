@@ -1,3 +1,5 @@
+import { LogoutButton } from '../../../components/logout-button';
+
 type ProfilePageProps = {
   params: Promise<{ slug: string }>;
 };
@@ -11,6 +13,7 @@ export default async function ProfileStubPage({ params }: ProfilePageProps) {
       <p>
         Публичный профиль пользователя <strong>{slug}</strong> скоро появится.
       </p>
+      <LogoutButton />
     </main>
   );
 }

@@ -2,6 +2,7 @@ import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
 import {
   getCurrentUser,
   login,
+  logout,
   profilePath,
   register,
   validatePassword,
@@ -32,7 +33,7 @@ describe('register', () => {
     vi.unstubAllGlobals();
   });
 
-  it('posts credentials to API register endpoint', async () => {
+  it('posts credentials to BFF register endpoint', async () => {
     const mockFetch = vi.mocked(fetch);
     mockFetch.mockResolvedValue({
       ok: true,
@@ -47,7 +48,7 @@ describe('register', () => {
     const result = await register('new@example.com', 'Secure123!');
 
     expect(mockFetch).toHaveBeenCalledWith(
-      'http://localhost:8000/auth/register',
+      '/api/auth/register',
       expect.objectContaining({
         method: 'POST',
         credentials: 'include',
@@ -87,7 +88,7 @@ describe('login', () => {
     vi.unstubAllGlobals();
   });
 
-  it('posts credentials to API login endpoint', async () => {
+  it('posts credentials to BFF login endpoint', async () => {
     const mockFetch = vi.mocked(fetch);
     mockFetch.mockResolvedValue({
       ok: true,
@@ -104,7 +105,7 @@ describe('login', () => {
     const result = await login('user@bookspace.local', 'User123!');
 
     expect(mockFetch).toHaveBeenCalledWith(
-      'http://localhost:8000/auth/login',
+      '/api/auth/login',
       expect.objectContaining({
         method: 'POST',
         credentials: 'include',
@@ -112,6 +113,34 @@ describe('login', () => {
     );
     expect(result.user.email).toBe('user@bookspace.local');
     expect(result.user.slug).toBe('user');
+  });
+});
+
+describe('logout', () => {
+  beforeEach(() => {
+    vi.stubGlobal('fetch', vi.fn());
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it('posts to BFF logout endpoint with credentials', async () => {
+    const mockFetch = vi.mocked(fetch);
+    mockFetch.mockResolvedValue({
+      ok: true,
+      json: async () => ({ ok: true }),
+    } as Response);
+
+    await logout();
+
+    expect(mockFetch).toHaveBeenCalledWith(
+      '/api/auth/logout',
+      expect.objectContaining({
+        method: 'POST',
+        credentials: 'include',
+      }),
+    );
   });
 });
 
@@ -139,7 +168,7 @@ describe('getCurrentUser', () => {
     const user = await getCurrentUser();
 
     expect(mockFetch).toHaveBeenCalledWith(
-      'http://localhost:8000/auth/me',
+      '/api/auth/me',
       expect.objectContaining({
         method: 'GET',
         credentials: 'include',
