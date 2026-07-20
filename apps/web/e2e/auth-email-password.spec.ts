@@ -24,7 +24,7 @@ test.describe('Auth email/password e2e', () => {
 
     await expect(page).toHaveURL('/');
 
-    const cookies = await context.cookies('http://localhost:8000');
+    const cookies = await context.cookies();
     const sessionCookie = cookies.find((cookie) => cookie.name === 'session');
     expect(sessionCookie).toBeDefined();
     expect(sessionCookie?.httpOnly).toBe(true);

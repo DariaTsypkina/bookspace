@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-20T07:40:00.674Z",
+  "generated_at": "2026-07-20T08:00:26.937Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 65,
-    "open_issues": 56,
+    "open_issues": 55,
     "in_progress_issues": 4,
-    "closed_issues": 5,
+    "closed_issues": 6,
     "blocked_issues": 51,
-    "ready_issues": 5
+    "ready_issues": 4
   },
   "epics": [
     {
@@ -149,11 +149,11 @@
       "status": "open",
       "priority": 1,
       "children_total": 6,
-      "children_closed": 2,
+      "children_closed": 3,
       "children_in_progress": 0,
-      "children_open": 4,
-      "progress": "2 / 6",
-      "percent_closed": 33,
+      "children_open": 3,
+      "progress": "3 / 6",
+      "percent_closed": 50,
       "children": [
         {
           "id": "bd-8jk",
@@ -186,7 +186,7 @@
         {
           "id": "bd-v2y",
           "title": "Auth: сессия и защита маршрутов",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 1
         },
@@ -579,11 +579,11 @@
     {
       "id": "bd-v2y",
       "title": "Auth: сессия и защита маршрутов",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 1,
       "parent": "bd-957",
-      "updated_at": "2026-07-16T10:52:07Z"
+      "updated_at": "2026-07-20T08:00:24Z"
     },
     {
       "id": "bd-8jk",

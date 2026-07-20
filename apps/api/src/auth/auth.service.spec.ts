@@ -203,6 +203,7 @@ describe('AuthService', () => {
         sub: 'user-id',
         email: 'user@bookspace.local',
         role: UserRole.USER,
+        jti: expect.any(String) as string,
       });
     });
 
@@ -277,7 +278,10 @@ describe('AuthService', () => {
 
   describe('getSessionUser', () => {
     it('returns safe user for valid token', async () => {
-      jwtService.verify = jest.fn().mockReturnValue({ sub: 'user-id' });
+      jwtService.verify = jest.fn().mockReturnValue({
+        sub: 'user-id',
+        jti: 'jti-1',
+      });
       prisma.user.findUnique.mockResolvedValue({
         id: 'user-id',
         email: 'user@bookspace.local',
@@ -310,7 +314,10 @@ describe('AuthService', () => {
     });
 
     it('throws UnauthorizedException for soft-deleted user', async () => {
-      jwtService.verify = jest.fn().mockReturnValue({ sub: 'user-id' });
+      jwtService.verify = jest.fn().mockReturnValue({
+        sub: 'user-id',
+        jti: 'jti-1',
+      });
       prisma.user.findUnique.mockResolvedValue({
         id: 'user-id',
         email: 'gone@example.com',
@@ -320,6 +327,27 @@ describe('AuthService', () => {
         createdAt: new Date('2026-01-01'),
         deletedAt: new Date('2026-02-01'),
       });
+
+      await expect(
+        authService.getSessionUser('jwt-token'),
+      ).rejects.toBeInstanceOf(UnauthorizedException);
+    });
+
+    it('throws UnauthorizedException after revokeSessionToken', async () => {
+      jwtService.verify = jest.fn().mockReturnValue({
+        sub: 'user-id',
+        jti: 'jti-revoked',
+        exp: Math.floor(Date.now() / 1000) + 3600,
+      });
+      prisma.user.findUnique.mockResolvedValue({
+        id: 'user-id',
+        email: 'user@bookspace.local',
+        role: UserRole.USER,
+        slug: 'user',
+        deletedAt: null,
+      });
+
+      authService.revokeSessionToken('jwt-token');
 
       await expect(
         authService.getSessionUser('jwt-token'),

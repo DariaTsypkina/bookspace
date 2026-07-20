@@ -50,7 +50,7 @@
 | 🔄 | `bd-957.1` | Auth: редирект с /login и /register → /u/[slug] |
 | ⬜ | `bd-957.2` | Auth: Google OAuth |
 | ⬜ | `bd-957.3` | Auth: Яндекс OAuth |
-| ⬜ | `bd-v2y` | Auth: сессия и защита маршрутов |
+| 🔄 | `bd-v2y` | Auth: сессия и защита маршрутов |
 | ⬜ | `bd-wlw` | Auth: rate limit на register/login |
 
 ### 2. Каталог — 🔒 · epic `bd-6v0` · 0 / 6
@@ -150,6 +150,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-20 | Claim/реализация `bd-v2y`: guards, logout, BFF, stub library; ветка `task/bd-v2y-auth-session-guards` |
 | 2026-07-20 | Claim/реализация `bd-957.1`: редирект auth → `/u/[slug]` + stub профиля; ветка `task/bd-957.1-auth-redirect-profile` |
 | 2026-07-20 | `bd-8jk`: доводка приёмки — bd conventions, Playwright chromium-desktop+mobile (12/12), unit/e2e green; `bd close` за оркестратором |
 | 2026-07-20 | Claim `bd-ky6`, ветка `chore/bd-ky6/beads-interactions-sync`: sync interactions.jsonl |

@@ -7,7 +7,7 @@ import { getCurrentUser, profilePath } from '../lib/auth';
 /**
  * For guest-only pages (/login, /register).
  * Does not render children while checking session; redirects auth users to /u/[slug].
- * Cookie lives on API origin — true Next SSR redirect needs BFF (bd-v2y).
+ * Cookie session is first-party via BFF `/api/auth/*` (Nest `/auth/*`).
  */
 export function GuestOnly({ children }: { children: ReactNode }) {
   const router = useRouter();

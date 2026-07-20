@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000';
+const AUTH_BFF_BASE = '/api/auth';
 
 export type AuthUser = {
   id: string;
@@ -49,7 +49,7 @@ export async function register(
   email: string,
   password: string,
 ): Promise<AuthUser> {
-  const response = await fetch(`${API_URL}/auth/register`, {
+  const response = await fetch(`${AUTH_BFF_BASE}/register`, {
     method: 'POST',
     credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
@@ -67,7 +67,7 @@ export async function login(
   email: string,
   password: string,
 ): Promise<{ user: AuthUser }> {
-  const response = await fetch(`${API_URL}/auth/login`, {
+  const response = await fetch(`${AUTH_BFF_BASE}/login`, {
     method: 'POST',
     credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
@@ -81,8 +81,19 @@ export async function login(
   return (await response.json()) as { user: AuthUser };
 }
 
+export async function logout(): Promise<void> {
+  const response = await fetch(`${AUTH_BFF_BASE}/logout`, {
+    method: 'POST',
+    credentials: 'include',
+  });
+
+  if (!response.ok) {
+    throw new Error(await parseApiError(response));
+  }
+}
+
 export async function getCurrentUser(): Promise<AuthUser | null> {
-  const response = await fetch(`${API_URL}/auth/me`, {
+  const response = await fetch(`${AUTH_BFF_BASE}/me`, {
     method: 'GET',
     credentials: 'include',
   });

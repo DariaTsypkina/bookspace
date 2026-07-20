@@ -7,14 +7,16 @@ import {
   Post,
   Req,
   Res,
-  UnauthorizedException,
+  UseGuards,
 } from '@nestjs/common';
 import type { Request, Response } from 'express';
 import { AuthService } from './auth.service';
+import type { SessionUser } from './auth.service';
+import { CurrentUser } from './decorators/current-user.decorator';
 import { LoginDto, RegisterDto } from './dto/auth.dto';
+import { AuthGuard } from './guards/auth.guard';
 import { isStrongPassword } from './password.validator';
-
-const SESSION_COOKIE = 'session';
+import { SESSION_COOKIE } from './session.constants';
 
 @Controller('auth')
 export class AuthController {
@@ -48,13 +50,25 @@ export class AuthController {
   }
 
   @Get('me')
-  async me(@Req() req: Request) {
+  @UseGuards(AuthGuard)
+  me(@CurrentUser() user: SessionUser) {
+    return user;
+  }
+
+  @Post('logout')
+  @HttpCode(200)
+  logout(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
     const cookies = req.cookies as
       Record<string, string | undefined> | undefined;
     const token = cookies?.[SESSION_COOKIE];
-    if (!token) {
-      throw new UnauthorizedException('Необходима авторизация');
+    if (token) {
+      this.authService.revokeSessionToken(token);
     }
-    return this.authService.getSessionUser(token);
+    res.clearCookie(SESSION_COOKIE, {
+      httpOnly: true,
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
+    });
+    return { ok: true };
   }
 }

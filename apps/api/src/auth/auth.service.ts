@@ -6,6 +6,7 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { Prisma, UserRole } from '@prisma/client';
 import { compare, hash } from 'bcryptjs';
+import { randomUUID } from 'crypto';
 import { PrismaService } from '../prisma/prisma.service';
 import { slugBaseFromEmail } from './slug.util';
 
@@ -30,6 +31,12 @@ export type LoginResult = {
   user: SessionUser;
 };
 
+type SessionJwtPayload = {
+  sub?: string;
+  jti?: string;
+  exp?: number;
+};
+
 const userSelect = {
   id: true,
   email: true,
@@ -49,6 +56,9 @@ export function normalizeEmail(email: string): string {
 
 @Injectable()
 export class AuthService {
+  /** jti → expiry epoch ms; single-process denylist (Redis later for multi-instance) */
+  private readonly revokedJtis = new Map<string, number>();
+
   constructor(
     private readonly prisma: PrismaService,
     private readonly jwtService: JwtService,
@@ -109,10 +119,12 @@ export class AuthService {
       throw new UnauthorizedException('Неверный email или пароль');
     }
 
+    const jti = randomUUID();
     const accessToken = this.jwtService.sign({
       sub: user.id,
       email: user.email,
       role: user.role,
+      jti,
     });
 
     return {
@@ -127,14 +139,18 @@ export class AuthService {
   }
 
   async getSessionUser(token: string): Promise<SessionUser> {
-    let payload: { sub?: string };
+    let payload: SessionJwtPayload;
     try {
-      payload = this.jwtService.verify<{ sub?: string }>(token);
+      payload = this.jwtService.verify<SessionJwtPayload>(token);
     } catch {
       throw new UnauthorizedException('Необходима авторизация');
     }
 
     if (!payload.sub) {
+      throw new UnauthorizedException('Необходима авторизация');
+    }
+
+    if (payload.jti && this.isRevoked(payload.jti)) {
       throw new UnauthorizedException('Необходима авторизация');
     }
 
@@ -159,6 +175,45 @@ export class AuthService {
       role: user.role,
       slug: user.slug,
     };
+  }
+
+  /** Invalidate token by jti; safe no-op for already-invalid tokens. */
+  revokeSessionToken(token: string): void {
+    try {
+      const payload = this.jwtService.verify<SessionJwtPayload>(token);
+      if (!payload.jti) {
+        return;
+      }
+      const expiresAtMs =
+        typeof payload.exp === 'number'
+          ? payload.exp * 1000
+          : Date.now() + 7 * 24 * 60 * 60 * 1000;
+      this.revokedJtis.set(payload.jti, expiresAtMs);
+      this.pruneRevoked();
+    } catch {
+      // ignore invalid tokens on logout
+    }
+  }
+
+  private isRevoked(jti: string): boolean {
+    const expiresAt = this.revokedJtis.get(jti);
+    if (expiresAt === undefined) {
+      return false;
+    }
+    if (expiresAt <= Date.now()) {
+      this.revokedJtis.delete(jti);
+      return false;
+    }
+    return true;
+  }
+
+  private pruneRevoked(): void {
+    const now = Date.now();
+    for (const [jti, expiresAt] of this.revokedJtis) {
+      if (expiresAt <= now) {
+        this.revokedJtis.delete(jti);
+      }
+    }
   }
 
   private async allocateUniqueSlug(base: string): Promise<string> {
