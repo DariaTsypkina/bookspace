@@ -36,7 +36,8 @@
 
 | Статус | ID | Задача |
 |--------|-----|--------|
-| 🔄 | `bd-0e6` | Docs: согласование зависимостей агентом |
+| 🔄 | `bd-ky6` | Chore: синхронизировать beads interactions.jsonl |
+| ✅ | `bd-0e6` | Docs: согласование зависимостей агентом |
 | 🔄 | `bd-rtp` | Docs: human intake workflow и /task skill |
 | 🔄 | `bd-nvi` | Scaffold monorepo dev baseline |
 | ✅ | `bd-384` | Session Completion: git push при конце сессии |
@@ -149,6 +150,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-20 | Claim `bd-ky6`, ветка `chore/bd-ky6/beads-interactions-sync`: sync interactions.jsonl |
 | 2026-07-20 | Claim `bd-0e6`, ветка `feature/bd-0e6/dependency-approval`: rule согласования зависимостей |
 | 2026-07-17 | `bd-aud`: автоэкспорт issues.jsonl + progress.json (скрипт, pre-commit) |
 | 2026-07-17 | bd-conventions: канон перенесён в `.cursor/rules/bd-conventions.mdc` |
