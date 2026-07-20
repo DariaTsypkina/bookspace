@@ -51,7 +51,9 @@ export function AdminContextPanel() {
   }, []);
 
   useEffect(() => {
-    void loadItems();
+    queueMicrotask(() => {
+      void loadItems();
+    });
   }, [loadItems]);
 
   async function handleSave(event: FormEvent, item: AdminContextReadingItem) {
