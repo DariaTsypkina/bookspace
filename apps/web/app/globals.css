@@ -272,6 +272,36 @@ a {
     sans-serif;
 }
 
+.search-empty p + p {
+  margin-top: 0.75rem;
+}
+
+.search-demo-queries {
+  margin-top: 0.75rem;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+}
+
+.search-demo-queries a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.search-error {
+  color: #b42318;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  padding: 0.75rem 1rem;
+  background: #fef3f2;
+  border: 1px solid #fecdca;
+  border-radius: 0.5rem;
+}
+
 .search-results {
   list-style: none;
   display: flex;

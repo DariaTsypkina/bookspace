@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-20T10:41:48.030Z",
+  "generated_at": "2026-07-20T10:54:15.266Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 66,
+    "total_issues": 67,
     "open_issues": 51,
     "in_progress_issues": 4,
-    "closed_issues": 11,
+    "closed_issues": 12,
     "blocked_issues": 49,
     "ready_issues": 2
   },
@@ -50,12 +50,12 @@
       "title": "Каталог",
       "status": "open",
       "priority": 1,
-      "children_total": 7,
-      "children_closed": 3,
+      "children_total": 8,
+      "children_closed": 4,
       "children_in_progress": 0,
       "children_open": 4,
-      "progress": "3 / 7",
-      "percent_closed": 43,
+      "progress": "4 / 8",
+      "percent_closed": 50,
       "children": [
         {
           "id": "bd-6v0.1",
@@ -102,6 +102,13 @@
         {
           "id": "bd-6v0.7",
           "title": "Playwright catalog-search: strict mode на ссылке Гарри Поттер",
+          "status": "closed",
+          "type": "bug",
+          "priority": 2
+        },
+        {
+          "id": "bd-6v0.8",
+          "title": "Поиск: подсказки при пустой выдаче и ошибка API",
           "status": "closed",
           "type": "bug",
           "priority": 2
@@ -600,6 +607,15 @@
       "priority": 1,
       "parent": "bd-957",
       "updated_at": "2026-07-20T07:30:07Z"
+    },
+    {
+      "id": "bd-6v0.8",
+      "title": "Поиск: подсказки при пустой выдаче и ошибка API",
+      "status": "closed",
+      "type": "bug",
+      "priority": 2,
+      "parent": "bd-6v0",
+      "updated_at": "2026-07-20T10:53:52Z"
     },
     {
       "id": "bd-6v0.7",
