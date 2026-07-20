@@ -1,4 +1,5 @@
 export const MAX_SOURCE_SNIPPET_LENGTH = 500;
+export const DEFAULT_RECENT_CONTEXT_DAYS = 7;
 export const MAX_EXTRACT_CANDIDATES = 8;
 export const CONTEXT_CLASSIFY_JOB = 'context.classify.need';
 export const CONTEXT_EXTRACT_JOB = 'context.extract.publish';
