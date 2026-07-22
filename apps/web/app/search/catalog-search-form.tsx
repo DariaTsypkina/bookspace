@@ -2,6 +2,9 @@
 
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 type CatalogSearchFormProps = {
   initialQuery?: string;
@@ -23,9 +26,11 @@ export function CatalogSearchForm({
   }
 
   return (
-    <form className="search-form" onSubmit={handleSubmit} role="search">
-      <label htmlFor="catalog-search-input">Поисковый запрос</label>
-      <input
+    <form className="flex flex-col gap-2" onSubmit={handleSubmit} role="search">
+      <Label htmlFor="catalog-search-input" className="font-normal text-muted">
+        Поисковый запрос
+      </Label>
+      <Input
         id="catalog-search-input"
         name="q"
         type="search"
@@ -34,7 +39,9 @@ export function CatalogSearchForm({
         placeholder="Книга, автор, серия…"
         autoComplete="off"
       />
-      <button type="submit">Найти</button>
+      <Button type="submit" className="w-full sm:w-auto">
+        Найти
+      </Button>
     </form>
   );
 }

@@ -45,7 +45,7 @@
 
 ### DX — Tailwind + shadcn — 🔄 · epic `bd-wus` · 0 / 17 · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
 
-План: [migration-tailwind-shadcn.md](docs/tech/migration-tailwind-shadcn.md). В работе: `bd-wus.7` (ветка `task/bd-wus.7-auth-error`). F1–F2 ✅; N1 (`bd-wus.3`) ✅; S1–S3 (`bd-wus.4`–`.6`) ✅ в сборочной.
+План: [migration-tailwind-shadcn.md](docs/tech/migration-tailwind-shadcn.md). В работе: `bd-wus.8` (ветка `task/bd-wus.8-search`). F1–F2 ✅; N1 (`bd-wus.3`) ✅; S1–S4 (`bd-wus.4`–`.7`) ✅ в сборочной.
 
 | Статус | ID | Задача |
 |--------|-----|--------|
@@ -55,8 +55,8 @@
 | ✅ | `bd-wus.4` | Экран: Главная `/` |
 | ✅ | `bd-wus.5` | Экран: Вход `/login` |
 | ✅ | `bd-wus.6` | Экран: Регистрация `/register` |
-| 🔄 | `bd-wus.7` | Экран: Auth error `/auth/error` |
-| ⬜ | `bd-wus.8` | Экран: Поиск `/search` |
+| ✅ | `bd-wus.7` | Экран: Auth error `/auth/error` |
+| 🔄 | `bd-wus.8` | Экран: Поиск `/search` |
 | ⬜ | `bd-wus.9` | Экран: Книга `/books/[slug]` |
 | ⬜ | `bd-wus.10` | Экран: Автор `/authors/[slug]` |
 | ⬜ | `bd-wus.11` | Экран: Персонаж `/characters/[slug]` |
@@ -187,6 +187,8 @@
 | 2026-07-22 | Claim `bd-wus.4`: conventions (design/acceptance/notes/labels area:web+sec:ui+dx); TDD RED→GREEN миграция `/`; ветка `task/bd-wus.4-home` |
 | 2026-07-22 | `bd-wus.3` close-prep: app-nav → Tailwind+shadcn Button+Lucide; legacy `.app-nav*` removed; unit 83; Playwright app-nav **10/10** (desktop+mobile, PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.3-app-nav`; `bd close` за оркестратором |
 | 2026-07-22 | Claim `bd-wus.3`: conventions (design/acceptance/notes/labels area:web+sec:ui+dx); TDD RED→GREEN миграция app-nav; ветка `task/bd-wus.3-app-nav` |
+| 2026-07-22 | `bd-wus.8` close-prep: `/search` + catalog-search-form → Tailwind+shadcn; legacy `.search-*` removed; unit search 6/6; Playwright catalog-search **8/8** (desktop+mobile, PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.8-search`; `bd close` за оркестратором |
+| 2026-07-22 | Claim `bd-wus.8`: S5 `/search` + catalog-search-form → Tailwind+shadcn; ветка `task/bd-wus.8-search` |
 | 2026-07-22 | `bd-wus.2` close-prep: shadcn baseline (cn/cva + Button/Input/Label/Card + lucide); unit 78; build/lint ok; Playwright baseline+foundation **12/12** (desktop+mobile, PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.2-shadcn-baseline`; `bd close` за оркестратором |
 | 2026-07-22 | Claim `bd-wus.2`: conventions (design/acceptance/notes/labels area:web+sec:ui+dx); TDD RED cn/Button + smoke; ветка `task/bd-wus.2-shadcn-baseline` |
 | 2026-07-22 | `bd-wus.1` close-prep: Tailwind v3+PostCSS+tokens; unit 68; build/lint ok; Playwright foundation+auth-pages+app-nav **20/20** (desktop+mobile, PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.1-tailwind-foundation`; `bd close` за оркестратором |
