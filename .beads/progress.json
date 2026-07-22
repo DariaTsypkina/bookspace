@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-22T14:59:58.292Z",
+  "generated_at": "2026-07-22T15:03:50.245Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 88,
-    "open_issues": 45,
+    "open_issues": 44,
     "in_progress_issues": 5,
-    "closed_issues": 38,
+    "closed_issues": 39,
     "blocked_issues": 7,
-    "ready_issues": 38
+    "ready_issues": 37
   },
   "epics": [
     {
@@ -534,11 +534,11 @@
       "status": "open",
       "priority": 2,
       "children_total": 17,
-      "children_closed": 13,
+      "children_closed": 14,
       "children_in_progress": 0,
-      "children_open": 4,
-      "progress": "13 / 17",
-      "percent_closed": 76,
+      "children_open": 3,
+      "progress": "14 / 17",
+      "percent_closed": 82,
       "children": [
         {
           "id": "bd-wus.1",
@@ -578,7 +578,7 @@
         {
           "id": "bd-wus.14",
           "title": "UI: миграция публичного профиля /u/[slug]",
-          "status": "open",
+          "status": "closed",
           "type": "task",
           "priority": 2
         },
@@ -801,11 +801,11 @@
     {
       "id": "bd-wus.14",
       "title": "UI: миграция публичного профиля /u/[slug]",
-      "status": "open",
+      "status": "closed",
       "type": "task",
       "priority": 2,
       "parent": "bd-wus",
-      "updated_at": "2026-07-22T11:46:18Z"
+      "updated_at": "2026-07-22T15:03:47Z"
     },
     {
       "id": "bd-wus.13",
