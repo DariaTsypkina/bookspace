@@ -22,7 +22,7 @@
 | 8 | Подборки | 🔒 | 0 / 3 | `bd-b75` |
 | 9 | Рекомендации | 🔒 | 0 / 3 | `bd-ada` |
 | 10 | Админка | 🔒 | 0 / 8 | `bd-i5b` |
-| 11 | PWA и оболочка | 🔒 | 0 / 3 | `bd-6b7` |
+| 11 | PWA и оболочка | 🔒 | 0 / 4 | `bd-6b7` |
 
 ---
 
@@ -137,13 +137,14 @@
 | ⬜ | `bd-i5b.7` | Админка: Очередь не сматченного |
 | ⬜ | `bd-i5b.8` | Админка: Журнал аудита |
 
-### 11. PWA и оболочка — 🔒 · epic `bd-6b7` · 0 / 3
+### 11. PWA и оболочка — 🔒 · epic `bd-6b7` · 0 / 4
 
 | Статус | ID | Задача |
 |--------|-----|--------|
 | ⬜ | `bd-6b7.1` | PWA: установка |
 | ⬜ | `bd-6b7.2` | PWA: offline shell |
 | ⬜ | `bd-6b7.3` | PWA: App shell и tab-bar |
+| ⬜ | `bd-6b7.4` | UI: строка меню (Главная · Поиск · Профиль) — human-reported, вариант B |
 
 ---
 
@@ -151,6 +152,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-22 | `/task`: создан `bd-6b7.4` — строка меню (вариант B: Главная · Поиск · Профиль; user → `/library`; admin вне меню) |
 | 2026-07-22 | Claim `bd-6v0.9`: FTS search_vector drift (Prisma migrate удалил колонки) — guard-миграция + Unsupported в schema; ветка `fix/bd-6v0.9/restore-catalog-fts` |
 | 2026-07-20 | Закрыты эпики `bd-957` Auth и `bd-6v0` Каталог после merge PR #11 (quality green) |
 | 2026-07-20 | Sync `feat/bookspace-bd-8s4` ← `origin/develop`: merge conflicts resolved (schema, catalog, beads, PROJECT-STATUS) |
