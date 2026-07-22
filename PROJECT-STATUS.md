@@ -45,15 +45,15 @@
 
 ### DX — Tailwind + shadcn — 🔄 · epic `bd-wus` · 0 / 17 · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
 
-План: [migration-tailwind-shadcn.md](docs/tech/migration-tailwind-shadcn.md). В работе: `bd-wus.4` (ветка `task/bd-wus.4-home`). F1–F2 ✅; N1 (`bd-wus.3`) ✅ в сборочной.
+План: [migration-tailwind-shadcn.md](docs/tech/migration-tailwind-shadcn.md). В работе: `bd-wus.5` (ветка `task/bd-wus.5-login`). F1–F2 ✅; N1 (`bd-wus.3`) ✅; S1 (`bd-wus.4`) ✅ в сборочной.
 
 | Статус | ID | Задача |
 |--------|-----|--------|
 | ✅ | `bd-wus.1` | Foundation: Tailwind + design tokens |
 | ✅ | `bd-wus.2` | Foundation: shadcn baseline + Lucide |
 | ✅ | `bd-wus.3` | Миграция app-nav (tab-bar) |
-| 🔄 | `bd-wus.4` | Экран: Главная `/` |
-| ⬜ | `bd-wus.5` | Экран: Вход `/login` |
+| ✅ | `bd-wus.4` | Экран: Главная `/` |
+| 🔄 | `bd-wus.5` | Экран: Вход `/login` |
 | ⬜ | `bd-wus.6` | Экран: Регистрация `/register` |
 | ⬜ | `bd-wus.7` | Экран: Auth error `/auth/error` |
 | ⬜ | `bd-wus.8` | Экран: Поиск `/search` |
@@ -177,6 +177,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-22 | `bd-wus.5` close-prep: `/login` → Tailwind+shadcn Card/Input/Label/Button; legacy classes сняты с экрана (shared `.auth-*` оставлены для register/error); unit **92**; Playwright login+auth-pages **12/12** desktop+mobile; ветка `task/bd-wus.5-login`; `bd close` за оркестратором |
+| 2026-07-22 | Claim `bd-wus.5`: conventions (design/acceptance/notes/labels area:web+sec:ui+dx); TDD RED→GREEN миграция `/login`; ветка `task/bd-wus.5-login` |
 | 2026-07-22 | `bd-wus.4` close-prep: `/` → Tailwind+shadcn Card; legacy `.home-page` removed; unit **88**; Playwright home (+foundation+baseline) **18/18** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.4-home`; `bd close` за оркестратором |
 | 2026-07-22 | Claim `bd-wus.4`: conventions (design/acceptance/notes/labels area:web+sec:ui+dx); TDD RED→GREEN миграция `/`; ветка `task/bd-wus.4-home` |
 | 2026-07-22 | `bd-wus.3` close-prep: app-nav → Tailwind+shadcn Button+Lucide; legacy `.app-nav*` removed; unit 83; Playwright app-nav **10/10** (desktop+mobile, PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.3-app-nav`; `bd close` за оркестратором |
