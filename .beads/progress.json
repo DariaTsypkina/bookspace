@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-22T14:32:41.913Z",
+  "generated_at": "2026-07-22T14:33:26.721Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 88,
     "open_issues": 50,
-    "in_progress_issues": 6,
-    "closed_issues": 32,
+    "in_progress_issues": 5,
+    "closed_issues": 33,
     "blocked_issues": 7,
     "ready_issues": 43
   },
@@ -534,11 +534,11 @@
       "status": "open",
       "priority": 2,
       "children_total": 17,
-      "children_closed": 7,
-      "children_in_progress": 1,
+      "children_closed": 8,
+      "children_in_progress": 0,
       "children_open": 9,
-      "progress": "7 / 17",
-      "percent_closed": 41,
+      "progress": "8 / 17",
+      "percent_closed": 47,
       "children": [
         {
           "id": "bd-wus.1",
@@ -648,7 +648,7 @@
         {
           "id": "bd-wus.8",
           "title": "UI: миграция экрана Поиск /search",
-          "status": "in_progress",
+          "status": "closed",
           "type": "task",
           "priority": 2
         },
@@ -846,11 +846,11 @@
     {
       "id": "bd-wus.8",
       "title": "UI: миграция экрана Поиск /search",
-      "status": "in_progress",
+      "status": "closed",
       "type": "task",
       "priority": 2,
       "parent": "bd-wus",
-      "updated_at": "2026-07-22T14:24:24Z"
+      "updated_at": "2026-07-22T14:33:22Z"
     },
     {
       "id": "bd-wus.9",
