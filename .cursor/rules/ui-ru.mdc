@@ -13,11 +13,12 @@ alwaysApply: false
 - Секция «Для понимания» только при published ContextReading
 - Spoiler cookie ~30 дней; PWA: shell + recent pages, не весь каталог
 
-## UI-kit (ADR 0003)
+## UI-kit (ADR 0003 accepted)
 
-- Новый и рефакторимый UI: **Tailwind** + компоненты из `components/ui` (shadcn/Radix)
+- **Новый UI и новые экраны — только** Tailwind + `components/ui` (shadcn/Radix) + Lucide ([ADR 0003](../../docs/adr/0003-tailwind-shadcn.md), [stack-and-architecture](../../docs/tech/stack-and-architecture.md))
 - Иконки: **lucide-react**
-- Не добавлять новые блоки в legacy `globals.css` для новых экранов; при касании экрана — перенос на Tailwind (см. [migration-tailwind-shadcn](../../docs/tech/migration-tailwind-shadcn.md))
+- **Запрещено** добавлять новые селекторы/блоки в legacy `globals.css` для новых экранов или нового UI; legacy — только до миграции существующего экрана
+- При касании экрана — перенос на Tailwind + вычистка мёртвых селекторов этого экрана (см. [migration-tailwind-shadcn](../../docs/tech/migration-tailwind-shadcn.md))
 - Другой UI-kit — только через новый ADR + согласование зависимостей
 
 Экраны: `docs/tech/screens.md`.

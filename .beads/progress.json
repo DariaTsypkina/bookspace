@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-22T15:10:47.811Z",
+  "generated_at": "2026-07-22T15:13:57.166Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 88,
-    "open_issues": 42,
+    "open_issues": 41,
     "in_progress_issues": 5,
-    "closed_issues": 41,
+    "closed_issues": 42,
     "blocked_issues": 7,
-    "ready_issues": 35
+    "ready_issues": 34
   },
   "epics": [
     {
@@ -534,11 +534,11 @@
       "status": "open",
       "priority": 2,
       "children_total": 17,
-      "children_closed": 16,
+      "children_closed": 17,
       "children_in_progress": 0,
-      "children_open": 1,
-      "progress": "16 / 17",
-      "percent_closed": 94,
+      "children_open": 0,
+      "progress": "17 / 17",
+      "percent_closed": 100,
       "children": [
         {
           "id": "bd-wus.1",
@@ -599,7 +599,7 @@
         {
           "id": "bd-wus.17",
           "title": "UI: конвенция новый UI только Tailwind+shadcn",
-          "status": "open",
+          "status": "closed",
           "type": "chore",
           "priority": 2
         },
@@ -774,11 +774,11 @@
     {
       "id": "bd-wus.17",
       "title": "UI: конвенция новый UI только Tailwind+shadcn",
-      "status": "open",
+      "status": "closed",
       "type": "chore",
       "priority": 2,
       "parent": "bd-wus",
-      "updated_at": "2026-07-22T11:58:14Z"
+      "updated_at": "2026-07-22T15:13:54Z"
     },
     {
       "id": "bd-wus.16",

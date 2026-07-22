@@ -45,7 +45,7 @@
 
 ### DX — Tailwind + shadcn — 🔄 · epic `bd-wus` · 0 / 17 · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
 
-План: [migration-tailwind-shadcn.md](docs/tech/migration-tailwind-shadcn.md). В работе: `bd-wus.16` (ветка `task/bd-wus.16-admin-context`). F1–F2 ✅; N1 ✅; S1–S12 (`bd-wus.4`–`.15`) ✅ в сборочной; SpoilerGate мигрирован в S8.
+План: [migration-tailwind-shadcn.md](docs/tech/migration-tailwind-shadcn.md). F1–F2 ✅; N1 ✅; S1–S13 ✅ в сборочной; C1 `bd-wus.17` 🔄 (ветка `task/bd-wus.17-convention`). SpoilerGate мигрирован в S8.
 
 | Статус | ID | Задача |
 |--------|-----|--------|
@@ -57,15 +57,15 @@
 | ✅ | `bd-wus.6` | Экран: Регистрация `/register` |
 | ✅ | `bd-wus.7` | Экран: Auth error `/auth/error` |
 | ✅ | `bd-wus.8` | Экран: Поиск `/search` |
-| 🔄 | `bd-wus.9` | Экран: Книга `/books/[slug]` |
-| 🔄 | `bd-wus.10` | Экран: Автор `/authors/[slug]` |
-| 🔄 | `bd-wus.11` | Экран: Персонаж `/characters/[slug]` |
+| ✅ | `bd-wus.9` | Экран: Книга `/books/[slug]` |
+| ✅ | `bd-wus.10` | Экран: Автор `/authors/[slug]` |
+| ✅ | `bd-wus.11` | Экран: Персонаж `/characters/[slug]` |
 | ✅ | `bd-wus.12` | Экран: Мир `/worlds/[slug]` |
 | ✅ | `bd-wus.13` | Экран: Локация `/places/[slug]` |
 | ✅ | `bd-wus.14` | Экран: Профиль `/u/[slug]` |
 | ✅ | `bd-wus.15` | Экран: Библиотека `/library` |
-| 🔄 | `bd-wus.16` | Экран: Admin Context `/admin/context` |
-| ⬜ | `bd-wus.17` | Конвенция: новый UI только на стеке |
+| ✅ | `bd-wus.16` | Экран: Admin Context `/admin/context` |
+| 🔄 | `bd-wus.17` | Конвенция: новый UI только на стеке |
 
 ### 1. Auth — ✅ · epic `bd-957` · 6 / 6 (эпик закрыт)
 
@@ -177,6 +177,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-22 | `bd-wus.17` close-prep: C1 docs/rules — ADR 0003 accepted; `stack-and-architecture` § UI-конвенция + `stack.mdc`/`ui-ru.mdc` запрет legacy CSS для новых экранов; migration C1 ✅; Playwright home+foundation+baseline **18/18** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); docs-only scope; ветка `task/bd-wus.17-convention`; `bd close` за оркестратором |
+| 2026-07-22 | Claim `bd-wus.17`: C1 конвенция docs/rules (ADR 0003 accepted, запрет legacy CSS для новых экранов); ветка `task/bd-wus.17-convention` |
 | 2026-07-22 | `bd-wus.16` close-prep: `/admin/context` + panel → Tailwind+shadcn Card/Button/Input/Label; orphan `.admin-context-*` removed; unit admin-context-page 5/5 (suite **155**); Playwright admin-context **6/6** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.16-admin-context`; `bd close` за оркестратором |
 | 2026-07-22 | Claim `bd-wus.16`: S13 `/admin/context` + panel → Tailwind+shadcn; admin-only/API без регрессии; ветка `task/bd-wus.16-admin-context` |
 | 2026-07-22 | `bd-wus.15` close-prep: `/library` stub → Tailwind+shadcn Card; orphan `.library-stub` removed; unit library 5/5 (suite **150**); Playwright library-page **6/6** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.15-library`; `bd close` за оркестратором |

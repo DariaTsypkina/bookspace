@@ -43,4 +43,4 @@
 - [Как писать ADR](adr/README.md)
 - [0001 — Стек MVP](adr/0001-stack-mvp.md)
 - [0002 — Агрегация рейтингов](adr/0002-rankings-aggregation.md)
-- [0003 — Tailwind + shadcn](adr/0003-tailwind-shadcn.md)
+- [0003 — Tailwind + shadcn](adr/0003-tailwind-shadcn.md) (**accepted**)

@@ -7,7 +7,7 @@
 | Слой | Выбор | Notes |
 |------|--------|--------|
 | Frontend | Next.js (App Router) + TypeScript + React | Отдельное приложение; SSR/SEO публичных страниц; PWA |
-| UI-kit | Tailwind CSS + shadcn/ui (Radix) + Lucide | Copy-in-repo `components/ui`; токены «читальня»; инкрементальная миграция с legacy CSS — [ADR 0003](../adr/0003-tailwind-shadcn.md) |
+| UI-kit | Tailwind CSS + shadcn/ui (Radix) + Lucide | **Канон** ([ADR 0003](../adr/0003-tailwind-shadcn.md) **accepted**): copy-in-repo `components/ui`; токены «читальня»; см. конвенцию ниже |
 | Backend | NestJS + TypeScript | Отдельный API + workers |
 | ORM / БД | Prisma + PostgreSQL | |
 | Поиск | PostgreSQL Full-Text Search (русский конфиг) | Meilisearch — отдельный ADR при росте |
@@ -50,6 +50,17 @@ docker-compose.yml # postgres, redis, api, web (dev)
 ```
 
 Фронт **не** milкает в БД: только HTTP к Nest.
+
+## UI-конвенция (apps/web)
+
+Канон: [ADR 0003](../adr/0003-tailwind-shadcn.md) (**accepted**), план [migration-tailwind-shadcn.md](migration-tailwind-shadcn.md), правила [`stack.mdc`](../../.cursor/rules/stack.mdc) / [`ui-ru.mdc`](../../.cursor/rules/ui-ru.mdc).
+
+| Правило | Смысл |
+|---------|--------|
+| Новый UI и новые экраны | Только **Tailwind** + примитивы `components/ui` (shadcn/Radix) + **Lucide** |
+| Legacy `globals.css` | Допустим только для ещё не мигрированных экранов; **запрещено** добавлять новые селекторы/блоки под новые экраны или новый UI |
+| On touch | При рефакторе экрана — перенос на стек ADR 0003 и вычистка мёртвых селекторов этого экрана из `globals.css` |
+| Другой UI-kit | Только новый ADR + согласование зависимостей |
 
 ## Auth
 
