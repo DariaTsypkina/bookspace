@@ -45,7 +45,7 @@
 
 ### DX — Tailwind + shadcn — 🔄 · epic `bd-wus` · 0 / 17 · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
 
-План: [migration-tailwind-shadcn.md](docs/tech/migration-tailwind-shadcn.md). В работе: `bd-wus.9` (ветка `task/bd-wus.9-books`). F1–F2 ✅; N1 (`bd-wus.3`) ✅; S1–S5 (`bd-wus.4`–`.8`) ✅ в сборочной.
+План: [migration-tailwind-shadcn.md](docs/tech/migration-tailwind-shadcn.md). В работе: `bd-wus.11` (ветка `task/bd-wus.11-characters`). F1–F2 ✅; N1 ✅; S1–S7 (`bd-wus.4`–`.10`) ✅ в сборочной; SpoilerGate мигрирован в S8.
 
 | Статус | ID | Задача |
 |--------|-----|--------|
@@ -59,7 +59,7 @@
 | ✅ | `bd-wus.8` | Экран: Поиск `/search` |
 | 🔄 | `bd-wus.9` | Экран: Книга `/books/[slug]` |
 | 🔄 | `bd-wus.10` | Экран: Автор `/authors/[slug]` |
-| ⬜ | `bd-wus.11` | Экран: Персонаж `/characters/[slug]` |
+| 🔄 | `bd-wus.11` | Экран: Персонаж `/characters/[slug]` |
 | ⬜ | `bd-wus.12` | Экран: Мир `/worlds/[slug]` |
 | ⬜ | `bd-wus.13` | Экран: Локация `/places/[slug]` |
 | ⬜ | `bd-wus.14` | Экран: Профиль `/u/[slug]` |
@@ -177,6 +177,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-22 | `bd-wus.11` close-prep: `/characters/[slug]` + SpoilerGate → Tailwind+shadcn Card/Button; orphan `.character-*`/`.spoiler-gate*` removed; unit characters+spoiler green; Playwright character-page **12/12** desktop+mobile; ветка `task/bd-wus.11-characters`; `bd close` за оркестратором |
 | 2026-07-22 | `bd-wus.10` close-prep: `/authors/[slug]` + not-found → Tailwind+shadcn Card; orphan `.author-*` removed; unit authors 6/6 (suite **120**); Playwright author-page **8/8** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.10-authors`; `bd close` за оркестратором |
 | 2026-07-22 | Claim `bd-wus.10`: S7 `/authors/[slug]` + not-found → Tailwind+shadcn; orphan `.author-*`; ветка `task/bd-wus.10-authors` |
 | 2026-07-22 | `bd-wus.9` close-prep: `/books/[slug]` + WorkContextReadingSection → Tailwind+shadcn Card; orphan `.work-*`/`.edition-*` removed; SpoilerGate вне scope (S8); unit **114**; Playwright work+context+character (spoiler) **22/22** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.9-books`; `bd close` за оркестратором |

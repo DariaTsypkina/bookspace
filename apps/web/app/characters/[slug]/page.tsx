@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { SpoilerGate } from '@/components/spoiler-gate';
+import { Card, CardContent } from '@/components/ui/card';
 import {
   CatalogCharacterNotFoundError,
   fetchCatalogCharacter,
@@ -56,62 +57,78 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
   }
 
   return (
-    <main className="character-page">
-      <article>
-        <header className="character-header">
-          <h1>{character.nameRu}</h1>
+    <main className="mx-auto flex w-full max-w-xl flex-1 flex-col gap-5 px-4 pb-8 pt-5">
+      <article className="flex flex-col gap-6">
+        <header>
+          <h1 className="text-[1.75rem] font-normal leading-tight tracking-[0.02em] text-foreground">
+            {character.nameRu}
+          </h1>
           {character.nameOrig && (
-            <p className="character-name-orig">{character.nameOrig}</p>
+            <p className="mt-1.5 font-sans text-[0.95rem] text-muted">
+              {character.nameOrig}
+            </p>
           )}
         </header>
 
-        <section className="character-appearances" aria-label="Книги появления">
-          <h2>Книги появления</h2>
+        <section aria-label="Книги появления">
+          <h2 className="mb-3 font-sans text-[1.15rem] font-medium text-foreground">
+            Книги появления
+          </h2>
           {character.appearances.length === 0 ? (
-            <p className="character-appearances-empty">
+            <p className="font-sans text-[0.95rem] text-muted">
               В каталоге пока нет опубликованных книг с этим персонажем.
             </p>
           ) : (
-            <ul>
+            <ul className="flex list-none flex-col gap-3 p-0">
               {character.appearances.map((appearance) => (
                 <li key={appearance.slug}>
-                  <Link
-                    href={`/books/${appearance.slug}`}
-                    className="character-appearance-link"
-                  >
-                    {appearance.titleRu}
-                  </Link>
-                  {appearance.yearFirst != null && (
-                    <span className="character-appearance-year">
-                      {appearance.yearFirst}
-                    </span>
-                  )}
+                  <Card>
+                    <CardContent className="flex flex-col gap-0.5 px-4 py-3.5">
+                      <Link
+                        href={`/books/${appearance.slug}`}
+                        className="text-[1.05rem] font-medium no-underline underline-offset-2 hover:underline"
+                      >
+                        {appearance.titleRu}
+                      </Link>
+                      {appearance.yearFirst != null && (
+                        <span className="font-sans text-[0.9rem] text-muted">
+                          {appearance.yearFirst}
+                        </span>
+                      )}
+                    </CardContent>
+                  </Card>
                 </li>
               ))}
             </ul>
           )}
         </section>
 
-        <section className="character-relations" aria-label="Связи персонажа">
-          <h2>Связи</h2>
+        <section aria-label="Связи персонажа">
+          <h2 className="mb-3 font-sans text-[1.15rem] font-medium text-foreground">
+            Связи
+          </h2>
           {character.relations.length === 0 ? (
-            <p className="character-relations-empty">
+            <p className="font-sans text-[0.95rem] text-muted">
               Связи с другими персонажами пока не добавлены.
             </p>
           ) : (
             <SpoilerGate initialAccepted={spoilersAccepted}>
-              <ul>
+              <ul className="flex list-none flex-col gap-3 p-0">
                 {character.relations.map((relation) => (
                   <li key={`${relation.slug}-${relation.type}`}>
-                    <Link
-                      href={`/characters/${relation.slug}`}
-                      className="character-relation-link"
-                    >
-                      {relation.nameRu}
-                    </Link>
-                    <span className="character-relation-type">
-                      {CHARACTER_RELATION_LABELS[relation.type]}
-                    </span>
+                    <Card>
+                      <CardContent className="flex flex-col gap-0.5 px-4 py-3.5">
+                        <Link
+                          href={`/characters/${relation.slug}`}
+                          className="text-[1.05rem] font-medium no-underline underline-offset-2 hover:underline"
+                        >
+                          {relation.nameRu}
+                        </Link>
+                        <span className="font-sans text-[0.9rem] text-muted">
+                          {CHARACTER_RELATION_LABELS[relation.type]}
+                        </span>
+                      </CardContent>
+                    </Card>
                   </li>
                 ))}
               </ul>
