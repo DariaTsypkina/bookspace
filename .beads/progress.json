@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-22T14:53:42.535Z",
+  "generated_at": "2026-07-22T14:56:19.751Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 88,
-    "open_issues": 47,
+    "open_issues": 46,
     "in_progress_issues": 5,
-    "closed_issues": 36,
+    "closed_issues": 37,
     "blocked_issues": 7,
-    "ready_issues": 40
+    "ready_issues": 39
   },
   "epics": [
     {
@@ -534,11 +534,11 @@
       "status": "open",
       "priority": 2,
       "children_total": 17,
-      "children_closed": 11,
+      "children_closed": 12,
       "children_in_progress": 0,
-      "children_open": 6,
-      "progress": "11 / 17",
-      "percent_closed": 65,
+      "children_open": 5,
+      "progress": "12 / 17",
+      "percent_closed": 71,
       "children": [
         {
           "id": "bd-wus.1",
@@ -564,7 +564,7 @@
         {
           "id": "bd-wus.12",
           "title": "UI: миграция карточки мира /worlds/[slug]",
-          "status": "open",
+          "status": "closed",
           "type": "task",
           "priority": 2
         },
@@ -819,11 +819,11 @@
     {
       "id": "bd-wus.12",
       "title": "UI: миграция карточки мира /worlds/[slug]",
-      "status": "open",
+      "status": "closed",
       "type": "task",
       "priority": 2,
       "parent": "bd-wus",
-      "updated_at": "2026-07-22T11:46:16Z"
+      "updated_at": "2026-07-22T14:56:16Z"
     },
     {
       "id": "bd-wus.11",
