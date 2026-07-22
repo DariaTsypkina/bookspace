@@ -45,7 +45,7 @@
 
 ### DX — Tailwind + shadcn — 🔄 · epic `bd-wus` · 0 / 17 · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
 
-План: [migration-tailwind-shadcn.md](docs/tech/migration-tailwind-shadcn.md). В работе: `bd-wus.8` (ветка `task/bd-wus.8-search`). F1–F2 ✅; N1 (`bd-wus.3`) ✅; S1–S4 (`bd-wus.4`–`.7`) ✅ в сборочной.
+План: [migration-tailwind-shadcn.md](docs/tech/migration-tailwind-shadcn.md). В работе: `bd-wus.9` (ветка `task/bd-wus.9-books`). F1–F2 ✅; N1 (`bd-wus.3`) ✅; S1–S5 (`bd-wus.4`–`.8`) ✅ в сборочной.
 
 | Статус | ID | Задача |
 |--------|-----|--------|
@@ -56,8 +56,8 @@
 | ✅ | `bd-wus.5` | Экран: Вход `/login` |
 | ✅ | `bd-wus.6` | Экран: Регистрация `/register` |
 | ✅ | `bd-wus.7` | Экран: Auth error `/auth/error` |
-| 🔄 | `bd-wus.8` | Экран: Поиск `/search` |
-| ⬜ | `bd-wus.9` | Экран: Книга `/books/[slug]` |
+| ✅ | `bd-wus.8` | Экран: Поиск `/search` |
+| 🔄 | `bd-wus.9` | Экран: Книга `/books/[slug]` |
 | ⬜ | `bd-wus.10` | Экран: Автор `/authors/[slug]` |
 | ⬜ | `bd-wus.11` | Экран: Персонаж `/characters/[slug]` |
 | ⬜ | `bd-wus.12` | Экран: Мир `/worlds/[slug]` |
@@ -177,6 +177,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-22 | `bd-wus.9` close-prep: `/books/[slug]` + WorkContextReadingSection → Tailwind+shadcn Card; orphan `.work-*`/`.edition-*` removed; SpoilerGate вне scope (S8); unit **114**; Playwright work+context+character (spoiler) **22/22** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.9-books`; `bd close` за оркестратором |
+| 2026-07-22 | Claim `bd-wus.9`: S6 `/books/[slug]` + WorkContextReadingSection → Tailwind+shadcn; orphan `.work-*`/`.edition-*`; SpoilerGate вне scope (character S8); ветка `task/bd-wus.9-books` |
 | 2026-07-22 | `bd-wus.7` close-prep: `/auth/error` → Tailwind+shadcn Card/Button; orphan shared `.auth-*` вычищены из globals; e2e alerts → `main [role=alert]`; unit **101**; Playwright auth-error+oauth smoke+auth-pages **16/16** desktop+mobile; ветка `task/bd-wus.7-auth-error`; `bd close` за оркестратором |
 | 2026-07-22 | Claim `bd-wus.7`: conventions (design/acceptance/notes); TDD RED→GREEN миграция `/auth/error` + вычистка orphan `.auth-*` из globals; ветка `task/bd-wus.7-auth-error` |
 | 2026-07-22 | `bd-wus.6` close-prep: `/register` → Tailwind+shadcn Card/Input/Label/Button; legacy classes сняты с экрана (shared `.auth-*` оставлены для `/auth/error`); e2e alerts → `main [role=alert]`; unit **96**; Playwright register+auth-pages+email **20/20** desktop+mobile; ветка `task/bd-wus.6-register`; `bd close` за оркестратором |
