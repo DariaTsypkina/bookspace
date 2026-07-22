@@ -45,13 +45,13 @@
 
 ### DX — Tailwind + shadcn — 🔄 · epic `bd-wus` · 0 / 17 · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
 
-План: [migration-tailwind-shadcn.md](docs/tech/migration-tailwind-shadcn.md). В работе: `bd-wus.2` (ветка `task/bd-wus.2-shadcn-baseline`). F1 ✅.
+План: [migration-tailwind-shadcn.md](docs/tech/migration-tailwind-shadcn.md). В работе: `bd-wus.3` (ветка `task/bd-wus.3-app-nav`). F1–F2 ✅.
 
 | Статус | ID | Задача |
 |--------|-----|--------|
 | ✅ | `bd-wus.1` | Foundation: Tailwind + design tokens |
-| 🔄 | `bd-wus.2` | Foundation: shadcn baseline + Lucide |
-| ⬜ | `bd-wus.3` | Миграция app-nav (tab-bar) |
+| ✅ | `bd-wus.2` | Foundation: shadcn baseline + Lucide |
+| 🔄 | `bd-wus.3` | Миграция app-nav (tab-bar) |
 | ⬜ | `bd-wus.4` | Экран: Главная `/` |
 | ⬜ | `bd-wus.5` | Экран: Вход `/login` |
 | ⬜ | `bd-wus.6` | Экран: Регистрация `/register` |
@@ -177,6 +177,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-22 | `bd-wus.3` close-prep: app-nav → Tailwind+shadcn Button+Lucide; legacy `.app-nav*` removed; unit 83; Playwright app-nav **10/10** (desktop+mobile, PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.3-app-nav`; `bd close` за оркестратором |
+| 2026-07-22 | Claim `bd-wus.3`: conventions (design/acceptance/notes/labels area:web+sec:ui+dx); TDD RED→GREEN миграция app-nav; ветка `task/bd-wus.3-app-nav` |
 | 2026-07-22 | `bd-wus.2` close-prep: shadcn baseline (cn/cva + Button/Input/Label/Card + lucide); unit 78; build/lint ok; Playwright baseline+foundation **12/12** (desktop+mobile, PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.2-shadcn-baseline`; `bd close` за оркестратором |
 | 2026-07-22 | Claim `bd-wus.2`: conventions (design/acceptance/notes/labels area:web+sec:ui+dx); TDD RED cn/Button + smoke; ветка `task/bd-wus.2-shadcn-baseline` |
 | 2026-07-22 | `bd-wus.1` close-prep: Tailwind v3+PostCSS+tokens; unit 68; build/lint ok; Playwright foundation+auth-pages+app-nav **20/20** (desktop+mobile, PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.1-tailwind-foundation`; `bd close` за оркестратором |
