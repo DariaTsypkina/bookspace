@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-22T14:21:57.057Z",
+  "generated_at": "2026-07-22T14:22:21.492Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 88,
     "open_issues": 51,
-    "in_progress_issues": 6,
-    "closed_issues": 31,
+    "in_progress_issues": 5,
+    "closed_issues": 32,
     "blocked_issues": 7,
     "ready_issues": 44
   },
@@ -534,11 +534,11 @@
       "status": "open",
       "priority": 2,
       "children_total": 17,
-      "children_closed": 6,
-      "children_in_progress": 1,
+      "children_closed": 7,
+      "children_in_progress": 0,
       "children_open": 10,
-      "progress": "6 / 17",
-      "percent_closed": 35,
+      "progress": "7 / 17",
+      "percent_closed": 41,
       "children": [
         {
           "id": "bd-wus.1",
@@ -641,7 +641,7 @@
         {
           "id": "bd-wus.7",
           "title": "UI: миграция экрана Auth error /auth/error",
-          "status": "in_progress",
+          "status": "closed",
           "type": "task",
           "priority": 2
         },
@@ -864,11 +864,11 @@
     {
       "id": "bd-wus.7",
       "title": "UI: миграция экрана Auth error /auth/error",
-      "status": "in_progress",
+      "status": "closed",
       "type": "task",
       "priority": 2,
       "parent": "bd-wus",
-      "updated_at": "2026-07-22T14:21:48Z"
+      "updated_at": "2026-07-22T14:22:18Z"
     },
     {
       "id": "bd-wus.6",
