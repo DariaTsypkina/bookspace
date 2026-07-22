@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-22T10:53:49.136Z",
+  "generated_at": "2026-07-22T13:00:18.645Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 70,
-    "open_issues": 40,
+    "total_issues": 88,
+    "open_issues": 58,
     "in_progress_issues": 5,
     "closed_issues": 25,
-    "blocked_issues": 7,
-    "ready_issues": 33
+    "blocked_issues": 23,
+    "ready_issues": 35
   },
   "epics": [
     {
@@ -527,6 +527,139 @@
           "priority": 2
         }
       ]
+    },
+    {
+      "id": "bd-wus",
+      "title": "DX: Tailwind + shadcn",
+      "status": "open",
+      "priority": 2,
+      "children_total": 17,
+      "children_closed": 0,
+      "children_in_progress": 0,
+      "children_open": 17,
+      "progress": "0 / 17",
+      "percent_closed": 0,
+      "children": [
+        {
+          "id": "bd-wus.1",
+          "title": "UI: Foundation Tailwind + design tokens",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.10",
+          "title": "UI: миграция карточки автора /authors/[slug]",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.11",
+          "title": "UI: миграция карточки персонажа /characters/[slug]",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.12",
+          "title": "UI: миграция карточки мира /worlds/[slug]",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.13",
+          "title": "UI: миграция карточки локации /places/[slug]",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.14",
+          "title": "UI: миграция публичного профиля /u/[slug]",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.15",
+          "title": "UI: миграция экрана Библиотека /library",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.16",
+          "title": "UI: миграция Admin Context /admin/context",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.17",
+          "title": "UI: конвенция новый UI только Tailwind+shadcn",
+          "status": "open",
+          "type": "chore",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.2",
+          "title": "UI: shadcn baseline + Lucide",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.3",
+          "title": "UI: миграция app-nav (tab-bar) на Tailwind+shadcn",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.4",
+          "title": "UI: миграция экрана Главная /",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.5",
+          "title": "UI: миграция экрана Вход /login",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.6",
+          "title": "UI: миграция экрана Регистрация /register",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.7",
+          "title": "UI: миграция экрана Auth error /auth/error",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.8",
+          "title": "UI: миграция экрана Поиск /search",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.9",
+          "title": "UI: миграция карточки произведения /books/[slug]",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        }
+      ]
     }
   ],
   "issues": [
@@ -637,6 +770,168 @@
       "priority": 1,
       "parent": "bd-957",
       "updated_at": "2026-07-20T07:30:07Z"
+    },
+    {
+      "id": "bd-wus.17",
+      "title": "UI: конвенция новый UI только Tailwind+shadcn",
+      "status": "open",
+      "type": "chore",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T11:58:14Z"
+    },
+    {
+      "id": "bd-wus.16",
+      "title": "UI: миграция Admin Context /admin/context",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T11:46:20Z"
+    },
+    {
+      "id": "bd-wus.15",
+      "title": "UI: миграция экрана Библиотека /library",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T11:46:19Z"
+    },
+    {
+      "id": "bd-wus.14",
+      "title": "UI: миграция публичного профиля /u/[slug]",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T11:46:18Z"
+    },
+    {
+      "id": "bd-wus.13",
+      "title": "UI: миграция карточки локации /places/[slug]",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T11:46:17Z"
+    },
+    {
+      "id": "bd-wus.12",
+      "title": "UI: миграция карточки мира /worlds/[slug]",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T11:46:16Z"
+    },
+    {
+      "id": "bd-wus.11",
+      "title": "UI: миграция карточки персонажа /characters/[slug]",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T11:46:15Z"
+    },
+    {
+      "id": "bd-wus.10",
+      "title": "UI: миграция карточки автора /authors/[slug]",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T11:46:14Z"
+    },
+    {
+      "id": "bd-wus.8",
+      "title": "UI: миграция экрана Поиск /search",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T11:46:13Z"
+    },
+    {
+      "id": "bd-wus.9",
+      "title": "UI: миграция карточки произведения /books/[slug]",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T11:46:13Z"
+    },
+    {
+      "id": "bd-wus.7",
+      "title": "UI: миграция экрана Auth error /auth/error",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T11:46:12Z"
+    },
+    {
+      "id": "bd-wus.6",
+      "title": "UI: миграция экрана Регистрация /register",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T11:54:56Z"
+    },
+    {
+      "id": "bd-wus.5",
+      "title": "UI: миграция экрана Вход /login",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T11:54:56Z"
+    },
+    {
+      "id": "bd-wus.4",
+      "title": "UI: миграция экрана Главная /",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T11:46:09Z"
+    },
+    {
+      "id": "bd-wus.3",
+      "title": "UI: миграция app-nav (tab-bar) на Tailwind+shadcn",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T11:46:08Z"
+    },
+    {
+      "id": "bd-wus.2",
+      "title": "UI: shadcn baseline + Lucide",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T11:46:07Z"
+    },
+    {
+      "id": "bd-wus.1",
+      "title": "UI: Foundation Tailwind + design tokens",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T11:46:06Z"
+    },
+    {
+      "id": "bd-wus",
+      "title": "DX: Tailwind + shadcn",
+      "status": "open",
+      "type": "epic",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-22T11:58:13Z"
     },
     {
       "id": "bd-6b7.4",

@@ -36,11 +36,36 @@
 
 | Статус | ID | Задача |
 |--------|-----|--------|
+| ⬜ | `bd-wus` | **Эпик DX: Tailwind + shadcn** (ADR 0003 accepted) — см. ниже |
 | 🔄 | `bd-ky6` | Chore: синхронизировать beads interactions.jsonl |
 | ✅ | `bd-0e6` | Docs: согласование зависимостей агентом |
 | 🔄 | `bd-rtp` | Docs: human intake workflow и /task skill |
 | 🔄 | `bd-nvi` | Scaffold monorepo dev baseline |
 | ✅ | `bd-384` | Session Completion: git push при конце сессии |
+
+### DX — Tailwind + shadcn — ⬜ · epic `bd-wus` · 0 / 17 · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
+
+План: [migration-tailwind-shadcn.md](docs/tech/migration-tailwind-shadcn.md). Можно стартовать `bd-wus.1`.
+
+| Статус | ID | Задача |
+|--------|-----|--------|
+| ⬜ | `bd-wus.1` | Foundation: Tailwind + design tokens |
+| ⬜ | `bd-wus.2` | Foundation: shadcn baseline + Lucide |
+| ⬜ | `bd-wus.3` | Миграция app-nav (tab-bar) |
+| ⬜ | `bd-wus.4` | Экран: Главная `/` |
+| ⬜ | `bd-wus.5` | Экран: Вход `/login` |
+| ⬜ | `bd-wus.6` | Экран: Регистрация `/register` |
+| ⬜ | `bd-wus.7` | Экран: Auth error `/auth/error` |
+| ⬜ | `bd-wus.8` | Экран: Поиск `/search` |
+| ⬜ | `bd-wus.9` | Экран: Книга `/books/[slug]` |
+| ⬜ | `bd-wus.10` | Экран: Автор `/authors/[slug]` |
+| ⬜ | `bd-wus.11` | Экран: Персонаж `/characters/[slug]` |
+| ⬜ | `bd-wus.12` | Экран: Мир `/worlds/[slug]` |
+| ⬜ | `bd-wus.13` | Экран: Локация `/places/[slug]` |
+| ⬜ | `bd-wus.14` | Экран: Профиль `/u/[slug]` |
+| ⬜ | `bd-wus.15` | Экран: Библиотека `/library` |
+| ⬜ | `bd-wus.16` | Экран: Admin Context `/admin/context` |
+| ⬜ | `bd-wus.17` | Конвенция: новый UI только на стеке |
 
 ### 1. Auth — ✅ · epic `bd-957` · 6 / 6 (эпик закрыт)
 
@@ -152,6 +177,9 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-22 | ADR 0003 **accepted**; обновлены `stack.mdc`, `ui-ru.mdc`, `stack-and-architecture.md`; эпик `bd-wus` готов к `bd-wus.1` |
+| 2026-07-22 | Трек UI: правки docs/beads — убраны посторонние «out of scope» (не про UI); повторное согласование ADR 0003 + `bd-wus` |
+| 2026-07-22 | Трек UI: ADR 0003 **proposed**, план `docs/tech/migration-tailwind-shadcn.md`, эпик `bd-wus` + 17 детей (foundation, nav, экраны) — на согласование человека; код не стартовать до accept |
 | 2026-07-22 | `bd-6b7.4` close-prep: меню реализовано (unit 60, Playwright app-nav 8/8 desktop+mobile); коммиты `7213400`, `0eb74aa`; ветка `task/bd-6b7.4-nav-menu`; `bd close` за оркестратором |
 | 2026-07-22 | `bd-6b7.4` в работе: conventions (design/acceptance/notes/labels), TDD app-nav (unit+Playwright), stub `/library`; ветка `task/bd-6b7.4-nav-menu` |
 | 2026-07-22 | `/task`: создан `bd-6b7.4` — строка меню (вариант B: Главная · Поиск · Профиль; user → `/library`; admin вне меню) |
