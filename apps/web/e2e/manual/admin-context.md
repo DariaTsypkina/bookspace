@@ -2,6 +2,8 @@
 
 Стенд: Postgres + Redis, `pnpm --filter api prisma:seed`, api + web локально.
 
+Стек UI (S13 / bd-wus.16): Tailwind + shadcn (`Card` / `Button` / `Input` / `Label`); orphan `.admin-context-*` в `globals.css` удалены.
+
 ## Доступ
 
 - [ ] Гость на `/admin/context` → редирект на `/login`

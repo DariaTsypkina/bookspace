@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-22T15:06:31.855Z",
+  "generated_at": "2026-07-22T15:10:47.811Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 88,
-    "open_issues": 43,
+    "open_issues": 42,
     "in_progress_issues": 5,
-    "closed_issues": 40,
+    "closed_issues": 41,
     "blocked_issues": 7,
-    "ready_issues": 36
+    "ready_issues": 35
   },
   "epics": [
     {
@@ -534,11 +534,11 @@
       "status": "open",
       "priority": 2,
       "children_total": 17,
-      "children_closed": 15,
+      "children_closed": 16,
       "children_in_progress": 0,
-      "children_open": 2,
-      "progress": "15 / 17",
-      "percent_closed": 88,
+      "children_open": 1,
+      "progress": "16 / 17",
+      "percent_closed": 94,
       "children": [
         {
           "id": "bd-wus.1",
@@ -592,7 +592,7 @@
         {
           "id": "bd-wus.16",
           "title": "UI: миграция Admin Context /admin/context",
-          "status": "open",
+          "status": "closed",
           "type": "task",
           "priority": 2
         },
@@ -783,11 +783,11 @@
     {
       "id": "bd-wus.16",
       "title": "UI: миграция Admin Context /admin/context",
-      "status": "open",
+      "status": "closed",
       "type": "task",
       "priority": 2,
       "parent": "bd-wus",
-      "updated_at": "2026-07-22T11:46:20Z"
+      "updated_at": "2026-07-22T15:10:44Z"
     },
     {
       "id": "bd-wus.15",

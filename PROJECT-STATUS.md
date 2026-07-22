@@ -45,7 +45,7 @@
 
 ### DX — Tailwind + shadcn — 🔄 · epic `bd-wus` · 0 / 17 · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
 
-План: [migration-tailwind-shadcn.md](docs/tech/migration-tailwind-shadcn.md). В работе: `bd-wus.15` (ветка `task/bd-wus.15-library`). F1–F2 ✅; N1 ✅; S1–S11 (`bd-wus.4`–`.14`) ✅ в сборочной; SpoilerGate мигрирован в S8.
+План: [migration-tailwind-shadcn.md](docs/tech/migration-tailwind-shadcn.md). В работе: `bd-wus.16` (ветка `task/bd-wus.16-admin-context`). F1–F2 ✅; N1 ✅; S1–S12 (`bd-wus.4`–`.15`) ✅ в сборочной; SpoilerGate мигрирован в S8.
 
 | Статус | ID | Задача |
 |--------|-----|--------|
@@ -63,8 +63,8 @@
 | ✅ | `bd-wus.12` | Экран: Мир `/worlds/[slug]` |
 | ✅ | `bd-wus.13` | Экран: Локация `/places/[slug]` |
 | ✅ | `bd-wus.14` | Экран: Профиль `/u/[slug]` |
-| 🔄 | `bd-wus.15` | Экран: Библиотека `/library` |
-| ⬜ | `bd-wus.16` | Экран: Admin Context `/admin/context` |
+| ✅ | `bd-wus.15` | Экран: Библиотека `/library` |
+| 🔄 | `bd-wus.16` | Экран: Admin Context `/admin/context` |
 | ⬜ | `bd-wus.17` | Конвенция: новый UI только на стеке |
 
 ### 1. Auth — ✅ · epic `bd-957` · 6 / 6 (эпик закрыт)
@@ -177,6 +177,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-22 | `bd-wus.16` close-prep: `/admin/context` + panel → Tailwind+shadcn Card/Button/Input/Label; orphan `.admin-context-*` removed; unit admin-context-page 5/5 (suite **155**); Playwright admin-context **6/6** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.16-admin-context`; `bd close` за оркестратором |
+| 2026-07-22 | Claim `bd-wus.16`: S13 `/admin/context` + panel → Tailwind+shadcn; admin-only/API без регрессии; ветка `task/bd-wus.16-admin-context` |
 | 2026-07-22 | `bd-wus.15` close-prep: `/library` stub → Tailwind+shadcn Card; orphan `.library-stub` removed; unit library 5/5 (suite **150**); Playwright library-page **6/6** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.15-library`; `bd close` за оркестратором |
 | 2026-07-22 | Claim `bd-wus.15`: S12 `/library` stub → Tailwind+shadcn Card; guest/user без регрессии; ветка `task/bd-wus.15-library` |
 | 2026-07-22 | `bd-wus.14` close-prep: `/u/[slug]` + LogoutButton → Tailwind+shadcn Card/Button; orphan `.profile-stub`/`.logout-button` отсутствуют в globals (assert); unit profile 5/5 (suite **145**); Playwright profile+auth-redirect+auth-pages+session **18/18** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.14-profile`; `bd close` за оркестратором |
