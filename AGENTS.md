@@ -19,6 +19,7 @@
 ## Стек (кратко)
 
 - Frontend: Next.js + TypeScript (отдельное app)
+- UI-kit: Tailwind + shadcn/Radix + Lucide ([ADR 0003](docs/adr/0003-tailwind-shadcn.md) **accepted**); новый UI / новые экраны — только этот стек, без новых legacy-правил в `globals.css`
 - Backend: NestJS + TypeScript + Prisma + PostgreSQL (FTS)
 - Jobs: BullMQ + Redis
 - Auth на Nest; LLM: OpenAI через `LlmProvider`
