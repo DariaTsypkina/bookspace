@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-22T13:23:09.733Z",
+  "generated_at": "2026-07-22T13:27:25.138Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 88,
-    "open_issues": 56,
-    "in_progress_issues": 5,
+    "open_issues": 55,
+    "in_progress_issues": 6,
     "closed_issues": 27,
     "blocked_issues": 7,
-    "ready_issues": 49
+    "ready_issues": 48
   },
   "epics": [
     {
@@ -535,8 +535,8 @@
       "priority": 2,
       "children_total": 17,
       "children_closed": 2,
-      "children_in_progress": 0,
-      "children_open": 15,
+      "children_in_progress": 1,
+      "children_open": 14,
       "progress": "2 / 17",
       "percent_closed": 12,
       "children": [
@@ -613,7 +613,7 @@
         {
           "id": "bd-wus.3",
           "title": "UI: миграция app-nav (tab-bar) на Tailwind+shadcn",
-          "status": "open",
+          "status": "in_progress",
           "type": "task",
           "priority": 2
         },
@@ -900,11 +900,11 @@
     {
       "id": "bd-wus.3",
       "title": "UI: миграция app-nav (tab-bar) на Tailwind+shadcn",
-      "status": "open",
+      "status": "in_progress",
       "type": "task",
       "priority": 2,
       "parent": "bd-wus",
-      "updated_at": "2026-07-22T11:46:08Z"
+      "updated_at": "2026-07-22T13:27:04Z"
     },
     {
       "id": "bd-wus.2",
