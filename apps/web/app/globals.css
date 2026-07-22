@@ -53,30 +53,6 @@ body {
   padding-bottom: 4.25rem;
 }
 
-.library-stub {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  padding: 1.25rem 1rem 2rem;
-  max-width: 40rem;
-  margin: 0 auto;
-  width: 100%;
-}
-
-.library-stub h1 {
-  font-size: 1.75rem;
-  font-weight: 400;
-}
-
-.library-stub p {
-  color: var(--muted);
-  font-family:
-    system-ui,
-    -apple-system,
-    sans-serif;
-}
-
 @media (min-width: 768px) {
   .app-shell {
     flex-direction: column;
