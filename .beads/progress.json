@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-22T14:33:26.721Z",
+  "generated_at": "2026-07-22T14:37:46.319Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 88,
-    "open_issues": 50,
+    "open_issues": 49,
     "in_progress_issues": 5,
-    "closed_issues": 33,
+    "closed_issues": 34,
     "blocked_issues": 7,
-    "ready_issues": 43
+    "ready_issues": 42
   },
   "epics": [
     {
@@ -534,11 +534,11 @@
       "status": "open",
       "priority": 2,
       "children_total": 17,
-      "children_closed": 8,
+      "children_closed": 9,
       "children_in_progress": 0,
-      "children_open": 9,
-      "progress": "8 / 17",
-      "percent_closed": 47,
+      "children_open": 8,
+      "progress": "9 / 17",
+      "percent_closed": 53,
       "children": [
         {
           "id": "bd-wus.1",
@@ -655,7 +655,7 @@
         {
           "id": "bd-wus.9",
           "title": "UI: миграция карточки произведения /books/[slug]",
-          "status": "open",
+          "status": "closed",
           "type": "task",
           "priority": 2
         }
@@ -855,11 +855,11 @@
     {
       "id": "bd-wus.9",
       "title": "UI: миграция карточки произведения /books/[slug]",
-      "status": "open",
+      "status": "closed",
       "type": "task",
       "priority": 2,
       "parent": "bd-wus",
-      "updated_at": "2026-07-22T11:46:13Z"
+      "updated_at": "2026-07-22T14:37:42Z"
     },
     {
       "id": "bd-wus.7",

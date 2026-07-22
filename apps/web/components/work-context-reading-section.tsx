@@ -3,6 +3,7 @@ import {
   CONTEXT_READING_DISCLAIMER,
   type PublicContextReadingItem,
 } from '@/lib/catalog-context-reading';
+import { Card, CardContent } from '@/components/ui/card';
 
 type WorkContextReadingSectionProps = {
   items: PublicContextReadingItem[];
@@ -52,19 +53,27 @@ export function WorkContextReadingSection({
   }
 
   return (
-    <section className="work-context-reading" aria-label="Для понимания">
-      <h2>{content.heading}</h2>
-      <p className="work-context-reading-disclaimer">{content.disclaimer}</p>
-      <ul>
+    <section aria-label="Для понимания">
+      <h2 className="mb-2 font-sans text-[1.15rem] font-medium text-foreground">
+        {content.heading}
+      </h2>
+      <p className="mb-3 font-sans text-[0.9rem] leading-snug text-muted">
+        {content.disclaimer}
+      </p>
+      <ul className="flex list-none flex-col gap-3 p-0">
         {content.items.map((item) => (
           <li key={item.slug}>
-            <Link
-              href={`/books/${item.slug}`}
-              className="work-context-reading-title"
-            >
-              {item.titleRu}
-            </Link>
-            <p className="work-context-reading-why">{item.whyText}</p>
+            <Card>
+              <CardContent className="flex flex-col gap-1.5 px-4 py-3.5 font-sans text-[0.95rem]">
+                <Link
+                  href={`/books/${item.slug}`}
+                  className="font-medium text-foreground no-underline hover:underline"
+                >
+                  {item.titleRu}
+                </Link>
+                <p className="leading-snug text-muted">{item.whyText}</p>
+              </CardContent>
+            </Card>
           </li>
         ))}
       </ul>
