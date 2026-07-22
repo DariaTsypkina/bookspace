@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* === Base: design tokens «читальня» (синхрон с lib/design-tokens.ts + tailwind theme) === */
 :root {
   --background: #f7f5f0;
   --foreground: #1c1917;
@@ -8,6 +13,8 @@
   --accent-text: #fafaf9;
   --error: #b42318;
 }
+
+/* === Legacy: экранные/shell-стили до миграции на Tailwind (см. migration-tailwind-shadcn.md) === */
 
 html {
   height: 100%;

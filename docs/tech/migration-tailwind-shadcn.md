@@ -125,6 +125,6 @@ flowchart TD
 | Стек целиком (Tailwind + shadcn/Radix + Lucide + cva/clsx/tailwind-merge) | ✅ человек |
 | Инкрементальная миграция + задача на экран + отдельно меню | ✅ человек |
 | ADR 0003 `proposed` → `accepted` | ✅ accepted 2026-07-22 |
-| Старт F1 / `bd-wus.1` (prod-зависимости + код) | ⬜ можно стартовать |
+| Старт F1 / `bd-wus.1` (prod-зависимости + код) | ✅ реализовано в `task/bd-wus.1-tailwind-foundation` (close за оркестратором) |
 | Состав beads `bd-wus`.* (17 детей) | ✅ |
 | Правила агента (`stack.mdc`, `ui-ru.mdc`, stack-and-architecture) | ✅ обновлены |

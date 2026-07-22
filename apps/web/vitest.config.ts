@@ -4,7 +4,11 @@ import path from 'node:path';
 export default defineConfig({
   test: {
     environment: 'node',
-    include: ['lib/**/*.test.ts', 'components/**/*.test.ts'],
+    include: [
+      'lib/**/*.test.ts',
+      'components/**/*.test.ts',
+      'tailwind.config.test.ts',
+    ],
   },
   resolve: {
     alias: {
