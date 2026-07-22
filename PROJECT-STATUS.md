@@ -45,7 +45,7 @@
 
 ### DX — Tailwind + shadcn — 🔄 · epic `bd-wus` · 0 / 17 · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
 
-План: [migration-tailwind-shadcn.md](docs/tech/migration-tailwind-shadcn.md). В работе: `bd-wus.13` (ветка `task/bd-wus.13-places`). F1–F2 ✅; N1 ✅; S1–S9 (`bd-wus.4`–`.12`) ✅ в сборочной; SpoilerGate мигрирован в S8.
+План: [migration-tailwind-shadcn.md](docs/tech/migration-tailwind-shadcn.md). В работе: `bd-wus.14` (ветка `task/bd-wus.14-profile`). F1–F2 ✅; N1 ✅; S1–S10 (`bd-wus.4`–`.13`) ✅ в сборочной; SpoilerGate мигрирован в S8.
 
 | Статус | ID | Задача |
 |--------|-----|--------|
@@ -61,8 +61,8 @@
 | 🔄 | `bd-wus.10` | Экран: Автор `/authors/[slug]` |
 | 🔄 | `bd-wus.11` | Экран: Персонаж `/characters/[slug]` |
 | ✅ | `bd-wus.12` | Экран: Мир `/worlds/[slug]` |
-| 🔄 | `bd-wus.13` | Экран: Локация `/places/[slug]` |
-| ⬜ | `bd-wus.14` | Экран: Профиль `/u/[slug]` |
+| ✅ | `bd-wus.13` | Экран: Локация `/places/[slug]` |
+| 🔄 | `bd-wus.14` | Экран: Профиль `/u/[slug]` |
 | ⬜ | `bd-wus.15` | Экран: Библиотека `/library` |
 | ⬜ | `bd-wus.16` | Экран: Admin Context `/admin/context` |
 | ⬜ | `bd-wus.17` | Конвенция: новый UI только на стеке |
@@ -177,6 +177,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-22 | `bd-wus.14` close-prep: `/u/[slug]` + LogoutButton → Tailwind+shadcn Card/Button; orphan `.profile-stub`/`.logout-button` отсутствуют в globals (assert); unit profile 5/5 (suite **145**); Playwright profile+auth-redirect+auth-pages+session **18/18** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.14-profile`; `bd close` за оркестратором |
+| 2026-07-22 | Claim `bd-wus.14`: S11 `/u/[slug]` + LogoutButton → Tailwind+shadcn; auth redirect UX без регрессии; ветка `task/bd-wus.14-profile` |
 | 2026-07-22 | `bd-wus.13` close-prep: `/places/[slug]` + not-found → Tailwind+shadcn Card; orphan `.place-*` отсутствуют в globals (assert); unit places 6/6 (suite **140**); Playwright place-page **8/8** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.13-places`; `bd close` за оркестратором |
 | 2026-07-22 | Claim `bd-wus.13`: S10 `/places/[slug]` + not-found → Tailwind+shadcn; ветка `task/bd-wus.13-places` |
 | 2026-07-22 | `bd-wus.12` close-prep: `/worlds/[slug]` + not-found → Tailwind+shadcn Card; orphan `.world-*` отсутствуют в globals (assert); unit worlds 6/6 (suite **134**); Playwright world-page **8/8** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.12-worlds`; `bd close` за оркестратором |
