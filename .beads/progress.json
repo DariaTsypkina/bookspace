@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-22T14:45:40.722Z",
+  "generated_at": "2026-07-22T14:53:42.535Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 88,
-    "open_issues": 48,
+    "open_issues": 47,
     "in_progress_issues": 5,
-    "closed_issues": 35,
+    "closed_issues": 36,
     "blocked_issues": 7,
-    "ready_issues": 41
+    "ready_issues": 40
   },
   "epics": [
     {
@@ -534,11 +534,11 @@
       "status": "open",
       "priority": 2,
       "children_total": 17,
-      "children_closed": 10,
+      "children_closed": 11,
       "children_in_progress": 0,
-      "children_open": 7,
-      "progress": "10 / 17",
-      "percent_closed": 59,
+      "children_open": 6,
+      "progress": "11 / 17",
+      "percent_closed": 65,
       "children": [
         {
           "id": "bd-wus.1",
@@ -557,7 +557,7 @@
         {
           "id": "bd-wus.11",
           "title": "UI: миграция карточки персонажа /characters/[slug]",
-          "status": "open",
+          "status": "closed",
           "type": "task",
           "priority": 2
         },
@@ -828,11 +828,11 @@
     {
       "id": "bd-wus.11",
       "title": "UI: миграция карточки персонажа /characters/[slug]",
-      "status": "open",
+      "status": "closed",
       "type": "task",
       "priority": 2,
       "parent": "bd-wus",
-      "updated_at": "2026-07-22T11:46:15Z"
+      "updated_at": "2026-07-22T14:53:39Z"
     },
     {
       "id": "bd-wus.10",
