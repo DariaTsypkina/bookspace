@@ -18,6 +18,45 @@ enum WorkStatus {
   MERGED
 }
 
+enum NeedsContext {
+  UNKNOWN
+  YES
+  NO
+}
+
+enum ContextReadingStatus {
+  DRAFT
+  PUBLISHED
+  REJECTED
+}
+
+enum MatchQueueKind {
+  RANKING_ENTRY
+  CONTEXT_CANDIDATE
+  IMPORT_ROW
+}
+
+enum MatchQueueStatus {
+  OPEN
+  RESOLVED
+  DISMISSED
+}
+
+model AuditLog {
+  id          String   @id @default(uuid())
+  actorUserId String
+  action      String
+  entityType  String
+  entityId    String
+  before      Json?
+  after       Json?
+  createdAt   DateTime @default(now())
+  actor       User     @relation(fields: [actorUserId], references: [id], onDelete: Cascade)
+
+  @@index([action, createdAt])
+  @@index([entityType, entityId])
+}
+
 enum CatalogEntityStatus {
   DRAFT
   PUBLISHED
@@ -29,8 +68,10 @@ model Work {
   titleRu     String
   titleOrig   String?
   yearFirst   Int?
-  status      WorkStatus   @default(DRAFT)
-  deletedAt   DateTime?
+  status                 WorkStatus   @default(DRAFT)
+  needsContext           NeedsContext @default(UNKNOWN)
+  needsContextAdminSetAt DateTime?
+  deletedAt              DateTime?
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
   authors              WorkAuthor[]
@@ -38,8 +79,45 @@ model Work {
   editions             Edition[]
   characterAppearances CharacterAppearance[]
   places               WorkPlace[]
+  contextReadingsAsSubject     ContextReading[] @relation("ContextSubject")
+  contextReadingsAsRecommended ContextReading[] @relation("ContextRecommended")
+  matchQueueResolved           MatchQueue[]
 
   @@index([status, deletedAt])
+}
+
+model ContextReading {
+  id                String               @id @default(uuid())
+  subjectWorkId     String
+  recommendedWorkId String
+  importanceRank    Int
+  whyText           String
+  status            ContextReadingStatus @default(DRAFT)
+  sourceUrl         String?
+  sourceSnippet     String?
+  llmModel          String?
+  llmRunId          String?
+  publishedAt       DateTime?
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+  subjectWork       Work                 @relation("ContextSubject", fields: [subjectWorkId], references: [id], onDelete: Cascade)
+  recommendedWork   Work                 @relation("ContextRecommended", fields: [recommendedWorkId], references: [id], onDelete: Cascade)
+
+  @@unique([subjectWorkId, recommendedWorkId])
+  @@index([subjectWorkId, status])
+}
+
+model MatchQueue {
+  id             String           @id @default(uuid())
+  kind           MatchQueueKind
+  payload        Json
+  status         MatchQueueStatus @default(OPEN)
+  resolvedWorkId String?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  resolvedWork   Work?            @relation(fields: [resolvedWorkId], references: [id], onDelete: SetNull)
+
+  @@index([kind, status])
 }
 
 model Edition {
@@ -207,6 +285,7 @@ model User {
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
   accounts     Account[]
+  auditLogs    AuditLog[]
 }
 
 model Account {

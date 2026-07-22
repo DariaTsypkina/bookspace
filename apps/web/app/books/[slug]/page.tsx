@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { WorkContextReadingSection } from '@/components/work-context-reading-section';
+import { fetchCatalogContextReadings } from '@/lib/catalog-context-reading';
 import {
   CatalogWorkNotFoundError,
   fetchCatalogWork,
@@ -22,6 +24,8 @@ export default async function WorkPage({ params }: WorkPageProps) {
     }
     throw error;
   }
+
+  const { items: contextReadings } = await fetchCatalogContextReadings(slug);
 
   return (
     <main className="work-page">
@@ -83,6 +87,8 @@ export default async function WorkPage({ params }: WorkPageProps) {
             </ul>
           </section>
         )}
+
+        <WorkContextReadingSection items={contextReadings} />
       </article>
     </main>
   );

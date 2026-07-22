@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-20T15:28:32.437Z",
+  "generated_at": "2026-07-20T16:21:23.598Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 68,
-    "open_issues": 42,
+    "open_issues": 40,
     "in_progress_issues": 4,
-    "closed_issues": 22,
-    "blocked_issues": 41,
-    "ready_issues": 1
+    "closed_issues": 24,
+    "blocked_issues": 7,
+    "ready_issues": 33
   },
   "epics": [
     {
@@ -48,7 +48,7 @@
     {
       "id": "bd-6v0",
       "title": "Каталог",
-      "status": "open",
+      "status": "closed",
       "priority": 1,
       "children_total": 8,
       "children_closed": 8,
@@ -160,7 +160,7 @@
     {
       "id": "bd-957",
       "title": "Auth",
-      "status": "open",
+      "status": "closed",
       "priority": 1,
       "children_total": 7,
       "children_closed": 7,
@@ -582,11 +582,11 @@
     {
       "id": "bd-6v0",
       "title": "Каталог",
-      "status": "open",
+      "status": "closed",
       "type": "epic",
       "priority": 1,
       "parent": null,
-      "updated_at": "2026-07-17T12:35:56Z"
+      "updated_at": "2026-07-20T15:51:43Z"
     },
     {
       "id": "bd-957.1",
@@ -600,11 +600,11 @@
     {
       "id": "bd-957",
       "title": "Auth",
-      "status": "open",
+      "status": "closed",
       "type": "epic",
       "priority": 1,
       "parent": null,
-      "updated_at": "2026-07-17T12:36:57Z"
+      "updated_at": "2026-07-20T15:51:42Z"
     },
     {
       "id": "bd-v2y",

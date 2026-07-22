@@ -12,10 +12,10 @@
 | # | Фаза | Статус | Прогресс | Эпик |
 |---|------|--------|----------|------|
 | 0 | Bootstrap (monorepo, docker, CI) | ✅ | — | — |
-| 1 | Auth | 🔄 | 0 / 6 | `bd-957` |
-| 2 | Каталог | 🔄 | 0 / 6 | `bd-6v0` |
+| 1 | Auth | ✅ | 6 / 6 | `bd-957` |
+| 2 | Каталог | ✅ | 6 / 6 | `bd-6v0` |
 | 3 | Связи и порядок | 🔒 | 0 / 4 | `bd-azl` |
-| 4 | ContextReading | 🔒 | 0 / 4 | `bd-8s4` |
+| 4 | ContextReading | 🔄 | 4 / 4 | `bd-8s4` |
 | 5 | Библиотека и профиль | 🔒 | 0 / 5 | `bd-cq7` |
 | 6 | Заметки и цель | 🔒 | 0 / 2 | `bd-sf4` |
 | 7 | Рейтинги | 🔒 | 0 / 3 | `bd-es5` |
@@ -42,27 +42,27 @@
 | 🔄 | `bd-nvi` | Scaffold monorepo dev baseline |
 | ✅ | `bd-384` | Session Completion: git push при конце сессии |
 
-### 1. Auth — 🔄 · epic `bd-957` · 0 / 6
+### 1. Auth — ✅ · epic `bd-957` · 6 / 6 (эпик закрыт)
 
 | Статус | ID | Задача |
 |--------|-----|--------|
 | ✅ | `bd-8jk` | Auth: email и пароль |
-| 🔄 | `bd-957.1` | Auth: редирект с /login и /register → /u/[slug] |
-| 🔄 | `bd-957.2` | Auth: Google OAuth |
-| 🔄 | `bd-957.3` | Auth: Яндекс OAuth |
-| 🔄 | `bd-v2y` | Auth: сессия и защита маршрутов |
-| ⬜ | `bd-wlw` | Auth: rate limit на register/login |
+| ✅ | `bd-957.1` | Auth: редирект с /login и /register → /u/[slug] |
+| ✅ | `bd-957.2` | Auth: Google OAuth |
+| ✅ | `bd-957.3` | Auth: Яндекс OAuth |
+| ✅ | `bd-v2y` | Auth: сессия и защита маршрутов |
+| ✅ | `bd-wlw` | Auth: rate limit на register/login |
 
-### 2. Каталог — 🔄 · epic `bd-6v0` · 0 / 6
+### 2. Каталог — ✅ · epic `bd-6v0` · 6 / 6 (эпик закрыт)
 
 | Статус | ID | Задача |
 |--------|-----|--------|
-| 🔄 | `bd-6v0.1` | Каталог: Поиск по каталогу |
-| ⬜ | `bd-6v0.2` | Каталог: Карточка произведения |
-| ⬜ | `bd-6v0.3` | Каталог: Карточка автора |
+| ✅ | `bd-6v0.1` | Каталог: Поиск по каталогу |
+| ✅ | `bd-6v0.2` | Каталог: Карточка произведения |
+| ✅ | `bd-6v0.3` | Каталог: Карточка автора |
 | ✅ | `bd-6v0.4` | Каталог: Карточка персонажа |
-| ⬜ | `bd-6v0.5` | Каталог: Карточка мира |
-| ⬜ | `bd-6v0.6` | Каталог: Карточка локации |
+| ✅ | `bd-6v0.5` | Каталог: Карточка мира |
+| ✅ | `bd-6v0.6` | Каталог: Карточка локации |
 
 ### 3. Связи и порядок — 🔒 · epic `bd-azl` · 0 / 4
 
@@ -73,14 +73,14 @@
 | ⬜ | `bd-azl.3` | Связи: Порядок чтения |
 | ⬜ | `bd-azl.4` | Связи: Spoiler gate |
 
-### 4. ContextReading — 🔒 · epic `bd-8s4` · 0 / 4
+### 4. ContextReading — 🔄 · epic `bd-8s4` · 4 / 4
 
 | Статус | ID | Задача |
 |--------|-----|--------|
-| ⬜ | `bd-8s4.1` | ContextReading: Блок «Для понимания» (UI) |
-| ⬜ | `bd-8s4.2` | ContextReading: Классификация needsContext |
-| ⬜ | `bd-8s4.3` | ContextReading: Пайплайн extract ContextReading |
-| ⬜ | `bd-8s4.4` | ContextReading: Админка ContextReading |
+| ✅ | `bd-8s4.1` | ContextReading: Блок «Для понимания» (UI) |
+| ✅ | `bd-8s4.2` | ContextReading: Классификация needsContext |
+| ✅ | `bd-8s4.3` | ContextReading: Пайплайн extract ContextReading |
+| ✅ | `bd-8s4.4` | ContextReading: Админка ContextReading |
 
 ### 5. Библиотека и профиль — 🔒 · epic `bd-cq7` · 0 / 5
 
@@ -150,6 +150,12 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-20 | Sync `feat/bookspace-bd-8s4` ← `origin/develop`: merge conflicts resolved (schema, catalog, beads, PROJECT-STATUS) |
+| 2026-07-20 | Закрыт `bd-8s4.1`: блок «Для понимания» на карточке произведения (public API client, WorkContextReadingSection, disclaimer, без source URL); web unit 43/43, Playwright context-reading 4/4 (chromium-desktop+mobile); ветка `task/bd-8s4.1-context-ui` |
+| 2026-07-20 | Закрыт `bd-8s4.4`: админка ContextReading (Admin API recent/patch/unpublish/reject + AuditLog, `/admin/context`, BFF, public context-readings); api unit 6/6 + e2e 5/5, web unit 32/32, Playwright 6/6; ветка `task/bd-8s4.4-admin-context` (коммит 65ac14e) |
+| 2026-07-20 | Реализация `bd-8s4.3`: extract pipeline (ContextReading+MatchQueue schema, whitelist→LLM→match→publish/queue, BullMQ jobs, admin POST extract, unit+e2e); ветка `task/bd-8s4.3-extract-pipeline` |
+| 2026-07-20 | Закрыт `bd-8s4.2`: needsContext classify (Prisma enum, LlmProvider, admin patch/classify API, unit+e2e); ветка `task/bd-8s4.2-needs-classify` |
+| 2026-07-20 | Закрыты эпики `bd-957` Auth и `bd-6v0` Каталог после merge PR #11 (quality green) |
 | 2026-07-20 | Закрыт `bd-957.4`: импорт ConfigService в AuthModule (регрессия bd-wlw); e2e rate-limit 3/3, Playwright 12/12; merge в сборочную |
 | 2026-07-20 | Обнаружен `bd-957.4` (discovered-from bd-wlw): ConfigService import missing в auth.module.ts — ломает API e2e |
 | 2026-07-20 | Закрыт `bd-wlw`: rate limit register/login (in-memory, 429); unit 9/9, e2e 23/23, Playwright 12/12; merge в `feat/bookspace-bd-957` |
