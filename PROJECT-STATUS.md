@@ -45,14 +45,14 @@
 
 ### DX — Tailwind + shadcn — 🔄 · epic `bd-wus` · 0 / 17 · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
 
-План: [migration-tailwind-shadcn.md](docs/tech/migration-tailwind-shadcn.md). В работе: `bd-wus.3` (ветка `task/bd-wus.3-app-nav`). F1–F2 ✅.
+План: [migration-tailwind-shadcn.md](docs/tech/migration-tailwind-shadcn.md). В работе: `bd-wus.4` (ветка `task/bd-wus.4-home`). F1–F2 ✅; N1 (`bd-wus.3`) ✅ в сборочной.
 
 | Статус | ID | Задача |
 |--------|-----|--------|
 | ✅ | `bd-wus.1` | Foundation: Tailwind + design tokens |
 | ✅ | `bd-wus.2` | Foundation: shadcn baseline + Lucide |
-| 🔄 | `bd-wus.3` | Миграция app-nav (tab-bar) |
-| ⬜ | `bd-wus.4` | Экран: Главная `/` |
+| ✅ | `bd-wus.3` | Миграция app-nav (tab-bar) |
+| 🔄 | `bd-wus.4` | Экран: Главная `/` |
 | ⬜ | `bd-wus.5` | Экран: Вход `/login` |
 | ⬜ | `bd-wus.6` | Экран: Регистрация `/register` |
 | ⬜ | `bd-wus.7` | Экран: Auth error `/auth/error` |
@@ -177,6 +177,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-22 | `bd-wus.4` close-prep: `/` → Tailwind+shadcn Card; legacy `.home-page` removed; unit **88**; Playwright home (+foundation+baseline) **18/18** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.4-home`; `bd close` за оркестратором |
+| 2026-07-22 | Claim `bd-wus.4`: conventions (design/acceptance/notes/labels area:web+sec:ui+dx); TDD RED→GREEN миграция `/`; ветка `task/bd-wus.4-home` |
 | 2026-07-22 | `bd-wus.3` close-prep: app-nav → Tailwind+shadcn Button+Lucide; legacy `.app-nav*` removed; unit 83; Playwright app-nav **10/10** (desktop+mobile, PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.3-app-nav`; `bd close` за оркестратором |
 | 2026-07-22 | Claim `bd-wus.3`: conventions (design/acceptance/notes/labels area:web+sec:ui+dx); TDD RED→GREEN миграция app-nav; ветка `task/bd-wus.3-app-nav` |
 | 2026-07-22 | `bd-wus.2` close-prep: shadcn baseline (cn/cva + Button/Input/Label/Card + lucide); unit 78; build/lint ok; Playwright baseline+foundation **12/12** (desktop+mobile, PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.2-shadcn-baseline`; `bd close` за оркестратором |

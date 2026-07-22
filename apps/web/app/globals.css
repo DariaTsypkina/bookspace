@@ -100,21 +100,6 @@ a {
   text-underline-offset: 0.15em;
 }
 
-.home-page {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 1rem;
-}
-
-.home-page h1 {
-  font-size: 1.75rem;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  color: var(--foreground);
-}
-
 .auth-page {
   flex: 1;
   display: flex;
