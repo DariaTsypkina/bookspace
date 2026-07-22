@@ -58,7 +58,7 @@
 | ✅ | `bd-wus.7` | Экран: Auth error `/auth/error` |
 | ✅ | `bd-wus.8` | Экран: Поиск `/search` |
 | 🔄 | `bd-wus.9` | Экран: Книга `/books/[slug]` |
-| ⬜ | `bd-wus.10` | Экран: Автор `/authors/[slug]` |
+| 🔄 | `bd-wus.10` | Экран: Автор `/authors/[slug]` |
 | ⬜ | `bd-wus.11` | Экран: Персонаж `/characters/[slug]` |
 | ⬜ | `bd-wus.12` | Экран: Мир `/worlds/[slug]` |
 | ⬜ | `bd-wus.13` | Экран: Локация `/places/[slug]` |
@@ -177,6 +177,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-22 | `bd-wus.10` close-prep: `/authors/[slug]` + not-found → Tailwind+shadcn Card; orphan `.author-*` removed; unit authors 6/6 (suite **120**); Playwright author-page **8/8** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.10-authors`; `bd close` за оркестратором |
+| 2026-07-22 | Claim `bd-wus.10`: S7 `/authors/[slug]` + not-found → Tailwind+shadcn; orphan `.author-*`; ветка `task/bd-wus.10-authors` |
 | 2026-07-22 | `bd-wus.9` close-prep: `/books/[slug]` + WorkContextReadingSection → Tailwind+shadcn Card; orphan `.work-*`/`.edition-*` removed; SpoilerGate вне scope (S8); unit **114**; Playwright work+context+character (spoiler) **22/22** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.9-books`; `bd close` за оркестратором |
 | 2026-07-22 | Claim `bd-wus.9`: S6 `/books/[slug]` + WorkContextReadingSection → Tailwind+shadcn; orphan `.work-*`/`.edition-*`; SpoilerGate вне scope (character S8); ветка `task/bd-wus.9-books` |
 | 2026-07-22 | `bd-wus.7` close-prep: `/auth/error` → Tailwind+shadcn Card/Button; orphan shared `.auth-*` вычищены из globals; e2e alerts → `main [role=alert]`; unit **101**; Playwright auth-error+oauth smoke+auth-pages **16/16** desktop+mobile; ветка `task/bd-wus.7-auth-error`; `bd close` за оркестратором |
