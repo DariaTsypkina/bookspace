@@ -1,19 +1,20 @@
 # Стек и архитектура (MVP)
 
-Связано: [ADR 0001](../adr/0001-stack-mvp.md), [продуктовая спека](../product/mvp-spec.md).
+Связано: [ADR 0001](../adr/0001-stack-mvp.md), [ADR 0003](../adr/0003-tailwind-shadcn.md) (UI-слой), [продуктовая спека](../product/mvp-spec.md), [миграция Tailwind + shadcn](migration-tailwind-shadcn.md).
 
 ## Решения
 
 | Слой | Выбор | Notes |
 |------|--------|--------|
 | Frontend | Next.js (App Router) + TypeScript + React | Отдельное приложение; SSR/SEO публичных страниц; PWA |
+| UI-kit | Tailwind CSS + shadcn/ui (Radix) + Lucide | Copy-in-repo `components/ui`; токены «читальня»; инкрементальная миграция с legacy CSS — [ADR 0003](../adr/0003-tailwind-shadcn.md) |
 | Backend | NestJS + TypeScript | Отдельный API + workers |
 | ORM / БД | Prisma + PostgreSQL | |
 | Поиск | PostgreSQL Full-Text Search (русский конфиг) | Meilisearch — отдельный ADR при росте |
 | Auth | На Nest (Passport / стратегии credentials + Google + Yandex); сессия или JWT в httpOnly cookie для Next | Вариант A: бэкенд — источник истины по identity |
 | Jobs | BullMQ + Redis | Импорт, агрегация рейтингов, LLM |
 | LLM | OpenAI API за абстракцией `LlmProvider` | Смена модели без переписывания пайплайнов |
-| Админка | UI во фронте (`/admin`), данные через admin API Nest | Role check только на бэкенде |
+| Админка | UI во фронте (`/admin`), данные через admin API Nest | Role check только на бэкенде; UI на том же kit |
 | Деплой MVP | Local first (Docker Compose: Next, Nest, Postgres, Redis); cloud позже без привязки к вендору | |
 
 ## Переменные окружения
