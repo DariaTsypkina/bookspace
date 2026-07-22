@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-22T14:56:19.751Z",
+  "generated_at": "2026-07-22T14:59:58.292Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 88,
-    "open_issues": 46,
+    "open_issues": 45,
     "in_progress_issues": 5,
-    "closed_issues": 37,
+    "closed_issues": 38,
     "blocked_issues": 7,
-    "ready_issues": 39
+    "ready_issues": 38
   },
   "epics": [
     {
@@ -534,11 +534,11 @@
       "status": "open",
       "priority": 2,
       "children_total": 17,
-      "children_closed": 12,
+      "children_closed": 13,
       "children_in_progress": 0,
-      "children_open": 5,
-      "progress": "12 / 17",
-      "percent_closed": 71,
+      "children_open": 4,
+      "progress": "13 / 17",
+      "percent_closed": 76,
       "children": [
         {
           "id": "bd-wus.1",
@@ -571,7 +571,7 @@
         {
           "id": "bd-wus.13",
           "title": "UI: миграция карточки локации /places/[slug]",
-          "status": "open",
+          "status": "closed",
           "type": "task",
           "priority": 2
         },
@@ -810,11 +810,11 @@
     {
       "id": "bd-wus.13",
       "title": "UI: миграция карточки локации /places/[slug]",
-      "status": "open",
+      "status": "closed",
       "type": "task",
       "priority": 2,
       "parent": "bd-wus",
-      "updated_at": "2026-07-22T11:46:17Z"
+      "updated_at": "2026-07-22T14:59:54Z"
     },
     {
       "id": "bd-wus.12",
