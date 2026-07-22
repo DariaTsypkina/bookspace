@@ -152,6 +152,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-22 | `bd-6b7.4` close-prep: меню реализовано (unit 60, Playwright app-nav 8/8 desktop+mobile); коммиты `7213400`, `0eb74aa`; ветка `task/bd-6b7.4-nav-menu`; `bd close` за оркестратором |
 | 2026-07-22 | `bd-6b7.4` в работе: conventions (design/acceptance/notes/labels), TDD app-nav (unit+Playwright), stub `/library`; ветка `task/bd-6b7.4-nav-menu` |
 | 2026-07-22 | `/task`: создан `bd-6b7.4` — строка меню (вариант B: Главная · Поиск · Профиль; user → `/library`; admin вне меню) |
 | 2026-07-22 | Claim `bd-6v0.9`: FTS search_vector drift (Prisma migrate удалил колонки) — guard-миграция + Unsupported в schema; ветка `fix/bd-6v0.9/restore-catalog-fts` |
