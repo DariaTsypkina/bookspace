@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-22T15:03:50.245Z",
+  "generated_at": "2026-07-22T15:06:04.997Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 88,
-    "open_issues": 44,
-    "in_progress_issues": 5,
+    "open_issues": 43,
+    "in_progress_issues": 6,
     "closed_issues": 39,
     "blocked_issues": 7,
-    "ready_issues": 37
+    "ready_issues": 36
   },
   "epics": [
     {
@@ -535,8 +535,8 @@
       "priority": 2,
       "children_total": 17,
       "children_closed": 14,
-      "children_in_progress": 0,
-      "children_open": 3,
+      "children_in_progress": 1,
+      "children_open": 2,
       "progress": "14 / 17",
       "percent_closed": 82,
       "children": [
@@ -585,7 +585,7 @@
         {
           "id": "bd-wus.15",
           "title": "UI: миграция экрана Библиотека /library",
-          "status": "open",
+          "status": "in_progress",
           "type": "task",
           "priority": 2
         },
@@ -792,11 +792,11 @@
     {
       "id": "bd-wus.15",
       "title": "UI: миграция экрана Библиотека /library",
-      "status": "open",
+      "status": "in_progress",
       "type": "task",
       "priority": 2,
       "parent": "bd-wus",
-      "updated_at": "2026-07-22T11:46:19Z"
+      "updated_at": "2026-07-22T15:05:22Z"
     },
     {
       "id": "bd-wus.14",
