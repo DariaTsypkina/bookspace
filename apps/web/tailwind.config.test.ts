@@ -19,6 +19,20 @@ describe('tailwind foundation config', () => {
     expect(tailwindConfig.corePlugins).toEqual({ preflight: false });
   });
 
+  it('safelists theme color utilities for cn-ready foundation', () => {
+    const safelist = tailwindConfig.safelist as string[];
+    expect(safelist).toEqual(
+      expect.arrayContaining([
+        'bg-background',
+        'text-foreground',
+        'border-border',
+        'bg-surface',
+        'text-muted',
+        'bg-accent',
+      ]),
+    );
+  });
+
   it('scans app, components, and lib for class names', () => {
     const content = tailwindConfig.content as string[];
     expect(content).toEqual(

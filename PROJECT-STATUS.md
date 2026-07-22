@@ -177,6 +177,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-22 | `bd-wus.1` close-prep: Tailwind v3+PostCSS+tokens; unit 68; build/lint ok; Playwright foundation+auth-pages+app-nav **20/20** (desktop+mobile, PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.1-tailwind-foundation`; `bd close` за оркестратором |
 | 2026-07-22 | Claim `bd-wus.1`: conventions (design/acceptance/notes/labels area:web+sec:ui); TDD RED unit+smoke; ветка `task/bd-wus.1-tailwind-foundation` |
 | 2026-07-22 | ADR 0003 **accepted**; обновлены `stack.mdc`, `ui-ru.mdc`, `stack-and-architecture.md`; эпик `bd-wus` готов к `bd-wus.1` |
 | 2026-07-22 | Трек UI: правки docs/beads — убраны посторонние «out of scope» (не про UI); повторное согласование ADR 0003 + `bd-wus` |

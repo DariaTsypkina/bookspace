@@ -11,6 +11,12 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './lib/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  // Theme utilities available before screens migrate off legacy CSS.
+  safelist: REQUIRED_TOKEN_KEYS.flatMap((key) => [
+    `bg-${key}`,
+    `text-${key}`,
+    `border-${key}`,
+  ]),
   // Preflight сбрасывает legacy globals.css — включаем после миграции экранов.
   corePlugins: {
     preflight: false,

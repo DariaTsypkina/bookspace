@@ -7,28 +7,29 @@ test.describe('Tailwind foundation smoke', () => {
     await expect(
       page.getByRole('navigation', { name: 'Основное меню' }),
     ).toBeVisible();
-    await expect(
-      page.getByRole('heading', { name: 'Книжная вселенная' }),
-    ).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Главная' })).toBeVisible();
+    await expect(page).toHaveTitle(/Книжная вселенная/);
 
     const tokens = await page.evaluate(() => {
       const styles = getComputedStyle(document.documentElement);
+      const read = (name: string) => styles.getPropertyValue(name).trim();
       return {
-        background: styles.getPropertyValue('--background').trim(),
-        foreground: styles.getPropertyValue('--foreground').trim(),
-        muted: styles.getPropertyValue('--muted').trim(),
-        border: styles.getPropertyValue('--border').trim(),
-        surface: styles.getPropertyValue('--surface').trim(),
-        accent: styles.getPropertyValue('--accent').trim(),
+        background: read('--background'),
+        foreground: read('--foreground'),
+        muted: read('--muted'),
+        border: read('--border'),
+        surface: read('--surface'),
+        accent: read('--accent'),
       };
     });
 
-    expect(tokens.background).toBe('#f7f5f0');
-    expect(tokens.foreground).toBe('#1c1917');
-    expect(tokens.muted).toBe('#57534e');
-    expect(tokens.border).toBe('#d6d3d1');
-    expect(tokens.surface).toBe('#ffffff');
-    expect(tokens.accent).toBe('#292524');
+    expect(tokens.background.toLowerCase()).toBe('#f7f5f0');
+    expect(tokens.foreground.toLowerCase()).toBe('#1c1917');
+    expect(tokens.muted.toLowerCase()).toBe('#57534e');
+    expect(tokens.border.toLowerCase()).toBe('#d6d3d1');
+    // Browsers may serialize #ffffff as #fff
+    expect(['#ffffff', '#fff']).toContain(tokens.surface.toLowerCase());
+    expect(tokens.accent.toLowerCase()).toBe('#292524');
   });
 
   test('login page still renders after Tailwind foundation', async ({
