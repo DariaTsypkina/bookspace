@@ -63,6 +63,7 @@
 | ✅ | `bd-6v0.4` | Каталог: Карточка персонажа |
 | ✅ | `bd-6v0.5` | Каталог: Карточка мира |
 | ✅ | `bd-6v0.6` | Каталог: Карточка локации |
+| 🔄 | `bd-6v0.9` | Поиск: восстановить FTS search_vector после drift Prisma |
 
 ### 3. Связи и порядок — 🔒 · epic `bd-azl` · 0 / 4
 
@@ -150,6 +151,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-22 | Claim `bd-6v0.9`: FTS search_vector drift (Prisma migrate удалил колонки) — guard-миграция + Unsupported в schema; ветка `fix/bd-6v0.9/restore-catalog-fts` |
 | 2026-07-20 | Закрыты эпики `bd-957` Auth и `bd-6v0` Каталог после merge PR #11 (quality green) |
 | 2026-07-20 | Sync `feat/bookspace-bd-8s4` ← `origin/develop`: merge conflicts resolved (schema, catalog, beads, PROJECT-STATUS) |
 | 2026-07-20 | Закрыт `bd-8s4.1`: блок «Для понимания» на карточке произведения (public API client, WorkContextReadingSection, disclaimer, без source URL); web unit 43/43, Playwright context-reading 4/4 (chromium-desktop+mobile); ветка `task/bd-8s4.1-context-ui` |
