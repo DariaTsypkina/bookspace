@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-22T15:13:57.166Z",
+  "generated_at": "2026-07-22T15:33:14.863Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 88,
+    "total_issues": 89,
     "open_issues": 41,
     "in_progress_issues": 5,
-    "closed_issues": 42,
+    "closed_issues": 43,
     "blocked_issues": 7,
     "ready_issues": 34
   },
@@ -531,7 +531,7 @@
     {
       "id": "bd-wus",
       "title": "DX: Tailwind + shadcn",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
       "children_total": 17,
       "children_closed": 17,
@@ -772,6 +772,15 @@
       "updated_at": "2026-07-20T07:30:07Z"
     },
     {
+      "id": "bd-5po",
+      "title": "e2e: spoiler cookie domain совпадать с page hostname",
+      "status": "open",
+      "type": "chore",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-22T15:33:10Z"
+    },
+    {
       "id": "bd-wus.17",
       "title": "UI: конвенция новый UI только Tailwind+shadcn",
       "status": "closed",
@@ -927,11 +936,11 @@
     {
       "id": "bd-wus",
       "title": "DX: Tailwind + shadcn",
-      "status": "open",
+      "status": "closed",
       "type": "epic",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-07-22T11:58:13Z"
+      "updated_at": "2026-07-22T15:33:09Z"
     },
     {
       "id": "bd-6b7.4",
