@@ -52,7 +52,7 @@ describe('Places page Tailwind+shadcn migration (S10 / bd-wus.13)', () => {
     expect(pageSource).toMatch(/aria-label=["']Книги локации["']/);
     expect(pageSource).toMatch(/fetchCatalogPlace/);
     expect(pageSource).toMatch(
-      /В каталоге пока нет опубликованных книг, связанных с этой локацией/,
+      /В каталоге пока нет опубликованных книг, связанных с этой\s+локацией/,
     );
     expect(notFoundSource).toMatch(/Локация не найдена/);
     expect(notFoundSource).toMatch(/Вернуться к поиску/);
