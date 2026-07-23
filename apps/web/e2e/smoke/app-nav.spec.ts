@@ -50,6 +50,39 @@ test.describe('App nav smoke', () => {
     await expectMigratedNavChrome(page);
   });
 
+  test('root content reserves mobile bottom padding; desktop clears it', async ({
+    page,
+  }) => {
+    await page.goto('/');
+    const nav = page.getByRole('navigation', { name: 'Основное меню' });
+    await expect(nav).toBeVisible();
+
+    const paddingBottomPx = await page.evaluate(() => {
+      const navEl = document.querySelector('nav[aria-label="Основное меню"]');
+      const content = navEl?.nextElementSibling;
+      if (!content) {
+        return null;
+      }
+      return parseFloat(getComputedStyle(content).paddingBottom);
+    });
+
+    expect(paddingBottomPx).not.toBeNull();
+    const viewport = page.viewportSize();
+    expect(viewport).not.toBeNull();
+    if (paddingBottomPx == null || !viewport) {
+      return;
+    }
+
+    const isMobile = viewport.width < 768;
+    if (isMobile) {
+      // 4.25rem ≈ 68px at 16px root
+      expect(paddingBottomPx).toBeGreaterThanOrEqual(64);
+      expect(paddingBottomPx).toBeLessThanOrEqual(80);
+    } else {
+      expect(paddingBottomPx).toBe(0);
+    }
+  });
+
   test('guest sees Главная · Поиск · Профиль; Профиль → /login', async ({
     page,
   }) => {

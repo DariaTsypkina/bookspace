@@ -66,7 +66,7 @@
 | ✅ | `bd-wus.15` | Экран: Библиотека `/library` |
 | ✅ | `bd-wus.16` | Экран: Admin Context `/admin/context` |
 | ✅ | `bd-wus.17` | Конвенция: новый UI только на стеке |
-| ⬜ | `bd-wus.18` | Корневой layout: `.app-shell` / `.app-content` → Tailwind |
+| 🔄 | `bd-wus.18` | Корневой layout: `.app-shell` / `.app-content` → Tailwind |
 
 ### 1. Auth — ✅ · epic `bd-957` · 6 / 6 (эпик закрыт)
 
@@ -178,6 +178,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-23 | `bd-wus.18` close-prep: root layout → Tailwind (`flex min-h-full flex-1 flex-col` / `pb-[4.25rem] md:pb-0`); legacy `.app-shell`/`.app-content` removed; unit layout-shell 5/5 (suite **160**); Playwright app-nav+home **18/18** desktop+mobile (system Chrome); ветка `task/bd-wus.18-root-layout-tailwind`; `bd close` за оркестратором |
+| 2026-07-23 | Claim `bd-wus.18`: корневой layout `.app-shell`/`.app-content` → Tailwind utilities; ветка `task/bd-wus.18-root-layout-tailwind` |
 | 2026-07-23 | `/task`: создан `bd-wus.18` — корневой layout `.app-shell`/`.app-content` → Tailwind (хвост эпика `bd-wus`) |
 | 2026-07-22 | `bd-wus.17` close-prep: C1 docs/rules — ADR 0003 accepted; `stack-and-architecture` § UI-конвенция + `stack.mdc`/`ui-ru.mdc` запрет legacy CSS для новых экранов; migration C1 ✅; Playwright home+foundation+baseline **18/18** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); docs-only scope; ветка `task/bd-wus.17-convention`; `bd close` за оркестратором |
 | 2026-07-22 | Claim `bd-wus.17`: C1 конвенция docs/rules (ADR 0003 accepted, запрет legacy CSS для новых экранов); ветка `task/bd-wus.17-convention` |
