@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-07-23T10:43:36.283Z",
+  "generated_at": "2026-07-23T10:45:14.372Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 92,
-    "open_issues": 38,
+    "open_issues": 37,
     "in_progress_issues": 0,
-    "closed_issues": 54,
+    "closed_issues": 55,
     "blocked_issues": 7,
-    "ready_issues": 31
+    "ready_issues": 30
   },
   "epics": [
     {
       "id": "bd-6b7",
       "title": "PWA и оболочка",
-      "status": "open",
+      "status": "closed",
       "priority": 3,
       "children_total": 4,
       "children_closed": 4,
@@ -1499,11 +1499,11 @@
     {
       "id": "bd-6b7",
       "title": "PWA и оболочка",
-      "status": "open",
+      "status": "closed",
       "type": "epic",
       "priority": 3,
       "parent": null,
-      "updated_at": "2026-07-17T12:36:35Z"
+      "updated_at": "2026-07-23T10:45:02Z"
     }
   ]
 }

@@ -22,7 +22,7 @@
 | 8 | Подборки | ⬜ | 0 / 3 | `bd-b75` |
 | 9 | Рекомендации | 🔒 | 0 / 3 | `bd-ada` |
 | 10 | Админка | ⬜ | 0 / 8 | `bd-i5b` |
-| 11 | PWA и оболочка | 🔄 | 4 / 4 | `bd-6b7` |
+| 11 | PWA и оболочка | ✅ | 4 / 4 | `bd-6b7` |
 
 ---
 
@@ -165,7 +165,7 @@
 | ⬜ | `bd-i5b.7` | Админка: Очередь не сматченного |
 | ⬜ | `bd-i5b.8` | Админка: Журнал аудита |
 
-### 11. PWA и оболочка — 🔄 · epic `bd-6b7` · 4 / 4
+### 11. PWA и оболочка — ✅ · epic `bd-6b7` · 4 / 4
 
 | Статус | ID | Задача |
 |--------|-----|--------|
@@ -180,6 +180,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-23 | Эпик `bd-6b7` closed (4/4): target verify web unit **186** + Playwright pwa-install+offline+app-nav **30/30**; сборочная `feat/bookspace-bd-6b7` — ЗАЛИВАТЬ develop=Нет (push only) |
+| 2026-07-23 | `bd-6b7.3` closed: 5-tab shell + stubs; unit suite 186; Playwright app-nav 12/12; merge → `feat/bookspace-bd-6b7` |
 | 2026-07-23 | `bd-6b7.3` close-prep: 5-tab shell (Главная·Поиск·Рейтинги·Подборки·Профиль); stubs `/rankings` `/collections`; unit app-nav green (suite 186); Playwright app-nav **12/12** desktop+mobile; manual `e2e/manual/app-shell-tab-bar.md`; ветка `task/bd-6b7.3-app-shell-tab-bar`; `bd close` за оркестратором |
 | 2026-07-23 | `bd-6b7.3` в работе: conventions (design/acceptance/notes/labels area:web+sec:pwa+ui+mobile); TDD 5-tab (Главная·Поиск·Рейтинги·Подборки·Профиль); stubs `/rankings` `/collections`; ветка `task/bd-6b7.3-app-shell-tab-bar`; `bd close` за оркестратором |
 | 2026-07-23 | Оркестратор: claim `bd-6b7.3` (5-tab app shell); ветка `task/bd-6b7.3-app-shell-tab-bar` |
