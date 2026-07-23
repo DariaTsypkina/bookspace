@@ -170,7 +170,7 @@
 | Статус | ID | Задача |
 |--------|-----|--------|
 | ✅ | `bd-6b7.1` | PWA: установка |
-| ⬜ | `bd-6b7.2` | PWA: offline shell |
+| 🔄 | `bd-6b7.2` | PWA: offline shell |
 | ⬜ | `bd-6b7.3` | PWA: App shell и tab-bar |
 | ✅ | `bd-6b7.4` | UI: строка меню (Главная · Поиск · Профиль) — MVP-срез |
 
@@ -180,6 +180,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-23 | Оркестратор: claim `bd-6b7.2` (PWA offline shell); ветка `task/bd-6b7.2-pwa-offline-shell` |
 | 2026-07-23 | `bd-6b7.1` closed: PWA manifest+icons 192/512+install helper; unit pwa 8/8 (suite 171); Playwright pwa-install 8/8 desktop+mobile; merge → `feat/bookspace-bd-6b7` |
 | 2026-07-23 | `bd-6b7.1` close-prep: PWA manifest+icons 192/512+metadata/viewport; unit **171**; Playwright pwa-install **8/8** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); manual `e2e/manual/pwa-install.md` (iOS A2HS); ветка `task/bd-6b7.1-pwa-install`; `bd close` за оркестратором |
 | 2026-07-23 | `bd-6b7.1` в работе: conventions (design/acceptance/notes/labels area:web+sec:pwa+mobile); TDD PWA manifest+icons+metadata; sync residual globals.css ← develop; ветка `task/bd-6b7.1-pwa-install` |

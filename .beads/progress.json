@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-23T10:30:08.219Z",
+  "generated_at": "2026-07-23T10:30:25.856Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 92,
-    "open_issues": 40,
-    "in_progress_issues": 0,
+    "open_issues": 39,
+    "in_progress_issues": 1,
     "closed_issues": 52,
     "blocked_issues": 7,
-    "ready_issues": 33
+    "ready_issues": 32
   },
   "epics": [
     {
@@ -17,8 +17,8 @@
       "priority": 3,
       "children_total": 4,
       "children_closed": 2,
-      "children_in_progress": 0,
-      "children_open": 2,
+      "children_in_progress": 1,
+      "children_open": 1,
       "progress": "2 / 4",
       "percent_closed": 50,
       "children": [
@@ -32,7 +32,7 @@
         {
           "id": "bd-6b7.2",
           "title": "PWA: offline shell",
-          "status": "open",
+          "status": "in_progress",
           "type": "feature",
           "priority": 3
         },
@@ -1472,11 +1472,11 @@
     {
       "id": "bd-6b7.2",
       "title": "PWA: offline shell",
-      "status": "open",
+      "status": "in_progress",
       "type": "feature",
       "priority": 3,
       "parent": "bd-6b7",
-      "updated_at": "2026-07-17T12:36:37Z"
+      "updated_at": "2026-07-23T10:30:14Z"
     },
     {
       "id": "bd-6b7.3",
