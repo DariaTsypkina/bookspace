@@ -90,6 +90,7 @@
 | ✅ | `bd-6v0.5` | Каталог: Карточка мира |
 | ✅ | `bd-6v0.6` | Каталог: Карточка локации |
 | 🔄 | `bd-6v0.9` | Поиск: восстановить FTS search_vector после drift Prisma |
+| ⬜ | `bd-6v0.10` | Поиск: префикс `роул` не находит «Роулинг» (human-reported) |
 
 ### 3. Связи и порядок — 🔒 · epic `bd-azl` · 0 / 4
 
@@ -178,6 +179,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-23 | `/task`: создан `bd-6v0.10` — поиск-префикс `роул` → «Роулинг» (catalog-search, эпик `bd-6v0`) |
 | 2026-07-23 | `bd-wus.18` close-prep: root layout → Tailwind (`flex min-h-full flex-1 flex-col` / `pb-[4.25rem] md:pb-0`); legacy `.app-shell`/`.app-content` removed; unit layout-shell 5/5 (suite **160**); Playwright app-nav+home **18/18** desktop+mobile (system Chrome); ветка `task/bd-wus.18-root-layout-tailwind`; `bd close` за оркестратором |
 | 2026-07-23 | Claim `bd-wus.18`: корневой layout `.app-shell`/`.app-content` → Tailwind utilities; ветка `task/bd-wus.18-root-layout-tailwind` |
 | 2026-07-23 | `/task`: создан `bd-wus.18` — корневой layout `.app-shell`/`.app-content` → Tailwind (хвост эпика `bd-wus`) |
