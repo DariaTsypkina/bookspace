@@ -180,6 +180,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-23 | `bd-6b7.1` close-prep: PWA manifest+icons 192/512+metadata/viewport; unit **171**; Playwright pwa-install **8/8** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); manual `e2e/manual/pwa-install.md` (iOS A2HS); ветка `task/bd-6b7.1-pwa-install`; `bd close` за оркестратором |
 | 2026-07-23 | `bd-6b7.1` в работе: conventions (design/acceptance/notes/labels area:web+sec:pwa+mobile); TDD PWA manifest+icons+metadata; sync residual globals.css ← develop; ветка `task/bd-6b7.1-pwa-install` |
 | 2026-07-23 | Оркестратор: batch `feat/bookspace-bd-6b7` — claim `bd-6b7.1` (PWA install); очередь `.1`→`.2`→`.3`; ветка `task/bd-6b7.1-pwa-install`; ЗАЛИВАТЬ develop=Нет |
 | 2026-07-23 | `bd-v3k` closed: канон close — на ветке задачи → commit `.beads` → `--no-ff` в **сборочную** (+ `bd import` страховка); `develop` только §6; обновлены feature-workflow, git-flow, human-intake, agent-dev-flow, rules, skills |

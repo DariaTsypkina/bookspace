@@ -6,6 +6,7 @@ const layoutSource = readFileSync(path.join(__dirname, 'layout.tsx'), 'utf8');
 
 describe('Root layout PWA metadata (bd-6b7.1)', () => {
   it('declares themeColor for install chrome', () => {
+    expect(layoutSource).toMatch(/export const viewport/);
     expect(layoutSource).toMatch(/themeColor/);
   });
 

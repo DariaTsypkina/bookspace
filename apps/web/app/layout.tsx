@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { AppNav } from '../components/app-nav';
 import { designTokens } from '../lib/design-tokens';
 import { pwaManifest } from '../lib/pwa/manifest';
@@ -8,7 +8,6 @@ export const metadata: Metadata = {
   title: pwaManifest.name,
   description: pwaManifest.description,
   manifest: '/manifest.webmanifest',
-  themeColor: pwaManifest.theme_color,
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
@@ -38,6 +37,10 @@ export const metadata: Metadata = {
   other: {
     'msapplication-TileColor': designTokens.background,
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: pwaManifest.theme_color,
 };
 
 export default function RootLayout({
