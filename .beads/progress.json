@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-23T10:42:41.450Z",
+  "generated_at": "2026-07-23T10:43:36.283Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 92,
     "open_issues": 38,
-    "in_progress_issues": 1,
-    "closed_issues": 53,
+    "in_progress_issues": 0,
+    "closed_issues": 54,
     "blocked_issues": 7,
     "ready_issues": 31
   },
@@ -16,11 +16,11 @@
       "status": "open",
       "priority": 3,
       "children_total": 4,
-      "children_closed": 3,
-      "children_in_progress": 1,
+      "children_closed": 4,
+      "children_in_progress": 0,
       "children_open": 0,
-      "progress": "3 / 4",
-      "percent_closed": 75,
+      "progress": "4 / 4",
+      "percent_closed": 100,
       "children": [
         {
           "id": "bd-6b7.1",
@@ -39,7 +39,7 @@
         {
           "id": "bd-6b7.3",
           "title": "PWA: App shell и tab-bar",
-          "status": "in_progress",
+          "status": "closed",
           "type": "feature",
           "priority": 3
         },
@@ -1481,11 +1481,11 @@
     {
       "id": "bd-6b7.3",
       "title": "PWA: App shell и tab-bar",
-      "status": "in_progress",
+      "status": "closed",
       "type": "feature",
       "priority": 3,
       "parent": "bd-6b7",
-      "updated_at": "2026-07-23T10:36:46Z"
+      "updated_at": "2026-07-23T10:43:32Z"
     },
     {
       "id": "bd-6b7.1",
