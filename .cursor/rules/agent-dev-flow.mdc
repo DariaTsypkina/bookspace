@@ -6,7 +6,7 @@ alwaysApply: true
 # Agent dev flow (TDD)
 
 Канон TDD: [docs/tech/agent-dev-flow.md](docs/tech/agent-dev-flow.md).  
-Оркестрация (эпик → plan → review → finish, скипать нельзя): [docs/tech/feature-workflow.md](docs/tech/feature-workflow.md), rule `feature-workflow.mdc`.  
+Оркестрация (эпик → plan → review → close → сборочная → develop, скипать нельзя): [docs/tech/feature-workflow.md](docs/tech/feature-workflow.md), rule `feature-workflow.mdc`.  
 Запросы от человека (доработки, баги): [docs/tech/human-intake-workflow.md](docs/tech/human-intake-workflow.md), rule `human-intake.mdc`.
 
 ## Инварианты
@@ -17,6 +17,7 @@ alwaysApply: true
 - Для каждой feature (`bd`-issue с runtime-изменениями): **1 main subagent на feature** (может иметь child subagents).
 - В issue/PR обязательно фиксировать маппинг `feature (bd-id) -> main subagent`.
 - Handoff обязателен только с тремя полями: тесты/проверки, их результаты, изменённые файлы.
+- **`bd close`:** только оркестратор; на ветке задачи → commit `.beads` → merge `--no-ff` в **сборочную** (+ `bd import` страховка). Не в `develop` ([feature-workflow § Close + merge](docs/tech/feature-workflow.md)).
 - Новые/заменённые зависимости — только после согласования с пользователем ([dependency-approval.mdc](dependency-approval.mdc), agent-dev-flow §2.1).
 
 ## На feature-ветку обязательно
