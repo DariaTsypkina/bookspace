@@ -36,16 +36,16 @@
 
 | Статус | ID | Задача |
 |--------|-----|--------|
-| ⬜ | `bd-wus` | **Эпик DX: Tailwind + shadcn** (ADR 0003 accepted) — см. ниже |
+| ✅ | `bd-wus` | **Эпик DX: Tailwind + shadcn** (ADR 0003 accepted) — см. ниже; хвост `bd-wus.18` |
 | 🔄 | `bd-ky6` | Chore: синхронизировать beads interactions.jsonl |
 | ✅ | `bd-0e6` | Docs: согласование зависимостей агентом |
 | 🔄 | `bd-rtp` | Docs: human intake workflow и /task skill |
 | 🔄 | `bd-nvi` | Scaffold monorepo dev baseline |
 | ✅ | `bd-384` | Session Completion: git push при конце сессии |
 
-### DX — Tailwind + shadcn — 🔄 · epic `bd-wus` · 0 / 17 · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
+### DX — Tailwind + shadcn — ✅ · epic `bd-wus` · 17 / 17 (+ хвост) · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
 
-План: [migration-tailwind-shadcn.md](docs/tech/migration-tailwind-shadcn.md). F1–F2 ✅; N1 ✅; S1–S13 ✅ в сборочной; C1 `bd-wus.17` 🔄 (ветка `task/bd-wus.17-convention`). SpoilerGate мигрирован в S8.
+План: [migration-tailwind-shadcn.md](docs/tech/migration-tailwind-shadcn.md). F1–F2 ✅; N1 ✅; S1–S13 ✅; C1 ✅. Эпик закрыт на сборочной `feat/bookspace-bd-wus`. Хвост: корневой layout shell.
 
 | Статус | ID | Задача |
 |--------|-----|--------|
@@ -65,7 +65,8 @@
 | ✅ | `bd-wus.14` | Экран: Профиль `/u/[slug]` |
 | ✅ | `bd-wus.15` | Экран: Библиотека `/library` |
 | ✅ | `bd-wus.16` | Экран: Admin Context `/admin/context` |
-| 🔄 | `bd-wus.17` | Конвенция: новый UI только на стеке |
+| ✅ | `bd-wus.17` | Конвенция: новый UI только на стеке |
+| ⬜ | `bd-wus.18` | Корневой layout: `.app-shell` / `.app-content` → Tailwind |
 
 ### 1. Auth — ✅ · epic `bd-957` · 6 / 6 (эпик закрыт)
 
@@ -177,6 +178,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-23 | `/task`: создан `bd-wus.18` — корневой layout `.app-shell`/`.app-content` → Tailwind (хвост эпика `bd-wus`) |
 | 2026-07-22 | `bd-wus.17` close-prep: C1 docs/rules — ADR 0003 accepted; `stack-and-architecture` § UI-конвенция + `stack.mdc`/`ui-ru.mdc` запрет legacy CSS для новых экранов; migration C1 ✅; Playwright home+foundation+baseline **18/18** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); docs-only scope; ветка `task/bd-wus.17-convention`; `bd close` за оркестратором |
 | 2026-07-22 | Claim `bd-wus.17`: C1 конвенция docs/rules (ADR 0003 accepted, запрет legacy CSS для новых экранов); ветка `task/bd-wus.17-convention` |
 | 2026-07-22 | `bd-wus.16` close-prep: `/admin/context` + panel → Tailwind+shadcn Card/Button/Input/Label; orphan `.admin-context-*` removed; unit admin-context-page 5/5 (suite **155**); Playwright admin-context **6/6** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.16-admin-context`; `bd close` за оркестратором |
