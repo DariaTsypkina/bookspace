@@ -8,14 +8,14 @@ alwaysApply: true
 Канон: [docs/tech/human-intake-workflow.md](docs/tech/human-intake-workflow.md).  
 **Slash:** `/task` или `/задача` + описание (skill `.cursor/skills/task/SKILL.md`).
 
-Человек описывает задачу → агент **классифицирует** (эпик + feature-doc + тип) → **ставит в план** (`bd create` + `PROJECT-STATUS.md`) → **отдельная ветка** от `develop` → TDD по [agent-dev-flow](docs/tech/agent-dev-flow.md).
+Человек описывает задачу → агент **классифицирует** (эпик + feature-doc + тип) → **ставит в план** (`bd create` + `PROJECT-STATUS.md`) → ветка **`task/bd-<id>-…` от сборочной** → TDD по [agent-dev-flow](docs/tech/agent-dev-flow.md). Close — протокол [feature-workflow § Close + merge](docs/tech/feature-workflow.md) (в сборочную, не в `develop`).
 
 ## Обязательно
 
 1. Определить эпик (`PROJECT-STATUS`, `bd list`) и feature-doc (`docs/features/`).
-2. Тип: `bug` → ветка `fix/bd-<id>/<slug>`; доработка → `feature`/`task` → `feature/bd-<id>/<slug>`.
+2. Тип: `bug` / `feature` / `task` → ветка `task/bd-<id>-<slug>` (или `fix/…`) от сборочной `feat/bookspace-bd-<epic>`.
 3. Если привязка неочевидна — **остановиться**, сообщить человеку варианты и задать вопросы. Без уточнения не создавать issue и не писать код.
-4. Каждый запрос — отдельный bd-issue и отдельная ветка; PR в `develop`.
+4. Каждый запрос — отдельный bd-issue и отдельная ветка; merge задачи → **сборочная**; `develop` — только §6.
 
 ## Не путать с новым эпиком
 

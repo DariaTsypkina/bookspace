@@ -38,7 +38,7 @@
 
 Rules: `.cursor/rules/`. Skills (project-only): `.cursor/skills/`.
 
-Обязательная политика исполнения фич: оркестрация по `docs/tech/feature-workflow.md` (скипать шаги нельзя); для каждого `bd`-issue с runtime-изменениями — `1 feature = 1 main subagent` и handoff (tests / results / changed files) по `docs/tech/agent-dev-flow.md`. **Запросы от человека:** классифицировать по эпику/feature-doc, поставить в план, отдельная ветка от `develop` — `docs/tech/human-intake-workflow.md`. Быстрый ввод: **`/task`** или **`/задача`** + описание в чате. Живой дашборд: `PROJECT-STATUS.md` — обновлять при claim/close/новой задаче.
+Обязательная политика исполнения фич: оркестрация по `docs/tech/feature-workflow.md` (скипать шаги нельзя); для каждого `bd`-issue с runtime-изменениями — `1 feature = 1 main subagent` и handoff (tests / results / changed files) по `docs/tech/agent-dev-flow.md`. **Запросы от человека:** классифицировать по эпику/feature-doc, поставить в план, ветка от сборочной — `docs/tech/human-intake-workflow.md`. Close: на ветке задачи → merge в сборочную (не в `develop`). Быстрый ввод: **`/task`** или **`/задача`** + описание в чате. Живой дашборд: `PROJECT-STATUS.md` — обновлять при claim/close/новой задаче.
 
 <!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:970c3bf2 -->
 

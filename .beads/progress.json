@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-23T09:52:49.928Z",
+  "generated_at": "2026-07-23T10:17:52.244Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 91,
+    "total_issues": 92,
     "open_issues": 41,
     "in_progress_issues": 0,
-    "closed_issues": 50,
+    "closed_issues": 51,
     "blocked_issues": 7,
     "ready_issues": 34
   },
@@ -793,6 +793,15 @@
       "priority": 1,
       "parent": "bd-957",
       "updated_at": "2026-07-20T07:30:07Z"
+    },
+    {
+      "id": "bd-v3k",
+      "title": "Docs: протокол bd close на ветке задачи + merge в сборочную",
+      "status": "closed",
+      "type": "chore",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-23T10:17:38Z"
     },
     {
       "id": "bd-wus.18",

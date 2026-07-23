@@ -18,15 +18,31 @@ TDD-слои: [docs/tech/agent-dev-flow.md](docs/tech/agent-dev-flow.md).
 2. `superpowers:brainstorming` **до кода**
 3. `superpowers:writing-plans`
 4. `bd create` на каждую задачу + `bd dep add` / `--parent=<epic>`
-5. `superpowers:using-git-worktrees` (нетривиальная работа)
+5. `superpowers:using-git-worktrees` (нетривиальная работа); сборочная `feat/bookspace-bd-<epic>`, задачи `task/bd-<id>-<slug>`
 6. `bd ready` → claim → TDD RED→GREEN→REFACTOR (вертикальный срез agent-dev-flow)
 7. `superpowers:requesting-code-review`
 8. `superpowers:receiving-code-review`
 9. `superpowers:verification-before-completion`
-10. `superpowers:finishing-a-development-branch`
-11. `bd close <epic-id> --reason="Done"` когда все дети закрыты
+10. **Оркестратор:** close + merge в **сборочную** (протокол в каноне; **не** в `develop`)
+11. `bd close <epic-id>` на сборочной когда все дети closed
+12. Финал: PR сборочная → `develop` (канон §6)
 
 Эпик — только крупные цели. Дети — `feature` / `task`.
+
+## Close + merge (обязательно)
+
+- **Subagent:** handoff only; **`bd close` запрещён**.
+- **Оркестратор** после handoff, **на ветке задачи**:
+  1. `bd close <id> --reason "…"`, dashboard `✅`
+  2. `bd show` = closed
+  3. `git add .beads PROJECT-STATUS.md && git commit`
+  4. `git checkout <сборочная>`
+  5. `git merge --no-ff task/bd-<id>-…` (`--no-ff` обязателен)
+  6. `bd import .beads/issues.jsonl` + `bd show`; если open — повторить import / `bd close` на сборочной
+  7. commit `.beads` при изменениях
+  8. удалить ветку задачи / worktree
+- **`develop` не участвует** до §6 (PR сборочной).
+- Канон: [feature-workflow § Close + merge](docs/tech/feature-workflow.md).
 
 ## PROJECT-STATUS.md
 
@@ -41,6 +57,7 @@ Run `bd prime` — single source of truth for operational commands and session w
 ## Запреты
 
 - Не начинать prod-код на новом эпике без brainstorm + plan + bd-задач.
-- Не заявлять «готово» без verification (evidence).
-- Не закрывать эпик с открытыми детьми.
+- Не заявлять «готово» без verification (evidence) и без протокола close→сборочная.
+- Не мержить задачу в `develop`; не закрывать эпик с открытыми детьми.
 - Не пропускать обновление `PROJECT-STATUS.md`.
+- Не пропускать Dolt-страховку (`bd import`) после merge в сборочную.

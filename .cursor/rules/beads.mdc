@@ -36,7 +36,7 @@ bd dolt push                          # Sync with the Dolt remote
 
 1. Epic (крупная цель) → brainstorm → plan → children + deps
 2. `bd ready` → claim → TDD (см. agent-dev-flow)
-3. Review → verify → finish branch → close issue; epic close когда дети ✅
+3. Review → verify → **оркестратор:** close на ветке задачи + merge `--no-ff` в сборочную (+ Dolt-страховка); epic close когда дети ✅; `develop` — только §6
 4. Обновлять PROJECT-STATUS.md при claim/close/новой задаче
 5. Sync: `bd dolt push` (по профилю / явной просьбе)
 
