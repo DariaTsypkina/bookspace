@@ -180,6 +180,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-23 | `bd-6b7.2` в работе: conventions (design/acceptance/notes/labels area:web+sec:pwa+mobile); TDD native SW + Cache Storage + `/offline`; unit offline-cache/register; Playwright pwa-offline-shell; manual `e2e/manual/pwa-offline-shell.md`; ветка `task/bd-6b7.2-pwa-offline-shell`; `bd close` за оркестратором |
 | 2026-07-23 | Оркестратор: claim `bd-6b7.2` (PWA offline shell); ветка `task/bd-6b7.2-pwa-offline-shell` |
 | 2026-07-23 | `bd-6b7.1` closed: PWA manifest+icons 192/512+install helper; unit pwa 8/8 (suite 171); Playwright pwa-install 8/8 desktop+mobile; merge → `feat/bookspace-bd-6b7` |
 | 2026-07-23 | `bd-6b7.1` close-prep: PWA manifest+icons 192/512+metadata/viewport; unit **171**; Playwright pwa-install **8/8** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); manual `e2e/manual/pwa-install.md` (iOS A2HS); ветка `task/bd-6b7.1-pwa-install`; `bd close` за оркестратором |
