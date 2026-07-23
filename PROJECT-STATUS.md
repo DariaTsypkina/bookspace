@@ -101,6 +101,7 @@
 | ⬜ | `bd-azl.2` | Связи произведений |
 | ⬜ | `bd-azl.3` | Связи: Порядок чтения |
 | ⬜ | `bd-azl.4` | Связи: Spoiler gate |
+| ⬜ | `bd-azl.5` | Bug: iOS Chrome — «Показать» не снимает spoiler gate (human-reported) |
 
 ### 4. ContextReading — ✅ · epic `bd-8s4` · 4 / 4 (эпик закрыт)
 
@@ -120,6 +121,7 @@
 | ⬜ | `bd-cq7.3` | Библиотека: Теги пользователя |
 | ⬜ | `bd-cq7.4` | Библиотека: Моя библиотека |
 | ⬜ | `bd-cq7.5` | Библиотека: Публичный профиль |
+| ⬜ | `bd-cq7.6` | Bug: iOS Chrome — пустая страница Профиль `/library` (human-reported) |
 
 ### 6. Заметки и цель — 🔒 · epic `bd-sf4` · 0 / 2
 
@@ -180,6 +182,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-23 | `/task`: `bd-azl.5` — iOS Chrome spoiler «Показать» не снимает gate; `bd-cq7.6` — iOS Chrome пустой Профиль `/library` (iPhone 17, human-reported) |
 | 2026-07-23 | Эпик `bd-6b7` closed (4/4): target verify web unit **186** + Playwright pwa-install+offline+app-nav **30/30**; сборочная `feat/bookspace-bd-6b7` — ЗАЛИВАТЬ develop=Нет (push only) |
 | 2026-07-23 | `bd-6b7.3` closed: 5-tab shell + stubs; unit suite 186; Playwright app-nav 12/12; merge → `feat/bookspace-bd-6b7` |
 | 2026-07-23 | `bd-6b7.3` close-prep: 5-tab shell (Главная·Поиск·Рейтинги·Подборки·Профиль); stubs `/rankings` `/collections`; unit app-nav green (suite 186); Playwright app-nav **12/12** desktop+mobile; manual `e2e/manual/app-shell-tab-bar.md`; ветка `task/bd-6b7.3-app-shell-tab-bar`; `bd close` за оркестратором |
