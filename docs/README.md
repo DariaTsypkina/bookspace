@@ -29,6 +29,7 @@
 - [Процесс разработки для агентов (TDD + browser)](tech/agent-dev-flow.md)
 - [Feature workflow (эпик → plan → review → finish)](tech/feature-workflow.md)
 - [Запросы от человека (доработки, баги)](tech/human-intake-workflow.md)
+- [Миграция Tailwind + shadcn](tech/migration-tailwind-shadcn.md)
 - [Beads conventions (validation / lint)](../.cursor/rules/bd-conventions.mdc)
 - [PROJECT-STATUS (дашборд)](../PROJECT-STATUS.md)
 
@@ -42,3 +43,4 @@
 - [Как писать ADR](adr/README.md)
 - [0001 — Стек MVP](adr/0001-stack-mvp.md)
 - [0002 — Агрегация рейтингов](adr/0002-rankings-aggregation.md)
+- [0003 — Tailwind + shadcn](adr/0003-tailwind-shadcn.md) (**accepted**)

@@ -14,15 +14,15 @@
 | 0 | Bootstrap (monorepo, docker, CI) | ✅ | — | — |
 | 1 | Auth | ✅ | 6 / 6 | `bd-957` |
 | 2 | Каталог | ✅ | 6 / 6 | `bd-6v0` |
-| 3 | Связи и порядок | 🔒 | 0 / 4 | `bd-azl` |
-| 4 | ContextReading | 🔄 | 4 / 4 | `bd-8s4` |
-| 5 | Библиотека и профиль | 🔒 | 0 / 5 | `bd-cq7` |
+| 3 | Связи и порядок | ⬜ | 0 / 4 | `bd-azl` |
+| 4 | ContextReading | ✅ | 4 / 4 | `bd-8s4` |
+| 5 | Библиотека и профиль | ⬜ | 0 / 5 | `bd-cq7` |
 | 6 | Заметки и цель | 🔒 | 0 / 2 | `bd-sf4` |
-| 7 | Рейтинги | 🔒 | 0 / 3 | `bd-es5` |
-| 8 | Подборки | 🔒 | 0 / 3 | `bd-b75` |
+| 7 | Рейтинги | ⬜ | 0 / 3 | `bd-es5` |
+| 8 | Подборки | ⬜ | 0 / 3 | `bd-b75` |
 | 9 | Рекомендации | 🔒 | 0 / 3 | `bd-ada` |
-| 10 | Админка | 🔒 | 0 / 8 | `bd-i5b` |
-| 11 | PWA и оболочка | 🔄 | 0 / 4 | `bd-6b7` |
+| 10 | Админка | ⬜ | 0 / 8 | `bd-i5b` |
+| 11 | PWA и оболочка | 🔄 | 1 / 4 | `bd-6b7` |
 
 ---
 
@@ -36,11 +36,38 @@
 
 | Статус | ID | Задача |
 |--------|-----|--------|
-| 🔄 | `bd-ky6` | Chore: синхронизировать beads interactions.jsonl |
+| ✅ | `bd-wus` | **Эпик DX: Tailwind + shadcn** (ADR 0003 accepted) — 18 / 18 |
+| ✅ | `bd-ky6` | Chore: синхронизировать beads interactions.jsonl |
 | ✅ | `bd-0e6` | Docs: согласование зависимостей агентом |
-| 🔄 | `bd-rtp` | Docs: human intake workflow и /task skill |
-| 🔄 | `bd-nvi` | Scaffold monorepo dev baseline |
+| ✅ | `bd-rtp` | Docs: human intake workflow и /task skill |
+| ✅ | `bd-nvi` | Scaffold monorepo dev baseline |
 | ✅ | `bd-384` | Session Completion: git push при конце сессии |
+| ✅ | `bd-v3k` | Docs: протокол `bd close` на ветке задачи + merge в сборочную |
+
+### DX — Tailwind + shadcn — ✅ · epic `bd-wus` · 18 / 18 · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
+
+План: [migration-tailwind-shadcn.md](docs/tech/migration-tailwind-shadcn.md). F1–F2 ✅; N1 ✅; S1–S13 ✅; C1 ✅; корневой layout shell ✅. Эпик закрыт.
+
+| Статус | ID | Задача |
+|--------|-----|--------|
+| ✅ | `bd-wus.1` | Foundation: Tailwind + design tokens |
+| ✅ | `bd-wus.2` | Foundation: shadcn baseline + Lucide |
+| ✅ | `bd-wus.3` | Миграция app-nav (tab-bar) |
+| ✅ | `bd-wus.4` | Экран: Главная `/` |
+| ✅ | `bd-wus.5` | Экран: Вход `/login` |
+| ✅ | `bd-wus.6` | Экран: Регистрация `/register` |
+| ✅ | `bd-wus.7` | Экран: Auth error `/auth/error` |
+| ✅ | `bd-wus.8` | Экран: Поиск `/search` |
+| ✅ | `bd-wus.9` | Экран: Книга `/books/[slug]` |
+| ✅ | `bd-wus.10` | Экран: Автор `/authors/[slug]` |
+| ✅ | `bd-wus.11` | Экран: Персонаж `/characters/[slug]` |
+| ✅ | `bd-wus.12` | Экран: Мир `/worlds/[slug]` |
+| ✅ | `bd-wus.13` | Экран: Локация `/places/[slug]` |
+| ✅ | `bd-wus.14` | Экран: Профиль `/u/[slug]` |
+| ✅ | `bd-wus.15` | Экран: Библиотека `/library` |
+| ✅ | `bd-wus.16` | Экран: Admin Context `/admin/context` |
+| ✅ | `bd-wus.17` | Конвенция: новый UI только на стеке |
+| ✅ | `bd-wus.18` | Корневой layout: `.app-shell` / `.app-content` → Tailwind |
 
 ### 1. Auth — ✅ · epic `bd-957` · 6 / 6 (эпик закрыт)
 
@@ -63,9 +90,10 @@
 | ✅ | `bd-6v0.4` | Каталог: Карточка персонажа |
 | ✅ | `bd-6v0.5` | Каталог: Карточка мира |
 | ✅ | `bd-6v0.6` | Каталог: Карточка локации |
-| 🔄 | `bd-6v0.9` | Поиск: восстановить FTS search_vector после drift Prisma |
+| ✅ | `bd-6v0.9` | Поиск: восстановить FTS search_vector после drift Prisma |
+| ⬜ | `bd-6v0.10` | Поиск: префикс `роул` не находит «Роулинг» (human-reported) |
 
-### 3. Связи и порядок — 🔒 · epic `bd-azl` · 0 / 4
+### 3. Связи и порядок — ⬜ · epic `bd-azl` · 0 / 4
 
 | Статус | ID | Задача |
 |--------|-----|--------|
@@ -74,7 +102,7 @@
 | ⬜ | `bd-azl.3` | Связи: Порядок чтения |
 | ⬜ | `bd-azl.4` | Связи: Spoiler gate |
 
-### 4. ContextReading — 🔄 · epic `bd-8s4` · 4 / 4
+### 4. ContextReading — ✅ · epic `bd-8s4` · 4 / 4 (эпик закрыт)
 
 | Статус | ID | Задача |
 |--------|-----|--------|
@@ -83,7 +111,7 @@
 | ✅ | `bd-8s4.3` | ContextReading: Пайплайн extract ContextReading |
 | ✅ | `bd-8s4.4` | ContextReading: Админка ContextReading |
 
-### 5. Библиотека и профиль — 🔒 · epic `bd-cq7` · 0 / 5
+### 5. Библиотека и профиль — ⬜ · epic `bd-cq7` · 0 / 5
 
 | Статус | ID | Задача |
 |--------|-----|--------|
@@ -100,7 +128,7 @@
 | ⬜ | `bd-sf4.1` | Заметки и цитаты |
 | ⬜ | `bd-sf4.2` | Заметки: Цель чтения на год |
 
-### 7. Рейтинги — 🔒 · epic `bd-es5` · 0 / 3
+### 7. Рейтинги — ⬜ · epic `bd-es5` · 0 / 3
 
 | Статус | ID | Задача |
 |--------|-----|--------|
@@ -108,7 +136,7 @@
 | ⬜ | `bd-es5.2` | Рейтинги: Импорт внешних рейтингов |
 | ⬜ | `bd-es5.3` | Рейтинги: Агрегация и автопубликация рейтингов |
 
-### 8. Подборки — 🔒 · epic `bd-b75` · 0 / 3
+### 8. Подборки — ⬜ · epic `bd-b75` · 0 / 3
 
 | Статус | ID | Задача |
 |--------|-----|--------|
@@ -124,7 +152,7 @@
 | ⬜ | `bd-ada.2` | Рекомендации на главной |
 | ⬜ | `bd-ada.3` | Рекомендации: Эвристики рекомендаций |
 
-### 10. Админка — 🔒 · epic `bd-i5b` · 0 / 8
+### 10. Админка — ⬜ · epic `bd-i5b` · 0 / 8
 
 | Статус | ID | Задача |
 |--------|-----|--------|
@@ -137,14 +165,14 @@
 | ⬜ | `bd-i5b.7` | Админка: Очередь не сматченного |
 | ⬜ | `bd-i5b.8` | Админка: Журнал аудита |
 
-### 11. PWA и оболочка — 🔄 · epic `bd-6b7` · 0 / 4
+### 11. PWA и оболочка — 🔄 · epic `bd-6b7` · 1 / 4
 
 | Статус | ID | Задача |
 |--------|-----|--------|
 | ⬜ | `bd-6b7.1` | PWA: установка |
 | ⬜ | `bd-6b7.2` | PWA: offline shell |
 | ⬜ | `bd-6b7.3` | PWA: App shell и tab-bar |
-| 🔄 | `bd-6b7.4` | UI: строка меню (Главная · Поиск · Профиль) — human-reported, вариант B · ветка `task/bd-6b7.4-nav-menu` |
+| ✅ | `bd-6b7.4` | UI: строка меню (Главная · Поиск · Профиль) — MVP-срез |
 
 ---
 
@@ -152,6 +180,48 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-23 | `bd-v3k` closed: канон close — на ветке задачи → commit `.beads` → `--no-ff` в **сборочную** (+ `bd import` страховка); `develop` только §6; обновлены feature-workflow, git-flow, human-intake, agent-dev-flow, rules, skills |
+| 2026-07-23 | Housekeeping: закрыт эпик `bd-8s4` ContextReading (4/4); дашборд синхронизирован с bd (`bd-wus.18`, `bd-6b7.4`, `bd-6v0.9`, `bd-ky6`/`bd-rtp`/`bd-nvi` → ✅; фазы 3/5/7/8/10 → ⬜) |
+| 2026-07-23 | `/task`: создан `bd-6v0.10` — поиск-префикс `роул` → «Роулинг» (catalog-search, эпик `bd-6v0`) |
+| 2026-07-23 | `bd-wus.18` close-prep: root layout → Tailwind (`flex min-h-full flex-1 flex-col` / `pb-[4.25rem] md:pb-0`); legacy `.app-shell`/`.app-content` removed; unit layout-shell 5/5 (suite **160**); Playwright app-nav+home **18/18** desktop+mobile (system Chrome); ветка `task/bd-wus.18-root-layout-tailwind`; `bd close` за оркестратором |
+| 2026-07-23 | Claim `bd-wus.18`: корневой layout `.app-shell`/`.app-content` → Tailwind utilities; ветка `task/bd-wus.18-root-layout-tailwind` |
+| 2026-07-23 | `/task`: создан `bd-wus.18` — корневой layout `.app-shell`/`.app-content` → Tailwind (хвост эпика `bd-wus`) |
+| 2026-07-22 | `bd-wus.17` close-prep: C1 docs/rules — ADR 0003 accepted; `stack-and-architecture` § UI-конвенция + `stack.mdc`/`ui-ru.mdc` запрет legacy CSS для новых экранов; migration C1 ✅; Playwright home+foundation+baseline **18/18** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); docs-only scope; ветка `task/bd-wus.17-convention`; `bd close` за оркестратором |
+| 2026-07-22 | Claim `bd-wus.17`: C1 конвенция docs/rules (ADR 0003 accepted, запрет legacy CSS для новых экранов); ветка `task/bd-wus.17-convention` |
+| 2026-07-22 | `bd-wus.16` close-prep: `/admin/context` + panel → Tailwind+shadcn Card/Button/Input/Label; orphan `.admin-context-*` removed; unit admin-context-page 5/5 (suite **155**); Playwright admin-context **6/6** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.16-admin-context`; `bd close` за оркестратором |
+| 2026-07-22 | Claim `bd-wus.16`: S13 `/admin/context` + panel → Tailwind+shadcn; admin-only/API без регрессии; ветка `task/bd-wus.16-admin-context` |
+| 2026-07-22 | `bd-wus.15` close-prep: `/library` stub → Tailwind+shadcn Card; orphan `.library-stub` removed; unit library 5/5 (suite **150**); Playwright library-page **6/6** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.15-library`; `bd close` за оркестратором |
+| 2026-07-22 | Claim `bd-wus.15`: S12 `/library` stub → Tailwind+shadcn Card; guest/user без регрессии; ветка `task/bd-wus.15-library` |
+| 2026-07-22 | `bd-wus.14` close-prep: `/u/[slug]` + LogoutButton → Tailwind+shadcn Card/Button; orphan `.profile-stub`/`.logout-button` отсутствуют в globals (assert); unit profile 5/5 (suite **145**); Playwright profile+auth-redirect+auth-pages+session **18/18** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.14-profile`; `bd close` за оркестратором |
+| 2026-07-22 | Claim `bd-wus.14`: S11 `/u/[slug]` + LogoutButton → Tailwind+shadcn; auth redirect UX без регрессии; ветка `task/bd-wus.14-profile` |
+| 2026-07-22 | `bd-wus.13` close-prep: `/places/[slug]` + not-found → Tailwind+shadcn Card; orphan `.place-*` отсутствуют в globals (assert); unit places 6/6 (suite **140**); Playwright place-page **8/8** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.13-places`; `bd close` за оркестратором |
+| 2026-07-22 | Claim `bd-wus.13`: S10 `/places/[slug]` + not-found → Tailwind+shadcn; ветка `task/bd-wus.13-places` |
+| 2026-07-22 | `bd-wus.12` close-prep: `/worlds/[slug]` + not-found → Tailwind+shadcn Card; orphan `.world-*` отсутствуют в globals (assert); unit worlds 6/6 (suite **134**); Playwright world-page **8/8** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.12-worlds`; `bd close` за оркестратором |
+| 2026-07-22 | Claim `bd-wus.12`: S9 `/worlds/[slug]` + not-found → Tailwind+shadcn; ветка `task/bd-wus.12-worlds` |
+| 2026-07-22 | `bd-wus.11` close-prep: `/characters/[slug]` + SpoilerGate → Tailwind+shadcn Card/Button; orphan `.character-*`/`.spoiler-gate*` removed; unit characters+spoiler green; Playwright character-page **12/12** desktop+mobile; ветка `task/bd-wus.11-characters`; `bd close` за оркестратором |
+| 2026-07-22 | `bd-wus.10` close-prep: `/authors/[slug]` + not-found → Tailwind+shadcn Card; orphan `.author-*` removed; unit authors 6/6 (suite **120**); Playwright author-page **8/8** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.10-authors`; `bd close` за оркестратором |
+| 2026-07-22 | Claim `bd-wus.10`: S7 `/authors/[slug]` + not-found → Tailwind+shadcn; orphan `.author-*`; ветка `task/bd-wus.10-authors` |
+| 2026-07-22 | `bd-wus.9` close-prep: `/books/[slug]` + WorkContextReadingSection → Tailwind+shadcn Card; orphan `.work-*`/`.edition-*` removed; SpoilerGate вне scope (S8); unit **114**; Playwright work+context+character (spoiler) **22/22** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.9-books`; `bd close` за оркестратором |
+| 2026-07-22 | Claim `bd-wus.9`: S6 `/books/[slug]` + WorkContextReadingSection → Tailwind+shadcn; orphan `.work-*`/`.edition-*`; SpoilerGate вне scope (character S8); ветка `task/bd-wus.9-books` |
+| 2026-07-22 | `bd-wus.7` close-prep: `/auth/error` → Tailwind+shadcn Card/Button; orphan shared `.auth-*` вычищены из globals; e2e alerts → `main [role=alert]`; unit **101**; Playwright auth-error+oauth smoke+auth-pages **16/16** desktop+mobile; ветка `task/bd-wus.7-auth-error`; `bd close` за оркестратором |
+| 2026-07-22 | Claim `bd-wus.7`: conventions (design/acceptance/notes); TDD RED→GREEN миграция `/auth/error` + вычистка orphan `.auth-*` из globals; ветка `task/bd-wus.7-auth-error` |
+| 2026-07-22 | `bd-wus.6` close-prep: `/register` → Tailwind+shadcn Card/Input/Label/Button; legacy classes сняты с экрана (shared `.auth-*` оставлены для `/auth/error`); e2e alerts → `main [role=alert]`; unit **96**; Playwright register+auth-pages+email **20/20** desktop+mobile; ветка `task/bd-wus.6-register`; `bd close` за оркестратором |
+| 2026-07-22 | Claim `bd-wus.6`: conventions (design/acceptance/notes); TDD RED→GREEN миграция `/register`; ветка `task/bd-wus.6-register` |
+| 2026-07-22 | `bd-wus.5` close-prep: `/login` → Tailwind+shadcn Card/Input/Label/Button; legacy classes сняты с экрана (shared `.auth-*` оставлены для register/error); unit **92**; Playwright login+auth-pages **12/12** desktop+mobile; ветка `task/bd-wus.5-login`; `bd close` за оркестратором |
+| 2026-07-22 | Claim `bd-wus.5`: conventions (design/acceptance/notes/labels area:web+sec:ui+dx); TDD RED→GREEN миграция `/login`; ветка `task/bd-wus.5-login` |
+| 2026-07-22 | `bd-wus.4` close-prep: `/` → Tailwind+shadcn Card; legacy `.home-page` removed; unit **88**; Playwright home (+foundation+baseline) **18/18** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.4-home`; `bd close` за оркестратором |
+| 2026-07-22 | Claim `bd-wus.4`: conventions (design/acceptance/notes/labels area:web+sec:ui+dx); TDD RED→GREEN миграция `/`; ветка `task/bd-wus.4-home` |
+| 2026-07-22 | `bd-wus.3` close-prep: app-nav → Tailwind+shadcn Button+Lucide; legacy `.app-nav*` removed; unit 83; Playwright app-nav **10/10** (desktop+mobile, PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.3-app-nav`; `bd close` за оркестратором |
+| 2026-07-22 | Claim `bd-wus.3`: conventions (design/acceptance/notes/labels area:web+sec:ui+dx); TDD RED→GREEN миграция app-nav; ветка `task/bd-wus.3-app-nav` |
+| 2026-07-22 | `bd-wus.8` close-prep: `/search` + catalog-search-form → Tailwind+shadcn; legacy `.search-*` removed; unit search 6/6; Playwright catalog-search **8/8** (desktop+mobile, PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.8-search`; `bd close` за оркестратором |
+| 2026-07-22 | Claim `bd-wus.8`: S5 `/search` + catalog-search-form → Tailwind+shadcn; ветка `task/bd-wus.8-search` |
+| 2026-07-22 | `bd-wus.2` close-prep: shadcn baseline (cn/cva + Button/Input/Label/Card + lucide); unit 78; build/lint ok; Playwright baseline+foundation **12/12** (desktop+mobile, PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.2-shadcn-baseline`; `bd close` за оркестратором |
+| 2026-07-22 | Claim `bd-wus.2`: conventions (design/acceptance/notes/labels area:web+sec:ui+dx); TDD RED cn/Button + smoke; ветка `task/bd-wus.2-shadcn-baseline` |
+| 2026-07-22 | `bd-wus.1` close-prep: Tailwind v3+PostCSS+tokens; unit 68; build/lint ok; Playwright foundation+auth-pages+app-nav **20/20** (desktop+mobile, PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-wus.1-tailwind-foundation`; `bd close` за оркестратором |
+| 2026-07-22 | Claim `bd-wus.1`: conventions (design/acceptance/notes/labels area:web+sec:ui); TDD RED unit+smoke; ветка `task/bd-wus.1-tailwind-foundation` |
+| 2026-07-22 | ADR 0003 **accepted**; обновлены `stack.mdc`, `ui-ru.mdc`, `stack-and-architecture.md`; эпик `bd-wus` готов к `bd-wus.1` |
+| 2026-07-22 | Трек UI: правки docs/beads — убраны посторонние «out of scope» (не про UI); повторное согласование ADR 0003 + `bd-wus` |
+| 2026-07-22 | Трек UI: ADR 0003 **proposed**, план `docs/tech/migration-tailwind-shadcn.md`, эпик `bd-wus` + 17 детей (foundation, nav, экраны) — на согласование человека; код не стартовать до accept |
 | 2026-07-22 | `bd-6b7.4` close-prep: меню реализовано (unit 60, Playwright app-nav 8/8 desktop+mobile); коммиты `7213400`, `0eb74aa`; ветка `task/bd-6b7.4-nav-menu`; `bd close` за оркестратором |
 | 2026-07-22 | `bd-6b7.4` в работе: conventions (design/acceptance/notes/labels), TDD app-nav (unit+Playwright), stub `/library`; ветка `task/bd-6b7.4-nav-menu` |
 | 2026-07-22 | `/task`: создан `bd-6b7.4` — строка меню (вариант B: Главная · Поиск · Профиль; user → `/library`; admin вне меню) |

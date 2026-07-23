@@ -140,7 +140,7 @@ docker-compose.yml            # postgres, redis (dev infra)
 
 - **Feature-docs** (`docs/features/*`): критерии приёмки (продукт). Не заменяют автотесты. Ручной чеклист живёт рядом с e2e, не в feature-doc.
 - **Git-flow rule:** push только на зелёных тестах; этот документ уточняет *какие* тесты и TDD-порядок.
-- **Beads:** claim → работа → close после merge; в описании issue можно ссылать на чеклист/тесты.
+- **Beads:** claim → работа (сабагент) → handoff → оркестратор: `bd close` на ветке задачи → merge `--no-ff` в сборочную (+ `bd import`); `develop` только в финале эпика.
 - **Product mvp-spec:** не дублировать процесс; процесс не расширяет MVP scope.
 
 ## Содержимое `.cursor/rules/agent-dev-flow.mdc` (черновик смысла)

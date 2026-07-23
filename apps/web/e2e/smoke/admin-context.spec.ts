@@ -24,7 +24,9 @@ async function loginAsAdmin(page: import('@playwright/test').Page) {
 }
 
 test.describe('Admin context smoke', () => {
-  test('admin sees context queue page', async ({ page }) => {
+  test('admin sees context queue page on Tailwind+shadcn stack', async ({
+    page,
+  }) => {
     await loginAsAdmin(page);
     await page.goto('/admin/context');
     await expect(
@@ -33,6 +35,11 @@ test.describe('Admin context smoke', () => {
     await expect(
       page.getByText('Очередь недавних auto-published записей'),
     ).toBeVisible();
+    // Stack signal: shadcn Button (accent) and Card (surface/border) utilities
+    const saveOrEmpty = page
+      .getByRole('button', { name: 'Сохранить' })
+      .or(page.getByText('Нет свежих auto-published записей'));
+    await expect(saveOrEmpty.first()).toBeVisible();
   });
 
   test('admin can edit and unpublish a recent reading', async ({ page }) => {

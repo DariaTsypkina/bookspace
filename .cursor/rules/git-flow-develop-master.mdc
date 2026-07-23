@@ -1,41 +1,43 @@
 ---
-description: Git flow develop/master — ветки, PR, коммиты с bd
+description: Git flow develop/master + сборочная эпика — ветки, PR, коммиты с bd
 alwaysApply: true
 ---
 
-# Git Flow (develop / master)
+# Git Flow (develop / master / сборочная)
 
 ## Ветки
 
 | Ветка | Назначение |
 |-------|------------|
 | `master` | Продакшен, только release/hotfix |
-| `develop` | Интеграция, база для feature |
-| `feature/bd-<id>/<slug>` | Задачи и фичи |
-| `fix/bd-<id>/<slug>` | Исправление багов |
-| `release/*` | Подготовка релиза (develop → master) |
+| `develop` | Интеграция; трогается **только** в финале эпика (PR сборочной → `develop`) |
+| `feat/bookspace-bd-<epic-id>` | **Сборочная** эпика (от `develop`). Сюда `--no-ff` merge веток задач |
+| `task/bd-<id>-<slug>` | Одна задача (от сборочной). Здесь код и `bd close` |
+| `feature/bd-<id>/<slug>` / `fix/bd-<id>/<slug>` | Допустимые алиасы одиночных веток; close/merge — тот же протокол |
+| `release/*` | Подготовка релиза (`develop` → `master`) |
 | `hotfix/*` | Срочные исправления в проде (от `master`) |
 
-## Именование веток
+## Именование
 
 ```
-feature/bd-123/add-auth
-fix/bd-456/update-auth
+feat/bookspace-bd-wus
+task/bd-wus.18-root-layout-tailwind
 ```
 
 - `bd-<id>` — id issue в Beads
 - `<slug>` — короткий kebab-case на английском
 
-## Workflow
+## Workflow эпика
 
-1. **Feature**: `git checkout develop` → `git checkout -b feature/bd-123/add-auth` (для нетривиальной работы — worktree, см. [feature-workflow](docs/tech/feature-workflow.md))
-2. **Fix**: `git checkout develop` → `git checkout -b fix/bd-456/update-auth`
-3. Работа, коммиты; перед push — **все тесты зелёные**
-4. Push feature/fix-ветки → **PR → `develop`** (не в `master`)
-5. **Release**: `release/x.y.z` от `develop` → PR в `master` + back-merge в `develop`
-6. **Hotfix**: `hotfix/x.y.z` от `master` → PR в `master` + back-merge в `develop`
+1. Сборочная: `git checkout develop` → `git checkout -b feat/bookspace-bd-<epic>`
+2. Задача: от сборочной → `task/bd-<id>-<slug>` (worktree — по [feature-workflow](docs/tech/feature-workflow.md))
+3. Работа, коммиты; перед handoff — **все тесты фичи зелёные**
+4. **Close + merge в сборочную** — строго протокол в [feature-workflow § Close + merge](../../docs/tech/feature-workflow.md) (`bd close` на ветке задачи → commit `.beads` → `git merge --no-ff` → Dolt-страховка). **Не** в `develop`
+5. Когда эпик готов: **PR сборочная → `develop`** ([§6](../../docs/tech/feature-workflow.md#6-финал-сборочная--develop))
+6. **Release**: `release/x.y.z` от `develop` → PR в `master` + back-merge в `develop`
+7. **Hotfix**: `hotfix/x.y.z` от `master` → PR в `master` + back-merge в `develop`
 
-Merge: **merge commit** (`--no-ff`), не squash и не rebase в shared-ветки.
+Merge в shared-ветки: **merge commit** (`--no-ff`), не squash и не rebase. Fast-forward задачи в сборочную **запрещён**.
 
 ## Commit message
 
@@ -44,7 +46,7 @@ Conventional Commits, описание на русском, ссылка на bd
 ```
 feat: bd-123 добавить авторизацию через Google
 fix: bd-456 исправить падение поиска при пустом запросе
-chore: bd-789 обновить зависимости api
+chore: bd-789 close + dashboard
 ```
 
 Типы: `feat`, `fix`, `chore`, `docs`, `refactor`, `test`.
@@ -52,13 +54,15 @@ chore: bd-789 обновить зависимости api
 ## Ограничения для агента
 
 - **Не пушить** напрямую в `develop` и `master`
-- **Не пушить** feature/fix-ветку, пока хотя бы один тест красный — только когда все тесты зелёные
+- **Не мержить** ветку задачи в `develop` (только в сборочную)
+- **Не пушить** task-ветку, пока хотя бы один тест фичи красный
 - **Не делать** force push (особенно в `develop`/`master`)
 - **Не мержить** `develop`/`master` локально — только через PR
-- Feature/fix-ветки создавать от **`develop`**, не от `master`
+- Сборочную создавать от **`develop`**; задачи — от **сборочной**
 
 ## Связь с Beads
 
 - Перед работой: `bd update <id> --claim`
-- Ветка и коммиты ссылаются на bd-id (`feature/bd-123/add-auth`, `feat: bd-123 …`)
-- После merge: `bd close <id>`, в конце сессии `bd dolt push`
+- Ветка и коммиты ссылаются на bd-id (`task/bd-123-…`, `feat: bd-123 …`)
+- Close: **оркестратор** на ветке задачи по протоколу [feature-workflow § Close + merge](../../docs/tech/feature-workflow.md); implementing-сабагент `bd close` не вызывает
+- `bd dolt push` — в конце сессии по профилю / явной просьбе (conservative: только с ok)

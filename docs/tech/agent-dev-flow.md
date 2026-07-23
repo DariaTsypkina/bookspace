@@ -7,7 +7,7 @@
 Единый обязательный процесс **TDD + browser** для Cursor-агентов и разработчиков: любая feature/fix-работа с изменением runtime-поведения закрывается тестами (сначала red) и проверкой UI там, где есть UI.
 
 Этот документ — **источник правды по TDD-слоям, стенду и browser**.  
-Порядок шагов эпика (brainstorm → plan → worktree → review → finish) и запрет пропуска — в **[feature-workflow.md](feature-workflow.md)**; rule `.cursor/rules/feature-workflow.mdc`.
+Порядок шагов эпика (brainstorm → plan → worktree → review → close → сборочная → `develop`) и запрет пропуска — в **[feature-workflow.md](feature-workflow.md)**; rule `.cursor/rules/feature-workflow.mdc`.
 
 Cursor rule `.cursor/rules/agent-dev-flow.mdc` дублирует только инварианты TDD и ссылается сюда.
 
@@ -25,6 +25,7 @@ Cursor rule `.cursor/rules/agent-dev-flow.mdc` дублирует только �
   - список запущенных тестов/проверок;
   - результат по каждой проверке (pass/fail + краткий статус);
   - список изменённых файлов.
+- **`bd close`:** main feature subagent **не** закрывает issue. После handoff **оркестратор** выполняет протокол close на ветке задачи → merge в **сборочную** ([feature-workflow § Close + merge](feature-workflow.md#close--merge-в-сборочную)).
 
 ## 2. Инварианты TDD
 
@@ -102,7 +103,7 @@ UI-проверку **не начинать**, пока стенд не гото
 
 Вызывается **после** claim в [feature-workflow](feature-workflow.md) (шаг Implement). Не заменяет brainstorm/plan/ревью на уровне эпика.
 
-1. `bd update <id> --claim`; ветка `feature/bd-<id>/<slug>` от `develop` (см. git-flow); worktree — по feature-workflow.
+1. `bd update <id> --claim`; ветка `task/bd-<id>-<slug>` от **сборочной** эпика (см. git-flow / feature-workflow); worktree — по feature-workflow.
 2. Red **backend unit** → код → green → commit.
 3. Red **API/integration** → код → green → commit.
 4. Если UI: red **FE unit** → код → green → commit.
@@ -147,9 +148,9 @@ npm-скрипты (`test`, `test:e2e`, `test:smoke`) фиксируются п�
 
 ## 9. Связь с другими docs
 
-- **Feature-workflow:** оркестрация эпик → brainstorm → plan → children → worktree → review → verify → finish → close epic; [PROJECT-STATUS.md](../../PROJECT-STATUS.md).
+- **Feature-workflow:** оркестрация эпик → brainstorm → plan → children → worktree → review → verify → close + merge в сборочную → close epic → §6 PR в `develop`; [PROJECT-STATUS.md](../../PROJECT-STATUS.md).
 - **Feature-docs** (`docs/features/*`): продуктовые критерии приёмки. Не заменяют автотесты. Ручной чеклист — рядом с e2e, не в feature-doc.
 - **Git-flow:** push только на зелёных; этот документ уточняет какие тесты и порядок TDD.
-- **Beads:** claim → работа → close после merge; эпик закрывать только когда все дети закрыты.
-- **Human intake:** доработки и баги от человека — [human-intake-workflow](human-intake-workflow.md) (классификация, план, ветка от `develop`).
+- **Beads:** claim → работа (сабагент) → handoff → **оркестратор** `bd close` на ветке задачи → commit `.beads` → merge `--no-ff` в сборочную (+ `bd import` страховка). Не в `develop`. Эпик — только когда все дети закрыты. Детали: [feature-workflow § Close + merge](feature-workflow.md#close--merge-в-сборочную).
+- **Human intake:** доработки и баги от человека — [human-intake-workflow](human-intake-workflow.md) (классификация, план, ветка от сборочной).
 - **Product mvp-spec:** процесс не расширяет MVP scope и не дублирует продуктовую спеку.

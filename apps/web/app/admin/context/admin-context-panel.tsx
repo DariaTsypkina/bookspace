@@ -2,6 +2,10 @@
 
 import Link from 'next/link';
 import { FormEvent, useCallback, useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
   classifyContextForWork,
   extractContextForWork,
@@ -12,6 +16,13 @@ import {
   unpublishContextReading,
   type AdminContextReadingItem,
 } from '@/lib/admin-context';
+import { cn } from '@/lib/utils';
+
+const textareaClassName = cn(
+  'flex min-h-[4.5rem] w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-foreground shadow-sm transition-colors',
+  'placeholder:text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2',
+  'disabled:cursor-not-allowed disabled:opacity-50',
+);
 
 export function AdminContextPanel() {
   const [items, setItems] = useState<AdminContextReadingItem[]>([]);
@@ -147,136 +158,172 @@ export function AdminContextPanel() {
   }
 
   return (
-    <main className="admin-context-page">
-      <header className="admin-context-header">
-        <h1>ContextReading</h1>
-        <p className="admin-context-lead">
+    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6 px-4 pb-12 pt-8">
+      <header>
+        <h1 className="text-[1.75rem] font-normal tracking-[0.02em] text-foreground">
+          ContextReading
+        </h1>
+        <p className="mt-2 font-sans text-[0.95rem] text-muted">
           Очередь недавних auto-published записей для выборочной правки.
         </p>
       </header>
 
       {error ? (
-        <p role="alert" className="admin-context-error">
+        <p role="alert" className="font-sans text-sm text-[color:var(--error)]">
           {error}
         </p>
       ) : null}
 
       {loading ? (
-        <p aria-live="polite">Загрузка…</p>
+        <p aria-live="polite" className="font-sans text-muted">
+          Загрузка…
+        </p>
       ) : items.length === 0 ? (
-        <p>Нет свежих auto-published записей.</p>
+        <p className="font-sans text-muted">
+          Нет свежих auto-published записей.
+        </p>
       ) : (
-        <ul className="admin-context-list">
+        <ul className="flex list-none flex-col gap-6 p-0">
           {items.map((item) => {
             const draft = drafts[item.id];
             const isBusy = busyId === item.id || busyId === item.subjectWork.id;
             return (
-              <li key={item.id} className="admin-context-card">
-                <div className="admin-context-meta">
-                  <p>
-                    Книга:{' '}
-                    <Link href={`/books/${item.subjectWork.slug}`}>
-                      {item.subjectWork.titleRu}
-                    </Link>
-                  </p>
-                  <p>
-                    Рекомендация:{' '}
-                    <Link href={`/books/${item.recommendedWork.slug}`}>
-                      {item.recommendedWork.titleRu}
-                    </Link>
-                  </p>
-                  <p>Опубликовано: {formatPublishedAt(item.publishedAt)}</p>
-                  {item.sourceUrl ? (
-                    <p>
-                      Источник:{' '}
-                      <a href={item.sourceUrl} target="_blank" rel="noreferrer">
-                        {item.sourceUrl}
-                      </a>
-                    </p>
-                  ) : null}
-                  {item.sourceSnippet ? (
-                    <p className="admin-context-snippet">
-                      {item.sourceSnippet}
-                    </p>
-                  ) : null}
-                </div>
+              <li key={item.id}>
+                <Card>
+                  <CardContent className="flex flex-col gap-4 p-4">
+                    <div className="flex flex-col gap-1.5 font-sans text-[0.95rem] leading-normal text-foreground">
+                      <p>
+                        Книга:{' '}
+                        <Link href={`/books/${item.subjectWork.slug}`}>
+                          {item.subjectWork.titleRu}
+                        </Link>
+                      </p>
+                      <p>
+                        Рекомендация:{' '}
+                        <Link href={`/books/${item.recommendedWork.slug}`}>
+                          {item.recommendedWork.titleRu}
+                        </Link>
+                      </p>
+                      <p>Опубликовано: {formatPublishedAt(item.publishedAt)}</p>
+                      {item.sourceUrl ? (
+                        <p>
+                          Источник:{' '}
+                          <a
+                            href={item.sourceUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {item.sourceUrl}
+                          </a>
+                        </p>
+                      ) : null}
+                      {item.sourceSnippet ? (
+                        <p className="text-sm text-muted">
+                          {item.sourceSnippet}
+                        </p>
+                      ) : null}
+                    </div>
 
-                <form
-                  className="admin-context-form"
-                  onSubmit={(event) => void handleSave(event, item)}
-                >
-                  <label htmlFor={`why-${item.id}`}>Почему (RU)</label>
-                  <textarea
-                    id={`why-${item.id}`}
-                    value={draft?.whyText ?? item.whyText}
-                    onChange={(event) =>
-                      setDrafts((current) => ({
-                        ...current,
-                        [item.id]: {
-                          whyText: event.target.value,
-                          importanceRank:
-                            current[item.id]?.importanceRank ??
-                            String(item.importanceRank),
-                        },
-                      }))
-                    }
-                    rows={3}
-                    required
-                  />
+                    <form
+                      className="flex flex-col gap-2 font-sans"
+                      onSubmit={(event) => void handleSave(event, item)}
+                    >
+                      <Label
+                        htmlFor={`why-${item.id}`}
+                        className="font-normal text-muted"
+                      >
+                        Почему (RU)
+                      </Label>
+                      <textarea
+                        id={`why-${item.id}`}
+                        className={textareaClassName}
+                        value={draft?.whyText ?? item.whyText}
+                        onChange={(event) =>
+                          setDrafts((current) => ({
+                            ...current,
+                            [item.id]: {
+                              whyText: event.target.value,
+                              importanceRank:
+                                current[item.id]?.importanceRank ??
+                                String(item.importanceRank),
+                            },
+                          }))
+                        }
+                        rows={3}
+                        required
+                      />
 
-                  <label htmlFor={`rank-${item.id}`}>Ранг</label>
-                  <input
-                    id={`rank-${item.id}`}
-                    type="number"
-                    min={1}
-                    max={99}
-                    value={draft?.importanceRank ?? String(item.importanceRank)}
-                    onChange={(event) =>
-                      setDrafts((current) => ({
-                        ...current,
-                        [item.id]: {
-                          whyText: current[item.id]?.whyText ?? item.whyText,
-                          importanceRank: event.target.value,
-                        },
-                      }))
-                    }
-                    required
-                  />
+                      <Label
+                        htmlFor={`rank-${item.id}`}
+                        className="font-normal text-muted"
+                      >
+                        Ранг
+                      </Label>
+                      <Input
+                        id={`rank-${item.id}`}
+                        type="number"
+                        min={1}
+                        max={99}
+                        value={
+                          draft?.importanceRank ?? String(item.importanceRank)
+                        }
+                        onChange={(event) =>
+                          setDrafts((current) => ({
+                            ...current,
+                            [item.id]: {
+                              whyText:
+                                current[item.id]?.whyText ?? item.whyText,
+                              importanceRank: event.target.value,
+                            },
+                          }))
+                        }
+                        required
+                      />
 
-                  <div className="admin-context-actions">
-                    <button type="submit" disabled={isBusy}>
-                      Сохранить
-                    </button>
-                    <button
-                      type="button"
-                      disabled={isBusy}
-                      onClick={() => void handleUnpublish(item.id)}
-                    >
-                      Снять с публикации
-                    </button>
-                    <button
-                      type="button"
-                      disabled={isBusy}
-                      onClick={() => void handleReject(item.id)}
-                    >
-                      Отклонить
-                    </button>
-                    <button
-                      type="button"
-                      disabled={isBusy}
-                      onClick={() => void handleClassify(item.subjectWork.id)}
-                    >
-                      Classify
-                    </button>
-                    <button
-                      type="button"
-                      disabled={isBusy}
-                      onClick={() => void handleExtract(item.subjectWork.id)}
-                    >
-                      Extract
-                    </button>
-                  </div>
-                </form>
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        <Button type="submit" disabled={isBusy}>
+                          Сохранить
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          disabled={isBusy}
+                          onClick={() => void handleUnpublish(item.id)}
+                        >
+                          Снять с публикации
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          disabled={isBusy}
+                          onClick={() => void handleReject(item.id)}
+                        >
+                          Отклонить
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          disabled={isBusy}
+                          onClick={() =>
+                            void handleClassify(item.subjectWork.id)
+                          }
+                        >
+                          Classify
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          disabled={isBusy}
+                          onClick={() =>
+                            void handleExtract(item.subjectWork.id)
+                          }
+                        >
+                          Extract
+                        </Button>
+                      </div>
+                    </form>
+                  </CardContent>
+                </Card>
               </li>
             );
           })}

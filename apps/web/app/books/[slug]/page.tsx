@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { WorkContextReadingSection } from '@/components/work-context-reading-section';
+import { Card, CardContent } from '@/components/ui/card';
 import { fetchCatalogContextReadings } from '@/lib/catalog-context-reading';
 import {
   CatalogWorkNotFoundError,
@@ -28,27 +29,39 @@ export default async function WorkPage({ params }: WorkPageProps) {
   const { items: contextReadings } = await fetchCatalogContextReadings(slug);
 
   return (
-    <main className="work-page">
-      <article>
-        <header className="work-header">
-          <h1>{work.titleRu}</h1>
+    <main className="mx-auto flex w-full max-w-xl flex-1 flex-col gap-5 px-4 pb-8 pt-5">
+      <article className="flex flex-col gap-6">
+        <header>
+          <h1 className="text-[1.75rem] font-normal leading-tight tracking-[0.02em] text-foreground">
+            {work.titleRu}
+          </h1>
           {work.authors.length > 0 && (
-            <p className="work-authors">
+            <p className="mt-2 text-[1.05rem] text-foreground">
               {work.authors.map((author, index) => (
                 <span key={author.slug}>
                   {index > 0 && ', '}
-                  <Link href={`/authors/${author.slug}`}>{author.nameRu}</Link>
+                  <Link
+                    href={`/authors/${author.slug}`}
+                    className="underline-offset-2 hover:underline"
+                  >
+                    {author.nameRu}
+                  </Link>
                 </span>
               ))}
             </p>
           )}
           {work.yearFirst && (
-            <p className="work-year">Год первого издания: {work.yearFirst}</p>
+            <p className="mt-1.5 font-sans text-[0.95rem] text-muted">
+              Год первого издания: {work.yearFirst}
+            </p>
           )}
           {work.series && (
-            <p className="work-series">
+            <p className="mt-1.5 font-sans text-[0.95rem] text-muted">
               Серия:{' '}
-              <Link href={`/series/${work.series.slug}`}>
+              <Link
+                href={`/series/${work.series.slug}`}
+                className="underline-offset-2 hover:underline"
+              >
                 {work.series.nameRu}
               </Link>
               {work.series.positionInSeries != null &&
@@ -58,30 +71,40 @@ export default async function WorkPage({ params }: WorkPageProps) {
         </header>
 
         {work.editions.length > 0 && (
-          <section className="work-editions" aria-label="Издания и переводы">
-            <h2>Издания и переводы</h2>
-            <ul>
+          <section aria-label="Издания и переводы">
+            <h2 className="mb-3 font-sans text-[1.15rem] font-medium text-foreground">
+              Издания и переводы
+            </h2>
+            <ul className="flex list-none flex-col gap-3 p-0">
               {work.editions.map((edition, index) => (
                 <li key={`${edition.language}-${edition.isbn13 ?? index}`}>
-                  <span className="edition-language">
-                    {formatEditionLanguage(edition.language)}
-                  </span>
-                  {edition.translator && (
-                    <span className="edition-translator">
-                      Перевод: {edition.translator}
-                    </span>
-                  )}
-                  {edition.isbn13 && (
-                    <span className="edition-isbn">ISBN {edition.isbn13}</span>
-                  )}
-                  {edition.publisher && (
-                    <span className="edition-publisher">
-                      {edition.publisher}
-                    </span>
-                  )}
-                  {edition.year && (
-                    <span className="edition-year">{edition.year}</span>
-                  )}
+                  <Card>
+                    <CardContent className="flex flex-col gap-0.5 px-4 py-3.5 font-sans text-[0.95rem]">
+                      <span className="font-medium text-foreground">
+                        {formatEditionLanguage(edition.language)}
+                      </span>
+                      {edition.translator && (
+                        <span className="text-[0.9rem] text-muted">
+                          Перевод: {edition.translator}
+                        </span>
+                      )}
+                      {edition.isbn13 && (
+                        <span className="text-[0.9rem] text-muted">
+                          ISBN {edition.isbn13}
+                        </span>
+                      )}
+                      {edition.publisher && (
+                        <span className="text-[0.9rem] text-muted">
+                          {edition.publisher}
+                        </span>
+                      )}
+                      {edition.year && (
+                        <span className="text-[0.9rem] text-muted">
+                          {edition.year}
+                        </span>
+                      )}
+                    </CardContent>
+                  </Card>
                 </li>
               ))}
             </ul>

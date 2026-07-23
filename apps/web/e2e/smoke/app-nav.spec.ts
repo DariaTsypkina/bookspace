@@ -15,7 +15,74 @@ async function expectMainNav(page: Page) {
   return nav;
 }
 
+async function expectMigratedNavChrome(page: Page) {
+  const nav = page.getByRole('navigation', { name: 'Основное меню' });
+  await expect(nav).toBeVisible();
+
+  const className = (await nav.getAttribute('class')) ?? '';
+  expect(className.split(/\s+/)).not.toContain('app-nav');
+  expect(className).toMatch(/fixed|sticky/);
+
+  // Lucide icons render as inline SVG next to RU labels
+  await expect(nav.locator('svg')).toHaveCount(3);
+
+  const box = await nav.boundingBox();
+  expect(box).not.toBeNull();
+  const viewport = page.viewportSize();
+  expect(viewport).not.toBeNull();
+  if (!box || !viewport) {
+    return;
+  }
+
+  const isMobile = viewport.width < 768;
+  if (isMobile) {
+    expect(box.y + box.height).toBeGreaterThan(viewport.height - 120);
+  } else {
+    expect(box.y).toBeLessThan(80);
+  }
+}
+
 test.describe('App nav smoke', () => {
+  test('migrated chrome: no legacy class, Lucide icons, mobile bottom / desktop top', async ({
+    page,
+  }) => {
+    await page.goto('/');
+    await expectMigratedNavChrome(page);
+  });
+
+  test('root content reserves mobile bottom padding; desktop clears it', async ({
+    page,
+  }) => {
+    await page.goto('/');
+    const nav = page.getByRole('navigation', { name: 'Основное меню' });
+    await expect(nav).toBeVisible();
+
+    const paddingBottomPx = await page.evaluate(() => {
+      const navEl = document.querySelector('nav[aria-label="Основное меню"]');
+      const content = navEl?.nextElementSibling;
+      if (!content) {
+        return null;
+      }
+      return parseFloat(getComputedStyle(content).paddingBottom);
+    });
+
+    expect(paddingBottomPx).not.toBeNull();
+    const viewport = page.viewportSize();
+    expect(viewport).not.toBeNull();
+    if (paddingBottomPx == null || !viewport) {
+      return;
+    }
+
+    const isMobile = viewport.width < 768;
+    if (isMobile) {
+      // 4.25rem ≈ 68px at 16px root
+      expect(paddingBottomPx).toBeGreaterThanOrEqual(64);
+      expect(paddingBottomPx).toBeLessThanOrEqual(80);
+    } else {
+      expect(paddingBottomPx).toBe(0);
+    }
+  });
+
   test('guest sees Главная · Поиск · Профиль; Профиль → /login', async ({
     page,
   }) => {

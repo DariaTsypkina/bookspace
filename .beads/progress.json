@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-22T10:53:49.136Z",
+  "generated_at": "2026-07-23T10:22:18.833Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 70,
-    "open_issues": 40,
-    "in_progress_issues": 5,
-    "closed_issues": 25,
+    "total_issues": 92,
+    "open_issues": 41,
+    "in_progress_issues": 0,
+    "closed_issues": 51,
     "blocked_issues": 7,
-    "ready_issues": 33
+    "ready_issues": 34
   },
   "epics": [
     {
@@ -57,18 +57,25 @@
       "title": "Каталог",
       "status": "closed",
       "priority": 1,
-      "children_total": 9,
-      "children_closed": 8,
-      "children_in_progress": 1,
-      "children_open": 0,
-      "progress": "8 / 9",
-      "percent_closed": 89,
+      "children_total": 10,
+      "children_closed": 9,
+      "children_in_progress": 0,
+      "children_open": 1,
+      "progress": "9 / 10",
+      "percent_closed": 90,
       "children": [
         {
           "id": "bd-6v0.1",
           "title": "Каталог: Поиск по каталогу",
           "status": "closed",
           "type": "feature",
+          "priority": 1
+        },
+        {
+          "id": "bd-6v0.10",
+          "title": "Поиск: префикс запроса не находит полные совпадения (роул → Роулинг)",
+          "status": "open",
+          "type": "bug",
           "priority": 1
         },
         {
@@ -123,7 +130,7 @@
         {
           "id": "bd-6v0.9",
           "title": "Поиск: восстановить FTS search_vector после drift Prisma",
-          "status": "in_progress",
+          "status": "closed",
           "type": "bug",
           "priority": 2
         }
@@ -132,7 +139,7 @@
     {
       "id": "bd-8s4",
       "title": "ContextReading",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
       "children_total": 4,
       "children_closed": 4,
@@ -527,9 +534,158 @@
           "priority": 2
         }
       ]
+    },
+    {
+      "id": "bd-wus",
+      "title": "DX: Tailwind + shadcn",
+      "status": "closed",
+      "priority": 2,
+      "children_total": 18,
+      "children_closed": 18,
+      "children_in_progress": 0,
+      "children_open": 0,
+      "progress": "18 / 18",
+      "percent_closed": 100,
+      "children": [
+        {
+          "id": "bd-wus.1",
+          "title": "UI: Foundation Tailwind + design tokens",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.10",
+          "title": "UI: миграция карточки автора /authors/[slug]",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.11",
+          "title": "UI: миграция карточки персонажа /characters/[slug]",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.12",
+          "title": "UI: миграция карточки мира /worlds/[slug]",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.13",
+          "title": "UI: миграция карточки локации /places/[slug]",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.14",
+          "title": "UI: миграция публичного профиля /u/[slug]",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.15",
+          "title": "UI: миграция экрана Библиотека /library",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.16",
+          "title": "UI: миграция Admin Context /admin/context",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.17",
+          "title": "UI: конвенция новый UI только Tailwind+shadcn",
+          "status": "closed",
+          "type": "chore",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.18",
+          "title": "UI: корневой layout на Tailwind (app-shell/app-content)",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.2",
+          "title": "UI: shadcn baseline + Lucide",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.3",
+          "title": "UI: миграция app-nav (tab-bar) на Tailwind+shadcn",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.4",
+          "title": "UI: миграция экрана Главная /",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.5",
+          "title": "UI: миграция экрана Вход /login",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.6",
+          "title": "UI: миграция экрана Регистрация /register",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.7",
+          "title": "UI: миграция экрана Auth error /auth/error",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.8",
+          "title": "UI: миграция экрана Поиск /search",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.9",
+          "title": "UI: миграция карточки произведения /books/[slug]",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        }
+      ]
     }
   ],
   "issues": [
+    {
+      "id": "bd-6v0.10",
+      "title": "Поиск: префикс запроса не находит полные совпадения (роул → Роулинг)",
+      "status": "open",
+      "type": "bug",
+      "priority": 1,
+      "parent": "bd-6v0",
+      "updated_at": "2026-07-23T08:11:45Z"
+    },
     {
       "id": "bd-957.4",
       "title": "AuthModule: ConfigService не импортирован — e2e AppModule падает",
@@ -639,6 +795,195 @@
       "updated_at": "2026-07-20T07:30:07Z"
     },
     {
+      "id": "bd-v3k",
+      "title": "Docs: протокол bd close на ветке задачи + merge в сборочную",
+      "status": "closed",
+      "type": "chore",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-23T10:17:38Z"
+    },
+    {
+      "id": "bd-wus.18",
+      "title": "UI: корневой layout на Tailwind (app-shell/app-content)",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-23T08:01:55Z"
+    },
+    {
+      "id": "bd-5po",
+      "title": "e2e: spoiler cookie domain совпадать с page hostname",
+      "status": "open",
+      "type": "chore",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-22T15:33:23Z"
+    },
+    {
+      "id": "bd-wus.17",
+      "title": "UI: конвенция новый UI только Tailwind+shadcn",
+      "status": "closed",
+      "type": "chore",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T15:13:54Z"
+    },
+    {
+      "id": "bd-wus.16",
+      "title": "UI: миграция Admin Context /admin/context",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T15:10:44Z"
+    },
+    {
+      "id": "bd-wus.15",
+      "title": "UI: миграция экрана Библиотека /library",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T15:06:28Z"
+    },
+    {
+      "id": "bd-wus.14",
+      "title": "UI: миграция публичного профиля /u/[slug]",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T15:03:47Z"
+    },
+    {
+      "id": "bd-wus.13",
+      "title": "UI: миграция карточки локации /places/[slug]",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T14:59:54Z"
+    },
+    {
+      "id": "bd-wus.12",
+      "title": "UI: миграция карточки мира /worlds/[slug]",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T14:56:16Z"
+    },
+    {
+      "id": "bd-wus.11",
+      "title": "UI: миграция карточки персонажа /characters/[slug]",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T14:53:39Z"
+    },
+    {
+      "id": "bd-wus.10",
+      "title": "UI: миграция карточки автора /authors/[slug]",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T14:45:37Z"
+    },
+    {
+      "id": "bd-wus.8",
+      "title": "UI: миграция экрана Поиск /search",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T14:33:22Z"
+    },
+    {
+      "id": "bd-wus.9",
+      "title": "UI: миграция карточки произведения /books/[slug]",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T14:37:42Z"
+    },
+    {
+      "id": "bd-wus.7",
+      "title": "UI: миграция экрана Auth error /auth/error",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T14:22:18Z"
+    },
+    {
+      "id": "bd-wus.6",
+      "title": "UI: миграция экрана Регистрация /register",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T14:17:08Z"
+    },
+    {
+      "id": "bd-wus.5",
+      "title": "UI: миграция экрана Вход /login",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T13:48:51Z"
+    },
+    {
+      "id": "bd-wus.4",
+      "title": "UI: миграция экрана Главная /",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T13:31:51Z"
+    },
+    {
+      "id": "bd-wus.3",
+      "title": "UI: миграция app-nav (tab-bar) на Tailwind+shadcn",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T13:27:50Z"
+    },
+    {
+      "id": "bd-wus.2",
+      "title": "UI: shadcn baseline + Lucide",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T13:23:06Z"
+    },
+    {
+      "id": "bd-wus.1",
+      "title": "UI: Foundation Tailwind + design tokens",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T13:18:10Z"
+    },
+    {
+      "id": "bd-wus",
+      "title": "DX: Tailwind + shadcn",
+      "status": "closed",
+      "type": "epic",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-22T15:33:09Z"
+    },
+    {
       "id": "bd-6b7.4",
       "title": "UI: строка меню (Главная · Поиск · Профиль)",
       "status": "closed",
@@ -650,11 +995,11 @@
     {
       "id": "bd-6v0.9",
       "title": "Поиск: восстановить FTS search_vector после drift Prisma",
-      "status": "in_progress",
+      "status": "closed",
       "type": "bug",
       "priority": 2,
       "parent": "bd-6v0",
-      "updated_at": "2026-07-22T09:50:04Z"
+      "updated_at": "2026-07-23T08:23:11Z"
     },
     {
       "id": "bd-6v0.8",
@@ -677,20 +1022,20 @@
     {
       "id": "bd-ky6",
       "title": "Chore: синхронизировать beads interactions.jsonl",
-      "status": "in_progress",
+      "status": "closed",
       "type": "chore",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-07-20T07:17:49Z"
+      "updated_at": "2026-07-23T08:23:11Z"
     },
     {
       "id": "bd-0e6",
       "title": "Docs: согласование зависимостей агентом",
-      "status": "in_progress",
+      "status": "closed",
       "type": "chore",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-07-20T07:10:52Z"
+      "updated_at": "2026-07-23T08:23:11Z"
     },
     {
       "id": "bd-i5b.8",
@@ -1001,11 +1346,11 @@
     {
       "id": "bd-8s4",
       "title": "ContextReading",
-      "status": "open",
+      "status": "closed",
       "type": "epic",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-07-17T12:36:05Z"
+      "updated_at": "2026-07-23T09:19:51Z"
     },
     {
       "id": "bd-azl.4",
@@ -1073,11 +1418,11 @@
     {
       "id": "bd-rtp",
       "title": "Docs: human intake workflow и /task skill",
-      "status": "in_progress",
+      "status": "closed",
       "type": "task",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-07-17T12:14:54Z"
+      "updated_at": "2026-07-23T08:23:12Z"
     },
     {
       "id": "bd-384",
@@ -1100,11 +1445,11 @@
     {
       "id": "bd-nvi",
       "title": "Scaffold monorepo dev baseline",
-      "status": "in_progress",
+      "status": "closed",
       "type": "task",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-07-16T09:26:54Z"
+      "updated_at": "2026-07-23T08:23:12Z"
     },
     {
       "id": "bd-aud",

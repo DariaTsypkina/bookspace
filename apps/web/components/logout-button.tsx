@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 import { logout } from '../lib/auth';
 
 export function LogoutButton() {
@@ -20,15 +21,16 @@ export function LogoutButton() {
   }
 
   return (
-    <button
+    <Button
       type="button"
+      variant="outline"
       onClick={() => {
         void handleLogout();
       }}
       disabled={loading}
-      className="logout-button"
+      className="self-start"
     >
       {loading ? 'Выход…' : 'Выйти'}
-    </button>
+    </Button>
   );
 }
