@@ -14,15 +14,15 @@
 | 0 | Bootstrap (monorepo, docker, CI) | ✅ | — | — |
 | 1 | Auth | ✅ | 6 / 6 | `bd-957` |
 | 2 | Каталог | ✅ | 6 / 6 | `bd-6v0` |
-| 3 | Связи и порядок | 🔒 | 0 / 4 | `bd-azl` |
-| 4 | ContextReading | 🔄 | 4 / 4 | `bd-8s4` |
-| 5 | Библиотека и профиль | 🔒 | 0 / 5 | `bd-cq7` |
+| 3 | Связи и порядок | ⬜ | 0 / 4 | `bd-azl` |
+| 4 | ContextReading | ✅ | 4 / 4 | `bd-8s4` |
+| 5 | Библиотека и профиль | ⬜ | 0 / 5 | `bd-cq7` |
 | 6 | Заметки и цель | 🔒 | 0 / 2 | `bd-sf4` |
-| 7 | Рейтинги | 🔒 | 0 / 3 | `bd-es5` |
-| 8 | Подборки | 🔒 | 0 / 3 | `bd-b75` |
+| 7 | Рейтинги | ⬜ | 0 / 3 | `bd-es5` |
+| 8 | Подборки | ⬜ | 0 / 3 | `bd-b75` |
 | 9 | Рекомендации | 🔒 | 0 / 3 | `bd-ada` |
-| 10 | Админка | 🔒 | 0 / 8 | `bd-i5b` |
-| 11 | PWA и оболочка | 🔄 | 0 / 4 | `bd-6b7` |
+| 10 | Админка | ⬜ | 0 / 8 | `bd-i5b` |
+| 11 | PWA и оболочка | 🔄 | 1 / 4 | `bd-6b7` |
 
 ---
 
@@ -36,16 +36,16 @@
 
 | Статус | ID | Задача |
 |--------|-----|--------|
-| ✅ | `bd-wus` | **Эпик DX: Tailwind + shadcn** (ADR 0003 accepted) — см. ниже; хвост `bd-wus.18` |
-| 🔄 | `bd-ky6` | Chore: синхронизировать beads interactions.jsonl |
+| ✅ | `bd-wus` | **Эпик DX: Tailwind + shadcn** (ADR 0003 accepted) — 18 / 18 |
+| ✅ | `bd-ky6` | Chore: синхронизировать beads interactions.jsonl |
 | ✅ | `bd-0e6` | Docs: согласование зависимостей агентом |
-| 🔄 | `bd-rtp` | Docs: human intake workflow и /task skill |
-| 🔄 | `bd-nvi` | Scaffold monorepo dev baseline |
+| ✅ | `bd-rtp` | Docs: human intake workflow и /task skill |
+| ✅ | `bd-nvi` | Scaffold monorepo dev baseline |
 | ✅ | `bd-384` | Session Completion: git push при конце сессии |
 
-### DX — Tailwind + shadcn — ✅ · epic `bd-wus` · 17 / 17 (+ хвост) · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
+### DX — Tailwind + shadcn — ✅ · epic `bd-wus` · 18 / 18 · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
 
-План: [migration-tailwind-shadcn.md](docs/tech/migration-tailwind-shadcn.md). F1–F2 ✅; N1 ✅; S1–S13 ✅; C1 ✅. Эпик закрыт на сборочной `feat/bookspace-bd-wus`. Хвост: корневой layout shell.
+План: [migration-tailwind-shadcn.md](docs/tech/migration-tailwind-shadcn.md). F1–F2 ✅; N1 ✅; S1–S13 ✅; C1 ✅; корневой layout shell ✅. Эпик закрыт.
 
 | Статус | ID | Задача |
 |--------|-----|--------|
@@ -66,7 +66,7 @@
 | ✅ | `bd-wus.15` | Экран: Библиотека `/library` |
 | ✅ | `bd-wus.16` | Экран: Admin Context `/admin/context` |
 | ✅ | `bd-wus.17` | Конвенция: новый UI только на стеке |
-| 🔄 | `bd-wus.18` | Корневой layout: `.app-shell` / `.app-content` → Tailwind |
+| ✅ | `bd-wus.18` | Корневой layout: `.app-shell` / `.app-content` → Tailwind |
 
 ### 1. Auth — ✅ · epic `bd-957` · 6 / 6 (эпик закрыт)
 
@@ -89,10 +89,10 @@
 | ✅ | `bd-6v0.4` | Каталог: Карточка персонажа |
 | ✅ | `bd-6v0.5` | Каталог: Карточка мира |
 | ✅ | `bd-6v0.6` | Каталог: Карточка локации |
-| 🔄 | `bd-6v0.9` | Поиск: восстановить FTS search_vector после drift Prisma |
+| ✅ | `bd-6v0.9` | Поиск: восстановить FTS search_vector после drift Prisma |
 | ⬜ | `bd-6v0.10` | Поиск: префикс `роул` не находит «Роулинг» (human-reported) |
 
-### 3. Связи и порядок — 🔒 · epic `bd-azl` · 0 / 4
+### 3. Связи и порядок — ⬜ · epic `bd-azl` · 0 / 4
 
 | Статус | ID | Задача |
 |--------|-----|--------|
@@ -101,7 +101,7 @@
 | ⬜ | `bd-azl.3` | Связи: Порядок чтения |
 | ⬜ | `bd-azl.4` | Связи: Spoiler gate |
 
-### 4. ContextReading — 🔄 · epic `bd-8s4` · 4 / 4
+### 4. ContextReading — ✅ · epic `bd-8s4` · 4 / 4 (эпик закрыт)
 
 | Статус | ID | Задача |
 |--------|-----|--------|
@@ -110,7 +110,7 @@
 | ✅ | `bd-8s4.3` | ContextReading: Пайплайн extract ContextReading |
 | ✅ | `bd-8s4.4` | ContextReading: Админка ContextReading |
 
-### 5. Библиотека и профиль — 🔒 · epic `bd-cq7` · 0 / 5
+### 5. Библиотека и профиль — ⬜ · epic `bd-cq7` · 0 / 5
 
 | Статус | ID | Задача |
 |--------|-----|--------|
@@ -127,7 +127,7 @@
 | ⬜ | `bd-sf4.1` | Заметки и цитаты |
 | ⬜ | `bd-sf4.2` | Заметки: Цель чтения на год |
 
-### 7. Рейтинги — 🔒 · epic `bd-es5` · 0 / 3
+### 7. Рейтинги — ⬜ · epic `bd-es5` · 0 / 3
 
 | Статус | ID | Задача |
 |--------|-----|--------|
@@ -135,7 +135,7 @@
 | ⬜ | `bd-es5.2` | Рейтинги: Импорт внешних рейтингов |
 | ⬜ | `bd-es5.3` | Рейтинги: Агрегация и автопубликация рейтингов |
 
-### 8. Подборки — 🔒 · epic `bd-b75` · 0 / 3
+### 8. Подборки — ⬜ · epic `bd-b75` · 0 / 3
 
 | Статус | ID | Задача |
 |--------|-----|--------|
@@ -151,7 +151,7 @@
 | ⬜ | `bd-ada.2` | Рекомендации на главной |
 | ⬜ | `bd-ada.3` | Рекомендации: Эвристики рекомендаций |
 
-### 10. Админка — 🔒 · epic `bd-i5b` · 0 / 8
+### 10. Админка — ⬜ · epic `bd-i5b` · 0 / 8
 
 | Статус | ID | Задача |
 |--------|-----|--------|
@@ -164,14 +164,14 @@
 | ⬜ | `bd-i5b.7` | Админка: Очередь не сматченного |
 | ⬜ | `bd-i5b.8` | Админка: Журнал аудита |
 
-### 11. PWA и оболочка — 🔄 · epic `bd-6b7` · 0 / 4
+### 11. PWA и оболочка — 🔄 · epic `bd-6b7` · 1 / 4
 
 | Статус | ID | Задача |
 |--------|-----|--------|
 | ⬜ | `bd-6b7.1` | PWA: установка |
 | ⬜ | `bd-6b7.2` | PWA: offline shell |
 | ⬜ | `bd-6b7.3` | PWA: App shell и tab-bar |
-| 🔄 | `bd-6b7.4` | UI: строка меню (Главная · Поиск · Профиль) — human-reported, вариант B · ветка `task/bd-6b7.4-nav-menu` |
+| ✅ | `bd-6b7.4` | UI: строка меню (Главная · Поиск · Профиль) — MVP-срез |
 
 ---
 
@@ -179,6 +179,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-23 | Housekeeping: закрыт эпик `bd-8s4` ContextReading (4/4); дашборд синхронизирован с bd (`bd-wus.18`, `bd-6b7.4`, `bd-6v0.9`, `bd-ky6`/`bd-rtp`/`bd-nvi` → ✅; фазы 3/5/7/8/10 → ⬜) |
 | 2026-07-23 | `/task`: создан `bd-6v0.10` — поиск-префикс `роул` → «Роулинг» (catalog-search, эпик `bd-6v0`) |
 | 2026-07-23 | `bd-wus.18` close-prep: root layout → Tailwind (`flex min-h-full flex-1 flex-col` / `pb-[4.25rem] md:pb-0`); legacy `.app-shell`/`.app-content` removed; unit layout-shell 5/5 (suite **160**); Playwright app-nav+home **18/18** desktop+mobile (system Chrome); ветка `task/bd-wus.18-root-layout-tailwind`; `bd close` за оркестратором |
 | 2026-07-23 | Claim `bd-wus.18`: корневой layout `.app-shell`/`.app-content` → Tailwind utilities; ветка `task/bd-wus.18-root-layout-tailwind` |
