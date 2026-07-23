@@ -88,9 +88,9 @@ flowchart TD
 
 ### Завершение трека
 
-| # | Issue | Задача | Содержание |
-|---|-------|--------|------------|
-| C1 | `bd-wus.17` | Конвенция | Обновить `stack-and-architecture.md`, при необходимости `ui-ru.mdc`: новый UI только Tailwind+shadcn; после миграции экрана — вычистить мёртвые селекторы из `globals.css` |
+| # | Issue | Задача | Содержание | Статус |
+|---|-------|--------|------------|--------|
+| C1 | `bd-wus.17` | Конвенция | Docs/rules: ADR 0003 **accepted**; `stack-and-architecture` + `stack.mdc` + `ui-ru.mdc` — новый UI только Tailwind+shadcn; **запрет** новых legacy-правил в `globals.css` для новых экранов; после миграции экрана — вычистить мёртвые селекторы | ✅ docs (close за оркестратором) |
 
 Экраны из [screens.md](screens.md), которых ещё нет в коде (`/rankings`, `/collections`, `/series`, остальной `/admin/*`, settings…) — **не** заводятся задачами миграции: пишутся сразу на стеке после F2.
 
@@ -124,7 +124,7 @@ flowchart TD
 |---------|--------|
 | Стек целиком (Tailwind + shadcn/Radix + Lucide + cva/clsx/tailwind-merge) | ✅ человек |
 | Инкрементальная миграция + задача на экран + отдельно меню | ✅ человек |
-| ADR 0003 `proposed` → `accepted` | ✅ accepted 2026-07-22 |
-| Старт F1 / `bd-wus.1` (prod-зависимости + код) | ⬜ можно стартовать |
+| ADR 0003 → `accepted` | ✅ accepted 2026-07-22 |
+| Старт F1 / `bd-wus.1` (prod-зависимости + код) | ✅ реализовано в `task/bd-wus.1-tailwind-foundation` (close за оркестратором) |
 | Состав beads `bd-wus`.* (17 детей) | ✅ |
-| Правила агента (`stack.mdc`, `ui-ru.mdc`, stack-and-architecture) | ✅ обновлены |
+| C1 / `bd-wus.17` конвенция в docs/rules | ✅ `stack-and-architecture` § UI-конвенция + `stack.mdc` / `ui-ru.mdc` (запрет legacy для новых экранов) |

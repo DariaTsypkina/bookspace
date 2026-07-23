@@ -15,9 +15,11 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body>
-        <div className="app-shell">
+        <div className="flex min-h-full flex-1 flex-col">
           <AppNav />
-          <div className="app-content">{children}</div>
+          <div className="flex flex-1 flex-col pb-[4.25rem] md:pb-0">
+            {children}
+          </div>
         </div>
       </body>
     </html>
