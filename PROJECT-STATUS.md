@@ -169,7 +169,7 @@
 
 | Статус | ID | Задача |
 |--------|-----|--------|
-| ⬜ | `bd-6b7.1` | PWA: установка |
+| 🔄 | `bd-6b7.1` | PWA: установка |
 | ⬜ | `bd-6b7.2` | PWA: offline shell |
 | ⬜ | `bd-6b7.3` | PWA: App shell и tab-bar |
 | ✅ | `bd-6b7.4` | UI: строка меню (Главная · Поиск · Профиль) — MVP-срез |
@@ -180,6 +180,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-23 | Оркестратор: batch `feat/bookspace-bd-6b7` — claim `bd-6b7.1` (PWA install); очередь `.1`→`.2`→`.3`; ветка `task/bd-6b7.1-pwa-install`; ЗАЛИВАТЬ develop=Нет |
 | 2026-07-23 | `bd-v3k` closed: канон close — на ветке задачи → commit `.beads` → `--no-ff` в **сборочную** (+ `bd import` страховка); `develop` только §6; обновлены feature-workflow, git-flow, human-intake, agent-dev-flow, rules, skills |
 | 2026-07-23 | Housekeeping: закрыт эпик `bd-8s4` ContextReading (4/4); дашборд синхронизирован с bd (`bd-wus.18`, `bd-6b7.4`, `bd-6v0.9`, `bd-ky6`/`bd-rtp`/`bd-nvi` → ✅; фазы 3/5/7/8/10 → ⬜) |
 | 2026-07-23 | `/task`: создан `bd-6v0.10` — поиск-префикс `роул` → «Роулинг» (catalog-search, эпик `bd-6v0`) |
