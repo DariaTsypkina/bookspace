@@ -22,7 +22,7 @@
 | 8 | Подборки | ⬜ | 0 / 3 | `bd-b75` |
 | 9 | Рекомендации | 🔒 | 0 / 3 | `bd-ada` |
 | 10 | Админка | ⬜ | 0 / 8 | `bd-i5b` |
-| 11 | PWA и оболочка | 🔄 | 1 / 4 | `bd-6b7` |
+| 11 | PWA и оболочка | ✅ | 4 / 4 | `bd-6b7` |
 
 ---
 
@@ -101,6 +101,7 @@
 | ⬜ | `bd-azl.2` | Связи произведений |
 | ⬜ | `bd-azl.3` | Связи: Порядок чтения |
 | ⬜ | `bd-azl.4` | Связи: Spoiler gate |
+| ⬜ | `bd-azl.5` | Bug: iOS Chrome — «Показать» не снимает spoiler gate (human-reported) |
 
 ### 4. ContextReading — ✅ · epic `bd-8s4` · 4 / 4 (эпик закрыт)
 
@@ -120,6 +121,7 @@
 | ⬜ | `bd-cq7.3` | Библиотека: Теги пользователя |
 | ⬜ | `bd-cq7.4` | Библиотека: Моя библиотека |
 | ⬜ | `bd-cq7.5` | Библиотека: Публичный профиль |
+| ⬜ | `bd-cq7.6` | Bug: iOS Chrome — пустая страница Профиль `/library` (human-reported) |
 
 ### 6. Заметки и цель — 🔒 · epic `bd-sf4` · 0 / 2
 
@@ -165,13 +167,13 @@
 | ⬜ | `bd-i5b.7` | Админка: Очередь не сматченного |
 | ⬜ | `bd-i5b.8` | Админка: Журнал аудита |
 
-### 11. PWA и оболочка — 🔄 · epic `bd-6b7` · 1 / 4
+### 11. PWA и оболочка — ✅ · epic `bd-6b7` · 4 / 4
 
 | Статус | ID | Задача |
 |--------|-----|--------|
-| ⬜ | `bd-6b7.1` | PWA: установка |
-| ⬜ | `bd-6b7.2` | PWA: offline shell |
-| ⬜ | `bd-6b7.3` | PWA: App shell и tab-bar |
+| ✅ | `bd-6b7.1` | PWA: установка |
+| ✅ | `bd-6b7.2` | PWA: offline shell |
+| ✅ | `bd-6b7.3` | PWA: App shell и tab-bar |
 | ✅ | `bd-6b7.4` | UI: строка меню (Главная · Поиск · Профиль) — MVP-срез |
 
 ---
@@ -180,6 +182,20 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-23 | `/task`: `bd-azl.5` — iOS Chrome spoiler «Показать» не снимает gate; `bd-cq7.6` — iOS Chrome пустой Профиль `/library` (iPhone 17, human-reported) |
+| 2026-07-23 | Эпик `bd-6b7` closed (4/4): target verify web unit **186** + Playwright pwa-install+offline+app-nav **30/30**; сборочная `feat/bookspace-bd-6b7` — ЗАЛИВАТЬ develop=Нет (push only) |
+| 2026-07-23 | `bd-6b7.3` closed: 5-tab shell + stubs; unit suite 186; Playwright app-nav 12/12; merge → `feat/bookspace-bd-6b7` |
+| 2026-07-23 | `bd-6b7.3` close-prep: 5-tab shell (Главная·Поиск·Рейтинги·Подборки·Профиль); stubs `/rankings` `/collections`; unit app-nav green (suite 186); Playwright app-nav **12/12** desktop+mobile; manual `e2e/manual/app-shell-tab-bar.md`; ветка `task/bd-6b7.3-app-shell-tab-bar`; `bd close` за оркестратором |
+| 2026-07-23 | `bd-6b7.3` в работе: conventions (design/acceptance/notes/labels area:web+sec:pwa+ui+mobile); TDD 5-tab (Главная·Поиск·Рейтинги·Подборки·Профиль); stubs `/rankings` `/collections`; ветка `task/bd-6b7.3-app-shell-tab-bar`; `bd close` за оркестратором |
+| 2026-07-23 | Оркестратор: claim `bd-6b7.3` (5-tab app shell); ветка `task/bd-6b7.3-app-shell-tab-bar` |
+| 2026-07-23 | `bd-6b7.2` closed: native SW + /offline + LRU recent; unit offline 10/10 (suite 181); Playwright pwa-offline-shell 10/10 desktop+mobile; merge → `feat/bookspace-bd-6b7` |
+| 2026-07-23 | `bd-6b7.2` close-prep: native SW + Cache Storage + `/offline` (без npm PWA-libs); unit **181**; Playwright pwa-offline-shell **10/10** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); manual `e2e/manual/pwa-offline-shell.md`; ветка `task/bd-6b7.2-pwa-offline-shell`; `bd close` за оркестратором |
+| 2026-07-23 | `bd-6b7.2` в работе: conventions (design/acceptance/notes/labels area:web+sec:pwa+mobile); TDD native SW + Cache Storage + `/offline`; unit offline-cache/register; Playwright pwa-offline-shell; manual `e2e/manual/pwa-offline-shell.md`; ветка `task/bd-6b7.2-pwa-offline-shell`; `bd close` за оркестратором |
+| 2026-07-23 | Оркестратор: claim `bd-6b7.2` (PWA offline shell); ветка `task/bd-6b7.2-pwa-offline-shell` |
+| 2026-07-23 | `bd-6b7.1` closed: PWA manifest+icons 192/512+install helper; unit pwa 8/8 (suite 171); Playwright pwa-install 8/8 desktop+mobile; merge → `feat/bookspace-bd-6b7` |
+| 2026-07-23 | `bd-6b7.1` close-prep: PWA manifest+icons 192/512+metadata/viewport; unit **171**; Playwright pwa-install **8/8** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); manual `e2e/manual/pwa-install.md` (iOS A2HS); ветка `task/bd-6b7.1-pwa-install`; `bd close` за оркестратором |
+| 2026-07-23 | `bd-6b7.1` в работе: conventions (design/acceptance/notes/labels area:web+sec:pwa+mobile); TDD PWA manifest+icons+metadata; sync residual globals.css ← develop; ветка `task/bd-6b7.1-pwa-install` |
+| 2026-07-23 | Оркестратор: batch `feat/bookspace-bd-6b7` — claim `bd-6b7.1` (PWA install); очередь `.1`→`.2`→`.3`; ветка `task/bd-6b7.1-pwa-install`; ЗАЛИВАТЬ develop=Нет |
 | 2026-07-23 | `bd-v3k` closed: канон close — на ветке задачи → commit `.beads` → `--no-ff` в **сборочную** (+ `bd import` страховка); `develop` только §6; обновлены feature-workflow, git-flow, human-intake, agent-dev-flow, rules, skills |
 | 2026-07-23 | Housekeeping: закрыт эпик `bd-8s4` ContextReading (4/4); дашборд синхронизирован с bd (`bd-wus.18`, `bd-6b7.4`, `bd-6v0.9`, `bd-ky6`/`bd-rtp`/`bd-nvi` → ✅; фазы 3/5/7/8/10 → ⬜) |
 | 2026-07-23 | `/task`: создан `bd-6v0.10` — поиск-префикс `роул` → «Роулинг» (catalog-search, эпик `bd-6v0`) |

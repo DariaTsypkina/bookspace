@@ -3,14 +3,20 @@ import { expect, test, type Page } from '@playwright/test';
 const uniqueEmail = () =>
   `e2e-nav-${Date.now()}-${Math.random().toString(36).slice(2)}@bookspace.local`;
 
+const TAB_LABELS = [
+  'Главная',
+  'Поиск',
+  'Рейтинги',
+  'Подборки',
+  'Профиль',
+] as const;
+
 async function expectMainNav(page: Page) {
   const nav = page.getByRole('navigation', { name: 'Основное меню' });
   await expect(nav).toBeVisible();
-  await expect(nav.getByRole('link', { name: 'Главная' })).toBeVisible();
-  await expect(nav.getByRole('link', { name: 'Поиск' })).toBeVisible();
-  await expect(nav.getByRole('link', { name: 'Профиль' })).toBeVisible();
-  await expect(nav.getByRole('link', { name: 'Рейтинги' })).toHaveCount(0);
-  await expect(nav.getByRole('link', { name: 'Подборки' })).toHaveCount(0);
+  for (const label of TAB_LABELS) {
+    await expect(nav.getByRole('link', { name: label })).toBeVisible();
+  }
   await expect(nav.getByRole('link', { name: /админ/i })).toHaveCount(0);
   return nav;
 }
@@ -23,8 +29,8 @@ async function expectMigratedNavChrome(page: Page) {
   expect(className.split(/\s+/)).not.toContain('app-nav');
   expect(className).toMatch(/fixed|sticky/);
 
-  // Lucide icons render as inline SVG next to RU labels
-  await expect(nav.locator('svg')).toHaveCount(3);
+  // Lucide icons render as inline SVG next to RU labels (5 tabs)
+  await expect(nav.locator('svg')).toHaveCount(5);
 
   const box = await nav.boundingBox();
   expect(box).not.toBeNull();
@@ -83,9 +89,7 @@ test.describe('App nav smoke', () => {
     }
   });
 
-  test('guest sees Главная · Поиск · Профиль; Профиль → /login', async ({
-    page,
-  }) => {
+  test('guest sees five tabs; Профиль → /login', async ({ page }) => {
     await page.goto('/');
     const nav = await expectMainNav(page);
     await expect(nav.getByRole('link', { name: 'Профиль' })).toHaveAttribute(
@@ -96,7 +100,9 @@ test.describe('App nav smoke', () => {
     await expect(page).toHaveURL('/login');
   });
 
-  test('active item is highlighted on home and search', async ({ page }) => {
+  test('active item is highlighted across tabs including rankings and collections', async ({
+    page,
+  }) => {
     await page.goto('/');
     const nav = await expectMainNav(page);
     await expect(nav.getByRole('link', { name: 'Главная' })).toHaveAttribute(
@@ -117,6 +123,22 @@ test.describe('App nav smoke', () => {
     await expect(
       nav.getByRole('link', { name: 'Главная' }),
     ).not.toHaveAttribute('aria-current', 'page');
+
+    await nav.getByRole('link', { name: 'Рейтинги' }).click();
+    await expect(page).toHaveURL('/rankings');
+    await expect(page.getByRole('heading', { name: 'Рейтинги' })).toBeVisible();
+    await expect(nav.getByRole('link', { name: 'Рейтинги' })).toHaveAttribute(
+      'aria-current',
+      'page',
+    );
+
+    await nav.getByRole('link', { name: 'Подборки' }).click();
+    await expect(page).toHaveURL('/collections');
+    await expect(page.getByRole('heading', { name: 'Подборки' })).toBeVisible();
+    await expect(nav.getByRole('link', { name: 'Подборки' })).toHaveAttribute(
+      'aria-current',
+      'page',
+    );
   });
 
   test('authenticated user: Профиль → /library stub', async ({ page }) => {
@@ -150,7 +172,9 @@ test.describe('App nav smoke', () => {
     );
   });
 
-  test('nav is absent of /admin entry on public pages', async ({ page }) => {
+  test('nav has no /admin entry; on /admin* no tab is active', async ({
+    page,
+  }) => {
     await page.goto('/search');
     const nav = await expectMainNav(page);
     const hrefs = await nav
@@ -159,5 +183,25 @@ test.describe('App nav smoke', () => {
     expect(hrefs.every((href) => href && !href.startsWith('/admin'))).toBe(
       true,
     );
+
+    // Guest would be redirected to /login; use seeded admin to stay on /admin*
+    await page.goto('/login');
+    await page.getByLabel('Email').fill('admin@bookspace.local');
+    await page.getByLabel('Пароль').fill('Admin123!');
+    await page.getByRole('button', { name: 'Войти' }).click();
+    await expect(page).toHaveURL('/');
+
+    await page.goto('/admin/context');
+    await expect(
+      page.getByRole('heading', { name: 'ContextReading' }),
+    ).toBeVisible();
+    const adminNav = page.getByRole('navigation', { name: 'Основное меню' });
+    await expect(adminNav).toBeVisible();
+    for (const label of TAB_LABELS) {
+      await expect(
+        adminNav.getByRole('link', { name: label }),
+      ).not.toHaveAttribute('aria-current', 'page');
+    }
+    await expect(adminNav.getByRole('link', { name: /админ/i })).toHaveCount(0);
   });
 });

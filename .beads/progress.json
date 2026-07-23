@@ -1,45 +1,45 @@
 {
-  "generated_at": "2026-07-23T10:17:52.244Z",
+  "generated_at": "2026-07-23T16:48:05.609Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 92,
-    "open_issues": 41,
+    "total_issues": 94,
+    "open_issues": 39,
     "in_progress_issues": 0,
-    "closed_issues": 51,
+    "closed_issues": 55,
     "blocked_issues": 7,
-    "ready_issues": 34
+    "ready_issues": 32
   },
   "epics": [
     {
       "id": "bd-6b7",
       "title": "PWA и оболочка",
-      "status": "open",
+      "status": "closed",
       "priority": 3,
       "children_total": 4,
-      "children_closed": 1,
+      "children_closed": 4,
       "children_in_progress": 0,
-      "children_open": 3,
-      "progress": "1 / 4",
-      "percent_closed": 25,
+      "children_open": 0,
+      "progress": "4 / 4",
+      "percent_closed": 100,
       "children": [
         {
           "id": "bd-6b7.1",
           "title": "PWA: установка",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 3
         },
         {
           "id": "bd-6b7.2",
           "title": "PWA: offline shell",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 3
         },
         {
           "id": "bd-6b7.3",
           "title": "PWA: App shell и tab-bar",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 3
         },
@@ -281,11 +281,11 @@
       "title": "Связи и порядок",
       "status": "open",
       "priority": 2,
-      "children_total": 4,
+      "children_total": 5,
       "children_closed": 0,
       "children_in_progress": 0,
-      "children_open": 4,
-      "progress": "0 / 4",
+      "children_open": 5,
+      "progress": "0 / 5",
       "percent_closed": 0,
       "children": [
         {
@@ -315,6 +315,13 @@
           "status": "open",
           "type": "feature",
           "priority": 2
+        },
+        {
+          "id": "bd-azl.5",
+          "title": "iOS Chrome: кнопка «Показать» не снимает spoiler gate",
+          "status": "open",
+          "type": "bug",
+          "priority": 1
         }
       ]
     },
@@ -358,11 +365,11 @@
       "title": "Библиотека и профиль",
       "status": "open",
       "priority": 2,
-      "children_total": 5,
+      "children_total": 6,
       "children_closed": 0,
       "children_in_progress": 0,
-      "children_open": 5,
-      "progress": "0 / 5",
+      "children_open": 6,
+      "progress": "0 / 6",
       "percent_closed": 0,
       "children": [
         {
@@ -399,6 +406,13 @@
           "status": "open",
           "type": "feature",
           "priority": 2
+        },
+        {
+          "id": "bd-cq7.6",
+          "title": "iOS Chrome: пустая страница Профиль (/library)",
+          "status": "open",
+          "type": "bug",
+          "priority": 1
         }
       ]
     },
@@ -677,6 +691,24 @@
     }
   ],
   "issues": [
+    {
+      "id": "bd-cq7.6",
+      "title": "iOS Chrome: пустая страница Профиль (/library)",
+      "status": "open",
+      "type": "bug",
+      "priority": 1,
+      "parent": "bd-cq7",
+      "updated_at": "2026-07-23T16:20:57Z"
+    },
+    {
+      "id": "bd-azl.5",
+      "title": "iOS Chrome: кнопка «Показать» не снимает spoiler gate",
+      "status": "open",
+      "type": "bug",
+      "priority": 1,
+      "parent": "bd-azl",
+      "updated_at": "2026-07-23T16:20:56Z"
+    },
     {
       "id": "bd-6v0.10",
       "title": "Поиск: префикс запроса не находит полные совпадения (роул → Роулинг)",
@@ -1472,38 +1504,38 @@
     {
       "id": "bd-6b7.2",
       "title": "PWA: offline shell",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 3,
       "parent": "bd-6b7",
-      "updated_at": "2026-07-17T12:36:37Z"
+      "updated_at": "2026-07-23T10:35:29Z"
     },
     {
       "id": "bd-6b7.3",
       "title": "PWA: App shell и tab-bar",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 3,
       "parent": "bd-6b7",
-      "updated_at": "2026-07-17T12:36:37Z"
+      "updated_at": "2026-07-23T10:43:32Z"
     },
     {
       "id": "bd-6b7.1",
       "title": "PWA: установка",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 3,
       "parent": "bd-6b7",
-      "updated_at": "2026-07-17T12:36:36Z"
+      "updated_at": "2026-07-23T10:29:57Z"
     },
     {
       "id": "bd-6b7",
       "title": "PWA и оболочка",
-      "status": "open",
+      "status": "closed",
       "type": "epic",
       "priority": 3,
       "parent": null,
-      "updated_at": "2026-07-17T12:36:35Z"
+      "updated_at": "2026-07-23T10:45:02Z"
     }
   ]
 }

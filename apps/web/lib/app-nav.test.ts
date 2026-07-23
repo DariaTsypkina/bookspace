@@ -35,15 +35,29 @@ describe('profileNavHref', () => {
 });
 
 describe('getNavItems', () => {
-  it('returns exactly Главная · Поиск · Профиль for guest', () => {
+  it('returns exactly Главная · Поиск · Рейтинги · Подборки · Профиль for guest', () => {
     const items = getNavItems(null);
-    expect(items.map((item) => item.id)).toEqual(['home', 'search', 'profile']);
+    expect(items.map((item) => item.id)).toEqual([
+      'home',
+      'search',
+      'rankings',
+      'collections',
+      'profile',
+    ]);
     expect(items.map((item) => item.label)).toEqual([
       'Главная',
       'Поиск',
+      'Рейтинги',
+      'Подборки',
       'Профиль',
     ]);
-    expect(items.map((item) => item.href)).toEqual(['/', '/search', '/login']);
+    expect(items.map((item) => item.href)).toEqual([
+      '/',
+      '/search',
+      '/rankings',
+      '/collections',
+      '/login',
+    ]);
   });
 
   it('points Профиль to /library for authenticated USER', () => {
@@ -53,6 +67,7 @@ describe('getNavItems', () => {
       role: 'USER',
       slug: 'reader',
     });
+    expect(items).toHaveLength(5);
     expect(items.find((item) => item.id === 'profile')?.href).toBe('/library');
   });
 
@@ -63,16 +78,10 @@ describe('getNavItems', () => {
       role: 'ADMIN',
       slug: 'admin',
     });
-    expect(items).toHaveLength(3);
+    expect(items).toHaveLength(5);
     expect(items.some((item) => /admin/i.test(item.label))).toBe(false);
     expect(items.some((item) => item.href.startsWith('/admin'))).toBe(false);
     expect(items.find((item) => item.id === 'profile')?.href).toBe('/library');
-  });
-
-  it('does not include Рейтинги or Подборки', () => {
-    const labels = getNavItems(null).map((item) => item.label);
-    expect(labels).not.toContain('Рейтинги');
-    expect(labels).not.toContain('Подборки');
   });
 });
 
@@ -81,13 +90,19 @@ describe('getActiveNavId', () => {
     ['/', 'home'],
     ['/search', 'search'],
     ['/search?q=гарри', 'search'],
+    ['/rankings', 'rankings'],
+    ['/rankings/best-2024', 'rankings'],
+    ['/collections', 'collections'],
+    ['/collections/summer', 'collections'],
     ['/login', 'profile'],
     ['/register', 'profile'],
     ['/library', 'profile'],
     ['/library/shelves', 'profile'],
+    ['/u/demo-reader', 'profile'],
     ['/books/harry-potter', null],
+    ['/admin', null],
     ['/admin/context', null],
-    ['/u/demo-reader', null],
+    ['/admin/rankings', null],
   ])('maps %s → %s', (pathname, expected) => {
     expect(getActiveNavId(pathname)).toBe(expected);
   });
