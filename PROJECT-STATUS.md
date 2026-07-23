@@ -22,7 +22,7 @@
 | 8 | Подборки | ⬜ | 0 / 3 | `bd-b75` |
 | 9 | Рекомендации | 🔒 | 0 / 3 | `bd-ada` |
 | 10 | Админка | ⬜ | 0 / 8 | `bd-i5b` |
-| 11 | PWA и оболочка | 🔄 | 3 / 4 | `bd-6b7` |
+| 11 | PWA и оболочка | 🔄 | 4 / 4 | `bd-6b7` |
 
 ---
 
@@ -165,13 +165,13 @@
 | ⬜ | `bd-i5b.7` | Админка: Очередь не сматченного |
 | ⬜ | `bd-i5b.8` | Админка: Журнал аудита |
 
-### 11. PWA и оболочка — 🔄 · epic `bd-6b7` · 3 / 4
+### 11. PWA и оболочка — 🔄 · epic `bd-6b7` · 4 / 4
 
 | Статус | ID | Задача |
 |--------|-----|--------|
 | ✅ | `bd-6b7.1` | PWA: установка |
 | ✅ | `bd-6b7.2` | PWA: offline shell |
-| ⬜ | `bd-6b7.3` | PWA: App shell и tab-bar |
+| ✅ | `bd-6b7.3` | PWA: App shell и tab-bar |
 | ✅ | `bd-6b7.4` | UI: строка меню (Главная · Поиск · Профиль) — MVP-срез |
 
 ---
@@ -180,6 +180,10 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-23 | `bd-6b7.3` close-prep: 5-tab shell (Главная·Поиск·Рейтинги·Подборки·Профиль); stubs `/rankings` `/collections`; unit app-nav green (suite 186); Playwright app-nav **12/12** desktop+mobile; manual `e2e/manual/app-shell-tab-bar.md`; ветка `task/bd-6b7.3-app-shell-tab-bar`; `bd close` за оркестратором |
+| 2026-07-23 | `bd-6b7.3` в работе: conventions (design/acceptance/notes/labels area:web+sec:pwa+ui+mobile); TDD 5-tab (Главная·Поиск·Рейтинги·Подборки·Профиль); stubs `/rankings` `/collections`; ветка `task/bd-6b7.3-app-shell-tab-bar`; `bd close` за оркестратором |
+| 2026-07-23 | Оркестратор: claim `bd-6b7.3` (5-tab app shell); ветка `task/bd-6b7.3-app-shell-tab-bar` |
+| 2026-07-23 | `bd-6b7.2` closed: native SW + /offline + LRU recent; unit offline 10/10 (suite 181); Playwright pwa-offline-shell 10/10 desktop+mobile; merge → `feat/bookspace-bd-6b7` |
 | 2026-07-23 | `bd-6b7.2` close-prep: native SW + Cache Storage + `/offline` (без npm PWA-libs); unit **181**; Playwright pwa-offline-shell **10/10** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); manual `e2e/manual/pwa-offline-shell.md`; ветка `task/bd-6b7.2-pwa-offline-shell`; `bd close` за оркестратором |
 | 2026-07-23 | `bd-6b7.2` в работе: conventions (design/acceptance/notes/labels area:web+sec:pwa+mobile); TDD native SW + Cache Storage + `/offline`; unit offline-cache/register; Playwright pwa-offline-shell; manual `e2e/manual/pwa-offline-shell.md`; ветка `task/bd-6b7.2-pwa-offline-shell`; `bd close` за оркестратором |
 | 2026-07-23 | Оркестратор: claim `bd-6b7.2` (PWA offline shell); ветка `task/bd-6b7.2-pwa-offline-shell` |

@@ -15,10 +15,12 @@ describe('AppNav Tailwind+shadcn migration (N1 / bd-wus.3)', () => {
     expect(appNavSource).not.toMatch(/app-nav-link/);
   });
 
-  it('uses Lucide icons for nav items', () => {
+  it('uses Lucide icons for all five nav items', () => {
     expect(appNavSource).toMatch(/from ['"]lucide-react['"]/);
     expect(appNavSource).toMatch(/\bHome\b/);
     expect(appNavSource).toMatch(/\bSearch\b/);
+    expect(appNavSource).toMatch(/\bTrophy\b/);
+    expect(appNavSource).toMatch(/\bLayers\b/);
     expect(appNavSource).toMatch(/\bUser\b/);
   });
 
