@@ -42,4 +42,15 @@ test.describe('Catalog search smoke', () => {
     await expect(page).toHaveURL(/\/search\?q=/);
     await expect(page.getByText('Автор')).toBeVisible();
   });
+
+  test('prefix query finds full author name (роул → Роулинг)', async ({
+    page,
+  }) => {
+    await page.goto('/search?q=роул');
+    await expect(
+      page.getByRole('list', { name: 'Результаты поиска' }),
+    ).toBeVisible();
+    await expect(page.getByText('Автор')).toBeVisible();
+    await expect(page.getByRole('link', { name: /роулинг/i })).toBeVisible();
+  });
 });
