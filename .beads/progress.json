@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-27T09:17:33.790Z",
+  "generated_at": "2026-07-27T09:49:52.086Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 94,
-    "open_issues": 39,
-    "in_progress_issues": 0,
+    "open_issues": 38,
+    "in_progress_issues": 1,
     "closed_issues": 55,
     "blocked_issues": 7,
-    "ready_issues": 32
+    "ready_issues": 31
   },
   "epics": [
     {
@@ -59,8 +59,8 @@
       "priority": 1,
       "children_total": 10,
       "children_closed": 9,
-      "children_in_progress": 0,
-      "children_open": 1,
+      "children_in_progress": 1,
+      "children_open": 0,
       "progress": "9 / 10",
       "percent_closed": 90,
       "children": [
@@ -74,7 +74,7 @@
         {
           "id": "bd-6v0.10",
           "title": "Поиск: префикс запроса не находит полные совпадения (роул → Роулинг)",
-          "status": "open",
+          "status": "in_progress",
           "type": "bug",
           "priority": 1
         },
@@ -712,11 +712,11 @@
     {
       "id": "bd-6v0.10",
       "title": "Поиск: префикс запроса не находит полные совпадения (роул → Роулинг)",
-      "status": "open",
+      "status": "in_progress",
       "type": "bug",
       "priority": 1,
       "parent": "bd-6v0",
-      "updated_at": "2026-07-23T08:11:45Z"
+      "updated_at": "2026-07-27T09:19:36Z"
     },
     {
       "id": "bd-957.4",
