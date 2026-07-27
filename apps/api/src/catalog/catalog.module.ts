@@ -10,6 +10,8 @@ import { CatalogWorldController } from './catalog-world.controller';
 import { CatalogWorldService } from './catalog-world.service';
 import { CatalogSearchController } from './catalog-search.controller';
 import { CatalogSearchService } from './catalog-search.service';
+import { CatalogContextReadingController } from './catalog-context-reading.controller';
+import { CatalogContextReadingService } from './catalog-context-reading.service';
 import { CatalogWorkController } from './catalog-work.controller';
 import { CatalogWorkService } from './catalog-work.service';
 
@@ -17,6 +19,7 @@ import { CatalogWorkService } from './catalog-work.service';
   imports: [PrismaModule],
   controllers: [
     CatalogSearchController,
+    CatalogContextReadingController,
     CatalogWorkController,
     CatalogAuthorController,
     CatalogCharacterController,
@@ -25,6 +28,7 @@ import { CatalogWorkService } from './catalog-work.service';
   ],
   providers: [
     CatalogSearchService,
+    CatalogContextReadingService,
     CatalogWorkService,
     CatalogAuthorService,
     CatalogCharacterService,
@@ -33,6 +37,7 @@ import { CatalogWorkService } from './catalog-work.service';
   ],
   exports: [
     CatalogSearchService,
+    CatalogContextReadingService,
     CatalogWorkService,
     CatalogAuthorService,
     CatalogCharacterService,

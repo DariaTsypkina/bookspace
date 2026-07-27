@@ -38,7 +38,9 @@ test.describe('Auth email/password e2e', () => {
     await page.getByLabel('Пароль').fill('weak');
     await page.getByRole('button', { name: 'Зарегистрироваться' }).click();
 
-    await expect(page.locator('.auth-error')).toContainText('8 символов');
+    await expect(page.locator('main').getByRole('alert')).toContainText(
+      '8 символов',
+    );
   });
 
   test('login shows error for invalid credentials', async ({ page }) => {
@@ -47,7 +49,7 @@ test.describe('Auth email/password e2e', () => {
     await page.getByLabel('Пароль').fill('Wrong123!');
     await page.getByRole('button', { name: 'Войти' }).click();
 
-    await expect(page.locator('.auth-error')).toContainText(
+    await expect(page.locator('main').getByRole('alert')).toContainText(
       'Неверный email или пароль',
     );
   });
@@ -67,6 +69,8 @@ test.describe('Auth email/password e2e', () => {
     await page.getByLabel('Пароль').fill(password);
     await page.getByRole('button', { name: 'Зарегистрироваться' }).click();
 
-    await expect(page.locator('.auth-error')).toContainText('уже существует');
+    await expect(page.locator('main').getByRole('alert')).toContainText(
+      'уже существует',
+    );
   });
 });

@@ -3,6 +3,8 @@
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Suspense } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 
 function providerLabel(provider: string | null): string {
   if (provider === 'yandex') return 'Яндекс';
@@ -33,14 +35,20 @@ function AuthErrorContent() {
   const message = messageFor(reason, provider);
 
   return (
-    <main className="auth-page">
-      <h1>Ошибка входа</h1>
-      <p role="alert" className="auth-error">
-        {message}
-      </p>
-      <p>
+    <main className="mx-auto flex w-full max-w-sm flex-1 flex-col items-center justify-center gap-4 px-4 py-8">
+      <h1 className="text-[1.75rem] font-normal tracking-[0.02em] text-foreground">
+        Ошибка входа
+      </h1>
+      <Card className="w-full">
+        <CardContent className="p-5">
+          <p role="alert" className="text-sm text-[color:var(--error)]">
+            {message}
+          </p>
+        </CardContent>
+      </Card>
+      <Button asChild variant="outline" className="w-full">
         <Link href="/login">Вернуться ко входу</Link>
-      </p>
+      </Button>
     </main>
   );
 }
@@ -49,8 +57,10 @@ export default function AuthErrorPage() {
   return (
     <Suspense
       fallback={
-        <main className="auth-page">
-          <h1>Ошибка входа</h1>
+        <main className="mx-auto flex w-full max-w-sm flex-1 flex-col items-center justify-center gap-4 px-4 py-8">
+          <h1 className="text-[1.75rem] font-normal tracking-[0.02em] text-foreground">
+            Ошибка входа
+          </h1>
         </main>
       }
     >

@@ -27,6 +27,12 @@ async function proxyAuth(
   if (cookie) {
     headers.set('cookie', cookie);
   }
+  const e2eHeader = request.headers.get('x-e2e');
+  if (e2eHeader) {
+    headers.set('x-e2e', e2eHeader);
+  } else if (process.env.E2E_THROTTLE_BYPASS === 'true') {
+    headers.set('x-e2e', '1');
+  }
 
   const method = request.method.toUpperCase();
   const hasBody = method !== 'GET' && method !== 'HEAD';

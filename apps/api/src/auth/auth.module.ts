@@ -3,10 +3,13 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { AdminController } from '../admin/admin.controller';
 import { MeLibraryController } from '../me/me-library.controller';
+import { AuthRateLimiterFactory } from './auth-rate-limiter.factory';
+import { AuthRateLimiterService } from './auth-rate-limiter.service';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { GoogleOAuthClient } from './google-oauth.client';
 import { AuthGuard } from './guards/auth.guard';
+import { AuthRateLimitGuard } from './guards/auth-rate-limit.guard';
 import { RolesGuard } from './guards/roles.guard';
 import { YandexOAuthClient } from './yandex-oauth.client';
 
@@ -24,9 +27,16 @@ import { YandexOAuthClient } from './yandex-oauth.client';
   controllers: [AuthController, AdminController, MeLibraryController],
   providers: [
     AuthService,
+    AuthRateLimiterFactory,
+    {
+      provide: AuthRateLimiterService,
+      inject: [AuthRateLimiterFactory],
+      useFactory: (factory: AuthRateLimiterFactory) => factory.create(),
+    },
     GoogleOAuthClient,
     YandexOAuthClient,
     AuthGuard,
+    AuthRateLimitGuard,
     RolesGuard,
   ],
   exports: [AuthService, JwtModule, AuthGuard, RolesGuard],

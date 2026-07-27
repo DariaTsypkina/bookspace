@@ -1,5 +1,5 @@
 ---
-description: UI русский язык, навигация, PWA
+description: UI русский язык, навигация, PWA, UI-kit
 globs: "**/apps/web/**,**/components/**"
 alwaysApply: false
 ---
@@ -12,5 +12,13 @@ alwaysApply: false
 - Не показывать пользователю источники рейтингов/LLM
 - Секция «Для понимания» только при published ContextReading
 - Spoiler cookie ~30 дней; PWA: shell + recent pages, не весь каталог
+
+## UI-kit (ADR 0003 accepted)
+
+- **Новый UI и новые экраны — только** Tailwind + `components/ui` (shadcn/Radix) + Lucide ([ADR 0003](../../docs/adr/0003-tailwind-shadcn.md), [stack-and-architecture](../../docs/tech/stack-and-architecture.md))
+- Иконки: **lucide-react**
+- **Запрещено** добавлять новые селекторы/блоки в legacy `globals.css` для новых экранов или нового UI; legacy — только до миграции существующего экрана
+- При касании экрана — перенос на Tailwind + вычистка мёртвых селекторов этого экрана (см. [migration-tailwind-shadcn](../../docs/tech/migration-tailwind-shadcn.md))
+- Другой UI-kit — только через новый ADR + согласование зависимостей
 
 Экраны: `docs/tech/screens.md`.

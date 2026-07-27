@@ -17,8 +17,8 @@ bd prime
 
 `bd prime` is the single source of truth for operational commands and session workflow.
 
-Full feature orchestration (epic → brainstorm → plan → review → finish; skip steps forbidden): `docs/tech/feature-workflow.md`.  
-Human requests (bugs, enhancements): classify epic + feature-doc, `bd create`, separate branch from `develop` — `docs/tech/human-intake-workflow.md`; ask the human if placement is unclear.  
+Full feature orchestration (epic → brainstorm → plan → review → close → assembly → develop; skip steps forbidden): `docs/tech/feature-workflow.md`.  
+Human requests (bugs, enhancements): classify epic + feature-doc, `bd create`, branch from assembly — `docs/tech/human-intake-workflow.md`; ask the human if placement is unclear.  
 Update `PROJECT-STATUS.md` on claim / close / new task / phase complete.  
 Issue templates / validation: `.cursor/rules/bd-conventions.mdc` (`validation.on-create=warn`, always pass `--description` and `--acceptance` for feature/task/epic).
 
@@ -62,10 +62,17 @@ bd create -t epic "Goal"   # large goals only (Auth, Catalog, …); children via
 bd dep add <issue> <depends-on>
 ```
 
-5. Close completed work:
+5. Close + merge (**оркестратор** после handoff; на ветке задачи → сборочная; см. `docs/tech/feature-workflow.md` § Close + merge):
 
 ```bash
-bd close <id> --reason="Completed"
+# на task/bd-<id>-…
+bd close <id> --reason="<итог + evidence>"
+bd show <id>   # must be closed
+git add .beads PROJECT-STATUS.md && git commit -m "chore: bd-<id> close + dashboard"
+git checkout feat/bookspace-bd-<epic>
+git merge --no-ff task/bd-<id>-…
+bd import .beads/issues.jsonl && bd show <id>   # Dolt insurance; re-close on assembly if needed
+# commit .beads if changed; delete task branch / worktree
 ```
 
 ## What Belongs In Beads

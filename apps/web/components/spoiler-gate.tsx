@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 import {
   buildSpoilersOkCookie,
   hasSpoilersConsent,
@@ -44,19 +46,29 @@ export function SpoilerGate({ initialAccepted, children }: SpoilerGateProps) {
   }
 
   return (
-    <section className="spoiler-gate" aria-label="Предупреждение о спойлерах">
-      <p className="spoiler-gate-warning">Могут быть спойлеры</p>
-      <button
-        type="button"
-        className="spoiler-gate-button"
-        onClick={() => {
-          persistSpoilersConsent();
-          setAccepted(true);
-        }}
-      >
-        Показать
-      </button>
-    </section>
+    <Card className="border-dashed shadow-none">
+      <CardContent className="px-4 py-4">
+        <section
+          aria-label="Предупреждение о спойлерах"
+          className="flex flex-col gap-3"
+        >
+          <p className="font-sans text-[0.95rem] text-muted">
+            Могут быть спойлеры
+          </p>
+          <Button
+            type="button"
+            variant="outline"
+            className="self-start"
+            onClick={() => {
+              persistSpoilersConsent();
+              setAccepted(true);
+            }}
+          >
+            Показать
+          </Button>
+        </section>
+      </CardContent>
+    </Card>
   );
 }
 
