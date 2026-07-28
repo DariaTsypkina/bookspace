@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { buildPrefixTsQuery } from './catalog-search-query';
 import {
   CATALOG_ENTITY_PATHS,
   type CatalogSearchEntityType,
@@ -31,12 +32,17 @@ export class CatalogSearchService {
       return { query: '', items: [], hints: EMPTY_QUERY_HINTS };
     }
 
+    const prefixTsQuery = buildPrefixTsQuery(query);
+    if (!prefixTsQuery) {
+      return { query, items: [] };
+    }
+
     const rows = await this.prisma.$queryRaw<RawSearchRow[]>(
       Prisma.sql`
         WITH search_query AS (
           SELECT
-            websearch_to_tsquery('russian', ${query})
-            || websearch_to_tsquery('simple', ${query}) AS tsq
+            to_tsquery('russian', ${prefixTsQuery})
+            || to_tsquery('simple', ${prefixTsQuery}) AS tsq
         )
         SELECT * FROM (
           SELECT
