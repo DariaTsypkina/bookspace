@@ -30,6 +30,24 @@ export default tseslint.config(
       '@typescript-eslint/no-floating-promises': 'warn',
       '@typescript-eslint/no-unsafe-argument': 'warn',
       'prettier/prettier': ['error', { endOfLine: 'auto' }],
+      // ADR 0005: outbound HTTP via Nest HttpService only (no native fetch).
+      'no-restricted-globals': [
+        'error',
+        {
+          name: 'fetch',
+          message:
+            'Use Nest HttpService (@nestjs/axios). Native fetch is not allowed in apps/api (ADR 0005).',
+        },
+      ],
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector:
+            "CallExpression[callee.object.name='globalThis'][callee.property.name='fetch']",
+          message:
+            'Use Nest HttpService (@nestjs/axios). Native fetch is not allowed in apps/api (ADR 0005).',
+        },
+      ],
     },
   },
 );
