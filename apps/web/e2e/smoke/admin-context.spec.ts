@@ -43,25 +43,26 @@ test.describe('Admin context smoke', () => {
   });
 
   test('admin can edit and unpublish a recent reading', async ({ page }) => {
-    const prefix = `pw-admin-context-${Date.now()}`;
+    const prefix = `pw-admin-context-${Date.now()}-${test.info().project.name}`;
     runFixture(prefix, 'seed');
 
     try {
       await loginAsAdmin(page);
       await page.goto('/admin/context');
-      await expect(page.getByText('PW Subject')).toBeVisible();
-      await expect(page.getByText('PW Rec')).toBeVisible();
 
-      const whyField = page.getByLabel('Почему (RU)').first();
+      const subjectByHref = page.locator(`a[href="/books/${prefix}-subject"]`);
+      const recByHref = page.locator(`a[href="/books/${prefix}-rec"]`);
+      await expect(subjectByHref).toBeVisible();
+      await expect(recByHref).toBeVisible();
+
+      const card = page.locator('li').filter({ has: subjectByHref });
+      const whyField = card.getByLabel('Почему (RU)');
       await whyField.fill('Обновлено в Playwright');
-      await page.getByRole('button', { name: 'Сохранить' }).first().click();
+      await card.getByRole('button', { name: 'Сохранить' }).click();
       await expect(whyField).toHaveValue('Обновлено в Playwright');
 
-      await page
-        .getByRole('button', { name: 'Снять с публикации' })
-        .first()
-        .click();
-      await expect(page.getByText('PW Subject')).not.toBeVisible();
+      await card.getByRole('button', { name: 'Снять с публикации' }).click();
+      await expect(subjectByHref).toHaveCount(0);
     } finally {
       runFixture(prefix, 'cleanup');
     }

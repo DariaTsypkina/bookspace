@@ -70,18 +70,18 @@
 | ✅ | `bd-wus.17` | Конвенция: новый UI только на стеке |
 | ✅ | `bd-wus.18` | Корневой layout: `.app-shell` / `.app-content` → Tailwind |
 
-### DX — RHF + Zod full contour — ⬜ · epic `bd-0t0` · 0 / 11 · ADR [0004](docs/adr/0004-rhf-zod-full-contour.md) **accepted**
+### DX — RHF + Zod full contour — 🔄 · epic `bd-0t0` · 5 / 11 · ADR [0004](docs/adr/0004-rhf-zod-full-contour.md) **accepted**
 
 План: [migration-rhf-zod.md](docs/tech/migration-rhf-zod.md). Цель: единый контур валидации и форм (shared schemas + RHF + nestjs-zod) и итоговый отказ от `class-validator` в runtime.
 
 | Статус | ID | Задача |
 |--------|-----|--------|
-| ⬜ | `bd-0t0.1` | RHF/Zod foundation: packages/schemas + naming |
-| ⬜ | `bd-0t0.2` | RHF/Zod foundation: web form pattern on shadcn Form |
-| ⬜ | `bd-0t0.3` | RHF/Zod foundation: api validation pipe + OpenAPI |
-| ⬜ | `bd-0t0.4` | Wave 1: миграция login/register end-to-end |
-| ⬜ | `bd-0t0.5` | Wave 1: миграция catalog search end-to-end |
-| ⬜ | `bd-0t0.6` | Wave 1: миграция admin context end-to-end |
+| ✅ | `bd-0t0.1` | RHF/Zod foundation: packages/schemas + naming |
+| ✅ | `bd-0t0.2` | RHF/Zod foundation: web form pattern on shadcn Form |
+| ✅ | `bd-0t0.3` | RHF/Zod foundation: api validation pipe + OpenAPI |
+| ✅ | `bd-0t0.4` | Wave 1: миграция login/register end-to-end |
+| ✅ | `bd-0t0.5` | Wave 1: миграция catalog search end-to-end |
+| 🔄 | `bd-0t0.6` | Wave 1: миграция admin context end-to-end |
 | ⬜ | `bd-0t0.7` | Wave 2: миграция домена Catalog pages DTO/forms |
 | ⬜ | `bd-0t0.8` | Wave 2: миграция домена Library/Profile DTO/forms |
 | ⬜ | `bd-0t0.9` | Wave 2: миграция домена Relations/Spoiler DTO/forms |
