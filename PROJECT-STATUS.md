@@ -37,6 +37,7 @@
 | Статус | ID | Задача |
 |--------|-----|--------|
 | ✅ | `bd-wus` | **Эпик DX: Tailwind + shadcn** (ADR 0003 accepted) — 18 / 18 |
+| ⬜ | `bd-0t0` | **Эпик DX: RHF + Zod full contour** (ADR 0004 accepted) — 0 / 11 |
 | ✅ | `bd-ky6` | Chore: синхронизировать beads interactions.jsonl |
 | ✅ | `bd-0e6` | Docs: согласование зависимостей агентом |
 | ✅ | `bd-rtp` | Docs: human intake workflow и /task skill |
@@ -68,6 +69,24 @@
 | ✅ | `bd-wus.16` | Экран: Admin Context `/admin/context` |
 | ✅ | `bd-wus.17` | Конвенция: новый UI только на стеке |
 | ✅ | `bd-wus.18` | Корневой layout: `.app-shell` / `.app-content` → Tailwind |
+
+### DX — RHF + Zod full contour — ⬜ · epic `bd-0t0` · 0 / 11 · ADR [0004](docs/adr/0004-rhf-zod-full-contour.md) **accepted**
+
+План: [migration-rhf-zod.md](docs/tech/migration-rhf-zod.md). Цель: единый контур валидации и форм (shared schemas + RHF + nestjs-zod) и итоговый отказ от `class-validator` в runtime.
+
+| Статус | ID | Задача |
+|--------|-----|--------|
+| ⬜ | `bd-0t0.1` | RHF/Zod foundation: packages/schemas + naming |
+| ⬜ | `bd-0t0.2` | RHF/Zod foundation: web form pattern on shadcn Form |
+| ⬜ | `bd-0t0.3` | RHF/Zod foundation: api validation pipe + OpenAPI |
+| ⬜ | `bd-0t0.4` | Wave 1: миграция login/register end-to-end |
+| ⬜ | `bd-0t0.5` | Wave 1: миграция catalog search end-to-end |
+| ⬜ | `bd-0t0.6` | Wave 1: миграция admin context end-to-end |
+| ⬜ | `bd-0t0.7` | Wave 2: миграция домена Catalog pages DTO/forms |
+| ⬜ | `bd-0t0.8` | Wave 2: миграция домена Library/Profile DTO/forms |
+| ⬜ | `bd-0t0.9` | Wave 2: миграция домена Relations/Spoiler DTO/forms |
+| ⬜ | `bd-0t0.10` | Wave 2: миграция домена Rankings/Collections/Admin DTO/forms |
+| ⬜ | `bd-0t0.11` | Finalization: remove class-validator and legacy cleanup |
 
 ### 1. Auth — ✅ · epic `bd-957` · 6 / 6 (эпик закрыт)
 
@@ -182,6 +201,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-28 | Создан DX-эпик `bd-0t0` (RHF + Zod full contour, ADR 0004 accepted) + декомпозиция `bd-0t0.1`…`bd-0t0.11` с зависимостями (foundation → wave1 → wave2 → finalization) |
 | 2026-07-23 | `/task`: `bd-azl.5` — iOS Chrome spoiler «Показать» не снимает gate; `bd-cq7.6` — iOS Chrome пустой Профиль `/library` (iPhone 17, human-reported) |
 | 2026-07-23 | Эпик `bd-6b7` closed (4/4): target verify web unit **186** + Playwright pwa-install+offline+app-nav **30/30**; сборочная `feat/bookspace-bd-6b7` — ЗАЛИВАТЬ develop=Нет (push only) |
 | 2026-07-23 | `bd-6b7.3` closed: 5-tab shell + stubs; unit suite 186; Playwright app-nav 12/12; merge → `feat/bookspace-bd-6b7` |

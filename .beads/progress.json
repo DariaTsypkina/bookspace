@@ -1,15 +1,106 @@
 {
-  "generated_at": "2026-07-23T16:48:05.609Z",
+  "generated_at": "2026-07-29T09:29:51.337Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 94,
-    "open_issues": 39,
+    "total_issues": 106,
+    "open_issues": 50,
     "in_progress_issues": 0,
-    "closed_issues": 55,
-    "blocked_issues": 7,
-    "ready_issues": 32
+    "closed_issues": 56,
+    "blocked_issues": 17,
+    "ready_issues": 33
   },
   "epics": [
+    {
+      "id": "bd-0t0",
+      "title": "DX: RHF + Zod full contour",
+      "status": "open",
+      "priority": 2,
+      "children_total": 11,
+      "children_closed": 0,
+      "children_in_progress": 0,
+      "children_open": 11,
+      "progress": "0 / 11",
+      "percent_closed": 0,
+      "children": [
+        {
+          "id": "bd-0t0.1",
+          "title": "RHF/Zod foundation: packages/schemas + naming",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.10",
+          "title": "Wave 2: миграция домена Rankings/Collections/Admin DTO/forms",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.11",
+          "title": "Finalization: remove class-validator and legacy cleanup",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.2",
+          "title": "RHF/Zod foundation: web form pattern on shadcn Form",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.3",
+          "title": "RHF/Zod foundation: api validation pipe + OpenAPI",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.4",
+          "title": "Wave 1: миграция login/register end-to-end",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.5",
+          "title": "Wave 1: миграция catalog search end-to-end",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.6",
+          "title": "Wave 1: миграция admin context end-to-end",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.7",
+          "title": "Wave 2: миграция домена Catalog pages DTO/forms",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.8",
+          "title": "Wave 2: миграция домена Library/Profile DTO/forms",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.9",
+          "title": "Wave 2: миграция домена Relations/Spoiler DTO/forms",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        }
+      ]
+    },
     {
       "id": "bd-6b7",
       "title": "PWA и оболочка",
@@ -58,11 +149,11 @@
       "status": "closed",
       "priority": 1,
       "children_total": 10,
-      "children_closed": 9,
+      "children_closed": 10,
       "children_in_progress": 0,
-      "children_open": 1,
-      "progress": "9 / 10",
-      "percent_closed": 90,
+      "children_open": 0,
+      "progress": "10 / 10",
+      "percent_closed": 100,
       "children": [
         {
           "id": "bd-6v0.1",
@@ -74,7 +165,7 @@
         {
           "id": "bd-6v0.10",
           "title": "Поиск: префикс запроса не находит полные совпадения (роул → Роулинг)",
-          "status": "open",
+          "status": "closed",
           "type": "bug",
           "priority": 1
         },
@@ -712,11 +803,11 @@
     {
       "id": "bd-6v0.10",
       "title": "Поиск: префикс запроса не находит полные совпадения (роул → Роулинг)",
-      "status": "open",
+      "status": "closed",
       "type": "bug",
       "priority": 1,
       "parent": "bd-6v0",
-      "updated_at": "2026-07-23T08:11:45Z"
+      "updated_at": "2026-07-27T09:57:41Z"
     },
     {
       "id": "bd-957.4",
@@ -825,6 +916,114 @@
       "priority": 1,
       "parent": "bd-957",
       "updated_at": "2026-07-20T07:30:07Z"
+    },
+    {
+      "id": "bd-0t0.11",
+      "title": "Finalization: remove class-validator and legacy cleanup",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-28T14:33:25Z"
+    },
+    {
+      "id": "bd-0t0.10",
+      "title": "Wave 2: миграция домена Rankings/Collections/Admin DTO/forms",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-28T14:33:24Z"
+    },
+    {
+      "id": "bd-0t0.8",
+      "title": "Wave 2: миграция домена Library/Profile DTO/forms",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-28T14:33:23Z"
+    },
+    {
+      "id": "bd-0t0.9",
+      "title": "Wave 2: миграция домена Relations/Spoiler DTO/forms",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-28T14:33:23Z"
+    },
+    {
+      "id": "bd-0t0.7",
+      "title": "Wave 2: миграция домена Catalog pages DTO/forms",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-28T14:33:22Z"
+    },
+    {
+      "id": "bd-0t0.6",
+      "title": "Wave 1: миграция admin context end-to-end",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-28T14:33:21Z"
+    },
+    {
+      "id": "bd-0t0.5",
+      "title": "Wave 1: миграция catalog search end-to-end",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-28T14:33:20Z"
+    },
+    {
+      "id": "bd-0t0.4",
+      "title": "Wave 1: миграция login/register end-to-end",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-28T14:33:19Z"
+    },
+    {
+      "id": "bd-0t0.3",
+      "title": "RHF/Zod foundation: api validation pipe + OpenAPI",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-28T14:33:18Z"
+    },
+    {
+      "id": "bd-0t0.2",
+      "title": "RHF/Zod foundation: web form pattern on shadcn Form",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-28T14:33:17Z"
+    },
+    {
+      "id": "bd-0t0.1",
+      "title": "RHF/Zod foundation: packages/schemas + naming",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-28T14:33:16Z"
+    },
+    {
+      "id": "bd-0t0",
+      "title": "DX: RHF + Zod full contour",
+      "status": "open",
+      "type": "epic",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-28T14:33:00Z"
     },
     {
       "id": "bd-v3k",
