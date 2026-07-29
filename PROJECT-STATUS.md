@@ -37,7 +37,7 @@
 | Статус | ID | Задача |
 |--------|-----|--------|
 | ✅ | `bd-wus` | **Эпик DX: Tailwind + shadcn** (ADR 0003 accepted) — 18 / 18 |
-| 🔄 | `bd-0t0` | **Эпик DX: RHF + Zod full contour** (ADR 0004 accepted) — 6 / 11 |
+| 🔄 | `bd-0t0` | **Эпик DX: RHF + Zod full contour** (ADR 0004 accepted) — 7 / 11 |
 | ✅ | `bd-ky6` | Chore: синхронизировать beads interactions.jsonl |
 | ✅ | `bd-0e6` | Docs: согласование зависимостей агентом |
 | ✅ | `bd-rtp` | Docs: human intake workflow и /task skill |
@@ -70,7 +70,7 @@
 | ✅ | `bd-wus.17` | Конвенция: новый UI только на стеке |
 | ✅ | `bd-wus.18` | Корневой layout: `.app-shell` / `.app-content` → Tailwind |
 
-### DX — RHF + Zod full contour — 🔄 · epic `bd-0t0` · 6 / 11 · ADR [0004](docs/adr/0004-rhf-zod-full-contour.md) **accepted**
+### DX — RHF + Zod full contour — 🔄 · epic `bd-0t0` · 7 / 11 · ADR [0004](docs/adr/0004-rhf-zod-full-contour.md) **accepted**
 
 План: [migration-rhf-zod.md](docs/tech/migration-rhf-zod.md). Цель: единый контур валидации и форм (shared schemas + RHF + nestjs-zod) и итоговый отказ от `class-validator` в runtime.
 
@@ -82,8 +82,8 @@
 | ✅ | `bd-0t0.4` | Wave 1: миграция login/register end-to-end |
 | ✅ | `bd-0t0.5` | Wave 1: миграция catalog search end-to-end |
 | ✅ | `bd-0t0.6` | Wave 1: миграция admin context end-to-end |
-| 🔄 | `bd-0t0.7` | Wave 2: миграция домена Catalog pages DTO/forms |
-| ⬜ | `bd-0t0.8` | Wave 2: миграция домена Library/Profile DTO/forms |
+| ✅ | `bd-0t0.7` | Wave 2: миграция домена Catalog pages DTO/forms |
+| 🔄 | `bd-0t0.8` | Wave 2: миграция домена Library/Profile DTO/forms |
 | ⬜ | `bd-0t0.9` | Wave 2: миграция домена Relations/Spoiler DTO/forms |
 | ⬜ | `bd-0t0.10` | Wave 2: миграция домена Rankings/Collections/Admin DTO/forms |
 | ⬜ | `bd-0t0.11` | Finalization: remove class-validator and legacy cleanup |
