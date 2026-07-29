@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-29T12:44:01.756Z",
+  "generated_at": "2026-07-29T12:49:08.091Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 106,
+    "total_issues": 107,
     "open_issues": 39,
     "in_progress_issues": 0,
-    "closed_issues": 67,
+    "closed_issues": 68,
     "blocked_issues": 7,
     "ready_issues": 32
   },
@@ -15,11 +15,11 @@
       "title": "DX: RHF + Zod full contour",
       "status": "open",
       "priority": 2,
-      "children_total": 11,
-      "children_closed": 11,
+      "children_total": 12,
+      "children_closed": 12,
       "children_in_progress": 0,
       "children_open": 0,
-      "progress": "11 / 11",
+      "progress": "12 / 12",
       "percent_closed": 100,
       "children": [
         {
@@ -41,6 +41,13 @@
           "title": "Finalization: remove class-validator and legacy cleanup",
           "status": "closed",
           "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.12",
+          "title": "Playwright rankings/collections smoke: button count ловит Next.js Dev Tools",
+          "status": "closed",
+          "type": "bug",
           "priority": 2
         },
         {
@@ -916,6 +923,15 @@
       "priority": 1,
       "parent": "bd-957",
       "updated_at": "2026-07-20T07:30:07Z"
+    },
+    {
+      "id": "bd-0t0.12",
+      "title": "Playwright rankings/collections smoke: button count ловит Next.js Dev Tools",
+      "status": "closed",
+      "type": "bug",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T12:49:03Z"
     },
     {
       "id": "bd-0t0.11",
