@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
-test.describe('UI typography Roboto (bd-82j)', () => {
-  test('body and home heading use Roboto; no fonts.googleapis.com link', async ({
+test.describe('UI typography Baskerville (bd-23j)', () => {
+  test('body and home heading use Baskerville; no fonts.googleapis.com link', async ({
     page,
   }) => {
     await page.goto('/');
@@ -12,13 +12,14 @@ test.describe('UI typography Roboto (bd-82j)', () => {
     const bodyFont = await page.evaluate(
       () => getComputedStyle(document.body).fontFamily,
     );
-    expect(bodyFont.toLowerCase()).toContain('roboto');
+    expect(bodyFont.toLowerCase()).toContain('baskerville');
     expect(bodyFont.toLowerCase()).not.toMatch(/georgia/);
+    expect(bodyFont.toLowerCase()).not.toMatch(/roboto/);
 
     const headingFont = await heading.evaluate(
       (el) => getComputedStyle(el).fontFamily,
     );
-    expect(headingFont.toLowerCase()).toContain('roboto');
+    expect(headingFont.toLowerCase()).toContain('baskerville');
 
     const googleFontsLinks = page.locator(
       'link[href*="fonts.googleapis.com"], link[href*="fonts.gstatic.com"]',
@@ -26,7 +27,7 @@ test.describe('UI typography Roboto (bd-82j)', () => {
     await expect(googleFontsLinks).toHaveCount(0);
   });
 
-  test('login heading uses Roboto', async ({ page }) => {
+  test('login heading uses Baskerville', async ({ page }) => {
     await page.goto('/login');
 
     const heading = page.getByRole('heading', { name: 'Вход', level: 1 });
@@ -35,15 +36,15 @@ test.describe('UI typography Roboto (bd-82j)', () => {
     const headingFont = await heading.evaluate(
       (el) => getComputedStyle(el).fontFamily,
     );
-    expect(headingFont.toLowerCase()).toContain('roboto');
+    expect(headingFont.toLowerCase()).toContain('baskerville');
 
     const bodyFont = await page.evaluate(
       () => getComputedStyle(document.body).fontFamily,
     );
-    expect(bodyFont.toLowerCase()).toContain('roboto');
+    expect(bodyFont.toLowerCase()).toContain('baskerville');
   });
 
-  test('app nav labels remain readable with Roboto', async ({ page }) => {
+  test('app nav labels remain readable with Baskerville', async ({ page }) => {
     await page.goto('/');
 
     const nav = page.getByRole('navigation', { name: 'Основное меню' });
@@ -51,6 +52,6 @@ test.describe('UI typography Roboto (bd-82j)', () => {
     await expect(nav.getByRole('link', { name: 'Главная' })).toBeVisible();
 
     const navFont = await nav.evaluate((el) => getComputedStyle(el).fontFamily);
-    expect(navFont.toLowerCase()).toContain('roboto');
+    expect(navFont.toLowerCase()).toContain('baskerville');
   });
 });

@@ -36,19 +36,23 @@ describe('Root layout shell Tailwind migration (bd-wus.18)', () => {
   });
 });
 
-describe('Root layout Roboto typography (bd-82j)', () => {
-  it('loads Roboto via next/font/google with weights 400/500/700', () => {
-    expect(layoutSource).toMatch(/from\s+['"]next\/font\/google['"]/);
-    expect(layoutSource).toMatch(/\bRoboto\b/);
-    expect(layoutSource).toMatch(
-      /weight:\s*\[\s*['"]400['"]\s*,\s*['"]500['"]\s*,\s*['"]700['"]\s*\]/,
-    );
-    expect(layoutSource).toMatch(/variable:\s*['"]--font-roboto['"]/);
+describe('Root layout Baskerville typography (bd-23j)', () => {
+  it('loads Baskerville via next/font/local with woff2 400/700 normal+italic', () => {
+    expect(layoutSource).toMatch(/from\s+['"]next\/font\/local['"]/);
+    expect(layoutSource).not.toMatch(/from\s+['"]next\/font\/google['"]/);
+    expect(layoutSource).not.toMatch(/\bRoboto\b/);
+    expect(layoutSource).toMatch(/Baskerville-Regular\.woff2/);
+    expect(layoutSource).toMatch(/Baskerville-Italic\.woff2/);
+    expect(layoutSource).toMatch(/Baskerville-Bold\.woff2/);
+    expect(layoutSource).toMatch(/Baskerville-BoldItalic\.woff2/);
+    expect(layoutSource).toMatch(/weight:\s*['"]400['"]/);
+    expect(layoutSource).toMatch(/weight:\s*['"]700['"]/);
+    expect(layoutSource).toMatch(/variable:\s*['"]--font-baskerville['"]/);
   });
 
-  it('applies Roboto font class / CSS variable on html root', () => {
+  it('applies Baskerville font class / CSS variable on html root', () => {
     expect(layoutSource).toMatch(/<html\b[^>]*className=\{/);
-    expect(layoutSource).toMatch(/roboto\.(?:className|variable)/);
+    expect(layoutSource).toMatch(/baskerville\.(?:className|variable)/);
   });
 
   it('does not add runtime fonts.googleapis.com link tags', () => {
@@ -56,8 +60,9 @@ describe('Root layout Roboto typography (bd-82j)', () => {
     expect(layoutSource).not.toMatch(/fonts\.gstatic\.com/);
   });
 
-  it('body uses Roboto CSS variable, not Georgia as primary', () => {
-    expect(globalsSource).toMatch(/font-family:\s*var\(--font-roboto\)/);
+  it('body uses Baskerville CSS variable, not Georgia or Roboto as primary', () => {
+    expect(globalsSource).toMatch(/font-family:\s*var\(--font-baskerville\)/);
     expect(globalsSource).not.toMatch(/font-family:\s*Georgia/);
+    expect(globalsSource).not.toMatch(/--font-roboto/);
   });
 });
