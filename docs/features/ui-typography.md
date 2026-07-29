@@ -1,5 +1,9 @@
 # UI typography (Baskerville)
 
+## Для агентов
+
+В Bookspace **единственный** UI-шрифт — **Baskerville** (с кириллицей). Не предлагать и не подключать Roboto, Inter, Geist, Google Fonts или другой typeface без явной задачи человека. Токены: `--font-baskerville`, Tailwind `font-sans`. Файлы: `apps/web/fonts/Baskerville-*.woff2`. Layout: `apps/web/app/layout.tsx` (`next/font/local`). Form controls (`button`/`input`/…) часто не наследуют `font-family` с `body` — на примитивах `components/ui` задавать `font-sans` или `inherit`.
+
 ## Цель
 
 Единый UI-шрифт Bookspace: **Baskerville** (кириллица) через `next/font/local` (self-host woff2), начертания roman / italic / bold / bolditalic (веса 400 / 700).

@@ -61,6 +61,7 @@ docker-compose.yml # postgres, redis, api, web (dev)
 | Правило | Смысл |
 |---------|--------|
 | Новый UI и новые экраны | Только **Tailwind** + примитивы `components/ui` (shadcn/Radix) + **Lucide** |
+| UI-шрифт | **Baskerville** (кириллица): `next/font/local`, `apps/web/fonts/Baskerville-*.woff2`, `--font-baskerville`, Tailwind `font-sans` — [ui-typography](../features/ui-typography.md). Не подключать другой typeface / Google Fonts без задачи |
 | Legacy `globals.css` | Допустим только для ещё не мигрированных экранов; **запрещено** добавлять новые селекторы/блоки под новые экраны или новый UI |
 | On touch | При рефакторе экрана — перенос на стек ADR 0003 и вычистка мёртвых селекторов этого экрана из `globals.css` |
 | Другой UI-kit | Только новый ADR + согласование зависимостей |

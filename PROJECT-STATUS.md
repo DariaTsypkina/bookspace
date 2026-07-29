@@ -47,6 +47,7 @@
 | ✅ | `bd-v3k` | Docs: протокол `bd close` на ветке задачи + merge в сборочную |
 | ✅ | `bd-82j` | UI: Google Fonts Roboto на весь UI (400/500/700) — DX · сборочная `feat/bookspace-bd-82j` |
 | ✅ | `bd-23j` | UI: Baskerville (woff2, кириллица) на весь UI — DX · сборочная `feat/bookspace-bd-23j` |
+| ⬜ | `bd-p3l` | [bug] UI: Baskerville не на кнопках/инпутах — DX · сборочная `feat/bookspace-bd-23j` · discovered-from `bd-23j` |
 | ⬜ | `bd-v3x` | [bug] web: work-page-context-reading.integration stubs fetch (axios) — discovered-from bd-23j |
 
 ### DX — Tailwind + shadcn — ✅ · epic `bd-wus` · 18 / 18 · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
@@ -223,6 +224,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-29 | Docs на `feat/bookspace-bd-23j`: канон UI-шрифта Baskerville для агентов — `stack.mdc`, `ui-ru.mdc`, `AGENTS.md`, `stack-and-architecture`, `ui-typography` § Для агентов; `bd remember ui-font-baskerville` |
+| 2026-07-29 | Intake `/task`: `bd-p3l` bug — Baskerville не на button/input (UA не наследует font-family); feature-doc `ui-typography`; сборочная `feat/bookspace-bd-23j`; discovered-from `bd-23j` |
 | 2026-07-29 | Оркестратор: целевая проверка `feat/bookspace-bd-23j` PASS (unit typography 20/20, typecheck OK, PW 30/30); `bd-v3x` заведён (axios stub, вне diff); ЗАЛИВАТЬ develop=Нет — push сборочной |
 | 2026-07-29 | `bd-23j` closed + merge → `feat/bookspace-bd-23j`: Baskerville next/font/local woff2; unit 20/20; Playwright home/nav/login/typography **30/30** desktop+mobile; ЗАЛИВАТЬ develop=Нет |
 | 2026-07-29 | `bd-23j` close-prep: Baskerville via next/font/local (woff2 400/700 + italic); unit layout/tokens/tailwind **20/20**; Playwright home+app-nav+login+ui-typography **30/30** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); feature-doc `ui-typography.md`; ветка `task/bd-23j-baskerville-fonts`; `bd close` за оркестратором |
