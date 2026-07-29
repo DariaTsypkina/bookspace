@@ -7,6 +7,11 @@ import { AppModule } from '../src/app.module';
 import { configureApp } from '../src/bootstrap';
 
 const prisma = new PrismaClient();
+type ValidationErrorItem = { code: string; path: string; message: string };
+type ValidationErrorResponse = {
+  code: string;
+  errors: ValidationErrorItem[];
+};
 
 describe('Auth (e2e)', () => {
   let app: INestApplication<App>;
@@ -88,21 +93,18 @@ describe('Auth (e2e)', () => {
       })
       .expect(400);
 
-    expect(response.body).toMatchObject({
-      code: 'VALIDATION_FAILED',
-      errors: expect.arrayContaining([
-        expect.objectContaining({
-          code: expect.any(String),
-          path: 'email',
-          message: expect.any(String),
-        }),
-        expect.objectContaining({
-          code: expect.any(String),
-          path: 'password',
-          message: expect.any(String),
-        }),
-      ]),
-    });
+    const body = response.body as ValidationErrorResponse;
+    expect(body.code).toBe('VALIDATION_FAILED');
+    const emailIssue = body.errors.find((issue) => issue.path === 'email');
+    const passwordIssue = body.errors.find(
+      (issue) => issue.path === 'password',
+    );
+    expect(emailIssue).toBeDefined();
+    expect(passwordIssue).toBeDefined();
+    expect(emailIssue?.code.length).toBeGreaterThan(0);
+    expect(passwordIssue?.code.length).toBeGreaterThan(0);
+    expect(emailIssue?.message.length).toBeGreaterThan(0);
+    expect(passwordIssue?.message.length).toBeGreaterThan(0);
   });
 
   it('POST /auth/register rejects duplicate email', async () => {
@@ -194,6 +196,26 @@ describe('Auth (e2e)', () => {
         password: 'Secure123!',
       })
       .expect(401);
+  });
+
+  it('POST /auth/login validates payload with normalized errors', async () => {
+    const response = await authPost('/auth/login')
+      .send({
+        email: 'bad-email',
+        password: 'short',
+      })
+      .expect(400);
+
+    const body = response.body as ValidationErrorResponse;
+    expect(body.code).toBe('VALIDATION_FAILED');
+    const emailIssue = body.errors.find((issue) => issue.path === 'email');
+    const passwordIssue = body.errors.find(
+      (issue) => issue.path === 'password',
+    );
+    expect(emailIssue).toBeDefined();
+    expect(passwordIssue).toBeDefined();
+    expect(emailIssue?.message.length).toBeGreaterThan(0);
+    expect(passwordIssue?.message.length).toBeGreaterThan(0);
   });
 
   it('POST /auth/logout clears cookie and invalidates session token', async () => {

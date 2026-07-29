@@ -4,14 +4,18 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "pnpm --filter @bookspace/schemas build",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "pretest": "pnpm --filter @bookspace/schemas build",
     "test": "vitest run",
+    "pretest:smoke": "pnpm --filter @bookspace/schemas build",
     "test:smoke": "playwright test e2e/smoke",
+    "pretest:e2e": "pnpm --filter @bookspace/schemas build",
     "test:e2e": "playwright test e2e/auth-email-password.spec.ts"
   },
   "dependencies": {

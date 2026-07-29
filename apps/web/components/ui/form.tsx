@@ -138,6 +138,7 @@ function FormMessage({
   return (
     <p
       id={formMessageId}
+      role="alert"
       className={cn('text-sm font-medium text-destructive', className)}
       {...props}
     >

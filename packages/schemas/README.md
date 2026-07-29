@@ -7,6 +7,16 @@ Shared Zod v4 schemas and inferred input types for Bookspace domains.
 - Input schemas use `XxxInputSchema`.
 - Inferred types use `XxxInput`.
 
+## Build
+
+`@bookspace/schemas` compiles TypeScript to CommonJS in `dist/` for Nest/Jest/Next consumers.
+
+```bash
+pnpm --filter @bookspace/schemas build
+```
+
+API and web test/build scripts run this step automatically via `pretest`/`prebuild` hooks.
+
 ## Domain exports
 
 - `@bookspace/schemas` - all public schemas/types.
