@@ -46,6 +46,14 @@ describe('fetchCatalogWork', () => {
       CatalogWorkNotFoundError,
     );
   });
+
+  it('rejects empty slug via shared CatalogEntitySlugParamSchema before fetch', async () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal('fetch', fetchMock);
+
+    await expect(fetchCatalogWork('   ')).rejects.toThrow();
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
 });
 
 describe('formatEditionLanguage', () => {

@@ -1,3 +1,5 @@
+import { parseCatalogEntitySlug } from './catalog-entity-slug';
+
 export interface CatalogWorkAuthor {
   slug: string;
   nameRu: string;
@@ -39,10 +41,11 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000';
 export async function fetchCatalogWork(
   slug: string,
 ): Promise<CatalogWorkResponse> {
-  const url = `${API_URL}/catalog/works/${encodeURIComponent(slug)}`;
+  const safeSlug = parseCatalogEntitySlug(slug);
+  const url = `${API_URL}/catalog/works/${encodeURIComponent(safeSlug)}`;
   const response = await fetch(url, { cache: 'no-store' });
   if (response.status === 404) {
-    throw new CatalogWorkNotFoundError(slug);
+    throw new CatalogWorkNotFoundError(safeSlug);
   }
   if (!response.ok) {
     throw new Error(`Catalog work fetch failed: ${response.status}`);

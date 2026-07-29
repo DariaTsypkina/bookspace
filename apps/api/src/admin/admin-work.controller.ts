@@ -6,20 +6,15 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { NeedsContext, UserRole } from '@prisma/client';
-import { IsEnum } from 'class-validator';
+import { UserRole } from '@prisma/client';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
+import { AdminWorkNeedsContextPatchDto } from '../catalog/dto/catalog-entity.dto';
 import { ContextClassifyService } from '../context/context-classify.service';
 import { ContextExtractService } from '../context/context-extract.service';
 import { ContextJobsService } from '../context/context-jobs.service';
 import { AdminContextExtractDto } from '../context/dto/admin-context.dto';
-
-class PatchNeedsContextDto {
-  @IsEnum(NeedsContext)
-  needsContext!: NeedsContext;
-}
 
 @Controller('admin/works')
 @UseGuards(AuthGuard, RolesGuard)
@@ -34,7 +29,7 @@ export class AdminWorkController {
   @Roles(UserRole.ADMIN)
   patchNeedsContext(
     @Param('workId') workId: string,
-    @Body() body: PatchNeedsContextDto,
+    @Body() body: AdminWorkNeedsContextPatchDto,
   ) {
     return this.classifyService.setAdminNeedsContext(workId, body.needsContext);
   }
