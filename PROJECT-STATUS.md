@@ -38,7 +38,7 @@
 |--------|-----|--------|
 | ✅ | `bd-wus` | **Эпик DX: Tailwind + shadcn** (ADR 0003 accepted) — 18 / 18 |
 | ✅ | `bd-0t0` | **Эпик DX: RHF + Zod full contour** (ADR 0004 accepted) — 11 / 11 + bug .12 |
-| ⬜ | `bd-707` | **Эпик DX: axios HTTP-клиент** (ADR 0005 accepted) — 0 / 10 |
+| 🔄 | `bd-707` | **Эпик DX: axios HTTP-клиент** (ADR 0005 accepted) — 0 / 10 · F0 in progress |
 | ✅ | `bd-ky6` | Chore: синхронизировать beads interactions.jsonl |
 | ✅ | `bd-0e6` | Docs: согласование зависимостей агентом |
 | ✅ | `bd-rtp` | Docs: human intake workflow и /task skill |
@@ -90,13 +90,13 @@
 | ✅ | `bd-0t0.10` | Wave 2: миграция домена Rankings/Collections/Admin DTO/forms |
 | ✅ | `bd-0t0.11` | Finalization: remove class-validator and legacy cleanup |
 
-### DX — axios HTTP-клиент — ⬜ · epic `bd-707` · 0 / 10 · ADR [0005](docs/adr/0005-axios-http-client.md) **accepted**
+### DX — axios HTTP-клиент — 🔄 · epic `bd-707` · 0 / 10 · ADR [0005](docs/adr/0005-axios-http-client.md) **accepted**
 
-План: [migration-axios.md](docs/tech/migration-axios.md). Сборочная: `feat/bookspace-bd-707`. Ready: `bd-707.1` (F0).
+План: [migration-axios.md](docs/tech/migration-axios.md). Сборочная: `feat/bookspace-bd-707`. В работе: `bd-707.1` (F0).
 
 | Статус | ID | Задача |
 |--------|-----|--------|
-| ⬜ | `bd-707.1` | F0: deps + docs sync |
+| 🔄 | `bd-707.1` | F0: deps + docs sync |
 | 🔒 | `bd-707.2` | F1: web http + ApiError foundation |
 | 🔒 | `bd-707.3` | F2: api HttpModule foundation |
 | 🔒 | `bd-707.4` | W1: migrate web lib/auth |
@@ -221,6 +221,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-29 | `bd-707.1` F0: axios `^1.18.1` в web+api, `@nestjs/axios` `^4.0.1` в api; docs ADR 0005 уже accepted (README + stack); Playwright N/A; ветка `task/bd-707.1-axios-deps-docs`; `bd close` за оркестратором |
+| 2026-07-29 | Claim `bd-707.1`: conventions (design/acceptance/notes/labels area:web+area:api+sec:http+dx+deps); sync origin/develop OK; ветка `task/bd-707.1-axios-deps-docs` |
 | 2026-07-29 | ADR 0005 **accepted**; эпик `bd-707` + 10 задач (F0–D1) по [migration-axios.md](docs/tech/migration-axios.md); ready: `bd-707.1`; сборочная `feat/bookspace-bd-707` |
 | 2026-07-29 | `/task`: создан `bd-82j` — Roboto (Google Fonts) на весь UI, веса 400/500/700; DX без продуктового эпика; feature-doc `ui-typography` при реализации |
 | 2026-07-29 | `/task`: создан `bd-6b7.5` — Войти/Выйти в AppNav (гость→`/login`, user→logout BFF); эпик `bd-6b7`, feature-doc `app-shell-tab-bar` |
