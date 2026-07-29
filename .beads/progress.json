@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-29T17:37:48.661Z",
+  "generated_at": "2026-07-29T17:44:19.502Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 121,
-    "open_issues": 40,
-    "in_progress_issues": 0,
+    "open_issues": 39,
+    "in_progress_issues": 1,
     "closed_issues": 81,
     "blocked_issues": 7,
-    "ready_issues": 33
+    "ready_issues": 32
   },
   "epics": [
     {
@@ -1124,11 +1124,11 @@
     {
       "id": "bd-82j",
       "title": "UI: подключить Google Fonts Roboto (весь UI)",
-      "status": "open",
+      "status": "in_progress",
       "type": "task",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-07-29T15:49:42Z"
+      "updated_at": "2026-07-29T17:42:29Z"
     },
     {
       "id": "bd-6b7.5",

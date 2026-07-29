@@ -35,3 +35,29 @@ describe('Root layout shell Tailwind migration (bd-wus.18)', () => {
     expect(globalsSource).not.toMatch(/\.app-content\b/);
   });
 });
+
+describe('Root layout Roboto typography (bd-82j)', () => {
+  it('loads Roboto via next/font/google with weights 400/500/700', () => {
+    expect(layoutSource).toMatch(/from\s+['"]next\/font\/google['"]/);
+    expect(layoutSource).toMatch(/\bRoboto\b/);
+    expect(layoutSource).toMatch(
+      /weight:\s*\[\s*['"]400['"]\s*,\s*['"]500['"]\s*,\s*['"]700['"]\s*\]/,
+    );
+    expect(layoutSource).toMatch(/variable:\s*['"]--font-roboto['"]/);
+  });
+
+  it('applies Roboto font class / CSS variable on html root', () => {
+    expect(layoutSource).toMatch(/<html\b[^>]*className=\{/);
+    expect(layoutSource).toMatch(/roboto\.(?:className|variable)/);
+  });
+
+  it('does not add runtime fonts.googleapis.com link tags', () => {
+    expect(layoutSource).not.toMatch(/fonts\.googleapis\.com/);
+    expect(layoutSource).not.toMatch(/fonts\.gstatic\.com/);
+  });
+
+  it('body uses Roboto CSS variable, not Georgia as primary', () => {
+    expect(globalsSource).toMatch(/font-family:\s*var\(--font-roboto\)/);
+    expect(globalsSource).not.toMatch(/font-family:\s*Georgia/);
+  });
+});
