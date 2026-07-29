@@ -222,6 +222,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-29 | `bd-23j` close-prep: Baskerville via next/font/local (woff2 400/700 + italic); unit layout/tokens/tailwind **20/20**; Playwright home+app-nav+login+ui-typography **30/30** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); feature-doc `ui-typography.md`; ветка `task/bd-23j-baskerville-fonts`; `bd close` за оркестратором |
 | 2026-07-29 | Оркестратор: claim `bd-23j`; сборочная `feat/bookspace-bd-23j` от develop@524c658; ветка `task/bd-23j-baskerville-fonts`; файлы woff2 в `apps/web/fonts/`; ЗАЛИВАТЬ develop=Нет |
 | 2026-07-29 | Intake: `bd-23j` UI Baskerville OTF (roman/italic/bold/bolditalic, кириллица, web-embed OK) вместо Roboto; feature-doc `ui-typography`; DX без продуктового эпика |
 | 2026-07-29 | `bd-82j` close-prep: Roboto via next/font (400/500/700); unit layout/tokens/tailwind **19**; Playwright home+app-nav+login+ui-typography **30/30** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); feature-doc `ui-typography.md`; ветка `task/bd-82j-roboto-fonts`; `bd close` за оркестратором |
