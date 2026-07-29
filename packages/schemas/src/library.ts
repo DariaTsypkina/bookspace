@@ -2,10 +2,14 @@ import { z } from 'zod';
 
 /** API POST /me/library/items body (stub UserBook mutation). */
 export const AddLibraryItemInputSchema = z.object({
-  workId: z.preprocess(
-    (value) => (value === '' || value === null ? undefined : value),
-    z.string().trim().max(128).optional(),
-  ),
+  workId: z
+    .string()
+    .trim()
+    .max(128)
+    .optional()
+    .transform((value) =>
+      value === undefined || value.length === 0 ? undefined : value,
+    ),
 });
 
 export type AddLibraryItemInput = z.infer<typeof AddLibraryItemInputSchema>;

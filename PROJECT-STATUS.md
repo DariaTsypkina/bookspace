@@ -201,6 +201,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-29 | `bd-0t0.8` close-prep: Library/Profile Zod (AddLibraryItem + ProfileSlug); class-validator убран из me-library; RHF form `/library` + BFF `/api/me`; unit DTO 5/5 + web focused 20+; API e2e auth 13/13; Playwright library+profile **20/20** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0, next start localhost); manual `e2e/manual/library-profile-zod.md`; shelves/tags runtime нет; ветка `task/bd-0t0.8-library-profile-dto`; `bd close` за оркестратором |
 | 2026-07-29 | `bd-0t0.8` conventions: design/acceptance/notes/labels; план Wave 2 Library/Profile (AddLibraryItem + ProfileSlug Zod, RHF form `/library`, shelves/tags вне runtime); ветка `task/bd-0t0.8-library-profile-dto` |
 | 2026-07-29 | Оркестратор: claim `bd-0t0.8` (Library/Profile DTO/forms); ветка `task/bd-0t0.8-library-profile-dto` |
 | 2026-07-29 | `bd-0t0.7` closed + merge `--no-ff` → `feat/bookspace-bd-0t0`: catalog slug/needsContext Zod; unit 5/5, e2e 26/26, Playwright 42/42 |
