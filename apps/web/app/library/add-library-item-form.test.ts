@@ -27,3 +27,16 @@ describe('AddLibraryItemForm RHF + Zod (bd-0t0.8)', () => {
     expect(source).toMatch(/\/api\/me\/library\/items/);
   });
 });
+
+describe('AddLibraryItemForm axios client (bd-707.7)', () => {
+  it('posts via api from @/lib/http (no native fetch)', () => {
+    expect(source).toMatch(/from ['"]@\/lib\/http['"]/);
+    expect(source).toMatch(/\bapi\.post\b/);
+    expect(source).not.toMatch(/\bfetch\s*\(/);
+  });
+
+  it('handles errors via ApiError', () => {
+    expect(source).toMatch(/\bApiError\b/);
+    expect(source).toMatch(/instanceof ApiError/);
+  });
+});
