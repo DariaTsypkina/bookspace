@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-29T17:18:56.740Z",
+  "generated_at": "2026-07-29T17:21:13.029Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 121,
-    "open_issues": 41,
+    "open_issues": 40,
     "in_progress_issues": 0,
-    "closed_issues": 80,
+    "closed_issues": 81,
     "blocked_issues": 7,
-    "ready_issues": 34
+    "ready_issues": 33
   },
   "epics": [
     {
@@ -251,7 +251,7 @@
     {
       "id": "bd-707",
       "title": "DX: axios HTTP-клиент (web + api)",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
       "children_total": 10,
       "children_closed": 10,
@@ -1115,11 +1115,11 @@
     {
       "id": "bd-707",
       "title": "DX: axios HTTP-клиент (web + api)",
-      "status": "open",
+      "status": "closed",
       "type": "epic",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-07-29T16:16:16Z"
+      "updated_at": "2026-07-29T17:21:08Z"
     },
     {
       "id": "bd-82j",
