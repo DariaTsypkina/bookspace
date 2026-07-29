@@ -320,10 +320,9 @@ describe('Auth (e2e)', () => {
       .send({ workId: 'w'.repeat(129) })
       .expect(400);
 
-    expect(response.body).toMatchObject({
-      code: 'VALIDATION_FAILED',
-    });
-    expect(response.body.errors).toEqual(
+    const body = response.body as ValidationErrorResponse;
+    expect(body.code).toBe('VALIDATION_FAILED');
+    expect(body.errors).toEqual(
       expect.arrayContaining([expect.objectContaining({ path: 'workId' })]),
     );
   });

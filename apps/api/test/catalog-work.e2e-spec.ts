@@ -7,6 +7,12 @@ import { AppModule } from '../src/app.module';
 import { configureApp } from '../src/bootstrap';
 import type { CatalogWorkResponse } from '../src/catalog/catalog-work.types';
 
+type ValidationErrorItem = { code: string; path: string; message: string };
+type ValidationErrorResponse = {
+  code: string;
+  errors: ValidationErrorItem[];
+};
+
 const prisma = new PrismaClient();
 const TEST_PREFIX = 'catalog-work-e2e';
 
@@ -121,11 +127,10 @@ describe('Catalog work (e2e)', () => {
       .get(`/catalog/works/${'a'.repeat(201)}`)
       .expect(400);
 
-    expect(response.body).toMatchObject({
-      code: 'VALIDATION_FAILED',
-      errors: expect.arrayContaining([
-        expect.objectContaining({ path: 'slug' }),
-      ]),
-    });
+    const body = response.body as ValidationErrorResponse;
+    expect(body.code).toBe('VALIDATION_FAILED');
+    expect(body.errors).toEqual(
+      expect.arrayContaining([expect.objectContaining({ path: 'slug' })]),
+    );
   });
 });
