@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-29T15:54:37.779Z",
+  "generated_at": "2026-07-29T16:17:55.946Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 110,
-    "open_issues": 40,
+    "total_issues": 121,
+    "open_issues": 51,
     "in_progress_issues": 0,
     "closed_issues": 70,
-    "blocked_issues": 7,
-    "ready_issues": 33
+    "blocked_issues": 16,
+    "ready_issues": 35
   },
   "epics": [
     {
@@ -244,6 +244,90 @@
           "title": "Поиск: восстановить FTS search_vector после drift Prisma",
           "status": "closed",
           "type": "bug",
+          "priority": 2
+        }
+      ]
+    },
+    {
+      "id": "bd-707",
+      "title": "DX: axios HTTP-клиент (web + api)",
+      "status": "open",
+      "priority": 2,
+      "children_total": 10,
+      "children_closed": 0,
+      "children_in_progress": 0,
+      "children_open": 10,
+      "progress": "0 / 10",
+      "percent_closed": 0,
+      "children": [
+        {
+          "id": "bd-707.1",
+          "title": "Axios F0: deps + docs sync",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.10",
+          "title": "Axios D1: DoD guardrails + docs",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.2",
+          "title": "Axios F1: web http + ApiError foundation",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.3",
+          "title": "Axios F2: api HttpModule foundation",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.4",
+          "title": "Axios W1: migrate web lib/auth",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.5",
+          "title": "Axios W2: migrate web catalog libs",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.6",
+          "title": "Axios W3: migrate web admin-context lib",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.7",
+          "title": "Axios W4: migrate web client forms fetch",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.8",
+          "title": "Axios W5: web regression smoke",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.9",
+          "title": "Axios A1: OAuth clients → HttpService",
+          "status": "open",
+          "type": "task",
           "priority": 2
         }
       ]
@@ -937,6 +1021,105 @@
       "priority": 1,
       "parent": "bd-957",
       "updated_at": "2026-07-20T07:30:07Z"
+    },
+    {
+      "id": "bd-707.10",
+      "title": "Axios D1: DoD guardrails + docs",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T16:15:34Z"
+    },
+    {
+      "id": "bd-707.9",
+      "title": "Axios A1: OAuth clients → HttpService",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T16:15:33Z"
+    },
+    {
+      "id": "bd-707.8",
+      "title": "Axios W5: web regression smoke",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T16:15:32Z"
+    },
+    {
+      "id": "bd-707.7",
+      "title": "Axios W4: migrate web client forms fetch",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T16:15:31Z"
+    },
+    {
+      "id": "bd-707.6",
+      "title": "Axios W3: migrate web admin-context lib",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T16:15:30Z"
+    },
+    {
+      "id": "bd-707.5",
+      "title": "Axios W2: migrate web catalog libs",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T16:15:29Z"
+    },
+    {
+      "id": "bd-707.3",
+      "title": "Axios F2: api HttpModule foundation",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T16:15:28Z"
+    },
+    {
+      "id": "bd-707.4",
+      "title": "Axios W1: migrate web lib/auth",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T16:15:28Z"
+    },
+    {
+      "id": "bd-707.2",
+      "title": "Axios F1: web http + ApiError foundation",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T16:15:27Z"
+    },
+    {
+      "id": "bd-707.1",
+      "title": "Axios F0: deps + docs sync",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T16:15:26Z"
+    },
+    {
+      "id": "bd-707",
+      "title": "DX: axios HTTP-клиент (web + api)",
+      "status": "open",
+      "type": "epic",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-29T16:16:16Z"
     },
     {
       "id": "bd-82j",
