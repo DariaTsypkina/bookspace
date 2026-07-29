@@ -1,10 +1,62 @@
 import { describe, expect, it } from 'vitest';
 import {
   getActiveNavId,
+  getNavAuthAction,
   getNavItems,
   profileNavHref,
   type NavItemId,
 } from './app-nav';
+
+describe('getNavAuthAction', () => {
+  it('returns login link for guest', () => {
+    expect(getNavAuthAction(null)).toEqual({
+      kind: 'login',
+      label: 'Войти',
+      href: '/login',
+    });
+  });
+
+  it('returns logout action for USER', () => {
+    expect(
+      getNavAuthAction({
+        id: 'u1',
+        email: 'reader@bookspace.local',
+        role: 'USER',
+        slug: 'reader',
+      }),
+    ).toEqual({
+      kind: 'logout',
+      label: 'Выйти',
+    });
+  });
+
+  it('returns logout action for ADMIN (same as USER; admin not a nav destination)', () => {
+    expect(
+      getNavAuthAction({
+        id: 'a1',
+        email: 'admin@bookspace.local',
+        role: 'ADMIN',
+        slug: 'admin',
+      }),
+    ).toEqual({
+      kind: 'logout',
+      label: 'Выйти',
+    });
+  });
+
+  it('does not introduce a sixth tab id or /admin href', () => {
+    const guest = getNavAuthAction(null);
+    const user = getNavAuthAction({
+      id: 'u1',
+      email: 'reader@bookspace.local',
+      role: 'USER',
+      slug: 'reader',
+    });
+    expect(guest).not.toHaveProperty('id');
+    expect(user).not.toHaveProperty('id');
+    expect(guest.kind === 'login' ? guest.href : '').not.toMatch(/^\/admin/);
+  });
+});
 
 describe('profileNavHref', () => {
   it('sends guest to /login', () => {
