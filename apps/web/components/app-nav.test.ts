@@ -8,6 +8,34 @@ const globalsSource = readFileSync(
   'utf8',
 );
 
+describe('AppNav auth action (bd-6b7.5)', () => {
+  it('uses getNavAuthAction for guest login / auth logout visibility', () => {
+    expect(appNavSource).toMatch(/getNavAuthAction/);
+    expect(appNavSource).toMatch(/authAction\.label/);
+    expect(appNavSource).toMatch(/authAction\.kind === ['"]login['"]/);
+  });
+
+  it('guest login is a link to /login inside Основное меню', () => {
+    expect(appNavSource).toMatch(/authAction\.kind === ['"]login['"]/);
+    expect(appNavSource).toMatch(/href=\{authAction\.href\}/);
+  });
+
+  it('logout reuses lib/auth logout (BFF) and does not invent a new endpoint', () => {
+    expect(appNavSource).toMatch(
+      /from ['"].*\/lib\/auth['"]|from ['"]\.\.\/lib\/auth['"]/,
+    );
+    expect(appNavSource).toMatch(/\blogout\b/);
+    expect(appNavSource).not.toMatch(/\/api\/auth\/signout|\/auth\/sign-out/);
+  });
+
+  it('keeps five tab items via getNavItems (auth is not a tab-id)', () => {
+    expect(appNavSource).toMatch(/getNavItems\(/);
+    expect(appNavSource).not.toMatch(
+      /id:\s*['"]login['"]|id:\s*['"]logout['"]/,
+    );
+  });
+});
+
 describe('AppNav Tailwind+shadcn migration (N1 / bd-wus.3)', () => {
   it('does not use legacy app-nav* class names', () => {
     expect(appNavSource).not.toMatch(/className=["']app-nav/);

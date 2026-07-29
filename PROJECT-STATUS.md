@@ -216,7 +216,7 @@
 | ✅ | `bd-6b7.2` | PWA: offline shell |
 | ✅ | `bd-6b7.3` | PWA: App shell и tab-bar |
 | ✅ | `bd-6b7.4` | UI: строка меню (Главная · Поиск · Профиль) — MVP-срез |
-| ⬜ | `bd-6b7.5` | UI: кнопки Войти / Выйти в меню (human-reported) |
+| ✅ | `bd-6b7.5` | UI: кнопки Войти / Выйти в меню (human-reported) |
 | ⬜ | `bd-6b7.6` | [bug] UI: одинаковый font-weight у всех пунктов меню (как у активного) |
 
 ---
@@ -225,6 +225,10 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-29 | `bd-6b7.5` closed: Войти/Выйти в AppNav; unit 35/35; PW app-nav 14/14 desktop+mobile; merge → `feat/bookspace-bd-6b7` |
+| 2026-07-29 | `bd-6b7.5` close-prep: AppNav guest «Войти»→/login, USER/ADMIN «Выйти»→`logout()` BFF; unit **35/35**; Playwright app-nav **14/14** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); manual `e2e/manual/app-nav.md`; `bd close` за оркестратором |
+| 2026-07-29 | `bd-6b7.5` в работе: conventions OK; sync origin/develop Already up to date; TDD `getNavAuthAction` + AppNav «Войти»/«Выйти» (BFF logout); unit 35/35; PW smoke app-nav — далее |
+| 2026-07-29 | Оркестратор batch `feat/bookspace-bd-6b7`: sync origin/develop; claim `bd-6b7.5` → `task/bd-6b7.5-nav-login-logout`; очередь `.5` → `.6`; ЗАЛИВАТЬ develop=Да |
 | 2026-07-29 | Intake `/task`: `bd-6b7.6` bug — font-weight всех ссылок меню = как у активного (`font-semibold` сейчас только на `isActive`); feature-doc `app-shell-tab-bar`; сборочная `feat/bookspace-bd-6b7` |
 | 2026-07-29 | Docs на `feat/bookspace-bd-23j`: канон UI-шрифта Baskerville для агентов — `stack.mdc`, `ui-ru.mdc`, `AGENTS.md`, `stack-and-architecture`, `ui-typography` § Для агентов; `bd remember ui-font-baskerville` |
 | 2026-07-29 | Intake `/task`: `bd-p3l` bug — Baskerville не на button/input (UA не наследует font-family); feature-doc `ui-typography`; сборочная `feat/bookspace-bd-23j`; discovered-from `bd-23j` |
