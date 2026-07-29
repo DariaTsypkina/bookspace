@@ -11,7 +11,7 @@ import {
   User,
   type LucideProps,
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import {
   getActiveNavId,
@@ -29,11 +29,20 @@ const NAV_ICONS: Record<NavItemId, ComponentType<LucideProps>> = {
   profile: User,
 };
 
+/** Shared nav chrome — applied in one cn() with buttonVariants (no Slot/asChild). */
 const navItemClassName = cn(
   'h-auto w-full min-h-11 flex-col gap-0.5 rounded-md px-0.5 py-1 font-sans font-semibold text-[0.65rem] leading-tight no-underline',
   'whitespace-normal text-muted hover:bg-transparent hover:text-foreground',
   'md:w-auto md:min-h-10 md:flex-row md:gap-1.5 md:px-3 md:py-1.5 md:text-[0.9rem] md:leading-normal md:whitespace-nowrap',
 );
+
+function navLinkClassName(isActive: boolean): string {
+  return cn(
+    buttonVariants({ variant: 'ghost' }),
+    navItemClassName,
+    isActive && 'text-foreground underline underline-offset-[0.2em]',
+  );
+}
 
 export function AppNav() {
   const pathname = usePathname();
@@ -92,37 +101,26 @@ export function AppNav() {
           const Icon = NAV_ICONS[item.id];
           return (
             <li key={item.id} className="min-w-0 flex-1 md:flex-none">
-              <Button
-                asChild
-                variant="ghost"
-                className={cn(
-                  navItemClassName,
-                  isActive &&
-                    'text-foreground underline underline-offset-[0.2em]',
-                )}
+              <Link
+                href={item.href}
+                aria-current={isActive ? 'page' : undefined}
+                className={navLinkClassName(isActive)}
               >
-                <Link
-                  href={item.href}
-                  aria-current={isActive ? 'page' : undefined}
-                >
-                  <Icon
-                    aria-hidden
-                    className="size-4 shrink-0"
-                    strokeWidth={1.75}
-                  />
-                  <span className="max-w-full truncate">{item.label}</span>
-                </Link>
-              </Button>
+                <Icon
+                  aria-hidden
+                  className="size-4 shrink-0"
+                  strokeWidth={1.75}
+                />
+                <span className="max-w-full truncate">{item.label}</span>
+              </Link>
             </li>
           );
         })}
-        <li className="min-w-0 flex-1 md:ml-auto md:flex-none">
+        <li className="min-w-0 shrink-0 md:ml-auto md:flex-none">
           {authAction.kind === 'login' ? (
-            <Button asChild variant="ghost" className={navItemClassName}>
-              <Link href={authAction.href}>
-                <span className="max-w-full truncate">{authAction.label}</span>
-              </Link>
-            </Button>
+            <Link href={authAction.href} className={navLinkClassName(false)}>
+              <span className="max-w-full truncate">{authAction.label}</span>
+            </Link>
           ) : (
             <Button
               type="button"
