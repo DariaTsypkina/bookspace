@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-29T16:31:48.925Z",
+  "generated_at": "2026-07-29T16:42:18.879Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 121,
-    "open_issues": 51,
+    "open_issues": 50,
     "in_progress_issues": 0,
-    "closed_issues": 70,
-    "blocked_issues": 16,
-    "ready_issues": 35
+    "closed_issues": 71,
+    "blocked_issues": 14,
+    "ready_issues": 36
   },
   "epics": [
     {
@@ -254,16 +254,16 @@
       "status": "open",
       "priority": 2,
       "children_total": 10,
-      "children_closed": 0,
+      "children_closed": 1,
       "children_in_progress": 0,
-      "children_open": 10,
-      "progress": "0 / 10",
-      "percent_closed": 0,
+      "children_open": 9,
+      "progress": "1 / 10",
+      "percent_closed": 10,
       "children": [
         {
           "id": "bd-707.1",
           "title": "Axios F0: deps + docs sync",
-          "status": "open",
+          "status": "closed",
           "type": "task",
           "priority": 2
         },
@@ -1106,11 +1106,11 @@
     {
       "id": "bd-707.1",
       "title": "Axios F0: deps + docs sync",
-      "status": "open",
+      "status": "closed",
       "type": "task",
       "priority": 2,
       "parent": "bd-707",
-      "updated_at": "2026-07-29T16:15:26Z"
+      "updated_at": "2026-07-29T16:42:14Z"
     },
     {
       "id": "bd-707",

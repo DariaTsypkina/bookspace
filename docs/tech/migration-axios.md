@@ -2,7 +2,7 @@
 
 Связано: [ADR 0005](../adr/0005-axios-http-client.md) (**accepted**), [stack-and-architecture](stack-and-architecture.md), [agent-dev-flow](agent-dev-flow.md).
 
-**Статус:** ready — ADR accepted; эпик Beads **`bd-707`** (0/10). Ready: `bd-707.1` (F0). Сборочная: `feat/bookspace-bd-707`.
+**Статус:** in progress — ADR accepted; эпик Beads **`bd-707`** (0/10). В работе: `bd-707.1` (F0 deps). Сборочная: `feat/bookspace-bd-707`.
 
 **Цель:** перевести весь **прикладной** HTTP в `apps/web` (lib + client) и `apps/api` (outbound) на axios; native `fetch` оставить только в Service Worker и Next BFF-proxy.
 
@@ -168,8 +168,8 @@ flowchart TD
 
 ## Критерии приёмки эпика
 
-- [ ] ADR 0005 **accepted**
-- [ ] `axios` в `apps/web` и `apps/api`; `@nestjs/axios` в `apps/api`
+- [x] ADR 0005 **accepted**
+- [x] `axios` в `apps/web` и `apps/api`; `@nestjs/axios` в `apps/api`
 - [ ] Все строки инвентаря «→ …» мигрированы
 - [ ] `fetch(` только в SW + BFF-proxy (и тест-хелперах при необходимости)
 - [ ] Docs/stack обновлены; статус плана → completed
