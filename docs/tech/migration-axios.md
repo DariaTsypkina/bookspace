@@ -2,7 +2,7 @@
 
 Связано: [ADR 0005](../adr/0005-axios-http-client.md) (**accepted**), [stack-and-architecture](stack-and-architecture.md), [agent-dev-flow](agent-dev-flow.md).
 
-**Статус:** in progress — ADR accepted; эпик Beads **`bd-707`** (F0–F2 ✅; W1 `bd-707.4` done on branch, await close). Сборочная: `feat/bookspace-bd-707`.
+**Статус:** in progress — ADR accepted; эпик Beads **`bd-707`** (F0–F2 ✅; W1 `bd-707.4` + W2 `bd-707.5` done on branch, await close). Сборочная: `feat/bookspace-bd-707`.
 
 **Цель:** перевести весь **прикладной** HTTP в `apps/web` (lib + client) и `apps/api` (outbound) на axios; native `fetch` оставить только в Service Worker и Next BFF-proxy.
 
@@ -145,7 +145,8 @@ flowchart TD
 | Зона | Путь | Действие |
 |------|------|----------|
 | Web lib | `lib/auth.ts` | ✅ → web axios (`bd-707.4`) |
-| Web lib | `lib/catalog-*.ts`, `lib/admin-context.ts`, `lib/catalog-search.ts`, `lib/catalog-context-reading.ts` | → web axios |
+| Web lib | `lib/catalog-*.ts`, `lib/catalog-search.ts`, `lib/catalog-context-reading.ts` | ✅ → web axios (`bd-707.5`) |
+| Web lib | `lib/admin-context.ts` | → web axios |
 | Web UI | `app/library/add-library-item-form.tsx` | → web axios |
 | BFF | `app/api/auth|admin|me/[...path]/route.ts` | **оставить fetch** |
 | SW | `public/sw.js` | **оставить fetch** |

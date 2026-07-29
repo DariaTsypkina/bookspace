@@ -43,6 +43,11 @@ export const api = axios.create({
   timeout: DEFAULT_API_TIMEOUT_MS,
 });
 
+/** Axios equivalent of fetch `{ cache: 'no-store' }` for Next/data caches. */
+export const noStoreConfig = {
+  headers: { 'Cache-Control': 'no-store' },
+} as const;
+
 api.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
