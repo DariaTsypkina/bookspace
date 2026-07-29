@@ -201,6 +201,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-29 | `bd-0t0.12` close-prep: smoke `rankings-collections-zod` button/textbox count scoped to `main` (exclude Next Dev Tools); Playwright **4/4** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0, E2E_THROTTLE_BYPASS, localhost); product stubs unchanged; `bd close` за оркестратором |
 | 2026-07-29 | Target verify: bug `bd-0t0.12` (rankings smoke vs Next Dev Tools); claim `task/bd-0t0.12-rankings-smoke-devtools` |
 | 2026-07-29 | `bd-0t0.11` close-prep: удалены прямые deps `class-validator`/`class-transformer`; e2e → `configureApp`; CV-path filter убран; docs migration/ADR0004/stack/schemas README; unit removal gates api 5 + web 3; API e2e auth/oauth/openapi/search/admin-context green; Playwright migrated domains **84/84** desktop+mobile (localhost, PLAYWRIGHT_CHROME_CHANNEL=0); manual `e2e/manual/class-validator-removed.md`; optional peers Nest/@hookform/resolvers в lockfile; `bd close` за оркестратором |
 | 2026-07-29 | Оркестратор: claim `bd-0t0.11` (remove class-validator + legacy cleanup); ветка `task/bd-0t0.11-remove-class-validator` |

@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-29T12:47:46.412Z",
+  "generated_at": "2026-07-29T12:49:08.091Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 107,
     "open_issues": 39,
-    "in_progress_issues": 1,
-    "closed_issues": 67,
+    "in_progress_issues": 0,
+    "closed_issues": 68,
     "blocked_issues": 7,
     "ready_issues": 32
   },
@@ -16,11 +16,11 @@
       "status": "open",
       "priority": 2,
       "children_total": 12,
-      "children_closed": 11,
-      "children_in_progress": 1,
+      "children_closed": 12,
+      "children_in_progress": 0,
       "children_open": 0,
-      "progress": "11 / 12",
-      "percent_closed": 92,
+      "progress": "12 / 12",
+      "percent_closed": 100,
       "children": [
         {
           "id": "bd-0t0.1",
@@ -46,7 +46,7 @@
         {
           "id": "bd-0t0.12",
           "title": "Playwright rankings/collections smoke: button count ловит Next.js Dev Tools",
-          "status": "in_progress",
+          "status": "closed",
           "type": "bug",
           "priority": 2
         },
@@ -927,11 +927,11 @@
     {
       "id": "bd-0t0.12",
       "title": "Playwright rankings/collections smoke: button count ловит Next.js Dev Tools",
-      "status": "in_progress",
+      "status": "closed",
       "type": "bug",
       "priority": 2,
       "parent": "bd-0t0",
-      "updated_at": "2026-07-29T12:47:41Z"
+      "updated_at": "2026-07-29T12:49:03Z"
     },
     {
       "id": "bd-0t0.11",
