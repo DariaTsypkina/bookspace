@@ -28,6 +28,10 @@
     "./library": {
       "types": "./dist/library.d.ts",
       "default": "./dist/library.js"
+    },
+    "./relations": {
+      "types": "./dist/relations.d.ts",
+      "default": "./dist/relations.js"
     }
   },
   "scripts": {

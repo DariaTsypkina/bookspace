@@ -1,6 +1,7 @@
+import type { CharacterRelationType } from '@bookspace/schemas';
 import { parseCatalogEntitySlug } from './catalog-entity-slug';
 
-export type CharacterRelationType = 'FRIEND' | 'ENEMY' | 'FAMILY' | 'RELATED';
+export type { CharacterRelationType };
 
 export interface CatalogCharacterAppearance {
   slug: string;
