@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-07-29T19:24:14.315Z",
+  "generated_at": "2026-07-29T19:33:35.746Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 126,
+    "total_issues": 127,
     "open_issues": 40,
-    "in_progress_issues": 0,
+    "in_progress_issues": 1,
     "closed_issues": 86,
     "blocked_issues": 7,
     "ready_issues": 33
@@ -120,12 +120,12 @@
       "title": "PWA и оболочка",
       "status": "closed",
       "priority": 3,
-      "children_total": 7,
+      "children_total": 8,
       "children_closed": 7,
-      "children_in_progress": 0,
+      "children_in_progress": 1,
       "children_open": 0,
-      "progress": "7 / 7",
-      "percent_closed": 100,
+      "progress": "7 / 8",
+      "percent_closed": 88,
       "children": [
         {
           "id": "bd-6b7.1",
@@ -175,6 +175,13 @@
           "status": "closed",
           "type": "bug",
           "priority": 1
+        },
+        {
+          "id": "bd-6b7.8",
+          "title": "UI: Войти/Выйти из меню в раздел Профиля",
+          "status": "in_progress",
+          "type": "feature",
+          "priority": 2
         }
       ]
     },
@@ -1044,6 +1051,15 @@
       "priority": 1,
       "parent": "bd-957",
       "updated_at": "2026-07-20T07:30:07Z"
+    },
+    {
+      "id": "bd-6b7.8",
+      "title": "UI: Войти/Выйти из меню в раздел Профиля",
+      "status": "in_progress",
+      "type": "feature",
+      "priority": 2,
+      "parent": "bd-6b7",
+      "updated_at": "2026-07-29T19:28:22Z"
     },
     {
       "id": "bd-6b7.6",

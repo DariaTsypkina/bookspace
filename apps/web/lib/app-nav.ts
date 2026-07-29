@@ -9,20 +9,8 @@ export type NavItem = {
   href: string;
 };
 
-/** Auth control in AppNav — not a tab-id; sits beside the five tabs. */
-export type NavAuthAction =
-  | { kind: 'login'; label: 'Войти'; href: '/login' }
-  | { kind: 'logout'; label: 'Выйти' };
-
 export function profileNavHref(user: AuthUser | null): string {
   return user ? '/library' : '/login';
-}
-
-export function getNavAuthAction(user: AuthUser | null): NavAuthAction {
-  if (user) {
-    return { kind: 'logout', label: 'Выйти' };
-  }
-  return { kind: 'login', label: 'Войти', href: '/login' };
 }
 
 export function getNavItems(user: AuthUser | null): NavItem[] {

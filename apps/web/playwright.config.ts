@@ -14,6 +14,8 @@ export default defineConfig({
   use: {
     baseURL,
     trace: 'on-first-retry',
+    // Forwarded by BFF when present; with E2E_THROTTLE_BYPASS on API skips auth rate limit
+    extraHTTPHeaders: { 'X-E2E': '1' },
   },
   projects: [
     {

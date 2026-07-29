@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState, type ComponentType } from 'react';
 import {
   Home,
@@ -11,15 +11,10 @@ import {
   User,
   type LucideProps,
 } from 'lucide-react';
-import { Button, buttonVariants } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import {
-  getActiveNavId,
-  getNavAuthAction,
-  getNavItems,
-  type NavItemId,
-} from '../lib/app-nav';
-import { getCurrentUser, logout, type AuthUser } from '../lib/auth';
+import { getActiveNavId, getNavItems, type NavItemId } from '../lib/app-nav';
+import { getCurrentUser, type AuthUser } from '../lib/auth';
 
 const NAV_ICONS: Record<NavItemId, ComponentType<LucideProps>> = {
   home: Home,
@@ -46,9 +41,7 @@ function navLinkClassName(isActive: boolean): string {
 
 export function AppNav() {
   const pathname = usePathname();
-  const router = useRouter();
   const [user, setUser] = useState<AuthUser | null>(null);
-  const [logoutLoading, setLogoutLoading] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -67,19 +60,6 @@ export function AppNav() {
 
   const items = getNavItems(user);
   const activeId = getActiveNavId(pathname);
-  const authAction = getNavAuthAction(user);
-
-  async function handleLogout() {
-    setLogoutLoading(true);
-    try {
-      await logout();
-      setUser(null);
-      router.push('/login');
-      router.refresh();
-    } finally {
-      setLogoutLoading(false);
-    }
-  }
 
   return (
     <nav
@@ -116,27 +96,6 @@ export function AppNav() {
             </li>
           );
         })}
-        <li className="min-w-0 shrink-0 md:ml-auto md:flex-none">
-          {authAction.kind === 'login' ? (
-            <Link href={authAction.href} className={navLinkClassName(false)}>
-              <span className="max-w-full truncate">{authAction.label}</span>
-            </Link>
-          ) : (
-            <Button
-              type="button"
-              variant="ghost"
-              disabled={logoutLoading}
-              className={navItemClassName}
-              onClick={() => {
-                void handleLogout();
-              }}
-            >
-              <span className="max-w-full truncate">
-                {logoutLoading ? 'Выход…' : authAction.label}
-              </span>
-            </Button>
-          )}
-        </li>
       </ul>
     </nav>
   );

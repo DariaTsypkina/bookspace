@@ -29,27 +29,15 @@ describe('AppNav equal font-weight (bd-6b7.6)', () => {
   });
 });
 
-describe('AppNav auth action (bd-6b7.5)', () => {
-  it('uses getNavAuthAction for guest login / auth logout visibility', () => {
-    expect(appNavSource).toMatch(/getNavAuthAction/);
-    expect(appNavSource).toMatch(/authAction\.label/);
-    expect(appNavSource).toMatch(/authAction\.kind === ['"]login['"]/);
+describe('AppNav auth placement (bd-6b7.8)', () => {
+  it('does not render Войти/Выйти in the tab-bar (auth lives in profile/library)', () => {
+    expect(appNavSource).not.toMatch(/getNavAuthAction/);
+    expect(appNavSource).not.toMatch(/authAction/);
+    expect(appNavSource).not.toMatch(/['"]Войти['"]|['"]Выйти['"]/);
+    expect(appNavSource).not.toMatch(/\blogout\b/);
   });
 
-  it('guest login is a link to /login inside Основное меню', () => {
-    expect(appNavSource).toMatch(/authAction\.kind === ['"]login['"]/);
-    expect(appNavSource).toMatch(/href=\{authAction\.href\}/);
-  });
-
-  it('logout reuses lib/auth logout (BFF) and does not invent a new endpoint', () => {
-    expect(appNavSource).toMatch(
-      /from ['"].*\/lib\/auth['"]|from ['"]\.\.\/lib\/auth['"]/,
-    );
-    expect(appNavSource).toMatch(/\blogout\b/);
-    expect(appNavSource).not.toMatch(/\/api\/auth\/signout|\/auth\/sign-out/);
-  });
-
-  it('keeps five tab items via getNavItems (auth is not a tab-id)', () => {
+  it('keeps five tab items via getNavItems only', () => {
     expect(appNavSource).toMatch(/getNavItems\(/);
     expect(appNavSource).not.toMatch(
       /id:\s*['"]login['"]|id:\s*['"]logout['"]/,
@@ -61,16 +49,6 @@ describe('AppNav hydration-safe links (bd-6b7.7)', () => {
   it('does not wrap nav Links in Button asChild (Slot SSR mismatch on Next 16.2)', () => {
     expect(appNavSource).toMatch(/buttonVariants/);
     expect(appNavSource).not.toMatch(/\basChild\b\s*=/);
-  });
-
-  it('keeps auth control out of flex-1 equal share so it is not clipped', () => {
-    expect(appNavSource).toMatch(
-      /min-w-0\s+shrink-0\s+md:ml-auto(?:\s+md:flex-none)?|min-w-0\s+flex-none\s+shrink-0\s+md:ml-auto/,
-    );
-    const authLi = appNavSource.match(
-      /<li className="([^"]*)">\s*\{authAction/,
-    );
-    expect(authLi?.[1] ?? '').not.toMatch(/\bflex-1\b/);
   });
 });
 
@@ -90,9 +68,11 @@ describe('AppNav Tailwind+shadcn migration (N1 / bd-wus.3)', () => {
     expect(appNavSource).toMatch(/\bUser\b/);
   });
 
-  it('uses shadcn Button and cn helper', () => {
+  it('uses buttonVariants and cn helper (no Button wrapper on links)', () => {
     expect(appNavSource).toMatch(/from ['"]@\/components\/ui\/button['"]/);
+    expect(appNavSource).toMatch(/buttonVariants/);
     expect(appNavSource).toMatch(/\bcn\(/);
+    expect(appNavSource).not.toMatch(/\bButton\b/);
   });
 
   it('styles nav with Tailwind token utilities (fixed mobile / sticky desktop)', () => {
