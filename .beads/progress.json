@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-29T18:33:09.090Z",
+  "generated_at": "2026-07-29T18:35:51.376Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 122,
@@ -1024,12 +1024,12 @@
     },
     {
       "id": "bd-23j",
-      "title": "UI: Baskerville (OTF, кириллица) на весь UI",
+      "title": "UI: Baskerville (woff2, кириллица) на весь UI",
       "status": "in_progress",
       "type": "task",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-07-29T18:32:58Z"
+      "updated_at": "2026-07-29T18:34:18Z"
     },
     {
       "id": "bd-707.10",
