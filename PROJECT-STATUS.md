@@ -38,6 +38,7 @@
 |--------|-----|--------|
 | ✅ | `bd-wus` | **Эпик DX: Tailwind + shadcn** (ADR 0003 accepted) — 18 / 18 |
 | ✅ | `bd-0t0` | **Эпик DX: RHF + Zod full contour** (ADR 0004 accepted) — 11 / 11 + bug .12 |
+| ⬜ | `bd-707` | **Эпик DX: axios HTTP-клиент** (ADR 0005 accepted) — 0 / 10 |
 | ✅ | `bd-ky6` | Chore: синхронизировать beads interactions.jsonl |
 | ✅ | `bd-0e6` | Docs: согласование зависимостей агентом |
 | ✅ | `bd-rtp` | Docs: human intake workflow и /task skill |
@@ -88,6 +89,23 @@
 | ✅ | `bd-0t0.9` | Wave 2: миграция домена Relations/Spoiler DTO/forms |
 | ✅ | `bd-0t0.10` | Wave 2: миграция домена Rankings/Collections/Admin DTO/forms |
 | ✅ | `bd-0t0.11` | Finalization: remove class-validator and legacy cleanup |
+
+### DX — axios HTTP-клиент — ⬜ · epic `bd-707` · 0 / 10 · ADR [0005](docs/adr/0005-axios-http-client.md) **accepted**
+
+План: [migration-axios.md](docs/tech/migration-axios.md). Сборочная: `feat/bookspace-bd-707`. Ready: `bd-707.1` (F0).
+
+| Статус | ID | Задача |
+|--------|-----|--------|
+| ⬜ | `bd-707.1` | F0: deps + docs sync |
+| 🔒 | `bd-707.2` | F1: web http + ApiError foundation |
+| 🔒 | `bd-707.3` | F2: api HttpModule foundation |
+| 🔒 | `bd-707.4` | W1: migrate web lib/auth |
+| 🔒 | `bd-707.5` | W2: migrate web catalog libs |
+| 🔒 | `bd-707.6` | W3: migrate web admin-context lib |
+| 🔒 | `bd-707.7` | W4: migrate web client forms fetch |
+| 🔒 | `bd-707.8` | W5: web regression smoke |
+| 🔒 | `bd-707.9` | A1: OAuth clients → HttpService |
+| 🔒 | `bd-707.10` | D1: DoD guardrails + docs |
 
 ### 1. Auth — ✅ · epic `bd-957` · 6 / 6 (эпик закрыт)
 
@@ -203,6 +221,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-29 | ADR 0005 **accepted**; эпик `bd-707` + 10 задач (F0–D1) по [migration-axios.md](docs/tech/migration-axios.md); ready: `bd-707.1`; сборочная `feat/bookspace-bd-707` |
 | 2026-07-29 | `/task`: создан `bd-82j` — Roboto (Google Fonts) на весь UI, веса 400/500/700; DX без продуктового эпика; feature-doc `ui-typography` при реализации |
 | 2026-07-29 | `/task`: создан `bd-6b7.5` — Войти/Выйти в AppNav (гость→`/login`, user→logout BFF); эпик `bd-6b7`, feature-doc `app-shell-tab-bar` |
 | 2026-07-29 | Эпик `bd-0t0` closed (11/11 + bd-0t0.12): target verify code PASS + Playwright **108/108**; сборочная `feat/bookspace-bd-0t0` — ЗАЛИВАТЬ develop=Нет (push only) |
