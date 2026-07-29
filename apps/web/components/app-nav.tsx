@@ -30,7 +30,7 @@ const NAV_ICONS: Record<NavItemId, ComponentType<LucideProps>> = {
 };
 
 const navItemClassName = cn(
-  'h-auto w-full min-h-11 flex-col gap-0.5 rounded-md px-0.5 py-1 font-sans text-[0.65rem] leading-tight no-underline',
+  'h-auto w-full min-h-11 flex-col gap-0.5 rounded-md px-0.5 py-1 font-sans font-semibold text-[0.65rem] leading-tight no-underline',
   'whitespace-normal text-muted hover:bg-transparent hover:text-foreground',
   'md:w-auto md:min-h-10 md:flex-row md:gap-1.5 md:px-3 md:py-1.5 md:text-[0.9rem] md:leading-normal md:whitespace-nowrap',
 );
@@ -98,7 +98,7 @@ export function AppNav() {
                 className={cn(
                   navItemClassName,
                   isActive &&
-                    'font-semibold text-foreground underline underline-offset-[0.2em]',
+                    'text-foreground underline underline-offset-[0.2em]',
                 )}
               >
                 <Link
