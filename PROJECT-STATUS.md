@@ -38,7 +38,7 @@
 |--------|-----|--------|
 | ✅ | `bd-wus` | **Эпик DX: Tailwind + shadcn** (ADR 0003 accepted) — 18 / 18 |
 | ✅ | `bd-0t0` | **Эпик DX: RHF + Zod full contour** (ADR 0004 accepted) — 11 / 11 + bug .12 |
-| 🔄 | `bd-707` | **Эпик DX: axios HTTP-клиент** (ADR 0005 accepted) — 3 / 10 · W1–W5 done (await close) |
+| 🔄 | `bd-707` | **Эпик DX: axios HTTP-клиент** (ADR 0005 accepted) — 3 / 10 · W1–W5 + A1 done (await close) |
 | ✅ | `bd-ky6` | Chore: синхронизировать beads interactions.jsonl |
 | ✅ | `bd-0e6` | Docs: согласование зависимостей агентом |
 | ✅ | `bd-rtp` | Docs: human intake workflow и /task skill |
@@ -92,7 +92,7 @@
 
 ### DX — axios HTTP-клиент — 🔄 · epic `bd-707` · 3 / 10 · ADR [0005](docs/adr/0005-axios-http-client.md) **accepted**
 
-План: [migration-axios.md](docs/tech/migration-axios.md). Сборочная: `feat/bookspace-bd-707`. W1–W5 (`bd-707.4`–`.8`) готовы к close.
+План: [migration-axios.md](docs/tech/migration-axios.md). Сборочная: `feat/bookspace-bd-707`. W1–W5 + A1 (`bd-707.4`–`.9`) готовы к close.
 
 | Статус | ID | Задача |
 |--------|-----|--------|
@@ -104,7 +104,7 @@
 | 🔄 | `bd-707.6` | W3: migrate web admin-context lib (await close) |
 | 🔄 | `bd-707.7` | W4: migrate web client forms fetch (await close) |
 | 🔄 | `bd-707.8` | W5: web regression smoke (await close) |
-| 🔒 | `bd-707.9` | A1: OAuth clients → HttpService |
+| 🔄 | `bd-707.9` | A1: OAuth clients → HttpService (await close) |
 | 🔒 | `bd-707.10` | D1: DoD guardrails + docs |
 
 ### 1. Auth — ✅ · epic `bd-957` · 6 / 6 (эпик закрыт)
@@ -221,6 +221,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-29 | `bd-707.9` A1: Google/Yandex OAuth clients → `HttpService`+`firstValueFrom` (без `fetch(`); unit **14/14**; API e2e auth-google+yandex **10/10**; Playwright oauth smoke+e2e desktop **10/10**; `bd close` за оркестратором |
+| 2026-07-29 | Claim `bd-707.9`: conventions (design/acceptance Критерии+Проверка/notes/labels area:api+sec:auth+dx); sync origin/develop OK; ветка `task/bd-707.9-oauth-httpservice` |
 | 2026-07-29 | `bd-707.8` W5: web regression после W1–W4; unit **54/54** (11 files: http/auth/catalog-*/admin-context/add-library-item-form); Playwright smoke auth-pages+login+register+library+admin-context+catalog-search **44/44** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); фиксов axios нет; `bd close` за оркестратором |
 | 2026-07-29 | Claim `bd-707.8`: conventions (design/acceptance Критерии+Проверка/notes/labels area:web+sec:http+dx+regress); sync origin/develop OK; ветка `task/bd-707.8-web-regression-smoke` |
 | 2026-07-29 | `bd-707.7` W4: `add-library-item-form.tsx` → `api`+`ApiError` (нет client fetch); unit 6/6 (+http 8/8); Playwright `library-page` desktop 5/5; `bd close` за оркестратором |
