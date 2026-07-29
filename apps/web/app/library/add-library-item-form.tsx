@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { getFriendlyZodIssueMessage } from '@/lib/form-errors';
+import { ApiError, api } from '@/lib/http';
 
 type AddLibraryItemFormValues = {
   workId?: string;
@@ -43,46 +44,27 @@ export function AddLibraryItemForm() {
         : {};
 
     try {
-      const response = await fetch('/api/me/library/items', {
-        method: 'POST',
-        credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
-      if (response.status === 401) {
-        setStatus({
-          kind: 'error',
-          message: 'Войдите, чтобы добавить книгу в библиотеку',
-        });
-        return;
-      }
-
-      if (!response.ok) {
-        let message = 'Не удалось добавить книгу';
-        try {
-          const body = (await response.json()) as {
-            message?: string;
-            errors?: { message?: string }[];
-          };
-          if (body.errors?.[0]?.message) {
-            message = body.errors[0].message;
-          } else if (body.message) {
-            message = body.message;
-          }
-        } catch {
-          // ignore parse errors
-        }
-        setStatus({ kind: 'error', message });
-        return;
-      }
-
+      await api.post('/api/me/library/items', payload);
       form.reset({ workId: '' });
       setStatus({
         kind: 'success',
         message: 'Добавлено в библиотеку (заглушка)',
       });
-    } catch {
+    } catch (error) {
+      if (error instanceof ApiError) {
+        if (error.status === 401) {
+          setStatus({
+            kind: 'error',
+            message: 'Войдите, чтобы добавить книгу в библиотеку',
+          });
+          return;
+        }
+        setStatus({
+          kind: 'error',
+          message: error.message || 'Не удалось добавить книгу',
+        });
+        return;
+      }
       setStatus({
         kind: 'error',
         message: 'Не удалось добавить книгу',
