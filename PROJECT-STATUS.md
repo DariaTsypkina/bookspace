@@ -46,7 +46,7 @@
 | ✅ | `bd-384` | Session Completion: git push при конце сессии |
 | ✅ | `bd-v3k` | Docs: протокол `bd close` на ветке задачи + merge в сборочную |
 | ✅ | `bd-82j` | UI: Google Fonts Roboto на весь UI (400/500/700) — DX · сборочная `feat/bookspace-bd-82j` |
-| 🔄 | `bd-23j` | UI: Baskerville (woff2, кириллица) на весь UI — DX · сборочная `feat/bookspace-bd-23j` · ветка `task/bd-23j-baskerville-fonts` |
+| ✅ | `bd-23j` | UI: Baskerville (woff2, кириллица) на весь UI — DX · сборочная `feat/bookspace-bd-23j` |
 
 ### DX — Tailwind + shadcn — ✅ · epic `bd-wus` · 18 / 18 · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
 
@@ -222,6 +222,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-29 | `bd-23j` closed + merge → `feat/bookspace-bd-23j`: Baskerville next/font/local woff2; unit 20/20; Playwright home/nav/login/typography **30/30** desktop+mobile; ЗАЛИВАТЬ develop=Нет |
 | 2026-07-29 | `bd-23j` close-prep: Baskerville via next/font/local (woff2 400/700 + italic); unit layout/tokens/tailwind **20/20**; Playwright home+app-nav+login+ui-typography **30/30** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); feature-doc `ui-typography.md`; ветка `task/bd-23j-baskerville-fonts`; `bd close` за оркестратором |
 | 2026-07-29 | Оркестратор: claim `bd-23j`; сборочная `feat/bookspace-bd-23j` от develop@524c658; ветка `task/bd-23j-baskerville-fonts`; файлы woff2 в `apps/web/fonts/`; ЗАЛИВАТЬ develop=Нет |
 | 2026-07-29 | Intake: `bd-23j` UI Baskerville OTF (roman/italic/bold/bolditalic, кириллица, web-embed OK) вместо Roboto; feature-doc `ui-typography`; DX без продуктового эпика |
