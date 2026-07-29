@@ -84,4 +84,48 @@ describe('OpenAPI (e2e)', () => {
     expect(schemas).toHaveProperty('AdminContextPatchDto');
     expect(schemas).toHaveProperty('AdminContextExtractDto');
   });
+
+  it('GET /docs-json exposes Zod-based catalog entity / needs-context DTO schemas', async () => {
+    const response = await request(app.getHttpServer())
+      .get('/docs-json')
+      .expect(200);
+
+    const body = response.body as {
+      components?: { schemas?: object };
+      paths?: Record<
+        string,
+        {
+          get?: {
+            parameters?: Array<{
+              name?: string;
+              in?: string;
+              schema?: {
+                type?: string;
+                maxLength?: number;
+                minLength?: number;
+              };
+            }>;
+          };
+          patch?: { requestBody?: unknown };
+        }
+      >;
+    };
+
+    expect(body.components?.schemas).toHaveProperty(
+      'AdminWorkNeedsContextPatchDto',
+    );
+
+    const workSlugParam = body.paths?.[
+      '/catalog/works/{slug}'
+    ]?.get?.parameters?.find(
+      (parameter) => parameter.name === 'slug' && parameter.in === 'path',
+    );
+    expect(workSlugParam?.schema?.type).toBe('string');
+    expect(workSlugParam?.schema?.minLength).toBe(1);
+    expect(workSlugParam?.schema?.maxLength).toBe(200);
+
+    const needsContextPath =
+      body.paths?.['/admin/works/{workId}/needs-context']?.patch;
+    expect(needsContextPath).toBeDefined();
+  });
 });

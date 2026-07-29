@@ -1,5 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { CatalogCharacterService } from './catalog-character.service';
+import { CatalogEntitySlugParamDto } from './dto/catalog-entity.dto';
 
 @Controller('catalog/characters')
 export class CatalogCharacterController {
@@ -8,7 +9,7 @@ export class CatalogCharacterController {
   ) {}
 
   @Get(':slug')
-  getBySlug(@Param('slug') slug: string) {
-    return this.catalogCharacterService.getBySlug(slug);
+  getBySlug(@Param() params: CatalogEntitySlugParamDto) {
+    return this.catalogCharacterService.getBySlug(params.slug);
   }
 }

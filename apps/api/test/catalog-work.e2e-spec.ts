@@ -1,10 +1,10 @@
-import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import cookieParser from 'cookie-parser';
 import request from 'supertest';
 import { App } from 'supertest/types';
 import { PrismaClient, WorkStatus } from '@prisma/client';
 import { AppModule } from '../src/app.module';
+import { configureApp } from '../src/bootstrap';
 import type { CatalogWorkResponse } from '../src/catalog/catalog-work.types';
 
 const prisma = new PrismaClient();
@@ -37,14 +37,7 @@ describe('Catalog work (e2e)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
-    app.use(cookieParser());
-    app.useGlobalPipes(
-      new ValidationPipe({
-        whitelist: true,
-        forbidNonWhitelisted: true,
-        transform: true,
-      }),
-    );
+    configureApp(app);
     await app.init();
   });
 
@@ -121,5 +114,18 @@ describe('Catalog work (e2e)', () => {
     await request(app.getHttpServer())
       .get(`/catalog/works/${TEST_PREFIX}-missing`)
       .expect(404);
+  });
+
+  it('GET /catalog/works/:slug returns 400 VALIDATION_FAILED for oversized slug', async () => {
+    const response = await request(app.getHttpServer())
+      .get(`/catalog/works/${'a'.repeat(201)}`)
+      .expect(400);
+
+    expect(response.body).toMatchObject({
+      code: 'VALIDATION_FAILED',
+      errors: expect.arrayContaining([
+        expect.objectContaining({ path: 'slug' }),
+      ]),
+    });
   });
 });
