@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-29T17:46:17.841Z",
+  "generated_at": "2026-07-29T18:32:57.059Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 121,
-    "open_issues": 39,
+    "total_issues": 122,
+    "open_issues": 40,
     "in_progress_issues": 0,
     "closed_issues": 82,
     "blocked_issues": 7,
-    "ready_issues": 32
+    "ready_issues": 33
   },
   "epics": [
     {
@@ -1021,6 +1021,15 @@
       "priority": 1,
       "parent": "bd-957",
       "updated_at": "2026-07-20T07:30:07Z"
+    },
+    {
+      "id": "bd-23j",
+      "title": "UI: Baskerville (OTF, кириллица) на весь UI",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-29T18:28:49Z"
     },
     {
       "id": "bd-707.10",
