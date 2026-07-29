@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-29T12:12:39.109Z",
+  "generated_at": "2026-07-29T12:13:00.484Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 106,
-    "open_issues": 42,
-    "in_progress_issues": 0,
+    "open_issues": 41,
+    "in_progress_issues": 1,
     "closed_issues": 64,
     "blocked_issues": 8,
-    "ready_issues": 34
+    "ready_issues": 33
   },
   "epics": [
     {
@@ -17,8 +17,8 @@
       "priority": 2,
       "children_total": 11,
       "children_closed": 8,
-      "children_in_progress": 0,
-      "children_open": 3,
+      "children_in_progress": 1,
+      "children_open": 2,
       "progress": "8 / 11",
       "percent_closed": 73,
       "children": [
@@ -95,7 +95,7 @@
         {
           "id": "bd-0t0.9",
           "title": "Wave 2: миграция домена Relations/Spoiler DTO/forms",
-          "status": "open",
+          "status": "in_progress",
           "type": "task",
           "priority": 2
         }
@@ -947,11 +947,11 @@
     {
       "id": "bd-0t0.9",
       "title": "Wave 2: миграция домена Relations/Spoiler DTO/forms",
-      "status": "open",
+      "status": "in_progress",
       "type": "task",
       "priority": 2,
       "parent": "bd-0t0",
-      "updated_at": "2026-07-28T14:33:23Z"
+      "updated_at": "2026-07-29T12:12:55Z"
     },
     {
       "id": "bd-0t0.7",
