@@ -2,35 +2,68 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { FormEvent, useState } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { LoginInputSchema } from '@bookspace/schemas';
+import { useForm } from 'react-hook-form';
 import { GuestOnly } from '../../components/guest-only';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { getFriendlyZodIssueMessage } from '@/lib/form-errors';
 import { login } from '../../lib/auth';
+
+type LoginFormValues = {
+  email: string;
+  password: string;
+};
 
 function LoginForm() {
   const router = useRouter();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const form = useForm<LoginFormValues>({
+    resolver: zodResolver(LoginInputSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setError(null);
-    setLoading(true);
+  async function handleValidSubmit(values: LoginFormValues) {
+    form.clearErrors('root');
 
     try {
-      await login(email, password);
+      await login(values.email, values.password);
       router.push('/');
     } catch (submitError) {
-      setError(
-        submitError instanceof Error ? submitError.message : 'Не удалось войти',
-      );
-    } finally {
-      setLoading(false);
+      form.setError('root', {
+        message:
+          submitError instanceof Error
+            ? submitError.message
+            : 'Не удалось войти',
+      });
+    }
+  }
+
+  function handleInvalidSubmit() {
+    const result = LoginInputSchema.safeParse(form.getValues());
+    if (result.success) {
+      return;
+    }
+    for (const issue of result.error.issues) {
+      const fieldName = issue.path[0];
+      if (fieldName === 'email' || fieldName === 'password') {
+        form.setError(fieldName, {
+          type: issue.code,
+          message: getFriendlyZodIssueMessage(issue),
+        });
+      }
     }
   }
 
@@ -41,43 +74,65 @@ function LoginForm() {
       </h1>
       <Card className="w-full">
         <CardContent className="p-5">
-          <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-            <Label htmlFor="email" className="font-normal text-muted">
-              Email
-            </Label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              autoComplete="email"
-              required
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-            />
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(
+                handleValidSubmit,
+                handleInvalidSubmit,
+              )}
+              className="flex flex-col gap-3"
+            >
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="font-normal text-muted">
+                      Email
+                    </FormLabel>
+                    <FormControl>
+                      <Input type="email" autoComplete="email" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <Label htmlFor="password" className="font-normal text-muted">
-              Пароль
-            </Label>
-            <Input
-              id="password"
-              name="password"
-              type="password"
-              autoComplete="current-password"
-              required
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-            />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="font-normal text-muted">
+                      Пароль
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="password"
+                        autoComplete="current-password"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            {error ? (
-              <p role="alert" className="text-sm text-[color:var(--error)]">
-                {error}
-              </p>
-            ) : null}
+              {form.formState.errors.root?.message ? (
+                <p role="alert" className="text-sm text-[color:var(--error)]">
+                  {form.formState.errors.root.message}
+                </p>
+              ) : null}
 
-            <Button type="submit" disabled={loading} className="mt-2 w-full">
-              {loading ? 'Вход…' : 'Войти'}
-            </Button>
-          </form>
+              <Button
+                type="submit"
+                disabled={form.formState.isSubmitting}
+                className="mt-2 w-full"
+              >
+                {form.formState.isSubmitting ? 'Вход…' : 'Войти'}
+              </Button>
+            </form>
+          </Form>
         </CardContent>
       </Card>
       <p className="text-sm text-muted">или</p>
