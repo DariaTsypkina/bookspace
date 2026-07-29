@@ -217,6 +217,7 @@
 | ✅ | `bd-6b7.3` | PWA: App shell и tab-bar |
 | ✅ | `bd-6b7.4` | UI: строка меню (Главная · Поиск · Профиль) — MVP-срез |
 | ⬜ | `bd-6b7.5` | UI: кнопки Войти / Выйти в меню (human-reported) |
+| ⬜ | `bd-6b7.6` | [bug] UI: одинаковый font-weight у всех пунктов меню (как у активного) |
 
 ---
 
@@ -224,6 +225,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-29 | Intake `/task`: `bd-6b7.6` bug — font-weight всех ссылок меню = как у активного (`font-semibold` сейчас только на `isActive`); feature-doc `app-shell-tab-bar`; сборочная `feat/bookspace-bd-6b7` |
 | 2026-07-29 | Docs на `feat/bookspace-bd-23j`: канон UI-шрифта Baskerville для агентов — `stack.mdc`, `ui-ru.mdc`, `AGENTS.md`, `stack-and-architecture`, `ui-typography` § Для агентов; `bd remember ui-font-baskerville` |
 | 2026-07-29 | Intake `/task`: `bd-p3l` bug — Baskerville не на button/input (UA не наследует font-family); feature-doc `ui-typography`; сборочная `feat/bookspace-bd-23j`; discovered-from `bd-23j` |
 | 2026-07-29 | Оркестратор: целевая проверка `feat/bookspace-bd-23j` PASS (unit typography 20/20, typecheck OK, PW 30/30); `bd-v3x` заведён (axios stub, вне diff); ЗАЛИВАТЬ develop=Нет — push сборочной |
