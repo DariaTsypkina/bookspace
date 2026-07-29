@@ -1,16 +1,15 @@
+import { LoginInputSchema, RegisterInputSchema } from '@bookspace/schemas';
 import { createZodDto } from 'nestjs-zod';
 import { z } from 'zod';
 
-const NormalizedEmailSchema = z.email().trim().toLowerCase();
+const NormalizedEmailSchema = z.string().trim().toLowerCase().pipe(z.email());
 
-const RegisterDtoSchema = z.object({
+const RegisterDtoSchema = RegisterInputSchema.extend({
   email: NormalizedEmailSchema,
-  password: z.string().min(8).max(128),
 });
 
-const LoginDtoSchema = z.object({
+const LoginDtoSchema = LoginInputSchema.extend({
   email: NormalizedEmailSchema,
-  password: z.string().min(8).max(128),
 });
 
 export class RegisterDto extends createZodDto(RegisterDtoSchema) {}
