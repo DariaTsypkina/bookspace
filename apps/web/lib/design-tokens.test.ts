@@ -32,8 +32,8 @@ describe('designTokens (читальня)', () => {
     }
   });
 
-  it('exposes Roboto font CSS variable name (bd-82j)', () => {
-    expect(designTokens.fontFamilyCssVar).toBe('--font-roboto');
-    expect(designTokens.fontFamily).toBe('Roboto');
+  it('exposes Baskerville font CSS variable name (bd-23j)', () => {
+    expect(designTokens.fontFamilyCssVar).toBe('--font-baskerville');
+    expect(designTokens.fontFamily).toBe('Baskerville');
   });
 });

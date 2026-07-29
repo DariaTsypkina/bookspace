@@ -25,7 +25,11 @@ const config: Config = {
     extend: {
       colors: themeColors,
       fontFamily: {
-        sans: ['var(--font-roboto)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-baskerville)', 'system-ui', 'sans-serif'],
+      },
+      // Baskerville woff2: только 400/700 — medium без faux 500.
+      fontWeight: {
+        medium: '400',
       },
     },
   },

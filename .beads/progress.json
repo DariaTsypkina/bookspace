@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-29T17:46:17.841Z",
+  "generated_at": "2026-07-29T18:47:37.371Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 121,
-    "open_issues": 39,
+    "total_issues": 124,
+    "open_issues": 41,
     "in_progress_issues": 0,
-    "closed_issues": 82,
+    "closed_issues": 83,
     "blocked_issues": 7,
-    "ready_issues": 32
+    "ready_issues": 34
   },
   "epics": [
     {
@@ -1021,6 +1021,33 @@
       "priority": 1,
       "parent": "bd-957",
       "updated_at": "2026-07-20T07:30:07Z"
+    },
+    {
+      "id": "bd-p3l",
+      "title": "UI: Baskerville не применяется к кнопкам и инпутам",
+      "status": "open",
+      "type": "bug",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-29T18:45:21Z"
+    },
+    {
+      "id": "bd-v3x",
+      "title": "web: work-page-context-reading.integration stubs fetch, code uses axios",
+      "status": "open",
+      "type": "bug",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-29T18:39:21Z"
+    },
+    {
+      "id": "bd-23j",
+      "title": "UI: Baskerville (woff2, кириллица) на весь UI",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-29T18:38:12Z"
     },
     {
       "id": "bd-707.10",
