@@ -38,7 +38,7 @@
 |--------|-----|--------|
 | ✅ | `bd-wus` | **Эпик DX: Tailwind + shadcn** (ADR 0003 accepted) — 18 / 18 |
 | ✅ | `bd-0t0` | **Эпик DX: RHF + Zod full contour** (ADR 0004 accepted) — 11 / 11 + bug .12 |
-| 🔄 | `bd-707` | **Эпик DX: axios HTTP-клиент** (ADR 0005 accepted) — 3 / 10 · W1+W2 done (await close) |
+| 🔄 | `bd-707` | **Эпик DX: axios HTTP-клиент** (ADR 0005 accepted) — 3 / 10 · W1–W3 done (await close) |
 | ✅ | `bd-ky6` | Chore: синхронизировать beads interactions.jsonl |
 | ✅ | `bd-0e6` | Docs: согласование зависимостей агентом |
 | ✅ | `bd-rtp` | Docs: human intake workflow и /task skill |
@@ -92,7 +92,7 @@
 
 ### DX — axios HTTP-клиент — 🔄 · epic `bd-707` · 3 / 10 · ADR [0005](docs/adr/0005-axios-http-client.md) **accepted**
 
-План: [migration-axios.md](docs/tech/migration-axios.md). Сборочная: `feat/bookspace-bd-707`. W1 (`bd-707.4`) + W2 (`bd-707.5`) готовы к close.
+План: [migration-axios.md](docs/tech/migration-axios.md). Сборочная: `feat/bookspace-bd-707`. W1–W3 (`bd-707.4`–`.6`) готовы к close.
 
 | Статус | ID | Задача |
 |--------|-----|--------|
@@ -101,7 +101,7 @@
 | ✅ | `bd-707.3` | F2: api HttpModule foundation |
 | 🔄 | `bd-707.4` | W1: migrate web lib/auth (await close) |
 | 🔄 | `bd-707.5` | W2: migrate web catalog libs (await close) |
-| 🔒 | `bd-707.6` | W3: migrate web admin-context lib |
+| 🔄 | `bd-707.6` | W3: migrate web admin-context lib (await close) |
 | 🔒 | `bd-707.7` | W4: migrate web client forms fetch |
 | 🔒 | `bd-707.8` | W5: web regression smoke |
 | 🔒 | `bd-707.9` | A1: OAuth clients → HttpService |
@@ -221,6 +221,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-29 | `bd-707.6` W3: `lib/admin-context.ts` → `api`+`ApiError`+`noStoreConfig` (без fetch/parseApiError); unit 8/8; Playwright `admin-context` desktop 3/3; `bd close` за оркестратором |
+| 2026-07-29 | Claim `bd-707.6`: conventions (design/acceptance Критерии+Проверка/notes/labels area:web+sec:http+dx); sync origin/develop OK; ветка `task/bd-707.6-migrate-admin-context` |
 | 2026-07-29 | `bd-707.5` W2: catalog libs → `api`+`ApiError`+`noStoreConfig` (без fetch); unit 22/22; Playwright `catalog-search` desktop 5/5; `bd close` за оркестратором |
 | 2026-07-29 | `bd-707.4` W1: `lib/auth.ts` → `api`+`ApiError` (без fetch/parseApiError); unit 10/10; Playwright `auth-pages` desktop 3/3; полный auth e2e → W5; `bd close` за оркестратором |
 | 2026-07-29 | `bd-707.3` F2: `HttpOutboundModule` (`HttpModule.register` timeout 10s) + import AppModule/AuthModule; unit inject `HttpService` 1/1; нет `axios.create` в app-коде; Playwright N/A; OAuth не тронут (A1); `bd close` за оркестратором |

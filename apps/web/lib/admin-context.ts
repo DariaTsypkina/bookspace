@@ -1,3 +1,5 @@
+import { api, noStoreConfig } from './http';
+
 export type AdminContextWorkSummary = {
   id: string;
   slug: string;
@@ -22,107 +24,61 @@ export type AdminContextReadingItem = {
 
 const ADMIN_BFF_BASE = '/api/admin';
 
-async function parseApiError(response: Response): Promise<string> {
-  try {
-    const body = (await response.json()) as { message?: string | string[] };
-    if (Array.isArray(body.message)) {
-      return body.message.join(', ');
-    }
-    if (body.message) {
-      return body.message;
-    }
-  } catch {
-    // ignore
-  }
-  return `Ошибка API: ${response.status}`;
-}
-
 export async function fetchRecentContextReadings(
   days = 7,
 ): Promise<{ items: AdminContextReadingItem[] }> {
-  const response = await fetch(
+  const { data } = await api.get<{ items: AdminContextReadingItem[] }>(
     `${ADMIN_BFF_BASE}/context/recent?days=${days}`,
-    { credentials: 'include', cache: 'no-store' },
+    noStoreConfig,
   );
-  if (!response.ok) {
-    throw new Error(await parseApiError(response));
-  }
-  return response.json() as Promise<{ items: AdminContextReadingItem[] }>;
+  return data;
 }
 
 export async function patchContextReading(
   id: string,
   data: { whyText?: string; importanceRank?: number },
 ): Promise<AdminContextReadingItem> {
-  const response = await fetch(`${ADMIN_BFF_BASE}/context/${id}`, {
-    method: 'PATCH',
-    credentials: 'include',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
-  });
-  if (!response.ok) {
-    throw new Error(await parseApiError(response));
-  }
-  return response.json() as Promise<AdminContextReadingItem>;
+  const { data: item } = await api.patch<AdminContextReadingItem>(
+    `${ADMIN_BFF_BASE}/context/${id}`,
+    data,
+  );
+  return item;
 }
 
 export async function unpublishContextReading(
   id: string,
 ): Promise<AdminContextReadingItem> {
-  const response = await fetch(`${ADMIN_BFF_BASE}/context/${id}/unpublish`, {
-    method: 'POST',
-    credentials: 'include',
-  });
-  if (!response.ok) {
-    throw new Error(await parseApiError(response));
-  }
-  return response.json() as Promise<AdminContextReadingItem>;
+  const { data } = await api.post<AdminContextReadingItem>(
+    `${ADMIN_BFF_BASE}/context/${id}/unpublish`,
+  );
+  return data;
 }
 
 export async function rejectContextReading(
   id: string,
 ): Promise<AdminContextReadingItem> {
-  const response = await fetch(`${ADMIN_BFF_BASE}/context/${id}/reject`, {
-    method: 'POST',
-    credentials: 'include',
-  });
-  if (!response.ok) {
-    throw new Error(await parseApiError(response));
-  }
-  return response.json() as Promise<AdminContextReadingItem>;
+  const { data } = await api.post<AdminContextReadingItem>(
+    `${ADMIN_BFF_BASE}/context/${id}/reject`,
+  );
+  return data;
 }
 
 export async function classifyContextForWork(workId: string): Promise<unknown> {
-  const response = await fetch(
+  const { data } = await api.post(
     `${ADMIN_BFF_BASE}/works/${workId}/context/classify`,
-    {
-      method: 'POST',
-      credentials: 'include',
-    },
   );
-  if (!response.ok) {
-    throw new Error(await parseApiError(response));
-  }
-  return response.json();
+  return data;
 }
 
 export async function extractContextForWork(
   workId: string,
   options: { force?: boolean; async?: boolean } = {},
 ): Promise<unknown> {
-  const response = await fetch(
+  const { data } = await api.post(
     `${ADMIN_BFF_BASE}/works/${workId}/context/extract`,
-    {
-      method: 'POST',
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(options),
-    },
+    options,
   );
-  if (!response.ok) {
-    throw new Error(await parseApiError(response));
-  }
-  return response.json();
+  return data;
 }
 
 export function formatPublishedAt(iso: string | null): string {
