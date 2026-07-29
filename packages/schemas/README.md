@@ -2,6 +2,8 @@
 
 Shared Zod v4 schemas and inferred input types for Bookspace domains.
 
+Migration (ADR 0004 / epic `bd-0t0`) is **complete**: web forms and API DTOs use these schemas; `class-validator` is not part of the runtime validation stack.
+
 ## Naming convention
 
 - Input schemas use `XxxInputSchema`.

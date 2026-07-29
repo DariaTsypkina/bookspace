@@ -13,7 +13,7 @@ import {
   ZodValidationPipe,
 } from 'nestjs-zod';
 import cookieParser from 'cookie-parser';
-import type { Request, Response } from 'express';
+import type { Response } from 'express';
 import type { ZodError, ZodIssue } from 'zod';
 
 type ValidationErrorItem = {
@@ -50,49 +50,18 @@ class ValidationExceptionFilter implements ExceptionFilter<
   }
 
   private normalize(exception: unknown): ValidationErrorResponse | null {
-    if (exception instanceof ZodValidationException) {
-      const zodError = exception.getZodError() as ZodError;
-      const errors = zodError.issues.map((issue: ZodIssue) => ({
-        code: issue.code,
-        path: issue.path.join('.'),
-        message: issue.message,
-      }));
-
-      return this.makeResponse(errors);
-    }
-
-    if (!(exception instanceof BadRequestException)) {
+    if (!(exception instanceof ZodValidationException)) {
       return null;
     }
 
-    const payload = exception.getResponse();
-    if (
-      typeof payload !== 'object' ||
-      payload === null ||
-      !Array.isArray((payload as { message?: unknown }).message)
-    ) {
-      return null;
-    }
-
-    const messages = (payload as { message: unknown[] }).message.filter(
-      (value): value is string => typeof value === 'string',
-    );
-    if (messages.length === 0) {
-      return null;
-    }
-
-    const errors = messages.map((message) => ({
-      code: 'invalid_request',
-      path: this.pathFromClassValidatorMessage(message),
-      message,
+    const zodError = exception.getZodError() as ZodError;
+    const errors = zodError.issues.map((issue: ZodIssue) => ({
+      code: issue.code,
+      path: issue.path.join('.'),
+      message: issue.message,
     }));
 
     return this.makeResponse(errors);
-  }
-
-  private pathFromClassValidatorMessage(message: string): string {
-    const [field] = message.trim().split(' ');
-    return field || 'request';
   }
 
   private makeResponse(errors: ValidationErrorItem[]): ValidationErrorResponse {
