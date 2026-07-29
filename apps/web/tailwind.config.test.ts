@@ -43,6 +43,17 @@ describe('tailwind foundation config', () => {
       ]),
     );
   });
+
+  it('maps font-sans to Roboto CSS variable (bd-82j)', () => {
+    const fontFamily = tailwindConfig.theme?.extend?.fontFamily as
+      Record<string, string | string[]> | undefined;
+
+    expect(fontFamily).toBeDefined();
+    const sans = fontFamily?.sans;
+    const stack = Array.isArray(sans) ? sans.join(',') : String(sans ?? '');
+    expect(stack).toMatch(/var\(--font-roboto\)/);
+    expect(stack.toLowerCase()).not.toMatch(/georgia/);
+  });
 });
 
 describe('tailwind foundation package deps (ADR 0003 F1)', () => {

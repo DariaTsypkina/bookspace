@@ -45,7 +45,7 @@
 | ✅ | `bd-nvi` | Scaffold monorepo dev baseline |
 | ✅ | `bd-384` | Session Completion: git push при конце сессии |
 | ✅ | `bd-v3k` | Docs: протокол `bd close` на ветке задачи + merge в сборочную |
-| ⬜ | `bd-82j` | UI: Google Fonts Roboto на весь UI (400/500/700) — human-reported DX |
+| ✅ | `bd-82j` | UI: Google Fonts Roboto на весь UI (400/500/700) — DX · сборочная `feat/bookspace-bd-82j` |
 
 ### DX — Tailwind + shadcn — ✅ · epic `bd-wus` · 18 / 18 · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
 
@@ -221,12 +221,16 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-29 | `bd-82j` close-prep: Roboto via next/font (400/500/700); unit layout/tokens/tailwind **19**; Playwright home+app-nav+login+ui-typography **30/30** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); feature-doc `ui-typography.md`; ветка `task/bd-82j-roboto-fonts`; `bd close` за оркестратором |
+| 2026-07-29 | `bd-82j` в работе: conventions OK; sync origin/develop Already up to date @8fbb22d; TDD Roboto via next/font (400/500/700) + tokens/Tailwind; ветка `task/bd-82j-roboto-fonts` |
 | 2026-07-29 | Оркестратор: эпик `bd-707` closed (10/10); target verify PASS (web 54/54, api 15/15, lint OK, PW 48/48); push `origin/feat/bookspace-bd-707`; в `develop` НЕ мёржили (ЗАЛИВАТЬ=Нет) |
 | 2026-07-29 | `bd-707.10` D1: eslint `no-restricted-globals`/`syntax` (web overrides SW+BFF; api запрет fetch); `migration-axios.md` → **completed**; inventory+эпик AC закрыты; stack notes; manual `e2e/manual/axios-http-dod.md`; Playwright N/A; `bd close` за оркестратором |
 | 2026-07-29 | Claim `bd-707.10`: conventions (design/acceptance Критерии+Проверка/notes/labels area:web+area:api+sec:http+dx); sync origin/develop OK; ветка `task/bd-707.10-dod-guardrails` |
 | 2026-07-29 | `bd-707.9` A1: Google/Yandex OAuth clients → `HttpService`+`firstValueFrom` (без `fetch(`); unit **14/14**; API e2e auth-google+yandex **10/10**; Playwright oauth smoke+e2e desktop **10/10**; `bd close` за оркестратором |
 | 2026-07-29 | Claim `bd-707.9`: conventions (design/acceptance Критерии+Проверка/notes/labels area:api+sec:auth+dx); sync origin/develop OK; ветка `task/bd-707.9-oauth-httpservice` |
 | 2026-07-29 | `bd-707.8` W5: web regression после W1–W4; unit **54/54** (11 files: http/auth/catalog-*/admin-context/add-library-item-form); Playwright smoke auth-pages+login+register+library+admin-context+catalog-search **44/44** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); фиксов axios нет; `bd close` за оркестратором |
+| 2026-07-29 | `bd-82j` closed + merge → `feat/bookspace-bd-82j`: Roboto next/font 400/500/700; unit 19/19; Playwright home/nav/login/typography **30/30** desktop+mobile; ЗАЛИВАТЬ develop=Нет |
+| 2026-07-29 | Оркестратор: claim `bd-82j` (Roboto via next/font); сборочная `feat/bookspace-bd-82j` от develop@8fbb22d; ветка `task/bd-82j-roboto-fonts`; ЗАЛИВАТЬ develop=Нет |
 | 2026-07-29 | Claim `bd-707.8`: conventions (design/acceptance Критерии+Проверка/notes/labels area:web+sec:http+dx+regress); sync origin/develop OK; ветка `task/bd-707.8-web-regression-smoke` |
 | 2026-07-29 | `bd-707.7` W4: `add-library-item-form.tsx` → `api`+`ApiError` (нет client fetch); unit 6/6 (+http 8/8); Playwright `library-page` desktop 5/5; `bd close` за оркестратором |
 | 2026-07-29 | Claim `bd-707.7`: conventions (design/acceptance Критерии+Проверка/notes/labels area:web+sec:http+dx); sync origin/develop OK; ветка `task/bd-707.7-migrate-client-forms` |

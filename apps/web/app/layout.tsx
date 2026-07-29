@@ -1,9 +1,17 @@
 import type { Metadata, Viewport } from 'next';
+import { Roboto } from 'next/font/google';
 import { AppNav } from '../components/app-nav';
 import { PwaSwRegister } from '../components/pwa-sw-register';
 import { designTokens } from '../lib/design-tokens';
 import { pwaManifest } from '../lib/pwa/manifest';
 import './globals.css';
+
+const roboto = Roboto({
+  subsets: ['cyrillic', 'latin'],
+  weight: ['400', '500', '700'],
+  variable: '--font-roboto',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: pwaManifest.name,
@@ -50,7 +58,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru">
+    <html lang="ru" className={`${roboto.variable} ${roboto.className}`}>
       <body>
         <PwaSwRegister />
         <div className="flex min-h-full flex-1 flex-col">
