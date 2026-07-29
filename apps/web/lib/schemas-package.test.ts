@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  AddLibraryItemInputSchema,
   AdminContextExtractInputSchema,
   AdminContextListRecentQuerySchema,
   AdminContextPatchFormSchema,
@@ -7,6 +8,7 @@ import {
   AdminContextPublishInputSchema,
   CatalogSearchQuerySchema,
   LoginInputSchema,
+  ProfileSlugParamSchema,
   SearchBooksInputSchema,
   SearchQueryFormSchema,
 } from '@bookspace/schemas';
@@ -55,6 +57,13 @@ describe('@bookspace/schemas export contract', () => {
       AdminContextExtractInputSchema.safeParse({ async: true, force: false })
         .success,
     ).toBe(true);
+    expect(AddLibraryItemInputSchema.safeParse({}).success).toBe(true);
+    expect(
+      AddLibraryItemInputSchema.safeParse({ workId: 'work-1' }).success,
+    ).toBe(true);
+    expect(
+      ProfileSlugParamSchema.safeParse({ slug: 'demo-reader' }).success,
+    ).toBe(true);
   });
 
   it('rejects invalid payloads', () => {
@@ -96,6 +105,13 @@ describe('@bookspace/schemas export contract', () => {
     ).toBe(false);
     expect(
       AdminContextExtractInputSchema.safeParse({ async: 'yes' }).success,
+    ).toBe(false);
+    expect(
+      AddLibraryItemInputSchema.safeParse({ workId: 'w'.repeat(129) }).success,
+    ).toBe(false);
+    expect(ProfileSlugParamSchema.safeParse({ slug: '' }).success).toBe(false);
+    expect(
+      ProfileSlugParamSchema.safeParse({ slug: 'a'.repeat(201) }).success,
     ).toBe(false);
   });
 });

@@ -37,7 +37,7 @@ describe('getFriendlyZodIssueMessage', () => {
     }
 
     expect(getFriendlyZodIssueMessage(result.error.issues[0])).toBe(
-      'Минимум 3 символа',
+      'Минимум 3 символов',
     );
   });
 });

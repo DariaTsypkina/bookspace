@@ -1,4 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card';
+import { AddLibraryItemForm } from './add-library-item-form';
 
 export default function LibraryStubPage() {
   return (
@@ -11,6 +12,7 @@ export default function LibraryStubPage() {
           <p className="text-[0.95rem] text-muted">
             Коллекция и полки скоро появятся.
           </p>
+          <AddLibraryItemForm />
         </CardContent>
       </Card>
     </main>

@@ -94,4 +94,42 @@ test.describe('Library page smoke (S12 / bd-wus.15)', () => {
       'page',
     );
   });
+
+  test('authenticated user: add library item form via BFF', async ({
+    page,
+  }) => {
+    const email = uniqueEmail();
+    const password = 'Secure123!';
+
+    await page.goto('/register');
+    await page.getByLabel('Email').fill(email);
+    await page.getByLabel('Пароль').fill(password);
+    await page.getByRole('button', { name: 'Зарегистрироваться' }).click();
+    await expect(page).toHaveURL('/login');
+
+    await page.getByLabel('Email').fill(email);
+    await page.getByLabel('Пароль').fill(password);
+    await page.getByRole('button', { name: 'Войти' }).click();
+    await expect(page).toHaveURL('/');
+
+    await page.goto('/library');
+    await page.getByLabel('ID произведения').fill('work-e2e-1');
+    await page.getByRole('button', { name: 'Добавить в библиотеку' }).click();
+    await expect(
+      page.getByRole('status').filter({
+        hasText: 'Добавлено в библиотеку (заглушка)',
+      }),
+    ).toBeVisible();
+  });
+
+  test('guest: add library item form asks to log in', async ({ page }) => {
+    await page.goto('/library');
+    await page.getByLabel('ID произведения').fill('guest-work');
+    await page.getByRole('button', { name: 'Добавить в библиотеку' }).click();
+    await expect(
+      page.getByRole('status').filter({
+        hasText: 'Войдите, чтобы добавить книгу в библиотеку',
+      }),
+    ).toBeVisible();
+  });
 });
