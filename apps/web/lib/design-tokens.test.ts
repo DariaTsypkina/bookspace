@@ -31,4 +31,9 @@ describe('designTokens (читальня)', () => {
       expect(designTokens.cssVar(key)).toBe(`--${key}`);
     }
   });
+
+  it('exposes Baskerville font CSS variable name (bd-23j)', () => {
+    expect(designTokens.fontFamilyCssVar).toBe('--font-baskerville');
+    expect(designTokens.fontFamily).toBe('Baskerville');
+  });
 });

@@ -1,6 +1,5 @@
-import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import cookieParser from 'cookie-parser';
 import request from 'supertest';
 import { App } from 'supertest/types';
 import {
@@ -12,6 +11,7 @@ import {
   WorkStatus,
 } from '@prisma/client';
 import { AppModule } from '../src/app.module';
+import { configureApp } from '../src/bootstrap';
 import { MAX_SOURCE_SNIPPET_LENGTH } from '../src/context/context.constants';
 import { FakeLlmProvider } from '../src/llm/fake-llm.provider';
 import { LLM_PROVIDER } from '../src/llm/llm.provider';
@@ -49,20 +49,14 @@ describe('Context extract pipeline (e2e)', () => {
 
   beforeAll(async () => {
     process.env.JOBS_SYNC = 'true';
+    process.env.E2E_THROTTLE_BYPASS = 'true';
 
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
 
     app = moduleFixture.createNestApplication();
-    app.use(cookieParser());
-    app.useGlobalPipes(
-      new ValidationPipe({
-        whitelist: true,
-        forbidNonWhitelisted: true,
-        transform: true,
-      }),
-    );
+    configureApp(app);
     await app.init();
 
     fakeLlm = app.get<FakeLlmProvider>(LLM_PROVIDER);

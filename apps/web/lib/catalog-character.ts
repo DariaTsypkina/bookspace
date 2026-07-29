@@ -1,4 +1,8 @@
-export type CharacterRelationType = 'FRIEND' | 'ENEMY' | 'FAMILY' | 'RELATED';
+import type { CharacterRelationType } from '@bookspace/schemas';
+import { parseCatalogEntitySlug } from './catalog-entity-slug';
+import { ApiError, api, noStoreConfig } from './http';
+
+export type { CharacterRelationType };
 
 export interface CatalogCharacterAppearance {
   slug: string;
@@ -32,13 +36,21 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000';
 export async function fetchCatalogCharacter(
   slug: string,
 ): Promise<CatalogCharacterResponse> {
-  const url = `${API_URL}/catalog/characters/${encodeURIComponent(slug)}`;
-  const response = await fetch(url, { cache: 'no-store' });
-  if (response.status === 404) {
-    throw new CatalogCharacterNotFoundError(slug);
+  const safeSlug = parseCatalogEntitySlug(slug);
+  const url = `${API_URL}/catalog/characters/${encodeURIComponent(safeSlug)}`;
+  try {
+    const { data } = await api.get<CatalogCharacterResponse>(
+      url,
+      noStoreConfig,
+    );
+    return data;
+  } catch (error) {
+    if (error instanceof ApiError && error.status === 404) {
+      throw new CatalogCharacterNotFoundError(safeSlug);
+    }
+    if (error instanceof ApiError) {
+      throw new Error(`Catalog character fetch failed: ${error.status}`);
+    }
+    throw error;
   }
-  if (!response.ok) {
-    throw new Error(`Catalog character fetch failed: ${response.status}`);
-  }
-  return response.json() as Promise<CatalogCharacterResponse>;
 }

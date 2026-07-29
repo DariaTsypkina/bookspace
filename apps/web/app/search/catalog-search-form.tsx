@@ -1,47 +1,97 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { FormEvent, useState } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { SearchQueryFormSchema } from '@bookspace/schemas';
+import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { getFriendlyZodIssueMessage } from '@/lib/form-errors';
 
 type CatalogSearchFormProps = {
   initialQuery?: string;
 };
 
+type CatalogSearchFormValues = {
+  query: string;
+};
+
+const SearchQuerySchema = SearchQueryFormSchema;
+
 export function CatalogSearchForm({
   initialQuery = '',
 }: CatalogSearchFormProps) {
   const router = useRouter();
-  const [query, setQuery] = useState(initialQuery);
+  const form = useForm<CatalogSearchFormValues>({
+    resolver: zodResolver(SearchQuerySchema),
+    defaultValues: {
+      query: initialQuery,
+    },
+  });
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  const handleValidSubmit = ({ query }: CatalogSearchFormValues) => {
     const trimmed = query.trim();
     const nextUrl = trimmed
       ? `/search?q=${encodeURIComponent(trimmed)}`
       : '/search';
     router.push(nextUrl);
-  }
+  };
+  const handleInvalid = () => {
+    const result = SearchQuerySchema.safeParse(form.getValues());
+    if (result.success) {
+      return;
+    }
+
+    const firstIssue = result.error.issues[0];
+    if (!firstIssue || firstIssue.path[0] !== 'query') {
+      return;
+    }
+
+    form.setError('query', {
+      type: firstIssue.code,
+      message: getFriendlyZodIssueMessage(firstIssue),
+    });
+  };
 
   return (
-    <form className="flex flex-col gap-2" onSubmit={handleSubmit} role="search">
-      <Label htmlFor="catalog-search-input" className="font-normal text-muted">
-        Поисковый запрос
-      </Label>
-      <Input
-        id="catalog-search-input"
-        name="q"
-        type="search"
-        value={query}
-        onChange={(event) => setQuery(event.target.value)}
-        placeholder="Книга, автор, серия…"
-        autoComplete="off"
-      />
-      <Button type="submit" className="w-full sm:w-auto">
-        Найти
-      </Button>
-    </form>
+    <Form {...form}>
+      <form
+        className="flex flex-col gap-2"
+        onSubmit={form.handleSubmit(handleValidSubmit, handleInvalid)}
+        role="search"
+      >
+        <FormField
+          control={form.control}
+          name="query"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="font-normal text-muted">
+                Поисковый запрос
+              </FormLabel>
+              <FormControl>
+                <Input
+                  type="search"
+                  placeholder="Книга, автор, серия…"
+                  autoComplete="off"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit" className="w-full sm:w-auto">
+          Найти
+        </Button>
+      </form>
+    </Form>
   );
 }

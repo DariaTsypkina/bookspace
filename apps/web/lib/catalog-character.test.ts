@@ -1,10 +1,44 @@
-import { describe, expect, it, vi } from 'vitest';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { ApiError, api, noStoreConfig } from './http';
 import {
   CatalogCharacterNotFoundError,
   fetchCatalogCharacter,
 } from './catalog-character';
 
+vi.mock('./http', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('./http')>();
+  return {
+    ...actual,
+    api: {
+      get: vi.fn(),
+    },
+  };
+});
+
+const catalogCharacterSource = readFileSync(
+  path.join(__dirname, 'catalog-character.ts'),
+  'utf8',
+);
+
 describe('fetchCatalogCharacter', () => {
+  beforeEach(() => {
+    vi.mocked(api.get).mockReset();
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('imports CharacterRelationType from shared schemas (bd-0t0.9)', () => {
+    expect(catalogCharacterSource).toMatch(/from ['"]@bookspace\/schemas['"]/);
+    expect(catalogCharacterSource).toMatch(/CharacterRelationType/);
+    expect(catalogCharacterSource).not.toMatch(
+      /export type CharacterRelationType = 'FRIEND'/,
+    );
+  });
+
   it('returns parsed character response from API', async () => {
     const mockResponse = {
       slug: 'garri-potter',
@@ -26,32 +60,19 @@ describe('fetchCatalogCharacter', () => {
       ],
     };
 
-    vi.stubGlobal(
-      'fetch',
-      vi.fn().mockResolvedValue({
-        ok: true,
-        status: 200,
-        json: async () => mockResponse,
-      }),
-    );
+    vi.mocked(api.get).mockResolvedValue({ data: mockResponse });
 
     const result = await fetchCatalogCharacter('garri-potter');
 
     expect(result).toEqual(mockResponse);
-    expect(fetch).toHaveBeenCalledWith(
+    expect(api.get).toHaveBeenCalledWith(
       expect.stringContaining('/catalog/characters/garri-potter'),
-      { cache: 'no-store' },
+      noStoreConfig,
     );
   });
 
   it('throws CatalogCharacterNotFoundError on 404', async () => {
-    vi.stubGlobal(
-      'fetch',
-      vi.fn().mockResolvedValue({
-        ok: false,
-        status: 404,
-      }),
-    );
+    vi.mocked(api.get).mockRejectedValue(new ApiError(404, 'Not Found'));
 
     await expect(fetchCatalogCharacter('missing')).rejects.toBeInstanceOf(
       CatalogCharacterNotFoundError,

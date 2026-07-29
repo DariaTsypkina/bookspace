@@ -1,13 +1,19 @@
-import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import cookieParser from 'cookie-parser';
 import request from 'supertest';
 import { App } from 'supertest/types';
 import { NeedsContext, PrismaClient, WorkStatus } from '@prisma/client';
 import { AppModule } from '../src/app.module';
+import { configureApp } from '../src/bootstrap';
 import { isExtractEligible } from '../src/context/context-eligibility';
 import { FakeLlmProvider } from '../src/llm/fake-llm.provider';
 import { LLM_PROVIDER } from '../src/llm/llm.provider';
+
+type ValidationErrorItem = { code: string; path: string; message: string };
+type ValidationErrorResponse = {
+  code: string;
+  errors: ValidationErrorItem[];
+};
 
 const prisma = new PrismaClient();
 const TEST_PREFIX = 'context-needs-classify-e2e';
@@ -42,14 +48,7 @@ describe('Context needs classify (e2e)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
-    app.use(cookieParser());
-    app.useGlobalPipes(
-      new ValidationPipe({
-        whitelist: true,
-        forbidNonWhitelisted: true,
-        transform: true,
-      }),
-    );
+    configureApp(app);
     await app.init();
 
     fakeLlm = app.get<FakeLlmProvider>(LLM_PROVIDER);
@@ -184,6 +183,24 @@ describe('Context needs classify (e2e)', () => {
     const body = response.body as { needsContext: NeedsContext };
     expect(body.needsContext).toBe('YES');
     expect(isExtractEligible(body.needsContext)).toBe(true);
+  });
+
+  it('PATCH needs-context returns 400 VALIDATION_FAILED for invalid enum', async () => {
+    const work = await createWork();
+
+    const response = await request(app.getHttpServer())
+      .patch(`/admin/works/${work.id}/needs-context`)
+      .set('Cookie', adminCookie)
+      .send({ needsContext: 'MAYBE' })
+      .expect(400);
+
+    const body = response.body as ValidationErrorResponse;
+    expect(body.code).toBe('VALIDATION_FAILED');
+    expect(body.errors).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ path: 'needsContext' }),
+      ]),
+    );
   });
 
   it('rejects non-admin with 403', async () => {

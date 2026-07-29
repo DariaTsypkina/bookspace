@@ -1,3 +1,6 @@
+import { parseCatalogEntitySlug } from './catalog-entity-slug';
+import { ApiError, api, noStoreConfig } from './http';
+
 export interface CatalogWorkAuthor {
   slug: string;
   nameRu: string;
@@ -39,15 +42,20 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000';
 export async function fetchCatalogWork(
   slug: string,
 ): Promise<CatalogWorkResponse> {
-  const url = `${API_URL}/catalog/works/${encodeURIComponent(slug)}`;
-  const response = await fetch(url, { cache: 'no-store' });
-  if (response.status === 404) {
-    throw new CatalogWorkNotFoundError(slug);
+  const safeSlug = parseCatalogEntitySlug(slug);
+  const url = `${API_URL}/catalog/works/${encodeURIComponent(safeSlug)}`;
+  try {
+    const { data } = await api.get<CatalogWorkResponse>(url, noStoreConfig);
+    return data;
+  } catch (error) {
+    if (error instanceof ApiError && error.status === 404) {
+      throw new CatalogWorkNotFoundError(safeSlug);
+    }
+    if (error instanceof ApiError) {
+      throw new Error(`Catalog work fetch failed: ${error.status}`);
+    }
+    throw error;
   }
-  if (!response.ok) {
-    throw new Error(`Catalog work fetch failed: ${response.status}`);
-  }
-  return response.json() as Promise<CatalogWorkResponse>;
 }
 
 export const EDITION_LANGUAGE_LABELS: Record<string, string> = {

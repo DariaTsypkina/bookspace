@@ -9,36 +9,17 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { UserRole } from '@prisma/client';
-import { Type } from 'class-transformer';
-import { IsInt, IsOptional, IsString, Max, Min } from 'class-validator';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import type { SessionUser } from '../auth/auth.service';
 import { AdminContextService } from './admin-context.service';
-
-class ListRecentQueryDto {
-  @IsOptional()
-  @Type(() => Number)
-  @IsInt()
-  @Min(1)
-  @Max(90)
-  days?: number;
-}
-
-class PatchContextReadingDto {
-  @IsOptional()
-  @IsString()
-  whyText?: string;
-
-  @IsOptional()
-  @Type(() => Number)
-  @IsInt()
-  @Min(1)
-  @Max(99)
-  importanceRank?: number;
-}
+import {
+  AdminContextListRecentQueryDto,
+  AdminContextPatchDto,
+  AdminContextReadingIdParamDto,
+} from './dto/admin-context.dto';
 
 @Controller('admin/context')
 @UseGuards(AuthGuard, RolesGuard)
@@ -47,7 +28,7 @@ export class AdminContextController {
 
   @Get('recent')
   @Roles(UserRole.ADMIN)
-  listRecent(@Query() query: ListRecentQueryDto) {
+  listRecent(@Query() query: AdminContextListRecentQueryDto) {
     return this.adminContextService.listRecentAutoPublished({
       days: query.days,
     });
@@ -56,22 +37,28 @@ export class AdminContextController {
   @Patch(':id')
   @Roles(UserRole.ADMIN)
   patchReading(
-    @Param('id') id: string,
-    @Body() body: PatchContextReadingDto,
+    @Param() params: AdminContextReadingIdParamDto,
+    @Body() body: AdminContextPatchDto,
     @CurrentUser() user: SessionUser,
   ) {
-    return this.adminContextService.updateReading(id, user.id, body);
+    return this.adminContextService.updateReading(params.id, user.id, body);
   }
 
   @Post(':id/unpublish')
   @Roles(UserRole.ADMIN)
-  unpublish(@Param('id') id: string, @CurrentUser() user: SessionUser) {
-    return this.adminContextService.unpublishReading(id, user.id);
+  unpublish(
+    @Param() params: AdminContextReadingIdParamDto,
+    @CurrentUser() user: SessionUser,
+  ) {
+    return this.adminContextService.unpublishReading(params.id, user.id);
   }
 
   @Post(':id/reject')
   @Roles(UserRole.ADMIN)
-  reject(@Param('id') id: string, @CurrentUser() user: SessionUser) {
-    return this.adminContextService.rejectReading(id, user.id);
+  reject(
+    @Param() params: AdminContextReadingIdParamDto,
+    @CurrentUser() user: SessionUser,
+  ) {
+    return this.adminContextService.rejectReading(params.id, user.id);
   }
 }

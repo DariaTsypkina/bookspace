@@ -79,7 +79,8 @@
 - [pwa-install](pwa-install.md)
 - [pwa-offline-shell](pwa-offline-shell.md)
 - [app-shell-tab-bar](app-shell-tab-bar.md)
+- [ui-typography](ui-typography.md)
 
 ## Итого
 
-45 feature-docs. При правках обновляйте этот индекс.
+46 feature-docs. При правках обновляйте этот индекс.

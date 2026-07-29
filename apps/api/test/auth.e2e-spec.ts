@@ -1,12 +1,17 @@
-import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import cookieParser from 'cookie-parser';
 import request from 'supertest';
 import { App } from 'supertest/types';
 import { PrismaClient } from '@prisma/client';
 import { AppModule } from '../src/app.module';
+import { configureApp } from '../src/bootstrap';
 
 const prisma = new PrismaClient();
+type ValidationErrorItem = { code: string; path: string; message: string };
+type ValidationErrorResponse = {
+  code: string;
+  errors: ValidationErrorItem[];
+};
 
 describe('Auth (e2e)', () => {
   let app: INestApplication<App>;
@@ -22,14 +27,7 @@ describe('Auth (e2e)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
-    app.use(cookieParser());
-    app.useGlobalPipes(
-      new ValidationPipe({
-        whitelist: true,
-        forbidNonWhitelisted: true,
-        transform: true,
-      }),
-    );
+    configureApp(app);
     await app.init();
   });
 
@@ -37,6 +35,7 @@ describe('Auth (e2e)', () => {
     'e2e-new@bookspace.local',
     'e2e-dup@bookspace.local',
     'e2e-session@bookspace.local',
+    'e2e-library-val@bookspace.local',
     'e2e-admin-user@bookspace.local',
   ];
 
@@ -85,6 +84,28 @@ describe('Auth (e2e)', () => {
         password: 'weak',
       })
       .expect(400);
+  });
+
+  it('POST /auth/register returns normalized validation errors', async () => {
+    const response = await authPost('/auth/register')
+      .send({
+        email: 'bad-email',
+        password: 12345,
+      })
+      .expect(400);
+
+    const body = response.body as ValidationErrorResponse;
+    expect(body.code).toBe('VALIDATION_FAILED');
+    const emailIssue = body.errors.find((issue) => issue.path === 'email');
+    const passwordIssue = body.errors.find(
+      (issue) => issue.path === 'password',
+    );
+    expect(emailIssue).toBeDefined();
+    expect(passwordIssue).toBeDefined();
+    expect(emailIssue?.code.length).toBeGreaterThan(0);
+    expect(passwordIssue?.code.length).toBeGreaterThan(0);
+    expect(emailIssue?.message.length).toBeGreaterThan(0);
+    expect(passwordIssue?.message.length).toBeGreaterThan(0);
   });
 
   it('POST /auth/register rejects duplicate email', async () => {
@@ -178,6 +199,26 @@ describe('Auth (e2e)', () => {
       .expect(401);
   });
 
+  it('POST /auth/login validates payload with normalized errors', async () => {
+    const response = await authPost('/auth/login')
+      .send({
+        email: 'bad-email',
+        password: 'short',
+      })
+      .expect(400);
+
+    const body = response.body as ValidationErrorResponse;
+    expect(body.code).toBe('VALIDATION_FAILED');
+    const emailIssue = body.errors.find((issue) => issue.path === 'email');
+    const passwordIssue = body.errors.find(
+      (issue) => issue.path === 'password',
+    );
+    expect(emailIssue).toBeDefined();
+    expect(passwordIssue).toBeDefined();
+    expect(emailIssue?.message.length).toBeGreaterThan(0);
+    expect(passwordIssue?.message.length).toBeGreaterThan(0);
+  });
+
   it('POST /auth/logout clears cookie and invalidates session token', async () => {
     await authPost('/auth/register')
       .send({
@@ -256,6 +297,34 @@ describe('Auth (e2e)', () => {
       workId: 'work-1',
     });
     expect(created.body).toHaveProperty('userId');
+  });
+
+  it('POST /me/library/items rejects oversized workId with VALIDATION_FAILED', async () => {
+    await authPost('/auth/register')
+      .send({
+        email: 'e2e-library-val@bookspace.local',
+        password: 'Secure123!',
+      })
+      .expect(201);
+
+    const login = await authPost('/auth/login')
+      .send({
+        email: 'e2e-library-val@bookspace.local',
+        password: 'Secure123!',
+      })
+      .expect(200);
+
+    const response = await api()
+      .post('/me/library/items')
+      .set('Cookie', login.headers['set-cookie'] ?? [])
+      .send({ workId: 'w'.repeat(129) })
+      .expect(400);
+
+    const body = response.body as ValidationErrorResponse;
+    expect(body.code).toBe('VALIDATION_FAILED');
+    expect(body.errors).toEqual(
+      expect.arrayContaining([expect.objectContaining({ path: 'workId' })]),
+    );
   });
 
   it('GET /admin/ping rejects USER with 403 and allows ADMIN', async () => {

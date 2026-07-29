@@ -1,26 +1,131 @@
 {
-  "generated_at": "2026-07-23T16:48:05.609Z",
+  "generated_at": "2026-07-29T19:01:13.300Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 94,
-    "open_issues": 39,
+    "total_issues": 125,
+    "open_issues": 42,
     "in_progress_issues": 0,
-    "closed_issues": 55,
+    "closed_issues": 83,
     "blocked_issues": 7,
-    "ready_issues": 32
+    "ready_issues": 35
   },
   "epics": [
+    {
+      "id": "bd-0t0",
+      "title": "DX: RHF + Zod full contour",
+      "status": "closed",
+      "priority": 2,
+      "children_total": 13,
+      "children_closed": 13,
+      "children_in_progress": 0,
+      "children_open": 0,
+      "progress": "13 / 13",
+      "percent_closed": 100,
+      "children": [
+        {
+          "id": "bd-0t0.1",
+          "title": "RHF/Zod foundation: packages/schemas + naming",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.10",
+          "title": "Wave 2: миграция домена Rankings/Collections/Admin DTO/forms",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.11",
+          "title": "Finalization: remove class-validator and legacy cleanup",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.12",
+          "title": "Playwright rankings/collections smoke: button count ловит Next.js Dev Tools",
+          "status": "closed",
+          "type": "bug",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.13",
+          "title": "fix: api e2e eslint unsafe any в validation asserts",
+          "status": "closed",
+          "type": "bug",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.2",
+          "title": "RHF/Zod foundation: web form pattern on shadcn Form",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.3",
+          "title": "RHF/Zod foundation: api validation pipe + OpenAPI",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.4",
+          "title": "Wave 1: миграция login/register end-to-end",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.5",
+          "title": "Wave 1: миграция catalog search end-to-end",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.6",
+          "title": "Wave 1: миграция admin context end-to-end",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.7",
+          "title": "Wave 2: миграция домена Catalog pages DTO/forms",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.8",
+          "title": "Wave 2: миграция домена Library/Profile DTO/forms",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.9",
+          "title": "Wave 2: миграция домена Relations/Spoiler DTO/forms",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        }
+      ]
+    },
     {
       "id": "bd-6b7",
       "title": "PWA и оболочка",
       "status": "closed",
       "priority": 3,
-      "children_total": 4,
+      "children_total": 6,
       "children_closed": 4,
       "children_in_progress": 0,
-      "children_open": 0,
-      "progress": "4 / 4",
-      "percent_closed": 100,
+      "children_open": 2,
+      "progress": "4 / 6",
+      "percent_closed": 67,
       "children": [
         {
           "id": "bd-6b7.1",
@@ -49,6 +154,20 @@
           "status": "closed",
           "type": "feature",
           "priority": 2
+        },
+        {
+          "id": "bd-6b7.5",
+          "title": "UI: кнопки Войти / Выйти в меню",
+          "status": "open",
+          "type": "feature",
+          "priority": 2
+        },
+        {
+          "id": "bd-6b7.6",
+          "title": "UI: одинаковый font-weight у всех пунктов меню (как у активного)",
+          "status": "open",
+          "type": "bug",
+          "priority": 2
         }
       ]
     },
@@ -58,11 +177,11 @@
       "status": "closed",
       "priority": 1,
       "children_total": 10,
-      "children_closed": 9,
+      "children_closed": 10,
       "children_in_progress": 0,
-      "children_open": 1,
-      "progress": "9 / 10",
-      "percent_closed": 90,
+      "children_open": 0,
+      "progress": "10 / 10",
+      "percent_closed": 100,
       "children": [
         {
           "id": "bd-6v0.1",
@@ -74,7 +193,7 @@
         {
           "id": "bd-6v0.10",
           "title": "Поиск: префикс запроса не находит полные совпадения (роул → Роулинг)",
-          "status": "open",
+          "status": "closed",
           "type": "bug",
           "priority": 1
         },
@@ -132,6 +251,90 @@
           "title": "Поиск: восстановить FTS search_vector после drift Prisma",
           "status": "closed",
           "type": "bug",
+          "priority": 2
+        }
+      ]
+    },
+    {
+      "id": "bd-707",
+      "title": "DX: axios HTTP-клиент (web + api)",
+      "status": "closed",
+      "priority": 2,
+      "children_total": 10,
+      "children_closed": 10,
+      "children_in_progress": 0,
+      "children_open": 0,
+      "progress": "10 / 10",
+      "percent_closed": 100,
+      "children": [
+        {
+          "id": "bd-707.1",
+          "title": "Axios F0: deps + docs sync",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.10",
+          "title": "Axios D1: DoD guardrails + docs",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.2",
+          "title": "Axios F1: web http + ApiError foundation",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.3",
+          "title": "Axios F2: api HttpModule foundation",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.4",
+          "title": "Axios W1: migrate web lib/auth",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.5",
+          "title": "Axios W2: migrate web catalog libs",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.6",
+          "title": "Axios W3: migrate web admin-context lib",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.7",
+          "title": "Axios W4: migrate web client forms fetch",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.8",
+          "title": "Axios W5: web regression smoke",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.9",
+          "title": "Axios A1: OAuth clients → HttpService",
+          "status": "closed",
+          "type": "task",
           "priority": 2
         }
       ]
@@ -712,11 +915,11 @@
     {
       "id": "bd-6v0.10",
       "title": "Поиск: префикс запроса не находит полные совпадения (роул → Роулинг)",
-      "status": "open",
+      "status": "closed",
       "type": "bug",
       "priority": 1,
       "parent": "bd-6v0",
-      "updated_at": "2026-07-23T08:11:45Z"
+      "updated_at": "2026-07-27T09:57:41Z"
     },
     {
       "id": "bd-957.4",
@@ -825,6 +1028,285 @@
       "priority": 1,
       "parent": "bd-957",
       "updated_at": "2026-07-20T07:30:07Z"
+    },
+    {
+      "id": "bd-6b7.6",
+      "title": "UI: одинаковый font-weight у всех пунктов меню (как у активного)",
+      "status": "open",
+      "type": "bug",
+      "priority": 2,
+      "parent": "bd-6b7",
+      "updated_at": "2026-07-29T18:50:07Z"
+    },
+    {
+      "id": "bd-p3l",
+      "title": "UI: Baskerville не применяется к кнопкам и инпутам",
+      "status": "open",
+      "type": "bug",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-29T18:45:21Z"
+    },
+    {
+      "id": "bd-v3x",
+      "title": "web: work-page-context-reading.integration stubs fetch, code uses axios",
+      "status": "open",
+      "type": "bug",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-29T18:39:21Z"
+    },
+    {
+      "id": "bd-23j",
+      "title": "UI: Baskerville (woff2, кириллица) на весь UI",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-29T18:38:12Z"
+    },
+    {
+      "id": "bd-707.10",
+      "title": "Axios D1: DoD guardrails + docs",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T17:18:53Z"
+    },
+    {
+      "id": "bd-707.9",
+      "title": "Axios A1: OAuth clients → HttpService",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T17:15:55Z"
+    },
+    {
+      "id": "bd-707.8",
+      "title": "Axios W5: web regression smoke",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T17:11:56Z"
+    },
+    {
+      "id": "bd-707.7",
+      "title": "Axios W4: migrate web client forms fetch",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T17:07:53Z"
+    },
+    {
+      "id": "bd-707.6",
+      "title": "Axios W3: migrate web admin-context lib",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T17:02:31Z"
+    },
+    {
+      "id": "bd-707.5",
+      "title": "Axios W2: migrate web catalog libs",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T17:00:04Z"
+    },
+    {
+      "id": "bd-707.3",
+      "title": "Axios F2: api HttpModule foundation",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T16:50:04Z"
+    },
+    {
+      "id": "bd-707.4",
+      "title": "Axios W1: migrate web lib/auth",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T16:54:35Z"
+    },
+    {
+      "id": "bd-707.2",
+      "title": "Axios F1: web http + ApiError foundation",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T16:46:40Z"
+    },
+    {
+      "id": "bd-707.1",
+      "title": "Axios F0: deps + docs sync",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T16:42:14Z"
+    },
+    {
+      "id": "bd-707",
+      "title": "DX: axios HTTP-клиент (web + api)",
+      "status": "closed",
+      "type": "epic",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-29T17:21:08Z"
+    },
+    {
+      "id": "bd-82j",
+      "title": "UI: подключить Google Fonts Roboto (весь UI)",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-29T17:46:14Z"
+    },
+    {
+      "id": "bd-6b7.5",
+      "title": "UI: кнопки Войти / Выйти в меню",
+      "status": "open",
+      "type": "feature",
+      "priority": 2,
+      "parent": "bd-6b7",
+      "updated_at": "2026-07-29T15:42:11Z"
+    },
+    {
+      "id": "bd-0t0.13",
+      "title": "fix: api e2e eslint unsafe any в validation asserts",
+      "status": "closed",
+      "type": "bug",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T12:53:10Z"
+    },
+    {
+      "id": "bd-0t0.12",
+      "title": "Playwright rankings/collections smoke: button count ловит Next.js Dev Tools",
+      "status": "closed",
+      "type": "bug",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T12:49:03Z"
+    },
+    {
+      "id": "bd-0t0.11",
+      "title": "Finalization: remove class-validator and legacy cleanup",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T12:43:57Z"
+    },
+    {
+      "id": "bd-0t0.10",
+      "title": "Wave 2: миграция домена Rankings/Collections/Admin DTO/forms",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T12:27:23Z"
+    },
+    {
+      "id": "bd-0t0.8",
+      "title": "Wave 2: миграция домена Library/Profile DTO/forms",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T12:12:34Z"
+    },
+    {
+      "id": "bd-0t0.9",
+      "title": "Wave 2: миграция домена Relations/Spoiler DTO/forms",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T12:21:56Z"
+    },
+    {
+      "id": "bd-0t0.7",
+      "title": "Wave 2: миграция домена Catalog pages DTO/forms",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T12:01:24Z"
+    },
+    {
+      "id": "bd-0t0.6",
+      "title": "Wave 1: миграция admin context end-to-end",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T10:56:35Z"
+    },
+    {
+      "id": "bd-0t0.5",
+      "title": "Wave 1: миграция catalog search end-to-end",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T10:46:01Z"
+    },
+    {
+      "id": "bd-0t0.4",
+      "title": "Wave 1: миграция login/register end-to-end",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T10:39:35Z"
+    },
+    {
+      "id": "bd-0t0.3",
+      "title": "RHF/Zod foundation: api validation pipe + OpenAPI",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T10:23:32Z"
+    },
+    {
+      "id": "bd-0t0.2",
+      "title": "RHF/Zod foundation: web form pattern on shadcn Form",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T10:13:52Z"
+    },
+    {
+      "id": "bd-0t0.1",
+      "title": "RHF/Zod foundation: packages/schemas + naming",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T10:04:36Z"
+    },
+    {
+      "id": "bd-0t0",
+      "title": "DX: RHF + Zod full contour",
+      "status": "closed",
+      "type": "epic",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-29T12:51:09Z"
     },
     {
       "id": "bd-v3k",

@@ -2,7 +2,7 @@
 
 Стенд: Postgres + Redis, `pnpm --filter api prisma:seed`, api + web локально.
 
-Стек UI (S13 / bd-wus.16): Tailwind + shadcn (`Card` / `Button` / `Input` / `Label`); orphan `.admin-context-*` в `globals.css` удалены.
+Стек UI: Tailwind + shadcn (`Card` / `Button` / `Input` / `Form`); patch-форма на RHF + Zod (`AdminContextPatchFormSchema`); orphan `.admin-context-*` в `globals.css` удалены.
 
 ## Доступ
 
@@ -16,8 +16,10 @@
 - [ ] Видны admin-поля: source URL, snippet (если есть)
 - [ ] Пустая очередь — понятное сообщение
 
-## Правки
+## Правки / валидация
 
+- [ ] Пустой «Почему (RU)» → field-level ошибка, без сохранения
+- [ ] Ранг вне 1..99 → field-level ошибка
 - [ ] Сохранение whyText / importanceRank обновляет запись
 - [ ] «Снять с публикации» убирает запись из очереди и public API
 - [ ] «Отклонить» помечает REJECTED

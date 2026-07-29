@@ -1,25 +1,17 @@
-import { Transform } from 'class-transformer';
-import { IsEmail, IsString, MinLength } from 'class-validator';
+import { LoginInputSchema, RegisterInputSchema } from '@bookspace/schemas';
+import { createZodDto } from 'nestjs-zod';
+import { z } from 'zod';
 
-function toNormalizedEmail({ value }: { value: unknown }): unknown {
-  return typeof value === 'string' ? value.trim().toLowerCase() : value;
-}
+const NormalizedEmailSchema = z.string().trim().toLowerCase().pipe(z.email());
 
-export class RegisterDto {
-  @Transform(toNormalizedEmail)
-  @IsEmail()
-  email!: string;
+const RegisterDtoSchema = RegisterInputSchema.extend({
+  email: NormalizedEmailSchema,
+});
 
-  @IsString()
-  @MinLength(8)
-  password!: string;
-}
+const LoginDtoSchema = LoginInputSchema.extend({
+  email: NormalizedEmailSchema,
+});
 
-export class LoginDto {
-  @Transform(toNormalizedEmail)
-  @IsEmail()
-  email!: string;
+export class RegisterDto extends createZodDto(RegisterDtoSchema) {}
 
-  @IsString()
-  password!: string;
-}
+export class LoginDto extends createZodDto(LoginDtoSchema) {}

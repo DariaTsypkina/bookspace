@@ -1,14 +1,19 @@
-import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import cookieParser from 'cookie-parser';
 import request from 'supertest';
 import { App } from 'supertest/types';
 import { PrismaClient, WorkStatus } from '@prisma/client';
 import { AppModule } from '../src/app.module';
+import { configureApp } from '../src/bootstrap';
 import type { CatalogSearchResponse } from '../src/catalog/catalog-search.types';
 
 const prisma = new PrismaClient();
 const TEST_PREFIX = 'catalog-search-e2e';
+
+type ValidationErrorResponse = {
+  code: string;
+  errors: Array<{ code: string; path: string; message: string }>;
+};
 
 async function cleanup() {
   await prisma.work.deleteMany({
@@ -28,14 +33,7 @@ describe('Catalog search (e2e)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
-    app.use(cookieParser());
-    app.useGlobalPipes(
-      new ValidationPipe({
-        whitelist: true,
-        forbidNonWhitelisted: true,
-        transform: true,
-      }),
-    );
+    configureApp(app);
     await app.init();
   });
 
@@ -135,5 +133,64 @@ describe('Catalog search (e2e)', () => {
       id: author.id,
       path: `/authors/${author.slug}`,
     });
+  });
+
+  it('GET /catalog/search finds published author by prefix роул → Роулинг', async () => {
+    const author = await prisma.author.create({
+      data: {
+        slug: `${TEST_PREFIX}-rowling`,
+        nameRu: 'Дж. К. Роулинг',
+        nameOrig: 'J. K. Rowling',
+        status: 'PUBLISHED',
+      },
+    });
+
+    await prisma.author.create({
+      data: {
+        slug: `${TEST_PREFIX}-rowling-draft`,
+        nameRu: 'Черновик Роулинг',
+        status: 'DRAFT',
+      },
+    });
+
+    const response = await request(app.getHttpServer())
+      .get('/catalog/search')
+      .query({ q: 'роул' })
+      .expect(200);
+
+    const body = response.body as CatalogSearchResponse;
+    expect(body.items).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          type: 'AUTHOR',
+          id: author.id,
+          slug: author.slug,
+          title: 'Дж. К. Роулинг',
+          path: `/authors/${author.slug}`,
+        }),
+      ]),
+    );
+
+    const scoped = body.items.filter((item) =>
+      item.slug.startsWith(TEST_PREFIX),
+    );
+    expect(scoped.map((item) => item.slug)).toEqual([author.slug]);
+  });
+
+  it('GET /catalog/search rejects q shorter than 3 characters with VALIDATION_FAILED', async () => {
+    const response = await request(app.getHttpServer())
+      .get('/catalog/search')
+      .query({ q: 'ab' })
+      .expect(400);
+
+    const body = response.body as ValidationErrorResponse;
+    expect(body.code).toBe('VALIDATION_FAILED');
+    expect(body.errors).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          path: 'q',
+        }),
+      ]),
+    );
   });
 });

@@ -1,4 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card';
+import { RANKINGS_STUB_COPY } from '@/lib/rankings';
 
 export default function RankingsStubPage() {
   return (
@@ -8,9 +9,7 @@ export default function RankingsStubPage() {
       </h1>
       <Card>
         <CardContent className="flex flex-col gap-4 px-4 py-3.5 font-sans">
-          <p className="text-[0.95rem] text-muted">
-            Публичные рейтинги скоро появятся.
-          </p>
+          <p className="text-[0.95rem] text-muted">{RANKINGS_STUB_COPY}</p>
         </CardContent>
       </Card>
     </main>

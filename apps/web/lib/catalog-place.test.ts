@@ -1,7 +1,26 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { ApiError, api, noStoreConfig } from './http';
 import { CatalogPlaceNotFoundError, fetchCatalogPlace } from './catalog-place';
 
+vi.mock('./http', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('./http')>();
+  return {
+    ...actual,
+    api: {
+      get: vi.fn(),
+    },
+  };
+});
+
 describe('fetchCatalogPlace', () => {
+  beforeEach(() => {
+    vi.mocked(api.get).mockReset();
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
   it('returns parsed place response from API', async () => {
     const mockResponse = {
       slug: 'hogvarts',
@@ -21,32 +40,19 @@ describe('fetchCatalogPlace', () => {
       ],
     };
 
-    vi.stubGlobal(
-      'fetch',
-      vi.fn().mockResolvedValue({
-        ok: true,
-        status: 200,
-        json: async () => mockResponse,
-      }),
-    );
+    vi.mocked(api.get).mockResolvedValue({ data: mockResponse });
 
     const result = await fetchCatalogPlace('hogvarts');
 
     expect(result).toEqual(mockResponse);
-    expect(fetch).toHaveBeenCalledWith(
+    expect(api.get).toHaveBeenCalledWith(
       expect.stringContaining('/catalog/places/hogvarts'),
-      { cache: 'no-store' },
+      noStoreConfig,
     );
   });
 
   it('throws CatalogPlaceNotFoundError on 404', async () => {
-    vi.stubGlobal(
-      'fetch',
-      vi.fn().mockResolvedValue({
-        ok: false,
-        status: 404,
-      }),
-    );
+    vi.mocked(api.get).mockRejectedValue(new ApiError(404, 'Not Found'));
 
     await expect(fetchCatalogPlace('missing')).rejects.toBeInstanceOf(
       CatalogPlaceNotFoundError,

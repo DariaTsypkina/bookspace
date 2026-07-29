@@ -21,4 +21,12 @@ alwaysApply: false
 - При касании экрана — перенос на Tailwind + вычистка мёртвых селекторов этого экрана (см. [migration-tailwind-shadcn](../../docs/tech/migration-tailwind-shadcn.md))
 - Другой UI-kit — только через новый ADR + согласование зависимостей
 
+## Typography
+
+- Единый UI-шрифт приложения: **Baskerville** (кириллица), self-host woff2 — канон [ui-typography](../../docs/features/ui-typography.md)
+- Подключение: `next/font/local` в `apps/web/app/layout.tsx` → `--font-baskerville`; `body` и Tailwind `font-sans` на эту var
+- Начертания: roman / italic / bold / bolditalic (400 / 700); `font-medium` → 400
+- Form controls (`button`, `input`, …) часто **не** наследуют `font-family` с `body` — для нового UI явно `font-sans` / `inherit` на примитивах `components/ui`
+- Не менять typeface и не тянуть Google Fonts без отдельной задачи
+
 Экраны: `docs/tech/screens.md`.

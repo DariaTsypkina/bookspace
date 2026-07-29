@@ -20,6 +20,7 @@
 
 - Frontend: Next.js + TypeScript (отдельное app)
 - UI-kit: Tailwind + shadcn/Radix + Lucide ([ADR 0003](docs/adr/0003-tailwind-shadcn.md) **accepted**); новый UI / новые экраны — только этот стек, без новых legacy-правил в `globals.css`
+- UI-шрифт: **Baskerville** (кириллица, self-host woff2) — [docs/features/ui-typography.md](docs/features/ui-typography.md); не менять typeface без задачи
 - Backend: NestJS + TypeScript + Prisma + PostgreSQL (FTS)
 - Jobs: BullMQ + Redis
 - Auth на Nest; LLM: OpenAI через `LlmProvider`
@@ -31,6 +32,7 @@
 - Коллекция публична; notes — PUBLIC/PRIVATE
 - ContextReading источники только admin; блок только если есть PUBLISHED
 - UI и display-названия — русский
+- UI typeface — Baskerville (`--font-baskerville` / `font-sans`); form controls — явно наследовать/задавать шрифт
 - MVP без подписок/ленты, графа, таймлайна, биллинга
 - Новые или заменённые npm/pnpm-зависимости — только после явного согласования с пользователем ([agent-dev-flow §2.1](docs/tech/agent-dev-flow.md))
 
