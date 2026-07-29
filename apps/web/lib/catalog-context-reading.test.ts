@@ -1,11 +1,30 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { ApiError, api, noStoreConfig } from './http';
 import {
   CONTEXT_READING_DISCLAIMER,
   fetchCatalogContextReadings,
   hasContextReadings,
 } from './catalog-context-reading';
 
+vi.mock('./http', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('./http')>();
+  return {
+    ...actual,
+    api: {
+      get: vi.fn(),
+    },
+  };
+});
+
 describe('fetchCatalogContextReadings', () => {
+  beforeEach(() => {
+    vi.mocked(api.get).mockReset();
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
   it('returns parsed context readings from API', async () => {
     const mockResponse = {
       items: [
@@ -20,36 +39,23 @@ describe('fetchCatalogContextReadings', () => {
       ],
     };
 
-    vi.stubGlobal(
-      'fetch',
-      vi.fn().mockResolvedValue({
-        ok: true,
-        status: 200,
-        json: async () => mockResponse,
-      }),
-    );
+    vi.mocked(api.get).mockResolvedValue({ data: mockResponse });
 
     const result = await fetchCatalogContextReadings(
       'garri-potter-filosofskiy-kamen',
     );
 
     expect(result).toEqual(mockResponse);
-    expect(fetch).toHaveBeenCalledWith(
+    expect(api.get).toHaveBeenCalledWith(
       expect.stringContaining(
         '/catalog/works/garri-potter-filosofskiy-kamen/context-readings',
       ),
-      { cache: 'no-store' },
+      noStoreConfig,
     );
   });
 
   it('returns empty items on API error', async () => {
-    vi.stubGlobal(
-      'fetch',
-      vi.fn().mockResolvedValue({
-        ok: false,
-        status: 500,
-      }),
-    );
+    vi.mocked(api.get).mockRejectedValue(new ApiError(500, 'Server error'));
 
     const result = await fetchCatalogContextReadings('missing');
 

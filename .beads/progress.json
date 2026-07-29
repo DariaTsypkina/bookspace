@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-29T16:54:38.814Z",
+  "generated_at": "2026-07-29T17:00:03.682Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 121,
-    "open_issues": 47,
-    "in_progress_issues": 0,
+    "open_issues": 46,
+    "in_progress_issues": 1,
     "closed_issues": 74,
     "blocked_issues": 9,
-    "ready_issues": 38
+    "ready_issues": 37
   },
   "epics": [
     {
@@ -255,8 +255,8 @@
       "priority": 2,
       "children_total": 10,
       "children_closed": 4,
-      "children_in_progress": 0,
-      "children_open": 6,
+      "children_in_progress": 1,
+      "children_open": 5,
       "progress": "4 / 10",
       "percent_closed": 40,
       "children": [
@@ -298,7 +298,7 @@
         {
           "id": "bd-707.5",
           "title": "Axios W2: migrate web catalog libs",
-          "status": "open",
+          "status": "in_progress",
           "type": "task",
           "priority": 2
         },
@@ -1070,11 +1070,11 @@
     {
       "id": "bd-707.5",
       "title": "Axios W2: migrate web catalog libs",
-      "status": "open",
+      "status": "in_progress",
       "type": "task",
       "priority": 2,
       "parent": "bd-707",
-      "updated_at": "2026-07-29T16:15:29Z"
+      "updated_at": "2026-07-29T16:59:32Z"
     },
     {
       "id": "bd-707.3",

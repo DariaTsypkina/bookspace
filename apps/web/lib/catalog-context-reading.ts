@@ -1,4 +1,5 @@
 import { parseCatalogEntitySlug } from './catalog-entity-slug';
+import { api, noStoreConfig } from './http';
 
 export interface PublicContextReadingItem {
   recommendedWork: {
@@ -23,11 +24,15 @@ export async function fetchCatalogContextReadings(
 ): Promise<CatalogContextReadingsResponse> {
   const safeSlug = parseCatalogEntitySlug(slug);
   const url = `${API_URL}/catalog/works/${encodeURIComponent(safeSlug)}/context-readings`;
-  const response = await fetch(url, { cache: 'no-store' });
-  if (!response.ok) {
+  try {
+    const { data } = await api.get<CatalogContextReadingsResponse>(
+      url,
+      noStoreConfig,
+    );
+    return data;
+  } catch {
     return { items: [] };
   }
-  return response.json() as Promise<CatalogContextReadingsResponse>;
 }
 
 export function hasContextReadings(items: PublicContextReadingItem[]): boolean {

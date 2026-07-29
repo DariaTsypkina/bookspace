@@ -1,10 +1,29 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { ApiError, api, noStoreConfig } from './http';
 import {
   CatalogAuthorNotFoundError,
   fetchCatalogAuthor,
 } from './catalog-author';
 
+vi.mock('./http', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('./http')>();
+  return {
+    ...actual,
+    api: {
+      get: vi.fn(),
+    },
+  };
+});
+
 describe('fetchCatalogAuthor', () => {
+  beforeEach(() => {
+    vi.mocked(api.get).mockReset();
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
   it('returns parsed author response from API', async () => {
     const mockResponse = {
       slug: 'dzh-k-rouling',
@@ -19,32 +38,19 @@ describe('fetchCatalogAuthor', () => {
       ],
     };
 
-    vi.stubGlobal(
-      'fetch',
-      vi.fn().mockResolvedValue({
-        ok: true,
-        status: 200,
-        json: async () => mockResponse,
-      }),
-    );
+    vi.mocked(api.get).mockResolvedValue({ data: mockResponse });
 
     const result = await fetchCatalogAuthor('dzh-k-rouling');
 
     expect(result).toEqual(mockResponse);
-    expect(fetch).toHaveBeenCalledWith(
+    expect(api.get).toHaveBeenCalledWith(
       expect.stringContaining('/catalog/authors/dzh-k-rouling'),
-      { cache: 'no-store' },
+      noStoreConfig,
     );
   });
 
   it('throws CatalogAuthorNotFoundError on 404', async () => {
-    vi.stubGlobal(
-      'fetch',
-      vi.fn().mockResolvedValue({
-        ok: false,
-        status: 404,
-      }),
-    );
+    vi.mocked(api.get).mockRejectedValue(new ApiError(404, 'Not Found'));
 
     await expect(fetchCatalogAuthor('missing')).rejects.toBeInstanceOf(
       CatalogAuthorNotFoundError,

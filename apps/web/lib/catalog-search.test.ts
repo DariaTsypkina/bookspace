@@ -1,10 +1,29 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { api, noStoreConfig } from './http';
 import {
   CATALOG_ENTITY_TYPE_LABELS,
   fetchCatalogSearch,
 } from './catalog-search';
 
+vi.mock('./http', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('./http')>();
+  return {
+    ...actual,
+    api: {
+      get: vi.fn(),
+    },
+  };
+});
+
 describe('fetchCatalogSearch', () => {
+  beforeEach(() => {
+    vi.mocked(api.get).mockReset();
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
   it('returns parsed search response from API', async () => {
     const mockResponse = {
       query: 'гарри',
@@ -19,20 +38,14 @@ describe('fetchCatalogSearch', () => {
       ],
     };
 
-    vi.stubGlobal(
-      'fetch',
-      vi.fn().mockResolvedValue({
-        ok: true,
-        json: async () => mockResponse,
-      }),
-    );
+    vi.mocked(api.get).mockResolvedValue({ data: mockResponse });
 
     const result = await fetchCatalogSearch('гарри');
 
     expect(result).toEqual(mockResponse);
-    expect(fetch).toHaveBeenCalledWith(
+    expect(api.get).toHaveBeenCalledWith(
       expect.stringContaining('/catalog/search?q='),
-      { cache: 'no-store' },
+      noStoreConfig,
     );
   });
 });
