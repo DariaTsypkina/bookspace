@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-29T17:15:37.271Z",
+  "generated_at": "2026-07-29T17:15:58.534Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 121,
     "open_issues": 42,
-    "in_progress_issues": 1,
-    "closed_issues": 78,
-    "blocked_issues": 8,
-    "ready_issues": 34
+    "in_progress_issues": 0,
+    "closed_issues": 79,
+    "blocked_issues": 7,
+    "ready_issues": 35
   },
   "epics": [
     {
@@ -254,11 +254,11 @@
       "status": "open",
       "priority": 2,
       "children_total": 10,
-      "children_closed": 8,
-      "children_in_progress": 1,
+      "children_closed": 9,
+      "children_in_progress": 0,
       "children_open": 1,
-      "progress": "8 / 10",
-      "percent_closed": 80,
+      "progress": "9 / 10",
+      "percent_closed": 90,
       "children": [
         {
           "id": "bd-707.1",
@@ -326,7 +326,7 @@
         {
           "id": "bd-707.9",
           "title": "Axios A1: OAuth clients → HttpService",
-          "status": "in_progress",
+          "status": "closed",
           "type": "task",
           "priority": 2
         }
@@ -1034,11 +1034,11 @@
     {
       "id": "bd-707.9",
       "title": "Axios A1: OAuth clients → HttpService",
-      "status": "in_progress",
+      "status": "closed",
       "type": "task",
       "priority": 2,
       "parent": "bd-707",
-      "updated_at": "2026-07-29T17:13:01Z"
+      "updated_at": "2026-07-29T17:15:55Z"
     },
     {
       "id": "bd-707.8",
