@@ -40,32 +40,48 @@ describe('OpenAPI (e2e)', () => {
       .get('/docs-json')
       .expect(200);
 
-    const operation = (
-      response.body as {
-        paths?: Record<string, { get?: { parameters?: unknown[] } }>;
-      }
-    ).paths?.['/catalog/search']?.get;
+    type OpenApiParameter = {
+      name?: string;
+      in?: string;
+      schema?: {
+        type?: string;
+        maxLength?: number;
+        minimum?: number;
+        maximum?: number;
+      };
+    };
 
-    expect(operation?.parameters).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          name: 'q',
-          in: 'query',
-          schema: expect.objectContaining({
-            type: 'string',
-            maxLength: 200,
-          }),
-        }),
-        expect.objectContaining({
-          name: 'limit',
-          in: 'query',
-          schema: expect.objectContaining({
-            type: 'integer',
-            minimum: 1,
-            maximum: 50,
-          }),
-        }),
-      ]),
+    const parameters = (
+      response.body as {
+        paths?: Record<string, { get?: { parameters?: OpenApiParameter[] } }>;
+      }
+    ).paths?.['/catalog/search']?.get?.parameters;
+
+    expect(parameters).toBeDefined();
+    const qParam = parameters?.find(
+      (parameter) => parameter.name === 'q' && parameter.in === 'query',
     );
+    const limitParam = parameters?.find(
+      (parameter) => parameter.name === 'limit' && parameter.in === 'query',
+    );
+
+    expect(qParam?.schema?.type).toBe('string');
+    expect(qParam?.schema?.maxLength).toBe(200);
+    expect(limitParam?.schema?.type).toBe('integer');
+    expect(limitParam?.schema?.minimum).toBe(1);
+    expect(limitParam?.schema?.maximum).toBe(50);
+  });
+
+  it('GET /docs-json exposes Zod-based admin context DTO schemas', async () => {
+    const response = await request(app.getHttpServer())
+      .get('/docs-json')
+      .expect(200);
+
+    const schemas = (response.body as { components?: { schemas?: object } })
+      .components?.schemas;
+
+    expect(schemas).toBeDefined();
+    expect(schemas).toHaveProperty('AdminContextPatchDto');
+    expect(schemas).toHaveProperty('AdminContextExtractDto');
   });
 });
