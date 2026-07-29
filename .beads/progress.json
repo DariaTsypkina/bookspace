@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-29T17:15:58.534Z",
+  "generated_at": "2026-07-29T17:18:32.628Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 121,
-    "open_issues": 42,
-    "in_progress_issues": 0,
+    "open_issues": 41,
+    "in_progress_issues": 1,
     "closed_issues": 79,
     "blocked_issues": 7,
-    "ready_issues": 35
+    "ready_issues": 34
   },
   "epics": [
     {
@@ -255,8 +255,8 @@
       "priority": 2,
       "children_total": 10,
       "children_closed": 9,
-      "children_in_progress": 0,
-      "children_open": 1,
+      "children_in_progress": 1,
+      "children_open": 0,
       "progress": "9 / 10",
       "percent_closed": 90,
       "children": [
@@ -270,7 +270,7 @@
         {
           "id": "bd-707.10",
           "title": "Axios D1: DoD guardrails + docs",
-          "status": "open",
+          "status": "in_progress",
           "type": "task",
           "priority": 2
         },
@@ -1025,11 +1025,11 @@
     {
       "id": "bd-707.10",
       "title": "Axios D1: DoD guardrails + docs",
-      "status": "open",
+      "status": "in_progress",
       "type": "task",
       "priority": 2,
       "parent": "bd-707",
-      "updated_at": "2026-07-29T16:15:34Z"
+      "updated_at": "2026-07-29T17:16:45Z"
     },
     {
       "id": "bd-707.9",

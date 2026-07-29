@@ -9,7 +9,7 @@
 | Frontend | Next.js (App Router) + TypeScript + React | Отдельное приложение; SSR/SEO публичных страниц; PWA |
 | Формы (web) | React Hook Form + Zod (`zodResolver`) | Канон после ADR 0004 / bd-0t0 (миграция завершена) |
 | UI-kit | Tailwind CSS + shadcn/ui (Radix) + Lucide | **Канон** ([ADR 0003](../adr/0003-tailwind-shadcn.md) **accepted**): copy-in-repo `components/ui`; токены «читальня»; см. конвенцию ниже |
-| HTTP-клиент (app) | axios (web); axios + `@nestjs/axios` (api outbound) | **Канон** ([ADR 0005](../adr/0005-axios-http-client.md) **accepted**); `fetch` — SW + BFF-proxy; план [migration-axios.md](migration-axios.md) |
+| HTTP-клиент (app) | axios (web); axios + `@nestjs/axios` (api outbound) | **Канон** ([ADR 0005](../adr/0005-axios-http-client.md) **accepted**); миграция [completed](migration-axios.md); `fetch` — только SW + BFF-proxy (eslint guardrails) |
 | Backend | NestJS + TypeScript | Отдельный API + workers |
 | Валидация API | Zod + `nestjs-zod` | Канон после ADR 0004 / bd-0t0; `class-validator` удалён из runtime deps |
 | ORM / БД | Prisma + PostgreSQL | |

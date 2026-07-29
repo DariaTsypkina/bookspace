@@ -92,7 +92,7 @@
 
 ### DX — axios HTTP-клиент — 🔄 · epic `bd-707` · 3 / 10 · ADR [0005](docs/adr/0005-axios-http-client.md) **accepted**
 
-План: [migration-axios.md](docs/tech/migration-axios.md). Сборочная: `feat/bookspace-bd-707`. W1–W5 + A1 (`bd-707.4`–`.9`) готовы к close.
+План: [migration-axios.md](docs/tech/migration-axios.md) (**completed**). Сборочная: `feat/bookspace-bd-707`. W1–W5 + A1 + D1 готовы к close (оркестратор).
 
 | Статус | ID | Задача |
 |--------|-----|--------|
@@ -105,7 +105,7 @@
 | 🔄 | `bd-707.7` | W4: migrate web client forms fetch (await close) |
 | 🔄 | `bd-707.8` | W5: web regression smoke (await close) |
 | 🔄 | `bd-707.9` | A1: OAuth clients → HttpService (await close) |
-| 🔒 | `bd-707.10` | D1: DoD guardrails + docs |
+| 🔄 | `bd-707.10` | D1: DoD guardrails + docs (await close) |
 
 ### 1. Auth — ✅ · epic `bd-957` · 6 / 6 (эпик закрыт)
 
@@ -221,6 +221,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-29 | `bd-707.10` D1: eslint `no-restricted-globals`/`syntax` (web overrides SW+BFF; api запрет fetch); `migration-axios.md` → **completed**; inventory+эпик AC закрыты; stack notes; manual `e2e/manual/axios-http-dod.md`; Playwright N/A; `bd close` за оркестратором |
+| 2026-07-29 | Claim `bd-707.10`: conventions (design/acceptance Критерии+Проверка/notes/labels area:web+area:api+sec:http+dx); sync origin/develop OK; ветка `task/bd-707.10-dod-guardrails` |
 | 2026-07-29 | `bd-707.9` A1: Google/Yandex OAuth clients → `HttpService`+`firstValueFrom` (без `fetch(`); unit **14/14**; API e2e auth-google+yandex **10/10**; Playwright oauth smoke+e2e desktop **10/10**; `bd close` за оркестратором |
 | 2026-07-29 | Claim `bd-707.9`: conventions (design/acceptance Критерии+Проверка/notes/labels area:api+sec:auth+dx); sync origin/develop OK; ветка `task/bd-707.9-oauth-httpservice` |
 | 2026-07-29 | `bd-707.8` W5: web regression после W1–W4; unit **54/54** (11 files: http/auth/catalog-*/admin-context/add-library-item-form); Playwright smoke auth-pages+login+register+library+admin-context+catalog-search **44/44** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); фиксов axios нет; `bd close` за оркестратором |
