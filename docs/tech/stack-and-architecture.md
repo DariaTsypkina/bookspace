@@ -7,10 +7,10 @@
 | Слой | Выбор | Notes |
 |------|--------|--------|
 | Frontend | Next.js (App Router) + TypeScript + React | Отдельное приложение; SSR/SEO публичных страниц; PWA |
-| Формы (web) | React Hook Form + Zod (`zodResolver`) | Канон после миграции по ADR 0004; on-touch до полного покрытия |
+| Формы (web) | React Hook Form + Zod (`zodResolver`) | Канон после ADR 0004 / bd-0t0 (миграция завершена) |
 | UI-kit | Tailwind CSS + shadcn/ui (Radix) + Lucide | **Канон** ([ADR 0003](../adr/0003-tailwind-shadcn.md) **accepted**): copy-in-repo `components/ui`; токены «читальня»; см. конвенцию ниже |
 | Backend | NestJS + TypeScript | Отдельный API + workers |
-| Валидация API | Zod + `nestjs-zod` | Миграция с `class-validator` по ADR 0004, целевое состояние — только Zod |
+| Валидация API | Zod + `nestjs-zod` | Канон после ADR 0004 / bd-0t0; `class-validator` удалён из runtime deps |
 | ORM / БД | Prisma + PostgreSQL | |
 | Поиск | PostgreSQL Full-Text Search (русский конфиг) | Meilisearch — отдельный ADR при росте |
 | Auth | На Nest (Passport / стратегии credentials + Google + Yandex); сессия или JWT в httpOnly cookie для Next | Вариант A: бэкенд — источник истины по identity |
@@ -75,8 +75,7 @@ docker-compose.yml # postgres, redis, api, web (dev)
 | API validation | Новые endpoint-валидации делаются на Zod v4 + `nestjs-zod` |
 | API error contract | `400 validation errors` возвращаются в едином JSON-формате (`code`/`path`/`message`) |
 | UX messages | Web может показывать friendly/localized тексты, не меняя shared-схему и API-контракт |
-| On touch | Существующие формы/DTO переводятся при касании домена/экрана |
-| End state | После закрытия эпика runtime-код не использует `class-validator` |
+| End state | ✅ Runtime без `class-validator` (bd-0t0.11); новый код только RHF+Zod / nestjs-zod |
 
 ## Auth
 

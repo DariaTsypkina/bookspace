@@ -36,4 +36,22 @@ test.describe('Profile page smoke (S11 / bd-wus.14)', () => {
       page.getByRole('navigation', { name: 'Основное меню' }),
     ).toBeVisible();
   });
+
+  test('invalid empty-ish slug shows Профиль не найден', async ({ page }) => {
+    // Encoded spaces — Next may pass raw %20; helper decodes then Zod-rejects
+    await page.goto('/u/%20%20%20');
+    await expect(
+      page.getByRole('heading', { name: 'Профиль', level: 1 }),
+    ).toBeVisible();
+    await expect(page.getByText('Профиль не найден.')).toBeVisible();
+  });
+
+  test('oversized slug shows Профиль не найден', async ({ page }) => {
+    const oversized = 'a'.repeat(201);
+    await page.goto(`/u/${oversized}`);
+    await expect(
+      page.getByRole('heading', { name: 'Профиль', level: 1 }),
+    ).toBeVisible();
+    await expect(page.getByText('Профиль не найден.')).toBeVisible();
+  });
 });

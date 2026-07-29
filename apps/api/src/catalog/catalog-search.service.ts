@@ -26,7 +26,7 @@ type RawSearchRow = {
 export class CatalogSearchService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async search(rawQuery: string): Promise<CatalogSearchResponse> {
+  async search(rawQuery: string, limit = 50): Promise<CatalogSearchResponse> {
     const query = rawQuery.trim();
     if (!query) {
       return { query: '', items: [], hints: EMPTY_QUERY_HINTS };
@@ -128,7 +128,7 @@ export class CatalogSearchService {
             AND p.search_vector @@ sq.tsq
         ) results
         ORDER BY rank DESC, title ASC
-        LIMIT 50
+        LIMIT ${limit}
       `,
     );
 

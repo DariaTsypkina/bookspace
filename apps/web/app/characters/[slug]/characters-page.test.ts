@@ -86,6 +86,12 @@ describe('Characters page Tailwind+shadcn migration (S8 / bd-wus.11)', () => {
     );
   });
 
+  it('uses shared Zod spoiler/relation helpers (bd-0t0.9)', () => {
+    expect(pageSource).toMatch(/CHARACTER_RELATION_LABELS/);
+    expect(pageSource).toMatch(/hasSpoilersConsent/);
+    expect(spoilerGateSource).toMatch(/from ['"]@\/lib\/spoiler-gate['"]/);
+  });
+
   it('removes orphan .character-* / .spoiler-gate* rules from globals.css', () => {
     expect(globalsSource).not.toMatch(/\.character-page\b/);
     expect(globalsSource).not.toMatch(/\.character-header\b/);

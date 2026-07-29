@@ -2,6 +2,8 @@
 
 Связано: [ADR 0004](../adr/0004-rhf-zod-full-contour.md), [stack-and-architecture](stack-and-architecture.md), [agent-dev-flow](agent-dev-flow.md).
 
+**Статус:** completed (bd-0t0.11) — runtime без прямых зависимостей/`import` `class-validator` / `class-transformer`; API на `nestjs-zod` + `ZodValidationPipe`; web-формы на RHF + Zod + shadcn Form.
+
 **Цель:** перевести формы `apps/web` и валидацию DTO `apps/api` на единый стек RHF+Zod с общими схемами в `packages/schemas`, без big-bang и с конечным полным отказом от `class-validator`.
 
 ## Принципы
@@ -78,11 +80,12 @@ flowchart LR
 - Мигрировать остальные формы/DTO при касании соответствующих фич.
 - Каждый шаг завершать зелёными тестами и без регресса контрактов.
 
-### M3. Завершение эпика
+### M3. Завершение эпика — ✅
 
-- Удалить остатки `class-validator` и связанного legacy-кода.
-- Убрать неиспользуемые DTO/утилиты старого подхода.
-- Зафиксировать завершение трека в документации и quality gates.
+- Удалены прямые зависимости `class-validator` / `class-transformer` из `apps/api`.
+- E2e-харнесы переведены на `configureApp` (`ZodValidationPipe`); legacy `ValidationPipe` и CV-path в exception filter убраны.
+- Quality gates: unit-тесты на отсутствие deps/imports; Playwright smoke мигрированных доменов.
+- Примечание: Nest/`nestjs-zod`/`@nestjs/swagger` могут оставлять пакеты как *optional peer* в lockfile без app-source imports — это допустимо.
 
 ## Правила для задач миграции
 

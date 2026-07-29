@@ -1,3 +1,5 @@
+import { parseCatalogEntitySlug } from './catalog-entity-slug';
+
 export interface CatalogWorldPlace {
   slug: string;
   nameRu: string;
@@ -31,10 +33,11 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000';
 export async function fetchCatalogWorld(
   slug: string,
 ): Promise<CatalogWorldResponse> {
-  const url = `${API_URL}/catalog/worlds/${encodeURIComponent(slug)}`;
+  const safeSlug = parseCatalogEntitySlug(slug);
+  const url = `${API_URL}/catalog/worlds/${encodeURIComponent(safeSlug)}`;
   const response = await fetch(url, { cache: 'no-store' });
   if (response.status === 404) {
-    throw new CatalogWorldNotFoundError(slug);
+    throw new CatalogWorldNotFoundError(safeSlug);
   }
   if (!response.ok) {
     throw new Error(`Catalog world fetch failed: ${response.status}`);

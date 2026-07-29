@@ -32,6 +32,11 @@ describe('Library page Tailwind+shadcn migration (S12 / bd-wus.15)', () => {
     expect(pageSource).toMatch(/Коллекция и полки скоро появятся/);
   });
 
+  it('mounts AddLibraryItemForm (RHF + Zod migration)', () => {
+    expect(pageSource).toMatch(/AddLibraryItemForm/);
+    expect(pageSource).toMatch(/from ['"]\.\/add-library-item-form['"]/);
+  });
+
   it('removes orphan .library-stub rules from globals.css', () => {
     expect(globalsSource).not.toMatch(/\.library-stub\b/);
   });

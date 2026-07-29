@@ -37,7 +37,7 @@
 | Статус | ID | Задача |
 |--------|-----|--------|
 | ✅ | `bd-wus` | **Эпик DX: Tailwind + shadcn** (ADR 0003 accepted) — 18 / 18 |
-| ⬜ | `bd-0t0` | **Эпик DX: RHF + Zod full contour** (ADR 0004 accepted) — 0 / 11 |
+| ✅ | `bd-0t0` | **Эпик DX: RHF + Zod full contour** (ADR 0004 accepted) — 11 / 11 + bug .12 |
 | ✅ | `bd-ky6` | Chore: синхронизировать beads interactions.jsonl |
 | ✅ | `bd-0e6` | Docs: согласование зависимостей агентом |
 | ✅ | `bd-rtp` | Docs: human intake workflow и /task skill |
@@ -70,23 +70,23 @@
 | ✅ | `bd-wus.17` | Конвенция: новый UI только на стеке |
 | ✅ | `bd-wus.18` | Корневой layout: `.app-shell` / `.app-content` → Tailwind |
 
-### DX — RHF + Zod full contour — ⬜ · epic `bd-0t0` · 0 / 11 · ADR [0004](docs/adr/0004-rhf-zod-full-contour.md) **accepted**
+### DX — RHF + Zod full contour — ✅ · epic `bd-0t0` · 11 / 11 · ADR [0004](docs/adr/0004-rhf-zod-full-contour.md) **accepted**
 
 План: [migration-rhf-zod.md](docs/tech/migration-rhf-zod.md). Цель: единый контур валидации и форм (shared schemas + RHF + nestjs-zod) и итоговый отказ от `class-validator` в runtime.
 
 | Статус | ID | Задача |
 |--------|-----|--------|
-| ⬜ | `bd-0t0.1` | RHF/Zod foundation: packages/schemas + naming |
-| ⬜ | `bd-0t0.2` | RHF/Zod foundation: web form pattern on shadcn Form |
-| ⬜ | `bd-0t0.3` | RHF/Zod foundation: api validation pipe + OpenAPI |
-| ⬜ | `bd-0t0.4` | Wave 1: миграция login/register end-to-end |
-| ⬜ | `bd-0t0.5` | Wave 1: миграция catalog search end-to-end |
-| ⬜ | `bd-0t0.6` | Wave 1: миграция admin context end-to-end |
-| ⬜ | `bd-0t0.7` | Wave 2: миграция домена Catalog pages DTO/forms |
-| ⬜ | `bd-0t0.8` | Wave 2: миграция домена Library/Profile DTO/forms |
-| ⬜ | `bd-0t0.9` | Wave 2: миграция домена Relations/Spoiler DTO/forms |
-| ⬜ | `bd-0t0.10` | Wave 2: миграция домена Rankings/Collections/Admin DTO/forms |
-| ⬜ | `bd-0t0.11` | Finalization: remove class-validator and legacy cleanup |
+| ✅ | `bd-0t0.1` | RHF/Zod foundation: packages/schemas + naming |
+| ✅ | `bd-0t0.2` | RHF/Zod foundation: web form pattern on shadcn Form |
+| ✅ | `bd-0t0.3` | RHF/Zod foundation: api validation pipe + OpenAPI |
+| ✅ | `bd-0t0.4` | Wave 1: миграция login/register end-to-end |
+| ✅ | `bd-0t0.5` | Wave 1: миграция catalog search end-to-end |
+| ✅ | `bd-0t0.6` | Wave 1: миграция admin context end-to-end |
+| ✅ | `bd-0t0.7` | Wave 2: миграция домена Catalog pages DTO/forms |
+| ✅ | `bd-0t0.8` | Wave 2: миграция домена Library/Profile DTO/forms |
+| ✅ | `bd-0t0.9` | Wave 2: миграция домена Relations/Spoiler DTO/forms |
+| ✅ | `bd-0t0.10` | Wave 2: миграция домена Rankings/Collections/Admin DTO/forms |
+| ✅ | `bd-0t0.11` | Finalization: remove class-validator and legacy cleanup |
 
 ### 1. Auth — ✅ · epic `bd-957` · 6 / 6 (эпик закрыт)
 
@@ -201,6 +201,27 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-29 | Эпик `bd-0t0` closed (11/11 + bd-0t0.12): target verify code PASS + Playwright **108/108**; сборочная `feat/bookspace-bd-0t0` — ЗАЛИВАТЬ develop=Нет (push only) |
+| 2026-07-29 | Target re-verify PASS после `bd-0t0.12` (smoke main-scoped); Playwright regression 108/108 |
+| 2026-07-29 | `bd-0t0.12` close-prep: smoke `rankings-collections-zod` button/textbox count scoped to `main` (exclude Next Dev Tools); Playwright **4/4** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0, E2E_THROTTLE_BYPASS, localhost); product stubs unchanged; `bd close` за оркестратором |
+| 2026-07-29 | Target verify: bug `bd-0t0.12` (rankings smoke vs Next Dev Tools); claim `task/bd-0t0.12-rankings-smoke-devtools` |
+| 2026-07-29 | `bd-0t0.11` close-prep: удалены прямые deps `class-validator`/`class-transformer`; e2e → `configureApp`; CV-path filter убран; docs migration/ADR0004/stack/schemas README; unit removal gates api 5 + web 3; API e2e auth/oauth/openapi/search/admin-context green; Playwright migrated domains **84/84** desktop+mobile (localhost, PLAYWRIGHT_CHROME_CHANNEL=0); manual `e2e/manual/class-validator-removed.md`; optional peers Nest/@hookform/resolvers в lockfile; `bd close` за оркестратором |
+| 2026-07-29 | Оркестратор: claim `bd-0t0.11` (remove class-validator + legacy cleanup); ветка `task/bd-0t0.11-remove-class-validator` |
+| 2026-07-29 | `bd-0t0.10` closed + merge → `feat/bookspace-bd-0t0`: rankings/collections/admin Zod contracts; Playwright 4/4 |
+| 2026-07-29 | `bd-0t0.10` close-prep: Rankings/Collections Zod contracts + remaining admin path params; stubs без CRUD; unit API 11 + web 8; e2e admin/openapi 18/18; Playwright rankings-collections **4/4** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0, localhost); manual `e2e/manual/rankings-collections-zod.md`; Prisma Ranking/Collection вне runtime; `bd close` за оркестратором |
+| 2026-07-29 | `bd-0t0.10` conventions: design/acceptance/notes/labels; план Wave 2 Rankings/Collections stubs→Zod contracts + remaining admin path params; ветка `task/bd-0t0.10-rankings-collections-admin-dto` |
+| 2026-07-29 | Оркестратор: claim `bd-0t0.10` (Rankings/Collections/Admin DTO/forms); ветка `task/bd-0t0.10-rankings-collections-admin-dto` |
+| 2026-07-29 | `bd-0t0.9` closed + merge → `feat/bookspace-bd-0t0`: spoiler/relations Zod; Playwright character 12/12 |
+| 2026-07-29 | `bd-0t0.9` close-prep: Relations/Spoiler Zod (SpoilersOkCookieValue + SpoilersConsentInput + CharacterRelationType + WorkRelationType contract); web spoiler-gate + catalog-character types на schemas; API catalog-character.types shared enum; class-validator в домене не было; unit web focused + api catalog-relations-zod/service green; Playwright character-page **12/12** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0, localhost); manual `e2e/manual/relations-spoiler-zod.md`; WorkRelation/reading-order вне runtime (bd-azl); ветка `task/bd-0t0.9-relations-spoiler-dto`; `bd close` за оркестратором |
+| 2026-07-29 | `bd-0t0.9` conventions: design/acceptance/notes/labels; план Wave 2 Relations/Spoiler (spoiler cookie Zod + CharacterRelationType shared; WorkRelation вне runtime); ветка `task/bd-0t0.9-relations-spoiler-dto` |
+| 2026-07-29 | Оркестратор: claim `bd-0t0.9` (Relations/Spoiler DTO/forms); ветка `task/bd-0t0.9-relations-spoiler-dto` |
+| 2026-07-29 | `bd-0t0.8` closed + merge → `feat/bookspace-bd-0t0`: library RHF + Zod profile slug; Playwright 20/20 |
+| 2026-07-29 | `bd-0t0.8` close-prep: Library/Profile Zod (AddLibraryItem + ProfileSlug); class-validator убран из me-library; RHF form `/library` + BFF `/api/me`; unit DTO 5/5 + web focused 20+; API e2e auth 13/13; Playwright library+profile **20/20** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0, next start localhost); manual `e2e/manual/library-profile-zod.md`; shelves/tags runtime нет; ветка `task/bd-0t0.8-library-profile-dto`; `bd close` за оркестратором |
+| 2026-07-29 | `bd-0t0.8` conventions: design/acceptance/notes/labels; план Wave 2 Library/Profile (AddLibraryItem + ProfileSlug Zod, RHF form `/library`, shelves/tags вне runtime); ветка `task/bd-0t0.8-library-profile-dto` |
+| 2026-07-29 | Оркестратор: claim `bd-0t0.8` (Library/Profile DTO/forms); ветка `task/bd-0t0.8-library-profile-dto` |
+| 2026-07-29 | `bd-0t0.7` closed + merge `--no-ff` → `feat/bookspace-bd-0t0`: catalog slug/needsContext Zod; unit 5/5, e2e 26/26, Playwright 42/42 |
+| 2026-07-29 | `bd-0t0.7` реализация Catalog pages Zod (`CatalogEntitySlugParam` + `AdminWorkNeedsContextPatch`); class-validator убран из admin-work; web slug через schemas; unit DTO 5/5; API e2e catalog+needs+openapi green; CLI Playwright в agent sandbox fail (Chrome SIGABRT/EPERM); visual MCP Playwright work/author/character/world/place OK desktop+mobile viewport; manual `e2e/manual/catalog-pages-zod.md`; ветка `task/bd-0t0.7-catalog-pages-dto`; перед close — CLI PW вне sandbox; `bd close` за оркестратором |
+| 2026-07-29 | Оркестратор batch `feat/bookspace-bd-0t0`: claim `bd-0t0.7` (Catalog pages DTO/forms); очередь `.7`→`.8`→`.9`→`.10`→`.11`; ветка `task/bd-0t0.7-catalog-pages-dto`; ЗАЛИВАТЬ develop=Нет |
 | 2026-07-28 | Создан DX-эпик `bd-0t0` (RHF + Zod full contour, ADR 0004 accepted) + декомпозиция `bd-0t0.1`…`bd-0t0.11` с зависимостями (foundation → wave1 → wave2 → finalization) |
 | 2026-07-23 | `/task`: `bd-azl.5` — iOS Chrome spoiler «Показать» не снимает gate; `bd-cq7.6` — iOS Chrome пустой Профиль `/library` (iPhone 17, human-reported) |
 | 2026-07-23 | Эпик `bd-6b7` closed (4/4): target verify web unit **186** + Playwright pwa-install+offline+app-nav **30/30**; сборочная `feat/bookspace-bd-6b7` — ЗАЛИВАТЬ develop=Нет (push only) |

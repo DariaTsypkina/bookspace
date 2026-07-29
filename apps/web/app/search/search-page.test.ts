@@ -37,14 +37,16 @@ describe('Search page Tailwind+shadcn migration (S5 / bd-wus.8)', () => {
     expect(pageSource).toMatch(/text-muted/);
   });
 
-  it('uses shadcn Card on the page and Input/Label/Button in the form', () => {
+  it('uses shadcn Card on the page and Form/Input/Button in the form', () => {
     expect(pageSource).toMatch(/from ['"]@\/components\/ui\/card['"]/);
     expect(pageSource).toMatch(/\bCard\b/);
+    expect(formSource).toMatch(/from ['"]@\/components\/ui\/form['"]/);
     expect(formSource).toMatch(/from ['"]@\/components\/ui\/input['"]/);
-    expect(formSource).toMatch(/from ['"]@\/components\/ui\/label['"]/);
     expect(formSource).toMatch(/from ['"]@\/components\/ui\/button['"]/);
+    expect(formSource).toMatch(/\bFormField\b/);
+    expect(formSource).toMatch(/\bFormLabel\b/);
+    expect(formSource).toMatch(/\bFormMessage\b/);
     expect(formSource).toMatch(/\bInput\b/);
-    expect(formSource).toMatch(/\bLabel\b/);
     expect(formSource).toMatch(/\bButton\b/);
   });
 
