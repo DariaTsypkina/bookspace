@@ -201,6 +201,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-29 | `bd-0t0.10` close-prep: Rankings/Collections Zod contracts + remaining admin path params; stubs без CRUD; unit API 11 + web 8; e2e admin/openapi 18/18; Playwright rankings-collections **4/4** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0, localhost); manual `e2e/manual/rankings-collections-zod.md`; Prisma Ranking/Collection вне runtime; `bd close` за оркестратором |
 | 2026-07-29 | `bd-0t0.10` conventions: design/acceptance/notes/labels; план Wave 2 Rankings/Collections stubs→Zod contracts + remaining admin path params; ветка `task/bd-0t0.10-rankings-collections-admin-dto` |
 | 2026-07-29 | Оркестратор: claim `bd-0t0.10` (Rankings/Collections/Admin DTO/forms); ветка `task/bd-0t0.10-rankings-collections-admin-dto` |
 | 2026-07-29 | `bd-0t0.9` closed + merge → `feat/bookspace-bd-0t0`: spoiler/relations Zod; Playwright character 12/12 |
