@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-29T10:45:32.992Z",
+  "generated_at": "2026-07-29T10:46:04.707Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 106,
     "open_issues": 45,
-    "in_progress_issues": 1,
-    "closed_issues": 60,
+    "in_progress_issues": 0,
+    "closed_issues": 61,
     "blocked_issues": 9,
     "ready_issues": 36
   },
@@ -16,11 +16,11 @@
       "status": "open",
       "priority": 2,
       "children_total": 11,
-      "children_closed": 4,
-      "children_in_progress": 1,
+      "children_closed": 5,
+      "children_in_progress": 0,
       "children_open": 6,
-      "progress": "4 / 11",
-      "percent_closed": 36,
+      "progress": "5 / 11",
+      "percent_closed": 45,
       "children": [
         {
           "id": "bd-0t0.1",
@@ -67,7 +67,7 @@
         {
           "id": "bd-0t0.5",
           "title": "Wave 1: миграция catalog search end-to-end",
-          "status": "in_progress",
+          "status": "closed",
           "type": "task",
           "priority": 2
         },
@@ -974,11 +974,11 @@
     {
       "id": "bd-0t0.5",
       "title": "Wave 1: миграция catalog search end-to-end",
-      "status": "in_progress",
+      "status": "closed",
       "type": "task",
       "priority": 2,
       "parent": "bd-0t0",
-      "updated_at": "2026-07-29T10:41:52Z"
+      "updated_at": "2026-07-29T10:46:01Z"
     },
     {
       "id": "bd-0t0.4",
