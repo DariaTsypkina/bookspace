@@ -24,6 +24,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: themeColors,
+      fontFamily: {
+        sans: ['var(--font-roboto)', 'system-ui', 'sans-serif'],
+      },
     },
   },
   plugins: [],
