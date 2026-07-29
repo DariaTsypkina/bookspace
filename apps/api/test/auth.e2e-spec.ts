@@ -35,6 +35,7 @@ describe('Auth (e2e)', () => {
     'e2e-new@bookspace.local',
     'e2e-dup@bookspace.local',
     'e2e-session@bookspace.local',
+    'e2e-library-val@bookspace.local',
     'e2e-admin-user@bookspace.local',
   ];
 
@@ -296,6 +297,35 @@ describe('Auth (e2e)', () => {
       workId: 'work-1',
     });
     expect(created.body).toHaveProperty('userId');
+  });
+
+  it('POST /me/library/items rejects oversized workId with VALIDATION_FAILED', async () => {
+    await authPost('/auth/register')
+      .send({
+        email: 'e2e-library-val@bookspace.local',
+        password: 'Secure123!',
+      })
+      .expect(201);
+
+    const login = await authPost('/auth/login')
+      .send({
+        email: 'e2e-library-val@bookspace.local',
+        password: 'Secure123!',
+      })
+      .expect(200);
+
+    const response = await api()
+      .post('/me/library/items')
+      .set('Cookie', login.headers['set-cookie'] ?? [])
+      .send({ workId: 'w'.repeat(129) })
+      .expect(400);
+
+    expect(response.body).toMatchObject({
+      code: 'VALIDATION_FAILED',
+    });
+    expect(response.body.errors).toEqual(
+      expect.arrayContaining([expect.objectContaining({ path: 'workId' })]),
+    );
   });
 
   it('GET /admin/ping rejects USER with 403 and allows ADMIN', async () => {
