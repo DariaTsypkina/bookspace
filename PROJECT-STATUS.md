@@ -201,6 +201,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-29 | `bd-0t0.7` реализация Catalog pages Zod: schemas+DTO+controllers+web slug; API unit/e2e green; CLI Playwright blocked in sandbox (Chrome SIGABRT) — MCP visual OK; ветка `task/bd-0t0.7-catalog-pages-dto`; `bd close` за оркестратором |
 | 2026-07-29 | `bd-0t0.7` close-prep: Catalog pages → shared Zod (`CatalogEntitySlugParam` + `AdminWorkNeedsContextPatch`); class-validator убран из admin-work; web slug через schemas; unit DTO 5/5; API e2e catalog+needs **26/26**; Playwright work/author/character/world/place **42/42** desktop+mobile; manual `e2e/manual/catalog-pages-zod.md`; ветка `task/bd-0t0.7-catalog-pages-dto`; `bd close` за оркестратором |
 | 2026-07-29 | Оркестратор batch `feat/bookspace-bd-0t0`: claim `bd-0t0.7` (Catalog pages DTO/forms); очередь `.7`→`.8`→`.9`→`.10`→`.11`; ветка `task/bd-0t0.7-catalog-pages-dto`; ЗАЛИВАТЬ develop=Нет |
 | 2026-07-28 | Создан DX-эпик `bd-0t0` (RHF + Zod full contour, ADR 0004 accepted) + декомпозиция `bd-0t0.1`…`bd-0t0.11` с зависимостями (foundation → wave1 → wave2 → finalization) |
