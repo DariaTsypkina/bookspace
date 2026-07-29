@@ -8,6 +8,27 @@ const globalsSource = readFileSync(
   'utf8',
 );
 
+describe('AppNav equal font-weight (bd-6b7.6)', () => {
+  it('puts font-semibold on shared navItemClassName for all menu controls', () => {
+    const shared = appNavSource.match(
+      /const navItemClassName = cn\(([\s\S]*?)\);/,
+    );
+    expect(shared?.[1]).toMatch(/font-semibold/);
+  });
+
+  it('does not gate font-semibold on isActive; active uses underline/color only', () => {
+    const activeBranch = appNavSource.match(
+      /isActive\s*&&\s*\n?\s*['"`]([^'"`]+)['"`]/,
+    );
+    expect(activeBranch?.[1]).toBeTruthy();
+    expect(activeBranch?.[1]).not.toMatch(
+      /font-semibold|font-medium|font-bold/,
+    );
+    expect(activeBranch?.[1]).toMatch(/underline/);
+    expect(activeBranch?.[1]).toMatch(/text-foreground/);
+  });
+});
+
 describe('AppNav auth action (bd-6b7.5)', () => {
   it('uses getNavAuthAction for guest login / auth logout visibility', () => {
     expect(appNavSource).toMatch(/getNavAuthAction/);

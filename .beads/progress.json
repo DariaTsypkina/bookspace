@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-29T19:07:18.981Z",
+  "generated_at": "2026-07-29T19:10:58.175Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 125,
-    "open_issues": 41,
+    "open_issues": 40,
     "in_progress_issues": 0,
-    "closed_issues": 84,
+    "closed_issues": 85,
     "blocked_issues": 7,
-    "ready_issues": 34
+    "ready_issues": 33
   },
   "epics": [
     {
@@ -121,11 +121,11 @@
       "status": "closed",
       "priority": 3,
       "children_total": 6,
-      "children_closed": 5,
+      "children_closed": 6,
       "children_in_progress": 0,
-      "children_open": 1,
-      "progress": "5 / 6",
-      "percent_closed": 83,
+      "children_open": 0,
+      "progress": "6 / 6",
+      "percent_closed": 100,
       "children": [
         {
           "id": "bd-6b7.1",
@@ -165,7 +165,7 @@
         {
           "id": "bd-6b7.6",
           "title": "UI: одинаковый font-weight у всех пунктов меню (как у активного)",
-          "status": "open",
+          "status": "closed",
           "type": "bug",
           "priority": 2
         }
@@ -1032,11 +1032,11 @@
     {
       "id": "bd-6b7.6",
       "title": "UI: одинаковый font-weight у всех пунктов меню (как у активного)",
-      "status": "open",
+      "status": "closed",
       "type": "bug",
       "priority": 2,
       "parent": "bd-6b7",
-      "updated_at": "2026-07-29T18:50:07Z"
+      "updated_at": "2026-07-29T19:10:54Z"
     },
     {
       "id": "bd-p3l",
