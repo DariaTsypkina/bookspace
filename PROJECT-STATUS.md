@@ -37,7 +37,7 @@
 | Статус | ID | Задача |
 |--------|-----|--------|
 | ✅ | `bd-wus` | **Эпик DX: Tailwind + shadcn** (ADR 0003 accepted) — 18 / 18 |
-| 🔄 | `bd-0t0` | **Эпик DX: RHF + Zod full contour** (ADR 0004 accepted) — 10 / 11 |
+| ✅ | `bd-0t0` | **Эпик DX: RHF + Zod full contour** (ADR 0004 accepted) — 11 / 11 + bug .12 |
 | ✅ | `bd-ky6` | Chore: синхронизировать beads interactions.jsonl |
 | ✅ | `bd-0e6` | Docs: согласование зависимостей агентом |
 | ✅ | `bd-rtp` | Docs: human intake workflow и /task skill |
@@ -70,7 +70,7 @@
 | ✅ | `bd-wus.17` | Конвенция: новый UI только на стеке |
 | ✅ | `bd-wus.18` | Корневой layout: `.app-shell` / `.app-content` → Tailwind |
 
-### DX — RHF + Zod full contour — 🔄 · epic `bd-0t0` · 10 / 11 · ADR [0004](docs/adr/0004-rhf-zod-full-contour.md) **accepted**
+### DX — RHF + Zod full contour — ✅ · epic `bd-0t0` · 11 / 11 · ADR [0004](docs/adr/0004-rhf-zod-full-contour.md) **accepted**
 
 План: [migration-rhf-zod.md](docs/tech/migration-rhf-zod.md). Цель: единый контур валидации и форм (shared schemas + RHF + nestjs-zod) и итоговый отказ от `class-validator` в runtime.
 
@@ -86,7 +86,7 @@
 | ✅ | `bd-0t0.8` | Wave 2: миграция домена Library/Profile DTO/forms |
 | ✅ | `bd-0t0.9` | Wave 2: миграция домена Relations/Spoiler DTO/forms |
 | ✅ | `bd-0t0.10` | Wave 2: миграция домена Rankings/Collections/Admin DTO/forms |
-| 🔄 | `bd-0t0.11` | Finalization: remove class-validator and legacy cleanup |
+| ✅ | `bd-0t0.11` | Finalization: remove class-validator and legacy cleanup |
 
 ### 1. Auth — ✅ · epic `bd-957` · 6 / 6 (эпик закрыт)
 
@@ -201,6 +201,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-29 | Эпик `bd-0t0` closed (11/11 + bd-0t0.12): target verify code PASS + Playwright **108/108**; сборочная `feat/bookspace-bd-0t0` — ЗАЛИВАТЬ develop=Нет (push only) |
+| 2026-07-29 | Target re-verify PASS после `bd-0t0.12` (smoke main-scoped); Playwright regression 108/108 |
 | 2026-07-29 | `bd-0t0.12` close-prep: smoke `rankings-collections-zod` button/textbox count scoped to `main` (exclude Next Dev Tools); Playwright **4/4** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0, E2E_THROTTLE_BYPASS, localhost); product stubs unchanged; `bd close` за оркестратором |
 | 2026-07-29 | Target verify: bug `bd-0t0.12` (rankings smoke vs Next Dev Tools); claim `task/bd-0t0.12-rankings-smoke-devtools` |
 | 2026-07-29 | `bd-0t0.11` close-prep: удалены прямые deps `class-validator`/`class-transformer`; e2e → `configureApp`; CV-path filter убран; docs migration/ADR0004/stack/schemas README; unit removal gates api 5 + web 3; API e2e auth/oauth/openapi/search/admin-context green; Playwright migrated domains **84/84** desktop+mobile (localhost, PLAYWRIGHT_CHROME_CHANNEL=0); manual `e2e/manual/class-validator-removed.md`; optional peers Nest/@hookform/resolvers в lockfile; `bd close` за оркестратором |

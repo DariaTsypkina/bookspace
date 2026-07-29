@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-07-29T12:49:08.091Z",
+  "generated_at": "2026-07-29T12:51:14.204Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 107,
-    "open_issues": 39,
+    "open_issues": 38,
     "in_progress_issues": 0,
-    "closed_issues": 68,
+    "closed_issues": 69,
     "blocked_issues": 7,
-    "ready_issues": 32
+    "ready_issues": 31
   },
   "epics": [
     {
       "id": "bd-0t0",
       "title": "DX: RHF + Zod full contour",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
       "children_total": 12,
       "children_closed": 12,
@@ -1035,11 +1035,11 @@
     {
       "id": "bd-0t0",
       "title": "DX: RHF + Zod full contour",
-      "status": "open",
+      "status": "closed",
       "type": "epic",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-07-28T14:33:00Z"
+      "updated_at": "2026-07-29T12:51:09Z"
     },
     {
       "id": "bd-v3k",
