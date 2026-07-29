@@ -1,6 +1,6 @@
 # Стек и архитектура (MVP)
 
-Связано: [ADR 0001](../adr/0001-stack-mvp.md), [ADR 0003](../adr/0003-tailwind-shadcn.md) (UI-слой), [ADR 0004](../adr/0004-rhf-zod-full-contour.md) (формы и валидация), [продуктовая спека](../product/mvp-spec.md), [миграция Tailwind + shadcn](migration-tailwind-shadcn.md), [миграция RHF + Zod](migration-rhf-zod.md).
+Связано: [ADR 0001](../adr/0001-stack-mvp.md), [ADR 0003](../adr/0003-tailwind-shadcn.md) (UI-слой), [ADR 0004](../adr/0004-rhf-zod-full-contour.md) (формы и валидация), [ADR 0005](../adr/0005-axios-http-client.md) (HTTP-клиент, **accepted**), [продуктовая спека](../product/mvp-spec.md), [миграция Tailwind + shadcn](migration-tailwind-shadcn.md), [миграция RHF + Zod](migration-rhf-zod.md), [миграция axios](migration-axios.md).
 
 ## Решения
 
@@ -9,6 +9,7 @@
 | Frontend | Next.js (App Router) + TypeScript + React | Отдельное приложение; SSR/SEO публичных страниц; PWA |
 | Формы (web) | React Hook Form + Zod (`zodResolver`) | Канон после ADR 0004 / bd-0t0 (миграция завершена) |
 | UI-kit | Tailwind CSS + shadcn/ui (Radix) + Lucide | **Канон** ([ADR 0003](../adr/0003-tailwind-shadcn.md) **accepted**): copy-in-repo `components/ui`; токены «читальня»; см. конвенцию ниже |
+| HTTP-клиент (app) | axios (web); axios + `@nestjs/axios` (api outbound) | **Канон** ([ADR 0005](../adr/0005-axios-http-client.md) **accepted**); `fetch` — SW + BFF-proxy; план [migration-axios.md](migration-axios.md) |
 | Backend | NestJS + TypeScript | Отдельный API + workers |
 | Валидация API | Zod + `nestjs-zod` | Канон после ADR 0004 / bd-0t0; `class-validator` удалён из runtime deps |
 | ORM / БД | Prisma + PostgreSQL | |
