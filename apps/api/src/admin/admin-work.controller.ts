@@ -7,27 +7,18 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { NeedsContext, UserRole } from '@prisma/client';
-import { IsBoolean, IsEnum, IsOptional } from 'class-validator';
+import { IsEnum } from 'class-validator';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { ContextClassifyService } from '../context/context-classify.service';
 import { ContextExtractService } from '../context/context-extract.service';
 import { ContextJobsService } from '../context/context-jobs.service';
+import { AdminContextExtractDto } from '../context/dto/admin-context.dto';
 
 class PatchNeedsContextDto {
   @IsEnum(NeedsContext)
   needsContext!: NeedsContext;
-}
-
-class ExtractContextDto {
-  @IsOptional()
-  @IsBoolean()
-  force?: boolean;
-
-  @IsOptional()
-  @IsBoolean()
-  async?: boolean;
 }
 
 @Controller('admin/works')
@@ -58,7 +49,7 @@ export class AdminWorkController {
   @Roles(UserRole.ADMIN)
   async extractContext(
     @Param('workId') workId: string,
-    @Body() body: ExtractContextDto,
+    @Body() body: AdminContextExtractDto,
   ) {
     if (body.async) {
       const { jobId } = await this.jobsService.enqueueExtract(

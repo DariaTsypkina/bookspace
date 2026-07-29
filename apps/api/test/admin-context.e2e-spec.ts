@@ -1,15 +1,22 @@
-import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import cookieParser from 'cookie-parser';
 import request from 'supertest';
 import { App } from 'supertest/types';
 import { ContextReadingStatus, PrismaClient, WorkStatus } from '@prisma/client';
 import { AppModule } from '../src/app.module';
 import { AUDIT_ACTION } from '../src/audit/audit.constants';
+import { configureApp } from '../src/bootstrap';
 import type {
   AdminContextReadingItem,
   PublicContextReadingItem,
 } from '../src/context/admin-context.types';
+
+type ValidationErrorResponse = {
+  statusCode: number;
+  error: string;
+  code: 'VALIDATION_FAILED';
+  errors: Array<{ code: string; path: string; message: string }>;
+};
 
 const prisma = new PrismaClient();
 const TEST_PREFIX = 'admin-context-e2e';
@@ -55,14 +62,7 @@ describe('Admin context (e2e)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
-    app.use(cookieParser());
-    app.useGlobalPipes(
-      new ValidationPipe({
-        whitelist: true,
-        forbidNonWhitelisted: true,
-        transform: true,
-      }),
-    );
+    configureApp(app);
     await app.init();
 
     await request(app.getHttpServer())
@@ -232,6 +232,51 @@ describe('Admin context (e2e)', () => {
       },
     });
     expect(audit).not.toBeNull();
+  });
+
+  it('PATCH /admin/context/:id rejects invalid importanceRank with VALIDATION_FAILED', async () => {
+    const { reading } = await seedPublishedReading();
+
+    const response = await request(app.getHttpServer())
+      .patch(`/admin/context/${reading.id}`)
+      .set('Cookie', adminCookie)
+      .send({ importanceRank: 100 })
+      .expect(400);
+
+    const body = response.body as ValidationErrorResponse;
+    expect(body.code).toBe('VALIDATION_FAILED');
+    const rankIssue = body.errors.find(
+      (issue) => issue.path === 'importanceRank',
+    );
+    expect(rankIssue).toBeDefined();
+    expect(rankIssue?.code.length).toBeGreaterThan(0);
+    expect(rankIssue?.message.length).toBeGreaterThan(0);
+  });
+
+  it('GET /admin/context/recent rejects days outside 1..90 with VALIDATION_FAILED', async () => {
+    const response = await request(app.getHttpServer())
+      .get('/admin/context/recent')
+      .query({ days: 0 })
+      .set('Cookie', adminCookie)
+      .expect(400);
+
+    const body = response.body as ValidationErrorResponse;
+    expect(body.code).toBe('VALIDATION_FAILED');
+    expect(body.errors.some((issue) => issue.path === 'days')).toBe(true);
+  });
+
+  it('POST extract rejects non-boolean force with VALIDATION_FAILED', async () => {
+    const { subject } = await seedPublishedReading();
+
+    const response = await request(app.getHttpServer())
+      .post(`/admin/works/${subject.id}/context/extract`)
+      .set('Cookie', adminCookie)
+      .send({ force: 'yes' })
+      .expect(400);
+
+    const body = response.body as ValidationErrorResponse;
+    expect(body.code).toBe('VALIDATION_FAILED');
+    expect(body.errors.some((issue) => issue.path === 'force')).toBe(true);
   });
 
   it('non-admin cannot access admin context routes', async () => {

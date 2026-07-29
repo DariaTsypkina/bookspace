@@ -1,5 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import {
+  AdminContextExtractInputSchema,
+  AdminContextListRecentQuerySchema,
+  AdminContextPatchFormSchema,
+  AdminContextPatchInputSchema,
   AdminContextPublishInputSchema,
   CatalogSearchQuerySchema,
   LoginInputSchema,
@@ -32,6 +36,25 @@ describe('@bookspace/schemas export contract', () => {
     expect(
       CatalogSearchQuerySchema.safeParse({ q: 'гарри', limit: 10 }).success,
     ).toBe(true);
+    expect(
+      AdminContextListRecentQuerySchema.safeParse({ days: '7' }).success,
+    ).toBe(true);
+    expect(
+      AdminContextPatchInputSchema.safeParse({
+        whyText: 'Обновлённый текст',
+        importanceRank: '2',
+      }).success,
+    ).toBe(true);
+    expect(
+      AdminContextPatchFormSchema.safeParse({
+        whyText: 'Почему стоит прочитать',
+        importanceRank: '1',
+      }).success,
+    ).toBe(true);
+    expect(
+      AdminContextExtractInputSchema.safeParse({ async: true, force: false })
+        .success,
+    ).toBe(true);
   });
 
   it('rejects invalid payloads', () => {
@@ -52,6 +75,27 @@ describe('@bookspace/schemas export contract', () => {
         sourceUrl: 'notaurl',
         model: '',
       }).success,
+    ).toBe(false);
+    expect(
+      AdminContextListRecentQuerySchema.safeParse({ days: '0' }).success,
+    ).toBe(false);
+    expect(
+      AdminContextPatchInputSchema.safeParse({ importanceRank: 100 }).success,
+    ).toBe(false);
+    expect(
+      AdminContextPatchFormSchema.safeParse({
+        whyText: '',
+        importanceRank: '1',
+      }).success,
+    ).toBe(false);
+    expect(
+      AdminContextPatchFormSchema.safeParse({
+        whyText: 'ok',
+        importanceRank: '100',
+      }).success,
+    ).toBe(false);
+    expect(
+      AdminContextExtractInputSchema.safeParse({ async: 'yes' }).success,
     ).toBe(false);
   });
 });

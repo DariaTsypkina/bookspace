@@ -28,4 +28,4 @@ API and web test/build scripts run this step automatically via `pretest`/`prebui
 
 - Auth: `LoginInputSchema`, `RegisterInputSchema`.
 - Search: `SearchBooksInputSchema`, `SearchQueryFormSchema`, `CatalogSearchQuerySchema`.
-- Admin context: `AdminContextPublishInputSchema`.
+- Admin context: `AdminContextPublishInputSchema`, `AdminContextListRecentQuerySchema`, `AdminContextPatchInputSchema`, `AdminContextPatchFormSchema`, `AdminContextExtractInputSchema`.

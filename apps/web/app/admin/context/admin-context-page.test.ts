@@ -36,15 +36,24 @@ describe('Admin Context page Tailwind+shadcn migration (S13 / bd-wus.16)', () =>
     expect(panelSource).toMatch(/text-muted/);
   });
 
-  it('uses shadcn Card, Button, Input, Label on the panel', () => {
+  it('uses shadcn Card, Button, Input and Form primitives on the panel', () => {
     expect(panelSource).toMatch(/from ['"]@\/components\/ui\/card['"]/);
     expect(panelSource).toMatch(/from ['"]@\/components\/ui\/button['"]/);
     expect(panelSource).toMatch(/from ['"]@\/components\/ui\/input['"]/);
-    expect(panelSource).toMatch(/from ['"]@\/components\/ui\/label['"]/);
+    expect(panelSource).toMatch(/from ['"]@\/components\/ui\/form['"]/);
     expect(panelSource).toMatch(/\bCard\b/);
     expect(panelSource).toMatch(/\bButton\b/);
     expect(panelSource).toMatch(/\bInput\b/);
-    expect(panelSource).toMatch(/\bLabel\b/);
+    expect(panelSource).toMatch(/\bFormField\b/);
+    expect(panelSource).toMatch(/\bFormMessage\b/);
+  });
+
+  it('uses RHF + zodResolver with shared AdminContextPatchFormSchema', () => {
+    expect(panelSource).toMatch(/useForm/);
+    expect(panelSource).toMatch(/zodResolver/);
+    expect(panelSource).toMatch(/from ['"]@bookspace\/schemas['"]/);
+    expect(panelSource).toMatch(/AdminContextPatchFormSchema/);
+    expect(panelSource).toMatch(/getFriendlyZodIssueMessage/);
   });
 
   it('keeps AdminOnly gate and admin context UX / API wiring', () => {
