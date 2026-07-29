@@ -201,6 +201,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-29 | `bd-0t0.9` close-prep: Relations/Spoiler Zod (SpoilersOkCookieValue + SpoilersConsentInput + CharacterRelationType + WorkRelationType contract); web spoiler-gate + catalog-character types на schemas; API catalog-character.types shared enum; class-validator в домене не было; unit web focused + api catalog-relations-zod/service green; Playwright character-page **12/12** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0, localhost); manual `e2e/manual/relations-spoiler-zod.md`; WorkRelation/reading-order вне runtime (bd-azl); ветка `task/bd-0t0.9-relations-spoiler-dto`; `bd close` за оркестратором |
 | 2026-07-29 | `bd-0t0.9` conventions: design/acceptance/notes/labels; план Wave 2 Relations/Spoiler (spoiler cookie Zod + CharacterRelationType shared; WorkRelation вне runtime); ветка `task/bd-0t0.9-relations-spoiler-dto` |
 | 2026-07-29 | Оркестратор: claim `bd-0t0.9` (Relations/Spoiler DTO/forms); ветка `task/bd-0t0.9-relations-spoiler-dto` |
 | 2026-07-29 | `bd-0t0.8` closed + merge → `feat/bookspace-bd-0t0`: library RHF + Zod profile slug; Playwright 20/20 |
