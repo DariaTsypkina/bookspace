@@ -1,4 +1,5 @@
 import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
+import { ApiError, api } from './http';
 import {
   getCurrentUser,
   login,
@@ -7,6 +8,17 @@ import {
   register,
   validatePassword,
 } from './auth';
+
+vi.mock('./http', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('./http')>();
+  return {
+    ...actual,
+    api: {
+      post: vi.fn(),
+      get: vi.fn(),
+    },
+  };
+});
 
 describe('validatePassword', () => {
   it('accepts strong passwords', () => {
@@ -26,91 +38,75 @@ describe('profilePath', () => {
 
 describe('register', () => {
   beforeEach(() => {
-    vi.stubGlobal('fetch', vi.fn());
+    vi.mocked(api.post).mockReset();
+    vi.mocked(api.get).mockReset();
   });
 
   afterEach(() => {
-    vi.unstubAllGlobals();
+    vi.clearAllMocks();
   });
 
-  it('posts credentials to BFF register endpoint', async () => {
-    const mockFetch = vi.mocked(fetch);
-    mockFetch.mockResolvedValue({
-      ok: true,
-      json: async () => ({
+  it('posts credentials via api instance to BFF register', async () => {
+    vi.mocked(api.post).mockResolvedValue({
+      data: {
         id: '1',
         email: 'new@example.com',
         role: 'USER',
         slug: 'new',
-      }),
-    } as Response);
+      },
+    });
 
     const result = await register('new@example.com', 'Secure123!');
 
-    expect(mockFetch).toHaveBeenCalledWith(
-      '/api/auth/register',
-      expect.objectContaining({
-        method: 'POST',
-        credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: 'new@example.com',
-          password: 'Secure123!',
-        }),
-      }),
-    );
+    expect(api.post).toHaveBeenCalledWith('/api/auth/register', {
+      email: 'new@example.com',
+      password: 'Secure123!',
+    });
     expect(result.email).toBe('new@example.com');
     expect(result.slug).toBe('new');
   });
 
-  it('throws with API error message on failure', async () => {
-    const mockFetch = vi.mocked(fetch);
-    mockFetch.mockResolvedValue({
-      ok: false,
-      status: 409,
-      json: async () => ({
-        message: 'Пользователь с таким email уже существует',
-      }),
-    } as Response);
+  it('rethrows ApiError from api on failure', async () => {
+    vi.mocked(api.post).mockRejectedValue(
+      new ApiError(409, 'Пользователь с таким email уже существует'),
+    );
 
-    await expect(register('taken@example.com', 'Secure123!')).rejects.toThrow(
-      'Пользователь с таким email уже существует',
+    await expect(register('taken@example.com', 'Secure123!')).rejects.toSatisfy(
+      (err: unknown) =>
+        err instanceof ApiError &&
+        err.status === 409 &&
+        err.message === 'Пользователь с таким email уже существует',
     );
   });
 });
 
 describe('login', () => {
   beforeEach(() => {
-    vi.stubGlobal('fetch', vi.fn());
+    vi.mocked(api.post).mockReset();
   });
 
   afterEach(() => {
-    vi.unstubAllGlobals();
+    vi.clearAllMocks();
   });
 
-  it('posts credentials to BFF login endpoint', async () => {
-    const mockFetch = vi.mocked(fetch);
-    mockFetch.mockResolvedValue({
-      ok: true,
-      json: async () => ({
+  it('posts credentials via api instance to BFF login', async () => {
+    vi.mocked(api.post).mockResolvedValue({
+      data: {
         user: {
           id: '1',
           email: 'user@bookspace.local',
           role: 'USER',
           slug: 'user',
         },
-      }),
-    } as Response);
+      },
+    });
 
     const result = await login('user@bookspace.local', 'User123!');
 
-    expect(mockFetch).toHaveBeenCalledWith(
-      '/api/auth/login',
-      expect.objectContaining({
-        method: 'POST',
-        credentials: 'include',
-      }),
-    );
+    expect(api.post).toHaveBeenCalledWith('/api/auth/login', {
+      email: 'user@bookspace.local',
+      password: 'User123!',
+    });
     expect(result.user.email).toBe('user@bookspace.local');
     expect(result.user.slug).toBe('user');
   });
@@ -118,62 +114,44 @@ describe('login', () => {
 
 describe('logout', () => {
   beforeEach(() => {
-    vi.stubGlobal('fetch', vi.fn());
+    vi.mocked(api.post).mockReset();
   });
 
   afterEach(() => {
-    vi.unstubAllGlobals();
+    vi.clearAllMocks();
   });
 
-  it('posts to BFF logout endpoint with credentials', async () => {
-    const mockFetch = vi.mocked(fetch);
-    mockFetch.mockResolvedValue({
-      ok: true,
-      json: async () => ({ ok: true }),
-    } as Response);
+  it('posts via api instance to BFF logout', async () => {
+    vi.mocked(api.post).mockResolvedValue({ data: { ok: true } });
 
     await logout();
 
-    expect(mockFetch).toHaveBeenCalledWith(
-      '/api/auth/logout',
-      expect.objectContaining({
-        method: 'POST',
-        credentials: 'include',
-      }),
-    );
+    expect(api.post).toHaveBeenCalledWith('/api/auth/logout');
   });
 });
 
 describe('getCurrentUser', () => {
   beforeEach(() => {
-    vi.stubGlobal('fetch', vi.fn());
+    vi.mocked(api.get).mockReset();
   });
 
   afterEach(() => {
-    vi.unstubAllGlobals();
+    vi.clearAllMocks();
   });
 
   it('returns user when session cookie is valid', async () => {
-    const mockFetch = vi.mocked(fetch);
-    mockFetch.mockResolvedValue({
-      ok: true,
-      json: async () => ({
+    vi.mocked(api.get).mockResolvedValue({
+      data: {
         id: '1',
         email: 'user@bookspace.local',
         role: 'USER',
         slug: 'user',
-      }),
-    } as Response);
+      },
+    });
 
     const user = await getCurrentUser();
 
-    expect(mockFetch).toHaveBeenCalledWith(
-      '/api/auth/me',
-      expect.objectContaining({
-        method: 'GET',
-        credentials: 'include',
-      }),
-    );
+    expect(api.get).toHaveBeenCalledWith('/api/auth/me');
     expect(user).toEqual({
       id: '1',
       email: 'user@bookspace.local',
@@ -182,13 +160,14 @@ describe('getCurrentUser', () => {
     });
   });
 
-  it('returns null for guest (unauthorized)', async () => {
-    const mockFetch = vi.mocked(fetch);
-    mockFetch.mockResolvedValue({
-      ok: false,
-      status: 401,
-      json: async () => ({ message: 'Unauthorized' }),
-    } as Response);
+  it('returns null for guest (unauthorized ApiError)', async () => {
+    vi.mocked(api.get).mockRejectedValue(new ApiError(401, 'Unauthorized'));
+
+    await expect(getCurrentUser()).resolves.toBeNull();
+  });
+
+  it('returns null on other ApiError statuses', async () => {
+    vi.mocked(api.get).mockRejectedValue(new ApiError(500, 'Server error'));
 
     await expect(getCurrentUser()).resolves.toBeNull();
   });

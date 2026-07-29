@@ -1,3 +1,5 @@
+import { ApiError, api } from './http';
+
 const AUTH_BFF_BASE = '/api/auth';
 
 export type AuthUser = {
@@ -30,81 +32,40 @@ export function validatePassword(password: string): string | null {
   return null;
 }
 
-async function parseApiError(response: Response): Promise<string> {
-  try {
-    const body = (await response.json()) as { message?: string | string[] };
-    if (Array.isArray(body.message)) {
-      return body.message.join(', ');
-    }
-    if (body.message) {
-      return body.message;
-    }
-  } catch {
-    // ignore json parse errors
-  }
-  return 'Произошла ошибка. Попробуйте снова.';
-}
-
 export async function register(
   email: string,
   password: string,
 ): Promise<AuthUser> {
-  const response = await fetch(`${AUTH_BFF_BASE}/register`, {
-    method: 'POST',
-    credentials: 'include',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password }),
+  const { data } = await api.post<AuthUser>(`${AUTH_BFF_BASE}/register`, {
+    email,
+    password,
   });
-
-  if (!response.ok) {
-    throw new Error(await parseApiError(response));
-  }
-
-  return (await response.json()) as AuthUser;
+  return data;
 }
 
 export async function login(
   email: string,
   password: string,
 ): Promise<{ user: AuthUser }> {
-  const response = await fetch(`${AUTH_BFF_BASE}/login`, {
-    method: 'POST',
-    credentials: 'include',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password }),
-  });
-
-  if (!response.ok) {
-    throw new Error(await parseApiError(response));
-  }
-
-  return (await response.json()) as { user: AuthUser };
+  const { data } = await api.post<{ user: AuthUser }>(
+    `${AUTH_BFF_BASE}/login`,
+    { email, password },
+  );
+  return data;
 }
 
 export async function logout(): Promise<void> {
-  const response = await fetch(`${AUTH_BFF_BASE}/logout`, {
-    method: 'POST',
-    credentials: 'include',
-  });
-
-  if (!response.ok) {
-    throw new Error(await parseApiError(response));
-  }
+  await api.post(`${AUTH_BFF_BASE}/logout`);
 }
 
 export async function getCurrentUser(): Promise<AuthUser | null> {
-  const response = await fetch(`${AUTH_BFF_BASE}/me`, {
-    method: 'GET',
-    credentials: 'include',
-  });
-
-  if (response.status === 401) {
-    return null;
+  try {
+    const { data } = await api.get<AuthUser>(`${AUTH_BFF_BASE}/me`);
+    return data;
+  } catch (error) {
+    if (error instanceof ApiError) {
+      return null;
+    }
+    throw error;
   }
-
-  if (!response.ok) {
-    return null;
-  }
-
-  return (await response.json()) as AuthUser;
 }
