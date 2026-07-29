@@ -1,10 +1,25 @@
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
 import { describe, expect, it, vi } from 'vitest';
 import {
   CatalogCharacterNotFoundError,
   fetchCatalogCharacter,
 } from './catalog-character';
 
+const catalogCharacterSource = readFileSync(
+  path.join(__dirname, 'catalog-character.ts'),
+  'utf8',
+);
+
 describe('fetchCatalogCharacter', () => {
+  it('imports CharacterRelationType from shared schemas (bd-0t0.9)', () => {
+    expect(catalogCharacterSource).toMatch(/from ['"]@bookspace\/schemas['"]/);
+    expect(catalogCharacterSource).toMatch(/CharacterRelationType/);
+    expect(catalogCharacterSource).not.toMatch(
+      /export type CharacterRelationType = 'FRIEND'/,
+    );
+  });
+
   it('returns parsed character response from API', async () => {
     const mockResponse = {
       slug: 'garri-potter',

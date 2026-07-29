@@ -7,10 +7,14 @@ import {
   AdminContextPatchInputSchema,
   AdminContextPublishInputSchema,
   CatalogSearchQuerySchema,
+  CharacterRelationTypeSchema,
   LoginInputSchema,
   ProfileSlugParamSchema,
   SearchBooksInputSchema,
   SearchQueryFormSchema,
+  SpoilersConsentInputSchema,
+  SpoilersOkCookieValueSchema,
+  WorkRelationTypeSchema,
 } from '@bookspace/schemas';
 
 describe('@bookspace/schemas export contract', () => {
@@ -64,6 +68,12 @@ describe('@bookspace/schemas export contract', () => {
     expect(
       ProfileSlugParamSchema.safeParse({ slug: 'demo-reader' }).success,
     ).toBe(true);
+    expect(SpoilersOkCookieValueSchema.safeParse('1').success).toBe(true);
+    expect(SpoilersConsentInputSchema.safeParse({ value: '1' }).success).toBe(
+      true,
+    );
+    expect(CharacterRelationTypeSchema.safeParse('FRIEND').success).toBe(true);
+    expect(WorkRelationTypeSchema.safeParse('SEQUEL').success).toBe(true);
   });
 
   it('rejects invalid payloads', () => {
@@ -113,5 +123,11 @@ describe('@bookspace/schemas export contract', () => {
     expect(
       ProfileSlugParamSchema.safeParse({ slug: 'a'.repeat(201) }).success,
     ).toBe(false);
+    expect(SpoilersOkCookieValueSchema.safeParse('0').success).toBe(false);
+    expect(SpoilersConsentInputSchema.safeParse({ value: 'yes' }).success).toBe(
+      false,
+    );
+    expect(CharacterRelationTypeSchema.safeParse('ALLY').success).toBe(false);
+    expect(WorkRelationTypeSchema.safeParse('SPINOFF').success).toBe(false);
   });
 });

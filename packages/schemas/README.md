@@ -23,9 +23,15 @@ API and web test/build scripts run this step automatically via `pretest`/`prebui
 - `@bookspace/schemas/auth` - auth input schemas/types.
 - `@bookspace/schemas/search` - search input schemas/types.
 - `@bookspace/schemas/admin-context` - admin context-reading input schemas/types.
+- `@bookspace/schemas/catalog` - catalog entity slug / needs-context schemas.
+- `@bookspace/schemas/library` - library/profile input schemas.
+- `@bookspace/schemas/relations` - spoiler cookie + relation type schemas.
 
 ## Current baseline schemas
 
 - Auth: `LoginInputSchema`, `RegisterInputSchema`.
 - Search: `SearchBooksInputSchema`, `SearchQueryFormSchema`, `CatalogSearchQuerySchema`.
 - Admin context: `AdminContextPublishInputSchema`, `AdminContextListRecentQuerySchema`, `AdminContextPatchInputSchema`, `AdminContextPatchFormSchema`, `AdminContextExtractInputSchema`.
+- Catalog: `CatalogEntitySlugParamSchema`, `AdminWorkNeedsContextPatchInputSchema`.
+- Library: `AddLibraryItemInputSchema`, `ProfileSlugParamSchema`.
+- Relations/spoiler: `SpoilersOkCookieValueSchema`, `SpoilersConsentInputSchema`, `CharacterRelationTypeSchema`, `WorkRelationTypeSchema`.
