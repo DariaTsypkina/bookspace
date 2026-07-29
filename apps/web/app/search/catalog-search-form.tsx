@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { SearchBooksInputSchema } from '@bookspace/schemas';
+import { SearchQueryFormSchema } from '@bookspace/schemas';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import {
@@ -24,7 +24,7 @@ type CatalogSearchFormValues = {
   query: string;
 };
 
-const SearchQuerySchema = SearchBooksInputSchema.pick({ query: true });
+const SearchQuerySchema = SearchQueryFormSchema;
 
 export function CatalogSearchForm({
   initialQuery = '',

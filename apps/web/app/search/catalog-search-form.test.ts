@@ -22,4 +22,9 @@ describe('CatalogSearchForm RHF + shadcn Form pattern', () => {
   it('uses friendly/localized validation message mapping', () => {
     expect(source).toMatch(/getFriendlyZodIssueMessage/);
   });
+
+  it('imports shared SearchQueryFormSchema from @bookspace/schemas', () => {
+    expect(source).toMatch(/from ['"]@bookspace\/schemas['"]/);
+    expect(source).toMatch(/SearchQueryFormSchema/);
+  });
 });

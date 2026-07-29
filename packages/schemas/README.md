@@ -27,5 +27,5 @@ API and web test/build scripts run this step automatically via `pretest`/`prebui
 ## Current baseline schemas
 
 - Auth: `LoginInputSchema`, `RegisterInputSchema`.
-- Search: `SearchBooksInputSchema`.
+- Search: `SearchBooksInputSchema`, `SearchQueryFormSchema`, `CatalogSearchQuerySchema`.
 - Admin context: `AdminContextPublishInputSchema`.

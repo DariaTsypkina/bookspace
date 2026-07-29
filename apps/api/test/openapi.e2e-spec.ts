@@ -34,4 +34,38 @@ describe('OpenAPI (e2e)', () => {
     expect(schemas).toHaveProperty('RegisterDto');
     expect(schemas).toHaveProperty('LoginDto');
   });
+
+  it('GET /docs-json documents catalog search query params from Zod DTO', async () => {
+    const response = await request(app.getHttpServer())
+      .get('/docs-json')
+      .expect(200);
+
+    const operation = (
+      response.body as {
+        paths?: Record<string, { get?: { parameters?: unknown[] } }>;
+      }
+    ).paths?.['/catalog/search']?.get;
+
+    expect(operation?.parameters).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          name: 'q',
+          in: 'query',
+          schema: expect.objectContaining({
+            type: 'string',
+            maxLength: 200,
+          }),
+        }),
+        expect.objectContaining({
+          name: 'limit',
+          in: 'query',
+          schema: expect.objectContaining({
+            type: 'integer',
+            minimum: 1,
+            maximum: 50,
+          }),
+        }),
+      ]),
+    );
+  });
 });
