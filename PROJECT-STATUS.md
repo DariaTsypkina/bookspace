@@ -44,6 +44,7 @@
 | ✅ | `bd-nvi` | Scaffold monorepo dev baseline |
 | ✅ | `bd-384` | Session Completion: git push при конце сессии |
 | ✅ | `bd-v3k` | Docs: протокол `bd close` на ветке задачи + merge в сборочную |
+| ⬜ | `bd-82j` | UI: Google Fonts Roboto на весь UI (400/500/700) — human-reported DX |
 
 ### DX — Tailwind + shadcn — ✅ · epic `bd-wus` · 18 / 18 · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
 
@@ -186,7 +187,7 @@
 | ⬜ | `bd-i5b.7` | Админка: Очередь не сматченного |
 | ⬜ | `bd-i5b.8` | Админка: Журнал аудита |
 
-### 11. PWA и оболочка — ✅ · epic `bd-6b7` · 4 / 4
+### 11. PWA и оболочка — ✅ · epic `bd-6b7` · 4 / 4 (+ human follow-up)
 
 | Статус | ID | Задача |
 |--------|-----|--------|
@@ -194,6 +195,7 @@
 | ✅ | `bd-6b7.2` | PWA: offline shell |
 | ✅ | `bd-6b7.3` | PWA: App shell и tab-bar |
 | ✅ | `bd-6b7.4` | UI: строка меню (Главная · Поиск · Профиль) — MVP-срез |
+| ⬜ | `bd-6b7.5` | UI: кнопки Войти / Выйти в меню (human-reported) |
 
 ---
 
@@ -201,6 +203,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-29 | `/task`: создан `bd-82j` — Roboto (Google Fonts) на весь UI, веса 400/500/700; DX без продуктового эпика; feature-doc `ui-typography` при реализации |
+| 2026-07-29 | `/task`: создан `bd-6b7.5` — Войти/Выйти в AppNav (гость→`/login`, user→logout BFF); эпик `bd-6b7`, feature-doc `app-shell-tab-bar` |
 | 2026-07-29 | Эпик `bd-0t0` closed (11/11 + bd-0t0.12): target verify code PASS + Playwright **108/108**; сборочная `feat/bookspace-bd-0t0` — ЗАЛИВАТЬ develop=Нет (push only) |
 | 2026-07-29 | Target re-verify PASS после `bd-0t0.12` (smoke main-scoped); Playwright regression 108/108 |
 | 2026-07-29 | `bd-0t0.12` close-prep: smoke `rankings-collections-zod` button/textbox count scoped to `main` (exclude Next Dev Tools); Playwright **4/4** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0, E2E_THROTTLE_BYPASS, localhost); product stubs unchanged; `bd close` за оркестратором |

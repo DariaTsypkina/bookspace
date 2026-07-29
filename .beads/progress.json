@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-29T12:53:15.347Z",
+  "generated_at": "2026-07-29T15:54:37.779Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 108,
-    "open_issues": 38,
+    "total_issues": 110,
+    "open_issues": 40,
     "in_progress_issues": 0,
     "closed_issues": 70,
     "blocked_issues": 7,
-    "ready_issues": 31
+    "ready_issues": 33
   },
   "epics": [
     {
@@ -120,12 +120,12 @@
       "title": "PWA и оболочка",
       "status": "closed",
       "priority": 3,
-      "children_total": 4,
+      "children_total": 5,
       "children_closed": 4,
       "children_in_progress": 0,
-      "children_open": 0,
-      "progress": "4 / 4",
-      "percent_closed": 100,
+      "children_open": 1,
+      "progress": "4 / 5",
+      "percent_closed": 80,
       "children": [
         {
           "id": "bd-6b7.1",
@@ -152,6 +152,13 @@
           "id": "bd-6b7.4",
           "title": "UI: строка меню (Главная · Поиск · Профиль)",
           "status": "closed",
+          "type": "feature",
+          "priority": 2
+        },
+        {
+          "id": "bd-6b7.5",
+          "title": "UI: кнопки Войти / Выйти в меню",
+          "status": "open",
           "type": "feature",
           "priority": 2
         }
@@ -930,6 +937,24 @@
       "priority": 1,
       "parent": "bd-957",
       "updated_at": "2026-07-20T07:30:07Z"
+    },
+    {
+      "id": "bd-82j",
+      "title": "UI: подключить Google Fonts Roboto (весь UI)",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-29T15:49:42Z"
+    },
+    {
+      "id": "bd-6b7.5",
+      "title": "UI: кнопки Войти / Выйти в меню",
+      "status": "open",
+      "type": "feature",
+      "priority": 2,
+      "parent": "bd-6b7",
+      "updated_at": "2026-07-29T15:42:11Z"
     },
     {
       "id": "bd-0t0.13",
