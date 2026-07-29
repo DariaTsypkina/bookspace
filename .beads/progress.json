@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-29T10:46:04.707Z",
+  "generated_at": "2026-07-29T10:56:02.074Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 106,
-    "open_issues": 45,
-    "in_progress_issues": 0,
+    "open_issues": 44,
+    "in_progress_issues": 1,
     "closed_issues": 61,
     "blocked_issues": 9,
-    "ready_issues": 36
+    "ready_issues": 35
   },
   "epics": [
     {
@@ -17,8 +17,8 @@
       "priority": 2,
       "children_total": 11,
       "children_closed": 5,
-      "children_in_progress": 0,
-      "children_open": 6,
+      "children_in_progress": 1,
+      "children_open": 5,
       "progress": "5 / 11",
       "percent_closed": 45,
       "children": [
@@ -74,7 +74,7 @@
         {
           "id": "bd-0t0.6",
           "title": "Wave 1: миграция admin context end-to-end",
-          "status": "open",
+          "status": "in_progress",
           "type": "task",
           "priority": 2
         },
@@ -965,11 +965,11 @@
     {
       "id": "bd-0t0.6",
       "title": "Wave 1: миграция admin context end-to-end",
-      "status": "open",
+      "status": "in_progress",
       "type": "task",
       "priority": 2,
       "parent": "bd-0t0",
-      "updated_at": "2026-07-28T14:33:21Z"
+      "updated_at": "2026-07-29T10:47:24Z"
     },
     {
       "id": "bd-0t0.5",
