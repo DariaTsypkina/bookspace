@@ -136,4 +136,46 @@ describe('Catalog search (e2e)', () => {
       path: `/authors/${author.slug}`,
     });
   });
+
+  it('GET /catalog/search finds published author by prefix роул → Роулинг', async () => {
+    const author = await prisma.author.create({
+      data: {
+        slug: `${TEST_PREFIX}-rowling`,
+        nameRu: 'Дж. К. Роулинг',
+        nameOrig: 'J. K. Rowling',
+        status: 'PUBLISHED',
+      },
+    });
+
+    await prisma.author.create({
+      data: {
+        slug: `${TEST_PREFIX}-rowling-draft`,
+        nameRu: 'Черновик Роулинг',
+        status: 'DRAFT',
+      },
+    });
+
+    const response = await request(app.getHttpServer())
+      .get('/catalog/search')
+      .query({ q: 'роул' })
+      .expect(200);
+
+    const body = response.body as CatalogSearchResponse;
+    expect(body.items).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          type: 'AUTHOR',
+          id: author.id,
+          slug: author.slug,
+          title: 'Дж. К. Роулинг',
+          path: `/authors/${author.slug}`,
+        }),
+      ]),
+    );
+
+    const scoped = body.items.filter((item) =>
+      item.slug.startsWith(TEST_PREFIX),
+    );
+    expect(scoped.map((item) => item.slug)).toEqual([author.slug]);
+  });
 });
