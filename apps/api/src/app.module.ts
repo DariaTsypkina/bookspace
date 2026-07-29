@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { CatalogModule } from './catalog/catalog.module';
 import { ContextModule } from './context/context.module';
+import { HttpOutboundModule } from './http/http-outbound.module';
 import { PrismaModule } from './prisma/prisma.module';
 
 function redisConnection() {
@@ -22,6 +23,7 @@ function redisConnection() {
     ConfigModule.forRoot({ isGlobal: true }),
     BullModule.forRoot({ connection: redisConnection() }),
     PrismaModule,
+    HttpOutboundModule,
     AuthModule,
     CatalogModule,
     ContextModule,

@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { AdminController } from '../admin/admin.controller';
+import { HttpOutboundModule } from '../http/http-outbound.module';
 import { MeLibraryController } from '../me/me-library.controller';
 import { AuthRateLimiterFactory } from './auth-rate-limiter.factory';
 import { AuthRateLimiterService } from './auth-rate-limiter.service';
@@ -15,6 +16,7 @@ import { YandexOAuthClient } from './yandex-oauth.client';
 
 @Module({
   imports: [
+    HttpOutboundModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
