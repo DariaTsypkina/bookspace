@@ -225,6 +225,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-29 | `bd-6b7.6` close-prep: общий `font-semibold` на всех пунктах AppNav (active = underline/цвет); unit **11/11**; Playwright app-nav **16/16** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); manual DevTools; ветка `task/bd-6b7.6-nav-font-weight`; `bd close` за оркестратором |
+| 2026-07-29 | `bd-6b7.6` в работе: conventions OK; sync origin/develop Already up to date; TDD font-weight AppNav |
 | 2026-07-29 | Оркестратор: claim `bd-6b7.6` → `task/bd-6b7.6-nav-font-weight` (после close+merge `.5`) |
 | 2026-07-29 | `bd-6b7.5` closed: Войти/Выйти в AppNav; unit 35/35; PW app-nav 14/14 desktop+mobile; merge → `feat/bookspace-bd-6b7` |
 | 2026-07-29 | `bd-6b7.5` close-prep: AppNav guest «Войти»→/login, USER/ADMIN «Выйти»→`logout()` BFF; unit **35/35**; Playwright app-nav **14/14** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); manual `e2e/manual/app-nav.md`; `bd close` за оркестратором |
