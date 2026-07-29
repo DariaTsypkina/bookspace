@@ -18,6 +18,7 @@ import { AdminContextService } from './admin-context.service';
 import {
   AdminContextListRecentQueryDto,
   AdminContextPatchDto,
+  AdminContextReadingIdParamDto,
 } from './dto/admin-context.dto';
 
 @Controller('admin/context')
@@ -36,22 +37,28 @@ export class AdminContextController {
   @Patch(':id')
   @Roles(UserRole.ADMIN)
   patchReading(
-    @Param('id') id: string,
+    @Param() params: AdminContextReadingIdParamDto,
     @Body() body: AdminContextPatchDto,
     @CurrentUser() user: SessionUser,
   ) {
-    return this.adminContextService.updateReading(id, user.id, body);
+    return this.adminContextService.updateReading(params.id, user.id, body);
   }
 
   @Post(':id/unpublish')
   @Roles(UserRole.ADMIN)
-  unpublish(@Param('id') id: string, @CurrentUser() user: SessionUser) {
-    return this.adminContextService.unpublishReading(id, user.id);
+  unpublish(
+    @Param() params: AdminContextReadingIdParamDto,
+    @CurrentUser() user: SessionUser,
+  ) {
+    return this.adminContextService.unpublishReading(params.id, user.id);
   }
 
   @Post(':id/reject')
   @Roles(UserRole.ADMIN)
-  reject(@Param('id') id: string, @CurrentUser() user: SessionUser) {
-    return this.adminContextService.rejectReading(id, user.id);
+  reject(
+    @Param() params: AdminContextReadingIdParamDto,
+    @CurrentUser() user: SessionUser,
+  ) {
+    return this.adminContextService.rejectReading(params.id, user.id);
   }
 }

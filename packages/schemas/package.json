@@ -32,6 +32,18 @@
     "./relations": {
       "types": "./dist/relations.d.ts",
       "default": "./dist/relations.js"
+    },
+    "./rankings": {
+      "types": "./dist/rankings.d.ts",
+      "default": "./dist/rankings.js"
+    },
+    "./collections": {
+      "types": "./dist/collections.d.ts",
+      "default": "./dist/collections.js"
+    },
+    "./admin": {
+      "types": "./dist/admin.d.ts",
+      "default": "./dist/admin.js"
     }
   },
   "scripts": {

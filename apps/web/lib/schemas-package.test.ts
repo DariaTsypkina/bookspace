@@ -6,10 +6,19 @@ import {
   AdminContextPatchFormSchema,
   AdminContextPatchInputSchema,
   AdminContextPublishInputSchema,
+  AdminContextReadingIdParamSchema,
+  AdminWorkIdParamSchema,
   CatalogSearchQuerySchema,
   CharacterRelationTypeSchema,
+  CollectionSlugParamSchema,
+  CollectionStatusSchema,
+  ExternalRankingMatchStatusSchema,
   LoginInputSchema,
   ProfileSlugParamSchema,
+  RankingSlugParamSchema,
+  RankingStatusSchema,
+  RankingsAggregatePublishInputSchema,
+  RankingsImportSourceInputSchema,
   SearchBooksInputSchema,
   SearchQueryFormSchema,
   SpoilersConsentInputSchema,
@@ -74,6 +83,31 @@ describe('@bookspace/schemas export contract', () => {
     );
     expect(CharacterRelationTypeSchema.safeParse('FRIEND').success).toBe(true);
     expect(WorkRelationTypeSchema.safeParse('SEQUEL').success).toBe(true);
+    expect(RankingStatusSchema.safeParse('PUBLISHED').success).toBe(true);
+    expect(RankingSlugParamSchema.safeParse({ slug: 'top-100' }).success).toBe(
+      true,
+    );
+    expect(ExternalRankingMatchStatusSchema.safeParse('MATCHED').success).toBe(
+      true,
+    );
+    expect(
+      RankingsImportSourceInputSchema.safeParse({ sourceKey: 'guardian' })
+        .success,
+    ).toBe(true);
+    expect(
+      RankingsAggregatePublishInputSchema.safeParse({ themeKey: 'classics' })
+        .success,
+    ).toBe(true);
+    expect(CollectionStatusSchema.safeParse('DRAFT').success).toBe(true);
+    expect(
+      CollectionSlugParamSchema.safeParse({ slug: 'silver-age' }).success,
+    ).toBe(true);
+    expect(AdminWorkIdParamSchema.safeParse({ workId: 'work-1' }).success).toBe(
+      true,
+    );
+    expect(
+      AdminContextReadingIdParamSchema.safeParse({ id: 'reading-1' }).success,
+    ).toBe(true);
   });
 
   it('rejects invalid payloads', () => {
@@ -129,5 +163,29 @@ describe('@bookspace/schemas export contract', () => {
     );
     expect(CharacterRelationTypeSchema.safeParse('ALLY').success).toBe(false);
     expect(WorkRelationTypeSchema.safeParse('SPINOFF').success).toBe(false);
+    expect(RankingStatusSchema.safeParse('ARCHIVED').success).toBe(false);
+    expect(RankingSlugParamSchema.safeParse({ slug: '' }).success).toBe(false);
+    expect(ExternalRankingMatchStatusSchema.safeParse('PENDING').success).toBe(
+      false,
+    );
+    expect(
+      RankingsImportSourceInputSchema.safeParse({ sourceKey: '' }).success,
+    ).toBe(false);
+    expect(
+      RankingsAggregatePublishInputSchema.safeParse({
+        themeKey: 'x',
+        topN: 0,
+      }).success,
+    ).toBe(false);
+    expect(CollectionStatusSchema.safeParse('REJECTED').success).toBe(false);
+    expect(CollectionSlugParamSchema.safeParse({ slug: '  ' }).success).toBe(
+      false,
+    );
+    expect(AdminWorkIdParamSchema.safeParse({ workId: '' }).success).toBe(
+      false,
+    );
+    expect(AdminContextReadingIdParamSchema.safeParse({ id: '' }).success).toBe(
+      false,
+    );
   });
 });
