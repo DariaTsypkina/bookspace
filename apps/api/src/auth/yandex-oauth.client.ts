@@ -1,5 +1,7 @@
+import { HttpService } from '@nestjs/axios';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { firstValueFrom } from 'rxjs';
 import { OAUTH_TEST_CODE_PREFIX } from './oauth.constants';
 import {
   YANDEX_AUTH_URL,
@@ -21,7 +23,10 @@ export type YandexOAuthConfig = {
 
 @Injectable()
 export class YandexOAuthClient {
-  constructor(private readonly config: ConfigService) {}
+  constructor(
+    private readonly config: ConfigService,
+    private readonly http: HttpService,
+  ) {}
 
   getConfig(): YandexOAuthConfig {
     const testMode = this.config.get<string>('OAUTH_TEST_MODE') === 'true';
@@ -127,31 +132,31 @@ export class YandexOAuthClient {
       client_secret: cfg.clientSecret,
     });
 
-    const response = await fetch(YANDEX_TOKEN_URL, {
-      method: 'POST',
-      headers: { 'content-type': 'application/x-www-form-urlencoded' },
-      body,
-    });
-
-    if (!response.ok) {
+    try {
+      const { data } = await firstValueFrom(
+        this.http.post<YandexTokenResponse>(YANDEX_TOKEN_URL, body.toString(), {
+          headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        }),
+      );
+      return data;
+    } catch {
       throw new UnauthorizedException('Не удалось обменять код Яндекс OAuth');
     }
-
-    return (await response.json()) as YandexTokenResponse;
   }
 
   private async fetchUserInfo(accessToken: string): Promise<YandexUserInfo> {
     const url = new URL(YANDEX_USERINFO_URL);
     url.searchParams.set('format', 'json');
 
-    const response = await fetch(url.toString(), {
-      headers: { Authorization: `OAuth ${accessToken}` },
-    });
-
-    if (!response.ok) {
+    try {
+      const { data } = await firstValueFrom(
+        this.http.get<YandexUserInfo>(url.toString(), {
+          headers: { Authorization: `OAuth ${accessToken}` },
+        }),
+      );
+      return data;
+    } catch {
       throw new UnauthorizedException('Не удалось получить профиль Яндекс');
     }
-
-    return (await response.json()) as YandexUserInfo;
   }
 }

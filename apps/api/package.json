@@ -14,6 +14,7 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
+    "pretypecheck": "pnpm --filter @bookspace/schemas build",
     "typecheck": "tsc --noEmit",
     "pretest": "pnpm --filter @bookspace/schemas build",
     "test": "jest",
@@ -28,6 +29,7 @@
   },
   "dependencies": {
     "@bookspace/schemas": "workspace:*",
+    "@nestjs/axios": "^4.0.1",
     "@nestjs/bullmq": "^11.0.4",
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.4",
@@ -36,6 +38,7 @@
     "@nestjs/platform-express": "^11.0.1",
     "@nestjs/swagger": "^11.4.6",
     "@prisma/client": "^6.11.1",
+    "axios": "^1.18.1",
     "bcryptjs": "^2.4.3",
     "bullmq": "^5.80.9",
     "cookie-parser": "^1.4.7",

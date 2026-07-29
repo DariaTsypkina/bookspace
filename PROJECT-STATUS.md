@@ -38,7 +38,7 @@
 |--------|-----|--------|
 | ✅ | `bd-wus` | **Эпик DX: Tailwind + shadcn** (ADR 0003 accepted) — 18 / 18 |
 | ✅ | `bd-0t0` | **Эпик DX: RHF + Zod full contour** (ADR 0004 accepted) — 11 / 11 + bug .12 |
-| ⬜ | `bd-707` | **Эпик DX: axios HTTP-клиент** (ADR 0005 accepted) — 0 / 10 |
+| ✅ | `bd-707` | **Эпик DX: axios HTTP-клиент** (ADR 0005 accepted) — 10 / 10 · сборочная `feat/bookspace-bd-707` (не влита в develop) |
 | ✅ | `bd-ky6` | Chore: синхронизировать beads interactions.jsonl |
 | ✅ | `bd-0e6` | Docs: согласование зависимостей агентом |
 | ✅ | `bd-rtp` | Docs: human intake workflow и /task skill |
@@ -90,22 +90,22 @@
 | ✅ | `bd-0t0.10` | Wave 2: миграция домена Rankings/Collections/Admin DTO/forms |
 | ✅ | `bd-0t0.11` | Finalization: remove class-validator and legacy cleanup |
 
-### DX — axios HTTP-клиент — ⬜ · epic `bd-707` · 0 / 10 · ADR [0005](docs/adr/0005-axios-http-client.md) **accepted**
+### DX — axios HTTP-клиент — ✅ · epic `bd-707` · 10 / 10 · ADR [0005](docs/adr/0005-axios-http-client.md) **accepted**
 
-План: [migration-axios.md](docs/tech/migration-axios.md). Сборочная: `feat/bookspace-bd-707`. Ready: `bd-707.1` (F0).
+План: [migration-axios.md](docs/tech/migration-axios.md) (**completed**). Сборочная: `feat/bookspace-bd-707` (запушена; в `develop` не влита — ЗАЛИВАТЬ=Нет). Target verify: web unit 54/54, api 15/15, lint OK, PW 48/48.
 
 | Статус | ID | Задача |
 |--------|-----|--------|
-| ⬜ | `bd-707.1` | F0: deps + docs sync |
-| 🔒 | `bd-707.2` | F1: web http + ApiError foundation |
-| 🔒 | `bd-707.3` | F2: api HttpModule foundation |
-| 🔒 | `bd-707.4` | W1: migrate web lib/auth |
-| 🔒 | `bd-707.5` | W2: migrate web catalog libs |
-| 🔒 | `bd-707.6` | W3: migrate web admin-context lib |
-| 🔒 | `bd-707.7` | W4: migrate web client forms fetch |
-| 🔒 | `bd-707.8` | W5: web regression smoke |
-| 🔒 | `bd-707.9` | A1: OAuth clients → HttpService |
-| 🔒 | `bd-707.10` | D1: DoD guardrails + docs |
+| ✅ | `bd-707.1` | F0: deps + docs sync |
+| ✅ | `bd-707.2` | F1: web http + ApiError foundation |
+| ✅ | `bd-707.3` | F2: api HttpModule foundation |
+| ✅ | `bd-707.4` | W1: migrate web lib/auth |
+| ✅ | `bd-707.5` | W2: migrate web catalog libs |
+| ✅ | `bd-707.6` | W3: migrate web admin-context lib |
+| ✅ | `bd-707.7` | W4: migrate web client forms fetch |
+| ✅ | `bd-707.8` | W5: web regression smoke |
+| ✅ | `bd-707.9` | A1: OAuth clients → HttpService |
+| ✅ | `bd-707.10` | D1: DoD guardrails + docs |
 
 ### 1. Auth — ✅ · epic `bd-957` · 6 / 6 (эпик закрыт)
 
@@ -221,6 +221,25 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-29 | Оркестратор: эпик `bd-707` closed (10/10); target verify PASS (web 54/54, api 15/15, lint OK, PW 48/48); push `origin/feat/bookspace-bd-707`; в `develop` НЕ мёржили (ЗАЛИВАТЬ=Нет) |
+| 2026-07-29 | `bd-707.10` D1: eslint `no-restricted-globals`/`syntax` (web overrides SW+BFF; api запрет fetch); `migration-axios.md` → **completed**; inventory+эпик AC закрыты; stack notes; manual `e2e/manual/axios-http-dod.md`; Playwright N/A; `bd close` за оркестратором |
+| 2026-07-29 | Claim `bd-707.10`: conventions (design/acceptance Критерии+Проверка/notes/labels area:web+area:api+sec:http+dx); sync origin/develop OK; ветка `task/bd-707.10-dod-guardrails` |
+| 2026-07-29 | `bd-707.9` A1: Google/Yandex OAuth clients → `HttpService`+`firstValueFrom` (без `fetch(`); unit **14/14**; API e2e auth-google+yandex **10/10**; Playwright oauth smoke+e2e desktop **10/10**; `bd close` за оркестратором |
+| 2026-07-29 | Claim `bd-707.9`: conventions (design/acceptance Критерии+Проверка/notes/labels area:api+sec:auth+dx); sync origin/develop OK; ветка `task/bd-707.9-oauth-httpservice` |
+| 2026-07-29 | `bd-707.8` W5: web regression после W1–W4; unit **54/54** (11 files: http/auth/catalog-*/admin-context/add-library-item-form); Playwright smoke auth-pages+login+register+library+admin-context+catalog-search **44/44** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); фиксов axios нет; `bd close` за оркестратором |
+| 2026-07-29 | Claim `bd-707.8`: conventions (design/acceptance Критерии+Проверка/notes/labels area:web+sec:http+dx+regress); sync origin/develop OK; ветка `task/bd-707.8-web-regression-smoke` |
+| 2026-07-29 | `bd-707.7` W4: `add-library-item-form.tsx` → `api`+`ApiError` (нет client fetch); unit 6/6 (+http 8/8); Playwright `library-page` desktop 5/5; `bd close` за оркестратором |
+| 2026-07-29 | Claim `bd-707.7`: conventions (design/acceptance Критерии+Проверка/notes/labels area:web+sec:http+dx); sync origin/develop OK; ветка `task/bd-707.7-migrate-client-forms` |
+| 2026-07-29 | `bd-707.6` W3: `lib/admin-context.ts` → `api`+`ApiError`+`noStoreConfig` (без fetch/parseApiError); unit 8/8; Playwright `admin-context` desktop 3/3; `bd close` за оркестратором |
+| 2026-07-29 | Claim `bd-707.6`: conventions (design/acceptance Критерии+Проверка/notes/labels area:web+sec:http+dx); sync origin/develop OK; ветка `task/bd-707.6-migrate-admin-context` |
+| 2026-07-29 | `bd-707.5` W2: catalog libs → `api`+`ApiError`+`noStoreConfig` (без fetch); unit 22/22; Playwright `catalog-search` desktop 5/5; `bd close` за оркестратором |
+| 2026-07-29 | `bd-707.4` W1: `lib/auth.ts` → `api`+`ApiError` (без fetch/parseApiError); unit 10/10; Playwright `auth-pages` desktop 3/3; полный auth e2e → W5; `bd close` за оркестратором |
+| 2026-07-29 | `bd-707.3` F2: `HttpOutboundModule` (`HttpModule.register` timeout 10s) + import AppModule/AuthModule; unit inject `HttpService` 1/1; нет `axios.create` в app-коде; Playwright N/A; OAuth не тронут (A1); `bd close` за оркестратором |
+| 2026-07-29 | Claim `bd-707.3`: conventions (design/acceptance Критерии+Проверка/notes/labels area:api+dx+sec:http+foundation); sync origin/develop OK; ветка `task/bd-707.3-api-httpmodule` |
+| 2026-07-29 | `bd-707.2` F1: `apps/web/lib/http.ts` axios client + `ApiError` interceptor (string/string[]/fallback); unit 8/8; Playwright N/A (foundation без UI); call-sites не тронуты; `bd close` за оркестратором |
+| 2026-07-29 | Claim `bd-707.2`: conventions (design/acceptance Критерии+Проверка/notes/labels area:web+dx+sec:http+foundation); sync origin/develop OK; ветка `task/bd-707.2-web-http-apierror` |
+| 2026-07-29 | `bd-707.1` F0: axios `^1.18.1` в web+api, `@nestjs/axios` `^4.0.1` в api; docs ADR 0005 уже accepted (README + stack); Playwright N/A; ветка `task/bd-707.1-axios-deps-docs`; `bd close` за оркестратором |
+| 2026-07-29 | Claim `bd-707.1`: conventions (design/acceptance/notes/labels area:web+area:api+sec:http+dx+deps); sync origin/develop OK; ветка `task/bd-707.1-axios-deps-docs` |
 | 2026-07-29 | ADR 0005 **accepted**; эпик `bd-707` + 10 задач (F0–D1) по [migration-axios.md](docs/tech/migration-axios.md); ready: `bd-707.1`; сборочная `feat/bookspace-bd-707` |
 | 2026-07-29 | `/task`: создан `bd-82j` — Roboto (Google Fonts) на весь UI, веса 400/500/700; DX без продуктового эпика; feature-doc `ui-typography` при реализации |
 | 2026-07-29 | `/task`: создан `bd-6b7.5` — Войти/Выйти в AppNav (гость→`/login`, user→logout BFF); эпик `bd-6b7`, feature-doc `app-shell-tab-bar` |

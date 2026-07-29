@@ -1,4 +1,5 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { ApiError, api, noStoreConfig } from './http';
 import {
   CatalogWorkNotFoundError,
   EDITION_LANGUAGE_LABELS,
@@ -6,7 +7,25 @@ import {
   formatEditionLanguage,
 } from './catalog-work';
 
+vi.mock('./http', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('./http')>();
+  return {
+    ...actual,
+    api: {
+      get: vi.fn(),
+    },
+  };
+});
+
 describe('fetchCatalogWork', () => {
+  beforeEach(() => {
+    vi.mocked(api.get).mockReset();
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
   it('returns parsed work response from API', async () => {
     const mockResponse = {
       slug: 'garri-potter',
@@ -15,32 +34,19 @@ describe('fetchCatalogWork', () => {
       editions: [{ language: 'ru', translator: 'М. Спивак' }],
     };
 
-    vi.stubGlobal(
-      'fetch',
-      vi.fn().mockResolvedValue({
-        ok: true,
-        status: 200,
-        json: async () => mockResponse,
-      }),
-    );
+    vi.mocked(api.get).mockResolvedValue({ data: mockResponse });
 
     const result = await fetchCatalogWork('garri-potter');
 
     expect(result).toEqual(mockResponse);
-    expect(fetch).toHaveBeenCalledWith(
+    expect(api.get).toHaveBeenCalledWith(
       expect.stringContaining('/catalog/works/garri-potter'),
-      { cache: 'no-store' },
+      noStoreConfig,
     );
   });
 
   it('throws CatalogWorkNotFoundError on 404', async () => {
-    vi.stubGlobal(
-      'fetch',
-      vi.fn().mockResolvedValue({
-        ok: false,
-        status: 404,
-      }),
-    );
+    vi.mocked(api.get).mockRejectedValue(new ApiError(404, 'Not Found'));
 
     await expect(fetchCatalogWork('missing')).rejects.toBeInstanceOf(
       CatalogWorkNotFoundError,
@@ -48,11 +54,8 @@ describe('fetchCatalogWork', () => {
   });
 
   it('rejects empty slug via shared CatalogEntitySlugParamSchema before fetch', async () => {
-    const fetchMock = vi.fn();
-    vi.stubGlobal('fetch', fetchMock);
-
     await expect(fetchCatalogWork('   ')).rejects.toThrow();
-    expect(fetchMock).not.toHaveBeenCalled();
+    expect(api.get).not.toHaveBeenCalled();
   });
 });
 

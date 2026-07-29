@@ -2,7 +2,7 @@
 
 Связано: [ADR 0005](../adr/0005-axios-http-client.md) (**accepted**), [stack-and-architecture](stack-and-architecture.md), [agent-dev-flow](agent-dev-flow.md).
 
-**Статус:** ready — ADR accepted; эпик Beads **`bd-707`** (0/10). Ready: `bd-707.1` (F0). Сборочная: `feat/bookspace-bd-707`.
+**Статус:** completed (bd-707.10) — ADR accepted; прикладной HTTP на axios / `HttpService`; native `fetch` только SW + BFF; eslint guardrails в web+api. Сборочная: `feat/bookspace-bd-707` (close/merge детей — оркестратор).
 
 **Цель:** перевести весь **прикладной** HTTP в `apps/web` (lib + client) и `apps/api` (outbound) на axios; native `fetch` оставить только в Service Worker и Next BFF-proxy.
 
@@ -63,7 +63,7 @@ flowchart TB
 - `apps/web/public/sw.js`
 - `apps/web/app/api/**/route.ts`
 
-Рекомендация на DoD: `eslint` `no-restricted-globals` / `no-restricted-syntax` с overrides на разрешённые пути (или `rg`-проверка в CI/задаче D1).
+**Guardrails (D1 / bd-707.10):** `no-restricted-globals` + `no-restricted-syntax` в `apps/web/eslint.config.mjs` (overrides: `public/sw.js`, `app/api/**/route.ts`) и `apps/api/eslint.config.mjs` (запрет `fetch` в src). CI Quality уже гоняет `pnpm --filter web|api run lint`.
 
 ---
 
@@ -128,13 +128,13 @@ flowchart TD
 
 | # | Issue | Задача | Файлы |
 |---|-------|--------|--------|
-| A1 | `bd-707.9` | OAuth Google + Yandex | `google-oauth.client.ts`, `yandex-oauth.client.ts` → `HttpService` + unit/e2e |
+| A1 | `bd-707.9` | OAuth Google + Yandex | ✅ `google-oauth.client.ts`, `yandex-oauth.client.ts` → `HttpService` + unit/e2e |
 
 ### DoD
 
 | # | Issue | Задача | Содержание |
 |---|-------|--------|------------|
-| D1 | `bd-707.10` | Вычистка + guardrails | `rg fetch(` = только исключения; eslint restrict; обновить docs; план → completed |
+| D1 | `bd-707.10` | Вычистка + guardrails | ✅ `rg fetch(` = только SW/BFF; eslint restrict web+api; docs → completed |
 
 **Deps:** F1/F2 ← F0; W1–W4 ← F1; W5 ← W1–W4; A1 ← F2; D1 ← W5 + A1.
 
@@ -144,11 +144,13 @@ flowchart TD
 
 | Зона | Путь | Действие |
 |------|------|----------|
-| Web lib | `lib/auth.ts`, `lib/catalog-*.ts`, `lib/admin-context.ts`, `lib/catalog-search.ts`, `lib/catalog-context-reading.ts` | → web axios |
-| Web UI | `app/library/add-library-item-form.tsx` | → web axios |
+| Web lib | `lib/auth.ts` | ✅ → web axios (`bd-707.4`) |
+| Web lib | `lib/catalog-*.ts`, `lib/catalog-search.ts`, `lib/catalog-context-reading.ts` | ✅ → web axios (`bd-707.5`) |
+| Web lib | `lib/admin-context.ts` | ✅ → web axios (`bd-707.6`) |
+| Web UI | `app/library/add-library-item-form.tsx` | ✅ → web axios (`bd-707.7`) |
 | BFF | `app/api/auth|admin|me/[...path]/route.ts` | **оставить fetch** |
 | SW | `public/sw.js` | **оставить fetch** |
-| Api | `auth/google-oauth.client.ts`, `auth/yandex-oauth.client.ts` | → `HttpService` |
+| Api | `auth/google-oauth.client.ts`, `auth/yandex-oauth.client.ts` | ✅ → `HttpService` (`bd-707.9`) |
 
 ---
 
@@ -168,8 +170,8 @@ flowchart TD
 
 ## Критерии приёмки эпика
 
-- [ ] ADR 0005 **accepted**
-- [ ] `axios` в `apps/web` и `apps/api`; `@nestjs/axios` в `apps/api`
-- [ ] Все строки инвентаря «→ …» мигрированы
-- [ ] `fetch(` только в SW + BFF-proxy (и тест-хелперах при необходимости)
-- [ ] Docs/stack обновлены; статус плана → completed
+- [x] ADR 0005 **accepted**
+- [x] `axios` в `apps/web` и `apps/api`; `@nestjs/axios` в `apps/api`
+- [x] Все строки инвентаря «→ …» мигрированы
+- [x] `fetch(` только в SW + BFF-proxy (eslint guardrails)
+- [x] Docs/stack обновлены; статус плана → completed
