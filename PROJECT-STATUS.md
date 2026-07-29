@@ -201,6 +201,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-29 | `bd-0t0.11` close-prep: удалены прямые deps `class-validator`/`class-transformer`; e2e → `configureApp`; CV-path filter убран; docs migration/ADR0004/stack/schemas README; unit removal gates; Playwright smoke мигрированных доменов — см. handoff; `bd close` за оркестратором |
 | 2026-07-29 | Оркестратор: claim `bd-0t0.11` (remove class-validator + legacy cleanup); ветка `task/bd-0t0.11-remove-class-validator` |
 | 2026-07-29 | `bd-0t0.10` closed + merge → `feat/bookspace-bd-0t0`: rankings/collections/admin Zod contracts; Playwright 4/4 |
 | 2026-07-29 | `bd-0t0.10` close-prep: Rankings/Collections Zod contracts + remaining admin path params; stubs без CRUD; unit API 11 + web 8; e2e admin/openapi 18/18; Playwright rankings-collections **4/4** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0, localhost); manual `e2e/manual/rankings-collections-zod.md`; Prisma Ranking/Collection вне runtime; `bd close` за оркестратором |
