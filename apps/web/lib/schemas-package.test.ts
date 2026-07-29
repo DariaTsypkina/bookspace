@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import {
   AdminContextPublishInputSchema,
+  CatalogSearchQuerySchema,
   LoginInputSchema,
   SearchBooksInputSchema,
+  SearchQueryFormSchema,
 } from '@bookspace/schemas';
 
 describe('@bookspace/schemas export contract', () => {
@@ -26,6 +28,10 @@ describe('@bookspace/schemas export contract', () => {
         model: 'gpt-5-mini',
       }).success,
     ).toBe(true);
+    expect(SearchQueryFormSchema.safeParse({ query: '' }).success).toBe(true);
+    expect(
+      CatalogSearchQuerySchema.safeParse({ q: 'гарри', limit: 10 }).success,
+    ).toBe(true);
   });
 
   it('rejects invalid payloads', () => {
@@ -36,6 +42,10 @@ describe('@bookspace/schemas export contract', () => {
     expect(SearchBooksInputSchema.safeParse({ query: 'ab' }).success).toBe(
       false,
     );
+    expect(SearchQueryFormSchema.safeParse({ query: 'ab' }).success).toBe(
+      false,
+    );
+    expect(CatalogSearchQuerySchema.safeParse({ q: 'ab' }).success).toBe(false);
     expect(
       AdminContextPublishInputSchema.safeParse({
         workId: '',
