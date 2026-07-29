@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-29T17:07:24.743Z",
+  "generated_at": "2026-07-29T17:07:57.343Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 121,
     "open_issues": 44,
-    "in_progress_issues": 1,
-    "closed_issues": 76,
-    "blocked_issues": 9,
-    "ready_issues": 35
+    "in_progress_issues": 0,
+    "closed_issues": 77,
+    "blocked_issues": 8,
+    "ready_issues": 36
   },
   "epics": [
     {
@@ -254,11 +254,11 @@
       "status": "open",
       "priority": 2,
       "children_total": 10,
-      "children_closed": 6,
-      "children_in_progress": 1,
+      "children_closed": 7,
+      "children_in_progress": 0,
       "children_open": 3,
-      "progress": "6 / 10",
-      "percent_closed": 60,
+      "progress": "7 / 10",
+      "percent_closed": 70,
       "children": [
         {
           "id": "bd-707.1",
@@ -312,7 +312,7 @@
         {
           "id": "bd-707.7",
           "title": "Axios W4: migrate web client forms fetch",
-          "status": "in_progress",
+          "status": "closed",
           "type": "task",
           "priority": 2
         },
@@ -1052,11 +1052,11 @@
     {
       "id": "bd-707.7",
       "title": "Axios W4: migrate web client forms fetch",
-      "status": "in_progress",
+      "status": "closed",
       "type": "task",
       "priority": 2,
       "parent": "bd-707",
-      "updated_at": "2026-07-29T17:03:40Z"
+      "updated_at": "2026-07-29T17:07:53Z"
     },
     {
       "id": "bd-707.6",
