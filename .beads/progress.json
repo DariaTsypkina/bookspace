@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-29T12:37:48.728Z",
+  "generated_at": "2026-07-29T12:43:30.429Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 106,
@@ -924,7 +924,7 @@
       "type": "task",
       "priority": 2,
       "parent": "bd-0t0",
-      "updated_at": "2026-07-29T12:27:41Z"
+      "updated_at": "2026-07-29T12:37:56Z"
     },
     {
       "id": "bd-0t0.10",
