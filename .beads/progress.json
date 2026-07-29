@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-29T12:51:14.204Z",
+  "generated_at": "2026-07-29T12:53:15.347Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 107,
+    "total_issues": 108,
     "open_issues": 38,
     "in_progress_issues": 0,
-    "closed_issues": 69,
+    "closed_issues": 70,
     "blocked_issues": 7,
     "ready_issues": 31
   },
@@ -15,11 +15,11 @@
       "title": "DX: RHF + Zod full contour",
       "status": "closed",
       "priority": 2,
-      "children_total": 12,
-      "children_closed": 12,
+      "children_total": 13,
+      "children_closed": 13,
       "children_in_progress": 0,
       "children_open": 0,
-      "progress": "12 / 12",
+      "progress": "13 / 13",
       "percent_closed": 100,
       "children": [
         {
@@ -46,6 +46,13 @@
         {
           "id": "bd-0t0.12",
           "title": "Playwright rankings/collections smoke: button count ловит Next.js Dev Tools",
+          "status": "closed",
+          "type": "bug",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.13",
+          "title": "fix: api e2e eslint unsafe any в validation asserts",
           "status": "closed",
           "type": "bug",
           "priority": 2
@@ -923,6 +930,15 @@
       "priority": 1,
       "parent": "bd-957",
       "updated_at": "2026-07-20T07:30:07Z"
+    },
+    {
+      "id": "bd-0t0.13",
+      "title": "fix: api e2e eslint unsafe any в validation asserts",
+      "status": "closed",
+      "type": "bug",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T12:53:10Z"
     },
     {
       "id": "bd-0t0.12",

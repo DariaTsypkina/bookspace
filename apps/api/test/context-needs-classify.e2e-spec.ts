@@ -9,6 +9,12 @@ import { isExtractEligible } from '../src/context/context-eligibility';
 import { FakeLlmProvider } from '../src/llm/fake-llm.provider';
 import { LLM_PROVIDER } from '../src/llm/llm.provider';
 
+type ValidationErrorItem = { code: string; path: string; message: string };
+type ValidationErrorResponse = {
+  code: string;
+  errors: ValidationErrorItem[];
+};
+
 const prisma = new PrismaClient();
 const TEST_PREFIX = 'context-needs-classify-e2e';
 
@@ -188,12 +194,13 @@ describe('Context needs classify (e2e)', () => {
       .send({ needsContext: 'MAYBE' })
       .expect(400);
 
-    expect(response.body).toMatchObject({
-      code: 'VALIDATION_FAILED',
-      errors: expect.arrayContaining([
+    const body = response.body as ValidationErrorResponse;
+    expect(body.code).toBe('VALIDATION_FAILED');
+    expect(body.errors).toEqual(
+      expect.arrayContaining([
         expect.objectContaining({ path: 'needsContext' }),
       ]),
-    });
+    );
   });
 
   it('rejects non-admin with 403', async () => {
