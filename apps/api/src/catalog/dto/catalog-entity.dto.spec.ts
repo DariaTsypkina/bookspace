@@ -1,8 +1,10 @@
 import {
+  AdminWorkIdParamSchema,
   AdminWorkNeedsContextPatchInputSchema,
   CatalogEntitySlugParamSchema,
 } from '@bookspace/schemas';
 import {
+  AdminWorkIdParamDto,
   AdminWorkNeedsContextPatchDto,
   CatalogEntitySlugParamDto,
 } from './catalog-entity.dto';
@@ -64,6 +66,28 @@ describe('Catalog entity Zod DTO shared schemas', () => {
       AdminWorkNeedsContextPatchInputSchema.safeParse({
         needsContext: 'yes',
       }).success,
+    ).toBe(false);
+  });
+
+  it('AdminWorkIdParamDto accepts non-empty trimmed workId', () => {
+    const result = AdminWorkIdParamDto.schema.safeParse({
+      workId: '  work-123  ',
+    });
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data).toEqual({ workId: 'work-123' });
+    }
+    expect(
+      AdminWorkIdParamSchema.safeParse({ workId: 'work-123' }).success,
+    ).toBe(true);
+  });
+
+  it('AdminWorkIdParamDto rejects empty or oversized workId', () => {
+    expect(AdminWorkIdParamDto.schema.safeParse({ workId: '' }).success).toBe(
+      false,
+    );
+    expect(
+      AdminWorkIdParamSchema.safeParse({ workId: 'w'.repeat(129) }).success,
     ).toBe(false);
   });
 });

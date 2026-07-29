@@ -26,12 +26,18 @@ API and web test/build scripts run this step automatically via `pretest`/`prebui
 - `@bookspace/schemas/catalog` - catalog entity slug / needs-context schemas.
 - `@bookspace/schemas/library` - library/profile input schemas.
 - `@bookspace/schemas/relations` - spoiler cookie + relation type schemas.
+- `@bookspace/schemas/rankings` - ranking status/slug + future job inputs.
+- `@bookspace/schemas/collections` - collection status/slug.
+- `@bookspace/schemas/admin` - remaining admin path params.
 
 ## Current baseline schemas
 
 - Auth: `LoginInputSchema`, `RegisterInputSchema`.
 - Search: `SearchBooksInputSchema`, `SearchQueryFormSchema`, `CatalogSearchQuerySchema`.
 - Admin context: `AdminContextPublishInputSchema`, `AdminContextListRecentQuerySchema`, `AdminContextPatchInputSchema`, `AdminContextPatchFormSchema`, `AdminContextExtractInputSchema`.
+- Admin params: `AdminWorkIdParamSchema`, `AdminContextReadingIdParamSchema`.
 - Catalog: `CatalogEntitySlugParamSchema`, `AdminWorkNeedsContextPatchInputSchema`.
 - Library: `AddLibraryItemInputSchema`, `ProfileSlugParamSchema`.
 - Relations/spoiler: `SpoilersOkCookieValueSchema`, `SpoilersConsentInputSchema`, `CharacterRelationTypeSchema`, `WorkRelationTypeSchema`.
+- Rankings: `RankingStatusSchema`, `RankingSlugParamSchema`, `ExternalRankingMatchStatusSchema`, `RankingsImportSourceInputSchema`, `RankingsAggregatePublishInputSchema`.
+- Collections: `CollectionStatusSchema`, `CollectionSlugParamSchema`.

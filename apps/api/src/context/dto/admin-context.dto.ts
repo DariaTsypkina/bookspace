@@ -2,6 +2,7 @@ import {
   AdminContextExtractInputSchema,
   AdminContextListRecentQuerySchema,
   AdminContextPatchInputSchema,
+  AdminContextReadingIdParamSchema,
 } from '@bookspace/schemas';
 import { createZodDto } from 'nestjs-zod';
 
@@ -15,4 +16,8 @@ export class AdminContextPatchDto extends createZodDto(
 
 export class AdminContextExtractDto extends createZodDto(
   AdminContextExtractInputSchema,
+) {}
+
+export class AdminContextReadingIdParamDto extends createZodDto(
+  AdminContextReadingIdParamSchema,
 ) {}

@@ -9,8 +9,10 @@ describe('AdminWorkController Zod migration', () => {
 
   it('uses shared Zod DTO for needs-context patch and no class-validator', () => {
     expect(source).toMatch(/AdminWorkNeedsContextPatchDto/);
+    expect(source).toMatch(/AdminWorkIdParamDto/);
     expect(source).not.toMatch(/class-validator/);
     expect(source).not.toMatch(/@IsEnum/);
     expect(source).not.toMatch(/class PatchNeedsContextDto/);
+    expect(source).not.toMatch(/@Param\('workId'\)/);
   });
 });

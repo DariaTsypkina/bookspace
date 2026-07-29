@@ -1,4 +1,5 @@
 import {
+  AdminWorkIdParamSchema,
   AdminWorkNeedsContextPatchInputSchema,
   CatalogEntitySlugParamSchema,
 } from '@bookspace/schemas';
@@ -11,3 +12,5 @@ export class CatalogEntitySlugParamDto extends createZodDto(
 export class AdminWorkNeedsContextPatchDto extends createZodDto(
   AdminWorkNeedsContextPatchInputSchema,
 ) {}
+
+export class AdminWorkIdParamDto extends createZodDto(AdminWorkIdParamSchema) {}
