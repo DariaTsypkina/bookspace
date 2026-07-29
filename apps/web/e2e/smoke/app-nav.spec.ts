@@ -1,8 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
 
-const uniqueEmail = () =>
-  `e2e-nav-${Date.now()}-${Math.random().toString(36).slice(2)}@bookspace.local`;
-
 const TAB_LABELS = [
   'Главная',
   'Поиск',
@@ -100,7 +97,7 @@ test.describe('App nav smoke', () => {
     await expect(page).toHaveURL('/login');
   });
 
-  test('guest sees Войти in menu → /login', async ({ page }) => {
+  test('guest has no Войти in menu; Профиль → /login', async ({ page }) => {
     const hydrationErrors: string[] = [];
     page.on('pageerror', (error) => {
       if (/hydration/i.test(error.message)) {
@@ -115,21 +112,15 @@ test.describe('App nav smoke', () => {
 
     await page.goto('/');
     const nav = await expectMainNav(page);
-    const loginLink = nav.getByRole('link', { name: 'Войти' });
-    await expect(loginLink).toBeVisible();
-    // Stay visible after paint / font-swap / hydration settle (bd-6b7.7)
-    await page.waitForTimeout(800);
-    await expect(loginLink).toBeVisible();
-    const box = await loginLink.boundingBox();
-    expect(box).not.toBeNull();
-    if (box) {
-      expect(box.width).toBeGreaterThan(8);
-      expect(box.height).toBeGreaterThan(8);
-    }
-    expect(hydrationErrors).toEqual([]);
-    await expect(loginLink).toHaveAttribute('href', '/login');
+    await expect(nav.getByRole('link', { name: 'Войти' })).toHaveCount(0);
     await expect(nav.getByRole('button', { name: 'Выйти' })).toHaveCount(0);
-    await loginLink.click();
+    await page.waitForTimeout(400);
+    expect(hydrationErrors).toEqual([]);
+    await expect(nav.getByRole('link', { name: 'Профиль' })).toHaveAttribute(
+      'href',
+      '/login',
+    );
+    await nav.getByRole('link', { name: 'Профиль' }).click();
     await expect(page).toHaveURL('/login');
   });
 
@@ -203,21 +194,14 @@ test.describe('App nav smoke', () => {
     );
   });
 
-  test('authenticated user: Профиль → /library stub; Выйти clears session', async ({
+  test('authenticated user: Профиль → /library; Выйти on library clears session', async ({
     page,
     context,
   }) => {
-    const email = uniqueEmail();
-    const password = 'Secure123!';
-
-    await page.goto('/register');
-    await page.getByLabel('Email').fill(email);
-    await page.getByLabel('Пароль').fill(password);
-    await page.getByRole('button', { name: 'Зарегистрироваться' }).click();
-    await expect(page).toHaveURL('/login');
-
-    await page.getByLabel('Email').fill(email);
-    await page.getByLabel('Пароль').fill(password);
+    // Seeded admin avoids flaky register under parallel / rate-limit pressure
+    await page.goto('/login');
+    await page.getByLabel('Email').fill('admin@bookspace.local');
+    await page.getByLabel('Пароль').fill('Admin123!');
     await page.getByRole('button', { name: 'Войти' }).click();
     await expect(page).toHaveURL('/');
 
@@ -227,8 +211,7 @@ test.describe('App nav smoke', () => {
       '/library',
     );
     await expect(nav.getByRole('link', { name: 'Войти' })).toHaveCount(0);
-    const logoutButton = nav.getByRole('button', { name: 'Выйти' });
-    await expect(logoutButton).toBeVisible();
+    await expect(nav.getByRole('button', { name: 'Выйти' })).toHaveCount(0);
 
     await nav.getByRole('link', { name: 'Профиль' }).click();
     await expect(page).toHaveURL('/library');
@@ -240,6 +223,8 @@ test.describe('App nav smoke', () => {
       'page',
     );
 
+    const logoutButton = page.getByRole('button', { name: 'Выйти' });
+    await expect(logoutButton).toBeVisible();
     await logoutButton.click();
     await expect(page).toHaveURL('/login');
     await expect(page.getByRole('heading', { name: 'Вход' })).toBeVisible();
@@ -249,7 +234,9 @@ test.describe('App nav smoke', () => {
     expect(session === undefined || session.value === '').toBe(true);
 
     const guestNav = await expectMainNav(page);
-    await expect(guestNav.getByRole('link', { name: 'Войти' })).toBeVisible();
+    await expect(
+      guestNav.getByRole('link', { name: 'Профиль' }),
+    ).toHaveAttribute('href', '/login');
     await expect(guestNav.getByRole('button', { name: 'Выйти' })).toHaveCount(
       0,
     );

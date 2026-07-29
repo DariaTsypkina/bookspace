@@ -219,6 +219,7 @@
 | ✅ | `bd-6b7.5` | UI: кнопки Войти / Выйти в меню (human-reported) |
 | ✅ | `bd-6b7.6` | [bug] UI: одинаковый font-weight у всех пунктов меню (как у активного) |
 | ✅ | `bd-6b7.7` | [bug] Войти/Выйти пропадает + hydration AppNav |
+| ✅ | `bd-6b7.8` | UI: Войти/Выйти из меню в раздел Профиля |
 
 ---
 
@@ -226,6 +227,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-29 | `bd-6b7.8`: auth из AppNav → `/library` LogoutButton; guest Профиль→/login; unit 48; PW app-nav guest OK |
+| 2026-07-29 | Intake: `bd-6b7.8` — Войти/Выйти из AppNav в Профиль/библиотеку (UX mobile); claim `task/bd-6b7.8-auth-in-profile` |
 | 2026-07-29 | `bd-6b7.7` fix: AppNav без Slot/asChild; auth shrink-0; unit 48; PW 16/16; ready close+merge → develop |
 | 2026-07-29 | Intake+fix: `bd-6b7.7` — Войти/Выйти flash/пропадает + hydration AppNav (Slot asChild); claim `task/bd-6b7.7-nav-hydration-auth-visible` |
 | 2026-07-29 | Оркестратор: целевая проверка PASS (unit AppNav 53/53, PW app-nav 16/16); `feat/bookspace-bd-6b7` → develop (`bd-6b7.5`+`.6`); ЗАЛИВАТЬ=Да |
