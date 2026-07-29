@@ -217,7 +217,7 @@
 | ✅ | `bd-6b7.3` | PWA: App shell и tab-bar |
 | ✅ | `bd-6b7.4` | UI: строка меню (Главная · Поиск · Профиль) — MVP-срез |
 | ✅ | `bd-6b7.5` | UI: кнопки Войти / Выйти в меню (human-reported) |
-| ⬜ | `bd-6b7.6` | [bug] UI: одинаковый font-weight у всех пунктов меню (как у активного) |
+| 🔄 | `bd-6b7.6` | [bug] UI: одинаковый font-weight у всех пунктов меню · `task/bd-6b7.6-nav-font-weight` |
 
 ---
 
@@ -225,6 +225,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-29 | Оркестратор: claim `bd-6b7.6` → `task/bd-6b7.6-nav-font-weight` (после close+merge `.5`) |
 | 2026-07-29 | `bd-6b7.5` closed: Войти/Выйти в AppNav; unit 35/35; PW app-nav 14/14 desktop+mobile; merge → `feat/bookspace-bd-6b7` |
 | 2026-07-29 | `bd-6b7.5` close-prep: AppNav guest «Войти»→/login, USER/ADMIN «Выйти»→`logout()` BFF; unit **35/35**; Playwright app-nav **14/14** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); manual `e2e/manual/app-nav.md`; `bd close` за оркестратором |
 | 2026-07-29 | `bd-6b7.5` в работе: conventions OK; sync origin/develop Already up to date; TDD `getNavAuthAction` + AppNav «Войти»/«Выйти» (BFF logout); unit 35/35; PW smoke app-nav — далее |
