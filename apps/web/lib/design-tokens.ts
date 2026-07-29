@@ -25,9 +25,9 @@ export const designTokens = {
   /** Доп. токены, не обязательные в REQUIRED_TOKEN_KEYS, но живут в :root. */
   accentText: '#fafaf9',
   error: '#b42318',
-  /** UI typeface (next/font Roboto → CSS var на html). */
-  fontFamily: 'Roboto',
-  fontFamilyCssVar: '--font-roboto',
+  /** UI typeface (next/font/local Baskerville → CSS var на html). */
+  fontFamily: 'Baskerville',
+  fontFamilyCssVar: '--font-baskerville',
   cssVar(key: DesignTokenKey): `--${DesignTokenKey}` {
     return `--${key}`;
   },

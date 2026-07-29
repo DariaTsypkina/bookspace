@@ -1,15 +1,35 @@
 import type { Metadata, Viewport } from 'next';
-import { Roboto } from 'next/font/google';
+import localFont from 'next/font/local';
 import { AppNav } from '../components/app-nav';
 import { PwaSwRegister } from '../components/pwa-sw-register';
 import { designTokens } from '../lib/design-tokens';
 import { pwaManifest } from '../lib/pwa/manifest';
 import './globals.css';
 
-const roboto = Roboto({
-  subsets: ['cyrillic', 'latin'],
-  weight: ['400', '500', '700'],
-  variable: '--font-roboto',
+const baskerville = localFont({
+  src: [
+    {
+      path: '../fonts/Baskerville-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/Baskerville-Italic.woff2',
+      weight: '400',
+      style: 'italic',
+    },
+    {
+      path: '../fonts/Baskerville-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/Baskerville-BoldItalic.woff2',
+      weight: '700',
+      style: 'italic',
+    },
+  ],
+  variable: '--font-baskerville',
   display: 'swap',
 });
 
@@ -58,7 +78,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru" className={`${roboto.variable} ${roboto.className}`}>
+    <html
+      lang="ru"
+      className={`${baskerville.variable} ${baskerville.className}`}
+    >
       <body>
         <PwaSwRegister />
         <div className="flex min-h-full flex-1 flex-col">

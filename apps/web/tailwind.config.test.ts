@@ -44,15 +44,22 @@ describe('tailwind foundation config', () => {
     );
   });
 
-  it('maps font-sans to Roboto CSS variable (bd-82j)', () => {
+  it('maps font-sans to Baskerville CSS variable (bd-23j)', () => {
     const fontFamily = tailwindConfig.theme?.extend?.fontFamily as
       Record<string, string | string[]> | undefined;
 
     expect(fontFamily).toBeDefined();
     const sans = fontFamily?.sans;
     const stack = Array.isArray(sans) ? sans.join(',') : String(sans ?? '');
-    expect(stack).toMatch(/var\(--font-roboto\)/);
+    expect(stack).toMatch(/var\(--font-baskerville\)/);
+    expect(stack).not.toMatch(/--font-roboto/);
     expect(stack.toLowerCase()).not.toMatch(/georgia/);
+  });
+
+  it('maps font-medium to 400 (no Baskerville medium woff2)', () => {
+    const fontWeight = tailwindConfig.theme?.extend?.fontWeight as
+      Record<string, string | number> | undefined;
+    expect(fontWeight?.medium).toBe('400');
   });
 });
 

@@ -1,8 +1,8 @@
-# UI typography (Roboto)
+# UI typography (Baskerville)
 
 ## Цель
 
-Единый UI-шрифт Bookspace: **Roboto** (Google Fonts) через `next/font/google` (self-host), веса 400 / 500 / 700.
+Единый UI-шрифт Bookspace: **Baskerville** (кириллица) через `next/font/local` (self-host woff2), начертания roman / italic / bold / bolditalic (веса 400 / 700).
 
 ## Акторы
 
@@ -11,12 +11,12 @@
 ## User flow
 
 1. Открыть любой экран приложения
-2. Текст body, заголовки и компоненты рендерятся шрифтом Roboto
+2. Текст body, заголовки и компоненты рендерятся шрифтом Baskerville
 3. Без зависимости от CDN fonts.googleapis.com в runtime
 
 ## Данные
 
-Нет; только фронтенд-токены (`--font-roboto`, Tailwind `font-sans`).
+Нет; только фронтенд-токены (`--font-baskerville`, Tailwind `font-sans`). Файлы: `apps/web/fonts/Baskerville-*.woff2`.
 
 ## API / jobs
 
@@ -26,17 +26,18 @@
 
 - FOIT/FOUT: `display: 'swap'`
 - Offline / PWA: шрифт в билде Next, не внешний CDN
-- Подмножества: `cyrillic` + `latin` (RU UI)
+- Нет medium (500): Tailwind `font-medium` → 400 (без faux-bold)
+- Кириллица в тех же woff2-файлах
 
 ## Критерии приёмки
 
-- [x] Roboto через `next/font/google`, веса 400 / 500 / 700
-- [x] Корневой layout + CSS/Tailwind `font-sans` на Roboto; Georgia не основной
+- [x] Baskerville через `next/font/local` (woff2: roman, italic, bold, bolditalic)
+- [x] Корневой layout + CSS/Tailwind `font-sans` на Baskerville; Roboto/Georgia не основные
 - [x] Нет runtime `<link>` на fonts.googleapis.com
-- [x] Smoke home / nav / login без регрессий layout
+- [x] Smoke home / nav / login без регрессий layout; кириллица в Baskerville
 
 ## Ссылки
 
 - ADR [0003](../adr/0003-tailwind-shadcn.md)
 - [stack-and-architecture](../tech/stack-and-architecture.md)
-- Issue: `bd-82j`
+- Issue: `bd-23j` (ранее `bd-82j` Roboto)
