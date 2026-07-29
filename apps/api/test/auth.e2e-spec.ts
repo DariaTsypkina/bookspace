@@ -1,10 +1,10 @@
-import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import cookieParser from 'cookie-parser';
 import request from 'supertest';
 import { App } from 'supertest/types';
 import { PrismaClient } from '@prisma/client';
 import { AppModule } from '../src/app.module';
+import { configureApp } from '../src/bootstrap';
 
 const prisma = new PrismaClient();
 
@@ -22,14 +22,7 @@ describe('Auth (e2e)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
-    app.use(cookieParser());
-    app.useGlobalPipes(
-      new ValidationPipe({
-        whitelist: true,
-        forbidNonWhitelisted: true,
-        transform: true,
-      }),
-    );
+    configureApp(app);
     await app.init();
   });
 
@@ -85,6 +78,31 @@ describe('Auth (e2e)', () => {
         password: 'weak',
       })
       .expect(400);
+  });
+
+  it('POST /auth/register returns normalized validation errors', async () => {
+    const response = await authPost('/auth/register')
+      .send({
+        email: 'bad-email',
+        password: 12345,
+      })
+      .expect(400);
+
+    expect(response.body).toMatchObject({
+      code: 'VALIDATION_FAILED',
+      errors: expect.arrayContaining([
+        expect.objectContaining({
+          code: expect.any(String),
+          path: 'email',
+          message: expect.any(String),
+        }),
+        expect.objectContaining({
+          code: expect.any(String),
+          path: 'password',
+          message: expect.any(String),
+        }),
+      ]),
+    });
   });
 
   it('POST /auth/register rejects duplicate email', async () => {
