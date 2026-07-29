@@ -20,6 +20,10 @@
     "./admin-context": {
       "types": "./dist/admin-context.d.ts",
       "default": "./dist/admin-context.js"
+    },
+    "./catalog": {
+      "types": "./dist/catalog.d.ts",
+      "default": "./dist/catalog.js"
     }
   },
   "scripts": {
