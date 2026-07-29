@@ -38,7 +38,7 @@
 |--------|-----|--------|
 | ✅ | `bd-wus` | **Эпик DX: Tailwind + shadcn** (ADR 0003 accepted) — 18 / 18 |
 | ✅ | `bd-0t0` | **Эпик DX: RHF + Zod full contour** (ADR 0004 accepted) — 11 / 11 + bug .12 |
-| 🔄 | `bd-707` | **Эпик DX: axios HTTP-клиент** (ADR 0005 accepted) — 3 / 10 · W1–W5 + A1 done (await close) |
+| ✅ | `bd-707` | **Эпик DX: axios HTTP-клиент** (ADR 0005 accepted) — 10 / 10 · сборочная `feat/bookspace-bd-707` (не влита в develop) |
 | ✅ | `bd-ky6` | Chore: синхронизировать beads interactions.jsonl |
 | ✅ | `bd-0e6` | Docs: согласование зависимостей агентом |
 | ✅ | `bd-rtp` | Docs: human intake workflow и /task skill |
@@ -90,22 +90,22 @@
 | ✅ | `bd-0t0.10` | Wave 2: миграция домена Rankings/Collections/Admin DTO/forms |
 | ✅ | `bd-0t0.11` | Finalization: remove class-validator and legacy cleanup |
 
-### DX — axios HTTP-клиент — 🔄 · epic `bd-707` · 3 / 10 · ADR [0005](docs/adr/0005-axios-http-client.md) **accepted**
+### DX — axios HTTP-клиент — ✅ · epic `bd-707` · 10 / 10 · ADR [0005](docs/adr/0005-axios-http-client.md) **accepted**
 
-План: [migration-axios.md](docs/tech/migration-axios.md) (**completed**). Сборочная: `feat/bookspace-bd-707`. W1–W5 + A1 + D1 готовы к close (оркестратор).
+План: [migration-axios.md](docs/tech/migration-axios.md) (**completed**). Сборочная: `feat/bookspace-bd-707` (запушена; в `develop` не влита — ЗАЛИВАТЬ=Нет). Target verify: web unit 54/54, api 15/15, lint OK, PW 48/48.
 
 | Статус | ID | Задача |
 |--------|-----|--------|
 | ✅ | `bd-707.1` | F0: deps + docs sync |
 | ✅ | `bd-707.2` | F1: web http + ApiError foundation |
 | ✅ | `bd-707.3` | F2: api HttpModule foundation |
-| 🔄 | `bd-707.4` | W1: migrate web lib/auth (await close) |
-| 🔄 | `bd-707.5` | W2: migrate web catalog libs (await close) |
-| 🔄 | `bd-707.6` | W3: migrate web admin-context lib (await close) |
-| 🔄 | `bd-707.7` | W4: migrate web client forms fetch (await close) |
-| 🔄 | `bd-707.8` | W5: web regression smoke (await close) |
-| 🔄 | `bd-707.9` | A1: OAuth clients → HttpService (await close) |
-| 🔄 | `bd-707.10` | D1: DoD guardrails + docs (await close) |
+| ✅ | `bd-707.4` | W1: migrate web lib/auth |
+| ✅ | `bd-707.5` | W2: migrate web catalog libs |
+| ✅ | `bd-707.6` | W3: migrate web admin-context lib |
+| ✅ | `bd-707.7` | W4: migrate web client forms fetch |
+| ✅ | `bd-707.8` | W5: web regression smoke |
+| ✅ | `bd-707.9` | A1: OAuth clients → HttpService |
+| ✅ | `bd-707.10` | D1: DoD guardrails + docs |
 
 ### 1. Auth — ✅ · epic `bd-957` · 6 / 6 (эпик закрыт)
 
@@ -221,6 +221,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-07-29 | Оркестратор: эпик `bd-707` closed (10/10); target verify PASS (web 54/54, api 15/15, lint OK, PW 48/48); push `origin/feat/bookspace-bd-707`; в `develop` НЕ мёржили (ЗАЛИВАТЬ=Нет) |
 | 2026-07-29 | `bd-707.10` D1: eslint `no-restricted-globals`/`syntax` (web overrides SW+BFF; api запрет fetch); `migration-axios.md` → **completed**; inventory+эпик AC закрыты; stack notes; manual `e2e/manual/axios-http-dod.md`; Playwright N/A; `bd close` за оркестратором |
 | 2026-07-29 | Claim `bd-707.10`: conventions (design/acceptance Критерии+Проверка/notes/labels area:web+area:api+sec:http+dx); sync origin/develop OK; ветка `task/bd-707.10-dod-guardrails` |
 | 2026-07-29 | `bd-707.9` A1: Google/Yandex OAuth clients → `HttpService`+`firstValueFrom` (без `fetch(`); unit **14/14**; API e2e auth-google+yandex **10/10**; Playwright oauth smoke+e2e desktop **10/10**; `bd close` за оркестратором |
