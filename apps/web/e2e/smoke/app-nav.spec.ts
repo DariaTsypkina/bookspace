@@ -100,6 +100,46 @@ test.describe('App nav smoke', () => {
     await expect(page).toHaveURL('/login');
   });
 
+  test('guest sees Войти in menu → /login', async ({ page }) => {
+    await page.goto('/');
+    const nav = await expectMainNav(page);
+    const loginLink = nav.getByRole('link', { name: 'Войти' });
+    await expect(loginLink).toBeVisible();
+    await expect(loginLink).toHaveAttribute('href', '/login');
+    await expect(nav.getByRole('button', { name: 'Выйти' })).toHaveCount(0);
+    await loginLink.click();
+    await expect(page).toHaveURL('/login');
+  });
+
+  test('all main-menu links share the same computed font-weight; active uses underline', async ({
+    page,
+  }) => {
+    await page.goto('/');
+    const nav = await expectMainNav(page);
+
+    const weights = await nav
+      .locator('a')
+      .evaluateAll((anchors) =>
+        anchors.map((a) => getComputedStyle(a).fontWeight),
+      );
+    expect(weights.length).toBeGreaterThanOrEqual(5);
+    expect(new Set(weights).size).toBe(1);
+
+    const home = nav.getByRole('link', { name: 'Главная' });
+    await expect(home).toHaveAttribute('aria-current', 'page');
+    const decoration = await home.evaluate(
+      (el) => getComputedStyle(el).textDecorationLine,
+    );
+    expect(decoration).toContain('underline');
+
+    const search = nav.getByRole('link', { name: 'Поиск' });
+    await expect(search).not.toHaveAttribute('aria-current', 'page');
+    const searchDecoration = await search.evaluate(
+      (el) => getComputedStyle(el).textDecorationLine,
+    );
+    expect(searchDecoration).not.toContain('underline');
+  });
+
   test('active item is highlighted across tabs including rankings and collections', async ({
     page,
   }) => {
@@ -141,7 +181,10 @@ test.describe('App nav smoke', () => {
     );
   });
 
-  test('authenticated user: Профиль → /library stub', async ({ page }) => {
+  test('authenticated user: Профиль → /library stub; Выйти clears session', async ({
+    page,
+    context,
+  }) => {
     const email = uniqueEmail();
     const password = 'Secure123!';
 
@@ -161,6 +204,10 @@ test.describe('App nav smoke', () => {
       'href',
       '/library',
     );
+    await expect(nav.getByRole('link', { name: 'Войти' })).toHaveCount(0);
+    const logoutButton = nav.getByRole('button', { name: 'Выйти' });
+    await expect(logoutButton).toBeVisible();
+
     await nav.getByRole('link', { name: 'Профиль' }).click();
     await expect(page).toHaveURL('/library');
     await expect(
@@ -169,6 +216,20 @@ test.describe('App nav smoke', () => {
     await expect(nav.getByRole('link', { name: 'Профиль' })).toHaveAttribute(
       'aria-current',
       'page',
+    );
+
+    await logoutButton.click();
+    await expect(page).toHaveURL('/login');
+    await expect(page.getByRole('heading', { name: 'Вход' })).toBeVisible();
+
+    const afterLogout = await context.cookies();
+    const session = afterLogout.find((cookie) => cookie.name === 'session');
+    expect(session === undefined || session.value === '').toBe(true);
+
+    const guestNav = await expectMainNav(page);
+    await expect(guestNav.getByRole('link', { name: 'Войти' })).toBeVisible();
+    await expect(guestNav.getByRole('button', { name: 'Выйти' })).toHaveCount(
+      0,
     );
   });
 
