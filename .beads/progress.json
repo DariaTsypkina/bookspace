@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-29T19:14:06.696Z",
+  "generated_at": "2026-07-29T19:24:14.315Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 125,
+    "total_issues": 126,
     "open_issues": 40,
     "in_progress_issues": 0,
-    "closed_issues": 85,
+    "closed_issues": 86,
     "blocked_issues": 7,
     "ready_issues": 33
   },
@@ -120,11 +120,11 @@
       "title": "PWA и оболочка",
       "status": "closed",
       "priority": 3,
-      "children_total": 6,
-      "children_closed": 6,
+      "children_total": 7,
+      "children_closed": 7,
       "children_in_progress": 0,
       "children_open": 0,
-      "progress": "6 / 6",
+      "progress": "7 / 7",
       "percent_closed": 100,
       "children": [
         {
@@ -168,6 +168,13 @@
           "status": "closed",
           "type": "bug",
           "priority": 2
+        },
+        {
+          "id": "bd-6b7.7",
+          "title": "UI: Войти/Выйти пропадает + hydration mismatch в AppNav",
+          "status": "closed",
+          "type": "bug",
+          "priority": 1
         }
       ]
     },
@@ -894,6 +901,15 @@
     }
   ],
   "issues": [
+    {
+      "id": "bd-6b7.7",
+      "title": "UI: Войти/Выйти пропадает + hydration mismatch в AppNav",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": "bd-6b7",
+      "updated_at": "2026-07-29T19:24:09Z"
+    },
     {
       "id": "bd-cq7.6",
       "title": "iOS Chrome: пустая страница Профиль (/library)",

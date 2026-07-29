@@ -57,6 +57,23 @@ describe('AppNav auth action (bd-6b7.5)', () => {
   });
 });
 
+describe('AppNav hydration-safe links (bd-6b7.7)', () => {
+  it('does not wrap nav Links in Button asChild (Slot SSR mismatch on Next 16.2)', () => {
+    expect(appNavSource).toMatch(/buttonVariants/);
+    expect(appNavSource).not.toMatch(/\basChild\b\s*=/);
+  });
+
+  it('keeps auth control out of flex-1 equal share so it is not clipped', () => {
+    expect(appNavSource).toMatch(
+      /min-w-0\s+shrink-0\s+md:ml-auto(?:\s+md:flex-none)?|min-w-0\s+flex-none\s+shrink-0\s+md:ml-auto/,
+    );
+    const authLi = appNavSource.match(
+      /<li className="([^"]*)">\s*\{authAction/,
+    );
+    expect(authLi?.[1] ?? '').not.toMatch(/\bflex-1\b/);
+  });
+});
+
 describe('AppNav Tailwind+shadcn migration (N1 / bd-wus.3)', () => {
   it('does not use legacy app-nav* class names', () => {
     expect(appNavSource).not.toMatch(/className=["']app-nav/);

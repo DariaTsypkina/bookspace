@@ -101,10 +101,32 @@ test.describe('App nav smoke', () => {
   });
 
   test('guest sees Войти in menu → /login', async ({ page }) => {
+    const hydrationErrors: string[] = [];
+    page.on('pageerror', (error) => {
+      if (/hydration/i.test(error.message)) {
+        hydrationErrors.push(error.message);
+      }
+    });
+    page.on('console', (msg) => {
+      if (msg.type() === 'error' && /hydration/i.test(msg.text())) {
+        hydrationErrors.push(msg.text());
+      }
+    });
+
     await page.goto('/');
     const nav = await expectMainNav(page);
     const loginLink = nav.getByRole('link', { name: 'Войти' });
     await expect(loginLink).toBeVisible();
+    // Stay visible after paint / font-swap / hydration settle (bd-6b7.7)
+    await page.waitForTimeout(800);
+    await expect(loginLink).toBeVisible();
+    const box = await loginLink.boundingBox();
+    expect(box).not.toBeNull();
+    if (box) {
+      expect(box.width).toBeGreaterThan(8);
+      expect(box.height).toBeGreaterThan(8);
+    }
+    expect(hydrationErrors).toEqual([]);
     await expect(loginLink).toHaveAttribute('href', '/login');
     await expect(nav.getByRole('button', { name: 'Выйти' })).toHaveCount(0);
     await loginLink.click();

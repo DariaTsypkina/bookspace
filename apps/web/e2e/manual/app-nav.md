@@ -1,11 +1,11 @@
-# Ручной чеклист: AppNav (`bd-6b7.5` + `bd-6b7.6`)
+# Ручной чеклист: AppNav (`bd-6b7.5` + `bd-6b7.6` + `bd-6b7.7`)
 
 См. также 5-tab shell: [app-shell-tab-bar.md](./app-shell-tab-bar.md).
 
 ## Viewport
 
-- [ ] Узкий (mobile): bottom bar — 5 табов + «Войти» (гость) или «Выйти» (user)
-- [ ] Широкий (desktop): top nav — то же
+- [ ] Узкий (mobile): bottom bar — 5 табов + «Войти» (гость) или «Выйти» (user); auth **остаётся видимой** после загрузки (не flash)
+- [ ] Широкий (desktop): top nav — то же; «Войти»/«Выйти» справа (`md:ml-auto`)
 
 ## Гость
 
@@ -25,6 +25,11 @@
 - [ ] Active отличим underline / `text-foreground`, не весом
 - [ ] «Войти»/«Выйти» визуально того же веса, что табы
 - [ ] Mobile + desktop
+
+## Hydration (`bd-6b7.7`)
+
+- [ ] Hard reload `/`: console **без** `Hydration failed`
+- [ ] «Войти» не исчезает через ~1s после загрузки
 
 ## Прочее
 
