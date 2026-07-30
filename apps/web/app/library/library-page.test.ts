@@ -32,6 +32,11 @@ describe('Library page Tailwind+shadcn migration (S12 / bd-wus.15)', () => {
     expect(pageSource).toMatch(/Коллекция и полки скоро появятся/);
   });
 
+  it('shows LogoutButton for signed-in profile destination (bd-6b7.8)', () => {
+    expect(pageSource).toMatch(/LogoutButton/);
+    expect(pageSource).toMatch(/from ['"]@\/components\/logout-button['"]/);
+  });
+
   it('mounts AddLibraryItemForm (RHF + Zod migration)', () => {
     expect(pageSource).toMatch(/AddLibraryItemForm/);
     expect(pageSource).toMatch(/from ['"]\.\/add-library-item-form['"]/);

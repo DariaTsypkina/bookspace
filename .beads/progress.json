@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-29T19:14:06.696Z",
+  "generated_at": "2026-07-29T19:34:10.478Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 125,
+    "total_issues": 127,
     "open_issues": 40,
     "in_progress_issues": 0,
-    "closed_issues": 85,
+    "closed_issues": 87,
     "blocked_issues": 7,
     "ready_issues": 33
   },
@@ -120,11 +120,11 @@
       "title": "PWA и оболочка",
       "status": "closed",
       "priority": 3,
-      "children_total": 6,
-      "children_closed": 6,
+      "children_total": 8,
+      "children_closed": 8,
       "children_in_progress": 0,
       "children_open": 0,
-      "progress": "6 / 6",
+      "progress": "8 / 8",
       "percent_closed": 100,
       "children": [
         {
@@ -167,6 +167,20 @@
           "title": "UI: одинаковый font-weight у всех пунктов меню (как у активного)",
           "status": "closed",
           "type": "bug",
+          "priority": 2
+        },
+        {
+          "id": "bd-6b7.7",
+          "title": "UI: Войти/Выйти пропадает + hydration mismatch в AppNav",
+          "status": "closed",
+          "type": "bug",
+          "priority": 1
+        },
+        {
+          "id": "bd-6b7.8",
+          "title": "UI: Войти/Выйти из меню в раздел Профиля",
+          "status": "closed",
+          "type": "feature",
           "priority": 2
         }
       ]
@@ -895,6 +909,15 @@
   ],
   "issues": [
     {
+      "id": "bd-6b7.7",
+      "title": "UI: Войти/Выйти пропадает + hydration mismatch в AppNav",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": "bd-6b7",
+      "updated_at": "2026-07-29T19:24:09Z"
+    },
+    {
       "id": "bd-cq7.6",
       "title": "iOS Chrome: пустая страница Профиль (/library)",
       "status": "open",
@@ -1028,6 +1051,15 @@
       "priority": 1,
       "parent": "bd-957",
       "updated_at": "2026-07-20T07:30:07Z"
+    },
+    {
+      "id": "bd-6b7.8",
+      "title": "UI: Войти/Выйти из меню в раздел Профиля",
+      "status": "closed",
+      "type": "feature",
+      "priority": 2,
+      "parent": "bd-6b7",
+      "updated_at": "2026-07-29T19:34:06Z"
     },
     {
       "id": "bd-6b7.6",

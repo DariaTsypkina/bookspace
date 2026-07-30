@@ -1,3 +1,4 @@
+import { LogoutButton } from '@/components/logout-button';
 import { Card, CardContent } from '@/components/ui/card';
 import { AddLibraryItemForm } from './add-library-item-form';
 
@@ -13,6 +14,7 @@ export default function LibraryStubPage() {
             Коллекция и полки скоро появятся.
           </p>
           <AddLibraryItemForm />
+          <LogoutButton />
         </CardContent>
       </Card>
     </main>
