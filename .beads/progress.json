@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-03T10:27:07.164Z",
+  "generated_at": "2026-08-03T10:27:25.934Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 128,
     "open_issues": 36,
-    "in_progress_issues": 1,
-    "closed_issues": 91,
+    "in_progress_issues": 0,
+    "closed_issues": 92,
     "blocked_issues": 7,
     "ready_issues": 29
   },
@@ -911,11 +911,11 @@
     {
       "id": "bd-jtw",
       "title": "web: spoiler-gate setState-in-effect lint fail (react-hooks)",
-      "status": "in_progress",
+      "status": "closed",
       "type": "bug",
       "priority": 1,
       "parent": null,
-      "updated_at": "2026-08-03T10:24:21Z"
+      "updated_at": "2026-08-03T10:27:22Z"
     },
     {
       "id": "bd-6b7.7",
