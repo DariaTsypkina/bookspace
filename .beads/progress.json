@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-03T13:59:02.547Z",
+  "generated_at": "2026-08-03T14:00:22.144Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 136,
     "open_issues": 38,
-    "in_progress_issues": 1,
-    "closed_issues": 97,
+    "in_progress_issues": 0,
+    "closed_issues": 98,
     "blocked_issues": 7,
     "ready_issues": 31
   },
@@ -121,11 +121,11 @@
       "status": "closed",
       "priority": 3,
       "children_total": 12,
-      "children_closed": 11,
-      "children_in_progress": 1,
+      "children_closed": 12,
+      "children_in_progress": 0,
       "children_open": 0,
-      "progress": "11 / 12",
-      "percent_closed": 92,
+      "progress": "12 / 12",
+      "percent_closed": 100,
       "children": [
         {
           "id": "bd-6b7.1",
@@ -151,7 +151,7 @@
         {
           "id": "bd-6b7.12",
           "title": "mobile: logout 303 редиректит на localhost (ERR_CONNECTION_FAILED по LAN)",
-          "status": "in_progress",
+          "status": "closed",
           "type": "bug",
           "priority": 1
         },
@@ -960,11 +960,11 @@
     {
       "id": "bd-6b7.12",
       "title": "mobile: logout 303 редиректит на localhost (ERR_CONNECTION_FAILED по LAN)",
-      "status": "in_progress",
+      "status": "closed",
       "type": "bug",
       "priority": 1,
       "parent": "bd-6b7",
-      "updated_at": "2026-08-03T13:56:02Z"
+      "updated_at": "2026-08-03T14:00:16Z"
     },
     {
       "id": "bd-6b7.11",

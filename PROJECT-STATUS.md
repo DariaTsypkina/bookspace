@@ -224,7 +224,8 @@
 | ✅ | `bd-6b7.6` | [bug] UI: одинаковый font-weight у всех пунктов меню (как у активного) |
 | ✅ | `bd-6b7.7` | [bug] Войти/Выйти пропадает + hydration AppNav |
 | ✅ | `bd-6b7.8` | UI: Войти/Выйти из меню в раздел Профиля |
-| 🔄 | `bd-6b7.11` | [bug] mobile: «Выйти» → progressive form POST `/logout` · `task/bd-6b7.11-logout-progressive-form` |
+| ✅ | `bd-6b7.12` | [bug] mobile: logout 303 → Host/x-forwarded-host (не localhost) · merged → `fix/bookspace-bd-bugs` |
+| ✅ | `bd-6b7.11` | [bug] mobile: «Выйти» → progressive form POST `/api/logout` · merged → `fix/bookspace-bd-bugs` |
 | ✅ | `bd-6b7.10` | [bug] PWA SW: не кэшировать `/_next/` + cache v2 (hydration asChild) · merged → `fix/bookspace-bd-bugs` |
 | ✅ | `bd-6b7.9` | [bug] mobile: «Выйти» в профиле не редиректит на /login — `window.location.assign` после logout · merged → `fix/bookspace-bd-bugs` |
 
@@ -234,6 +235,9 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-03 | Оркестратор: `bd-6b7.12` closed+merged в `fix/bookspace-bd-bugs` (`loginRedirectUrl` Host/x-forwarded-*; vitest logout 7/7; mapping → [subagent](49ad360d-6b0b-4c24-a295-d2177a48759a)); ЗАЛИВАТЬ develop=Нет |
+| 2026-08-03 | Claim `bd-6b7.12`: logout Location из Host/x-forwarded-host; ветка `task/bd-6b7.12-logout-redirect-host` от `fix/bookspace-bd-bugs` |
+| 2026-08-03 | Intake: `bd-6b7.12` — mobile logout 303 Location=localhost при доступе по LAN IP (follow-up `bd-6b7.11`); сборочная `fix/bookspace-bd-bugs` |
 | 2026-08-03 | Intake+claim `bd-6b7.11`: phone Выйти no-op → progressive POST `/logout` |
 | 2026-08-03 | Оркестратор: `bd-6b7.10` closed+merged в `fix/bookspace-bd-bugs` (SW no `/_next/` cache; vitest 274; PW 26/26) |
 | 2026-08-03 | Intake: `bd-6b7.10` hydration AppNav — SW cache-first `/_next/static` + SW в dev; claim `task/bd-6b7.10-sw-stale-hydration` |
