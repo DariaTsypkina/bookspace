@@ -153,8 +153,10 @@ describe('spoiler gate helpers', () => {
     expect(spoilerGateComponentSource).toMatch(/hasClientSpoilersConsent/);
     expect(spoilerGateComponentSource).toMatch(/cursor-pointer/);
     expect(spoilerGateComponentSource).toMatch(/font-sans/);
-    // Hydration-safe: client storage read only in useEffect
-    expect(spoilerGateComponentSource).toMatch(/useEffect/);
+    // Hydration-safe: client consent via useSyncExternalStore (no setState-in-effect)
+    expect(spoilerGateComponentSource).toMatch(/useSyncExternalStore/);
+    expect(spoilerGateComponentSource).toMatch(/getServerSnapshot/);
+    expect(spoilerGateComponentSource).not.toMatch(/useEffect/);
     // Optimistic UI: setAccepted(true) before persist
     const acceptHandler = spoilerGateComponentSource.match(
       /onClick=\{\(\)\s*=>\s*\{([\s\S]*?)\}\}/,

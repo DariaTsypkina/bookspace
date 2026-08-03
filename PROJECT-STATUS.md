@@ -47,8 +47,9 @@
 | ✅ | `bd-v3k` | Docs: протокол `bd close` на ветке задачи + merge в сборочную |
 | ✅ | `bd-82j` | UI: Google Fonts Roboto на весь UI (400/500/700) — DX · сборочная `feat/bookspace-bd-82j` |
 | ✅ | `bd-23j` | UI: Baskerville (woff2, кириллица) на весь UI — DX · сборочная `feat/bookspace-bd-23j` |
-| 🔄 | `bd-p3l` | [bug] UI: Baskerville не на кнопках/инпутах — DX · сборочная `feat/bookspace-bd-bugs` · ветка `task/bd-p3l-baskerville-form-controls` · discovered-from `bd-23j` |
-| 🔄 | `bd-v3x` | [bug] web: work-page-context-reading.integration stubs fetch (axios) — DX · сборочная `feat/bookspace-bd-bugs` · ветка `task/bd-v3x-context-reading-axios-mock` · discovered-from `bd-23j` |
+| ✅ | `bd-p3l` | [bug] UI: Baskerville не на кнопках/инпутах — DX · сборочная `feat/bookspace-bd-bugs` |
+| ✅ | `bd-v3x` | [bug] web: work-page-context-reading.integration stubs fetch (axios) — DX · сборочная `feat/bookspace-bd-bugs` |
+| 🔄 | `bd-jtw` | [bug] web: spoiler-gate setState-in-effect lint (react-hooks) — DX · сборочная `feat/bookspace-bd-bugs` · ветка `task/bd-jtw-spoiler-gate-setstate-lint` · discovered-from `bd-azl.5` |
 
 ### DX — Tailwind + shadcn — ✅ · epic `bd-wus` · 18 / 18 · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
 
@@ -142,7 +143,7 @@
 | ⬜ | `bd-azl.2` | Связи произведений |
 | ⬜ | `bd-azl.3` | Связи: Порядок чтения |
 | ⬜ | `bd-azl.4` | Связи: Spoiler gate |
-| 🔄 | `bd-azl.5` | Bug: iOS Chrome — «Показать» не снимает spoiler gate (human-reported) · `task/bd-azl.5-ios-chrome-spoiler-gate` |
+| ✅ | `bd-azl.5` | Bug: iOS Chrome — «Показать» не снимает spoiler gate (human-reported) |
 
 ### 4. ContextReading — ✅ · epic `bd-8s4` · 4 / 4 (эпик закрыт)
 
@@ -227,6 +228,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-03 | `bd-jtw` ready close: `useSyncExternalStore` вместо setState-in-effect; lint green; unit spoiler-gate+characters **19/19**; PW character-page **12/12** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); ветка `task/bd-jtw-spoiler-gate-setstate-lint`; `bd close` — оркестратор |
+| 2026-08-03 | Dashboard: `bd-p3l` / `bd-v3x` / `bd-azl.5` → ✅ (closed+merged в сборочную bugs) |
 | 2026-08-03 | `bd-v3x` ready close: integration mock `api.get` (не fetch); vitest integration 3/3 + web suite **264/264**; PW context-reading+work-page **10/10** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); ветка `task/bd-v3x-context-reading-axios-mock`; `bd close` — оркестратор |
 | 2026-08-03 | `bd-v3x` в работе: conventions (design/acceptance/notes/labels area:web+area:context+sec:http+regress+dx); TDD RED stub fetch → GREEN mock api.get; sync origin/develop OK |
 | 2026-08-03 | `bd-p3l` ready close: `font-sans` на Button/Input; unit button.test **9/9**; PW ui-typography+login **14/14** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); manual `e2e/manual/ui-typography-form-controls.md`; ветка `task/bd-p3l-baskerville-form-controls`; `bd close` — оркестратор |
