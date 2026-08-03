@@ -52,6 +52,14 @@ test.describe('Character page smoke', () => {
   }) => {
     await page.context().clearCookies();
     await page.goto('/characters/garri-potter');
+    await page.evaluate(() => {
+      try {
+        localStorage.removeItem('spoilers_ok');
+      } catch {
+        /* ignore */
+      }
+    });
+    await page.reload();
 
     await expect(
       page.getByRole('region', { name: 'Связи персонажа' }),
@@ -63,6 +71,20 @@ test.describe('Character page smoke', () => {
 
     await page.getByRole('button', { name: 'Показать' }).click();
 
+    await expect(
+      page.getByRole('link', { name: 'Гермиона Грейнджер' }),
+    ).toBeVisible();
+    await expect(page.getByText('Могут быть спойлеры')).not.toBeVisible();
+
+    const cookieHeader = await page.evaluate(() => document.cookie);
+    expect(cookieHeader).toMatch(/(?:^|;\s*)spoilers_ok=1(?:;|$)/);
+
+    const storageValue = await page.evaluate(() =>
+      localStorage.getItem('spoilers_ok'),
+    );
+    expect(storageValue).toBe('1');
+
+    await page.reload();
     await expect(
       page.getByRole('link', { name: 'Гермиона Грейнджер' }),
     ).toBeVisible();

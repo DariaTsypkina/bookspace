@@ -16,7 +16,8 @@
 
 ## Данные
 
-Cookie `spoilers_ok=1` (~30 дней), path `/`, SameSite=Lax.
+Cookie `spoilers_ok=1` (~30 дней), path `/`, SameSite=Lax; на HTTPS — флаг `Secure`.
+Клиентское зеркало в `localStorage` (`spoilers_ok=1`) — fallback, если iOS WebKit молча не сохраняет cookie (ITP / Secure); UI и remount читают cookie **или** storage.
 
 ## API / jobs
 
@@ -24,7 +25,8 @@ Cookie `spoilers_ok=1` (~30 дней), path `/`, SameSite=Lax.
 
 ## Края и ошибки
 
-Без blur по статусу прочитанного. Истечение cookie → снова gate.
+Без blur по статусу прочитанного. Истечение cookie → снова gate (если нет зеркала в storage).
+На iOS Chrome: после «Показать» контент открывается сразу (optimistic state); persist — cookie+storage.
 
 ## Критерии приёмки
 
