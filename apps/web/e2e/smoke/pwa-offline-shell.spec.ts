@@ -17,7 +17,7 @@ test.describe('PWA offline shell smoke (bd-6b7.2)', () => {
     const res = await request.get('/sw.js');
     expect(res.ok()).toBeTruthy();
     const body = await res.text();
-    expect(body).toContain('bookspace-shell-v1');
+    expect(body).toContain('bookspace-shell-v2');
     expect(body).toContain('/offline');
   });
 
