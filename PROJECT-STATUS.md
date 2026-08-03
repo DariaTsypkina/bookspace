@@ -224,7 +224,7 @@
 | ✅ | `bd-6b7.6` | [bug] UI: одинаковый font-weight у всех пунктов меню (как у активного) |
 | ✅ | `bd-6b7.7` | [bug] Войти/Выйти пропадает + hydration AppNav |
 | ✅ | `bd-6b7.8` | UI: Войти/Выйти из меню в раздел Профиля |
-| 🔄 | `bd-6b7.9` | [bug] mobile: «Выйти» в профиле не редиректит на /login (human-reported) · `task/bd-6b7.9-mobile-logout-redirect` ← сборочная `fix/bookspace-bd-bugs` |
+| ✅ | `bd-6b7.9` | [bug] mobile: «Выйти» в профиле не редиректит на /login — `window.location.assign` после logout · merged → `fix/bookspace-bd-bugs` |
 
 ---
 
@@ -232,6 +232,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-03 | Оркестратор: `bd-6b7.9` closed+merged `--no-ff` в `fix/bookspace-bd-bugs` (assign /login; vitest 267; PW logout mobile+desktop) |
 | 2026-08-03 | Оркестратор batch `fix/bookspace-bd-bugs`: claim `bd-6b7.9` → ветка `task/bd-6b7.9-mobile-logout-redirect`; очередь `bd-6b7.9` → `bd-6v0.11`; ЗАЛИВАТЬ develop=Нет |
 | 2026-08-03 | Intake `/task`: `bd-6v0.11` bug — mobile search native GET `?query=` vs page `q`; dashboard `bd-6v0.10` → ✅ |
 | 2026-08-03 | Intake `/task`: `bd-6b7.9` bug — mobile logout без редиректа на `/login`; `bd-957.5` feature — глаз показать/скрыть пароль на login/register |
