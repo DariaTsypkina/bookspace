@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
-  buildSpoilersOkCookie,
-  hasSpoilersConsent,
+  hasClientSpoilersConsent,
+  persistSpoilersConsent,
   SPOILERS_OK_COOKIE,
   SPOILERS_OK_VALUE,
 } from '@/lib/spoiler-gate';
@@ -15,31 +15,29 @@ type SpoilerGateProps = {
   children: React.ReactNode;
 };
 
-function readSpoilersCookie(): boolean {
+function readClientConsent(): boolean {
   if (typeof document === 'undefined') {
     return false;
   }
 
-  const entry = document.cookie
-    .split('; ')
-    .find((item) => item.startsWith(`${SPOILERS_OK_COOKIE}=`));
-
-  if (!entry) {
-    return false;
-  }
-
-  const value = entry.split('=')[1];
-  return hasSpoilersConsent(value);
-}
-
-function persistSpoilersConsent(): void {
-  document.cookie = buildSpoilersOkCookie();
+  return hasClientSpoilersConsent({
+    cookieHeader: document.cookie,
+    storage: typeof localStorage !== 'undefined' ? localStorage : null,
+  });
 }
 
 export function SpoilerGate({ initialAccepted, children }: SpoilerGateProps) {
-  const [accepted, setAccepted] = useState(
-    initialAccepted || readSpoilersCookie(),
-  );
+  // Match SSR: do not read localStorage during first client render (hydration).
+  const [accepted, setAccepted] = useState(initialAccepted);
+
+  useEffect(() => {
+    if (initialAccepted) {
+      return;
+    }
+    if (readClientConsent()) {
+      setAccepted(true);
+    }
+  }, [initialAccepted]);
 
   if (accepted) {
     return <>{children}</>;
@@ -58,10 +56,10 @@ export function SpoilerGate({ initialAccepted, children }: SpoilerGateProps) {
           <Button
             type="button"
             variant="outline"
-            className="self-start"
+            className="cursor-pointer self-start font-sans"
             onClick={() => {
-              persistSpoilersConsent();
               setAccepted(true);
+              persistSpoilersConsent();
             }}
           >
             Показать
