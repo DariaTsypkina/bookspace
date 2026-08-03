@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-03T10:31:19.575Z",
+  "generated_at": "2026-08-03T10:49:04.972Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 129,
-    "open_issues": 36,
+    "total_issues": 131,
+    "open_issues": 38,
     "in_progress_issues": 0,
     "closed_issues": 93,
     "blocked_issues": 7,
-    "ready_issues": 29
+    "ready_issues": 31
   },
   "epics": [
     {
@@ -120,12 +120,12 @@
       "title": "PWA и оболочка",
       "status": "closed",
       "priority": 3,
-      "children_total": 8,
+      "children_total": 9,
       "children_closed": 8,
       "children_in_progress": 0,
-      "children_open": 0,
-      "progress": "8 / 8",
-      "percent_closed": 100,
+      "children_open": 1,
+      "progress": "8 / 9",
+      "percent_closed": 89,
       "children": [
         {
           "id": "bd-6b7.1",
@@ -182,6 +182,13 @@
           "status": "closed",
           "type": "feature",
           "priority": 2
+        },
+        {
+          "id": "bd-6b7.9",
+          "title": "mobile: «Выйти» в профиле не редиректит на /login",
+          "status": "open",
+          "type": "bug",
+          "priority": 1
         }
       ]
     },
@@ -400,12 +407,12 @@
       "title": "Auth",
       "status": "closed",
       "priority": 1,
-      "children_total": 7,
+      "children_total": 8,
       "children_closed": 7,
       "children_in_progress": 0,
-      "children_open": 0,
-      "progress": "7 / 7",
-      "percent_closed": 100,
+      "children_open": 1,
+      "progress": "7 / 8",
+      "percent_closed": 88,
       "children": [
         {
           "id": "bd-8jk",
@@ -441,6 +448,13 @@
           "status": "closed",
           "type": "bug",
           "priority": 1
+        },
+        {
+          "id": "bd-957.5",
+          "title": "UI: показать/скрыть пароль (кнопка глаза) на полях пароля",
+          "status": "open",
+          "type": "feature",
+          "priority": 2
         },
         {
           "id": "bd-v2y",
@@ -909,6 +923,15 @@
   ],
   "issues": [
     {
+      "id": "bd-6b7.9",
+      "title": "mobile: «Выйти» в профиле не редиректит на /login",
+      "status": "open",
+      "type": "bug",
+      "priority": 1,
+      "parent": "bd-6b7",
+      "updated_at": "2026-08-03T10:46:41Z"
+    },
+    {
       "id": "bd-9p1",
       "title": "web: spoiler-gate.test Storage mock fails typecheck",
       "status": "closed",
@@ -1069,6 +1092,15 @@
       "priority": 1,
       "parent": "bd-957",
       "updated_at": "2026-07-20T07:30:07Z"
+    },
+    {
+      "id": "bd-957.5",
+      "title": "UI: показать/скрыть пароль (кнопка глаза) на полях пароля",
+      "status": "open",
+      "type": "feature",
+      "priority": 2,
+      "parent": "bd-957",
+      "updated_at": "2026-08-03T10:46:43Z"
     },
     {
       "id": "bd-6b7.8",

@@ -122,6 +122,7 @@
 | ✅ | `bd-957.3` | Auth: Яндекс OAuth |
 | ✅ | `bd-v2y` | Auth: сессия и защита маршрутов |
 | ✅ | `bd-wlw` | Auth: rate limit на register/login |
+| ⬜ | `bd-957.5` | UI: показать/скрыть пароль (глаз) на полях пароля (human-reported) · сборочная `feat/bookspace-bd-957` |
 
 ### 2. Каталог — ✅ · epic `bd-6v0` · 6 / 6 (эпик закрыт)
 
@@ -222,6 +223,7 @@
 | ✅ | `bd-6b7.6` | [bug] UI: одинаковый font-weight у всех пунктов меню (как у активного) |
 | ✅ | `bd-6b7.7` | [bug] Войти/Выйти пропадает + hydration AppNav |
 | ✅ | `bd-6b7.8` | UI: Войти/Выйти из меню в раздел Профиля |
+| ⬜ | `bd-6b7.9` | [bug] mobile: «Выйти» в профиле не редиректит на /login (human-reported) · сборочная `feat/bookspace-bd-6b7` |
 
 ---
 
@@ -229,6 +231,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-03 | Intake `/task`: `bd-6b7.9` bug — mobile logout без редиректа на `/login`; `bd-957.5` feature — глаз показать/скрыть пароль на login/register |
 | 2026-08-03 | Оркестратор batch bugs: все ключи + discovered bd-jtw/bd-9p1 closed+merged в `feat/bookspace-bd-bugs`; целевая проверка PASS (web 264 + PW 76); ЗАЛИВАТЬ develop=Нет — push сборочной |
 | 2026-08-03 | `bd-9p1` ready close: Storage mock полный stub (`satisfies Storage`: length/clear/key); typecheck green; vitest spoiler-gate **10/10**; `pnpm check` OK; PW character-page **12/12** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); ветка `task/bd-9p1-spoiler-storage-typecheck`; `bd close` — оркестратор |
 | 2026-08-03 | Dashboard: `bd-cq7.6` / `bd-jtw` → ✅ (closed batch); `bd-9p1` 🔄 |
