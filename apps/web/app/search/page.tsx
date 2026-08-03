@@ -11,11 +11,12 @@ import { CatalogSearchForm } from './catalog-search-form';
 const DEMO_SEARCH_QUERIES = ['гарри', 'роулинг', 'potter'] as const;
 
 type SearchPageProps = {
-  searchParams: Promise<{ q?: string }>;
+  searchParams: Promise<{ q?: string; query?: string }>;
 };
 
 export default async function SearchPage({ searchParams }: SearchPageProps) {
-  const { q = '' } = await searchParams;
+  const params = await searchParams;
+  const q = params.q ?? params.query ?? '';
   let fetchError: string | null = null;
   let result: CatalogSearchResponse = { query: q.trim(), items: [] };
 
