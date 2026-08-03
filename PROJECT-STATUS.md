@@ -135,7 +135,8 @@
 | ✅ | `bd-6v0.5` | Каталог: Карточка мира |
 | ✅ | `bd-6v0.6` | Каталог: Карточка локации |
 | ✅ | `bd-6v0.9` | Поиск: восстановить FTS search_vector после drift Prisma |
-| 🔄 | `bd-6v0.10` | Поиск: префикс `роул` не находит «Роулинг» (human-reported) |
+| ✅ | `bd-6v0.10` | Поиск: префикс `роул` не находит «Роулинг» (human-reported) |
+| ⬜ | `bd-6v0.11` | [bug] mobile: поиск «Найти» → `?query=` вместо `?q=` — пустая выдача (human-reported) · сборочная `feat/bookspace-bd-6v0` |
 
 ### 3. Связи и порядок — ⬜ · epic `bd-azl` · 0 / 4
 
@@ -231,6 +232,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-03 | Intake `/task`: `bd-6v0.11` bug — mobile search native GET `?query=` vs page `q`; dashboard `bd-6v0.10` → ✅ |
 | 2026-08-03 | Intake `/task`: `bd-6b7.9` bug — mobile logout без редиректа на `/login`; `bd-957.5` feature — глаз показать/скрыть пароль на login/register |
 | 2026-08-03 | Оркестратор batch bugs: все ключи + discovered bd-jtw/bd-9p1 closed+merged в `feat/bookspace-bd-bugs`; целевая проверка PASS (web 264 + PW 76); ЗАЛИВАТЬ develop=Нет — push сборочной |
 | 2026-08-03 | `bd-9p1` ready close: Storage mock полный stub (`satisfies Storage`: length/clear/key); typecheck green; vitest spoiler-gate **10/10**; `pnpm check` OK; PW character-page **12/12** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); ветка `task/bd-9p1-spoiler-storage-typecheck`; `bd close` — оркестратор |
