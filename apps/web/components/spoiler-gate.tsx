@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
@@ -26,18 +26,29 @@ function readClientConsent(): boolean {
   });
 }
 
-export function SpoilerGate({ initialAccepted, children }: SpoilerGateProps) {
-  // Match SSR: do not read localStorage during first client render (hydration).
-  const [accepted, setAccepted] = useState(initialAccepted);
+/** Cross-tab storage updates; same-tab accept uses optimistic state. */
+function subscribeSpoilersConsent(onStoreChange: () => void): () => void {
+  if (typeof window === 'undefined') {
+    return () => undefined;
+  }
+  window.addEventListener('storage', onStoreChange);
+  return () => window.removeEventListener('storage', onStoreChange);
+}
 
-  useEffect(() => {
-    if (initialAccepted) {
-      return;
-    }
-    if (readClientConsent()) {
-      setAccepted(true);
-    }
-  }, [initialAccepted]);
+function getServerSnapshot(): boolean {
+  return false;
+}
+
+export function SpoilerGate({ initialAccepted, children }: SpoilerGateProps) {
+  // Match SSR via getServerSnapshot=false; after hydration getSnapshot may
+  // pick up localStorage when cookie was dropped (iOS). No setState-in-effect.
+  const storeConsent = useSyncExternalStore(
+    subscribeSpoilersConsent,
+    readClientConsent,
+    getServerSnapshot,
+  );
+  const [optimisticAccepted, setAccepted] = useState(false);
+  const accepted = initialAccepted || storeConsent || optimisticAccepted;
 
   if (accepted) {
     return <>{children}</>;
