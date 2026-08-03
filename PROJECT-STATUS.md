@@ -142,7 +142,7 @@
 | ⬜ | `bd-azl.2` | Связи произведений |
 | ⬜ | `bd-azl.3` | Связи: Порядок чтения |
 | ⬜ | `bd-azl.4` | Связи: Spoiler gate |
-| ⬜ | `bd-azl.5` | Bug: iOS Chrome — «Показать» не снимает spoiler gate (human-reported) |
+| 🔄 | `bd-azl.5` | Bug: iOS Chrome — «Показать» не снимает spoiler gate (human-reported) · `task/bd-azl.5-ios-chrome-spoiler-gate` |
 
 ### 4. ContextReading — ✅ · epic `bd-8s4` · 4 / 4 (эпик закрыт)
 
@@ -227,6 +227,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-03 | `bd-azl.5` ready close: Secure cookie + localStorage fallback + optimistic accept; unit spoiler-gate 10/10 (+ characters 9); PW character-page **12/12** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); manual `e2e/manual/spoiler-gate-ios.md`; ветка `task/bd-azl.5-ios-chrome-spoiler-gate`; `bd close` — оркестратор |
+| 2026-08-03 | `bd-azl.5` в работе: iOS Chrome spoiler «Показать»; гипотеза Secure cookie + remount без fallback; TDD Secure/localStorage + PW accept+reload; ветка `task/bd-azl.5-ios-chrome-spoiler-gate` |
 | 2026-08-03 | `bd-cq7.6` ready close: GuestOnly loading UI + AppNav pending→/library; unit 47/47; PW library+app-nav 32/32 + auth-pages/redirect/login (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-cq7.6-ios-chrome-library-empty`; `bd close` — оркестратор |
 | 2026-08-03 | `bd-cq7.6` в работе: root cause GuestOnly `return null` + AppNav pending→/login; TDD GuestOnly loading + pending profile→/library; ветка `task/bd-cq7.6-ios-chrome-library-empty` |
 | 2026-07-29 | `bd-6b7.8`: auth из AppNav → `/library` LogoutButton; guest Профиль→/login; unit 48; PW app-nav guest OK |
