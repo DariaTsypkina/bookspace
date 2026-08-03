@@ -11,6 +11,10 @@ describe('profileNavHref', () => {
     expect(profileNavHref(null)).toBe('/login');
   });
 
+  it('sends pending auth (undefined) to /library to avoid blank /login gate', () => {
+    expect(profileNavHref(undefined)).toBe('/library');
+  });
+
   it('sends USER to /library', () => {
     expect(
       profileNavHref({
@@ -35,6 +39,11 @@ describe('profileNavHref', () => {
 });
 
 describe('getNavItems', () => {
+  it('points Профиль to /library while auth is pending (undefined)', () => {
+    const items = getNavItems(undefined);
+    expect(items.find((item) => item.id === 'profile')?.href).toBe('/library');
+  });
+
   it('returns exactly Главная · Поиск · Рейтинги · Подборки · Профиль for guest', () => {
     const items = getNavItems(null);
     expect(items.map((item) => item.id)).toEqual([
