@@ -11,8 +11,29 @@ function stripCookieDomain(setCookie: string): string {
     .join('; ');
 }
 
+function firstHeaderValue(value: string | null): string | null {
+  if (!value) return null;
+  const first = value.split(',')[0]?.trim();
+  return first || null;
+}
+
+/** Absolute /login URL from client-facing Host / forwarded headers (LAN-safe). */
+export function loginRedirectUrl(request: NextRequest): URL {
+  const host =
+    firstHeaderValue(request.headers.get('x-forwarded-host')) ??
+    firstHeaderValue(request.headers.get('host'));
+  if (!host) {
+    return new URL('/login', request.url);
+  }
+  const fromUrl = request.nextUrl.protocol.replace(/:$/, '');
+  const proto =
+    firstHeaderValue(request.headers.get('x-forwarded-proto')) ??
+    (fromUrl || 'http');
+  return new URL('/login', `${proto}://${host}`);
+}
+
 function clearSessionAndRedirect(request: NextRequest): NextResponse {
-  const redirect = NextResponse.redirect(new URL('/login', request.url), 303);
+  const redirect = NextResponse.redirect(loginRedirectUrl(request), 303);
   redirect.cookies.set(SESSION_COOKIE, '', {
     httpOnly: true,
     path: '/',
