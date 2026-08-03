@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
-  buildSpoilersOkCookie,
-  hasSpoilersConsent,
+  hasClientSpoilersConsent,
+  persistSpoilersConsent,
   SPOILERS_OK_COOKIE,
   SPOILERS_OK_VALUE,
 } from '@/lib/spoiler-gate';
@@ -15,31 +15,40 @@ type SpoilerGateProps = {
   children: React.ReactNode;
 };
 
-function readSpoilersCookie(): boolean {
+function readClientConsent(): boolean {
   if (typeof document === 'undefined') {
     return false;
   }
 
-  const entry = document.cookie
-    .split('; ')
-    .find((item) => item.startsWith(`${SPOILERS_OK_COOKIE}=`));
-
-  if (!entry) {
-    return false;
-  }
-
-  const value = entry.split('=')[1];
-  return hasSpoilersConsent(value);
+  return hasClientSpoilersConsent({
+    cookieHeader: document.cookie,
+    storage: typeof localStorage !== 'undefined' ? localStorage : null,
+  });
 }
 
-function persistSpoilersConsent(): void {
-  document.cookie = buildSpoilersOkCookie();
+/** Cross-tab storage updates; same-tab accept uses optimistic state. */
+function subscribeSpoilersConsent(onStoreChange: () => void): () => void {
+  if (typeof window === 'undefined') {
+    return () => undefined;
+  }
+  window.addEventListener('storage', onStoreChange);
+  return () => window.removeEventListener('storage', onStoreChange);
+}
+
+function getServerSnapshot(): boolean {
+  return false;
 }
 
 export function SpoilerGate({ initialAccepted, children }: SpoilerGateProps) {
-  const [accepted, setAccepted] = useState(
-    initialAccepted || readSpoilersCookie(),
+  // Match SSR via getServerSnapshot=false; after hydration getSnapshot may
+  // pick up localStorage when cookie was dropped (iOS). No setState-in-effect.
+  const storeConsent = useSyncExternalStore(
+    subscribeSpoilersConsent,
+    readClientConsent,
+    getServerSnapshot,
   );
+  const [optimisticAccepted, setAccepted] = useState(false);
+  const accepted = initialAccepted || storeConsent || optimisticAccepted;
 
   if (accepted) {
     return <>{children}</>;
@@ -58,10 +67,10 @@ export function SpoilerGate({ initialAccepted, children }: SpoilerGateProps) {
           <Button
             type="button"
             variant="outline"
-            className="self-start"
+            className="cursor-pointer self-start font-sans"
             onClick={() => {
-              persistSpoilersConsent();
               setAccepted(true);
+              persistSpoilersConsent();
             }}
           >
             Показать

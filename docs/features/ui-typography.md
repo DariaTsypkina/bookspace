@@ -39,6 +39,7 @@
 - [x] Корневой layout + CSS/Tailwind `font-sans` на Baskerville; Roboto/Georgia не основные
 - [x] Нет runtime `<link>` на fonts.googleapis.com
 - [x] Smoke home / nav / login без регрессий layout; кириллица в Baskerville
+- [x] Form controls (`Button`/`Input` в `components/ui`) явно `font-sans` — Baskerville на button/input (bd-p3l)
 
 ## Ссылки
 

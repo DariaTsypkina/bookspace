@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-29T19:34:10.478Z",
+  "generated_at": "2026-08-03T10:49:04.972Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 127,
-    "open_issues": 40,
+    "total_issues": 131,
+    "open_issues": 38,
     "in_progress_issues": 0,
-    "closed_issues": 87,
+    "closed_issues": 93,
     "blocked_issues": 7,
-    "ready_issues": 33
+    "ready_issues": 31
   },
   "epics": [
     {
@@ -120,12 +120,12 @@
       "title": "PWA и оболочка",
       "status": "closed",
       "priority": 3,
-      "children_total": 8,
+      "children_total": 9,
       "children_closed": 8,
       "children_in_progress": 0,
-      "children_open": 0,
-      "progress": "8 / 8",
-      "percent_closed": 100,
+      "children_open": 1,
+      "progress": "8 / 9",
+      "percent_closed": 89,
       "children": [
         {
           "id": "bd-6b7.1",
@@ -182,6 +182,13 @@
           "status": "closed",
           "type": "feature",
           "priority": 2
+        },
+        {
+          "id": "bd-6b7.9",
+          "title": "mobile: «Выйти» в профиле не редиректит на /login",
+          "status": "open",
+          "type": "bug",
+          "priority": 1
         }
       ]
     },
@@ -400,12 +407,12 @@
       "title": "Auth",
       "status": "closed",
       "priority": 1,
-      "children_total": 7,
+      "children_total": 8,
       "children_closed": 7,
       "children_in_progress": 0,
-      "children_open": 0,
-      "progress": "7 / 7",
-      "percent_closed": 100,
+      "children_open": 1,
+      "progress": "7 / 8",
+      "percent_closed": 88,
       "children": [
         {
           "id": "bd-8jk",
@@ -441,6 +448,13 @@
           "status": "closed",
           "type": "bug",
           "priority": 1
+        },
+        {
+          "id": "bd-957.5",
+          "title": "UI: показать/скрыть пароль (кнопка глаза) на полях пароля",
+          "status": "open",
+          "type": "feature",
+          "priority": 2
         },
         {
           "id": "bd-v2y",
@@ -499,11 +513,11 @@
       "status": "open",
       "priority": 2,
       "children_total": 5,
-      "children_closed": 0,
+      "children_closed": 1,
       "children_in_progress": 0,
-      "children_open": 5,
-      "progress": "0 / 5",
-      "percent_closed": 0,
+      "children_open": 4,
+      "progress": "1 / 5",
+      "percent_closed": 20,
       "children": [
         {
           "id": "bd-azl.1",
@@ -536,7 +550,7 @@
         {
           "id": "bd-azl.5",
           "title": "iOS Chrome: кнопка «Показать» не снимает spoiler gate",
-          "status": "open",
+          "status": "closed",
           "type": "bug",
           "priority": 1
         }
@@ -583,11 +597,11 @@
       "status": "open",
       "priority": 2,
       "children_total": 6,
-      "children_closed": 0,
+      "children_closed": 1,
       "children_in_progress": 0,
-      "children_open": 6,
-      "progress": "0 / 6",
-      "percent_closed": 0,
+      "children_open": 5,
+      "progress": "1 / 6",
+      "percent_closed": 17,
       "children": [
         {
           "id": "bd-cq7.1",
@@ -627,7 +641,7 @@
         {
           "id": "bd-cq7.6",
           "title": "iOS Chrome: пустая страница Профиль (/library)",
-          "status": "open",
+          "status": "closed",
           "type": "bug",
           "priority": 1
         }
@@ -909,6 +923,33 @@
   ],
   "issues": [
     {
+      "id": "bd-6b7.9",
+      "title": "mobile: «Выйти» в профиле не редиректит на /login",
+      "status": "open",
+      "type": "bug",
+      "priority": 1,
+      "parent": "bd-6b7",
+      "updated_at": "2026-08-03T10:46:41Z"
+    },
+    {
+      "id": "bd-9p1",
+      "title": "web: spoiler-gate.test Storage mock fails typecheck",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": null,
+      "updated_at": "2026-08-03T10:30:43Z"
+    },
+    {
+      "id": "bd-jtw",
+      "title": "web: spoiler-gate setState-in-effect lint fail (react-hooks)",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": null,
+      "updated_at": "2026-08-03T10:27:22Z"
+    },
+    {
       "id": "bd-6b7.7",
       "title": "UI: Войти/Выйти пропадает + hydration mismatch в AppNav",
       "status": "closed",
@@ -920,20 +961,20 @@
     {
       "id": "bd-cq7.6",
       "title": "iOS Chrome: пустая страница Профиль (/library)",
-      "status": "open",
+      "status": "closed",
       "type": "bug",
       "priority": 1,
       "parent": "bd-cq7",
-      "updated_at": "2026-07-23T16:20:57Z"
+      "updated_at": "2026-08-03T09:32:00Z"
     },
     {
       "id": "bd-azl.5",
       "title": "iOS Chrome: кнопка «Показать» не снимает spoiler gate",
-      "status": "open",
+      "status": "closed",
       "type": "bug",
       "priority": 1,
       "parent": "bd-azl",
-      "updated_at": "2026-07-23T16:20:56Z"
+      "updated_at": "2026-08-03T10:14:36Z"
     },
     {
       "id": "bd-6v0.10",
@@ -1053,6 +1094,15 @@
       "updated_at": "2026-07-20T07:30:07Z"
     },
     {
+      "id": "bd-957.5",
+      "title": "UI: показать/скрыть пароль (кнопка глаза) на полях пароля",
+      "status": "open",
+      "type": "feature",
+      "priority": 2,
+      "parent": "bd-957",
+      "updated_at": "2026-08-03T10:46:43Z"
+    },
+    {
       "id": "bd-6b7.8",
       "title": "UI: Войти/Выйти из меню в раздел Профиля",
       "status": "closed",
@@ -1073,20 +1123,20 @@
     {
       "id": "bd-p3l",
       "title": "UI: Baskerville не применяется к кнопкам и инпутам",
-      "status": "open",
+      "status": "closed",
       "type": "bug",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-07-29T18:45:21Z"
+      "updated_at": "2026-08-03T10:17:21Z"
     },
     {
       "id": "bd-v3x",
       "title": "web: work-page-context-reading.integration stubs fetch, code uses axios",
-      "status": "open",
+      "status": "closed",
       "type": "bug",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-07-29T18:39:21Z"
+      "updated_at": "2026-08-03T10:20:06Z"
     },
     {
       "id": "bd-23j",

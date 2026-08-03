@@ -16,6 +16,17 @@ describe('Button (shadcn baseline)', () => {
     expect(classes).toContain('border-border');
     expect(classes).toMatch(/bg-surface|bg-background/);
   });
+
+  it('applies font-sans so Baskerville reaches button (bd-p3l UA stylesheet)', () => {
+    expect(buttonVariants()).toContain('font-sans');
+  });
+});
+
+describe('Input form control typography (bd-p3l)', () => {
+  it('applies font-sans so Baskerville reaches input (UA stylesheet)', () => {
+    const inputSource = readFileSync(path.join(__dirname, 'input.tsx'), 'utf8');
+    expect(inputSource).toMatch(/\bfont-sans\b/);
+  });
 });
 
 describe('shadcn baseline UI modules', () => {

@@ -47,8 +47,10 @@
 | ✅ | `bd-v3k` | Docs: протокол `bd close` на ветке задачи + merge в сборочную |
 | ✅ | `bd-82j` | UI: Google Fonts Roboto на весь UI (400/500/700) — DX · сборочная `feat/bookspace-bd-82j` |
 | ✅ | `bd-23j` | UI: Baskerville (woff2, кириллица) на весь UI — DX · сборочная `feat/bookspace-bd-23j` |
-| ⬜ | `bd-p3l` | [bug] UI: Baskerville не на кнопках/инпутах — DX · сборочная `feat/bookspace-bd-23j` · discovered-from `bd-23j` |
-| ⬜ | `bd-v3x` | [bug] web: work-page-context-reading.integration stubs fetch (axios) — discovered-from bd-23j |
+| ✅ | `bd-p3l` | [bug] UI: Baskerville не на кнопках/инпутах — DX · сборочная `feat/bookspace-bd-bugs` |
+| ✅ | `bd-v3x` | [bug] web: work-page-context-reading.integration stubs fetch (axios) — DX · сборочная `feat/bookspace-bd-bugs` |
+| ✅ | `bd-jtw` | [bug] web: spoiler-gate setState-in-effect lint (react-hooks) — DX · сборочная `feat/bookspace-bd-bugs` |
+| ✅ | `bd-9p1` | [bug] web: spoiler-gate.test Storage mock fails typecheck — DX · сборочная `feat/bookspace-bd-bugs` · discovered-from `bd-jtw` |
 
 ### DX — Tailwind + shadcn — ✅ · epic `bd-wus` · 18 / 18 · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
 
@@ -120,6 +122,7 @@
 | ✅ | `bd-957.3` | Auth: Яндекс OAuth |
 | ✅ | `bd-v2y` | Auth: сессия и защита маршрутов |
 | ✅ | `bd-wlw` | Auth: rate limit на register/login |
+| ⬜ | `bd-957.5` | UI: показать/скрыть пароль (глаз) на полях пароля (human-reported) · сборочная `feat/bookspace-bd-957` |
 
 ### 2. Каталог — ✅ · epic `bd-6v0` · 6 / 6 (эпик закрыт)
 
@@ -142,7 +145,7 @@
 | ⬜ | `bd-azl.2` | Связи произведений |
 | ⬜ | `bd-azl.3` | Связи: Порядок чтения |
 | ⬜ | `bd-azl.4` | Связи: Spoiler gate |
-| ⬜ | `bd-azl.5` | Bug: iOS Chrome — «Показать» не снимает spoiler gate (human-reported) |
+| ✅ | `bd-azl.5` | Bug: iOS Chrome — «Показать» не снимает spoiler gate (human-reported) |
 
 ### 4. ContextReading — ✅ · epic `bd-8s4` · 4 / 4 (эпик закрыт)
 
@@ -162,7 +165,7 @@
 | ⬜ | `bd-cq7.3` | Библиотека: Теги пользователя |
 | ⬜ | `bd-cq7.4` | Библиотека: Моя библиотека |
 | ⬜ | `bd-cq7.5` | Библиотека: Публичный профиль |
-| ⬜ | `bd-cq7.6` | Bug: iOS Chrome — пустая страница Профиль `/library` (human-reported) |
+| ✅ | `bd-cq7.6` | Bug: iOS Chrome — пустая страница Профиль `/library` (human-reported) · сборочная `feat/bookspace-bd-bugs` |
 
 ### 6. Заметки и цель — 🔒 · epic `bd-sf4` · 0 / 2
 
@@ -220,6 +223,7 @@
 | ✅ | `bd-6b7.6` | [bug] UI: одинаковый font-weight у всех пунктов меню (как у активного) |
 | ✅ | `bd-6b7.7` | [bug] Войти/Выйти пропадает + hydration AppNav |
 | ✅ | `bd-6b7.8` | UI: Войти/Выйти из меню в раздел Профиля |
+| ⬜ | `bd-6b7.9` | [bug] mobile: «Выйти» в профиле не редиректит на /login (human-reported) · сборочная `feat/bookspace-bd-6b7` |
 
 ---
 
@@ -227,6 +231,20 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-03 | Intake `/task`: `bd-6b7.9` bug — mobile logout без редиректа на `/login`; `bd-957.5` feature — глаз показать/скрыть пароль на login/register |
+| 2026-08-03 | Оркестратор batch bugs: все ключи + discovered bd-jtw/bd-9p1 closed+merged в `feat/bookspace-bd-bugs`; целевая проверка PASS (web 264 + PW 76); ЗАЛИВАТЬ develop=Нет — push сборочной |
+| 2026-08-03 | `bd-9p1` ready close: Storage mock полный stub (`satisfies Storage`: length/clear/key); typecheck green; vitest spoiler-gate **10/10**; `pnpm check` OK; PW character-page **12/12** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); ветка `task/bd-9p1-spoiler-storage-typecheck`; `bd close` — оркестратор |
+| 2026-08-03 | Dashboard: `bd-cq7.6` / `bd-jtw` → ✅ (closed batch); `bd-9p1` 🔄 |
+| 2026-08-03 | `bd-jtw` ready close: `useSyncExternalStore` вместо setState-in-effect; lint green; unit spoiler-gate+characters **19/19**; PW character-page **12/12** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); ветка `task/bd-jtw-spoiler-gate-setstate-lint`; `bd close` — оркестратор |
+| 2026-08-03 | Dashboard: `bd-p3l` / `bd-v3x` / `bd-azl.5` → ✅ (closed+merged в сборочную bugs) |
+| 2026-08-03 | `bd-v3x` ready close: integration mock `api.get` (не fetch); vitest integration 3/3 + web suite **264/264**; PW context-reading+work-page **10/10** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); ветка `task/bd-v3x-context-reading-axios-mock`; `bd close` — оркестратор |
+| 2026-08-03 | `bd-v3x` в работе: conventions (design/acceptance/notes/labels area:web+area:context+sec:http+regress+dx); TDD RED stub fetch → GREEN mock api.get; sync origin/develop OK |
+| 2026-08-03 | `bd-p3l` ready close: `font-sans` на Button/Input; unit button.test **9/9**; PW ui-typography+login **14/14** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); manual `e2e/manual/ui-typography-form-controls.md`; ветка `task/bd-p3l-baskerville-form-controls`; `bd close` — оркестратор |
+| 2026-08-03 | `bd-p3l` в работе: conventions (design/acceptance/notes); TDD `font-sans` на Button/Input; ветка `task/bd-p3l-baskerville-form-controls` от `feat/bookspace-bd-bugs`; `bd close` — оркестратор |
+| 2026-08-03 | `bd-azl.5` ready close: Secure cookie + localStorage fallback + optimistic accept; unit spoiler-gate 10/10 (+ characters 9); PW character-page **12/12** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); manual `e2e/manual/spoiler-gate-ios.md`; ветка `task/bd-azl.5-ios-chrome-spoiler-gate`; `bd close` — оркестратор |
+| 2026-08-03 | `bd-azl.5` в работе: iOS Chrome spoiler «Показать»; гипотеза Secure cookie + remount без fallback; TDD Secure/localStorage + PW accept+reload; ветка `task/bd-azl.5-ios-chrome-spoiler-gate` |
+| 2026-08-03 | `bd-cq7.6` ready close: GuestOnly loading UI + AppNav pending→/library; unit 47/47; PW library+app-nav 32/32 + auth-pages/redirect/login (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-cq7.6-ios-chrome-library-empty`; `bd close` — оркестратор |
+| 2026-08-03 | `bd-cq7.6` в работе: root cause GuestOnly `return null` + AppNav pending→/login; TDD GuestOnly loading + pending profile→/library; ветка `task/bd-cq7.6-ios-chrome-library-empty` |
 | 2026-07-29 | `bd-6b7.8`: auth из AppNav → `/library` LogoutButton; guest Профиль→/login; unit 48; PW app-nav guest OK |
 | 2026-07-29 | Intake: `bd-6b7.8` — Войти/Выйти из AppNav в Профиль/библиотеку (UX mobile); claim `task/bd-6b7.8-auth-in-profile` |
 | 2026-07-29 | `bd-6b7.7` fix: AppNav без Slot/asChild; auth shrink-0; unit 48; PW 16/16; ready close+merge → develop |

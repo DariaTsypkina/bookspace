@@ -44,6 +44,24 @@ test.describe('UI typography Baskerville (bd-23j)', () => {
     expect(bodyFont.toLowerCase()).toContain('baskerville');
   });
 
+  test('login button and input use Baskerville (bd-p3l)', async ({ page }) => {
+    await page.goto('/login');
+
+    const email = page.getByLabel('Email');
+    await expect(email).toBeVisible();
+    const emailFont = await email.evaluate(
+      (el) => getComputedStyle(el).fontFamily,
+    );
+    expect(emailFont.toLowerCase()).toContain('baskerville');
+
+    const submit = page.getByRole('button', { name: 'Войти' });
+    await expect(submit).toBeVisible();
+    const submitFont = await submit.evaluate(
+      (el) => getComputedStyle(el).fontFamily,
+    );
+    expect(submitFont.toLowerCase()).toContain('baskerville');
+  });
+
   test('app nav labels remain readable with Baskerville', async ({ page }) => {
     await page.goto('/');
 
