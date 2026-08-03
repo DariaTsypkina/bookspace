@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-03T10:54:49.365Z",
+  "generated_at": "2026-08-03T12:43:51.988Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 132,
-    "open_issues": 39,
+    "total_issues": 135,
+    "open_issues": 38,
     "in_progress_issues": 0,
-    "closed_issues": 93,
+    "closed_issues": 97,
     "blocked_issues": 7,
-    "ready_issues": 32
+    "ready_issues": 31
   },
   "epics": [
     {
@@ -120,12 +120,12 @@
       "title": "PWA и оболочка",
       "status": "closed",
       "priority": 3,
-      "children_total": 9,
-      "children_closed": 8,
+      "children_total": 11,
+      "children_closed": 11,
       "children_in_progress": 0,
-      "children_open": 1,
-      "progress": "8 / 9",
-      "percent_closed": 89,
+      "children_open": 0,
+      "progress": "11 / 11",
+      "percent_closed": 100,
       "children": [
         {
           "id": "bd-6b7.1",
@@ -133,6 +133,20 @@
           "status": "closed",
           "type": "feature",
           "priority": 3
+        },
+        {
+          "id": "bd-6b7.10",
+          "title": "PWA SW: stale /_next/static cache → AppNav hydration mismatch (asChild)",
+          "status": "closed",
+          "type": "bug",
+          "priority": 1
+        },
+        {
+          "id": "bd-6b7.11",
+          "title": "mobile: «Выйти» не срабатывает (нужен progressive form POST)",
+          "status": "closed",
+          "type": "bug",
+          "priority": 1
         },
         {
           "id": "bd-6b7.2",
@@ -186,7 +200,7 @@
         {
           "id": "bd-6b7.9",
           "title": "mobile: «Выйти» в профиле не редиректит на /login",
-          "status": "open",
+          "status": "closed",
           "type": "bug",
           "priority": 1
         }
@@ -198,11 +212,11 @@
       "status": "closed",
       "priority": 1,
       "children_total": 11,
-      "children_closed": 10,
+      "children_closed": 11,
       "children_in_progress": 0,
-      "children_open": 1,
-      "progress": "10 / 11",
-      "percent_closed": 91,
+      "children_open": 0,
+      "progress": "11 / 11",
+      "percent_closed": 100,
       "children": [
         {
           "id": "bd-6v0.1",
@@ -221,7 +235,7 @@
         {
           "id": "bd-6v0.11",
           "title": "mobile: поиск «Найти» уходит с ?query= вместо ?q= — выдача пустая",
-          "status": "open",
+          "status": "closed",
           "type": "bug",
           "priority": 1
         },
@@ -414,12 +428,12 @@
       "title": "Auth",
       "status": "closed",
       "priority": 1,
-      "children_total": 8,
+      "children_total": 9,
       "children_closed": 7,
       "children_in_progress": 0,
-      "children_open": 1,
-      "progress": "7 / 8",
-      "percent_closed": 88,
+      "children_open": 2,
+      "progress": "7 / 9",
+      "percent_closed": 78,
       "children": [
         {
           "id": "bd-8jk",
@@ -459,6 +473,13 @@
         {
           "id": "bd-957.5",
           "title": "UI: показать/скрыть пароль (кнопка глаза) на полях пароля",
+          "status": "open",
+          "type": "feature",
+          "priority": 2
+        },
+        {
+          "id": "bd-957.6",
+          "title": "web: общий Auth Context — один /api/auth/me на сессию клиента",
           "status": "open",
           "type": "feature",
           "priority": 2
@@ -930,22 +951,40 @@
   ],
   "issues": [
     {
+      "id": "bd-6b7.11",
+      "title": "mobile: «Выйти» не срабатывает (нужен progressive form POST)",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": "bd-6b7",
+      "updated_at": "2026-08-03T12:38:41Z"
+    },
+    {
+      "id": "bd-6b7.10",
+      "title": "PWA SW: stale /_next/static cache → AppNav hydration mismatch (asChild)",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": "bd-6b7",
+      "updated_at": "2026-08-03T11:31:10Z"
+    },
+    {
       "id": "bd-6v0.11",
       "title": "mobile: поиск «Найти» уходит с ?query= вместо ?q= — выдача пустая",
-      "status": "open",
+      "status": "closed",
       "type": "bug",
       "priority": 1,
       "parent": "bd-6v0",
-      "updated_at": "2026-08-03T10:53:54Z"
+      "updated_at": "2026-08-03T11:12:52Z"
     },
     {
       "id": "bd-6b7.9",
       "title": "mobile: «Выйти» в профиле не редиректит на /login",
-      "status": "open",
+      "status": "closed",
       "type": "bug",
       "priority": 1,
       "parent": "bd-6b7",
-      "updated_at": "2026-08-03T10:46:41Z"
+      "updated_at": "2026-08-03T11:09:24Z"
     },
     {
       "id": "bd-9p1",
@@ -1108,6 +1147,15 @@
       "priority": 1,
       "parent": "bd-957",
       "updated_at": "2026-07-20T07:30:07Z"
+    },
+    {
+      "id": "bd-957.6",
+      "title": "web: общий Auth Context — один /api/auth/me на сессию клиента",
+      "status": "open",
+      "type": "feature",
+      "priority": 2,
+      "parent": "bd-957",
+      "updated_at": "2026-08-03T12:37:16Z"
     },
     {
       "id": "bd-957.5",
