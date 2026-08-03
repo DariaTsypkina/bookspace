@@ -1,38 +1,19 @@
-'use client';
-
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { logout } from '../lib/auth';
 
-/** Full page navigation after logout — avoids App Router soft-nav race on mobile (bd-6b7.9). */
-export function redirectAfterLogout(): void {
-  window.location.assign('/login');
-}
-
+/**
+ * Progressive logout (bd-6b7.11): native form POST → `/logout` → 303 `/login`.
+ * Works on mobile even when client click handlers / hydration are broken.
+ */
 export function LogoutButton() {
-  const [loading, setLoading] = useState(false);
-
-  async function handleLogout() {
-    setLoading(true);
-    try {
-      await logout();
-      redirectAfterLogout();
-    } finally {
-      setLoading(false);
-    }
-  }
-
   return (
-    <Button
-      type="button"
-      variant="outline"
-      onClick={() => {
-        void handleLogout();
-      }}
-      disabled={loading}
-      className="self-start"
-    >
-      {loading ? 'Выход…' : 'Выйти'}
-    </Button>
+    <form action="/logout" method="post" className="self-start">
+      <Button
+        type="submit"
+        variant="outline"
+        className="min-h-11 cursor-pointer self-start font-sans"
+      >
+        Выйти
+      </Button>
+    </form>
   );
 }
