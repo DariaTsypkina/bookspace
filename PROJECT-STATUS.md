@@ -232,6 +232,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-03 | Оркестратор batch `fix/bookspace-bd-bugs`: ключи `bd-6b7.9`+`bd-6v0.11` closed; целевая проверка PASS (web 269 + PW auth/search 34); ЗАЛИВАТЬ develop=Нет — push сборочной |
 | 2026-08-03 | Оркестратор: `bd-6v0.11` closed+merged `--no-ff` в `fix/bookspace-bd-bugs` (native GET q= + fallback query; vitest 12; PW catalog-search 14) |
 | 2026-08-03 | Оркестратор: claim `bd-6v0.11` → `task/bd-6v0.11-search-query-param` (сборочная `fix/bookspace-bd-bugs`) |
 | 2026-08-03 | Оркестратор: `bd-6b7.9` closed+merged `--no-ff` в `fix/bookspace-bd-bugs` (assign /login; vitest 267; PW logout mobile+desktop) |
