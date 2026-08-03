@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-03T10:19:46.119Z",
+  "generated_at": "2026-08-03T10:20:09.776Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 127,
     "open_issues": 36,
-    "in_progress_issues": 1,
-    "closed_issues": 90,
+    "in_progress_issues": 0,
+    "closed_issues": 91,
     "blocked_issues": 7,
     "ready_issues": 29
   },
@@ -1082,11 +1082,11 @@
     {
       "id": "bd-v3x",
       "title": "web: work-page-context-reading.integration stubs fetch, code uses axios",
-      "status": "in_progress",
+      "status": "closed",
       "type": "bug",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-08-03T10:18:35Z"
+      "updated_at": "2026-08-03T10:20:06Z"
     },
     {
       "id": "bd-23j",
