@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-03T10:17:05.886Z",
+  "generated_at": "2026-08-03T10:17:25.450Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 127,
     "open_issues": 37,
-    "in_progress_issues": 1,
-    "closed_issues": 89,
+    "in_progress_issues": 0,
+    "closed_issues": 90,
     "blocked_issues": 7,
     "ready_issues": 30
   },
@@ -1073,11 +1073,11 @@
     {
       "id": "bd-p3l",
       "title": "UI: Baskerville не применяется к кнопкам и инпутам",
-      "status": "in_progress",
+      "status": "closed",
       "type": "bug",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-08-03T10:15:19Z"
+      "updated_at": "2026-08-03T10:17:21Z"
     },
     {
       "id": "bd-v3x",
