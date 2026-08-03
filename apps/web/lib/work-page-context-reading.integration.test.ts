@@ -1,20 +1,32 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { api } from './http';
 import {
   fetchCatalogContextReadings,
   hasContextReadings,
 } from './catalog-context-reading';
 import { shouldRenderWorkContextReadingSection } from './work-page-context-reading';
 
+vi.mock('./http', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('./http')>();
+  return {
+    ...actual,
+    api: {
+      get: vi.fn(),
+    },
+  };
+});
+
 describe('work page context reading integration', () => {
+  beforeEach(() => {
+    vi.mocked(api.get).mockReset();
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
   it('does not render section when API returns no items', async () => {
-    vi.stubGlobal(
-      'fetch',
-      vi.fn().mockResolvedValue({
-        ok: true,
-        status: 200,
-        json: async () => ({ items: [] }),
-      }),
-    );
+    vi.mocked(api.get).mockResolvedValue({ data: { items: [] } });
 
     const { items } = await fetchCatalogContextReadings(
       'garri-potter-filosofskiy-kamen',
@@ -33,14 +45,7 @@ describe('work page context reading integration', () => {
       },
     ];
 
-    vi.stubGlobal(
-      'fetch',
-      vi.fn().mockResolvedValue({
-        ok: true,
-        status: 200,
-        json: async () => ({ items }),
-      }),
-    );
+    vi.mocked(api.get).mockResolvedValue({ data: { items } });
 
     const response = await fetchCatalogContextReadings('some-work');
 
@@ -57,14 +62,7 @@ describe('work page context reading integration', () => {
       },
     ];
 
-    vi.stubGlobal(
-      'fetch',
-      vi.fn().mockResolvedValue({
-        ok: true,
-        status: 200,
-        json: async () => ({ items }),
-      }),
-    );
+    vi.mocked(api.get).mockResolvedValue({ data: { items } });
 
     const { items: responseItems } =
       await fetchCatalogContextReadings('some-work');
