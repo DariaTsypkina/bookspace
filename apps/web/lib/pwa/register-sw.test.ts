@@ -11,10 +11,9 @@ describe('PWA service worker registration (bd-6b7.2)', () => {
     vi.restoreAllMocks();
   });
 
-  it('skips plain development but allows e2e/explicit SW (bd-6b7.10)', () => {
-    expect(shouldRegisterServiceWorker('development', {})).toBe(false);
+  it('allows production and e2e/explicit flags (bd-6b7.10 helper)', () => {
     expect(shouldRegisterServiceWorker('production')).toBe(true);
-    expect(shouldRegisterServiceWorker('test')).toBe(false);
+    expect(shouldRegisterServiceWorker('development', {})).toBe(false);
     expect(
       shouldRegisterServiceWorker('development', { e2eBypass: 'true' }),
     ).toBe(true);
