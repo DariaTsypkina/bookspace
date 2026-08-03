@@ -224,6 +224,7 @@
 | ✅ | `bd-6b7.6` | [bug] UI: одинаковый font-weight у всех пунктов меню (как у активного) |
 | ✅ | `bd-6b7.7` | [bug] Войти/Выйти пропадает + hydration AppNav |
 | ✅ | `bd-6b7.8` | UI: Войти/Выйти из меню в раздел Профиля |
+| ✅ | `bd-6b7.10` | [bug] PWA SW: не кэшировать `/_next/` + cache v2 (hydration asChild) · merged → `fix/bookspace-bd-bugs` |
 | ✅ | `bd-6b7.9` | [bug] mobile: «Выйти» в профиле не редиректит на /login — `window.location.assign` после logout · merged → `fix/bookspace-bd-bugs` |
 
 ---
@@ -232,6 +233,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-03 | Оркестратор: `bd-6b7.10` closed+merged в `fix/bookspace-bd-bugs` (SW no `/_next/` cache; vitest 274; PW 26/26) |
+| 2026-08-03 | Intake: `bd-6b7.10` hydration AppNav — SW cache-first `/_next/static` + SW в dev; claim `task/bd-6b7.10-sw-stale-hydration` |
 | 2026-08-03 | Оркестратор batch `fix/bookspace-bd-bugs`: ключи `bd-6b7.9`+`bd-6v0.11` closed; целевая проверка PASS (web 269 + PW auth/search 34); ЗАЛИВАТЬ develop=Нет — push сборочной |
 | 2026-08-03 | Оркестратор: `bd-6v0.11` closed+merged `--no-ff` в `fix/bookspace-bd-bugs` (native GET q= + fallback query; vitest 12; PW catalog-search 14) |
 | 2026-08-03 | Оркестратор: claim `bd-6v0.11` → `task/bd-6v0.11-search-query-param` (сборочная `fix/bookspace-bd-bugs`) |
