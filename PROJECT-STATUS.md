@@ -49,7 +49,8 @@
 | ✅ | `bd-23j` | UI: Baskerville (woff2, кириллица) на весь UI — DX · сборочная `feat/bookspace-bd-23j` |
 | ✅ | `bd-p3l` | [bug] UI: Baskerville не на кнопках/инпутах — DX · сборочная `feat/bookspace-bd-bugs` |
 | ✅ | `bd-v3x` | [bug] web: work-page-context-reading.integration stubs fetch (axios) — DX · сборочная `feat/bookspace-bd-bugs` |
-| 🔄 | `bd-jtw` | [bug] web: spoiler-gate setState-in-effect lint (react-hooks) — DX · сборочная `feat/bookspace-bd-bugs` · ветка `task/bd-jtw-spoiler-gate-setstate-lint` · discovered-from `bd-azl.5` |
+| ✅ | `bd-jtw` | [bug] web: spoiler-gate setState-in-effect lint (react-hooks) — DX · сборочная `feat/bookspace-bd-bugs` |
+| 🔄 | `bd-9p1` | [bug] web: spoiler-gate.test Storage mock fails typecheck — DX · сборочная `feat/bookspace-bd-bugs` · ветка `task/bd-9p1-spoiler-storage-typecheck` · discovered-from `bd-jtw` |
 
 ### DX — Tailwind + shadcn — ✅ · epic `bd-wus` · 18 / 18 · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
 
@@ -163,7 +164,7 @@
 | ⬜ | `bd-cq7.3` | Библиотека: Теги пользователя |
 | ⬜ | `bd-cq7.4` | Библиотека: Моя библиотека |
 | ⬜ | `bd-cq7.5` | Библиотека: Публичный профиль |
-| 🔄 | `bd-cq7.6` | Bug: iOS Chrome — пустая страница Профиль `/library` (human-reported) · `task/bd-cq7.6-ios-chrome-library-empty` |
+| ✅ | `bd-cq7.6` | Bug: iOS Chrome — пустая страница Профиль `/library` (human-reported) · сборочная `feat/bookspace-bd-bugs` |
 
 ### 6. Заметки и цель — 🔒 · epic `bd-sf4` · 0 / 2
 
@@ -228,6 +229,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-03 | `bd-9p1` ready close: Storage mock полный stub (`satisfies Storage`: length/clear/key); typecheck green; vitest spoiler-gate **10/10**; `pnpm check` OK; PW character-page **12/12** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); ветка `task/bd-9p1-spoiler-storage-typecheck`; `bd close` — оркестратор |
+| 2026-08-03 | Dashboard: `bd-cq7.6` / `bd-jtw` → ✅ (closed batch); `bd-9p1` 🔄 |
 | 2026-08-03 | `bd-jtw` ready close: `useSyncExternalStore` вместо setState-in-effect; lint green; unit spoiler-gate+characters **19/19**; PW character-page **12/12** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); ветка `task/bd-jtw-spoiler-gate-setstate-lint`; `bd close` — оркестратор |
 | 2026-08-03 | Dashboard: `bd-p3l` / `bd-v3x` / `bd-azl.5` → ✅ (closed+merged в сборочную bugs) |
 | 2026-08-03 | `bd-v3x` ready close: integration mock `api.get` (не fetch); vitest integration 3/3 + web suite **264/264**; PW context-reading+work-page **10/10** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); ветка `task/bd-v3x-context-reading-axios-mock`; `bd close` — оркестратор |

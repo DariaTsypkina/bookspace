@@ -83,7 +83,14 @@ describe('spoiler gate helpers', () => {
       removeItem: (key: string) => {
         store.delete(key);
       },
-    } as Storage;
+      clear: () => {
+        store.clear();
+      },
+      key: (index: number) => [...store.keys()][index] ?? null,
+      get length() {
+        return store.size;
+      },
+    } satisfies Storage;
 
     expect(readSpoilersConsentFromStorage(storage)).toBe(false);
 
@@ -121,7 +128,12 @@ describe('spoiler gate helpers', () => {
       getItem: (key: string) => store.get(key) ?? null,
       setItem: () => undefined,
       removeItem: () => undefined,
-    } as Storage;
+      clear: () => undefined,
+      key: () => null,
+      get length() {
+        return store.size;
+      },
+    } satisfies Storage;
 
     expect(
       hasClientSpoilersConsent({
