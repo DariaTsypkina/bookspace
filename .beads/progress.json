@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-03T10:54:49.365Z",
+  "generated_at": "2026-08-03T11:09:27.903Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 132,
-    "open_issues": 39,
+    "open_issues": 38,
     "in_progress_issues": 0,
-    "closed_issues": 93,
+    "closed_issues": 94,
     "blocked_issues": 7,
-    "ready_issues": 32
+    "ready_issues": 31
   },
   "epics": [
     {
@@ -121,11 +121,11 @@
       "status": "closed",
       "priority": 3,
       "children_total": 9,
-      "children_closed": 8,
+      "children_closed": 9,
       "children_in_progress": 0,
-      "children_open": 1,
-      "progress": "8 / 9",
-      "percent_closed": 89,
+      "children_open": 0,
+      "progress": "9 / 9",
+      "percent_closed": 100,
       "children": [
         {
           "id": "bd-6b7.1",
@@ -186,7 +186,7 @@
         {
           "id": "bd-6b7.9",
           "title": "mobile: «Выйти» в профиле не редиректит на /login",
-          "status": "open",
+          "status": "closed",
           "type": "bug",
           "priority": 1
         }
@@ -941,11 +941,11 @@
     {
       "id": "bd-6b7.9",
       "title": "mobile: «Выйти» в профиле не редиректит на /login",
-      "status": "open",
+      "status": "closed",
       "type": "bug",
       "priority": 1,
       "parent": "bd-6b7",
-      "updated_at": "2026-08-03T10:46:41Z"
+      "updated_at": "2026-08-03T11:09:24Z"
     },
     {
       "id": "bd-9p1",

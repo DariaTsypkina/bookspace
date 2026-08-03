@@ -1,20 +1,22 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { logout } from '../lib/auth';
 
+/** Full page navigation after logout — avoids App Router soft-nav race on mobile (bd-6b7.9). */
+export function redirectAfterLogout(): void {
+  window.location.assign('/login');
+}
+
 export function LogoutButton() {
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   async function handleLogout() {
     setLoading(true);
     try {
       await logout();
-      router.push('/login');
-      router.refresh();
+      redirectAfterLogout();
     } finally {
       setLoading(false);
     }

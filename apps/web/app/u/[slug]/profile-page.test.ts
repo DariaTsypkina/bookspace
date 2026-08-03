@@ -41,7 +41,7 @@ describe('Profile page Tailwind+shadcn migration (S11 / bd-wus.14)', () => {
     expect(pageSource).toMatch(/LogoutButton/);
     expect(logoutSource).toMatch(/Выйти/);
     expect(logoutSource).toMatch(/Выход…/);
-    expect(logoutSource).toMatch(/router\.push\(['"]\/login['"]\)/);
+    expect(logoutSource).toMatch(/redirectAfterLogout\(\)/);
   });
 
   it('validates slug via shared ProfileSlugParamSchema helper', () => {
