@@ -40,7 +40,7 @@ describe('Profile page Tailwind+shadcn migration (S11 / bd-wus.14)', () => {
     expect(pageSource).toMatch(/\{slug\}/);
     expect(pageSource).toMatch(/LogoutButton/);
     expect(logoutSource).toMatch(/Выйти/);
-    expect(logoutSource).toMatch(/action=["']\/logout["']/);
+    expect(logoutSource).toMatch(/action=["']\/api\/logout["']/);
     expect(logoutSource).toMatch(/method=["']post["']/);
   });
 

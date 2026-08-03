@@ -24,7 +24,8 @@ function clearSessionAndRedirect(request: NextRequest): NextResponse {
 
 /**
  * Progressive logout endpoint for form POST (bd-6b7.11).
- * Clears Nest session via BFF-equivalent fetch, then 303 → /login.
+ * Clears Nest session via upstream, then 303 → /login.
+ * Lives under app/api/** so native fetch is allowed (ADR 0005).
  */
 export async function POST(request: NextRequest): Promise<NextResponse> {
   const cookie = request.headers.get('cookie');

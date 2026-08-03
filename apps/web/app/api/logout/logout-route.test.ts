@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 
 const routeSource = readFileSync(path.join(__dirname, 'route.ts'), 'utf8');
 
-describe('POST /logout route (bd-6b7.11)', () => {
+describe('POST /api/logout route (bd-6b7.11)', () => {
   it('revokes upstream session and 303-redirects to /login', () => {
     expect(routeSource).toMatch(/export async function POST/);
     expect(routeSource).toMatch(/\/auth\/logout/);

@@ -9,7 +9,9 @@ const logoutButtonSource = readFileSync(
 
 describe('LogoutButton progressive logout (bd-6b7.11)', () => {
   it('posts a native form to /logout so mobile works without JS click handlers', () => {
-    expect(logoutButtonSource).toMatch(/<form[\s\S]*action=["']\/logout["']/);
+    expect(logoutButtonSource).toMatch(
+      /<form[\s\S]*action=["']\/api\/logout["']/,
+    );
     expect(logoutButtonSource).toMatch(/method=["']post["']/);
     expect(logoutButtonSource).toMatch(/type=["']submit["']/);
     expect(logoutButtonSource).toMatch(/Выйти/);

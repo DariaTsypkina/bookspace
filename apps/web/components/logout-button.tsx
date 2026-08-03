@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
  */
 export function LogoutButton() {
   return (
-    <form action="/logout" method="post" className="self-start">
+    <form action="/api/logout" method="post" className="self-start">
       <Button
         type="submit"
         variant="outline"
