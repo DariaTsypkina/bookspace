@@ -136,7 +136,7 @@
 | ✅ | `bd-6v0.6` | Каталог: Карточка локации |
 | ✅ | `bd-6v0.9` | Поиск: восстановить FTS search_vector после drift Prisma |
 | ✅ | `bd-6v0.10` | Поиск: префикс `роул` не находит «Роулинг» (human-reported) |
-| 🔄 | `bd-6v0.11` | [bug] mobile: поиск «Найти» → `?query=` вместо `?q=` — пустая выдача · `task/bd-6v0.11-search-query-param` ← `fix/bookspace-bd-bugs` |
+| ✅ | `bd-6v0.11` | [bug] mobile: поиск «Найти» → native `?q=` + server fallback `query` · merged → `fix/bookspace-bd-bugs` |
 
 ### 3. Связи и порядок — ⬜ · epic `bd-azl` · 0 / 4
 
@@ -232,6 +232,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-03 | Оркестратор: `bd-6v0.11` closed+merged `--no-ff` в `fix/bookspace-bd-bugs` (native GET q= + fallback query; vitest 12; PW catalog-search 14) |
 | 2026-08-03 | Оркестратор: claim `bd-6v0.11` → `task/bd-6v0.11-search-query-param` (сборочная `fix/bookspace-bd-bugs`) |
 | 2026-08-03 | Оркестратор: `bd-6b7.9` closed+merged `--no-ff` в `fix/bookspace-bd-bugs` (assign /login; vitest 267; PW logout mobile+desktop) |
 | 2026-08-03 | Оркестратор batch `fix/bookspace-bd-bugs`: claim `bd-6b7.9` → ветка `task/bd-6b7.9-mobile-logout-redirect`; очередь `bd-6b7.9` → `bd-6v0.11`; ЗАЛИВАТЬ develop=Нет |
