@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-03T10:27:25.934Z",
+  "generated_at": "2026-08-03T10:30:47.251Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 128,
+    "total_issues": 129,
     "open_issues": 36,
     "in_progress_issues": 0,
-    "closed_issues": 92,
+    "closed_issues": 93,
     "blocked_issues": 7,
     "ready_issues": 29
   },
@@ -908,6 +908,15 @@
     }
   ],
   "issues": [
+    {
+      "id": "bd-9p1",
+      "title": "web: spoiler-gate.test Storage mock fails typecheck",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": null,
+      "updated_at": "2026-08-03T10:30:43Z"
+    },
     {
       "id": "bd-jtw",
       "title": "web: spoiler-gate setState-in-effect lint fail (react-hooks)",
