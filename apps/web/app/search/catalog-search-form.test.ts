@@ -27,4 +27,10 @@ describe('CatalogSearchForm RHF + shadcn Form pattern', () => {
     expect(source).toMatch(/from ['"]@bookspace\/schemas['"]/);
     expect(source).toMatch(/SearchQueryFormSchema/);
   });
+
+  it('uses native GET with q param for progressive enhancement (bd-6v0.11)', () => {
+    expect(source).toMatch(/method=["']get["']/);
+    expect(source).toMatch(/action=["']\/search["']/);
+    expect(source).toMatch(/name=["']q["']/);
+  });
 });
