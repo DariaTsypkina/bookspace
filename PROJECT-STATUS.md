@@ -47,7 +47,7 @@
 | ✅ | `bd-v3k` | Docs: протокол `bd close` на ветке задачи + merge в сборочную |
 | ✅ | `bd-82j` | UI: Google Fonts Roboto на весь UI (400/500/700) — DX · сборочная `feat/bookspace-bd-82j` |
 | ✅ | `bd-23j` | UI: Baskerville (woff2, кириллица) на весь UI — DX · сборочная `feat/bookspace-bd-23j` |
-| ⬜ | `bd-p3l` | [bug] UI: Baskerville не на кнопках/инпутах — DX · сборочная `feat/bookspace-bd-23j` · discovered-from `bd-23j` |
+| 🔄 | `bd-p3l` | [bug] UI: Baskerville не на кнопках/инпутах — DX · сборочная `feat/bookspace-bd-bugs` · ветка `task/bd-p3l-baskerville-form-controls` · discovered-from `bd-23j` |
 | ⬜ | `bd-v3x` | [bug] web: work-page-context-reading.integration stubs fetch (axios) — discovered-from bd-23j |
 
 ### DX — Tailwind + shadcn — ✅ · epic `bd-wus` · 18 / 18 · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
@@ -227,6 +227,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-03 | `bd-p3l` ready close: `font-sans` на Button/Input; unit button.test **9/9**; PW ui-typography+login **14/14** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); manual `e2e/manual/ui-typography-form-controls.md`; ветка `task/bd-p3l-baskerville-form-controls`; `bd close` — оркестратор |
+| 2026-08-03 | `bd-p3l` в работе: conventions (design/acceptance/notes); TDD `font-sans` на Button/Input; ветка `task/bd-p3l-baskerville-form-controls` от `feat/bookspace-bd-bugs`; `bd close` — оркестратор |
 | 2026-08-03 | `bd-azl.5` ready close: Secure cookie + localStorage fallback + optimistic accept; unit spoiler-gate 10/10 (+ characters 9); PW character-page **12/12** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); manual `e2e/manual/spoiler-gate-ios.md`; ветка `task/bd-azl.5-ios-chrome-spoiler-gate`; `bd close` — оркестратор |
 | 2026-08-03 | `bd-azl.5` в работе: iOS Chrome spoiler «Показать»; гипотеза Secure cookie + remount без fallback; TDD Secure/localStorage + PW accept+reload; ветка `task/bd-azl.5-ios-chrome-spoiler-gate` |
 | 2026-08-03 | `bd-cq7.6` ready close: GuestOnly loading UI + AppNav pending→/library; unit 47/47; PW library+app-nav 32/32 + auth-pages/redirect/login (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-cq7.6-ios-chrome-library-empty`; `bd close` — оркестратор |

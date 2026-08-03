@@ -11,3 +11,4 @@
 3. Открыть `/login` → h1 «Вход» — то же
 4. Network: нет запросов к `fonts.googleapis.com` / `fonts.gstatic.com` за шрифтом (self-host через `next/font/local` + woff2)
 5. Mobile + desktop: tab-bar читаем, layout не «плывёт»
+6. `/login`: `input` и кнопка «Войти» — computed `font-family` содержит **Baskerville** (bd-p3l; UA не наследует с body)
