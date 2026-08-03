@@ -48,7 +48,7 @@
 | ✅ | `bd-82j` | UI: Google Fonts Roboto на весь UI (400/500/700) — DX · сборочная `feat/bookspace-bd-82j` |
 | ✅ | `bd-23j` | UI: Baskerville (woff2, кириллица) на весь UI — DX · сборочная `feat/bookspace-bd-23j` |
 | 🔄 | `bd-p3l` | [bug] UI: Baskerville не на кнопках/инпутах — DX · сборочная `feat/bookspace-bd-bugs` · ветка `task/bd-p3l-baskerville-form-controls` · discovered-from `bd-23j` |
-| ⬜ | `bd-v3x` | [bug] web: work-page-context-reading.integration stubs fetch (axios) — discovered-from bd-23j |
+| 🔄 | `bd-v3x` | [bug] web: work-page-context-reading.integration stubs fetch (axios) — DX · сборочная `feat/bookspace-bd-bugs` · ветка `task/bd-v3x-context-reading-axios-mock` · discovered-from `bd-23j` |
 
 ### DX — Tailwind + shadcn — ✅ · epic `bd-wus` · 18 / 18 · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
 
@@ -227,6 +227,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-03 | `bd-v3x` ready close: integration mock `api.get` (не fetch); vitest integration 3/3 + web suite **264/264**; PW context-reading+work-page **10/10** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); ветка `task/bd-v3x-context-reading-axios-mock`; `bd close` — оркестратор |
+| 2026-08-03 | `bd-v3x` в работе: conventions (design/acceptance/notes/labels area:web+area:context+sec:http+regress+dx); TDD RED stub fetch → GREEN mock api.get; sync origin/develop OK |
 | 2026-08-03 | `bd-p3l` ready close: `font-sans` на Button/Input; unit button.test **9/9**; PW ui-typography+login **14/14** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); manual `e2e/manual/ui-typography-form-controls.md`; ветка `task/bd-p3l-baskerville-form-controls`; `bd close` — оркестратор |
 | 2026-08-03 | `bd-p3l` в работе: conventions (design/acceptance/notes); TDD `font-sans` на Button/Input; ветка `task/bd-p3l-baskerville-form-controls` от `feat/bookspace-bd-bugs`; `bd close` — оркестратор |
 | 2026-08-03 | `bd-azl.5` ready close: Secure cookie + localStorage fallback + optimistic accept; unit spoiler-gate 10/10 (+ characters 9); PW character-page **12/12** desktop+mobile (PLAYWRIGHT_CHROME_CHANNEL=0); manual `e2e/manual/spoiler-gate-ios.md`; ветка `task/bd-azl.5-ios-chrome-spoiler-gate`; `bd close` — оркестратор |
