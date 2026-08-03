@@ -41,7 +41,7 @@ function navLinkClassName(isActive: boolean): string {
 
 export function AppNav() {
   const pathname = usePathname();
-  const [user, setUser] = useState<AuthUser | null>(null);
+  const [user, setUser] = useState<AuthUser | null | undefined>(undefined);
 
   useEffect(() => {
     let cancelled = false;

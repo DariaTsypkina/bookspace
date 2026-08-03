@@ -162,7 +162,7 @@
 | ⬜ | `bd-cq7.3` | Библиотека: Теги пользователя |
 | ⬜ | `bd-cq7.4` | Библиотека: Моя библиотека |
 | ⬜ | `bd-cq7.5` | Библиотека: Публичный профиль |
-| ⬜ | `bd-cq7.6` | Bug: iOS Chrome — пустая страница Профиль `/library` (human-reported) |
+| 🔄 | `bd-cq7.6` | Bug: iOS Chrome — пустая страница Профиль `/library` (human-reported) · `task/bd-cq7.6-ios-chrome-library-empty` |
 
 ### 6. Заметки и цель — 🔒 · epic `bd-sf4` · 0 / 2
 
@@ -227,6 +227,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-03 | `bd-cq7.6` ready close: GuestOnly loading UI + AppNav pending→/library; unit 47/47; PW library+app-nav 32/32 + auth-pages/redirect/login (PLAYWRIGHT_CHROME_CHANNEL=0); ветка `task/bd-cq7.6-ios-chrome-library-empty`; `bd close` — оркестратор |
+| 2026-08-03 | `bd-cq7.6` в работе: root cause GuestOnly `return null` + AppNav pending→/login; TDD GuestOnly loading + pending profile→/library; ветка `task/bd-cq7.6-ios-chrome-library-empty` |
 | 2026-07-29 | `bd-6b7.8`: auth из AppNav → `/library` LogoutButton; guest Профиль→/login; unit 48; PW app-nav guest OK |
 | 2026-07-29 | Intake: `bd-6b7.8` — Войти/Выйти из AppNav в Профиль/библиотеку (UX mobile); claim `task/bd-6b7.8-auth-in-profile` |
 | 2026-07-29 | `bd-6b7.7` fix: AppNav без Slot/asChild; auth shrink-0; unit 48; PW 16/16; ready close+merge → develop |

@@ -45,6 +45,18 @@ describe('AppNav auth placement (bd-6b7.8)', () => {
   });
 });
 
+describe('AppNav pending auth (bd-cq7.6 — no blank Profile)', () => {
+  it('starts auth as undefined (pending), not null guest', () => {
+    expect(appNavSource).toMatch(
+      /useState<\s*AuthUser\s*\|\s*null\s*\|\s*undefined\s*>\s*\(\s*undefined\s*\)/,
+    );
+  });
+
+  it('passes pending/ready user into getNavItems (profile href via profileNavHref)', () => {
+    expect(appNavSource).toMatch(/getNavItems\(\s*user\s*\)/);
+  });
+});
+
 describe('AppNav hydration-safe links (bd-6b7.7)', () => {
   it('does not wrap nav Links in Button asChild (Slot SSR mismatch on Next 16.2)', () => {
     expect(appNavSource).toMatch(/buttonVariants/);

@@ -45,4 +45,14 @@ describe('Library page Tailwind+shadcn migration (S12 / bd-wus.15)', () => {
   it('removes orphan .library-stub rules from globals.css', () => {
     expect(globalsSource).not.toMatch(/\.library-stub\b/);
   });
+
+  it('keeps stub heading and body text paint tokens visible (bd-cq7.6)', () => {
+    expect(pageSource).toMatch(/text-foreground/);
+    expect(pageSource).toMatch(/text-muted/);
+    expect(pageSource).toMatch(/Моя библиотека/);
+    expect(pageSource).toMatch(/Коллекция и полки скоро появятся/);
+    // Content must stay above mobile tab-bar padding from root layout
+    expect(pageSource).toMatch(/\bpt-5\b/);
+    expect(pageSource).toMatch(/\bpx-4\b/);
+  });
 });
