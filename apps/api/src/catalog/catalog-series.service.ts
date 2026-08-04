@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { WorkStatus } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { buildReadingOrderSteps } from './catalog-reading-order';
 import type { CatalogSeriesResponse } from './catalog-series.types';
 
 @Injectable()
@@ -35,12 +36,13 @@ export class CatalogSeriesService {
       throw new NotFoundException();
     }
 
-    const publishedWorks = series.works
-      .filter(
-        (link) =>
-          link.work.deletedAt === null &&
-          link.work.status === WorkStatus.PUBLISHED,
-      )
+    const publishedLinks = series.works.filter(
+      (link) =>
+        link.work.deletedAt === null &&
+        link.work.status === WorkStatus.PUBLISHED,
+    );
+
+    const publishedWorks = publishedLinks
       .map((link) => {
         const item: {
           slug: string;
@@ -71,14 +73,29 @@ export class CatalogSeriesService {
         } else if (rightPos != null) {
           return 1;
         }
-        return left.titleRu.localeCompare(right.titleRu, 'ru');
+        const byTitle = left.titleRu.localeCompare(right.titleRu, 'ru');
+        if (byTitle !== 0) {
+          return byTitle;
+        }
+        return left.slug.localeCompare(right.slug, 'en');
       });
+
+    const readingOrder = buildReadingOrderSteps(
+      publishedLinks
+        .filter((link) => link.positionInSeries != null)
+        .map((link) => ({
+          slug: link.work.slug,
+          titleRu: link.work.titleRu,
+          order: link.positionInSeries as number,
+        })),
+    );
 
     return {
       slug: series.slug,
       nameRu: series.nameRu,
       nameOrig: series.nameOrig ?? undefined,
       works: publishedWorks,
+      readingOrder,
     };
   }
 }

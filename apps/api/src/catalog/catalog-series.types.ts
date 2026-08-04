@@ -1,3 +1,7 @@
+import type { CatalogReadingOrderStep } from './catalog-reading-order';
+
+export type { CatalogReadingOrderStep };
+
 export interface CatalogSeriesWork {
   slug: string;
   titleRu: string;
@@ -10,4 +14,6 @@ export interface CatalogSeriesResponse {
   nameRu: string;
   nameOrig?: string;
   works: CatalogSeriesWork[];
+  /** Explicit recommended reading order (numbered steps); empty if unknown. */
+  readingOrder: CatalogReadingOrderStep[];
 }

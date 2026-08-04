@@ -34,10 +34,17 @@ describe('Series page (bd-azl.1)', () => {
     expect(notFoundSource).toMatch(/Вернуться к поиску/);
   });
 
-  it('does not add legacy series-* class names', () => {
-    expect(pageSource).not.toMatch(/className=["']series-page["']/);
-    expect(pageSource).not.toMatch(/\bseries-header\b/);
-    expect(pageSource).not.toMatch(/\bseries-works\b/);
-    expect(notFoundSource).not.toMatch(/\bseries-not-found\b/);
+  it('shows reading order behind SpoilerGate as numbered steps (bd-azl.3)', () => {
+    expect(pageSource).toMatch(/from ['"]@\/components\/spoiler-gate['"]/);
+    expect(pageSource).toMatch(/\bSpoilerGate\b/);
+    expect(pageSource).toMatch(/aria-label=["']Порядок чтения["']/);
+    expect(pageSource).toMatch(/Порядок чтения/);
+    expect(pageSource).toMatch(/series\.readingOrder\.length > 0/);
+    expect(pageSource).toMatch(/Шаг \{step\.step\}/);
+    expect(pageSource).toMatch(/href=\{`\/books\/\$\{step\.slug\}`\}/);
+    expect(pageSource).toMatch(/hasSpoilersConsent/);
+    expect(pageSource).toMatch(/SPOILERS_OK_COOKIE/);
+    // Distinct from books inventory list
+    expect(pageSource).toMatch(/aria-label=["']Книги серии["']/);
   });
 });

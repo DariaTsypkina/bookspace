@@ -87,6 +87,19 @@ describe('Books page Tailwind+shadcn migration (S6 / bd-wus.9)', () => {
     expect(pageSource).toMatch(/SPOILERS_OK_COOKIE/);
   });
 
+  it('shows reading order behind SpoilerGate as numbered steps (bd-azl.3)', () => {
+    expect(pageSource).toMatch(/aria-label=["']Порядок чтения["']/);
+    expect(pageSource).toMatch(/Порядок чтения/);
+    expect(pageSource).toMatch(/work\.readingOrder\.length > 0/);
+    expect(pageSource).toMatch(/Шаг \{step\.step\}/);
+    expect(pageSource).toMatch(/href=\{`\/books\/\$\{step\.slug\}`\}/);
+    // Distinct from relations dump (type labels vs numbered steps)
+    expect(pageSource).toMatch(/aria-label=["']Связи произведений["']/);
+    expect(pageSource).toMatch(
+      /work\.relations\.length > 0 \|\| work\.readingOrder\.length > 0/,
+    );
+  });
+
   it('removes orphan .work-* / .edition-* rules from globals.css', () => {
     expect(globalsSource).not.toMatch(/\.work-page\b/);
     expect(globalsSource).not.toMatch(/\.work-header\b/);

@@ -263,4 +263,122 @@ describe('CatalogSeriesService', () => {
       NotFoundException,
     );
   });
+
+  it('returns readingOrder as sequential steps from positionInSeries (bd-azl.3)', async () => {
+    const series = await prisma.series.create({
+      data: {
+        slug: `${TEST_PREFIX}-reading-order`,
+        nameRu: 'Серия с порядком',
+        status: 'PUBLISHED',
+      },
+    });
+    await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-ro-2`,
+        titleRu: 'Вторая книга',
+        status: WorkStatus.PUBLISHED,
+        seriesLinks: {
+          create: { seriesId: series.id, positionInSeries: 2 },
+        },
+      },
+    });
+    await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-ro-1`,
+        titleRu: 'Первая книга',
+        status: WorkStatus.PUBLISHED,
+        seriesLinks: {
+          create: { seriesId: series.id, positionInSeries: 1 },
+        },
+      },
+    });
+    await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-ro-no-pos`,
+        titleRu: 'Без позиции',
+        status: WorkStatus.PUBLISHED,
+        seriesLinks: {
+          create: { seriesId: series.id, positionInSeries: null },
+        },
+      },
+    });
+
+    const result = await service.getBySlug(series.slug);
+
+    expect(result.readingOrder).toEqual([
+      {
+        step: 1,
+        slug: `${TEST_PREFIX}-ro-1`,
+        titleRu: 'Первая книга',
+      },
+      {
+        step: 2,
+        slug: `${TEST_PREFIX}-ro-2`,
+        titleRu: 'Вторая книга',
+      },
+    ]);
+    expect(result.works).toHaveLength(3);
+  });
+
+  it('returns empty readingOrder when no works have positionInSeries', async () => {
+    const series = await prisma.series.create({
+      data: {
+        slug: `${TEST_PREFIX}-no-reading-order`,
+        nameRu: 'Серия без порядка',
+        status: 'PUBLISHED',
+      },
+    });
+    await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-no-ro-book`,
+        titleRu: 'Книга',
+        status: WorkStatus.PUBLISHED,
+        seriesLinks: {
+          create: { seriesId: series.id, positionInSeries: null },
+        },
+      },
+    });
+
+    const result = await service.getBySlug(series.slug);
+
+    expect(result.readingOrder).toEqual([]);
+  });
+
+  it('tie-breaks equal positionInSeries by titleRu then slug for readingOrder', async () => {
+    const series = await prisma.series.create({
+      data: {
+        slug: `${TEST_PREFIX}-tie-break`,
+        nameRu: 'Серия с ничьей',
+        status: 'PUBLISHED',
+      },
+    });
+    await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-tie-b`,
+        titleRu: 'Бета',
+        status: WorkStatus.PUBLISHED,
+        seriesLinks: {
+          create: { seriesId: series.id, positionInSeries: 1 },
+        },
+      },
+    });
+    await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-tie-a`,
+        titleRu: 'Альфа',
+        status: WorkStatus.PUBLISHED,
+        seriesLinks: {
+          create: { seriesId: series.id, positionInSeries: 1 },
+        },
+      },
+    });
+
+    const result = await service.getBySlug(series.slug);
+
+    expect(result.readingOrder.map((step) => step.titleRu)).toEqual([
+      'Альфа',
+      'Бета',
+    ]);
+    expect(result.readingOrder.map((step) => step.step)).toEqual([1, 2]);
+  });
 });

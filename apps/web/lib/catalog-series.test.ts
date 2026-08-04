@@ -37,6 +37,13 @@ describe('fetchCatalogSeries', () => {
           positionInSeries: 1,
         },
       ],
+      readingOrder: [
+        {
+          step: 1,
+          slug: 'garri-potter-filosofskiy-kamen',
+          titleRu: 'Гарри Поттер и философский камень',
+        },
+      ],
     };
 
     vi.mocked(api.get).mockResolvedValue({ data: mockResponse });

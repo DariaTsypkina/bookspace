@@ -141,13 +141,13 @@
 | ✅ | `bd-6v0.10` | Поиск: префикс `роул` не находит «Роулинг» (human-reported) |
 | ✅ | `bd-6v0.11` | [bug] mobile: поиск «Найти» → native `?q=` + server fallback `query` · merged → `fix/bookspace-bd-bugs` |
 
-### 3. Связи и порядок — 🔄 · epic `bd-azl` · 1 / 4
+### 3. Связи и порядок — 🔄 · epic `bd-azl` · 2 / 4
 
 | Статус | ID | Задача |
 |--------|-----|--------|
 | ✅ | `bd-azl.1` | Связи: Карточка серии |
-| 🔄 | `bd-azl.2` | Связи произведений · ready close |
-| ⬜ | `bd-azl.3` | Связи: Порядок чтения |
+| ✅ | `bd-azl.2` | Связи произведений |
+| 🔄 | `bd-azl.3` | Связи: Порядок чтения · ready close |
 | ⬜ | `bd-azl.4` | Связи: Spoiler gate |
 | ✅ | `bd-azl.5` | Bug: iOS Chrome — «Показать» не снимает spoiler gate (human-reported) |
 
@@ -239,6 +239,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-04 | `bd-azl.3` ready close: `readingOrder[]` в GET series/work; UI «Порядок чтения» (Шаг N) за SpoilerGate на `/series` + `/books` (отдельно от «Книги»/«Связи»); API unit **27** + e2e **6/6**; web unit **22/22**; PW reading-order+work-relations **16/16** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); manual `e2e/manual/reading-order.md`; ветка `task/bd-azl.3-reading-order`; `bd close` — оркестратор |
+| 2026-08-04 | `bd-azl.2` ✅ closed+merged → `feat/bookspace-bd-azl`; claim `bd-azl.3` → `task/bd-azl.3-reading-order` |
 | 2026-08-04 | `bd-azl.2` ready close: Prisma WorkRelation + `relations[]` в GET `/catalog/works/:slug` (только PUBLISHED); `/books/[slug]` блок «Связи» за SpoilerGate (reuse); RU-лейблы; API unit **9/9** + e2e **5/5**; web unit catalog-work+books-page; PW work-relations **6/6** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); manual `e2e/manual/work-relations.md`; ветка `task/bd-azl.2-work-relations`; `bd close` — оркестратор |
 | 2026-08-04 | `bd-azl.2` 🔄: conventions (design/acceptance Критерии+Проверка/notes/labels area:api+area:web+sec:catalog+mobile+regress); sync origin/develop Already up to date; TDD WorkRelation API+web; ветка `task/bd-azl.2-work-relations` |
 | 2026-08-04 | `bd-azl.1` ✅ closed+merged → `feat/bookspace-bd-azl`; claim `bd-azl.2` → `task/bd-azl.2-work-relations` |
