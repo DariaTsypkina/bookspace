@@ -4,6 +4,9 @@ import { JwtModule } from '@nestjs/jwt';
 import { AdminController } from '../admin/admin.controller';
 import { HttpOutboundModule } from '../http/http-outbound.module';
 import { MeLibraryController } from '../me/me-library.controller';
+import { MeLibraryService } from '../me/me-library.service';
+import { PrismaModule } from '../prisma/prisma.module';
+import { PublicLibraryController } from '../users/public-library.controller';
 import { AuthRateLimiterFactory } from './auth-rate-limiter.factory';
 import { AuthRateLimiterService } from './auth-rate-limiter.service';
 import { AuthController } from './auth.controller';
@@ -17,6 +20,7 @@ import { YandexOAuthClient } from './yandex-oauth.client';
 @Module({
   imports: [
     HttpOutboundModule,
+    PrismaModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -26,8 +30,14 @@ import { YandexOAuthClient } from './yandex-oauth.client';
       }),
     }),
   ],
-  controllers: [AuthController, AdminController, MeLibraryController],
+  controllers: [
+    AuthController,
+    AdminController,
+    MeLibraryController,
+    PublicLibraryController,
+  ],
   providers: [
+    MeLibraryService,
     AuthService,
     AuthRateLimiterFactory,
     {

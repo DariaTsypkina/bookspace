@@ -1,12 +1,17 @@
 import {
   PatchUserBookInputSchema,
   ProfileSlugParamSchema,
+  PutUserBookBySlugInputSchema,
   UpsertUserBookInputSchema,
 } from '@bookspace/schemas';
 import { createZodDto } from 'nestjs-zod';
 
 export class UpsertUserBookDto extends createZodDto(
   UpsertUserBookInputSchema,
+) {}
+
+export class PutUserBookBySlugDto extends createZodDto(
+  PutUserBookBySlugInputSchema,
 ) {}
 
 export class PatchUserBookDto extends createZodDto(PatchUserBookInputSchema) {}

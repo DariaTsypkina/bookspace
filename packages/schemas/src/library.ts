@@ -48,6 +48,18 @@ export const UpsertUserBookInputSchema = z
 export type UpsertUserBookInput = z.infer<typeof UpsertUserBookInputSchema>;
 
 /**
+ * PUT `/me/library/works/:workSlug` — upsert по slug (status обязателен).
+ */
+export const PutUserBookBySlugInputSchema = z.object({
+  status: UserBookStatusSchema,
+  rating: UserBookRatingSchema.nullable().optional(),
+});
+
+export type PutUserBookBySlugInput = z.infer<
+  typeof PutUserBookBySlugInputSchema
+>;
+
+/**
  * PATCH body: частичное обновление (хотя бы одно поле).
  * Path: `/me/library/works/:workSlug`.
  */
@@ -56,13 +68,10 @@ export const PatchUserBookInputSchema = z
     status: UserBookStatusSchema.optional(),
     rating: UserBookRatingSchema.nullable().optional(),
   })
-  .refine(
-    (data) => data.status !== undefined || data.rating !== undefined,
-    {
-      message: 'Укажите status и/или rating',
-      path: ['status'],
-    },
-  );
+  .refine((data) => data.status !== undefined || data.rating !== undefined, {
+    message: 'Укажите status и/или rating',
+    path: ['status'],
+  });
 
 export type PatchUserBookInput = z.infer<typeof PatchUserBookInputSchema>;
 

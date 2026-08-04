@@ -260,14 +260,14 @@ describe('Auth (e2e)', () => {
     await api()
       .post('/me/library/items')
       .set('Cookie', cookie ?? [])
-      .send({ workId: 'work-1' })
+      .send({ workSlug: 'work-1', status: 'WANT' })
       .expect(401);
   });
 
   it('POST /me/library/items requires session; succeeds with cookie', async () => {
     await api()
       .post('/me/library/items')
-      .send({ workId: 'work-guest' })
+      .send({ workSlug: 'work-guest', status: 'WANT' })
       .expect(401);
 
     await authPost('/auth/register')
@@ -286,20 +286,34 @@ describe('Auth (e2e)', () => {
 
     const cookie = login.headers['set-cookie'];
 
-    const created = await api()
-      .post('/me/library/items')
-      .set('Cookie', cookie ?? [])
-      .send({ workId: 'work-1' })
-      .expect(201);
-
-    expect(created.body).toMatchObject({
-      ok: true,
-      workId: 'work-1',
+    const work = await prisma.work.create({
+      data: {
+        slug: 'e2e-session-library-work',
+        titleRu: 'Auth e2e книга',
+        status: 'PUBLISHED',
+      },
     });
-    expect(created.body).toHaveProperty('userId');
+
+    try {
+      const created = await api()
+        .post('/me/library/items')
+        .set('Cookie', cookie ?? [])
+        .send({ workSlug: work.slug, status: 'WANT', rating: 5 })
+        .expect(201);
+
+      expect(created.body).toMatchObject({
+        workSlug: work.slug,
+        status: 'WANT',
+        rating: 5,
+      });
+      expect(created.body).toHaveProperty('userId');
+    } finally {
+      await prisma.userBook.deleteMany({ where: { workId: work.id } });
+      await prisma.work.delete({ where: { id: work.id } });
+    }
   });
 
-  it('POST /me/library/items rejects oversized workId with VALIDATION_FAILED', async () => {
+  it('POST /me/library/items rejects oversized workSlug with VALIDATION_FAILED', async () => {
     await authPost('/auth/register')
       .send({
         email: 'e2e-library-val@bookspace.local',
@@ -317,13 +331,13 @@ describe('Auth (e2e)', () => {
     const response = await api()
       .post('/me/library/items')
       .set('Cookie', login.headers['set-cookie'] ?? [])
-      .send({ workId: 'w'.repeat(129) })
+      .send({ workSlug: 'w'.repeat(201), status: 'WANT' })
       .expect(400);
 
     const body = response.body as ValidationErrorResponse;
     expect(body.code).toBe('VALIDATION_FAILED');
     expect(body.errors).toEqual(
-      expect.arrayContaining([expect.objectContaining({ path: 'workId' })]),
+      expect.arrayContaining([expect.objectContaining({ path: 'workSlug' })]),
     );
   });
 
