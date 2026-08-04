@@ -1,13 +1,13 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { useAuth } from './auth-provider';
 
 export function AdminOnly({ children }: { children: ReactNode }) {
   const router = useRouter();
   const { user, status } = useAuth();
-  const [ready, setReady] = useState(false);
+  const ready = status !== 'pending' && user?.role === 'ADMIN';
 
   useEffect(() => {
     if (status === 'pending') {
@@ -19,9 +19,7 @@ export function AdminOnly({ children }: { children: ReactNode }) {
     }
     if (user.role !== 'ADMIN') {
       router.replace('/');
-      return;
     }
-    setReady(true);
   }, [status, user, router]);
 
   if (!ready) {
