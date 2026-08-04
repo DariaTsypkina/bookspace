@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-04T10:51:48.488Z",
+  "generated_at": "2026-08-04T10:52:10.731Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 138,
     "open_issues": 35,
-    "in_progress_issues": 1,
-    "closed_issues": 102,
+    "in_progress_issues": 0,
+    "closed_issues": 103,
     "blocked_issues": 7,
     "ready_issues": 28
   },
@@ -443,11 +443,11 @@
       "status": "closed",
       "priority": 1,
       "children_total": 10,
-      "children_closed": 9,
-      "children_in_progress": 1,
+      "children_closed": 10,
+      "children_in_progress": 0,
       "children_open": 0,
-      "progress": "9 / 10",
-      "percent_closed": 90,
+      "progress": "10 / 10",
+      "percent_closed": 100,
       "children": [
         {
           "id": "bd-8jk",
@@ -494,7 +494,7 @@
         {
           "id": "bd-957.6",
           "title": "web: общий Auth Context — один /api/auth/me на сессию клиента",
-          "status": "in_progress",
+          "status": "closed",
           "type": "feature",
           "priority": 2
         },
@@ -1199,11 +1199,11 @@
     {
       "id": "bd-957.6",
       "title": "web: общий Auth Context — один /api/auth/me на сессию клиента",
-      "status": "in_progress",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-957",
-      "updated_at": "2026-08-04T10:42:47Z"
+      "updated_at": "2026-08-04T10:52:06Z"
     },
     {
       "id": "bd-957.5",
