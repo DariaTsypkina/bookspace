@@ -1,7 +1,11 @@
 'use client';
 
 import { useEffect } from 'react';
-import { registerServiceWorker } from '@/lib/pwa/register-sw';
+import {
+  registerServiceWorker,
+  shouldRegisterServiceWorker,
+  unregisterAllServiceWorkers,
+} from '@/lib/pwa/register-sw';
 
 /**
  * Registers the PWA service worker once on the client.
@@ -9,7 +13,11 @@ import { registerServiceWorker } from '@/lib/pwa/register-sw';
  */
 export function PwaSwRegister() {
   useEffect(() => {
-    void registerServiceWorker();
+    if (shouldRegisterServiceWorker()) {
+      void registerServiceWorker();
+      return;
+    }
+    void unregisterAllServiceWorkers();
   }, []);
 
   return null;
