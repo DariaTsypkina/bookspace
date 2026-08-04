@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-04T11:38:58.883Z",
+  "generated_at": "2026-08-04T11:39:17.812Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 140,
-    "open_issues": 32,
-    "in_progress_issues": 0,
+    "open_issues": 31,
+    "in_progress_issues": 1,
     "closed_issues": 108,
     "blocked_issues": 7,
-    "ready_issues": 25
+    "ready_issues": 24
   },
   "epics": [
     {
@@ -570,8 +570,8 @@
       "priority": 2,
       "children_total": 5,
       "children_closed": 4,
-      "children_in_progress": 0,
-      "children_open": 1,
+      "children_in_progress": 1,
+      "children_open": 0,
       "progress": "4 / 5",
       "percent_closed": 80,
       "children": [
@@ -599,7 +599,7 @@
         {
           "id": "bd-azl.4",
           "title": "Связи: Spoiler gate",
-          "status": "open",
+          "status": "in_progress",
           "type": "feature",
           "priority": 2
         },
@@ -2079,11 +2079,11 @@
     {
       "id": "bd-azl.4",
       "title": "Связи: Spoiler gate",
-      "status": "open",
+      "status": "in_progress",
       "type": "feature",
       "priority": 2,
       "parent": "bd-azl",
-      "updated_at": "2026-07-17T12:36:05Z"
+      "updated_at": "2026-08-04T11:39:13Z"
     },
     {
       "id": "bd-azl.3",
