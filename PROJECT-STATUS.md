@@ -238,6 +238,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-04 | `bd-957.5` ready close: `PasswordInput` (Eye/EyeOff, RU aria, FormControl→Input); unit password-input+login+register; suite **298**; PW password-visibility **4/4** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); ветка `task/bd-957.5-password-visibility-toggle`; `bd close` — оркестратор |
 | 2026-08-04 | Claim `bd-957.5`: UI глаз показать/скрыть пароль на `/login`+`/register`; conventions (design/notes); sync origin/develop OK; ветка `task/bd-957.5-password-visibility-toggle` от `feat/bookspace-bd-common`; `bd close` — оркестратор |
 | 2026-08-04 | `bd-5po` close-prep: `resolveSpoilerCookieDomain` + `acceptSpoilers` domain=hostname (не localhost); unit **5/5**; PW character-page **12/12** desktop+mobile на localhost; **12/12** на `BASE_URL=http://127.0.0.1:3000` (+`NEXT_ALLOWED_DEV_ORIGINS=127.0.0.1` для HMR); ветка `task/bd-5po-spoiler-cookie-domain`; `bd close` за оркестратором |
 | 2026-08-04 | `bd-5po` 🔄: conventions (design/acceptance Критерии+Проверка/notes/labels area:web+sec:ui+dx+e2e); sync origin/develop Already up to date; TDD `resolveSpoilerCookieDomain` + `acceptSpoilers` без хардкода localhost; ветка `task/bd-5po-spoiler-cookie-domain` (сборочная `feat/bookspace-bd-common`); `bd close` за оркестратором |
