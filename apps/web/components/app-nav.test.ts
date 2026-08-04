@@ -45,15 +45,18 @@ describe('AppNav auth placement (bd-6b7.8)', () => {
   });
 });
 
-describe('AppNav pending auth (bd-cq7.6 — no blank Profile)', () => {
-  it('starts auth as undefined (pending), not null guest', () => {
-    expect(appNavSource).toMatch(
-      /useState<\s*AuthUser\s*\|\s*null\s*\|\s*undefined\s*>\s*\(\s*undefined\s*\)/,
+describe('AppNav pending auth (bd-cq7.6 / bd-957.6 — no blank Profile)', () => {
+  it('reads session from useAuth (no local getCurrentUser state)', () => {
+    expect(appNavSource).toMatch(/useAuth\s*\(/);
+    expect(appNavSource).not.toMatch(/getCurrentUser/);
+    expect(appNavSource).not.toMatch(
+      /useState<\s*AuthUser\s*\|\s*null\s*\|\s*undefined\s*>/,
     );
   });
 
-  it('passes pending/ready user into getNavItems (profile href via profileNavHref)', () => {
-    expect(appNavSource).toMatch(/getNavItems\(\s*user\s*\)/);
+  it('passes pending as undefined into getNavItems (profile href via profileNavHref)', () => {
+    expect(appNavSource).toMatch(/getNavItems\s*\(/);
+    expect(appNavSource).toMatch(/pending/);
   });
 });
 

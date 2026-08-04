@@ -1,46 +1,29 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { ReactNode, useEffect } from 'react';
-import { getCurrentUser, profilePath, type AuthUser } from '../lib/auth';
-
-const GUEST_ONLY_TIMEOUT_MS = 4_000;
-const TIMEOUT = 'timeout' as const;
+import { ReactNode, useEffect, useRef } from 'react';
+import { profilePath } from '../lib/auth';
+import { useAuth } from './auth-provider';
 
 /**
  * For guest-only pages (/login, /register).
- * Renders children immediately; redirects auth users to /u/[slug] in the background.
- * Cookie session is first-party via BFF `/api/auth/*` (Nest `/auth/*`).
+ * Renders children immediately; redirects users who arrive already authenticated.
+ * Does not steal navigation after login/register on this page (saw guest first).
  */
 export function GuestOnly({ children }: { children: ReactNode }) {
   const router = useRouter();
+  const { user, status } = useAuth();
+  const sawGuest = useRef(false);
 
   useEffect(() => {
-    let cancelled = false;
-
-    void (async () => {
-      try {
-        const result = await Promise.race<AuthUser | null | typeof TIMEOUT>([
-          getCurrentUser(),
-          new Promise<typeof TIMEOUT>((resolve) => {
-            setTimeout(() => {
-              resolve(TIMEOUT);
-            }, GUEST_ONLY_TIMEOUT_MS);
-          }),
-        ]);
-        if (cancelled || result === TIMEOUT || result === null) {
-          return;
-        }
-        router.replace(profilePath(result.slug));
-      } catch {
-        // Ignore transient auth check failures; keep guest page visible.
-      }
-    })();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [router]);
+    if (status === 'guest') {
+      sawGuest.current = true;
+      return;
+    }
+    if (status === 'authenticated' && user && !sawGuest.current) {
+      router.replace(profilePath(user.slug));
+    }
+  }, [status, user, router]);
 
   return <>{children}</>;
 }

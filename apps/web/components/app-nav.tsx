@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState, type ComponentType } from 'react';
+import { type ComponentType } from 'react';
 import {
   Home,
   Layers,
@@ -14,7 +14,7 @@ import {
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { getActiveNavId, getNavItems, type NavItemId } from '../lib/app-nav';
-import { getCurrentUser, type AuthUser } from '../lib/auth';
+import { useAuth } from './auth-provider';
 
 const NAV_ICONS: Record<NavItemId, ComponentType<LucideProps>> = {
   home: Home,
@@ -41,24 +41,9 @@ function navLinkClassName(isActive: boolean): string {
 
 export function AppNav() {
   const pathname = usePathname();
-  const [user, setUser] = useState<AuthUser | null | undefined>(undefined);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    void (async () => {
-      const current = await getCurrentUser();
-      if (!cancelled) {
-        setUser(current);
-      }
-    })();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [pathname]);
-
-  const items = getNavItems(user);
+  const { user, status } = useAuth();
+  // pending → undefined so profileNavHref stays guest until session resolves
+  const items = getNavItems(status === 'pending' ? undefined : user);
   const activeId = getActiveNavId(pathname);
 
   return (
