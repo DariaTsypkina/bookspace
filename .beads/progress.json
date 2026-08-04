@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-04T15:01:36.604Z",
+  "generated_at": "2026-08-04T15:02:12.839Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 140,
-    "open_issues": 29,
-    "in_progress_issues": 0,
+    "open_issues": 28,
+    "in_progress_issues": 1,
     "closed_issues": 111,
     "blocked_issues": 9,
-    "ready_issues": 20
+    "ready_issues": 19
   },
   "epics": [
     {
@@ -654,8 +654,8 @@
       "priority": 2,
       "children_total": 6,
       "children_closed": 2,
-      "children_in_progress": 0,
-      "children_open": 4,
+      "children_in_progress": 1,
+      "children_open": 3,
       "progress": "2 / 6",
       "percent_closed": 33,
       "children": [
@@ -669,7 +669,7 @@
         {
           "id": "bd-cq7.2",
           "title": "Библиотека: Пользовательские полки",
-          "status": "open",
+          "status": "in_progress",
           "type": "feature",
           "priority": 2
         },
@@ -1998,11 +1998,11 @@
     {
       "id": "bd-cq7.2",
       "title": "Библиотека: Пользовательские полки",
-      "status": "open",
+      "status": "in_progress",
       "type": "feature",
       "priority": 2,
       "parent": "bd-cq7",
-      "updated_at": "2026-07-17T12:36:12Z"
+      "updated_at": "2026-08-04T15:02:00Z"
     },
     {
       "id": "bd-cq7.3",
