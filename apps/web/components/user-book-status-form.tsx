@@ -80,20 +80,36 @@ export function UserBookStatusForm({ workSlug }: UserBookStatusFormProps) {
 
   if (authStatus === 'pending') {
     return (
-      <p className="font-sans text-sm text-muted" role="status">
-        Загрузка…
-      </p>
+      <section
+        aria-label="Статус и оценка"
+        className="flex flex-col gap-3 font-sans"
+      >
+        <h2 className="text-[1.15rem] font-medium text-foreground">
+          В моей библиотеке
+        </h2>
+        <p className="text-sm text-muted" role="status">
+          Загрузка…
+        </p>
+      </section>
     );
   }
 
   if (!user) {
     return (
-      <p className="font-sans text-[0.95rem] text-muted">
-        <Link href="/login" className="underline-offset-2 hover:underline">
-          Войдите
-        </Link>
-        , чтобы поставить статус и оценку.
-      </p>
+      <section
+        aria-label="Статус и оценка"
+        className="flex flex-col gap-3 font-sans"
+      >
+        <h2 className="text-[1.15rem] font-medium text-foreground">
+          В моей библиотеке
+        </h2>
+        <p className="text-[0.95rem] text-muted">
+          <Link href="/login" className="underline-offset-2 hover:underline">
+            Войдите
+          </Link>
+          , чтобы поставить статус и оценку.
+        </p>
+      </section>
     );
   }
 

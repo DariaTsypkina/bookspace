@@ -62,12 +62,12 @@ test.describe('Library page smoke (S12 / bd-wus.15)', () => {
 
     await page.goto('/register');
     await page.getByLabel('Email').fill(email);
-    await page.getByLabel('Пароль').fill(password);
+    await page.getByLabel('Пароль', { exact: true }).fill(password);
     await page.getByRole('button', { name: 'Зарегистрироваться' }).click();
     await expect(page).toHaveURL('/login');
 
     await page.getByLabel('Email').fill(email);
-    await page.getByLabel('Пароль').fill(password);
+    await page.getByLabel('Пароль', { exact: true }).fill(password);
     await page.getByRole('button', { name: 'Войти' }).click();
     await expect(page).toHaveURL('/');
 
@@ -103,12 +103,12 @@ test.describe('Library page smoke (S12 / bd-wus.15)', () => {
 
     await page.goto('/register');
     await page.getByLabel('Email').fill(email);
-    await page.getByLabel('Пароль').fill(password);
+    await page.getByLabel('Пароль', { exact: true }).fill(password);
     await page.getByRole('button', { name: 'Зарегистрироваться' }).click();
     await expect(page).toHaveURL('/login');
 
     await page.getByLabel('Email').fill(email);
-    await page.getByLabel('Пароль').fill(password);
+    await page.getByLabel('Пароль', { exact: true }).fill(password);
     await page.getByRole('button', { name: 'Войти' }).click();
     await expect(page).toHaveURL('/');
 

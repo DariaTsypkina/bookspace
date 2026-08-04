@@ -42,6 +42,7 @@ export class MeLibraryController {
     @Body() body: PutUserBookBySlugDto,
   ) {
     return this.library.upsert(user.id, {
+      workId: undefined,
       workSlug,
       status: body.status,
       rating: body.rating,
