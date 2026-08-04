@@ -10,10 +10,6 @@ export type NavItem = {
 };
 
 export function profileNavHref(user: AuthUser | null | undefined): string {
-  // Pending session check: prefer visible /library stub over blank GuestOnly /login.
-  if (user === undefined) {
-    return '/library';
-  }
   return user ? '/library' : '/login';
 }
 

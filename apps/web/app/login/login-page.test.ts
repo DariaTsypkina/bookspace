@@ -52,6 +52,8 @@ describe('Login page Tailwind+shadcn migration (S2 / bd-wus.5)', () => {
     expect(pageSource).toMatch(/<h1[^>]*>\s*Вход\s*<\/h1>/);
     expect(pageSource).toMatch(/GuestOnly/);
     expect(pageSource).toMatch(/\blogin\b/);
+    expect(pageSource).toMatch(/method=["']post["']/);
+    expect(pageSource).toMatch(/action=["']\/api\/login["']/);
     expect(pageSource).toMatch(/\/api\/auth\/google/);
     expect(pageSource).toMatch(/\/api\/auth\/yandex/);
     expect(pageSource).toMatch(/href=["']\/register["']/);

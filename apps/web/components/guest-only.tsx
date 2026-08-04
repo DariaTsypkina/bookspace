@@ -1,8 +1,10 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { getCurrentUser, profilePath } from '../lib/auth';
+
+const GUEST_ONLY_TIMEOUT_MS = 4_000;
 
 /**
  * For guest-only pages (/login, /register).
@@ -12,21 +14,30 @@ import { getCurrentUser, profilePath } from '../lib/auth';
  */
 export function GuestOnly({ children }: { children: ReactNode }) {
   const router = useRouter();
-  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
 
     void (async () => {
-      const user = await getCurrentUser();
-      if (cancelled) {
-        return;
+      try {
+        const user = await Promise.race<AuthUserOrTimeout>([
+          getCurrentUser(),
+          new Promise<AuthUserOrTimeout>((resolve) => {
+            setTimeout(() => {
+              resolve(TIMEOUT_SYMBOL);
+            }, GUEST_ONLY_TIMEOUT_MS);
+          }),
+        ]);
+        if (cancelled) {
+          return;
+        }
+        if (user && user !== TIMEOUT_SYMBOL) {
+          router.replace(profilePath(user.slug));
+          return;
+        }
+      } catch {
+        // Ignore transient auth check failures; keep guest page visible.
       }
-      if (user) {
-        router.replace(profilePath(user.slug));
-        return;
-      }
-      setReady(true);
     })();
 
     return () => {
@@ -34,18 +45,8 @@ export function GuestOnly({ children }: { children: ReactNode }) {
     };
   }, [router]);
 
-  if (!ready) {
-    return (
-      <div
-        className="mx-auto flex w-full max-w-sm flex-1 flex-col items-center justify-center gap-4 px-4 py-8"
-        aria-busy="true"
-      >
-        <p className="text-[0.95rem] text-muted" role="status">
-          Загрузка…
-        </p>
-      </div>
-    );
-  }
-
-  return children;
+  return <>{children}</>;
 }
+
+type AuthUserOrTimeout = Awaited<ReturnType<typeof getCurrentUser>> | symbol;
+const TIMEOUT_SYMBOL = Symbol('guest-only-timeout');

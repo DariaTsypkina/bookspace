@@ -123,6 +123,7 @@
 | ✅ | `bd-v2y` | Auth: сессия и защита маршрутов |
 | ✅ | `bd-wlw` | Auth: rate limit на register/login |
 | ⬜ | `bd-957.5` | UI: показать/скрыть пароль (глаз) на полях пароля (human-reported) · сборочная `feat/bookspace-bd-957` |
+| ✅ | `bd-957.7` | [bug] mobile: login progressive POST `/api/login` (не GET с credentials в query) · merged → `fix/bookspace-bd-bugs` |
 
 ### 2. Каталог — ✅ · epic `bd-6v0` · 6 / 6 (эпик закрыт)
 
@@ -224,6 +225,7 @@
 | ✅ | `bd-6b7.6` | [bug] UI: одинаковый font-weight у всех пунктов меню (как у активного) |
 | ✅ | `bd-6b7.7` | [bug] Войти/Выйти пропадает + hydration AppNav |
 | ✅ | `bd-6b7.8` | UI: Войти/Выйти из меню в раздел Профиля |
+| ✅ | `bd-6b7.13` | [bug] mobile: GuestOnly без loading-gate + SW unregister в dev + pending Profile→/login · merged → `fix/bookspace-bd-bugs` |
 | ✅ | `bd-6b7.12` | [bug] mobile: logout 303 → Host/x-forwarded-host (не localhost) · merged → `fix/bookspace-bd-bugs` |
 | ✅ | `bd-6b7.11` | [bug] mobile: «Выйти» → progressive form POST `/api/logout` · merged → `fix/bookspace-bd-bugs` |
 | ✅ | `bd-6b7.10` | [bug] PWA SW: не кэшировать `/_next/` + cache v2 (hydration asChild) · merged → `fix/bookspace-bd-bugs` |
@@ -235,6 +237,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-04 | Оркестратор: `bd-6b7.13`+`bd-957.7` closed+merged в `fix/bookspace-bd-bugs` (GuestOnly SSR-safe, SW unregister dev, login POST `/api/login`, Profile pending→/login, env `NEXT_ALLOWED_DEV_ORIGINS`, .env.example без значений); Chrome `__gcruniqueid` hydration — note в auth-session; vitest focused 46; PR сборочной → develop |
 | 2026-08-03 | Оркестратор: `bd-6b7.12` closed+merged в `fix/bookspace-bd-bugs` (`loginRedirectUrl` Host/x-forwarded-*; vitest logout 7/7; mapping → [subagent](49ad360d-6b0b-4c24-a295-d2177a48759a)); ЗАЛИВАТЬ develop=Нет |
 | 2026-08-03 | Claim `bd-6b7.12`: logout Location из Host/x-forwarded-host; ветка `task/bd-6b7.12-logout-redirect-host` от `fix/bookspace-bd-bugs` |
 | 2026-08-03 | Intake: `bd-6b7.12` — mobile logout 303 Location=localhost при доступе по LAN IP (follow-up `bd-6b7.11`); сборочная `fix/bookspace-bd-bugs` |

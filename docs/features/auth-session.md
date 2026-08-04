@@ -26,6 +26,8 @@ Nest guards; Next BFF-proxy предпочтителен для first-party cook
 
 Скрытие `/admin` в UI недостаточно без server check.
 
+Mobile Chrome (iOS/Android) может вставлять `__gcruniqueid` / `__gchrome_uniqueid` в `<form>`/`<input>` до гидратации React → hydration mismatch в консоли. В Safari обычно чисто. Это не баг приложения; progressive form POST для login/logout страхует сценарий, когда JS handlers не цепляются.
+
 ## Критерии приёмки
 
 - [ ] Мутации библиотеки требуют сессии
