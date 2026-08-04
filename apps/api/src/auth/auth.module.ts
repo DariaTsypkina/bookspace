@@ -7,6 +7,8 @@ import { MeLibraryController } from '../me/me-library.controller';
 import { MeLibraryService } from '../me/me-library.service';
 import { MeShelvesController } from '../me/me-shelves.controller';
 import { MeShelvesService } from '../me/me-shelves.service';
+import { MeTagsController } from '../me/me-tags.controller';
+import { MeTagsService } from '../me/me-tags.service';
 import { PrismaModule } from '../prisma/prisma.module';
 import { PublicLibraryController } from '../users/public-library.controller';
 import { PublicShelvesController } from '../users/public-shelves.controller';
@@ -38,12 +40,14 @@ import { YandexOAuthClient } from './yandex-oauth.client';
     AdminController,
     MeLibraryController,
     MeShelvesController,
+    MeTagsController,
     PublicLibraryController,
     PublicShelvesController,
   ],
   providers: [
     MeLibraryService,
     MeShelvesService,
+    MeTagsService,
     AuthService,
     AuthRateLimiterFactory,
     {

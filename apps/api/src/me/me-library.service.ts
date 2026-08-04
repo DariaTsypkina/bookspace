@@ -6,6 +6,7 @@ import {
 import {
   UserBookStatus,
   WorkStatus,
+  type Tag,
   type UserBook,
   type Work,
 } from '@prisma/client';
@@ -19,6 +20,20 @@ import { PrismaService } from '../prisma/prisma.service';
 
 type UserBookWithWork = UserBook & {
   work: Pick<Work, 'id' | 'slug' | 'titleRu' | 'status' | 'deletedAt'>;
+  tags: Array<{ tag: Pick<Tag, 'id' | 'name'> }>;
+};
+
+const workSelect = {
+  id: true,
+  slug: true,
+  titleRu: true,
+  status: true,
+  deletedAt: true,
+} as const;
+
+const tagsInclude = {
+  include: { tag: { select: { id: true, name: true } } },
+  orderBy: { tag: { name: 'asc' as const } },
 };
 
 @Injectable()
@@ -59,15 +74,8 @@ export class MeLibraryService {
         finishedAt,
       },
       include: {
-        work: {
-          select: {
-            id: true,
-            slug: true,
-            titleRu: true,
-            status: true,
-            deletedAt: true,
-          },
-        },
+        work: { select: workSelect },
+        tags: tagsInclude,
       },
     });
 
@@ -83,15 +91,8 @@ export class MeLibraryService {
     const existing = await this.prisma.userBook.findUnique({
       where: { userId_workId: { userId, workId: work.id } },
       include: {
-        work: {
-          select: {
-            id: true,
-            slug: true,
-            titleRu: true,
-            status: true,
-            deletedAt: true,
-          },
-        },
+        work: { select: workSelect },
+        tags: tagsInclude,
       },
     });
     if (!existing) {
@@ -117,15 +118,8 @@ export class MeLibraryService {
         finishedAt,
       },
       include: {
-        work: {
-          select: {
-            id: true,
-            slug: true,
-            titleRu: true,
-            status: true,
-            deletedAt: true,
-          },
-        },
+        work: { select: workSelect },
+        tags: tagsInclude,
       },
     });
 
@@ -149,15 +143,8 @@ export class MeLibraryService {
     const row = await this.prisma.userBook.findUnique({
       where: { userId_workId: { userId, workId: work.id } },
       include: {
-        work: {
-          select: {
-            id: true,
-            slug: true,
-            titleRu: true,
-            status: true,
-            deletedAt: true,
-          },
-        },
+        work: { select: workSelect },
+        tags: tagsInclude,
       },
     });
     return row ? this.toResponse(row) : null;
@@ -180,15 +167,8 @@ export class MeLibraryService {
         },
       },
       include: {
-        work: {
-          select: {
-            id: true,
-            slug: true,
-            titleRu: true,
-            status: true,
-            deletedAt: true,
-          },
-        },
+        work: { select: workSelect },
+        tags: tagsInclude,
       },
       orderBy: [{ updatedAt: 'desc' }],
     });
@@ -201,6 +181,7 @@ export class MeLibraryService {
         status: row.status,
         rating: row.rating,
         finishedAt: row.finishedAt ? row.finishedAt.toISOString() : null,
+        tags: row.tags.map((link) => ({ name: link.tag.name })),
       })),
     };
   }
@@ -265,6 +246,10 @@ export class MeLibraryService {
       status: row.status,
       rating: row.rating,
       finishedAt: row.finishedAt ? row.finishedAt.toISOString() : null,
+      tags: row.tags.map((link) => ({
+        id: link.tag.id,
+        name: link.tag.name,
+      })),
     };
   }
 }

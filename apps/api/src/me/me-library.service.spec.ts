@@ -82,6 +82,7 @@ describe('MeLibraryService', () => {
       status: 'READING',
       rating: 7,
       finishedAt: null,
+      tags: [],
     });
     expect(created.id).toBeTruthy();
 
@@ -189,6 +190,7 @@ describe('MeLibraryService', () => {
       titleRu: 'Тестовая книга',
       status: 'READ',
       rating: 8,
+      tags: [],
     });
     expect(pub.items[0].finishedAt).toBeTruthy();
 

@@ -328,10 +328,35 @@ model UserBook {
   updatedAt  DateTime       @updatedAt
   user       User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   work       Work           @relation(fields: [workId], references: [id], onDelete: Cascade)
+  tags       UserBookTag[]
 
   @@unique([userId, workId])
   @@index([userId, status])
   @@index([workId])
+}
+
+model Tag {
+  id        String        @id @default(uuid())
+  userId    String
+  name      String
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userBooks UserBookTag[]
+
+  @@unique([userId, name])
+  @@index([userId])
+}
+
+model UserBookTag {
+  userBookId String
+  tagId      String
+  createdAt  DateTime @default(now())
+  userBook   UserBook @relation(fields: [userBookId], references: [id], onDelete: Cascade)
+  tag        Tag      @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([userBookId, tagId])
+  @@index([tagId])
 }
 
 model Shelf {
@@ -377,6 +402,7 @@ model User {
   auditLogs    AuditLog[]
   userBooks    UserBook[]
   shelves      Shelf[]
+  tags         Tag[]
 }
 
 model Account {
