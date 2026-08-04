@@ -124,6 +124,7 @@
 | ✅ | `bd-wlw` | Auth: rate limit на register/login |
 | ⬜ | `bd-957.5` | UI: показать/скрыть пароль (глаз) на полях пароля (human-reported) · сборочная `feat/bookspace-bd-957` |
 | ⬜ | `bd-957.6` | web: Auth Context — один `/api/auth/me` на сессию клиента (human-reported) · сборочная `feat/bookspace-bd-957` |
+| ✅ | `bd-957.7` | [bug] mobile: login progressive POST `/api/login` (не GET с credentials в query) · merged → `fix/bookspace-bd-bugs` |
 
 ### 2. Каталог — ✅ · epic `bd-6v0` · 6 / 6 (эпик закрыт)
 
@@ -137,7 +138,7 @@
 | ✅ | `bd-6v0.6` | Каталог: Карточка локации |
 | ✅ | `bd-6v0.9` | Поиск: восстановить FTS search_vector после drift Prisma |
 | ✅ | `bd-6v0.10` | Поиск: префикс `роул` не находит «Роулинг» (human-reported) |
-| ⬜ | `bd-6v0.11` | [bug] mobile: поиск «Найти» → `?query=` вместо `?q=` — пустая выдача (human-reported) · сборочная `feat/bookspace-bd-6v0` |
+| ✅ | `bd-6v0.11` | [bug] mobile: поиск «Найти» → native `?q=` + server fallback `query` · merged → `fix/bookspace-bd-bugs` |
 
 ### 3. Связи и порядок — ⬜ · epic `bd-azl` · 0 / 4
 
@@ -225,7 +226,11 @@
 | ✅ | `bd-6b7.6` | [bug] UI: одинаковый font-weight у всех пунктов меню (как у активного) |
 | ✅ | `bd-6b7.7` | [bug] Войти/Выйти пропадает + hydration AppNav |
 | ✅ | `bd-6b7.8` | UI: Войти/Выйти из меню в раздел Профиля |
-| ⬜ | `bd-6b7.9` | [bug] mobile: «Выйти» в профиле не редиректит на /login (human-reported) · сборочная `feat/bookspace-bd-6b7` |
+| ✅ | `bd-6b7.13` | [bug] mobile: GuestOnly без loading-gate + SW unregister в dev + pending Profile→/login · merged → `fix/bookspace-bd-bugs` |
+| ✅ | `bd-6b7.12` | [bug] mobile: logout 303 → Host/x-forwarded-host (не localhost) · merged → `fix/bookspace-bd-bugs` |
+| ✅ | `bd-6b7.11` | [bug] mobile: «Выйти» → progressive form POST `/api/logout` · merged → `fix/bookspace-bd-bugs` |
+| ✅ | `bd-6b7.10` | [bug] PWA SW: не кэшировать `/_next/` + cache v2 (hydration asChild) · merged → `fix/bookspace-bd-bugs` |
+| ✅ | `bd-6b7.9` | [bug] mobile: «Выйти» в профиле не редиректит на /login — `window.location.assign` после logout · merged → `fix/bookspace-bd-bugs` |
 
 ---
 
@@ -233,6 +238,18 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-04 | Оркестратор: `bd-6b7.13`+`bd-957.7` closed+merged в `fix/bookspace-bd-bugs` (GuestOnly SSR-safe, SW unregister dev, login POST `/api/login`, Profile pending→/login, env `NEXT_ALLOWED_DEV_ORIGINS`, .env.example без значений); Chrome `__gcruniqueid` hydration — note в auth-session; vitest focused 46; PR сборочной → develop |
+| 2026-08-03 | Оркестратор: `bd-6b7.12` closed+merged в `fix/bookspace-bd-bugs` (`loginRedirectUrl` Host/x-forwarded-*; vitest logout 7/7; mapping → [subagent](49ad360d-6b0b-4c24-a295-d2177a48759a)); ЗАЛИВАТЬ develop=Нет |
+| 2026-08-03 | Claim `bd-6b7.12`: logout Location из Host/x-forwarded-host; ветка `task/bd-6b7.12-logout-redirect-host` от `fix/bookspace-bd-bugs` |
+| 2026-08-03 | Intake: `bd-6b7.12` — mobile logout 303 Location=localhost при доступе по LAN IP (follow-up `bd-6b7.11`); сборочная `fix/bookspace-bd-bugs` |
+| 2026-08-03 | Intake+claim `bd-6b7.11`: phone Выйти no-op → progressive POST `/logout` |
+| 2026-08-03 | Оркестратор: `bd-6b7.10` closed+merged в `fix/bookspace-bd-bugs` (SW no `/_next/` cache; vitest 274; PW 26/26) |
+| 2026-08-03 | Intake: `bd-6b7.10` hydration AppNav — SW cache-first `/_next/static` + SW в dev; claim `task/bd-6b7.10-sw-stale-hydration` |
+| 2026-08-03 | Оркестратор batch `fix/bookspace-bd-bugs`: ключи `bd-6b7.9`+`bd-6v0.11` closed; целевая проверка PASS (web 269 + PW auth/search 34); ЗАЛИВАТЬ develop=Нет — push сборочной |
+| 2026-08-03 | Оркестратор: `bd-6v0.11` closed+merged `--no-ff` в `fix/bookspace-bd-bugs` (native GET q= + fallback query; vitest 12; PW catalog-search 14) |
+| 2026-08-03 | Оркестратор: claim `bd-6v0.11` → `task/bd-6v0.11-search-query-param` (сборочная `fix/bookspace-bd-bugs`) |
+| 2026-08-03 | Оркестратор: `bd-6b7.9` closed+merged `--no-ff` в `fix/bookspace-bd-bugs` (assign /login; vitest 267; PW logout mobile+desktop) |
+| 2026-08-03 | Оркестратор batch `fix/bookspace-bd-bugs`: claim `bd-6b7.9` → ветка `task/bd-6b7.9-mobile-logout-redirect`; очередь `bd-6b7.9` → `bd-6v0.11`; ЗАЛИВАТЬ develop=Нет |
 | 2026-08-03 | Intake `/task`: `bd-957.6` — Auth Context (один `/me` на клиент; без стейт-менеджера); feature-doc `auth-session` |
 | 2026-08-03 | Intake `/task`: `bd-6v0.11` bug — mobile search native GET `?query=` vs page `q`; dashboard `bd-6v0.10` → ✅ |
 | 2026-08-03 | Intake `/task`: `bd-6b7.9` bug — mobile logout без редиректа на `/login`; `bd-957.5` feature — глаз показать/скрыть пароль на login/register |

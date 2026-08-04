@@ -1,8 +1,8 @@
 /* Bookspace PWA offline shell (bd-6b7.2) — native SW, no workbox/serwist. */
 /* Constants mirrored from apps/web/lib/pwa/offline-cache-policy.ts */
 
-const CACHE_SHELL = 'bookspace-shell-v1';
-const CACHE_RECENT = 'bookspace-recent-v1';
+const CACHE_SHELL = 'bookspace-shell-v2';
+const CACHE_RECENT = 'bookspace-recent-v2';
 const OFFLINE_FALLBACK_PATH = '/offline';
 const MAX_RECENT_PAGES = 20;
 
@@ -49,12 +49,10 @@ function shouldRuntimeCacheDocument(pathname) {
   return true;
 }
 
+/** Never cache `/_next/` — see offline-cache-policy shouldCacheStaticAsset (bd-6b7.10). */
 function shouldCacheStaticAsset(pathname) {
-  return (
-    pathname.startsWith('/_next/static/') ||
-    pathname.startsWith('/icons/') ||
-    pathname === '/manifest.webmanifest'
-  );
+  if (pathname.startsWith('/_next/')) return false;
+  return pathname.startsWith('/icons/') || pathname === '/manifest.webmanifest';
 }
 
 async function putRecentDocument(request, response) {

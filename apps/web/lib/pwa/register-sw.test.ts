@@ -1,10 +1,42 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { registerServiceWorker } from './register-sw';
+import {
+  registerServiceWorker,
+  shouldRegisterServiceWorker,
+  unregisterAllServiceWorkers,
+} from './register-sw';
 
 describe('PWA service worker registration (bd-6b7.2)', () => {
   afterEach(() => {
     vi.unstubAllGlobals();
     vi.restoreAllMocks();
+  });
+
+  it('allows production and e2e/explicit flags (bd-6b7.10 helper)', () => {
+    expect(shouldRegisterServiceWorker('production')).toBe(true);
+    expect(shouldRegisterServiceWorker('development', {})).toBe(false);
+    expect(
+      shouldRegisterServiceWorker('development', { e2eBypass: 'true' }),
+    ).toBe(true);
+    expect(shouldRegisterServiceWorker('development', { enableSw: '1' })).toBe(
+      true,
+    );
+  });
+
+  it('unregisterAllServiceWorkers clears existing registrations (bd-6b7.10)', async () => {
+    const unregister = vi.fn().mockResolvedValue(true);
+    const getRegistrations = vi
+      .fn()
+      .mockResolvedValue([{ unregister }, { unregister }]);
+    vi.stubGlobal('navigator', {
+      serviceWorker: { getRegistrations },
+    });
+    vi.stubGlobal('window', { location: { protocol: 'https:' } });
+
+    await expect(unregisterAllServiceWorkers()).resolves.toEqual({
+      ok: true,
+      unregistered: 2,
+    });
+    expect(unregister).toHaveBeenCalledTimes(2);
   });
 
   it('registers /sw.js when serviceWorker is available', async () => {

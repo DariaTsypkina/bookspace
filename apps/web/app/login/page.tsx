@@ -76,6 +76,8 @@ function LoginForm() {
         <CardContent className="p-5">
           <Form {...form}>
             <form
+              method="post"
+              action="/api/login"
               onSubmit={form.handleSubmit(
                 handleValidSubmit,
                 handleInvalidSubmit,

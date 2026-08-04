@@ -8,6 +8,7 @@ import {
   OFFLINE_FALLBACK_PATH,
   SHELL_PRECACHE_URLS,
   isNavigationRequest,
+  shouldCacheStaticAsset,
   shouldRuntimeCacheDocument,
   touchRecentLru,
   urlsToEvict,
@@ -20,6 +21,19 @@ describe('PWA offline cache policy (bd-6b7.2)', () => {
     expect(MAX_RECENT_PAGES).toBeLessThanOrEqual(30);
     expect(CACHE_SHELL).toMatch(/^bookspace-shell-/);
     expect(CACHE_RECENT).toMatch(/^bookspace-recent-/);
+  });
+
+  it('bumps cache names past v1 so stale AppNav JS is dropped (bd-6b7.10)', () => {
+    expect(CACHE_SHELL).not.toBe('bookspace-shell-v1');
+    expect(CACHE_RECENT).not.toBe('bookspace-recent-v1');
+  });
+
+  it('does not SW-cache Next.js /_next/static assets (bd-6b7.10)', () => {
+    expect(shouldCacheStaticAsset('/_next/static/chunk.js')).toBe(false);
+    expect(shouldCacheStaticAsset('/_next/static/css/app.css')).toBe(false);
+    expect(shouldCacheStaticAsset('/icons/icon-192.png')).toBe(true);
+    expect(shouldCacheStaticAsset('/icons/icon-512.png')).toBe(true);
+    expect(shouldCacheStaticAsset('/manifest.webmanifest')).toBe(true);
   });
 
   it('precache shell does not include whole catalog routes', () => {

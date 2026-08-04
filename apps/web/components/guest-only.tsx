@@ -1,32 +1,40 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { ReactNode, useEffect, useState } from 'react';
-import { getCurrentUser, profilePath } from '../lib/auth';
+import { ReactNode, useEffect } from 'react';
+import { getCurrentUser, profilePath, type AuthUser } from '../lib/auth';
+
+const GUEST_ONLY_TIMEOUT_MS = 4_000;
+const TIMEOUT = 'timeout' as const;
 
 /**
  * For guest-only pages (/login, /register).
- * Shows a visible loading status while checking session (never blank);
- * redirects auth users to /u/[slug].
+ * Renders children immediately; redirects auth users to /u/[slug] in the background.
  * Cookie session is first-party via BFF `/api/auth/*` (Nest `/auth/*`).
  */
 export function GuestOnly({ children }: { children: ReactNode }) {
   const router = useRouter();
-  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
 
     void (async () => {
-      const user = await getCurrentUser();
-      if (cancelled) {
-        return;
+      try {
+        const result = await Promise.race<AuthUser | null | typeof TIMEOUT>([
+          getCurrentUser(),
+          new Promise<typeof TIMEOUT>((resolve) => {
+            setTimeout(() => {
+              resolve(TIMEOUT);
+            }, GUEST_ONLY_TIMEOUT_MS);
+          }),
+        ]);
+        if (cancelled || result === TIMEOUT || result === null) {
+          return;
+        }
+        router.replace(profilePath(result.slug));
+      } catch {
+        // Ignore transient auth check failures; keep guest page visible.
       }
-      if (user) {
-        router.replace(profilePath(user.slug));
-        return;
-      }
-      setReady(true);
     })();
 
     return () => {
@@ -34,18 +42,5 @@ export function GuestOnly({ children }: { children: ReactNode }) {
     };
   }, [router]);
 
-  if (!ready) {
-    return (
-      <div
-        className="mx-auto flex w-full max-w-sm flex-1 flex-col items-center justify-center gap-4 px-4 py-8"
-        aria-busy="true"
-      >
-        <p className="text-[0.95rem] text-muted" role="status">
-          Загрузка…
-        </p>
-      </div>
-    );
-  }
-
-  return children;
+  return <>{children}</>;
 }

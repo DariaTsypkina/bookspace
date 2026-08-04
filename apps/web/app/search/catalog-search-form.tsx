@@ -64,6 +64,8 @@ export function CatalogSearchForm({
   return (
     <Form {...form}>
       <form
+        method="get"
+        action="/search"
         className="flex flex-col gap-2"
         onSubmit={form.handleSubmit(handleValidSubmit, handleInvalid)}
         role="search"
@@ -82,6 +84,7 @@ export function CatalogSearchForm({
                   placeholder="Книга, автор, серия…"
                   autoComplete="off"
                   {...field}
+                  name="q"
                 />
               </FormControl>
               <FormMessage />

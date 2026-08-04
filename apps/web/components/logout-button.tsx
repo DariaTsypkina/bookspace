@@ -1,36 +1,19 @@
-'use client';
-
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { logout } from '../lib/auth';
 
+/**
+ * Progressive logout (bd-6b7.11): native form POST → `/logout` → 303 `/login`.
+ * Works on mobile even when client click handlers / hydration are broken.
+ */
 export function LogoutButton() {
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
-
-  async function handleLogout() {
-    setLoading(true);
-    try {
-      await logout();
-      router.push('/login');
-      router.refresh();
-    } finally {
-      setLoading(false);
-    }
-  }
-
   return (
-    <Button
-      type="button"
-      variant="outline"
-      onClick={() => {
-        void handleLogout();
-      }}
-      disabled={loading}
-      className="self-start"
-    >
-      {loading ? 'Выход…' : 'Выйти'}
-    </Button>
+    <form action="/api/logout" method="post" className="self-start">
+      <Button
+        type="submit"
+        variant="outline"
+        className="min-h-11 cursor-pointer self-start font-sans"
+      >
+        Выйти
+      </Button>
+    </form>
   );
 }

@@ -50,6 +50,13 @@ describe('Search page Tailwind+shadcn migration (S5 / bd-wus.8)', () => {
     expect(formSource).toMatch(/\bButton\b/);
   });
 
+  it('reads q and legacy query searchParams (bd-6v0.11)', () => {
+    expect(pageSource).toMatch(
+      /searchParams:\s*Promise<\{\s*q\?:\s*string;\s*query\?:\s*string/,
+    );
+    expect(pageSource).toMatch(/params\.q\s*\?\?\s*params\.query/);
+  });
+
   it('keeps FTS UX: RU copy, search role, and result semantics', () => {
     expect(pageSource).toMatch(/<h1[^>]*>\s*Поиск\s*<\/h1>/);
     expect(pageSource).toMatch(/Ничего не найдено/);

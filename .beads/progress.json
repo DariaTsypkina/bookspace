@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-03T12:43:51.988Z",
+  "generated_at": "2026-08-04T10:27:29.392Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 135,
+    "total_issues": 138,
     "open_issues": 38,
     "in_progress_issues": 0,
-    "closed_issues": 97,
+    "closed_issues": 100,
     "blocked_issues": 7,
     "ready_issues": 31
   },
@@ -120,11 +120,11 @@
       "title": "PWA и оболочка",
       "status": "closed",
       "priority": 3,
-      "children_total": 11,
-      "children_closed": 11,
+      "children_total": 13,
+      "children_closed": 13,
       "children_in_progress": 0,
       "children_open": 0,
-      "progress": "11 / 11",
+      "progress": "13 / 13",
       "percent_closed": 100,
       "children": [
         {
@@ -144,6 +144,20 @@
         {
           "id": "bd-6b7.11",
           "title": "mobile: «Выйти» не срабатывает (нужен progressive form POST)",
+          "status": "closed",
+          "type": "bug",
+          "priority": 1
+        },
+        {
+          "id": "bd-6b7.12",
+          "title": "mobile: logout 303 редиректит на localhost (ERR_CONNECTION_FAILED по LAN)",
+          "status": "closed",
+          "type": "bug",
+          "priority": 1
+        },
+        {
+          "id": "bd-6b7.13",
+          "title": "mobile: после logout /login зависает на «Загрузка…» при ошибке /api/auth/me",
           "status": "closed",
           "type": "bug",
           "priority": 1
@@ -428,12 +442,12 @@
       "title": "Auth",
       "status": "closed",
       "priority": 1,
-      "children_total": 9,
-      "children_closed": 7,
+      "children_total": 10,
+      "children_closed": 8,
       "children_in_progress": 0,
       "children_open": 2,
-      "progress": "7 / 9",
-      "percent_closed": 78,
+      "progress": "8 / 10",
+      "percent_closed": 80,
       "children": [
         {
           "id": "bd-8jk",
@@ -483,6 +497,13 @@
           "status": "open",
           "type": "feature",
           "priority": 2
+        },
+        {
+          "id": "bd-957.7",
+          "title": "mobile: /login form уходит GET с credential query; нужен progressive POST fallback",
+          "status": "closed",
+          "type": "bug",
+          "priority": 1
         },
         {
           "id": "bd-v2y",
@@ -950,6 +971,33 @@
     }
   ],
   "issues": [
+    {
+      "id": "bd-957.7",
+      "title": "mobile: /login form уходит GET с credential query; нужен progressive POST fallback",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": "bd-957",
+      "updated_at": "2026-08-04T10:19:32Z"
+    },
+    {
+      "id": "bd-6b7.13",
+      "title": "mobile: после logout /login зависает на «Загрузка…» при ошибке /api/auth/me",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": "bd-6b7",
+      "updated_at": "2026-08-04T10:19:31Z"
+    },
+    {
+      "id": "bd-6b7.12",
+      "title": "mobile: logout 303 редиректит на localhost (ERR_CONNECTION_FAILED по LAN)",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": "bd-6b7",
+      "updated_at": "2026-08-03T14:00:16Z"
+    },
     {
       "id": "bd-6b7.11",
       "title": "mobile: «Выйти» не срабатывает (нужен progressive form POST)",

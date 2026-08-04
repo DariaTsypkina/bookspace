@@ -33,15 +33,15 @@ describe('Profile page Tailwind+shadcn migration (S11 / bd-wus.14)', () => {
     expect(logoutSource).not.toMatch(/className=["']logout-button["']/);
   });
 
-  it('keeps profile stub UX: RU copy, slug, LogoutButton', () => {
+  it('keeps profile stub UX: RU copy, slug, progressive LogoutButton (bd-6b7.11)', () => {
     expect(pageSource).toMatch(/Профиль/);
     expect(pageSource).toMatch(/Публичный профиль пользователя/);
     expect(pageSource).toMatch(/скоро появится/);
     expect(pageSource).toMatch(/\{slug\}/);
     expect(pageSource).toMatch(/LogoutButton/);
     expect(logoutSource).toMatch(/Выйти/);
-    expect(logoutSource).toMatch(/Выход…/);
-    expect(logoutSource).toMatch(/router\.push\(['"]\/login['"]\)/);
+    expect(logoutSource).toMatch(/action=["']\/api\/logout["']/);
+    expect(logoutSource).toMatch(/method=["']post["']/);
   });
 
   it('validates slug via shared ProfileSlugParamSchema helper', () => {
