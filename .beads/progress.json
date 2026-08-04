@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-04T15:21:11.742Z",
+  "generated_at": "2026-08-04T15:21:45.914Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 140,
     "open_issues": 27,
-    "in_progress_issues": 1,
-    "closed_issues": 112,
+    "in_progress_issues": 0,
+    "closed_issues": 113,
     "blocked_issues": 8,
     "ready_issues": 19
   },
@@ -653,11 +653,11 @@
       "status": "open",
       "priority": 2,
       "children_total": 6,
-      "children_closed": 3,
-      "children_in_progress": 1,
+      "children_closed": 4,
+      "children_in_progress": 0,
       "children_open": 2,
-      "progress": "3 / 6",
-      "percent_closed": 50,
+      "progress": "4 / 6",
+      "percent_closed": 67,
       "children": [
         {
           "id": "bd-cq7.1",
@@ -676,7 +676,7 @@
         {
           "id": "bd-cq7.3",
           "title": "Библиотека: Теги пользователя",
-          "status": "in_progress",
+          "status": "closed",
           "type": "feature",
           "priority": 2
         },
@@ -2007,11 +2007,11 @@
     {
       "id": "bd-cq7.3",
       "title": "Библиотека: Теги пользователя",
-      "status": "in_progress",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-cq7",
-      "updated_at": "2026-08-04T15:14:27Z"
+      "updated_at": "2026-08-04T15:21:42Z"
     },
     {
       "id": "bd-cq7.1",
