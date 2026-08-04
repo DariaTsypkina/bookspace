@@ -30,6 +30,14 @@ describe('Root layout shell Tailwind migration (bd-wus.18)', () => {
     expect(layoutSource).toMatch(/<AppNav\s*\/>/);
   });
 
+  it('wraps shell with AuthProvider (bd-957.6)', () => {
+    expect(layoutSource).toMatch(/AuthProvider/);
+    expect(layoutSource).toMatch(/from ['"].*auth-provider['"]/);
+    expect(layoutSource).toMatch(
+      /<AuthProvider>[\s\S]*<AppNav\s*\/>[\s\S]*\{children\}[\s\S]*<\/AuthProvider>/,
+    );
+  });
+
   it('removes .app-shell and .app-content rules from globals.css', () => {
     expect(globalsSource).not.toMatch(/\.app-shell\b/);
     expect(globalsSource).not.toMatch(/\.app-content\b/);

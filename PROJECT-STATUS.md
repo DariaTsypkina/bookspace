@@ -122,8 +122,9 @@
 | ✅ | `bd-957.3` | Auth: Яндекс OAuth |
 | ✅ | `bd-v2y` | Auth: сессия и защита маршрутов |
 | ✅ | `bd-wlw` | Auth: rate limit на register/login |
-| ⬜ | `bd-957.5` | UI: показать/скрыть пароль (глаз) на полях пароля (human-reported) · сборочная `feat/bookspace-bd-957` |
-| ⬜ | `bd-957.6` | web: Auth Context — один `/api/auth/me` на сессию клиента (human-reported) · сборочная `feat/bookspace-bd-957` |
+| ✅ | `bd-957.5` | UI: показать/скрыть пароль (глаз) на полях пароля (human-reported) · сборочная `feat/bookspace-bd-common` |
+| ✅ | `bd-957.6` | web: Auth Context — один `/api/auth/me` на сессию клиента (human-reported) · сборочная `feat/bookspace-bd-common` |
+| 🔄 | `bd-3h3` | [bug] lint: AdminOnly setState-in-effect (`react-hooks/set-state-in-effect`) · discovered-from `bd-957.6` · сборочная `feat/bookspace-bd-common` · ветка `task/bd-3h3-admin-only-lint-setstate` |
 | ✅ | `bd-957.7` | [bug] mobile: login progressive POST `/api/login` (не GET с credentials в query) · merged → `fix/bookspace-bd-bugs` |
 
 ### 2. Каталог — ✅ · epic `bd-6v0` · 6 / 6 (эпик закрыт)
@@ -238,6 +239,11 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-04 | `bd-3h3` ready close: AdminOnly — derived `ready` (без setState в effect); unit admin-only+guest+auth-provider **16/16**; lint **0 errors**; PW auth-context+app-nav **22/22** desktop+mobile; ветка `task/bd-3h3-admin-only-lint-setstate`; `bd close` — оркестратор |
+| 2026-08-04 | `bd-957.5` ready close: `PasswordInput` (Eye/EyeOff, RU aria, FormControl→Input); unit password-input+login+register; suite **298**; PW password-visibility **4/4** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); ветка `task/bd-957.5-password-visibility-toggle`; `bd close` — оркестратор |
+| 2026-08-04 | Claim `bd-957.5`: UI глаз показать/скрыть пароль на `/login`+`/register`; conventions (design/notes); sync origin/develop OK; ветка `task/bd-957.5-password-visibility-toggle` от `feat/bookspace-bd-common`; `bd close` — оркестратор |
+| 2026-08-04 | `bd-5po` close-prep: `resolveSpoilerCookieDomain` + `acceptSpoilers` domain=hostname (не localhost); unit **5/5**; PW character-page **12/12** desktop+mobile на localhost; **12/12** на `BASE_URL=http://127.0.0.1:3000` (+`NEXT_ALLOWED_DEV_ORIGINS=127.0.0.1` для HMR); ветка `task/bd-5po-spoiler-cookie-domain`; `bd close` за оркестратором |
+| 2026-08-04 | `bd-5po` 🔄: conventions (design/acceptance Критерии+Проверка/notes/labels area:web+sec:ui+dx+e2e); sync origin/develop Already up to date; TDD `resolveSpoilerCookieDomain` + `acceptSpoilers` без хардкода localhost; ветка `task/bd-5po-spoiler-cookie-domain` (сборочная `feat/bookspace-bd-common`); `bd close` за оркестратором |
 | 2026-08-04 | Оркестратор: `bd-6b7.13`+`bd-957.7` closed+merged в `fix/bookspace-bd-bugs` (GuestOnly SSR-safe, SW unregister dev, login POST `/api/login`, Profile pending→/login, env `NEXT_ALLOWED_DEV_ORIGINS`, .env.example без значений); Chrome `__gcruniqueid` hydration — note в auth-session; vitest focused 46; PR сборочной → develop |
 | 2026-08-03 | Оркестратор: `bd-6b7.12` closed+merged в `fix/bookspace-bd-bugs` (`loginRedirectUrl` Host/x-forwarded-*; vitest logout 7/7; mapping → [subagent](49ad360d-6b0b-4c24-a295-d2177a48759a)); ЗАЛИВАТЬ develop=Нет |
 | 2026-08-03 | Claim `bd-6b7.12`: logout Location из Host/x-forwarded-host; ветка `task/bd-6b7.12-logout-redirect-host` от `fix/bookspace-bd-bugs` |
@@ -250,6 +256,7 @@
 | 2026-08-03 | Оркестратор: claim `bd-6v0.11` → `task/bd-6v0.11-search-query-param` (сборочная `fix/bookspace-bd-bugs`) |
 | 2026-08-03 | Оркестратор: `bd-6b7.9` closed+merged `--no-ff` в `fix/bookspace-bd-bugs` (assign /login; vitest 267; PW logout mobile+desktop) |
 | 2026-08-03 | Оркестратор batch `fix/bookspace-bd-bugs`: claim `bd-6b7.9` → ветка `task/bd-6b7.9-mobile-logout-redirect`; очередь `bd-6b7.9` → `bd-6v0.11`; ЗАЛИВАТЬ develop=Нет |
+| 2026-08-04 | `bd-957.6` claim/в работе: Auth Context (один `/me` на mount); ветка `task/bd-957.6-auth-context` от `feat/bookspace-bd-common`; sync origin/develop OK |
 | 2026-08-03 | Intake `/task`: `bd-957.6` — Auth Context (один `/me` на клиент; без стейт-менеджера); feature-doc `auth-session` |
 | 2026-08-03 | Intake `/task`: `bd-6v0.11` bug — mobile search native GET `?query=` vs page `q`; dashboard `bd-6v0.10` → ✅ |
 | 2026-08-03 | Intake `/task`: `bd-6b7.9` bug — mobile logout без редиректа на `/login`; `bd-957.5` feature — глаз показать/скрыть пароль на login/register |

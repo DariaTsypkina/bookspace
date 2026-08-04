@@ -17,6 +17,8 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { PasswordInput } from '@/components/ui/password-input';
+import { useAuth } from '../../components/auth-provider';
 import { getFriendlyZodIssueMessage } from '@/lib/form-errors';
 import { register } from '../../lib/auth';
 
@@ -27,6 +29,7 @@ type RegisterFormValues = {
 
 function RegisterForm() {
   const router = useRouter();
+  const { refresh } = useAuth();
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(RegisterInputSchema),
     defaultValues: {
@@ -40,6 +43,7 @@ function RegisterForm() {
 
     try {
       await register(values.email, values.password);
+      await refresh();
       router.push('/login');
     } catch (submitError) {
       form.setError('root', {
@@ -106,13 +110,7 @@ function RegisterForm() {
                     <FormLabel className="font-normal text-muted">
                       Пароль
                     </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="password"
-                        autoComplete="new-password"
-                        {...field}
-                      />
-                    </FormControl>
+                    <PasswordInput autoComplete="new-password" {...field} />
                     <FormMessage />
                   </FormItem>
                 )}
