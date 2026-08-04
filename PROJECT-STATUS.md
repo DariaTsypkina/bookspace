@@ -123,7 +123,8 @@
 | ✅ | `bd-v2y` | Auth: сессия и защита маршрутов |
 | ✅ | `bd-wlw` | Auth: rate limit на register/login |
 | ✅ | `bd-957.5` | UI: показать/скрыть пароль (глаз) на полях пароля (human-reported) · сборочная `feat/bookspace-bd-common` |
-| 🔄 | `bd-957.6` | web: Auth Context — один `/api/auth/me` на сессию клиента (human-reported) · сборочная `feat/bookspace-bd-common` · ветка `task/bd-957.6-auth-context` |
+| ✅ | `bd-957.6` | web: Auth Context — один `/api/auth/me` на сессию клиента (human-reported) · сборочная `feat/bookspace-bd-common` |
+| 🔄 | `bd-3h3` | [bug] lint: AdminOnly setState-in-effect (`react-hooks/set-state-in-effect`) · discovered-from `bd-957.6` · сборочная `feat/bookspace-bd-common` · ветка `task/bd-3h3-admin-only-lint-setstate` |
 | ✅ | `bd-957.7` | [bug] mobile: login progressive POST `/api/login` (не GET с credentials в query) · merged → `fix/bookspace-bd-bugs` |
 
 ### 2. Каталог — ✅ · epic `bd-6v0` · 6 / 6 (эпик закрыт)
@@ -238,6 +239,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-04 | `bd-3h3` ready close: AdminOnly — derived `ready` (без setState в effect); unit admin-only+guest+auth-provider **16/16**; lint **0 errors**; PW auth-context+app-nav **22/22** desktop+mobile; ветка `task/bd-3h3-admin-only-lint-setstate`; `bd close` — оркестратор |
 | 2026-08-04 | `bd-957.5` ready close: `PasswordInput` (Eye/EyeOff, RU aria, FormControl→Input); unit password-input+login+register; suite **298**; PW password-visibility **4/4** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); ветка `task/bd-957.5-password-visibility-toggle`; `bd close` — оркестратор |
 | 2026-08-04 | Claim `bd-957.5`: UI глаз показать/скрыть пароль на `/login`+`/register`; conventions (design/notes); sync origin/develop OK; ветка `task/bd-957.5-password-visibility-toggle` от `feat/bookspace-bd-common`; `bd close` — оркестратор |
 | 2026-08-04 | `bd-5po` close-prep: `resolveSpoilerCookieDomain` + `acceptSpoilers` domain=hostname (не localhost); unit **5/5**; PW character-page **12/12** desktop+mobile на localhost; **12/12** на `BASE_URL=http://127.0.0.1:3000` (+`NEXT_ALLOWED_DEV_ORIGINS=127.0.0.1` для HMR); ветка `task/bd-5po-spoiler-cookie-domain`; `bd close` за оркестратором |
