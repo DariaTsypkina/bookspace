@@ -141,14 +141,14 @@
 | ✅ | `bd-6v0.10` | Поиск: префикс `роул` не находит «Роулинг» (human-reported) |
 | ✅ | `bd-6v0.11` | [bug] mobile: поиск «Найти» → native `?q=` + server fallback `query` · merged → `fix/bookspace-bd-bugs` |
 
-### 3. Связи и порядок — 🔄 · epic `bd-azl` · 2 / 4
+### 3. Связи и порядок — 🔄 · epic `bd-azl` · 3 / 4
 
 | Статус | ID | Задача |
 |--------|-----|--------|
 | ✅ | `bd-azl.1` | Связи: Карточка серии |
 | ✅ | `bd-azl.2` | Связи произведений |
-| 🔄 | `bd-azl.3` | Связи: Порядок чтения · ready close |
-| ⬜ | `bd-azl.4` | Связи: Spoiler gate |
+| ✅ | `bd-azl.3` | Связи: Порядок чтения |
+| 🔄 | `bd-azl.4` | Связи: Spoiler gate · ready close |
 | ✅ | `bd-azl.5` | Bug: iOS Chrome — «Показать» не снимает spoiler gate (human-reported) |
 
 ### 4. ContextReading — ✅ · epic `bd-8s4` · 4 / 4 (эпик закрыт)
@@ -239,6 +239,8 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-04 | `bd-azl.4` ready close: cookie `spoilers_ok=1` Max-Age≈30d Path=/ SameSite=Lax (+Secure HTTPS) + localStorage fallback; unit spoiler-gate **12/12**; PW spoiler-gate+character+work-relations+reading-order **36/36** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); manual `e2e/manual/spoiler-gate.md`; критерии feature-doc ✅; ветка `task/bd-azl.4-spoiler-gate`; `bd close` — оркестратор |
+| 2026-08-04 | `bd-azl.3` ✅ closed+merged → `feat/bookspace-bd-azl`; claim `bd-azl.4` → `task/bd-azl.4-spoiler-gate` |
 | 2026-08-04 | `bd-azl.3` ready close: `readingOrder[]` в GET series/work; UI «Порядок чтения» (Шаг N) за SpoilerGate на `/series` + `/books` (отдельно от «Книги»/«Связи»); API unit **27** + e2e **6/6**; web unit **22/22**; PW reading-order+work-relations **16/16** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); manual `e2e/manual/reading-order.md`; ветка `task/bd-azl.3-reading-order`; `bd close` — оркестратор |
 | 2026-08-04 | `bd-azl.2` ✅ closed+merged → `feat/bookspace-bd-azl`; claim `bd-azl.3` → `task/bd-azl.3-reading-order` |
 | 2026-08-04 | `bd-azl.2` ready close: Prisma WorkRelation + `relations[]` в GET `/catalog/works/:slug` (только PUBLISHED); `/books/[slug]` блок «Связи» за SpoilerGate (reuse); RU-лейблы; API unit **9/9** + e2e **5/5**; web unit catalog-work+books-page; PW work-relations **6/6** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); manual `e2e/manual/work-relations.md`; ветка `task/bd-azl.2-work-relations`; `bd close` — оркестратор |
