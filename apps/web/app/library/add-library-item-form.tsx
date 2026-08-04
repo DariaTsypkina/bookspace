@@ -31,7 +31,11 @@ type AddLibraryItemFormValues = {
   rating?: number | null;
 };
 
-export function AddLibraryItemForm() {
+type AddLibraryItemFormProps = {
+  onSuccess?: () => void;
+};
+
+export function AddLibraryItemForm({ onSuccess }: AddLibraryItemFormProps) {
   const [status, setStatus] = useState<{
     kind: 'success' | 'error';
     message: string;
@@ -64,6 +68,7 @@ export function AddLibraryItemForm() {
         kind: 'success',
         message: 'Статус сохранён',
       });
+      onSuccess?.();
     } catch (error) {
       if (error instanceof ApiError) {
         if (error.status === 401) {

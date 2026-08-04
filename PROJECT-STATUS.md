@@ -16,7 +16,7 @@
 | 2   | Каталог                          | ✅     | 6 / 6    | `bd-6v0` |
 | 3   | Связи и порядок                  | ✅     | 4 / 4    | `bd-azl` |
 | 4   | ContextReading                   | ✅     | 4 / 4    | `bd-8s4` |
-| 5   | Библиотека и профиль             | 🔄     | 1 / 5    | `bd-cq7` |
+| 5   | Библиотека и профиль             | 🔄     | 3 / 5    | `bd-cq7` |
 | 6   | Заметки и цель                   | 🔒     | 0 / 2    | `bd-sf4` |
 | 7   | Рейтинги                         | ⬜     | 0 / 3    | `bd-es5` |
 | 8   | Подборки                         | ⬜     | 0 / 3    | `bd-b75` |
@@ -166,8 +166,8 @@
 | ------ | ---------- | ---------------------------------------------------------------------------------------------------------- |
 | ✅     | `bd-cq7.1` | Библиотека: Статус и оценка книги                                                                          |
 | ✅     | `bd-cq7.2` | Библиотека: Пользовательские полки                                                                         |
-| 🔄     | `bd-cq7.3` | Библиотека: Теги пользователя                                                                              |
-| ⬜     | `bd-cq7.4` | Библиотека: Моя библиотека                                                                                 |
+| ✅     | `bd-cq7.3` | Библиотека: Теги пользователя                                                                              |
+| 🔄     | `bd-cq7.4` | Библиотека: Моя библиотека                                                                                 |
 | ⬜     | `bd-cq7.5` | Библиотека: Публичный профиль                                                                              |
 | ✅     | `bd-cq7.6` | Bug: iOS Chrome — пустая страница Профиль `/library` (human-reported) · сборочная `feat/bookspace-bd-bugs` |
 
@@ -239,6 +239,7 @@
 
 | Дата       | Действие                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-08-04 | `bd-cq7.4` in progress: claim + bd-conventions; ветка `task/bd-cq7.4-user-library-page`; sync origin/develop OK; GET `/me/library?status=` + UI кабинет `/library` (коллекция, фильтры, полки/цель placeholder) |
 | 2026-08-04 | `bd-cq7.3` ready close: Tag/UserBookTag Prisma+API CRUD + assign `/me/library/works/:slug/tags` + public library tags; UI `/books` tags form + `/u/[slug]` display; unit api me-tags+dto **7** + e2e **2**; web unit **334**; PW user-tags **4/4** mobile+desktop (`PLAYWRIGHT_CHROME_CHANNEL=0`); manual `e2e/manual/user-tags.md`; ветка `task/bd-cq7.3-user-tags`; `bd close` — оркестратор |
 | 2026-08-04 | `bd-cq7.3` in progress: claim + bd-conventions (design/acceptance/notes/labels); ветка `task/bd-cq7.3-user-tags`; sync origin/develop OK; старт TDD Tag/UserBookTag |
 | 2026-08-04 | `bd-cq7.2` ready close: Shelf/ShelfItem Prisma+API CRUD + public GET `/users/:slug/shelves`; UI `/library/shelves` + empty state + min `/u/[slug]` shelves; unit api me-shelves+dto **8** (api total 218) + e2e **2**; web unit **330**; PW user-shelves **4/4** mobile+desktop (`PLAYWRIGHT_CHROME_CHANNEL=0`); manual `e2e/manual/user-shelves.md`; ветка `task/bd-cq7.2-user-shelves`; `bd close` — оркестратор |

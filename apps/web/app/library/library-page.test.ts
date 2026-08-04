@@ -8,7 +8,7 @@ const globalsSource = readFileSync(
   'utf8',
 );
 
-describe('Library page Tailwind+shadcn migration (S12 / bd-wus.15)', () => {
+describe('Library page (bd-cq7.4 / Моя библиотека)', () => {
   it('does not use legacy library-stub class name on the page', () => {
     expect(pageSource).not.toMatch(/className=["']library-stub["']/);
     expect(pageSource).not.toMatch(/\blibrary-stub\b/);
@@ -18,42 +18,34 @@ describe('Library page Tailwind+shadcn migration (S12 / bd-wus.15)', () => {
     expect(pageSource).toMatch(/\bflex\b/);
     expect(pageSource).toMatch(/\bflex-1\b/);
     expect(pageSource).toMatch(/text-foreground/);
-    expect(pageSource).toMatch(/text-muted/);
   });
 
-  it('uses shadcn Card on the page', () => {
-    expect(pageSource).toMatch(/from ['"]@\/components\/ui\/card['"]/);
-    expect(pageSource).toMatch(/\bCard\b/);
-    expect(pageSource).toMatch(/\bCardContent\b/);
-  });
-
-  it('keeps library stub UX: RU copy', () => {
+  it('keeps RU heading and mounts LibraryCabinet', () => {
     expect(pageSource).toMatch(/Моя библиотека/);
-    expect(pageSource).toMatch(/Коллекция и фильтры появятся здесь/);
-    expect(pageSource).toMatch(/Мои полки/);
-    expect(pageSource).toMatch(/\/library\/shelves/);
+    expect(pageSource).toMatch(/LibraryCabinet/);
+    expect(pageSource).toMatch(/from ['"]\.\/library-cabinet['"]/);
   });
 
-  it('shows LogoutButton for signed-in profile destination (bd-6b7.8)', () => {
-    expect(pageSource).toMatch(/LogoutButton/);
-    expect(pageSource).toMatch(/from ['"]@\/components\/logout-button['"]/);
-  });
-
-  it('mounts AddLibraryItemForm (RHF + Zod migration)', () => {
-    expect(pageSource).toMatch(/AddLibraryItemForm/);
-    expect(pageSource).toMatch(/from ['"]\.\/add-library-item-form['"]/);
+  it('cabinet links shelves + goal and mounts collection + add form', () => {
+    const cabinetSource = readFileSync(
+      path.join(__dirname, 'library-cabinet.tsx'),
+      'utf8',
+    );
+    expect(cabinetSource).toMatch(/Мои полки/);
+    expect(cabinetSource).toMatch(/\/library\/shelves/);
+    expect(cabinetSource).toMatch(/Цель на год/);
+    expect(cabinetSource).toMatch(/\/library\/goal/);
+    expect(cabinetSource).toMatch(/LibraryCollection/);
+    expect(cabinetSource).toMatch(/AddLibraryItemForm/);
+    expect(cabinetSource).toMatch(/LogoutButton/);
   });
 
   it('removes orphan .library-stub rules from globals.css', () => {
     expect(globalsSource).not.toMatch(/\.library-stub\b/);
   });
 
-  it('keeps stub heading and body text paint tokens visible (bd-cq7.6)', () => {
-    expect(pageSource).toMatch(/text-foreground/);
-    expect(pageSource).toMatch(/text-muted/);
-    expect(pageSource).toMatch(/Моя библиотека/);
-    expect(pageSource).toMatch(/Коллекция и фильтры появятся здесь/);
-    // Content must stay above mobile tab-bar padding from root layout
+  it('drops stub placeholder copy; keeps mobile padding', () => {
+    expect(pageSource).not.toMatch(/Коллекция и фильтры появятся здесь/);
     expect(pageSource).toMatch(/\bpt-5\b/);
     expect(pageSource).toMatch(/\bpx-4\b/);
   });

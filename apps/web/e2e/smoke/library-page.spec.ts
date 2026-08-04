@@ -10,8 +10,8 @@ function uniqueEmail() {
   return `library-${Date.now()}-${Math.random().toString(36).slice(2, 8)}@example.com`;
 }
 
-test.describe('Library page smoke (S12 / bd-wus.15)', () => {
-  test('guest: /library stub without legacy library-stub class', async ({
+test.describe('Library page smoke (S12 / bd-wus.15 + bd-cq7.4)', () => {
+  test('guest: /library without legacy library-stub class', async ({
     page,
   }) => {
     await page.goto('/library');
@@ -21,13 +21,14 @@ test.describe('Library page smoke (S12 / bd-wus.15)', () => {
       level: 1,
     });
     await expect(heading).toBeVisible();
-    await expect(
-      page.getByText('Коллекция и фильтры появятся здесь. Полки уже доступны.'),
-    ).toBeVisible();
     await expect(page.getByRole('link', { name: 'Мои полки' })).toHaveAttribute(
       'href',
       '/library/shelves',
     );
+    await expect(
+      page.getByRole('link', { name: 'Цель на год' }),
+    ).toHaveAttribute('href', '/library/goal');
+    await expect(page.getByRole('link', { name: 'Войдите' })).toBeVisible();
 
     const main = page.locator('main');
     await expect(main).toBeVisible();
@@ -58,7 +59,7 @@ test.describe('Library page smoke (S12 / bd-wus.15)', () => {
     expect(color).toBe('rgb(28, 25, 23)');
   });
 
-  test('authenticated user: Профиль → /library stub, aria-current', async ({
+  test('authenticated user: Профиль → /library, aria-current', async ({
     page,
   }) => {
     const email = uniqueEmail();
@@ -86,7 +87,7 @@ test.describe('Library page smoke (S12 / bd-wus.15)', () => {
       page.getByRole('heading', { name: 'Моя библиотека', level: 1 }),
     ).toBeVisible();
     await expect(
-      page.getByText('Коллекция и фильтры появятся здесь. Полки уже доступны.'),
+      page.getByText('В коллекции пока пусто', { exact: false }),
     ).toBeVisible();
 
     const main = page.locator('main');
@@ -168,7 +169,7 @@ test.describe('Library / Profile empty-page fix (bd-cq7.6)', () => {
     await expect(page.getByRole('button', { name: 'Войти' })).toBeVisible();
   });
 
-  test('slow /api/auth/me: Профиль pending → /library stub visible in viewport', async ({
+  test('slow /api/auth/me: Профиль pending → /library visible in viewport', async ({
     page,
   }) => {
     await page.route('**/api/auth/me', async (route) => {
@@ -204,12 +205,10 @@ test.describe('Library / Profile empty-page fix (bd-cq7.6)', () => {
       expect(box.y).toBeGreaterThanOrEqual(0);
       expect(box.y + box.height).toBeLessThan(viewport.height);
     }
-    await expect(
-      page.getByText('Коллекция и фильтры появятся здесь. Полки уже доступны.'),
-    ).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Мои полки' })).toBeVisible();
   });
 
-  test('iPhone viewport: /library stub heading and body stay visible', async ({
+  test('iPhone viewport: /library heading and body stay visible', async ({
     page,
   }) => {
     await page.setViewportSize({ width: 393, height: 852 }); // iPhone 17-ish
@@ -220,9 +219,7 @@ test.describe('Library / Profile empty-page fix (bd-cq7.6)', () => {
       level: 1,
     });
     await expect(heading).toBeVisible();
-    await expect(
-      page.getByText('Коллекция и фильтры появятся здесь. Полки уже доступны.'),
-    ).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Мои полки' })).toBeVisible();
 
     const box = await heading.boundingBox();
     expect(box).not.toBeNull();
