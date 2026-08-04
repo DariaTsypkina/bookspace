@@ -126,6 +126,28 @@ export class MeLibraryService {
     return this.toResponse(row);
   }
 
+  async list(
+    userId: string,
+    status?: UpsertUserBookInput['status'],
+  ): Promise<UserBookResponse[]> {
+    const rows = await this.prisma.userBook.findMany({
+      where: {
+        userId,
+        ...(status !== undefined ? { status: status as UserBookStatus } : {}),
+        work: {
+          deletedAt: null,
+          status: WorkStatus.PUBLISHED,
+        },
+      },
+      include: {
+        work: { select: workSelect },
+        tags: tagsInclude,
+      },
+      orderBy: [{ updatedAt: 'desc' }],
+    });
+    return rows.map((row) => this.toResponse(row));
+  }
+
   async getByWorkSlug(
     userId: string,
     workSlug: string,

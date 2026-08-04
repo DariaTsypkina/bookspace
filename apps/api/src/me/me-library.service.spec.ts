@@ -220,4 +220,71 @@ describe('MeLibraryService', () => {
     const pub = await service.listPublicBySlug(user.slug);
     expect(pub.items).toHaveLength(0);
   });
+
+  it('list returns owner collection; filters by status; hides drafts', async () => {
+    const user = await prisma.user.create({
+      data: {
+        email: `${TEST_PREFIX}-list@bookspace.local`,
+        slug: `${TEST_PREFIX}-list`,
+        role: UserRole.USER,
+        passwordHash: 'x',
+      },
+    });
+    const want = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-want`,
+        titleRu: 'Хочу',
+        status: WorkStatus.PUBLISHED,
+      },
+    });
+    const reading = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-reading`,
+        titleRu: 'Читаю',
+        status: WorkStatus.PUBLISHED,
+      },
+    });
+    const draft = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-draft`,
+        titleRu: 'Черновик',
+        status: WorkStatus.PUBLISHED,
+      },
+    });
+
+    await service.upsert(user.id, {
+      workSlug: want.slug,
+      status: 'WANT',
+      rating: 4,
+    });
+    await service.upsert(user.id, {
+      workSlug: reading.slug,
+      status: 'READING',
+    });
+    await service.upsert(user.id, {
+      workSlug: draft.slug,
+      status: 'READ',
+    });
+    await prisma.work.update({
+      where: { id: draft.id },
+      data: { status: WorkStatus.DRAFT },
+    });
+
+    const all = await service.list(user.id);
+    expect(all.map((i) => i.workSlug).sort()).toEqual(
+      [`${TEST_PREFIX}-reading`, `${TEST_PREFIX}-want`].sort(),
+    );
+
+    const filtered = await service.list(user.id, 'WANT');
+    expect(filtered).toHaveLength(1);
+    expect(filtered[0]).toMatchObject({
+      workSlug: want.slug,
+      titleRu: 'Хочу',
+      status: 'WANT',
+      rating: 4,
+    });
+
+    const empty = await service.list(user.id, 'ABANDONED');
+    expect(empty).toEqual([]);
+  });
 });

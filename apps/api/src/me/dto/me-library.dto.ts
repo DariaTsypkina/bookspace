@@ -1,4 +1,5 @@
 import {
+  MeLibraryListQuerySchema,
   PatchUserBookInputSchema,
   ProfileSlugParamSchema,
   PutUserBookBySlugInputSchema,
@@ -15,6 +16,10 @@ export class PutUserBookBySlugDto extends createZodDto(
 ) {}
 
 export class PatchUserBookDto extends createZodDto(PatchUserBookInputSchema) {}
+
+export class MeLibraryListQueryDto extends createZodDto(
+  MeLibraryListQuerySchema,
+) {}
 
 /** @deprecated alias — same as UpsertUserBookDto */
 export class AddLibraryItemDto extends createZodDto(

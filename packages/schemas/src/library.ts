@@ -167,6 +167,27 @@ export const UserBookResponseSchema = z.object({
 
 export type UserBookResponse = z.infer<typeof UserBookResponseSchema>;
 
+/**
+ * GET `/me/library` — список коллекции владельца.
+ * Query `status` опционален (WANT|READING|READ|ABANDONED).
+ */
+export const MeLibraryListQuerySchema = z.object({
+  status: z
+    .union([UserBookStatusSchema, z.literal('')])
+    .optional()
+    .transform((value) =>
+      value === undefined || value === '' ? undefined : value,
+    ),
+});
+
+export type MeLibraryListQuery = z.infer<typeof MeLibraryListQuerySchema>;
+
+export const MeLibraryListResponseSchema = z.object({
+  items: z.array(UserBookResponseSchema),
+});
+
+export type MeLibraryListResponse = z.infer<typeof MeLibraryListResponseSchema>;
+
 /** Создать полку: title обязателен; slug генерируется на сервере, если не задан. */
 export const CreateShelfInputSchema = z.object({
   title: z.string().trim().min(1).max(200),
