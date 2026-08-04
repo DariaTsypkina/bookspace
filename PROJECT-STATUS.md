@@ -16,7 +16,7 @@
 | 2 | Каталог | ✅ | 6 / 6 | `bd-6v0` |
 | 3 | Связи и порядок | ✅ | 4 / 4 | `bd-azl` |
 | 4 | ContextReading | ✅ | 4 / 4 | `bd-8s4` |
-| 5 | Библиотека и профиль | ⬜ | 0 / 5 | `bd-cq7` |
+| 5 | Библиотека и профиль | 🔄 | 0 / 5 | `bd-cq7` |
 | 6 | Заметки и цель | 🔒 | 0 / 2 | `bd-sf4` |
 | 7 | Рейтинги | ⬜ | 0 / 3 | `bd-es5` |
 | 8 | Подборки | ⬜ | 0 / 3 | `bd-b75` |
@@ -160,11 +160,11 @@
 | ✅ | `bd-8s4.3` | ContextReading: Пайплайн extract ContextReading |
 | ✅ | `bd-8s4.4` | ContextReading: Админка ContextReading |
 
-### 5. Библиотека и профиль — ⬜ · epic `bd-cq7` · 0 / 5
+### 5. Библиотека и профиль — 🔄 · epic `bd-cq7` · 0 / 5 · сборочная `feat/bookspace-bd-cq7`
 
 | Статус | ID | Задача |
 |--------|-----|--------|
-| ⬜ | `bd-cq7.1` | Библиотека: Статус и оценка книги |
+| 🔄 | `bd-cq7.1` | Библиотека: Статус и оценка книги |
 | ⬜ | `bd-cq7.2` | Библиотека: Пользовательские полки |
 | ⬜ | `bd-cq7.3` | Библиотека: Теги пользователя |
 | ⬜ | `bd-cq7.4` | Библиотека: Моя библиотека |
@@ -239,6 +239,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-04 | Оркестратор: сборочная `feat/bookspace-bd-cq7` от develop; очередь cq7.1→.2→.3→.4→.5; claim `bd-cq7.1`; ЗАЛИВАТЬ=Нет |
 | 2026-08-04 | Целевая проверка `feat/bookspace-bd-azl`: API 30+e2e6, web 34; PW series/relations/order/spoiler/character **44/44** desktop+mobile. ЗАЛИВАТЬ=Нет — сборочная на ревью |
 | 2026-08-04 | Эпик `bd-azl` ✅ closed на сборочной `feat/bookspace-bd-azl` (дети .1–.5); перед целевой проверкой |
 | 2026-08-04 | `bd-azl.4` ready close: cookie `spoilers_ok=1` Max-Age≈30d Path=/ SameSite=Lax (+Secure HTTPS) + localStorage fallback; unit spoiler-gate **12/12**; PW spoiler-gate+character+work-relations+reading-order **36/36** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); manual `e2e/manual/spoiler-gate.md`; критерии feature-doc ✅; ветка `task/bd-azl.4-spoiler-gate`; `bd close` — оркестратор |
