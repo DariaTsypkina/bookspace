@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-04T10:57:03.457Z",
+  "generated_at": "2026-08-04T10:57:32.561Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 139,
     "open_issues": 35,
-    "in_progress_issues": 1,
-    "closed_issues": 103,
+    "in_progress_issues": 0,
+    "closed_issues": 104,
     "blocked_issues": 7,
     "ready_issues": 28
   },
@@ -974,11 +974,11 @@
     {
       "id": "bd-3h3",
       "title": "lint: admin-only setState in effect (react-hooks/set-state-in-effect)",
-      "status": "in_progress",
+      "status": "closed",
       "type": "bug",
       "priority": 1,
       "parent": null,
-      "updated_at": "2026-08-04T10:55:03Z"
+      "updated_at": "2026-08-04T10:57:28Z"
     },
     {
       "id": "bd-957.7",
