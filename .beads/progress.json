@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-04T11:43:24.824Z",
+  "generated_at": "2026-08-04T11:43:50.997Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 140,
-    "open_issues": 31,
+    "open_issues": 30,
     "in_progress_issues": 0,
-    "closed_issues": 109,
+    "closed_issues": 110,
     "blocked_issues": 7,
-    "ready_issues": 24
+    "ready_issues": 23
   },
   "epics": [
     {
@@ -566,7 +566,7 @@
     {
       "id": "bd-azl",
       "title": "Связи и порядок",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
       "children_total": 5,
       "children_closed": 5,
@@ -2115,11 +2115,11 @@
     {
       "id": "bd-azl",
       "title": "Связи и порядок",
-      "status": "open",
+      "status": "closed",
       "type": "epic",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-07-17T12:36:01Z"
+      "updated_at": "2026-08-04T11:43:47Z"
     },
     {
       "id": "bd-957.3",
