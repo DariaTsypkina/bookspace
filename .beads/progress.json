@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-04T11:48:16.759Z",
+  "generated_at": "2026-08-04T15:01:36.604Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 140,
-    "open_issues": 30,
+    "open_issues": 29,
     "in_progress_issues": 0,
-    "closed_issues": 110,
-    "blocked_issues": 7,
-    "ready_issues": 23
+    "closed_issues": 111,
+    "blocked_issues": 9,
+    "ready_issues": 20
   },
   "epics": [
     {
@@ -653,16 +653,16 @@
       "status": "open",
       "priority": 2,
       "children_total": 6,
-      "children_closed": 1,
+      "children_closed": 2,
       "children_in_progress": 0,
-      "children_open": 5,
-      "progress": "1 / 6",
-      "percent_closed": 17,
+      "children_open": 4,
+      "progress": "2 / 6",
+      "percent_closed": 33,
       "children": [
         {
           "id": "bd-cq7.1",
           "title": "Библиотека: Статус и оценка книги",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 2
         },
@@ -2016,11 +2016,11 @@
     {
       "id": "bd-cq7.1",
       "title": "Библиотека: Статус и оценка книги",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-cq7",
-      "updated_at": "2026-07-17T12:36:11Z"
+      "updated_at": "2026-08-04T15:01:32Z"
     },
     {
       "id": "bd-8s4.4",

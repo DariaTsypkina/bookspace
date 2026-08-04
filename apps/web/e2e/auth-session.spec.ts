@@ -51,7 +51,7 @@ test.describe('Auth session and guards', () => {
     request,
   }) => {
     const guest = await request.post(`${API_URL}/me/library/items`, {
-      data: { workId: 'guest-work' },
+      data: { workSlug: 'garri-potter-filosofskiy-kamen', status: 'WANT' },
     });
     expect(guest.status()).toBe(401);
 
@@ -69,10 +69,22 @@ test.describe('Auth session and guards', () => {
     expect(login.status()).toBe(200);
 
     const authed = await request.post(`${API_URL}/me/library/items`, {
-      data: { workId: 'authed-work' },
+      data: {
+        workSlug: 'garri-potter-filosofskiy-kamen',
+        status: 'READING',
+        rating: 7,
+      },
     });
     expect(authed.status()).toBe(201);
-    const body = (await authed.json()) as { ok: boolean; workId: string };
-    expect(body).toMatchObject({ ok: true, workId: 'authed-work' });
+    const body = (await authed.json()) as {
+      workSlug: string;
+      status: string;
+      rating: number;
+    };
+    expect(body).toMatchObject({
+      workSlug: 'garri-potter-filosofskiy-kamen',
+      status: 'READING',
+      rating: 7,
+    });
   });
 });
