@@ -122,8 +122,8 @@
 | ✅ | `bd-957.3` | Auth: Яндекс OAuth |
 | ✅ | `bd-v2y` | Auth: сессия и защита маршрутов |
 | ✅ | `bd-wlw` | Auth: rate limit на register/login |
-| 🔄 | `bd-957.5` | UI: показать/скрыть пароль (глаз) на полях пароля (human-reported) · сборочная `feat/bookspace-bd-common` · ветка `task/bd-957.5-password-visibility-toggle` |
-| ⬜ | `bd-957.6` | web: Auth Context — один `/api/auth/me` на сессию клиента (human-reported) · сборочная `feat/bookspace-bd-957` |
+| ✅ | `bd-957.5` | UI: показать/скрыть пароль (глаз) на полях пароля (human-reported) · сборочная `feat/bookspace-bd-common` |
+| 🔄 | `bd-957.6` | web: Auth Context — один `/api/auth/me` на сессию клиента (human-reported) · сборочная `feat/bookspace-bd-common` · ветка `task/bd-957.6-auth-context` |
 | ✅ | `bd-957.7` | [bug] mobile: login progressive POST `/api/login` (не GET с credentials в query) · merged → `fix/bookspace-bd-bugs` |
 
 ### 2. Каталог — ✅ · epic `bd-6v0` · 6 / 6 (эпик закрыт)
@@ -254,6 +254,7 @@
 | 2026-08-03 | Оркестратор: claim `bd-6v0.11` → `task/bd-6v0.11-search-query-param` (сборочная `fix/bookspace-bd-bugs`) |
 | 2026-08-03 | Оркестратор: `bd-6b7.9` closed+merged `--no-ff` в `fix/bookspace-bd-bugs` (assign /login; vitest 267; PW logout mobile+desktop) |
 | 2026-08-03 | Оркестратор batch `fix/bookspace-bd-bugs`: claim `bd-6b7.9` → ветка `task/bd-6b7.9-mobile-logout-redirect`; очередь `bd-6b7.9` → `bd-6v0.11`; ЗАЛИВАТЬ develop=Нет |
+| 2026-08-04 | `bd-957.6` claim/в работе: Auth Context (один `/me` на mount); ветка `task/bd-957.6-auth-context` от `feat/bookspace-bd-common`; sync origin/develop OK |
 | 2026-08-03 | Intake `/task`: `bd-957.6` — Auth Context (один `/me` на клиент; без стейт-менеджера); feature-doc `auth-session` |
 | 2026-08-03 | Intake `/task`: `bd-6v0.11` bug — mobile search native GET `?query=` vs page `q`; dashboard `bd-6v0.10` → ✅ |
 | 2026-08-03 | Intake `/task`: `bd-6b7.9` bug — mobile logout без редиректа на `/login`; `bd-957.5` feature — глаз показать/скрыть пароль на login/register |
