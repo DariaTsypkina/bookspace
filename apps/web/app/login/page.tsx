@@ -18,6 +18,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/ui/password-input';
+import { useAuth } from '../../components/auth-provider';
 import { getFriendlyZodIssueMessage } from '@/lib/form-errors';
 import { login } from '../../lib/auth';
 
@@ -28,6 +29,7 @@ type LoginFormValues = {
 
 function LoginForm() {
   const router = useRouter();
+  const { setUser } = useAuth();
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(LoginInputSchema),
     defaultValues: {
@@ -40,7 +42,8 @@ function LoginForm() {
     form.clearErrors('root');
 
     try {
-      await login(values.email, values.password);
+      const result = await login(values.email, values.password);
+      setUser(result.user);
       router.push('/');
     } catch (submitError) {
       form.setError('root', {

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import { AppNav } from '../components/app-nav';
+import { AuthProvider } from '../components/auth-provider';
 import { PwaSwRegister } from '../components/pwa-sw-register';
 import { designTokens } from '../lib/design-tokens';
 import { pwaManifest } from '../lib/pwa/manifest';
@@ -84,12 +85,14 @@ export default function RootLayout({
     >
       <body>
         <PwaSwRegister />
-        <div className="flex min-h-full flex-1 flex-col">
-          <AppNav />
-          <div className="flex flex-1 flex-col pb-[4.25rem] md:pb-0">
-            {children}
+        <AuthProvider>
+          <div className="flex min-h-full flex-1 flex-col">
+            <AppNav />
+            <div className="flex flex-1 flex-col pb-[4.25rem] md:pb-0">
+              {children}
+            </div>
           </div>
-        </div>
+        </AuthProvider>
       </body>
     </html>
   );
