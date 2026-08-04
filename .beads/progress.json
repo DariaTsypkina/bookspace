@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-04T10:19:31.096Z",
+  "generated_at": "2026-08-04T10:19:37.771Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 138,
     "open_issues": 38,
-    "in_progress_issues": 2,
-    "closed_issues": 98,
+    "in_progress_issues": 0,
+    "closed_issues": 100,
     "blocked_issues": 7,
     "ready_issues": 31
   },
@@ -121,11 +121,11 @@
       "status": "closed",
       "priority": 3,
       "children_total": 13,
-      "children_closed": 12,
-      "children_in_progress": 1,
+      "children_closed": 13,
+      "children_in_progress": 0,
       "children_open": 0,
-      "progress": "12 / 13",
-      "percent_closed": 92,
+      "progress": "13 / 13",
+      "percent_closed": 100,
       "children": [
         {
           "id": "bd-6b7.1",
@@ -158,7 +158,7 @@
         {
           "id": "bd-6b7.13",
           "title": "mobile: после logout /login зависает на «Загрузка…» при ошибке /api/auth/me",
-          "status": "in_progress",
+          "status": "closed",
           "type": "bug",
           "priority": 1
         },
@@ -443,11 +443,11 @@
       "status": "closed",
       "priority": 1,
       "children_total": 10,
-      "children_closed": 7,
-      "children_in_progress": 1,
+      "children_closed": 8,
+      "children_in_progress": 0,
       "children_open": 2,
-      "progress": "7 / 10",
-      "percent_closed": 70,
+      "progress": "8 / 10",
+      "percent_closed": 80,
       "children": [
         {
           "id": "bd-8jk",
@@ -501,7 +501,7 @@
         {
           "id": "bd-957.7",
           "title": "mobile: /login form уходит GET с credential query; нужен progressive POST fallback",
-          "status": "in_progress",
+          "status": "closed",
           "type": "bug",
           "priority": 1
         },
@@ -974,20 +974,20 @@
     {
       "id": "bd-957.7",
       "title": "mobile: /login form уходит GET с credential query; нужен progressive POST fallback",
-      "status": "in_progress",
+      "status": "closed",
       "type": "bug",
       "priority": 1,
       "parent": "bd-957",
-      "updated_at": "2026-08-04T10:05:52Z"
+      "updated_at": "2026-08-04T10:19:32Z"
     },
     {
       "id": "bd-6b7.13",
       "title": "mobile: после logout /login зависает на «Загрузка…» при ошибке /api/auth/me",
-      "status": "in_progress",
+      "status": "closed",
       "type": "bug",
       "priority": 1,
       "parent": "bd-6b7",
-      "updated_at": "2026-08-04T08:55:40Z"
+      "updated_at": "2026-08-04T10:19:31Z"
     },
     {
       "id": "bd-6b7.12",
