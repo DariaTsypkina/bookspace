@@ -8,12 +8,14 @@ import {
   Patch,
   Post,
   Put,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import type { SessionUser } from '../auth/auth.service';
 import {
+  MeLibraryListQueryDto,
   PatchUserBookDto,
   PutUserBookBySlugDto,
   UpsertUserBookDto,
@@ -29,6 +31,15 @@ export class MeLibraryController {
     private readonly library: MeLibraryService,
     private readonly tags: MeTagsService,
   ) {}
+
+  /** Список коллекции владельца; optional `?status=`. */
+  @Get()
+  async list(
+    @CurrentUser() user: SessionUser,
+    @Query() query: MeLibraryListQueryDto,
+  ) {
+    return { items: await this.library.list(user.id, query.status) };
+  }
 
   /** Upsert статуса/оценки (workId или workSlug в body). */
   @Post('items')

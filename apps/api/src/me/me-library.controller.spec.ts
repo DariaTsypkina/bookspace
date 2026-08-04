@@ -18,4 +18,10 @@ describe('MeLibraryController Zod migration', () => {
     expect(source).not.toMatch(/@MaxLength/);
     expect(source).not.toMatch(/class UpsertUserBookDto/);
   });
+
+  it('exposes GET list with optional status query (bd-cq7.4)', () => {
+    expect(source).toMatch(/@Get\(\)/);
+    expect(source).toMatch(/MeLibraryListQueryDto/);
+    expect(source).toMatch(/\.list\(/);
+  });
 });
