@@ -18,6 +18,7 @@ describe('GuestOnly (bd-cq7.6 / bd-957.6 — Auth Context)', () => {
     expect(source).toMatch(/router\.replace/);
     expect(source).toMatch(/profilePath/);
     expect(source).toMatch(/authenticated|status/);
+    expect(source).toMatch(/sawGuest/);
   });
 
   it('does not race its own /api/auth/me (session owned by AuthProvider)', () => {

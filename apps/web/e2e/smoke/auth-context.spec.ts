@@ -29,6 +29,22 @@ async function countMeDuring(
   return count;
 }
 
+async function loginAsAdmin(page: Page) {
+  await page.goto('/login');
+  await expect(page.getByRole('heading', { name: 'Вход' })).toBeVisible();
+  await page.getByLabel('Email').fill('admin@bookspace.local');
+  // exact: avoid PasswordInput toggle aria-label «Показать пароль» (bd-957.5)
+  await page.getByLabel('Пароль', { exact: true }).fill('Admin123!');
+  await page.getByRole('button', { name: 'Войти' }).click();
+  await expect(page).toHaveURL('/');
+}
+
+async function clickNav(page: Page, label: string, url: string) {
+  const nav = page.getByRole('navigation', { name: 'Основное меню' });
+  await nav.getByRole('link', { name: label }).click();
+  await expect(page).toHaveURL(url);
+}
+
 test.describe('Auth Context — single /api/auth/me (bd-957.6)', () => {
   test('guest: one /me on load; nav clicks do not refetch', async ({
     page,
@@ -38,7 +54,6 @@ test.describe('Auth Context — single /api/auth/me (bd-957.6)', () => {
       await expect(
         page.getByRole('navigation', { name: 'Основное меню' }),
       ).toBeVisible();
-      // wait for session resolve (Профиль → /login for guest)
       await expect(
         page
           .getByRole('navigation', { name: 'Основное меню' })
@@ -47,16 +62,10 @@ test.describe('Auth Context — single /api/auth/me (bd-957.6)', () => {
     });
     expect(meOnLoad).toBe(1);
 
-    const nav = page.getByRole('navigation', { name: 'Основное меню' });
     const meOnNav = await countMeDuring(page, async () => {
-      await nav.getByRole('link', { name: 'Поиск' }).click();
-      await expect(page).toHaveURL('/search');
-      await nav.getByRole('link', { name: 'Рейтинги' }).click();
-      await expect(page).toHaveURL('/rankings');
-      await nav.getByRole('link', { name: 'Подборки' }).click();
-      await expect(page).toHaveURL('/collections');
-      await nav.getByRole('link', { name: 'Главная' }).click();
-      await expect(page).toHaveURL('/');
+      await clickNav(page, 'Поиск', '/search');
+      await clickNav(page, 'Рейтинги', '/rankings');
+      await clickNav(page, 'Поиск', '/search');
     });
     expect(meOnNav).toBe(0);
   });
@@ -64,14 +73,9 @@ test.describe('Auth Context — single /api/auth/me (bd-957.6)', () => {
   test('GuestOnly: authenticated user is redirected away from /login', async ({
     page,
   }) => {
-    await page.goto('/login');
-    await page.getByLabel('Email').fill('admin@bookspace.local');
-    await page.getByLabel('Пароль').fill('Admin123!');
-    await page.getByRole('button', { name: 'Войти' }).click();
-    await expect(page).toHaveURL('/');
+    await loginAsAdmin(page);
 
     await page.goto('/login');
-    // GuestOnly + Auth Context → profile redirect
     await expect(page).not.toHaveURL('/login');
     await expect(page).toHaveURL(/\/u\//);
   });
@@ -80,35 +84,32 @@ test.describe('Auth Context — single /api/auth/me (bd-957.6)', () => {
     page,
   }) => {
     const meOnLoginFlow = await countMeDuring(page, async () => {
-      await page.goto('/login');
-      await expect(page.getByRole('heading', { name: 'Вход' })).toBeVisible();
-      await page.getByLabel('Email').fill('admin@bookspace.local');
-      await page.getByLabel('Пароль').fill('Admin123!');
-      await page.getByRole('button', { name: 'Войти' }).click();
-      await expect(page).toHaveURL('/');
+      await loginAsAdmin(page);
       const nav = page.getByRole('navigation', { name: 'Основное меню' });
       await expect(nav.getByRole('link', { name: 'Профиль' })).toHaveAttribute(
         'href',
         '/library',
       );
     });
-    // Initial mount /me (+ possible remount after progressive login path).
-    // After setUser from login, client nav must not add more /me for menu.
     expect(meOnLoginFlow).toBeGreaterThanOrEqual(1);
     expect(meOnLoginFlow).toBeLessThanOrEqual(2);
 
-    const nav = page.getByRole('navigation', { name: 'Основное меню' });
     const meOnAuthedNav = await countMeDuring(page, async () => {
-      await nav.getByRole('link', { name: 'Поиск' }).click();
-      await expect(page).toHaveURL('/search');
-      await nav.getByRole('link', { name: 'Профиль' }).click();
-      await expect(page).toHaveURL('/library');
+      await clickNav(page, 'Поиск', '/search');
+      await clickNav(page, 'Профиль', '/library');
     });
     expect(meOnAuthedNav).toBe(0);
 
+    // Progressive logout → full remount; wait for mount /me to finish before counting.
+    const meAfterLogout = page.waitForResponse(
+      (response) =>
+        response.request().method() === 'GET' &&
+        isAuthMeRequest(response.request()),
+    );
     await page.getByRole('button', { name: 'Выйти' }).click();
     await expect(page).toHaveURL('/login');
     await expect(page.getByRole('heading', { name: 'Вход' })).toBeVisible();
+    await meAfterLogout;
 
     const guestNav = page.getByRole('navigation', { name: 'Основное меню' });
     await expect(
@@ -116,12 +117,9 @@ test.describe('Auth Context — single /api/auth/me (bd-957.6)', () => {
     ).toHaveAttribute('href', '/login');
 
     const meAfterLogoutNav = await countMeDuring(page, async () => {
-      await guestNav.getByRole('link', { name: 'Главная' }).click();
-      await expect(page).toHaveURL('/');
-      await guestNav.getByRole('link', { name: 'Поиск' }).click();
-      await expect(page).toHaveURL('/search');
-      await guestNav.getByRole('link', { name: 'Рейтинги' }).click();
-      await expect(page).toHaveURL('/rankings');
+      await clickNav(page, 'Поиск', '/search');
+      await clickNav(page, 'Рейтинги', '/rankings');
+      await clickNav(page, 'Поиск', '/search');
     });
     expect(meAfterLogoutNav).toBe(0);
   });

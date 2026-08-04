@@ -201,7 +201,7 @@ test.describe('App nav smoke', () => {
     // Seeded admin avoids flaky register under parallel / rate-limit pressure
     await page.goto('/login');
     await page.getByLabel('Email').fill('admin@bookspace.local');
-    await page.getByLabel('Пароль').fill('Admin123!');
+    await page.getByLabel('Пароль', { exact: true }).fill('Admin123!');
     await page.getByRole('button', { name: 'Войти' }).click();
     await expect(page).toHaveURL('/');
 
@@ -257,7 +257,7 @@ test.describe('App nav smoke', () => {
     // Guest would be redirected to /login; use seeded admin to stay on /admin*
     await page.goto('/login');
     await page.getByLabel('Email').fill('admin@bookspace.local');
-    await page.getByLabel('Пароль').fill('Admin123!');
+    await page.getByLabel('Пароль', { exact: true }).fill('Admin123!');
     await page.getByRole('button', { name: 'Войти' }).click();
     await expect(page).toHaveURL('/');
 
