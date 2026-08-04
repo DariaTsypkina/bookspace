@@ -22,8 +22,12 @@ test.describe('Library page smoke (S12 / bd-wus.15)', () => {
     });
     await expect(heading).toBeVisible();
     await expect(
-      page.getByText('Коллекция и полки скоро появятся.'),
+      page.getByText('Коллекция и фильтры появятся здесь. Полки уже доступны.'),
     ).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Мои полки' })).toHaveAttribute(
+      'href',
+      '/library/shelves',
+    );
 
     const main = page.locator('main');
     await expect(main).toBeVisible();
@@ -82,7 +86,7 @@ test.describe('Library page smoke (S12 / bd-wus.15)', () => {
       page.getByRole('heading', { name: 'Моя библиотека', level: 1 }),
     ).toBeVisible();
     await expect(
-      page.getByText('Коллекция и полки скоро появятся.'),
+      page.getByText('Коллекция и фильтры появятся здесь. Полки уже доступны.'),
     ).toBeVisible();
 
     const main = page.locator('main');
@@ -201,7 +205,7 @@ test.describe('Library / Profile empty-page fix (bd-cq7.6)', () => {
       expect(box.y + box.height).toBeLessThan(viewport.height);
     }
     await expect(
-      page.getByText('Коллекция и полки скоро появятся.'),
+      page.getByText('Коллекция и фильтры появятся здесь. Полки уже доступны.'),
     ).toBeVisible();
   });
 
@@ -217,7 +221,7 @@ test.describe('Library / Profile empty-page fix (bd-cq7.6)', () => {
     });
     await expect(heading).toBeVisible();
     await expect(
-      page.getByText('Коллекция и полки скоро появятся.'),
+      page.getByText('Коллекция и фильтры появятся здесь. Полки уже доступны.'),
     ).toBeVisible();
 
     const box = await heading.boundingBox();

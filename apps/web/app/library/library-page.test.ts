@@ -29,7 +29,9 @@ describe('Library page Tailwind+shadcn migration (S12 / bd-wus.15)', () => {
 
   it('keeps library stub UX: RU copy', () => {
     expect(pageSource).toMatch(/Моя библиотека/);
-    expect(pageSource).toMatch(/Коллекция и полки скоро появятся/);
+    expect(pageSource).toMatch(/Коллекция и фильтры появятся здесь/);
+    expect(pageSource).toMatch(/Мои полки/);
+    expect(pageSource).toMatch(/\/library\/shelves/);
   });
 
   it('shows LogoutButton for signed-in profile destination (bd-6b7.8)', () => {
@@ -50,7 +52,7 @@ describe('Library page Tailwind+shadcn migration (S12 / bd-wus.15)', () => {
     expect(pageSource).toMatch(/text-foreground/);
     expect(pageSource).toMatch(/text-muted/);
     expect(pageSource).toMatch(/Моя библиотека/);
-    expect(pageSource).toMatch(/Коллекция и полки скоро появятся/);
+    expect(pageSource).toMatch(/Коллекция и фильтры появятся здесь/);
     // Content must stay above mobile tab-bar padding from root layout
     expect(pageSource).toMatch(/\bpt-5\b/);
     expect(pageSource).toMatch(/\bpx-4\b/);
