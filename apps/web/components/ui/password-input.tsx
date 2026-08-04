@@ -34,9 +34,12 @@ const PasswordInput = React.forwardRef<
       </FormControl>
       <Button
         type="button"
-        variant="ghost"
-        size="icon"
-        className="absolute right-0 top-1/2 h-11 w-11 -translate-y-1/2 text-muted hover:bg-transparent hover:text-foreground"
+        className={cn(
+          'absolute right-1.5 top-1/2 h-auto w-auto min-h-11 min-w-11 -translate-y-1/2',
+          'border-0 bg-transparent p-0 shadow-none',
+          'text-muted hover:bg-transparent hover:text-foreground',
+          'rounded-none',
+        )}
         aria-label={passwordVisibilityAriaLabel(visible)}
         aria-pressed={visible}
         onClick={() => setVisible((current) => !current)}

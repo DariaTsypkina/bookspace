@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-04T10:57:32.561Z",
+  "generated_at": "2026-08-04T11:04:18.066Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 139,
+    "total_issues": 140,
     "open_issues": 35,
     "in_progress_issues": 0,
-    "closed_issues": 104,
+    "closed_issues": 105,
     "blocked_issues": 7,
     "ready_issues": 28
   },
@@ -442,11 +442,11 @@
       "title": "Auth",
       "status": "closed",
       "priority": 1,
-      "children_total": 10,
-      "children_closed": 10,
+      "children_total": 11,
+      "children_closed": 11,
       "children_in_progress": 0,
       "children_open": 0,
-      "progress": "10 / 10",
+      "progress": "11 / 11",
       "percent_closed": 100,
       "children": [
         {
@@ -504,6 +504,13 @@
           "status": "closed",
           "type": "bug",
           "priority": 1
+        },
+        {
+          "id": "bd-957.8",
+          "title": "UI: кнопка глаза пароля — только иконка без хрома",
+          "status": "closed",
+          "type": "task",
+          "priority": 3
         },
         {
           "id": "bd-v2y",
@@ -2167,6 +2174,15 @@
       "priority": 2,
       "parent": null,
       "updated_at": "2026-07-23T08:23:12Z"
+    },
+    {
+      "id": "bd-957.8",
+      "title": "UI: кнопка глаза пароля — только иконка без хрома",
+      "status": "closed",
+      "type": "task",
+      "priority": 3,
+      "parent": "bd-957",
+      "updated_at": "2026-08-04T11:04:14Z"
     },
     {
       "id": "bd-aud",
