@@ -4,6 +4,7 @@ import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { SpoilerGate } from '@/components/spoiler-gate';
 import { UserBookStatusForm } from '@/components/user-book-status-form';
+import { UserBookTagsForm } from '@/components/user-book-tags-form';
 import { WorkContextReadingSection } from '@/components/work-context-reading-section';
 import { Card, CardContent } from '@/components/ui/card';
 import { fetchCatalogContextReadings } from '@/lib/catalog-context-reading';
@@ -205,6 +206,7 @@ export default async function WorkPage({ params }: WorkPageProps) {
         <WorkContextReadingSection items={contextReadings} />
 
         <UserBookStatusForm workSlug={work.slug} />
+        <UserBookTagsForm workSlug={work.slug} />
       </article>
     </main>
   );

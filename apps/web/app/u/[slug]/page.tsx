@@ -106,6 +106,14 @@ export default async function ProfileStubPage({ params }: ProfilePageProps) {
                     {' · '}
                     {formatUserBookRating(item.rating)}
                   </p>
+                  {item.tags.length > 0 ? (
+                    <p
+                      className="mt-0.5 text-[0.9rem] text-muted"
+                      aria-label={`Теги: ${item.tags.map((t) => t.name).join(', ')}`}
+                    >
+                      Теги: {item.tags.map((tag) => tag.name).join(', ')}
+                    </p>
+                  ) : null}
                 </li>
               ))}
             </ul>
