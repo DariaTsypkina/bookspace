@@ -38,6 +38,18 @@ export class CatalogWorkService {
         editions: {
           orderBy: [{ language: 'asc' }, { year: 'asc' }],
         },
+        relationsFrom: {
+          include: {
+            toWork: {
+              select: {
+                slug: true,
+                titleRu: true,
+                status: true,
+                deletedAt: true,
+              },
+            },
+          },
+        },
       },
     });
 
@@ -56,6 +68,19 @@ export class CatalogWorkService {
       (link) =>
         link.series.deletedAt === null && link.series.status === 'PUBLISHED',
     );
+
+    const relations = work.relationsFrom
+      .filter(
+        (relation) =>
+          relation.toWork.deletedAt === null &&
+          relation.toWork.status === WorkStatus.PUBLISHED,
+      )
+      .map((relation) => ({
+        slug: relation.toWork.slug,
+        titleRu: relation.toWork.titleRu,
+        type: relation.type,
+      }))
+      .sort((left, right) => left.titleRu.localeCompare(right.titleRu, 'ru'));
 
     return {
       slug: work.slug,
@@ -77,6 +102,7 @@ export class CatalogWorkService {
         publisher: edition.publisher ?? undefined,
         year: edition.year ?? undefined,
       })),
+      relations,
     };
   }
 }

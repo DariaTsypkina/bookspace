@@ -9,6 +9,14 @@ const prisma = new PrismaClient();
 const TEST_PREFIX = 'catalog-work-spec';
 
 async function cleanup() {
+  await prisma.workRelation.deleteMany({
+    where: {
+      OR: [
+        { fromWork: { slug: { startsWith: TEST_PREFIX } } },
+        { toWork: { slug: { startsWith: TEST_PREFIX } } },
+      ],
+    },
+  });
   await prisma.edition.deleteMany({
     where: { work: { slug: { startsWith: TEST_PREFIX } } },
   });
@@ -144,6 +152,137 @@ describe('CatalogWorkService', () => {
       nameRu: 'Гарри Поттер',
       positionInSeries: 1,
     });
+  });
+
+  it('returns published work relations with distinct types', async () => {
+    const source = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-source`,
+        titleRu: 'Источник',
+        status: WorkStatus.PUBLISHED,
+      },
+    });
+    const sequel = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-sequel`,
+        titleRu: 'Сиквел',
+        status: WorkStatus.PUBLISHED,
+      },
+    });
+    const prequel = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-prequel`,
+        titleRu: 'Приквел',
+        status: WorkStatus.PUBLISHED,
+      },
+    });
+    await prisma.workRelation.createMany({
+      data: [
+        {
+          fromWorkId: source.id,
+          toWorkId: sequel.id,
+          type: 'SEQUEL',
+        },
+        {
+          fromWorkId: source.id,
+          toWorkId: prequel.id,
+          type: 'PREQUEL',
+        },
+      ],
+    });
+
+    const result = await service.getBySlug(source.slug);
+
+    expect(result.relations).toEqual(
+      expect.arrayContaining([
+        {
+          slug: sequel.slug,
+          titleRu: 'Сиквел',
+          type: 'SEQUEL',
+        },
+        {
+          slug: prequel.slug,
+          titleRu: 'Приквел',
+          type: 'PREQUEL',
+        },
+      ]),
+    );
+    expect(result.relations).toHaveLength(2);
+  });
+
+  it('excludes draft and soft-deleted relation targets', async () => {
+    const source = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-rel-source`,
+        titleRu: 'Источник связей',
+        status: WorkStatus.PUBLISHED,
+      },
+    });
+    const published = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-rel-published`,
+        titleRu: 'Опубликованная связь',
+        status: WorkStatus.PUBLISHED,
+      },
+    });
+    const draft = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-rel-draft`,
+        titleRu: 'Черновик связи',
+        status: WorkStatus.DRAFT,
+      },
+    });
+    const deleted = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-rel-deleted`,
+        titleRu: 'Удалённая связь',
+        status: WorkStatus.PUBLISHED,
+        deletedAt: new Date(),
+      },
+    });
+    await prisma.workRelation.createMany({
+      data: [
+        {
+          fromWorkId: source.id,
+          toWorkId: published.id,
+          type: 'RELATED',
+        },
+        {
+          fromWorkId: source.id,
+          toWorkId: draft.id,
+          type: 'ADAPTATION',
+        },
+        {
+          fromWorkId: source.id,
+          toWorkId: deleted.id,
+          type: 'SEQUEL',
+        },
+      ],
+    });
+
+    const result = await service.getBySlug(source.slug);
+
+    expect(result.relations).toEqual([
+      {
+        slug: published.slug,
+        titleRu: 'Опубликованная связь',
+        type: 'RELATED',
+      },
+    ]);
+  });
+
+  it('returns empty relations when work has none', async () => {
+    const work = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-no-relations`,
+        titleRu: 'Без связей',
+        status: WorkStatus.PUBLISHED,
+      },
+    });
+
+    const result = await service.getBySlug(work.slug);
+
+    expect(result.relations).toEqual([]);
   });
 
   it('throws NotFoundException for draft work', async () => {

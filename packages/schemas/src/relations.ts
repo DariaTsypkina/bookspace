@@ -31,8 +31,7 @@ export const CharacterRelationTypeSchema = z.enum([
 export type CharacterRelationType = z.infer<typeof CharacterRelationTypeSchema>;
 
 /**
- * WorkRelation.type — contract for future work-relations / reading-order (bd-azl).
- * Not yet backed by Prisma WorkRelation in runtime.
+ * WorkRelation.type — Prisma WorkRelation + GET /catalog/works/:slug relations.
  */
 export const WorkRelationTypeSchema = z.enum([
   'SEQUEL',
