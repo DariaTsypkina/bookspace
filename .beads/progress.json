@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-04T11:19:53.799Z",
+  "generated_at": "2026-08-04T11:20:21.564Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 140,
-    "open_issues": 34,
-    "in_progress_issues": 0,
+    "open_issues": 33,
+    "in_progress_issues": 1,
     "closed_issues": 106,
     "blocked_issues": 7,
-    "ready_issues": 27
+    "ready_issues": 26
   },
   "epics": [
     {
@@ -570,8 +570,8 @@
       "priority": 2,
       "children_total": 5,
       "children_closed": 2,
-      "children_in_progress": 0,
-      "children_open": 3,
+      "children_in_progress": 1,
+      "children_open": 2,
       "progress": "2 / 5",
       "percent_closed": 40,
       "children": [
@@ -585,7 +585,7 @@
         {
           "id": "bd-azl.2",
           "title": "Связи произведений",
-          "status": "open",
+          "status": "in_progress",
           "type": "feature",
           "priority": 2
         },
@@ -2097,11 +2097,11 @@
     {
       "id": "bd-azl.2",
       "title": "Связи произведений",
-      "status": "open",
+      "status": "in_progress",
       "type": "feature",
       "priority": 2,
       "parent": "bd-azl",
-      "updated_at": "2026-07-17T12:36:03Z"
+      "updated_at": "2026-08-04T11:20:17Z"
     },
     {
       "id": "bd-azl.1",

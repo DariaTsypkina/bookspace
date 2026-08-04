@@ -146,7 +146,7 @@
 | Статус | ID | Задача |
 |--------|-----|--------|
 | ✅ | `bd-azl.1` | Связи: Карточка серии · готово к close |
-| ⬜ | `bd-azl.2` | Связи произведений |
+| 🔄 | `bd-azl.2` | Связи произведений |
 | ⬜ | `bd-azl.3` | Связи: Порядок чтения |
 | ⬜ | `bd-azl.4` | Связи: Spoiler gate |
 | ✅ | `bd-azl.5` | Bug: iOS Chrome — «Показать» не снимает spoiler gate (human-reported) |
@@ -239,6 +239,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-04 | `bd-azl.1` ✅ closed+merged → `feat/bookspace-bd-azl`; claim `bd-azl.2` → `task/bd-azl.2-work-relations` |
 | 2026-08-04 | `bd-azl.1` ready close: GET `/catalog/series/:slug` + `/series/[slug]` (guest, PUBLISHED, positionInSeries); API unit **9/9**; web unit **6/6**; PW series-page **8/8** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); manual `e2e/manual/series-page.md`; ветка `task/bd-azl.1-series-page`; `bd close` — оркестратор |
 | 2026-08-04 | `bd-azl.1` 🔄: conventions (design/acceptance Критерии+Проверка/notes/labels area:api+area:web+sec:catalog+mobile+regress); sync origin/develop Already up to date; TDD series page API+web; ветка `task/bd-azl.1-series-page`; `bd close` — оркестратор |
 | 2026-08-04 | Оркестратор bd-azl: сборочная `feat/bookspace-bd-azl` от origin/develop (`a524d98`); claim `bd-azl.1` → `task/bd-azl.1-series-page`; ЗАЛИВАТЬ=Нет |
