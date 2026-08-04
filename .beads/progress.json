@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-04T15:30:43.511Z",
+  "generated_at": "2026-08-04T15:47:57.509Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 140,
     "open_issues": 26,
-    "in_progress_issues": 1,
-    "closed_issues": 113,
-    "blocked_issues": 8,
-    "ready_issues": 18
+    "in_progress_issues": 0,
+    "closed_issues": 114,
+    "blocked_issues": 7,
+    "ready_issues": 19
   },
   "epics": [
     {
@@ -653,11 +653,11 @@
       "status": "open",
       "priority": 2,
       "children_total": 6,
-      "children_closed": 4,
-      "children_in_progress": 1,
+      "children_closed": 5,
+      "children_in_progress": 0,
       "children_open": 1,
-      "progress": "4 / 6",
-      "percent_closed": 67,
+      "progress": "5 / 6",
+      "percent_closed": 83,
       "children": [
         {
           "id": "bd-cq7.1",
@@ -683,7 +683,7 @@
         {
           "id": "bd-cq7.4",
           "title": "Библиотека: Моя библиотека",
-          "status": "in_progress",
+          "status": "closed",
           "type": "feature",
           "priority": 2
         },
@@ -1989,11 +1989,11 @@
     {
       "id": "bd-cq7.4",
       "title": "Библиотека: Моя библиотека",
-      "status": "in_progress",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-cq7",
-      "updated_at": "2026-08-04T15:22:27Z"
+      "updated_at": "2026-08-04T15:47:40Z"
     },
     {
       "id": "bd-cq7.2",
