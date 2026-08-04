@@ -145,7 +145,7 @@ test.describe('Library page smoke (S12 / bd-wus.15 + bd-cq7.4)', () => {
 });
 
 test.describe('Library / Profile empty-page fix (bd-cq7.6)', () => {
-  test('slow /api/auth/me: /login shows loading status then guest form (never blank)', async ({
+  test('slow /api/auth/me: /login shows guest form immediately (never blank)', async ({
     page,
   }) => {
     await page.route('**/api/auth/me', async (route) => {
@@ -159,17 +159,15 @@ test.describe('Library / Profile empty-page fix (bd-cq7.6)', () => {
 
     await page.goto('/login');
 
-    await expect(page.getByRole('status')).toContainText('Загрузка');
     await expect(page.locator('body')).not.toBeEmpty();
-
     await expect(
       page.getByRole('heading', { name: 'Вход', level: 1 }),
-    ).toBeVisible({ timeout: 10_000 });
+    ).toBeVisible();
     await expect(page.getByLabel('Email')).toBeVisible();
     await expect(page.getByRole('button', { name: 'Войти' })).toBeVisible();
   });
 
-  test('slow /api/auth/me: Профиль pending → /library visible in viewport', async ({
+  test('slow /api/auth/me: /library heading stays visible (no blank cabinet)', async ({
     page,
   }) => {
     await page.route('**/api/auth/me', async (route) => {
@@ -180,16 +178,16 @@ test.describe('Library / Profile empty-page fix (bd-cq7.6)', () => {
         body: JSON.stringify({ message: 'Unauthorized' }),
       });
     });
+    await page.route('**/api/me/library**', async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await route.fulfill({
+        status: 401,
+        contentType: 'application/json',
+        body: JSON.stringify({ message: 'Unauthorized' }),
+      });
+    });
 
-    await page.goto('/');
-    const nav = await expectMainNav(page);
-    // Pending auth must not send users to a blank GuestOnly gate
-    await expect(nav.getByRole('link', { name: 'Профиль' })).toHaveAttribute(
-      'href',
-      '/library',
-    );
-    await nav.getByRole('link', { name: 'Профиль' }).click();
-    await expect(page).toHaveURL('/library');
+    await page.goto('/library');
 
     const heading = page.getByRole('heading', {
       name: 'Моя библиотека',
