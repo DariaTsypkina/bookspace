@@ -2,14 +2,14 @@
 
 import { useRouter } from 'next/navigation';
 import { ReactNode, useEffect } from 'react';
-import { getCurrentUser, profilePath } from '../lib/auth';
+import { getCurrentUser, profilePath, type AuthUser } from '../lib/auth';
 
 const GUEST_ONLY_TIMEOUT_MS = 4_000;
+const TIMEOUT = 'timeout' as const;
 
 /**
  * For guest-only pages (/login, /register).
- * Shows a visible loading status while checking session (never blank);
- * redirects auth users to /u/[slug].
+ * Renders children immediately; redirects auth users to /u/[slug] in the background.
  * Cookie session is first-party via BFF `/api/auth/*` (Nest `/auth/*`).
  */
 export function GuestOnly({ children }: { children: ReactNode }) {
@@ -20,21 +20,18 @@ export function GuestOnly({ children }: { children: ReactNode }) {
 
     void (async () => {
       try {
-        const user = await Promise.race<AuthUserOrTimeout>([
+        const result = await Promise.race<AuthUser | null | typeof TIMEOUT>([
           getCurrentUser(),
-          new Promise<AuthUserOrTimeout>((resolve) => {
+          new Promise<typeof TIMEOUT>((resolve) => {
             setTimeout(() => {
-              resolve(TIMEOUT_SYMBOL);
+              resolve(TIMEOUT);
             }, GUEST_ONLY_TIMEOUT_MS);
           }),
         ]);
-        if (cancelled) {
+        if (cancelled || result === TIMEOUT || result === null) {
           return;
         }
-        if (user && user !== TIMEOUT_SYMBOL) {
-          router.replace(profilePath(user.slug));
-          return;
-        }
+        router.replace(profilePath(result.slug));
       } catch {
         // Ignore transient auth check failures; keep guest page visible.
       }
@@ -47,6 +44,3 @@ export function GuestOnly({ children }: { children: ReactNode }) {
 
   return <>{children}</>;
 }
-
-type AuthUserOrTimeout = Awaited<ReturnType<typeof getCurrentUser>> | symbol;
-const TIMEOUT_SYMBOL = Symbol('guest-only-timeout');
