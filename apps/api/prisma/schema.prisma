@@ -81,11 +81,32 @@ model Work {
   editions             Edition[]
   characterAppearances CharacterAppearance[]
   places               WorkPlace[]
+  relationsFrom        WorkRelation[] @relation("WorkRelationFrom")
+  relationsTo          WorkRelation[] @relation("WorkRelationTo")
   contextReadingsAsSubject     ContextReading[] @relation("ContextSubject")
   contextReadingsAsRecommended ContextReading[] @relation("ContextRecommended")
   matchQueueResolved           MatchQueue[]
 
   @@index([status, deletedAt])
+}
+
+enum WorkRelationType {
+  SEQUEL
+  PREQUEL
+  RELATED
+  ADAPTATION
+}
+
+model WorkRelation {
+  fromWorkId   String
+  toWorkId     String
+  type         WorkRelationType
+  readingOrder Int?
+  fromWork     Work             @relation("WorkRelationFrom", fields: [fromWorkId], references: [id], onDelete: Cascade)
+  toWork       Work             @relation("WorkRelationTo", fields: [toWorkId], references: [id], onDelete: Cascade)
+
+  @@id([fromWorkId, toWorkId, type])
+  @@index([toWorkId])
 }
 
 model ContextReading {

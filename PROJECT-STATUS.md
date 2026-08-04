@@ -14,7 +14,7 @@
 | 0 | Bootstrap (monorepo, docker, CI) | ✅ | — | — |
 | 1 | Auth | ✅ | 6 / 6 | `bd-957` |
 | 2 | Каталог | ✅ | 6 / 6 | `bd-6v0` |
-| 3 | Связи и порядок | 🔄 | 0 / 4 | `bd-azl` |
+| 3 | Связи и порядок | 🔄 | 1 / 4 | `bd-azl` |
 | 4 | ContextReading | ✅ | 4 / 4 | `bd-8s4` |
 | 5 | Библиотека и профиль | ⬜ | 0 / 5 | `bd-cq7` |
 | 6 | Заметки и цель | 🔒 | 0 / 2 | `bd-sf4` |
@@ -141,12 +141,12 @@
 | ✅ | `bd-6v0.10` | Поиск: префикс `роул` не находит «Роулинг» (human-reported) |
 | ✅ | `bd-6v0.11` | [bug] mobile: поиск «Найти» → native `?q=` + server fallback `query` · merged → `fix/bookspace-bd-bugs` |
 
-### 3. Связи и порядок — ⬜ · epic `bd-azl` · 0 / 4
+### 3. Связи и порядок — 🔄 · epic `bd-azl` · 1 / 4
 
 | Статус | ID | Задача |
 |--------|-----|--------|
-| ✅ | `bd-azl.1` | Связи: Карточка серии · готово к close |
-| ⬜ | `bd-azl.2` | Связи произведений |
+| ✅ | `bd-azl.1` | Связи: Карточка серии |
+| 🔄 | `bd-azl.2` | Связи произведений · ready close |
 | ⬜ | `bd-azl.3` | Связи: Порядок чтения |
 | ⬜ | `bd-azl.4` | Связи: Spoiler gate |
 | ✅ | `bd-azl.5` | Bug: iOS Chrome — «Показать» не снимает spoiler gate (human-reported) |
@@ -239,6 +239,9 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-04 | `bd-azl.2` ready close: Prisma WorkRelation + `relations[]` в GET `/catalog/works/:slug` (только PUBLISHED); `/books/[slug]` блок «Связи» за SpoilerGate (reuse); RU-лейблы; API unit **9/9** + e2e **5/5**; web unit catalog-work+books-page; PW work-relations **6/6** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); manual `e2e/manual/work-relations.md`; ветка `task/bd-azl.2-work-relations`; `bd close` — оркестратор |
+| 2026-08-04 | `bd-azl.2` 🔄: conventions (design/acceptance Критерии+Проверка/notes/labels area:api+area:web+sec:catalog+mobile+regress); sync origin/develop Already up to date; TDD WorkRelation API+web; ветка `task/bd-azl.2-work-relations` |
+| 2026-08-04 | `bd-azl.1` ✅ closed+merged → `feat/bookspace-bd-azl`; claim `bd-azl.2` → `task/bd-azl.2-work-relations` |
 | 2026-08-04 | `bd-azl.1` ready close: GET `/catalog/series/:slug` + `/series/[slug]` (guest, PUBLISHED, positionInSeries); API unit **9/9**; web unit **6/6**; PW series-page **8/8** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); manual `e2e/manual/series-page.md`; ветка `task/bd-azl.1-series-page`; `bd close` — оркестратор |
 | 2026-08-04 | `bd-azl.1` 🔄: conventions (design/acceptance Критерии+Проверка/notes/labels area:api+area:web+sec:catalog+mobile+regress); sync origin/develop Already up to date; TDD series page API+web; ветка `task/bd-azl.1-series-page`; `bd close` — оркестратор |
 | 2026-08-04 | Оркестратор bd-azl: сборочная `feat/bookspace-bd-azl` от origin/develop (`a524d98`); claim `bd-azl.1` → `task/bd-azl.1-series-page`; ЗАЛИВАТЬ=Нет |

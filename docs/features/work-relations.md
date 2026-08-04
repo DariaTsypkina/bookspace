@@ -28,9 +28,9 @@ WorkRelation types SEQUEL|PREQUEL|RELATED|ADAPTATION.
 
 ## Критерии приёмки
 
-- [ ] Типы связей отображаются различимо
-- [ ] Контент за spoiler gate
-- [ ] Ссылки ведут на PUBLISHED works
+- [x] Типы связей отображаются различимо
+- [x] Контент за spoiler gate
+- [x] Ссылки ведут на PUBLISHED works
 
 ## Ссылки
 

@@ -1,3 +1,7 @@
+import type { WorkRelationType } from '@bookspace/schemas';
+
+export type { WorkRelationType };
+
 export interface CatalogWorkAuthor {
   slug: string;
   nameRu: string;
@@ -17,6 +21,12 @@ export interface CatalogWorkEdition {
   year?: number;
 }
 
+export interface CatalogWorkRelation {
+  slug: string;
+  titleRu: string;
+  type: WorkRelationType;
+}
+
 export interface CatalogWorkResponse {
   slug: string;
   titleRu: string;
@@ -25,4 +35,5 @@ export interface CatalogWorkResponse {
   authors: CatalogWorkAuthor[];
   series?: CatalogWorkSeries;
   editions: CatalogWorkEdition[];
+  relations: CatalogWorkRelation[];
 }

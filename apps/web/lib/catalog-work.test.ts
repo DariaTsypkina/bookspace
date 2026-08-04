@@ -5,6 +5,7 @@ import {
   EDITION_LANGUAGE_LABELS,
   fetchCatalogWork,
   formatEditionLanguage,
+  WORK_RELATION_LABELS,
 } from './catalog-work';
 
 vi.mock('./http', async (importOriginal) => {
@@ -32,6 +33,13 @@ describe('fetchCatalogWork', () => {
       titleRu: 'Гарри Поттер',
       authors: [{ slug: 'rouling', nameRu: 'Дж. К. Роулинг' }],
       editions: [{ language: 'ru', translator: 'М. Спивак' }],
+      relations: [
+        {
+          slug: 'garri-potter-taynaya-komnata',
+          titleRu: 'Гарри Поттер и Тайная комната',
+          type: 'SEQUEL' as const,
+        },
+      ],
     };
 
     vi.mocked(api.get).mockResolvedValue({ data: mockResponse });
@@ -73,5 +81,16 @@ describe('formatEditionLanguage', () => {
 describe('EDITION_LANGUAGE_LABELS', () => {
   it('includes common edition languages', () => {
     expect(EDITION_LANGUAGE_LABELS.ru).toBe('Русский');
+  });
+});
+
+describe('WORK_RELATION_LABELS', () => {
+  it('maps all WorkRelation types to distinct Russian labels', () => {
+    expect(WORK_RELATION_LABELS.SEQUEL).toBe('Продолжение');
+    expect(WORK_RELATION_LABELS.PREQUEL).toBe('Предыстория');
+    expect(WORK_RELATION_LABELS.RELATED).toBe('Связано');
+    expect(WORK_RELATION_LABELS.ADAPTATION).toBe('Адаптация');
+    const labels = Object.values(WORK_RELATION_LABELS);
+    expect(new Set(labels).size).toBe(labels.length);
   });
 });
