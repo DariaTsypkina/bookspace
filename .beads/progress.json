@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-04T10:27:29.392Z",
+  "generated_at": "2026-08-04T10:38:13.210Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 138,
-    "open_issues": 38,
+    "open_issues": 37,
     "in_progress_issues": 0,
-    "closed_issues": 100,
+    "closed_issues": 101,
     "blocked_issues": 7,
-    "ready_issues": 31
+    "ready_issues": 30
   },
   "epics": [
     {
@@ -1523,11 +1523,11 @@
     {
       "id": "bd-5po",
       "title": "e2e: spoiler cookie domain совпадать с page hostname",
-      "status": "open",
+      "status": "closed",
       "type": "chore",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-07-22T15:33:23Z"
+      "updated_at": "2026-08-04T10:38:09Z"
     },
     {
       "id": "bd-wus.17",
