@@ -122,7 +122,7 @@
 | ✅ | `bd-957.3` | Auth: Яндекс OAuth |
 | ✅ | `bd-v2y` | Auth: сессия и защита маршрутов |
 | ✅ | `bd-wlw` | Auth: rate limit на register/login |
-| ⬜ | `bd-957.5` | UI: показать/скрыть пароль (глаз) на полях пароля (human-reported) · сборочная `feat/bookspace-bd-957` |
+| 🔄 | `bd-957.5` | UI: показать/скрыть пароль (глаз) на полях пароля (human-reported) · сборочная `feat/bookspace-bd-common` · ветка `task/bd-957.5-password-visibility-toggle` |
 | ⬜ | `bd-957.6` | web: Auth Context — один `/api/auth/me` на сессию клиента (human-reported) · сборочная `feat/bookspace-bd-957` |
 | ✅ | `bd-957.7` | [bug] mobile: login progressive POST `/api/login` (не GET с credentials в query) · merged → `fix/bookspace-bd-bugs` |
 
@@ -238,6 +238,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-04 | Claim `bd-957.5`: UI глаз показать/скрыть пароль на `/login`+`/register`; conventions (design/notes); sync origin/develop OK; ветка `task/bd-957.5-password-visibility-toggle` от `feat/bookspace-bd-common`; `bd close` — оркестратор |
 | 2026-08-04 | `bd-5po` close-prep: `resolveSpoilerCookieDomain` + `acceptSpoilers` domain=hostname (не localhost); unit **5/5**; PW character-page **12/12** desktop+mobile на localhost; **12/12** на `BASE_URL=http://127.0.0.1:3000` (+`NEXT_ALLOWED_DEV_ORIGINS=127.0.0.1` для HMR); ветка `task/bd-5po-spoiler-cookie-domain`; `bd close` за оркестратором |
 | 2026-08-04 | `bd-5po` 🔄: conventions (design/acceptance Критерии+Проверка/notes/labels area:web+sec:ui+dx+e2e); sync origin/develop Already up to date; TDD `resolveSpoilerCookieDomain` + `acceptSpoilers` без хардкода localhost; ветка `task/bd-5po-spoiler-cookie-domain` (сборочная `feat/bookspace-bd-common`); `bd close` за оркестратором |
 | 2026-08-04 | Оркестратор: `bd-6b7.13`+`bd-957.7` closed+merged в `fix/bookspace-bd-bugs` (GuestOnly SSR-safe, SW unregister dev, login POST `/api/login`, Profile pending→/login, env `NEXT_ALLOWED_DEV_ORIGINS`, .env.example без значений); Chrome `__gcruniqueid` hydration — note в auth-session; vitest focused 46; PR сборочной → develop |
