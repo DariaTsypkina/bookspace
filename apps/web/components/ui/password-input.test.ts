@@ -48,10 +48,17 @@ describe('PasswordInput component contract (bd-957.5)', () => {
     expect(src).toMatch(/from ['"]@\/components\/ui\/button['"]/);
   });
 
-  it('keeps mobile-friendly hit target and Baskerville font-sans', () => {
+  it('shows icon-only toggle without button chrome (bd-957.8)', () => {
     const src = source();
-    expect(src).toMatch(/size=["']icon["']/);
-    expect(src).toMatch(/min-h-11|h-11|min-w-11|w-11|size=["']icon["']/);
+    expect(src).toMatch(/bg-transparent/);
+    expect(src).toMatch(/border-0|border-none/);
+    expect(src).toMatch(/\bp-0\b/);
+    expect(src).toMatch(/shadow-none/);
+    expect(src).toMatch(/hover:bg-transparent/);
+    expect(src).not.toMatch(/size=["']icon["']/);
+    expect(src).not.toMatch(/variant=["']ghost["']/);
+    // Transparent hit target for touch; no visible padding/chrome
+    expect(src).toMatch(/min-h-11|min-w-11|size-11/);
     expect(src).toMatch(/\bfont-sans\b/);
   });
 
