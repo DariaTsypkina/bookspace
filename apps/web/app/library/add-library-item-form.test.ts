@@ -7,7 +7,7 @@ const source = readFileSync(
   'utf8',
 );
 
-describe('AddLibraryItemForm RHF + Zod (bd-0t0.8)', () => {
+describe('AddLibraryItemForm RHF + Zod (bd-0t0.8 / bd-cq7.1)', () => {
   it('uses react-hook-form with zodResolver', () => {
     expect(source).toMatch(/useForm/);
     expect(source).toMatch(/zodResolver/);
@@ -23,8 +23,10 @@ describe('AddLibraryItemForm RHF + Zod (bd-0t0.8)', () => {
     expect(source).toMatch(/from ['"]@bookspace\/schemas['"]/);
   });
 
-  it('posts through first-party BFF /api/me/library/items', () => {
+  it('posts through first-party BFF /api/me/library/items with status', () => {
     expect(source).toMatch(/\/api\/me\/library\/items/);
+    expect(source).toMatch(/status/);
+    expect(source).toMatch(/Слаг произведения/);
   });
 });
 

@@ -239,6 +239,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-04 | `bd-cq7.1` in progress: UserBook Prisma+API (upsert/public library) + web status form на `/books` + минимальный `/u/[slug]`; unit/e2e API green; Playwright — в прогоне |
 | 2026-08-04 | Оркестратор: сборочная `feat/bookspace-bd-cq7` от develop; очередь cq7.1→.2→.3→.4→.5; claim `bd-cq7.1`; ЗАЛИВАТЬ=Нет |
 | 2026-08-04 | Целевая проверка `feat/bookspace-bd-azl`: API 30+e2e6, web 34; PW series/relations/order/spoiler/character **44/44** desktop+mobile. ЗАЛИВАТЬ=Нет — сборочная на ревью |
 | 2026-08-04 | Эпик `bd-azl` ✅ closed на сборочной `feat/bookspace-bd-azl` (дети .1–.5); перед целевой проверкой |

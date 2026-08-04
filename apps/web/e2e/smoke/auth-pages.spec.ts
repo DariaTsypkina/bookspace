@@ -39,10 +39,12 @@ test.describe('Auth pages smoke', () => {
     ).toBeVisible();
   });
 
-  test('profile stub page renders Russian placeholder', async ({ page }) => {
-    await page.goto('/u/demo-reader');
+  test('profile page renders Russian public collection for seeded user', async ({
+    page,
+  }) => {
+    await page.goto('/u/user');
     await expect(page.getByRole('heading', { name: 'Профиль' })).toBeVisible();
-    await expect(page.getByText('demo-reader')).toBeVisible();
-    await expect(page.getByText(/скоро появится/i)).toBeVisible();
+    await expect(page.getByText('Публичная коллекция')).toBeVisible();
+    await expect(page.getByText('user').first()).toBeVisible();
   });
 });
