@@ -8,6 +8,7 @@ export default defineConfig({
       'app/**/*.test.ts',
       'lib/**/*.test.ts',
       'components/**/*.test.ts',
+      'e2e/helpers/**/*.test.ts',
       'tailwind.config.test.ts',
     ],
   },

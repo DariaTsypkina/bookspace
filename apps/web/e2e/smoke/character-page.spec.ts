@@ -1,14 +1,22 @@
 import { expect, test } from '@playwright/test';
 
+import {
+  CANONICAL_E2E_BASE_URL,
+  resolveSpoilerCookieDomain,
+} from '../helpers/spoiler-cookie-domain';
+
 const SPOILERS_OK_COOKIE = 'spoilers_ok';
 const SPOILERS_OK_VALUE = '1';
 
+/** Sets spoilers_ok for the current page host (or BASE_URL before first goto). */
 async function acceptSpoilers(page: import('@playwright/test').Page) {
+  const fallbackBaseUrl = process.env.BASE_URL ?? CANONICAL_E2E_BASE_URL;
+  const domain = resolveSpoilerCookieDomain(page.url(), fallbackBaseUrl);
   await page.context().addCookies([
     {
       name: SPOILERS_OK_COOKIE,
       value: SPOILERS_OK_VALUE,
-      domain: 'localhost',
+      domain,
       path: '/',
       sameSite: 'Lax',
     },
