@@ -141,33 +141,64 @@ export default async function WorkPage({ params }: WorkPageProps) {
           </section>
         )}
 
-        {work.relations.length > 0 && (
-          <section aria-label="Связи произведений">
-            <h2 className="mb-3 font-sans text-[1.15rem] font-medium text-foreground">
-              Связи
-            </h2>
-            <SpoilerGate initialAccepted={spoilersAccepted}>
-              <ul className="flex list-none flex-col gap-3 p-0">
-                {work.relations.map((relation) => (
-                  <li key={`${relation.slug}-${relation.type}`}>
-                    <Card>
-                      <CardContent className="flex flex-col gap-0.5 px-4 py-3.5">
-                        <Link
-                          href={`/books/${relation.slug}`}
-                          className="text-[1.05rem] font-medium no-underline underline-offset-2 hover:underline"
-                        >
-                          {relation.titleRu}
-                        </Link>
-                        <span className="font-sans text-[0.9rem] text-muted">
-                          {WORK_RELATION_LABELS[relation.type]}
-                        </span>
-                      </CardContent>
-                    </Card>
-                  </li>
-                ))}
-              </ul>
-            </SpoilerGate>
-          </section>
+        {(work.relations.length > 0 || work.readingOrder.length > 0) && (
+          <SpoilerGate initialAccepted={spoilersAccepted}>
+            <div className="flex flex-col gap-6">
+              {work.relations.length > 0 && (
+                <section aria-label="Связи произведений">
+                  <h2 className="mb-3 font-sans text-[1.15rem] font-medium text-foreground">
+                    Связи
+                  </h2>
+                  <ul className="flex list-none flex-col gap-3 p-0">
+                    {work.relations.map((relation) => (
+                      <li key={`${relation.slug}-${relation.type}`}>
+                        <Card>
+                          <CardContent className="flex flex-col gap-0.5 px-4 py-3.5">
+                            <Link
+                              href={`/books/${relation.slug}`}
+                              className="text-[1.05rem] font-medium no-underline underline-offset-2 hover:underline"
+                            >
+                              {relation.titleRu}
+                            </Link>
+                            <span className="font-sans text-[0.9rem] text-muted">
+                              {WORK_RELATION_LABELS[relation.type]}
+                            </span>
+                          </CardContent>
+                        </Card>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+
+              {work.readingOrder.length > 0 && (
+                <section aria-label="Порядок чтения">
+                  <h2 className="mb-3 font-sans text-[1.15rem] font-medium text-foreground">
+                    Порядок чтения
+                  </h2>
+                  <ol className="flex list-none flex-col gap-3 p-0">
+                    {work.readingOrder.map((step) => (
+                      <li key={`${step.step}-${step.slug}`}>
+                        <Card>
+                          <CardContent className="flex flex-col gap-0.5 px-4 py-3.5">
+                            <span className="font-sans text-[0.9rem] text-muted">
+                              Шаг {step.step}
+                            </span>
+                            <Link
+                              href={`/books/${step.slug}`}
+                              className="text-[1.05rem] font-medium no-underline underline-offset-2 hover:underline"
+                            >
+                              {step.titleRu}
+                            </Link>
+                          </CardContent>
+                        </Card>
+                      </li>
+                    ))}
+                  </ol>
+                </section>
+              )}
+            </div>
+          </SpoilerGate>
         )}
 
         <WorkContextReadingSection items={contextReadings} />

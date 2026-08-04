@@ -29,6 +29,12 @@ export interface CatalogWorkRelation {
   type: WorkRelationType;
 }
 
+export interface CatalogReadingOrderStep {
+  step: number;
+  slug: string;
+  titleRu: string;
+}
+
 export interface CatalogWorkResponse {
   slug: string;
   titleRu: string;
@@ -38,6 +44,7 @@ export interface CatalogWorkResponse {
   series?: CatalogWorkSeries;
   editions: CatalogWorkEdition[];
   relations: CatalogWorkRelation[];
+  readingOrder: CatalogReadingOrderStep[];
 }
 
 export class CatalogWorkNotFoundError extends Error {

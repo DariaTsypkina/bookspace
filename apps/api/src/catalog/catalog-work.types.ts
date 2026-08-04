@@ -1,6 +1,7 @@
 import type { WorkRelationType } from '@bookspace/schemas';
+import type { CatalogReadingOrderStep } from './catalog-reading-order';
 
-export type { WorkRelationType };
+export type { WorkRelationType, CatalogReadingOrderStep };
 
 export interface CatalogWorkAuthor {
   slug: string;
@@ -36,4 +37,6 @@ export interface CatalogWorkResponse {
   series?: CatalogWorkSeries;
   editions: CatalogWorkEdition[];
   relations: CatalogWorkRelation[];
+  /** Explicit recommended reading order (numbered steps); empty if unknown. */
+  readingOrder: CatalogReadingOrderStep[];
 }

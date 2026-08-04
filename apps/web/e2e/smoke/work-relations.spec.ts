@@ -38,20 +38,22 @@ test.describe('Work relations smoke (bd-azl.2)', () => {
     });
     await page.reload();
 
+    await expect(page.getByText('Могут быть спойлеры')).toBeVisible();
     await expect(
       page.getByRole('region', { name: 'Связи произведений' }),
-    ).toBeVisible();
+    ).not.toBeVisible();
     await expect(
       page.getByRole('link', { name: 'Гарри Поттер и Тайная комната' }),
     ).not.toBeVisible();
-    await expect(page.getByText('Могут быть спойлеры')).toBeVisible();
 
     await page.getByRole('button', { name: 'Показать' }).click();
 
+    const relations = page.getByRole('region', { name: 'Связи произведений' });
+    await expect(relations).toBeVisible();
     await expect(
-      page.getByRole('link', { name: 'Гарри Поттер и Тайная комната' }),
+      relations.getByRole('link', { name: 'Гарри Поттер и Тайная комната' }),
     ).toBeVisible();
-    await expect(page.getByText('Продолжение')).toBeVisible();
+    await expect(relations.getByText('Продолжение')).toBeVisible();
     await expect(page.getByText('Могут быть спойлеры')).not.toBeVisible();
   });
 
@@ -61,10 +63,11 @@ test.describe('Work relations smoke (bd-azl.2)', () => {
     await acceptSpoilers(page);
     await page.goto('/books/garri-potter-filosofskiy-kamen');
 
+    const relations = page.getByRole('region', { name: 'Связи произведений' });
     await expect(
-      page.getByRole('link', { name: 'Гарри Поттер и Тайная комната' }),
+      relations.getByRole('link', { name: 'Гарри Поттер и Тайная комната' }),
     ).toBeVisible();
-    await expect(page.getByText('Продолжение')).toBeVisible();
+    await expect(relations.getByText('Продолжение')).toBeVisible();
     await expect(page.getByText('Могут быть спойлеры')).not.toBeVisible();
   });
 
@@ -74,6 +77,7 @@ test.describe('Work relations smoke (bd-azl.2)', () => {
     await acceptSpoilers(page);
     await page.goto('/books/garri-potter-filosofskiy-kamen');
     await page
+      .getByRole('region', { name: 'Связи произведений' })
       .getByRole('link', { name: 'Гарри Поттер и Тайная комната' })
       .click();
     await expect(page).toHaveURL(/\/books\/garri-potter-taynaya-komnata/);

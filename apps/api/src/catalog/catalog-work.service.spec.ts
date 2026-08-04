@@ -285,6 +285,146 @@ describe('CatalogWorkService', () => {
     expect(result.relations).toEqual([]);
   });
 
+  it('returns readingOrder from series positions when work is in a series (bd-azl.3)', async () => {
+    const series = await prisma.series.create({
+      data: {
+        slug: `${TEST_PREFIX}-ro-series`,
+        nameRu: 'Серия порядка',
+        status: 'PUBLISHED',
+      },
+    });
+    const first = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-ro-first`,
+        titleRu: 'Первая',
+        status: WorkStatus.PUBLISHED,
+        seriesLinks: {
+          create: { seriesId: series.id, positionInSeries: 1 },
+        },
+      },
+    });
+    await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-ro-second`,
+        titleRu: 'Вторая',
+        status: WorkStatus.PUBLISHED,
+        seriesLinks: {
+          create: { seriesId: series.id, positionInSeries: 2 },
+        },
+      },
+    });
+
+    const result = await service.getBySlug(first.slug);
+
+    expect(result.readingOrder).toEqual([
+      {
+        step: 1,
+        slug: `${TEST_PREFIX}-ro-first`,
+        titleRu: 'Первая',
+      },
+      {
+        step: 2,
+        slug: `${TEST_PREFIX}-ro-second`,
+        titleRu: 'Вторая',
+      },
+    ]);
+  });
+
+  it('returns readingOrder from WorkRelation.readingOrder when no series (bd-azl.3)', async () => {
+    const first = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-rel-ro-1`,
+        titleRu: 'Том один',
+        status: WorkStatus.PUBLISHED,
+      },
+    });
+    const second = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-rel-ro-2`,
+        titleRu: 'Том два',
+        status: WorkStatus.PUBLISHED,
+      },
+    });
+    await prisma.workRelation.create({
+      data: {
+        fromWorkId: first.id,
+        toWorkId: second.id,
+        type: 'SEQUEL',
+        readingOrder: 2,
+      },
+    });
+
+    const result = await service.getBySlug(first.slug);
+
+    expect(result.readingOrder).toEqual([
+      {
+        step: 1,
+        slug: first.slug,
+        titleRu: 'Том один',
+      },
+      {
+        step: 2,
+        slug: second.slug,
+        titleRu: 'Том два',
+      },
+    ]);
+  });
+
+  it('dedupes cyclic WorkRelation readingOrder without looping (bd-azl.3)', async () => {
+    const a = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-cycle-a`,
+        titleRu: 'А',
+        status: WorkStatus.PUBLISHED,
+      },
+    });
+    const b = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-cycle-b`,
+        titleRu: 'Б',
+        status: WorkStatus.PUBLISHED,
+      },
+    });
+    await prisma.workRelation.createMany({
+      data: [
+        {
+          fromWorkId: a.id,
+          toWorkId: b.id,
+          type: 'SEQUEL',
+          readingOrder: 2,
+        },
+        {
+          fromWorkId: b.id,
+          toWorkId: a.id,
+          type: 'PREQUEL',
+          readingOrder: 1,
+        },
+      ],
+    });
+
+    const result = await service.getBySlug(a.slug);
+
+    expect(result.readingOrder).toHaveLength(2);
+    expect(result.readingOrder.map((step) => step.slug).sort()).toEqual(
+      [a.slug, b.slug].sort(),
+    );
+    expect(result.readingOrder.map((step) => step.step)).toEqual([1, 2]);
+  });
+
+  it('returns empty readingOrder when neither series positions nor relation order', async () => {
+    const work = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-no-reading-order`,
+        titleRu: 'Без порядка',
+        status: WorkStatus.PUBLISHED,
+      },
+    });
+
+    const result = await service.getBySlug(work.slug);
+
+    expect(result.readingOrder).toEqual([]);
+  });
+
   it('throws NotFoundException for draft work', async () => {
     const work = await prisma.work.create({
       data: {

@@ -40,6 +40,18 @@ describe('fetchCatalogWork', () => {
           type: 'SEQUEL' as const,
         },
       ],
+      readingOrder: [
+        {
+          step: 1,
+          slug: 'garri-potter',
+          titleRu: 'Гарри Поттер',
+        },
+        {
+          step: 2,
+          slug: 'garri-potter-taynaya-komnata',
+          titleRu: 'Гарри Поттер и Тайная комната',
+        },
+      ],
     };
 
     vi.mocked(api.get).mockResolvedValue({ data: mockResponse });

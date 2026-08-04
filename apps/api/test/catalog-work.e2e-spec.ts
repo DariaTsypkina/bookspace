@@ -32,12 +32,20 @@ async function cleanup() {
     where: { work: { slug: { startsWith: TEST_PREFIX } } },
   });
   await prisma.workSeries.deleteMany({
-    where: { work: { slug: { startsWith: TEST_PREFIX } } },
+    where: {
+      OR: [
+        { work: { slug: { startsWith: TEST_PREFIX } } },
+        { series: { slug: { startsWith: TEST_PREFIX } } },
+      ],
+    },
   });
   await prisma.work.deleteMany({
     where: { slug: { startsWith: TEST_PREFIX } },
   });
   await prisma.author.deleteMany({
+    where: { slug: { startsWith: TEST_PREFIX } },
+  });
+  await prisma.series.deleteMany({
     where: { slug: { startsWith: TEST_PREFIX } },
   });
 }
@@ -108,7 +116,56 @@ describe('Catalog work (e2e)', () => {
         }),
       ],
       relations: [],
+      readingOrder: [],
     });
+  });
+
+  it('GET /catalog/works/:slug returns sequential readingOrder from series (bd-azl.3)', async () => {
+    const series = await prisma.series.create({
+      data: {
+        slug: `${TEST_PREFIX}-ro-series`,
+        nameRu: 'Серия порядка',
+        status: 'PUBLISHED',
+      },
+    });
+    const first = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-ro-first`,
+        titleRu: 'Первая',
+        status: WorkStatus.PUBLISHED,
+        seriesLinks: {
+          create: { seriesId: series.id, positionInSeries: 1 },
+        },
+      },
+    });
+    await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-ro-second`,
+        titleRu: 'Вторая',
+        status: WorkStatus.PUBLISHED,
+        seriesLinks: {
+          create: { seriesId: series.id, positionInSeries: 2 },
+        },
+      },
+    });
+
+    const response = await request(app.getHttpServer())
+      .get(`/catalog/works/${first.slug}`)
+      .expect(200);
+
+    const body = response.body as CatalogWorkResponse;
+    expect(body.readingOrder).toEqual([
+      {
+        step: 1,
+        slug: `${TEST_PREFIX}-ro-first`,
+        titleRu: 'Первая',
+      },
+      {
+        step: 2,
+        slug: `${TEST_PREFIX}-ro-second`,
+        titleRu: 'Вторая',
+      },
+    ]);
   });
 
   it('GET /catalog/works/:slug returns only PUBLISHED relation targets', async () => {

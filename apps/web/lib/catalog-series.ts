@@ -1,6 +1,12 @@
 import { parseCatalogEntitySlug } from './catalog-entity-slug';
 import { ApiError, api, noStoreConfig } from './http';
 
+export interface CatalogReadingOrderStep {
+  step: number;
+  slug: string;
+  titleRu: string;
+}
+
 export interface CatalogSeriesWork {
   slug: string;
   titleRu: string;
@@ -13,6 +19,7 @@ export interface CatalogSeriesResponse {
   nameRu: string;
   nameOrig?: string;
   works: CatalogSeriesWork[];
+  readingOrder: CatalogReadingOrderStep[];
 }
 
 export class CatalogSeriesNotFoundError extends Error {
