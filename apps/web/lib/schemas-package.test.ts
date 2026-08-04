@@ -70,9 +70,12 @@ describe('@bookspace/schemas export contract', () => {
       AdminContextExtractInputSchema.safeParse({ async: true, force: false })
         .success,
     ).toBe(true);
-    expect(AddLibraryItemInputSchema.safeParse({}).success).toBe(true);
+    expect(AddLibraryItemInputSchema.safeParse({}).success).toBe(false);
     expect(
-      AddLibraryItemInputSchema.safeParse({ workId: 'work-1' }).success,
+      AddLibraryItemInputSchema.safeParse({
+        workId: 'work-1',
+        status: 'WANT',
+      }).success,
     ).toBe(true);
     expect(
       ProfileSlugParamSchema.safeParse({ slug: 'demo-reader' }).success,

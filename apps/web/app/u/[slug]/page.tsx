@@ -5,6 +5,10 @@ import {
   fetchPublicLibrary,
   PublicLibraryNotFoundError,
 } from '@/lib/public-library';
+import {
+  fetchPublicShelves,
+  PublicShelvesNotFoundError,
+} from '@/lib/public-shelves';
 import { tryParseProfileSlug } from '@/lib/profile-slug';
 import {
   formatUserBookRating,
@@ -35,11 +39,16 @@ export default async function ProfileStubPage({ params }: ProfilePageProps) {
   }
 
   let library: Awaited<ReturnType<typeof fetchPublicLibrary>> | null = null;
+  let shelves: Awaited<ReturnType<typeof fetchPublicShelves>> | null = null;
   let notFoundUser = false;
   try {
     library = await fetchPublicLibrary(slug);
+    shelves = await fetchPublicShelves(slug);
   } catch (error) {
-    if (error instanceof PublicLibraryNotFoundError) {
+    if (
+      error instanceof PublicLibraryNotFoundError ||
+      error instanceof PublicShelvesNotFoundError
+    ) {
       notFoundUser = true;
     } else {
       throw error;
@@ -62,6 +71,7 @@ export default async function ProfileStubPage({ params }: ProfilePageProps) {
   }
 
   const items = library?.items ?? [];
+  const shelfList = shelves?.shelves ?? [];
 
   return (
     <main className="mx-auto flex w-full max-w-xl flex-1 flex-col gap-5 px-4 pb-8 pt-5">
@@ -95,6 +105,34 @@ export default async function ProfileStubPage({ params }: ProfilePageProps) {
                     {formatUserBookStatus(item.status)}
                     {' · '}
                     {formatUserBookRating(item.rating)}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          )}
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardContent className="flex flex-col gap-4 px-4 py-3.5 font-sans">
+          <h2 className="text-[1.15rem] font-medium text-foreground">Полки</h2>
+          {shelfList.length === 0 ? (
+            <p className="text-[0.95rem] text-muted">Пока нет полок.</p>
+          ) : (
+            <ul
+              className="flex list-none flex-col gap-3 p-0"
+              aria-label="Полки пользователя"
+            >
+              {shelfList.map((shelf) => (
+                <li key={shelf.slug}>
+                  <Link
+                    href={`/u/${slug}/shelves/${shelf.slug}`}
+                    className="text-[1.05rem] font-medium no-underline underline-offset-2 hover:underline"
+                  >
+                    {shelf.title}
+                  </Link>
+                  <p className="mt-0.5 text-[0.9rem] text-muted">
+                    Книг: {shelf.itemCount}
                   </p>
                 </li>
               ))}
