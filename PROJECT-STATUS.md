@@ -238,6 +238,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-04 | `bd-5po` close-prep: `resolveSpoilerCookieDomain` + `acceptSpoilers` domain=hostname (не localhost); unit **5/5**; PW character-page **12/12** desktop+mobile на localhost; **12/12** на `BASE_URL=http://127.0.0.1:3000` (+`NEXT_ALLOWED_DEV_ORIGINS=127.0.0.1` для HMR); ветка `task/bd-5po-spoiler-cookie-domain`; `bd close` за оркестратором |
 | 2026-08-04 | `bd-5po` 🔄: conventions (design/acceptance Критерии+Проверка/notes/labels area:web+sec:ui+dx+e2e); sync origin/develop Already up to date; TDD `resolveSpoilerCookieDomain` + `acceptSpoilers` без хардкода localhost; ветка `task/bd-5po-spoiler-cookie-domain` (сборочная `feat/bookspace-bd-common`); `bd close` за оркестратором |
 | 2026-08-04 | Оркестратор: `bd-6b7.13`+`bd-957.7` closed+merged в `fix/bookspace-bd-bugs` (GuestOnly SSR-safe, SW unregister dev, login POST `/api/login`, Profile pending→/login, env `NEXT_ALLOWED_DEV_ORIGINS`, .env.example без значений); Chrome `__gcruniqueid` hydration — note в auth-session; vitest focused 46; PR сборочной → develop |
 | 2026-08-03 | Оркестратор: `bd-6b7.12` closed+merged в `fix/bookspace-bd-bugs` (`loginRedirectUrl` Host/x-forwarded-*; vitest logout 7/7; mapping → [subagent](49ad360d-6b0b-4c24-a295-d2177a48759a)); ЗАЛИВАТЬ develop=Нет |

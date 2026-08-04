@@ -1,7 +1,8 @@
 /**
  * Canonical Playwright base URL (see apps/web/playwright.config.ts).
- * Prefer localhost; 127.0.0.1 also works when BASE_URL overrides it —
- * cookie domain must match the page hostname in either case.
+ * Prefer localhost. BASE_URL=http://127.0.0.1:3000 also works for spoiler
+ * cookies (domain = hostname), but Next.dev may need
+ * NEXT_ALLOWED_DEV_ORIGINS=127.0.0.1 for full client hydration on that host.
  */
 export const CANONICAL_E2E_BASE_URL = 'http://localhost:3000';
 
