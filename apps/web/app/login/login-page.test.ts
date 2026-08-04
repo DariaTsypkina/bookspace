@@ -48,6 +48,14 @@ describe('Login page Tailwind+shadcn migration (S2 / bd-wus.5)', () => {
     expect(pageSource).toMatch(/\bButton\b/);
   });
 
+  it('uses PasswordInput for password visibility toggle (bd-957.5)', () => {
+    expect(pageSource).toMatch(
+      /from ['"]@\/components\/ui\/password-input['"]/,
+    );
+    expect(pageSource).toMatch(/\bPasswordInput\b/);
+    expect(pageSource).not.toMatch(/type=["']password["']/);
+  });
+
   it('keeps RU heading Вход and auth behavior hooks', () => {
     expect(pageSource).toMatch(/<h1[^>]*>\s*Вход\s*<\/h1>/);
     expect(pageSource).toMatch(/GuestOnly/);

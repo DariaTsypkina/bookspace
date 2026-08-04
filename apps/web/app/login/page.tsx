@@ -17,6 +17,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { PasswordInput } from '@/components/ui/password-input';
 import { getFriendlyZodIssueMessage } from '@/lib/form-errors';
 import { login } from '../../lib/auth';
 
@@ -108,13 +109,7 @@ function LoginForm() {
                     <FormLabel className="font-normal text-muted">
                       Пароль
                     </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="password"
-                        autoComplete="current-password"
-                        {...field}
-                      />
-                    </FormControl>
+                    <PasswordInput autoComplete="current-password" {...field} />
                     <FormMessage />
                   </FormItem>
                 )}

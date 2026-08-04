@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-04T10:38:13.210Z",
+  "generated_at": "2026-08-04T10:41:49.774Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 138,
-    "open_issues": 37,
+    "open_issues": 36,
     "in_progress_issues": 0,
-    "closed_issues": 101,
+    "closed_issues": 102,
     "blocked_issues": 7,
-    "ready_issues": 30
+    "ready_issues": 29
   },
   "epics": [
     {
@@ -443,11 +443,11 @@
       "status": "closed",
       "priority": 1,
       "children_total": 10,
-      "children_closed": 8,
+      "children_closed": 9,
       "children_in_progress": 0,
-      "children_open": 2,
-      "progress": "8 / 10",
-      "percent_closed": 80,
+      "children_open": 1,
+      "progress": "9 / 10",
+      "percent_closed": 90,
       "children": [
         {
           "id": "bd-8jk",
@@ -487,7 +487,7 @@
         {
           "id": "bd-957.5",
           "title": "UI: показать/скрыть пароль (кнопка глаза) на полях пароля",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 2
         },
@@ -1208,11 +1208,11 @@
     {
       "id": "bd-957.5",
       "title": "UI: показать/скрыть пароль (кнопка глаза) на полях пароля",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-957",
-      "updated_at": "2026-08-03T10:46:43Z"
+      "updated_at": "2026-08-04T10:41:45Z"
     },
     {
       "id": "bd-6b7.8",
