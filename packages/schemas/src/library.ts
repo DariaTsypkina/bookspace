@@ -87,6 +87,53 @@ export const ProfileSlugParamSchema = z.object({
 
 export type ProfileSlugParam = z.infer<typeof ProfileSlugParamSchema>;
 
+/** Тег пользователя (владелец). */
+export const TagNameSchema = z.string().trim().min(1).max(100);
+
+export const TagResponseSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+});
+
+export type TagResponse = z.infer<typeof TagResponseSchema>;
+
+/** Создать тег. */
+export const CreateTagInputSchema = z.object({
+  name: TagNameSchema,
+});
+
+export type CreateTagInput = z.infer<typeof CreateTagInputSchema>;
+
+/** Переименовать тег. */
+export const UpdateTagInputSchema = z.object({
+  name: TagNameSchema,
+});
+
+export type UpdateTagInput = z.infer<typeof UpdateTagInputSchema>;
+
+/**
+ * Назначить тег на UserBook: существующий `tagId` или создать/найти по `name`.
+ */
+export const AssignTagInputSchema = z
+  .object({
+    tagId: z
+      .string()
+      .trim()
+      .min(1)
+      .max(128)
+      .optional()
+      .transform((value) =>
+        value === undefined || value.length === 0 ? undefined : value,
+      ),
+    name: TagNameSchema.optional(),
+  })
+  .refine((data) => data.tagId !== undefined || data.name !== undefined, {
+    message: 'Укажите tagId или name',
+    path: ['tagId'],
+  });
+
+export type AssignTagInput = z.infer<typeof AssignTagInputSchema>;
+
 /** Элемент публичной коллекции. */
 export const PublicUserBookItemSchema = z.object({
   workSlug: z.string(),
@@ -94,6 +141,7 @@ export const PublicUserBookItemSchema = z.object({
   status: UserBookStatusSchema,
   rating: UserBookRatingSchema.nullable(),
   finishedAt: z.string().datetime().nullable(),
+  tags: z.array(z.object({ name: z.string() })),
 });
 
 export type PublicUserBookItem = z.infer<typeof PublicUserBookItemSchema>;
@@ -114,6 +162,7 @@ export const UserBookResponseSchema = z.object({
   status: UserBookStatusSchema,
   rating: UserBookRatingSchema.nullable(),
   finishedAt: z.string().datetime().nullable(),
+  tags: z.array(TagResponseSchema),
 });
 
 export type UserBookResponse = z.infer<typeof UserBookResponseSchema>;

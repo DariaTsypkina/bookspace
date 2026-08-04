@@ -160,13 +160,13 @@
 | ✅     | `bd-8s4.3` | ContextReading: Пайплайн extract ContextReading |
 | ✅     | `bd-8s4.4` | ContextReading: Админка ContextReading          |
 
-### 5. Библиотека и профиль — 🔄 · epic `bd-cq7` · 2 / 5 · сборочная `feat/bookspace-bd-cq7`
+### 5. Библиотека и профиль — 🔄 · epic `bd-cq7` · 3 / 5 · сборочная `feat/bookspace-bd-cq7`
 
 | Статус | ID         | Задача                                                                                                     |
 | ------ | ---------- | ---------------------------------------------------------------------------------------------------------- |
 | ✅     | `bd-cq7.1` | Библиотека: Статус и оценка книги                                                                          |
-| 🔄     | `bd-cq7.2` | Библиотека: Пользовательские полки                                                                         |
-| ⬜     | `bd-cq7.3` | Библиотека: Теги пользователя                                                                              |
+| ✅     | `bd-cq7.2` | Библиотека: Пользовательские полки                                                                         |
+| 🔄     | `bd-cq7.3` | Библиотека: Теги пользователя                                                                              |
 | ⬜     | `bd-cq7.4` | Библиотека: Моя библиотека                                                                                 |
 | ⬜     | `bd-cq7.5` | Библиотека: Публичный профиль                                                                              |
 | ✅     | `bd-cq7.6` | Bug: iOS Chrome — пустая страница Профиль `/library` (human-reported) · сборочная `feat/bookspace-bd-bugs` |
@@ -239,6 +239,8 @@
 
 | Дата       | Действие                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-08-04 | `bd-cq7.3` ready close: Tag/UserBookTag Prisma+API CRUD + assign `/me/library/works/:slug/tags` + public library tags; UI `/books` tags form + `/u/[slug]` display; unit api me-tags+dto **7** + e2e **2**; web unit **334**; PW user-tags **4/4** mobile+desktop (`PLAYWRIGHT_CHROME_CHANNEL=0`); manual `e2e/manual/user-tags.md`; ветка `task/bd-cq7.3-user-tags`; `bd close` — оркестратор |
+| 2026-08-04 | `bd-cq7.3` in progress: claim + bd-conventions (design/acceptance/notes/labels); ветка `task/bd-cq7.3-user-tags`; sync origin/develop OK; старт TDD Tag/UserBookTag |
 | 2026-08-04 | `bd-cq7.2` ready close: Shelf/ShelfItem Prisma+API CRUD + public GET `/users/:slug/shelves`; UI `/library/shelves` + empty state + min `/u/[slug]` shelves; unit api me-shelves+dto **8** (api total 218) + e2e **2**; web unit **330**; PW user-shelves **4/4** mobile+desktop (`PLAYWRIGHT_CHROME_CHANNEL=0`); manual `e2e/manual/user-shelves.md`; ветка `task/bd-cq7.2-user-shelves`; `bd close` — оркестратор |
 | 2026-08-04 | `bd-cq7.2` in progress: claim + bd-conventions (design/acceptance/notes/labels); ветка `task/bd-cq7.2-user-shelves`; sync origin/develop OK; старт TDD Shelf/ShelfItem |
 | 2026-08-04 | `bd-cq7.1` ready close: UserBook status/rating + public GET `/users/:slug/library` + UI `/books` + min `/u/[slug]`; API unit me-library 16 + e2e 3+auth; web unit; PW user-book+profile **16/16** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); BFF PUT `/api/me/*`; manual `e2e/manual/user-book-status-rating.md`; ветка `task/bd-cq7.1-user-book-status-rating`; `bd close` — оркестратор                                                                                                                                                                                                                      |

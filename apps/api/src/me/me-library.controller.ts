@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   Param,
@@ -17,12 +18,17 @@ import {
   PutUserBookBySlugDto,
   UpsertUserBookDto,
 } from './dto/me-library.dto';
+import { AssignTagDto } from './dto/me-tags.dto';
 import { MeLibraryService } from './me-library.service';
+import { MeTagsService } from './me-tags.service';
 
 @Controller('me/library')
 @UseGuards(AuthGuard)
 export class MeLibraryController {
-  constructor(private readonly library: MeLibraryService) {}
+  constructor(
+    private readonly library: MeLibraryService,
+    private readonly tags: MeTagsService,
+  ) {}
 
   /** Upsert статуса/оценки (workId или workSlug в body). */
   @Post('items')
@@ -65,5 +71,32 @@ export class MeLibraryController {
   ) {
     const item = await this.library.getByWorkSlug(user.id, workSlug);
     return { item };
+  }
+
+  @Get('works/:workSlug/tags')
+  async listTags(
+    @CurrentUser() user: SessionUser,
+    @Param('workSlug') workSlug: string,
+  ) {
+    return { tags: await this.tags.listForWork(user.id, workSlug) };
+  }
+
+  @Post('works/:workSlug/tags')
+  @HttpCode(201)
+  assignTag(
+    @CurrentUser() user: SessionUser,
+    @Param('workSlug') workSlug: string,
+    @Body() body: AssignTagDto,
+  ) {
+    return this.tags.assignToWork(user.id, workSlug, body);
+  }
+
+  @Delete('works/:workSlug/tags/:tagId')
+  unassignTag(
+    @CurrentUser() user: SessionUser,
+    @Param('workSlug') workSlug: string,
+    @Param('tagId') tagId: string,
+  ) {
+    return this.tags.unassignFromWork(user.id, workSlug, tagId);
   }
 }

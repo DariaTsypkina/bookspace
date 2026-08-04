@@ -127,6 +127,8 @@ Partial unique: одна активная связь subject→recommended (кр
 
 Пользовательские полки; видны в публичной коллекции.
 
+`Tag` (`userId`, `name`; unique `(userId, name)`) + `UserBookTag` (`userBookId`, `tagId`); теги публичны как коллекция (не `Note.visibility`).
+
 ### `reading_goals`
 
 `userId`, `year` int, `targetCount` int; unique `(userId, year)`.  
