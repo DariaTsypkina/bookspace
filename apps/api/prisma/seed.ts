@@ -67,6 +67,24 @@ async function seedCatalogDemo() {
     },
   });
 
+  const sequelWork = await prisma.work.upsert({
+    where: { slug: 'garri-potter-taynaya-komnata' },
+    update: {
+      titleRu: 'Гарри Поттер и Тайная комната',
+      titleOrig: 'Harry Potter and the Chamber of Secrets',
+      yearFirst: 1998,
+      status: WorkStatus.PUBLISHED,
+      deletedAt: null,
+    },
+    create: {
+      slug: 'garri-potter-taynaya-komnata',
+      titleRu: 'Гарри Поттер и Тайная комната',
+      titleOrig: 'Harry Potter and the Chamber of Secrets',
+      yearFirst: 1998,
+      status: WorkStatus.PUBLISHED,
+    },
+  });
+
   await prisma.workAuthor.upsert({
     where: {
       workId_authorId: {
@@ -77,6 +95,21 @@ async function seedCatalogDemo() {
     update: { position: 0 },
     create: {
       workId: publishedWork.id,
+      authorId: author.id,
+      position: 0,
+    },
+  });
+
+  await prisma.workAuthor.upsert({
+    where: {
+      workId_authorId: {
+        workId: sequelWork.id,
+        authorId: author.id,
+      },
+    },
+    update: { position: 0 },
+    create: {
+      workId: sequelWork.id,
       authorId: author.id,
       position: 0,
     },
@@ -94,6 +127,38 @@ async function seedCatalogDemo() {
       workId: publishedWork.id,
       seriesId: series.id,
       positionInSeries: 1,
+    },
+  });
+
+  await prisma.workSeries.upsert({
+    where: {
+      workId_seriesId: {
+        workId: sequelWork.id,
+        seriesId: series.id,
+      },
+    },
+    update: { positionInSeries: 2 },
+    create: {
+      workId: sequelWork.id,
+      seriesId: series.id,
+      positionInSeries: 2,
+    },
+  });
+
+  await prisma.workRelation.upsert({
+    where: {
+      fromWorkId_toWorkId_type: {
+        fromWorkId: publishedWork.id,
+        toWorkId: sequelWork.id,
+        type: 'SEQUEL',
+      },
+    },
+    update: { readingOrder: 2 },
+    create: {
+      fromWorkId: publishedWork.id,
+      toWorkId: sequelWork.id,
+      type: 'SEQUEL',
+      readingOrder: 2,
     },
   });
 

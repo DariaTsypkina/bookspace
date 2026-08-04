@@ -39,14 +39,56 @@ describe('spoiler gate helpers', () => {
     expect(hasSpoilersConsent('yes')).toBe(false);
   });
 
+  it('Max-Age is approximately 30 days (bd-azl.4)', () => {
+    expect(SPOILERS_OK_MAX_AGE_SECONDS).toBe(60 * 60 * 24 * 30);
+    expect(SPOILERS_OK_MAX_AGE_SECONDS).toBe(2_592_000);
+  });
+
   it('builds cookie with 30-day max age and SameSite=Lax', () => {
     const cookie = buildSpoilersOkCookie({ secure: false });
 
     expect(cookie).toContain(`${SPOILERS_OK_COOKIE}=${SPOILERS_OK_VALUE}`);
     expect(cookie).toContain('Path=/');
     expect(cookie).toContain(`Max-Age=${SPOILERS_OK_MAX_AGE_SECONDS}`);
+    expect(cookie).toContain('Max-Age=2592000');
     expect(cookie).toContain('SameSite=Lax');
     expect(cookie).not.toContain('Secure');
+  });
+
+  it('persistSpoilersConsent writes cookie Max-Age≈30d and storage mirror', () => {
+    const written: string[] = [];
+    const store = new Map<string, string>();
+    const storage = {
+      getItem: (key: string) => store.get(key) ?? null,
+      setItem: (key: string, value: string) => {
+        store.set(key, value);
+      },
+      removeItem: (key: string) => {
+        store.delete(key);
+      },
+      clear: () => {
+        store.clear();
+      },
+      key: (index: number) => [...store.keys()][index] ?? null,
+      get length() {
+        return store.size;
+      },
+    } satisfies Storage;
+
+    persistSpoilersConsent({
+      cookieSetter: (value) => {
+        written.push(value);
+      },
+      storage,
+      secure: false,
+    });
+
+    expect(written).toHaveLength(1);
+    expect(written[0]).toContain('Max-Age=2592000');
+    expect(written[0]).toContain('Path=/');
+    expect(written[0]).toContain('SameSite=Lax');
+    expect(written[0]).not.toContain('Secure');
+    expect(store.get(SPOILERS_OK_STORAGE_KEY)).toBe(SPOILERS_OK_VALUE);
   });
 
   it('adds Secure attribute when building cookie for HTTPS (bd-azl.5)', () => {

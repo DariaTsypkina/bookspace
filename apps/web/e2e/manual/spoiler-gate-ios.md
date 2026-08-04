@@ -1,4 +1,6 @@
-# Ручной чеклист: Spoiler gate (bd-azl.5 / bd-azl.4)
+# Ручной чеклист: Spoiler gate iOS Chrome (bd-azl.5 / bd-azl.4)
+
+Канон desktop/mobile DoD: [spoiler-gate.md](./spoiler-gate.md).
 
 ## Prefight
 

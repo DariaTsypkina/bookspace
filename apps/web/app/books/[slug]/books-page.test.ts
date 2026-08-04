@@ -76,6 +76,30 @@ describe('Books page Tailwind+shadcn migration (S6 / bd-wus.9)', () => {
     expect(contextSectionSource).toMatch(/CONTEXT_READING_DISCLAIMER/);
   });
 
+  it('shows work relations behind SpoilerGate when present (bd-azl.2)', () => {
+    expect(pageSource).toMatch(/from ['"]@\/components\/spoiler-gate['"]/);
+    expect(pageSource).toMatch(/\bSpoilerGate\b/);
+    expect(pageSource).toMatch(/WORK_RELATION_LABELS/);
+    expect(pageSource).toMatch(/aria-label=["']Связи произведений["']/);
+    expect(pageSource).toMatch(/work\.relations\.length > 0/);
+    expect(pageSource).toMatch(/href=\{`\/books\/\$\{relation\.slug\}`\}/);
+    expect(pageSource).toMatch(/hasSpoilersConsent/);
+    expect(pageSource).toMatch(/SPOILERS_OK_COOKIE/);
+  });
+
+  it('shows reading order behind SpoilerGate as numbered steps (bd-azl.3)', () => {
+    expect(pageSource).toMatch(/aria-label=["']Порядок чтения["']/);
+    expect(pageSource).toMatch(/Порядок чтения/);
+    expect(pageSource).toMatch(/work\.readingOrder\.length > 0/);
+    expect(pageSource).toMatch(/Шаг \{step\.step\}/);
+    expect(pageSource).toMatch(/href=\{`\/books\/\$\{step\.slug\}`\}/);
+    // Distinct from relations dump (type labels vs numbered steps)
+    expect(pageSource).toMatch(/aria-label=["']Связи произведений["']/);
+    expect(pageSource).toMatch(
+      /work\.relations\.length > 0 \|\| work\.readingOrder\.length > 0/,
+    );
+  });
+
   it('removes orphan .work-* / .edition-* rules from globals.css', () => {
     expect(globalsSource).not.toMatch(/\.work-page\b/);
     expect(globalsSource).not.toMatch(/\.work-header\b/);

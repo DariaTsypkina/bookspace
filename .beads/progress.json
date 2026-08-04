@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-04T11:04:18.066Z",
+  "generated_at": "2026-08-04T11:48:16.759Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 140,
-    "open_issues": 35,
+    "open_issues": 30,
     "in_progress_issues": 0,
-    "closed_issues": 105,
+    "closed_issues": 110,
     "blocked_issues": 7,
-    "ready_issues": 28
+    "ready_issues": 23
   },
   "epics": [
     {
@@ -566,40 +566,40 @@
     {
       "id": "bd-azl",
       "title": "Связи и порядок",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
       "children_total": 5,
-      "children_closed": 1,
+      "children_closed": 5,
       "children_in_progress": 0,
-      "children_open": 4,
-      "progress": "1 / 5",
-      "percent_closed": 20,
+      "children_open": 0,
+      "progress": "5 / 5",
+      "percent_closed": 100,
       "children": [
         {
           "id": "bd-azl.1",
           "title": "Связи: Карточка серии",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 2
         },
         {
           "id": "bd-azl.2",
           "title": "Связи произведений",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 2
         },
         {
           "id": "bd-azl.3",
           "title": "Связи: Порядок чтения",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 2
         },
         {
           "id": "bd-azl.4",
           "title": "Связи: Spoiler gate",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 2
         },
@@ -2079,47 +2079,47 @@
     {
       "id": "bd-azl.4",
       "title": "Связи: Spoiler gate",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-azl",
-      "updated_at": "2026-07-17T12:36:05Z"
+      "updated_at": "2026-08-04T11:43:21Z"
     },
     {
       "id": "bd-azl.3",
       "title": "Связи: Порядок чтения",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-azl",
-      "updated_at": "2026-07-17T12:36:04Z"
+      "updated_at": "2026-08-04T11:38:55Z"
     },
     {
       "id": "bd-azl.2",
       "title": "Связи произведений",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-azl",
-      "updated_at": "2026-07-17T12:36:03Z"
+      "updated_at": "2026-08-04T11:29:44Z"
     },
     {
       "id": "bd-azl.1",
       "title": "Связи: Карточка серии",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-azl",
-      "updated_at": "2026-07-17T12:36:02Z"
+      "updated_at": "2026-08-04T11:19:50Z"
     },
     {
       "id": "bd-azl",
       "title": "Связи и порядок",
-      "status": "open",
+      "status": "closed",
       "type": "epic",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-07-17T12:36:01Z"
+      "updated_at": "2026-08-04T11:43:47Z"
     },
     {
       "id": "bd-957.3",
