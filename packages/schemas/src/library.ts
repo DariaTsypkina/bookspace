@@ -117,3 +117,137 @@ export const UserBookResponseSchema = z.object({
 });
 
 export type UserBookResponse = z.infer<typeof UserBookResponseSchema>;
+
+/** Создать полку: title обязателен; slug генерируется на сервере, если не задан. */
+export const CreateShelfInputSchema = z.object({
+  title: z.string().trim().min(1).max(200),
+  description: z
+    .string()
+    .trim()
+    .max(2000)
+    .optional()
+    .transform((value) =>
+      value === undefined || value.length === 0 ? undefined : value,
+    ),
+  slug: z
+    .string()
+    .trim()
+    .min(1)
+    .max(200)
+    .optional()
+    .transform((value) =>
+      value === undefined || value.length === 0 ? undefined : value,
+    ),
+});
+
+export type CreateShelfInput = z.infer<typeof CreateShelfInputSchema>;
+
+/** PATCH полки: хотя бы одно поле. description: null — сбросить. */
+export const UpdateShelfInputSchema = z
+  .object({
+    title: z.string().trim().min(1).max(200).optional(),
+    description: z
+      .string()
+      .trim()
+      .max(2000)
+      .nullable()
+      .optional()
+      .transform((value) => {
+        if (value === undefined) return undefined;
+        if (value === null) return null;
+        return value.length === 0 ? null : value;
+      }),
+    slug: z.string().trim().min(1).max(200).optional(),
+  })
+  .refine(
+    (data) =>
+      data.title !== undefined ||
+      data.description !== undefined ||
+      data.slug !== undefined,
+    {
+      message: 'Укажите title, description и/или slug',
+      path: ['title'],
+    },
+  );
+
+export type UpdateShelfInput = z.infer<typeof UpdateShelfInputSchema>;
+
+/** Добавить книгу на полку (из коллекции владельца). */
+export const AddShelfItemInputSchema = z
+  .object({
+    workId: z
+      .string()
+      .trim()
+      .min(1)
+      .max(128)
+      .optional()
+      .transform((value) =>
+        value === undefined || value.length === 0 ? undefined : value,
+      ),
+    workSlug: z
+      .string()
+      .trim()
+      .min(1)
+      .max(200)
+      .optional()
+      .transform((value) =>
+        value === undefined || value.length === 0 ? undefined : value,
+      ),
+  })
+  .refine((data) => data.workId !== undefined || data.workSlug !== undefined, {
+    message: 'Укажите workId или workSlug',
+    path: ['workId'],
+  });
+
+export type AddShelfItemInput = z.infer<typeof AddShelfItemInputSchema>;
+
+export const ShelfItemResponseSchema = z.object({
+  workId: z.string(),
+  workSlug: z.string(),
+  titleRu: z.string(),
+  position: z.number().int().nullable(),
+});
+
+export type ShelfItemResponse = z.infer<typeof ShelfItemResponseSchema>;
+
+export const ShelfResponseSchema = z.object({
+  id: z.string(),
+  slug: z.string(),
+  title: z.string(),
+  description: z.string().nullable(),
+  itemCount: z.number().int().nonnegative(),
+  items: z.array(ShelfItemResponseSchema).optional(),
+});
+
+export type ShelfResponse = z.infer<typeof ShelfResponseSchema>;
+
+export const PublicShelfSummarySchema = z.object({
+  slug: z.string(),
+  title: z.string(),
+  description: z.string().nullable(),
+  itemCount: z.number().int().nonnegative(),
+});
+
+export type PublicShelfSummary = z.infer<typeof PublicShelfSummarySchema>;
+
+export const PublicShelvesResponseSchema = z.object({
+  slug: z.string(),
+  shelves: z.array(PublicShelfSummarySchema),
+});
+
+export type PublicShelvesResponse = z.infer<typeof PublicShelvesResponseSchema>;
+
+export const PublicShelfDetailSchema = z.object({
+  slug: z.string(),
+  shelfSlug: z.string(),
+  title: z.string(),
+  description: z.string().nullable(),
+  items: z.array(
+    z.object({
+      workSlug: z.string(),
+      titleRu: z.string(),
+    }),
+  ),
+});
+
+export type PublicShelfDetail = z.infer<typeof PublicShelfDetailSchema>;
