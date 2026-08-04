@@ -239,6 +239,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-04 | Целевая проверка `feat/bookspace-bd-azl`: API 30+e2e6, web 34; PW series/relations/order/spoiler/character **44/44** desktop+mobile. ЗАЛИВАТЬ=Нет — сборочная на ревью |
 | 2026-08-04 | Эпик `bd-azl` ✅ closed на сборочной `feat/bookspace-bd-azl` (дети .1–.5); перед целевой проверкой |
 | 2026-08-04 | `bd-azl.4` ready close: cookie `spoilers_ok=1` Max-Age≈30d Path=/ SameSite=Lax (+Secure HTTPS) + localStorage fallback; unit spoiler-gate **12/12**; PW spoiler-gate+character+work-relations+reading-order **36/36** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); manual `e2e/manual/spoiler-gate.md`; критерии feature-doc ✅; ветка `task/bd-azl.4-spoiler-gate`; `bd close` — оркестратор |
 | 2026-08-04 | `bd-azl.3` ✅ closed+merged → `feat/bookspace-bd-azl`; claim `bd-azl.4` → `task/bd-azl.4-spoiler-gate` |
