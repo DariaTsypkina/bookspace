@@ -14,7 +14,7 @@
 | 0 | Bootstrap (monorepo, docker, CI) | ✅ | — | — |
 | 1 | Auth | ✅ | 6 / 6 | `bd-957` |
 | 2 | Каталог | ✅ | 6 / 6 | `bd-6v0` |
-| 3 | Связи и порядок | ⬜ | 0 / 4 | `bd-azl` |
+| 3 | Связи и порядок | 🔄 | 0 / 4 | `bd-azl` |
 | 4 | ContextReading | ✅ | 4 / 4 | `bd-8s4` |
 | 5 | Библиотека и профиль | ⬜ | 0 / 5 | `bd-cq7` |
 | 6 | Заметки и цель | 🔒 | 0 / 2 | `bd-sf4` |
@@ -145,7 +145,7 @@
 
 | Статус | ID | Задача |
 |--------|-----|--------|
-| ⬜ | `bd-azl.1` | Связи: Карточка серии |
+| 🔄 | `bd-azl.1` | Связи: Карточка серии |
 | ⬜ | `bd-azl.2` | Связи произведений |
 | ⬜ | `bd-azl.3` | Связи: Порядок чтения |
 | ⬜ | `bd-azl.4` | Связи: Spoiler gate |
@@ -239,6 +239,7 @@
 
 | Дата | Действие |
 |------|----------|
+| 2026-08-04 | Оркестратор bd-azl: сборочная `feat/bookspace-bd-azl` от origin/develop (`a524d98`); claim `bd-azl.1` → `task/bd-azl.1-series-page`; ЗАЛИВАТЬ=Нет |
 | 2026-08-04 | `bd-3h3` ready close: AdminOnly — derived `ready` (без setState в effect); unit admin-only+guest+auth-provider **16/16**; lint **0 errors**; PW auth-context+app-nav **22/22** desktop+mobile; ветка `task/bd-3h3-admin-only-lint-setstate`; `bd close` — оркестратор |
 | 2026-08-04 | `bd-957.5` ready close: `PasswordInput` (Eye/EyeOff, RU aria, FormControl→Input); unit password-input+login+register; suite **298**; PW password-visibility **4/4** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); ветка `task/bd-957.5-password-visibility-toggle`; `bd close` — оркестратор |
 | 2026-08-04 | Claim `bd-957.5`: UI глаз показать/скрыть пароль на `/login`+`/register`; conventions (design/notes); sync origin/develop OK; ветка `task/bd-957.5-password-visibility-toggle` от `feat/bookspace-bd-common`; `bd close` — оркестратор |
