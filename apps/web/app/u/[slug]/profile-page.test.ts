@@ -33,15 +33,26 @@ describe('Profile page Tailwind+shadcn migration (S11 / bd-wus.14)', () => {
     expect(logoutSource).not.toMatch(/className=["']logout-button["']/);
   });
 
-  it('keeps profile stub UX: RU copy, slug, progressive LogoutButton (bd-6b7.11)', () => {
+  it('shows public collection from API (bd-cq7.1) with RU status/rating', () => {
     expect(pageSource).toMatch(/Профиль/);
-    expect(pageSource).toMatch(/Публичный профиль пользователя/);
-    expect(pageSource).toMatch(/скоро появится/);
+    expect(pageSource).toMatch(/Публичная коллекция/);
+    expect(pageSource).toMatch(/fetchPublicLibrary/);
+    expect(pageSource).toMatch(/formatUserBookStatus/);
+    expect(pageSource).toMatch(/formatUserBookRating/);
+    expect(pageSource).toMatch(/Книги в коллекции/);
     expect(pageSource).toMatch(/\{slug\}/);
     expect(pageSource).toMatch(/LogoutButton/);
     expect(logoutSource).toMatch(/Выйти/);
     expect(logoutSource).toMatch(/action=["']\/api\/logout["']/);
     expect(logoutSource).toMatch(/method=["']post["']/);
+  });
+
+  it('links books to user-context page and gates notes/goal (bd-cq7.5)', () => {
+    expect(pageSource).toMatch(/\/u\/\$\{slug\}\/books\/\$\{item\.workSlug\}/);
+    expect(pageSource).toMatch(/Публичные заметки/);
+    expect(pageSource).toMatch(/Цель чтения на год/);
+    expect(pageSource).toMatch(/\{goal \?/);
+    expect(pageSource).toMatch(/notes\.length/);
   });
 
   it('validates slug via shared ProfileSlugParamSchema helper', () => {

@@ -2,7 +2,10 @@
 
 import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { AddLibraryItemInputSchema } from '@bookspace/schemas';
+import {
+  AddLibraryItemInputSchema,
+  type UserBookStatus,
+} from '@bookspace/schemas';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import {
@@ -16,12 +19,23 @@ import {
 import { Input } from '@/components/ui/input';
 import { getFriendlyZodIssueMessage } from '@/lib/form-errors';
 import { ApiError, api } from '@/lib/http';
+import {
+  USER_BOOK_STATUS_LABELS,
+  USER_BOOK_STATUS_OPTIONS,
+} from '@/lib/user-book-status';
 
 type AddLibraryItemFormValues = {
+  workSlug?: string;
   workId?: string;
+  status: UserBookStatus;
+  rating?: number | null;
 };
 
-export function AddLibraryItemForm() {
+type AddLibraryItemFormProps = {
+  onSuccess?: () => void;
+};
+
+export function AddLibraryItemForm({ onSuccess }: AddLibraryItemFormProps) {
   const [status, setStatus] = useState<{
     kind: 'success' | 'error';
     message: string;
@@ -30,7 +44,9 @@ export function AddLibraryItemForm() {
   const form = useForm<AddLibraryItemFormValues>({
     resolver: zodResolver(AddLibraryItemInputSchema),
     defaultValues: {
-      workId: '',
+      workSlug: '',
+      status: 'WANT',
+      rating: null,
     },
   });
 
@@ -38,18 +54,21 @@ export function AddLibraryItemForm() {
     form.clearErrors('root');
     setStatus(null);
 
-    const payload =
-      values.workId && values.workId.trim().length > 0
-        ? { workId: values.workId.trim() }
-        : {};
+    const payload = {
+      workSlug: values.workSlug?.trim() || undefined,
+      workId: values.workId?.trim() || undefined,
+      status: values.status,
+      rating: values.rating ?? null,
+    };
 
     try {
       await api.post('/api/me/library/items', payload);
-      form.reset({ workId: '' });
+      form.reset({ workSlug: '', status: 'WANT', rating: null });
       setStatus({
         kind: 'success',
-        message: 'Добавлено в библиотеку (заглушка)',
+        message: 'Статус сохранён',
       });
+      onSuccess?.();
     } catch (error) {
       if (error instanceof ApiError) {
         if (error.status === 401) {
@@ -59,15 +78,22 @@ export function AddLibraryItemForm() {
           });
           return;
         }
+        if (error.status === 404) {
+          setStatus({
+            kind: 'error',
+            message: 'Произведение не найдено',
+          });
+          return;
+        }
         setStatus({
           kind: 'error',
-          message: error.message || 'Не удалось добавить книгу',
+          message: error.message || 'Не удалось сохранить',
         });
         return;
       }
       setStatus({
         kind: 'error',
-        message: 'Не удалось добавить книгу',
+        message: 'Не удалось сохранить',
       });
     }
   }
@@ -79,8 +105,9 @@ export function AddLibraryItemForm() {
       return;
     }
     for (const issue of result.error.issues) {
-      if (issue.path[0] === 'workId') {
-        form.setError('workId', {
+      const key = issue.path[0];
+      if (key === 'workSlug' || key === 'workId' || key === 'status') {
+        form.setError(key, {
           type: issue.code,
           message: getFriendlyZodIssueMessage(issue),
         });
@@ -97,21 +124,46 @@ export function AddLibraryItemForm() {
       >
         <FormField
           control={form.control}
-          name="workId"
+          name="workSlug"
           render={({ field }) => (
             <FormItem>
               <FormLabel className="font-normal text-muted">
-                ID произведения
+                Слаг произведения
               </FormLabel>
               <FormControl>
                 <Input
                   type="text"
-                  placeholder="work-1"
+                  placeholder="garri-potter-filosofskiy-kamen"
                   autoComplete="off"
-                  maxLength={128}
+                  maxLength={200}
+                  aria-label="Слаг произведения"
                   {...field}
                   value={field.value ?? ''}
                 />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="status"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="font-normal text-muted">Статус</FormLabel>
+              <FormControl>
+                <select
+                  className="flex h-10 w-full rounded-md border border-border bg-surface px-3 py-2 font-sans text-sm text-foreground shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+                  aria-label="Статус книги"
+                  {...field}
+                  value={field.value}
+                >
+                  {USER_BOOK_STATUS_OPTIONS.map((s) => (
+                    <option key={s} value={s}>
+                      {USER_BOOK_STATUS_LABELS[s]}
+                    </option>
+                  ))}
+                </select>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -130,7 +182,7 @@ export function AddLibraryItemForm() {
           </p>
         ) : null}
         <Button type="submit" className="w-full sm:w-auto">
-          Добавить в библиотеку
+          Сохранить в библиотеку
         </Button>
       </form>
     </Form>
