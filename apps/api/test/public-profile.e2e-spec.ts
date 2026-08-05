@@ -110,25 +110,37 @@ describe('Public profile (e2e) bd-cq7.5', () => {
       .set('X-E2E', '1')
       .send({ name: `${TEST_PREFIX}-tag` })
       .expect(201);
+    const tagBody = tag.body as { id: string };
 
     await api()
       .post(`/me/library/works/${work.slug}/tags`)
       .set('Cookie', cookie)
       .set('X-E2E', '1')
-      .send({ tagId: tag.body.id })
+      .send({ tagId: tagBody.id })
       .expect(201);
 
     const library = await api().get(`/users/${user.slug}/library`).expect(200);
-    expect(library.body.slug).toBe(user.slug);
-    expect(library.body.items).toHaveLength(1);
-    expect(library.body.items[0]).toMatchObject({
+    const libraryBody = library.body as {
+      slug: string;
+      items: Array<{
+        workSlug: string;
+        status: string;
+        rating: number;
+        tags: Array<{ name: string }>;
+      }>;
+      notes: unknown[];
+      goal: null;
+    };
+    expect(libraryBody.slug).toBe(user.slug);
+    expect(libraryBody.items).toHaveLength(1);
+    expect(libraryBody.items[0]).toMatchObject({
       workSlug: work.slug,
       status: 'READ',
       rating: 9,
       tags: [{ name: `${TEST_PREFIX}-tag` }],
     });
-    expect(library.body.notes).toEqual([]);
-    expect(library.body.goal).toBeNull();
+    expect(libraryBody.notes).toEqual([]);
+    expect(libraryBody.goal).toBeNull();
 
     const detail = await api()
       .get(`/users/${user.slug}/library/works/${work.slug}`)

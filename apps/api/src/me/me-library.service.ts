@@ -48,7 +48,7 @@ export class MeLibraryService {
     input: UpsertUserBookInput,
   ): Promise<UserBookResponse> {
     const work = await this.resolvePublishedWork(input);
-    const nextStatus = input.status as UserBookStatus;
+    const nextStatus = input.status;
     const existing = await this.prisma.userBook.findUnique({
       where: { userId_workId: { userId, workId: work.id } },
     });
@@ -103,9 +103,7 @@ export class MeLibraryService {
     }
 
     const nextStatus =
-      input.status !== undefined
-        ? (input.status as UserBookStatus)
-        : existing.status;
+      input.status !== undefined ? input.status : existing.status;
     const rating = input.rating === undefined ? existing.rating : input.rating;
     const finishedAt = this.nextFinishedAt(
       existing.status,
@@ -136,7 +134,7 @@ export class MeLibraryService {
     const rows = await this.prisma.userBook.findMany({
       where: {
         userId,
-        ...(status !== undefined ? { status: status as UserBookStatus } : {}),
+        ...(status !== undefined ? { status } : {}),
         work: {
           deletedAt: null,
           status: WorkStatus.PUBLISHED,

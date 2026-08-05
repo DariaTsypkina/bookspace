@@ -114,14 +114,27 @@ describe('User book status/rating (e2e) bd-cq7.1', () => {
       .set('X-E2E', '1')
       .send({ status: 'READ', rating: 9 })
       .expect(200);
-
-    expect(put.body.status).toBe('READ');
-    expect(put.body.rating).toBe(9);
-    expect(put.body.finishedAt).toBeTruthy();
+    const putBody = put.body as {
+      status: string;
+      rating: number;
+      finishedAt: string | null;
+    };
+    expect(putBody.status).toBe('READ');
+    expect(putBody.rating).toBe(9);
+    expect(putBody.finishedAt).toBeTruthy();
 
     const pub = await api().get(`/users/${user.slug}/library`).expect(200);
-    expect(pub.body.slug).toBe(user.slug);
-    expect(pub.body.items).toEqual([
+    const pubBody = pub.body as {
+      slug: string;
+      items: Array<{
+        workSlug: string;
+        titleRu: string;
+        status: string;
+        rating: number;
+      }>;
+    };
+    expect(pubBody.slug).toBe(user.slug);
+    expect(pubBody.items).toEqual([
       expect.objectContaining({
         workSlug: work.slug,
         titleRu: 'Е2Е книга',
@@ -134,7 +147,7 @@ describe('User book status/rating (e2e) bd-cq7.1', () => {
   it('ADMIN can upsert; rating out of range → 400; missing work → 404', async () => {
     const work = await seedWork(`${TEST_PREFIX}-admin-work`);
     const email = `${TEST_PREFIX}-admin@bookspace.local`;
-    const cookie = await registerAndLogin(email);
+    await registerAndLogin(email);
     await prisma.user.update({
       where: { email },
       data: { role: UserRole.ADMIN },
@@ -197,8 +210,9 @@ describe('User book status/rating (e2e) bd-cq7.1', () => {
       .set('X-E2E', '1')
       .send({ rating: 4 })
       .expect(200);
-    expect(patched.body.rating).toBe(4);
-    expect(patched.body.status).toBe('READING');
+    const patchedBody = patched.body as { rating: number; status: string };
+    expect(patchedBody.rating).toBe(4);
+    expect(patchedBody.status).toBe('READING');
 
     await api().get(`/users/${TEST_PREFIX}-nope/library`).expect(404);
 

@@ -112,9 +112,15 @@ describe('User shelves (e2e) bd-cq7.2', () => {
       slug: `${TEST_PREFIX}-fav`,
       itemCount: 0,
     });
+    const createdBody = created.body as {
+      id: string;
+      title: string;
+      slug: string;
+      itemCount: number;
+    };
 
     await api()
-      .post(`/me/shelves/${created.body.id}/items`)
+      .post(`/me/shelves/${createdBody.id}/items`)
       .set('Cookie', cookie)
       .set('X-E2E', '1')
       .send({ workSlug: work.slug })
@@ -128,16 +134,19 @@ describe('User shelves (e2e) bd-cq7.2', () => {
       .expect(201);
 
     const withItem = await api()
-      .post(`/me/shelves/${created.body.id}/items`)
+      .post(`/me/shelves/${createdBody.id}/items`)
       .set('Cookie', cookie)
       .set('X-E2E', '1')
       .send({ workSlug: work.slug })
       .expect(201);
-
-    expect(withItem.body.itemCount).toBe(1);
+    const withItemBody = withItem.body as { itemCount: number };
+    expect(withItemBody.itemCount).toBe(1);
 
     const pub = await api().get(`/users/${user.slug}/shelves`).expect(200);
-    expect(pub.body.shelves).toEqual([
+    const pubBody = pub.body as {
+      shelves: Array<{ slug: string; title: string; itemCount: number }>;
+    };
+    expect(pubBody.shelves).toEqual([
       expect.objectContaining({
         slug: `${TEST_PREFIX}-fav`,
         title: 'Любимое',
@@ -148,7 +157,10 @@ describe('User shelves (e2e) bd-cq7.2', () => {
     const detail = await api()
       .get(`/users/${user.slug}/shelves/${TEST_PREFIX}-fav`)
       .expect(200);
-    expect(detail.body.items).toEqual([
+    const detailBody = detail.body as {
+      items: Array<{ workSlug: string; titleRu: string }>;
+    };
+    expect(detailBody.items).toEqual([
       expect.objectContaining({
         workSlug: work.slug,
         titleRu: 'Е2Е полка книга',
@@ -156,7 +168,7 @@ describe('User shelves (e2e) bd-cq7.2', () => {
     ]);
 
     await api()
-      .delete(`/me/shelves/${created.body.id}`)
+      .delete(`/me/shelves/${createdBody.id}`)
       .set('Cookie', cookie)
       .set('X-E2E', '1')
       .expect(204);
@@ -171,13 +183,14 @@ describe('User shelves (e2e) bd-cq7.2', () => {
       .get(`/users/${user.slug}/shelves`)
       .expect(200)
       .expect((res) => {
-        expect(res.body.shelves).toEqual([]);
+        const body = res.body as { shelves: unknown[] };
+        expect(body.shelves).toEqual([]);
       });
   });
 
   it('ADMIN can create shelf; missing public user → 404', async () => {
     const email = `${TEST_PREFIX}-admin@bookspace.local`;
-    const cookie = await registerAndLogin(email);
+    await registerAndLogin(email);
     await prisma.user.update({
       where: { email },
       data: { role: UserRole.ADMIN },
