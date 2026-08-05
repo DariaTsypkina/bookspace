@@ -21,6 +21,7 @@ import { PasswordInput } from '@/components/ui/password-input';
 import { useAuth } from '../../components/auth-provider';
 import { getFriendlyZodIssueMessage } from '@/lib/form-errors';
 import { login } from '../../lib/auth';
+import { toUserFacingErrorMessage } from '@/lib/user-facing-errors';
 
 type LoginFormValues = {
   email: string;
@@ -49,7 +50,7 @@ function LoginForm() {
       form.setError('root', {
         message:
           submitError instanceof Error
-            ? submitError.message
+            ? toUserFacingErrorMessage(submitError.message)
             : 'Не удалось войти',
       });
     }

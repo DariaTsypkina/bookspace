@@ -1,4 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
+import { selectUserBookStatus } from '../helpers/select-user-book-status';
 
 function uniqueEmail() {
   return `tags-${Date.now()}-${Math.random().toString(36).slice(2, 8)}@example.com`;
@@ -37,7 +38,7 @@ test.describe('User tags (bd-cq7.3)', () => {
     ).toBeVisible();
 
     const status = page.getByRole('region', { name: 'Статус и оценка' });
-    await status.getByLabel('Статус книги').selectOption('READING');
+    await selectUserBookStatus(page, 'READING', status);
     await status.getByRole('button', { name: 'Сохранить' }).click();
     await expect(
       status

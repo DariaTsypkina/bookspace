@@ -1,4 +1,5 @@
 import type { z } from 'zod';
+import { toUserFacingErrorMessage } from './user-facing-errors';
 
 type ZodIssueLike = z.ZodIssue;
 
@@ -16,7 +17,7 @@ export function getFriendlyZodIssueMessage(issue: ZodIssueLike): string {
       return 'Некорректный формат значения';
     case 'too_small':
       if (issue.message && !issue.message.startsWith('Too small:')) {
-        return issue.message;
+        return toUserFacingErrorMessage(issue.message);
       }
       if (typeof issue.minimum === 'number' && issue.origin === 'string') {
         return `Минимум ${issue.minimum} символов`;
@@ -27,7 +28,11 @@ export function getFriendlyZodIssueMessage(issue: ZodIssueLike): string {
         return `Максимум ${issue.maximum} символов`;
       }
       return 'Значение слишком большое';
+    case 'invalid_value':
+      return 'Выберите корректное значение';
     default:
-      return issue.message || 'Проверьте корректность введённых данных';
+      return toUserFacingErrorMessage(
+        issue.message || 'Проверьте корректность введённых данных',
+      );
   }
 }

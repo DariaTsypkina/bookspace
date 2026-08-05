@@ -59,6 +59,20 @@ describe('messageFromResponseData', () => {
     expect(messageFromResponseData(null)).toBe(FALLBACK_MESSAGE);
     expect(messageFromResponseData('raw')).toBe(FALLBACK_MESSAGE);
   });
+
+  it('maps English Nest defaults before returning to UI', () => {
+    expect(messageFromResponseData({ message: 'Unauthorized' })).toBe(
+      'Необходима авторизация',
+    );
+    expect(messageFromResponseData({ message: 'Not Found' })).toBe(
+      'Не найдено',
+    );
+    expect(
+      messageFromResponseData({
+        message: ['Unauthorized', 'Forbidden'],
+      }),
+    ).toBe('Необходима авторизация, Недостаточно прав');
+  });
 });
 
 describe('api client', () => {

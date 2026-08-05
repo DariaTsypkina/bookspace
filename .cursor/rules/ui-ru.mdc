@@ -7,6 +7,7 @@ alwaysApply: false
 # UI / UX
 
 - Язык UI: русский; локаль дат/чисел `ru`
+- **User-facing ошибки только на русском** (FormMessage, alert, toast, auth/error, API `message` на экране). Английские Nest/Zod defaults (`Unauthorized`, `Too small:…`) маппить через `apps/web/lib/user-facing-errors.ts` (`mapApiErrorMessage` / `toUserFacingErrorMessage`) и `getFriendlyZodIssueMessage` — не показывать сырой EN текст. Кастомные сообщения бэка — тоже писать по-русски.
 - Tab-bar: Главная · Поиск · Рейтинги · Подборки · Профиль
 - Минимализм «читальня»; mobile first
 - Не показывать пользователю источники рейтингов/LLM
@@ -17,6 +18,7 @@ alwaysApply: false
 
 - **Новый UI и новые экраны — только** Tailwind + `components/ui` (shadcn/Radix) + Lucide ([ADR 0003](../../docs/adr/0003-tailwind-shadcn.md), [stack-and-architecture](../../docs/tech/stack-and-architecture.md))
 - Иконки: **lucide-react**
+- **Выпадающие списки — только** `components/ui/select` на `@radix-ui/react-select` (shadcn Select). **Запрещён** native `<select>` в прод-UI; исключения — только осознанно и с пометкой в notes issue / docs.
 - **Запрещено** добавлять новые селекторы/блоки в legacy `globals.css` для новых экранов или нового UI; legacy — только до миграции существующего экрана
 - При касании экрана — перенос на Tailwind + вычистка мёртвых селекторов этого экрана (см. [migration-tailwind-shadcn](../../docs/tech/migration-tailwind-shadcn.md))
 - Другой UI-kit — только через новый ADR + согласование зависимостей
@@ -26,7 +28,7 @@ alwaysApply: false
 - Единый UI-шрифт приложения: **Baskerville** (кириллица), self-host woff2 — канон [ui-typography](../../docs/features/ui-typography.md)
 - Подключение: `next/font/local` в `apps/web/app/layout.tsx` → `--font-baskerville`; `body` и Tailwind `font-sans` на эту var
 - Начертания: roman / italic / bold / bolditalic (400 / 700); `font-medium` → 400
-- Form controls (`button`, `input`, …) часто **не** наследуют `font-family` с `body` — для нового UI явно `font-sans` / `inherit` на примитивах `components/ui`
+- Form controls (`button`, `input`, `select` Trigger/Content/Item, …) часто **не** наследуют `font-family` с `body` — для нового UI явно `font-sans` / `inherit` на примитивах `components/ui`
 - Не менять typeface и не тянуть Google Fonts без отдельной задачи
 
 Экраны: `docs/tech/screens.md`.

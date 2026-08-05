@@ -1,4 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
+import { selectUserBookStatus } from '../helpers/select-user-book-status';
 
 function uniqueEmail() {
   return `pubprof-${Date.now()}-${Math.random().toString(36).slice(2, 8)}@example.com`;
@@ -31,7 +32,7 @@ test.describe('Public profile (bd-cq7.5)', () => {
 
     await page.goto('/books/garri-potter-filosofskiy-kamen');
     const section = page.getByRole('region', { name: 'Статус и оценка' });
-    await section.getByLabel('Статус книги').selectOption('READ');
+    await selectUserBookStatus(page, 'READ', section);
     await section.getByLabel('Оценка книги').fill('8');
     await section.getByRole('button', { name: 'Сохранить' }).click();
     await expect(

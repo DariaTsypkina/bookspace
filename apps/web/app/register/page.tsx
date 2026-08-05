@@ -21,6 +21,7 @@ import { PasswordInput } from '@/components/ui/password-input';
 import { useAuth } from '../../components/auth-provider';
 import { getFriendlyZodIssueMessage } from '@/lib/form-errors';
 import { register } from '../../lib/auth';
+import { toUserFacingErrorMessage } from '@/lib/user-facing-errors';
 
 type RegisterFormValues = {
   email: string;
@@ -49,7 +50,7 @@ function RegisterForm() {
       form.setError('root', {
         message:
           submitError instanceof Error
-            ? submitError.message
+            ? toUserFacingErrorMessage(submitError.message)
             : 'Не удалось зарегистрироваться',
       });
     }

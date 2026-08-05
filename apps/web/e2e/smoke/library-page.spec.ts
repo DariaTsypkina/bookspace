@@ -1,4 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
+import { selectUserBookStatus } from '../helpers/select-user-book-status';
 
 async function expectMainNav(page: Page) {
   const nav = page.getByRole('navigation', { name: 'Основное меню' });
@@ -125,7 +126,7 @@ test.describe('Library page smoke (S12 / bd-wus.15 + bd-cq7.4)', () => {
     await page
       .getByRole('button', { name: 'Гарри Поттер и философский камень' })
       .click();
-    await page.getByLabel('Статус книги').selectOption('READING');
+    await selectUserBookStatus(page, 'READING');
     await page.getByRole('button', { name: 'Сохранить в библиотеку' }).click();
     await expect(
       page.getByRole('status').filter({
