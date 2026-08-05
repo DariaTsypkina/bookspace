@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-05T08:06:49.398Z",
+  "generated_at": "2026-08-05T09:45:17.769Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 146,
-    "open_issues": 27,
-    "in_progress_issues": 0,
-    "closed_issues": 119,
+    "total_issues": 147,
+    "open_issues": 26,
+    "in_progress_issues": 1,
+    "closed_issues": 120,
     "blocked_issues": 0,
-    "ready_issues": 27
+    "ready_issues": 26
   },
   "epics": [
     {
@@ -654,8 +654,8 @@
       "priority": 2,
       "children_total": 8,
       "children_closed": 6,
-      "children_in_progress": 0,
-      "children_open": 2,
+      "children_in_progress": 1,
+      "children_open": 1,
       "progress": "6 / 8",
       "percent_closed": 75,
       "children": [
@@ -704,7 +704,7 @@
         {
           "id": "bd-cq7.7",
           "title": "UI: английская ошибка Zod в поле «Слаг произведения»",
-          "status": "open",
+          "status": "in_progress",
           "type": "bug",
           "priority": 2
         },
@@ -1254,6 +1254,15 @@
       "updated_at": "2026-07-20T07:30:07Z"
     },
     {
+      "id": "bd-fr9",
+      "title": "Docs: orchestrate skill и пакетный оркестратор",
+      "status": "closed",
+      "type": "chore",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-08-05T08:45:40Z"
+    },
+    {
       "id": "bd-cq7.8",
       "title": "Библиотека/полки: не находит произведение при вводе названия (только slug)",
       "status": "open",
@@ -1265,11 +1274,11 @@
     {
       "id": "bd-cq7.7",
       "title": "UI: английская ошибка Zod в поле «Слаг произведения»",
-      "status": "open",
+      "status": "in_progress",
       "type": "bug",
       "priority": 2,
       "parent": "bd-cq7",
-      "updated_at": "2026-08-05T07:59:12Z"
+      "updated_at": "2026-08-05T09:44:30Z"
     },
     {
       "id": "bd-957.6",

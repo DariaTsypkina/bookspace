@@ -41,6 +41,7 @@
 | ✅     | `bd-707` | **Эпик DX: axios HTTP-клиент** (ADR 0005 accepted) — 10 / 10 · сборочная `feat/bookspace-bd-707` (не влита в develop)          |
 | ✅     | `bd-ky6` | Chore: синхронизировать beads interactions.jsonl                                                                               |
 | ✅     | `bd-0e6` | Docs: согласование зависимостей агентом                                                                                        |
+| ✅     | `bd-fr9` | Docs: orchestrate skill и пакетный оркестратор (`/orchestrate`, `/оркестратор`)                                                |
 | ✅     | `bd-rtp` | Docs: human intake workflow и /task skill                                                                                      |
 | ✅     | `bd-nvi` | Scaffold monorepo dev baseline                                                                                                 |
 | ✅     | `bd-384` | Session Completion: git push при конце сессии                                                                                  |
@@ -242,6 +243,7 @@
 
 | Дата       | Действие                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-08-05 | `bd-fr9` ✅: skill `/orchestrate` / `/оркестратор` — `.cursor/skills/orchestrate/` (SKILL.md + orchestrator-prompt.md); ссылки в AGENTS.md, feature-workflow.md, чеклист этапа 8 |
 | 2026-08-05 | `/task`: `bd-cq7.8` — добавление на полку/в коллекцию не находит книгу по названию (UI только slug; seed `garri-potter-taynaya-komnata`); epic `bd-cq7` |
 | 2026-08-05 | `/task`: `bd-cq7.7` — английский Zod в поле «Слаг произведения» на `/library`; human-reported; epic `bd-cq7` · feature-doc `user-library-page.md` |
 | 2026-08-05 | `bd-2qm` in progress: queueMicrotask defer для load/setLoaded (library + user-book forms); lint **0 errors**; unit library/user-book **30/30**; ветка `task/bd-2qm-lint-set-state-in-effect`; `bd close` — оркестратор |

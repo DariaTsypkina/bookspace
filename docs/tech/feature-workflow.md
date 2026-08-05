@@ -7,6 +7,8 @@ Cursor rule `.cursor/rules/feature-workflow.mdc` дублирует только
 
 **Запросы от человека** (доработки, найденные баги, уточнения фич) — отдельный канон: [human-intake-workflow](human-intake-workflow.md). Там: классификация по эпику/feature-doc, постановка в план, ветка задачи от **сборочной**; при неясной привязке — уточнение у человека до кода.
 
+**Пакетный прогон по списку ключей** — slash **`/orchestrate`** / **`/оркестратор`** + блок ВХОД. **РЕЖИМ ВЕТКИ** — имя **сборочной** ветки (`feat/bookspace-bd-<epic-id>`): указывай id эпика, объединяющего подзадачи из списка ключей (листья `bd-cq7.7`/`bd-cq7.8` → `feat/bookspace-bd-cq7`). Остальное: заливка в develop, лимит времени, bd-ключи. Skill: [`.cursor/skills/orchestrate/SKILL.md`](../../.cursor/skills/orchestrate/SKILL.md); полный промпт: [orchestrator-prompt.md](../../.cursor/skills/orchestrate/orchestrator-prompt.md). Оркестратор сам не пишет код — только субагенты; close/merge — протокол [§ Close + merge](#close--merge-в-сборочную).
+
 TDD-детали (слои тестов, стенд, browser) — в [agent-dev-flow.md](agent-dev-flow.md). После `claim` код идёт **вертикальный срез** из agent-dev-flow §5.
 
 ## Context Loading
