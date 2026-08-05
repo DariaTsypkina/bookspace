@@ -39,6 +39,7 @@
 | ✅     | `bd-wus` | **Эпик DX: Tailwind + shadcn** (ADR 0003 accepted) — 18 / 18                                                                   |
 | ✅     | `bd-0t0` | **Эпик DX: RHF + Zod full contour** (ADR 0004 accepted) — 11 / 11 + bug .12                                                    |
 | ✅     | `bd-707` | **Эпик DX: axios HTTP-клиент** (ADR 0005 accepted) — 10 / 10 · сборочная `feat/bookspace-bd-707` (не влита в develop)          |
+| ⬜     | `bd-a12` | **Эпик DX: UI-конвенции** (RU user-facing ошибки + shadcn Select) — 0 / 2 · дети на **разных** сборочных `feat/bookspace-bd-a12.1` / `a12.2` |
 | ✅     | `bd-ky6` | Chore: синхронизировать beads interactions.jsonl                                                                               |
 | ✅     | `bd-0e6` | Docs: согласование зависимостей агентом                                                                                        |
 | ✅     | `bd-fr9` | Docs: orchestrate skill и пакетный оркестратор (`/orchestrate`, `/оркестратор`)                                                |
@@ -52,6 +53,15 @@
 | ✅     | `bd-v3x` | [bug] web: work-page-context-reading.integration stubs fetch (axios) — DX · сборочная `feat/bookspace-bd-bugs`                 |
 | ✅     | `bd-jtw` | [bug] web: spoiler-gate setState-in-effect lint (react-hooks) — DX · сборочная `feat/bookspace-bd-bugs`                        |
 | ✅     | `bd-9p1` | [bug] web: spoiler-gate.test Storage mock fails typecheck — DX · сборочная `feat/bookspace-bd-bugs` · discovered-from `bd-jtw` |
+
+### DX — UI-конвенции — ⬜ · epic `bd-a12` · 0 / 2
+
+Human `/task` 2026-08-05. Дети **независимы** — каждая на своей сборочной (не общая `feat/bookspace-bd-a12`).
+
+| Статус | ID         | Задача                                                                                          |
+| ------ | ---------- | ----------------------------------------------------------------------------------------------- |
+| ⬜     | `bd-a12.1` | UI: все user-facing ошибки на русском (+ маппинг API) · сборочная `feat/bookspace-bd-a12.1`     |
+| ⬜     | `bd-a12.2` | UI: shadcn Select + замена native select · сборочная `feat/bookspace-bd-a12.2`                  |
 
 ### DX — Tailwind + shadcn — ✅ · epic `bd-wus` · 18 / 18 · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
 
@@ -243,6 +253,8 @@
 
 | Дата       | Действие                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-08-05 | `bd-a12.2`: подтверждена зависимость `@radix-ui/react-select` (установить и использовать для Select) |
+| 2026-08-05 | `/task`: эпик DX `bd-a12` UI-конвенции + дети `bd-a12.1` (RU user-facing ошибки + API map) · сборочная `feat/bookspace-bd-a12.1`; `bd-a12.2` (shadcn Select) · сборочная `feat/bookspace-bd-a12.2` — разные сборочные |
 | 2026-08-05 | `bd-cq7.8` ✅ closed+merged: поиск по названию и подсказки для добавления на `/library` и `/library/shelves/[shelfId]` + slug fallback; unit **70 passed** + Playwright smoke **8 passed** (mobile+desktop); ветка `task/bd-cq7.8-title-search-library-shelves`; сборочная `feat/bookspace-bd-cq7` |
 | 2026-08-05 | `bd-cq7.7` ✅ closed+merged: RU-валидация `workSlug` на `/library` (без англ. Zod текста); unit `form-errors` + Playwright smoke `library-page` desktop/mobile **18 passed**; ветка `task/bd-cq7.7-ru-zod-workslug`; сборочная `feat/bookspace-bd-cq7` |
 | 2026-08-05 | `bd-fr9` ✅: skill `/orchestrate` / `/оркестратор` — `.cursor/skills/orchestrate/` (SKILL.md + orchestrator-prompt.md); ссылки в AGENTS.md, feature-workflow.md, чеклист этапа 8 |
