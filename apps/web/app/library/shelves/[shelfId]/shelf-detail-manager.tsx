@@ -6,14 +6,19 @@ import { useCallback, useEffect, useState } from 'react';
 import type { ShelfResponse } from '@bookspace/schemas';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
+import { WorkSearchInput } from '@/components/work-search-input';
 import { ApiError, api } from '@/lib/http';
+import {
+  resolveWorkSelectionPayload,
+  type WorkSuggestion,
+} from '@/lib/work-search';
 
 export function ShelfDetailManager() {
   const params = useParams<{ shelfId: string }>();
   const shelfId = params.shelfId;
   const [shelf, setShelf] = useState<ShelfResponse | null>(null);
-  const [workSlug, setWorkSlug] = useState('');
+  const [workInput, setWorkInput] = useState('');
+  const [selectedWork, setSelectedWork] = useState<WorkSuggestion | null>(null);
   const [loading, setLoading] = useState(true);
   const [authRequired, setAuthRequired] = useState(false);
   const [notFound, setNotFound] = useState(false);
@@ -55,15 +60,20 @@ export function ShelfDetailManager() {
 
   async function handleAdd(event: React.FormEvent) {
     event.preventDefault();
-    if (!shelfId || !workSlug.trim()) return;
+    if (!shelfId || !workInput.trim()) return;
     setStatus(null);
+    const payload = resolveWorkSelectionPayload({
+      inputValue: workInput,
+      selectedWork,
+    });
     try {
       const { data } = await api.post<ShelfResponse>(
         `/api/me/shelves/${encodeURIComponent(shelfId)}/items`,
-        { workSlug: workSlug.trim() },
+        { workSlug: payload.workSlug },
       );
       setShelf(data);
-      setWorkSlug('');
+      setWorkInput('');
+      setSelectedWork(null);
       setStatus({ kind: 'success', message: 'Книга добавлена на полку' });
     } catch (error) {
       if (error instanceof ApiError && error.status === 400) {
@@ -147,12 +157,19 @@ export function ShelfDetailManager() {
           </h2>
           <form className="flex flex-col gap-3" onSubmit={handleAdd}>
             <label className="flex flex-col gap-1.5 text-sm font-medium text-foreground">
-              Слаг произведения
-              <Input
-                value={workSlug}
-                onChange={(e) => setWorkSlug(e.target.value)}
-                autoComplete="off"
-                placeholder="garri-potter-filosofskiy-kamen"
+              Книга (название или slug)
+              <WorkSearchInput
+                value={workInput}
+                onValueChange={(nextValue) => {
+                  setWorkInput(nextValue);
+                  setSelectedWork(null);
+                }}
+                onWorkSelect={(work) => {
+                  setSelectedWork(work);
+                  setWorkInput(work.title);
+                }}
+                ariaLabel="Книга для полки"
+                placeholder="Введите название книги или slug"
               />
             </label>
             <Button type="submit">Добавить на полку</Button>

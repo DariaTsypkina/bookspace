@@ -42,8 +42,11 @@ test.describe('User library cabinet (bd-cq7.4)', () => {
     ).toBeVisible();
 
     await page
-      .getByLabel('Слаг произведения')
-      .fill('garri-potter-filosofskiy-kamen');
+      .getByLabel('Книга для библиотеки')
+      .fill('Гарри Поттер и философский камень');
+    await page
+      .getByRole('button', { name: 'Гарри Поттер и философский камень' })
+      .click();
     await page.getByLabel('Статус книги').selectOption('READING');
     await page.getByRole('button', { name: 'Сохранить в библиотеку' }).click();
     await expect(

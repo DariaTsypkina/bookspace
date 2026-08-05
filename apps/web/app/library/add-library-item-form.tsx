@@ -8,6 +8,7 @@ import {
 } from '@bookspace/schemas';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
+import { WorkSearchInput } from '@/components/work-search-input';
 import {
   Form,
   FormControl,
@@ -16,9 +17,12 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
 import { getFriendlyZodIssueMessage } from '@/lib/form-errors';
 import { ApiError, api } from '@/lib/http';
+import {
+  resolveWorkSelectionPayload,
+  type WorkSuggestion,
+} from '@/lib/work-search';
 import {
   USER_BOOK_STATUS_LABELS,
   USER_BOOK_STATUS_OPTIONS,
@@ -40,6 +44,8 @@ export function AddLibraryItemForm({ onSuccess }: AddLibraryItemFormProps) {
     kind: 'success' | 'error';
     message: string;
   } | null>(null);
+  const [workInput, setWorkInput] = useState('');
+  const [selectedWork, setSelectedWork] = useState<WorkSuggestion | null>(null);
 
   const form = useForm<AddLibraryItemFormValues>({
     resolver: zodResolver(AddLibraryItemInputSchema),
@@ -54,16 +60,23 @@ export function AddLibraryItemForm({ onSuccess }: AddLibraryItemFormProps) {
     form.clearErrors('root');
     setStatus(null);
 
+    const selectionPayload = resolveWorkSelectionPayload({
+      inputValue: workInput,
+      selectedWork,
+    });
     const payload = {
-      workSlug: values.workSlug?.trim() || undefined,
-      workId: values.workId?.trim() || undefined,
+      workSlug:
+        selectionPayload.workSlug ?? (values.workSlug?.trim() || undefined),
+      workId: selectionPayload.workId ?? (values.workId?.trim() || undefined),
       status: values.status,
       rating: values.rating ?? null,
     };
 
     try {
       await api.post('/api/me/library/items', payload);
-      form.reset({ workSlug: '', status: 'WANT', rating: null });
+      form.reset({ workSlug: '', workId: '', status: 'WANT', rating: null });
+      setWorkInput('');
+      setSelectedWork(null);
       setStatus({
         kind: 'success',
         message: 'Статус сохранён',
@@ -125,20 +138,28 @@ export function AddLibraryItemForm({ onSuccess }: AddLibraryItemFormProps) {
         <FormField
           control={form.control}
           name="workSlug"
-          render={({ field }) => (
+          render={() => (
             <FormItem>
               <FormLabel className="font-normal text-muted">
-                Слаг произведения
+                Книга (название или slug)
               </FormLabel>
               <FormControl>
-                <Input
-                  type="text"
-                  placeholder="garri-potter-filosofskiy-kamen"
-                  autoComplete="off"
-                  maxLength={200}
-                  aria-label="Слаг произведения"
-                  {...field}
-                  value={field.value ?? ''}
+                <WorkSearchInput
+                  value={workInput}
+                  onValueChange={(nextValue) => {
+                    setWorkInput(nextValue);
+                    setSelectedWork(null);
+                    form.setValue('workSlug', nextValue);
+                    form.setValue('workId', undefined);
+                  }}
+                  onWorkSelect={(work) => {
+                    setSelectedWork(work);
+                    setWorkInput(work.title);
+                    form.setValue('workSlug', work.slug);
+                    form.setValue('workId', work.id);
+                  }}
+                  ariaLabel="Книга для библиотеки"
+                  placeholder="Введите название книги или slug"
                 />
               </FormControl>
               <FormMessage />

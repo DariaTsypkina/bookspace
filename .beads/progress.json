@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-05T09:38:17.079Z",
+  "generated_at": "2026-08-05T10:38:53.215Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 147,
-    "open_issues": 27,
+    "total_issues": 152,
+    "open_issues": 28,
     "in_progress_issues": 0,
-    "closed_issues": 120,
+    "closed_issues": 124,
     "blocked_issues": 0,
-    "ready_issues": 27
+    "ready_issues": 28
   },
   "epics": [
     {
@@ -529,6 +529,34 @@
       ]
     },
     {
+      "id": "bd-a12",
+      "title": "DX: UI-конвенции (RU ошибки + shadcn Select)",
+      "status": "open",
+      "priority": 2,
+      "children_total": 2,
+      "children_closed": 0,
+      "children_in_progress": 0,
+      "children_open": 2,
+      "progress": "0 / 2",
+      "percent_closed": 0,
+      "children": [
+        {
+          "id": "bd-a12.1",
+          "title": "UI: все user-facing ошибки на русском (+ маппинг API)",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-a12.2",
+          "title": "UI: shadcn Select + замена native select",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        }
+      ]
+    },
+    {
       "id": "bd-ada",
       "title": "Рекомендации",
       "status": "open",
@@ -653,11 +681,11 @@
       "status": "closed",
       "priority": 2,
       "children_total": 8,
-      "children_closed": 6,
+      "children_closed": 8,
       "children_in_progress": 0,
-      "children_open": 2,
-      "progress": "6 / 8",
-      "percent_closed": 75,
+      "children_open": 0,
+      "progress": "8 / 8",
+      "percent_closed": 100,
       "children": [
         {
           "id": "bd-cq7.1",
@@ -704,14 +732,14 @@
         {
           "id": "bd-cq7.7",
           "title": "UI: английская ошибка Zod в поле «Слаг произведения»",
-          "status": "open",
+          "status": "closed",
           "type": "bug",
           "priority": 2
         },
         {
           "id": "bd-cq7.8",
           "title": "Библиотека/полки: не находит произведение при вводе названия (только slug)",
-          "status": "open",
+          "status": "closed",
           "type": "bug",
           "priority": 2
         }
@@ -1254,6 +1282,51 @@
       "updated_at": "2026-07-20T07:30:07Z"
     },
     {
+      "id": "bd-a12.2",
+      "title": "UI: shadcn Select + замена native select",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-a12",
+      "updated_at": "2026-08-05T10:37:53Z"
+    },
+    {
+      "id": "bd-a12.1",
+      "title": "UI: все user-facing ошибки на русском (+ маппинг API)",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-a12",
+      "updated_at": "2026-08-05T10:35:46Z"
+    },
+    {
+      "id": "bd-a12",
+      "title": "DX: UI-конвенции (RU ошибки + shadcn Select)",
+      "status": "open",
+      "type": "epic",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-08-05T10:35:18Z"
+    },
+    {
+      "id": "bd-1wv",
+      "title": "[bug] cq7: smoke library-page использует устаревший slug-only сценарий",
+      "status": "closed",
+      "type": "bug",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-08-05T10:19:54Z"
+    },
+    {
+      "id": "bd-k7i",
+      "title": "[bug] cq7: lint react-hooks/set-state-in-effect в work-search-input",
+      "status": "closed",
+      "type": "bug",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-08-05T10:17:18Z"
+    },
+    {
       "id": "bd-fr9",
       "title": "Docs: orchestrate skill и пакетный оркестратор",
       "status": "closed",
@@ -1265,20 +1338,20 @@
     {
       "id": "bd-cq7.8",
       "title": "Библиотека/полки: не находит произведение при вводе названия (только slug)",
-      "status": "open",
+      "status": "closed",
       "type": "bug",
       "priority": 2,
       "parent": "bd-cq7",
-      "updated_at": "2026-08-05T08:02:07Z"
+      "updated_at": "2026-08-05T10:08:35Z"
     },
     {
       "id": "bd-cq7.7",
       "title": "UI: английская ошибка Zod в поле «Слаг произведения»",
-      "status": "open",
+      "status": "closed",
       "type": "bug",
       "priority": 2,
       "parent": "bd-cq7",
-      "updated_at": "2026-08-05T07:59:12Z"
+      "updated_at": "2026-08-05T09:50:23Z"
     },
     {
       "id": "bd-957.6",

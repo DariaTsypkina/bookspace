@@ -31,7 +31,7 @@ export const UpsertUserBookInputSchema = z
     workSlug: z
       .string()
       .trim()
-      .min(1)
+      .min(1, { message: 'Укажите слаг произведения' })
       .max(200)
       .optional()
       .transform((value) =>

@@ -15,6 +15,9 @@ export function getFriendlyZodIssueMessage(issue: ZodIssueLike): string {
       }
       return 'Некорректный формат значения';
     case 'too_small':
+      if (issue.message && !issue.message.startsWith('Too small:')) {
+        return issue.message;
+      }
       if (typeof issue.minimum === 'number' && issue.origin === 'string') {
         return `Минимум ${issue.minimum} символов`;
       }
