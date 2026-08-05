@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-05T10:19:39.461Z",
+  "generated_at": "2026-08-05T10:19:58.522Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 149,
     "open_issues": 25,
-    "in_progress_issues": 1,
-    "closed_issues": 123,
+    "in_progress_issues": 0,
+    "closed_issues": 124,
     "blocked_issues": 0,
     "ready_issues": 25
   },
@@ -1256,11 +1256,11 @@
     {
       "id": "bd-1wv",
       "title": "[bug] cq7: smoke library-page использует устаревший slug-only сценарий",
-      "status": "in_progress",
+      "status": "closed",
       "type": "bug",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-08-05T10:17:29Z"
+      "updated_at": "2026-08-05T10:19:54Z"
     },
     {
       "id": "bd-k7i",
