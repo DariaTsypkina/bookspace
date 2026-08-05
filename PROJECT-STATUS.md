@@ -39,7 +39,7 @@
 | ✅     | `bd-wus` | **Эпик DX: Tailwind + shadcn** (ADR 0003 accepted) — 18 / 18                                                                   |
 | ✅     | `bd-0t0` | **Эпик DX: RHF + Zod full contour** (ADR 0004 accepted) — 11 / 11 + bug .12                                                    |
 | ✅     | `bd-707` | **Эпик DX: axios HTTP-клиент** (ADR 0005 accepted) — 10 / 10 · сборочная `feat/bookspace-bd-707` (не влита в develop)          |
-| 🔄     | `bd-a12` | **Эпик DX: UI-конвенции** (RU user-facing ошибки + shadcn Select) — 1 / 2 · сборочная `/orchestrate`: `feat/bookspace-bd-a12` |
+| 🔄     | `bd-a12` | **Эпик DX: UI-конвенции** (RU user-facing ошибки + shadcn Select) — 2 / 2 · сборочная `feat/bookspace-bd-a12` (не влита в develop) |
 | ✅     | `bd-ky6` | Chore: синхронизировать beads interactions.jsonl                                                                               |
 | ✅     | `bd-0e6` | Docs: согласование зависимостей агентом                                                                                        |
 | ✅     | `bd-fr9` | Docs: orchestrate skill и пакетный оркестратор (`/orchestrate`, `/оркестратор`)                                                |
@@ -54,14 +54,14 @@
 | ✅     | `bd-jtw` | [bug] web: spoiler-gate setState-in-effect lint (react-hooks) — DX · сборочная `feat/bookspace-bd-bugs`                        |
 | ✅     | `bd-9p1` | [bug] web: spoiler-gate.test Storage mock fails typecheck — DX · сборочная `feat/bookspace-bd-bugs` · discovered-from `bd-jtw` |
 
-### DX — UI-конвенции — 🔄 · epic `bd-a12` · 1 / 2
+### DX — UI-конвенции — 🔄 · epic `bd-a12` · 2 / 2
 
 Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bookspace-bd-a12` (ЗАЛИВАТЬ develop=Нет).
 
 | Статус | ID         | Задача                                                                                          |
 | ------ | ---------- | ----------------------------------------------------------------------------------------------- |
 | ✅     | `bd-a12.1` | UI: все user-facing ошибки на русском (+ маппинг API) · слито в `feat/bookspace-bd-a12`         |
-| 🔄     | `bd-a12.2` | UI: shadcn Select + замена native select · `task/bd-a12.2-shadcn-select`                        |
+| ✅     | `bd-a12.2` | UI: shadcn Select + замена native select · слито в `feat/bookspace-bd-a12`                      |
 
 ### DX — Tailwind + shadcn — ✅ · epic `bd-wus` · 18 / 18 · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
 
@@ -252,6 +252,7 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 
 ## Последние действия
 
+- 2026-08-05: close `bd-a12.2` (shadcn Select) → merge `--no-ff` в `feat/bookspace-bd-a12`; vitest select 5; PW library/status 26/26
 - 2026-08-05: `bd-a12.2` ready close: shadcn Select (`@radix-ui/react-select`) + замена native `<select>`; unit **369**; PW library/status **26/26** + related **12/12** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); docs ui-ru/stack/ADR; ветка `task/bd-a12.2-shadcn-select`; сборочная `feat/bookspace-bd-a12`; `bd close` — оркестратор
 - 2026-08-05: `bd-a12.2` in progress: TDD Select (`@radix-ui/react-select` + замена native `<select>`); ветка `task/bd-a12.2-shadcn-select`; сборочная `feat/bookspace-bd-a12`
 - 2026-08-05: claim `bd-a12.2` → `task/bd-a12.2-shadcn-select` (сборочная `feat/bookspace-bd-a12`)
