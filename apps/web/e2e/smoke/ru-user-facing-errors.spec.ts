@@ -1,10 +1,15 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
 
 /** English Nest/Zod leftovers that must never appear in visible UI errors. */
 const EN_ERROR_LEAK =
   /Unauthorized|Forbidden|Not Found|Bad Request|Too small:|Too big:|Invalid email|Invalid option:|Internal Server Error|Something went wrong/i;
 
-async function expectNoEnglishErrorText(page: import('@playwright/test').Page) {
+function passwordField(page: Page) {
+  // Avoid getByLabel('Пароль') — also matches «Показать пароль» toggle.
+  return page.getByRole('textbox', { name: 'Пароль' });
+}
+
+async function expectNoEnglishErrorText(page: Page) {
   const alerts = page.locator('main [role="alert"], main [role="status"]');
   const count = await alerts.count();
   for (let i = 0; i < count; i += 1) {
@@ -20,14 +25,15 @@ test.describe('RU user-facing errors (bd-a12.1)', () => {
     page,
   }) => {
     await page.goto('/login');
-    await page.getByLabel('Email').fill('not-an-email');
-    await page.getByLabel('Пароль').fill('short');
+    // Valid email shape so HTML5 type=email does not block submit before RHF/Zod.
+    await page.getByLabel('Email').fill('user@bookspace.local');
+    await passwordField(page).fill('short');
     await page.getByRole('button', { name: 'Войти' }).click();
 
     const alerts = page.locator('main [role="alert"]');
     await expect(alerts.first()).toBeVisible();
+    await expect(page.getByText(/8 символ/)).toBeVisible();
     await expectNoEnglishErrorText(page);
-    await expect(page.getByText(/email|символ/i).first()).toBeVisible();
   });
 
   test('login: invalid credentials show Russian API message', async ({
@@ -35,7 +41,7 @@ test.describe('RU user-facing errors (bd-a12.1)', () => {
   }) => {
     await page.goto('/login');
     await page.getByLabel('Email').fill('missing@bookspace.local');
-    await page.getByLabel('Пароль').fill('Wrong123!');
+    await passwordField(page).fill('Wrong123!');
     await page.getByRole('button', { name: 'Войти' }).click();
 
     const alert = page.locator('main [role="alert"]');
@@ -57,7 +63,7 @@ test.describe('RU user-facing errors (bd-a12.1)', () => {
 
     await page.goto('/login');
     await page.getByLabel('Email').fill('user@bookspace.local');
-    await page.getByLabel('Пароль').fill('Secure123!');
+    await passwordField(page).fill('Secure123!');
     await page.getByRole('button', { name: 'Войти' }).click();
 
     const alert = page.locator('main [role="alert"]');
@@ -70,7 +76,7 @@ test.describe('RU user-facing errors (bd-a12.1)', () => {
   test('register: weak password shows Russian min length', async ({ page }) => {
     await page.goto('/register');
     await page.getByLabel('Email').fill('e2e-ru@bookspace.local');
-    await page.getByLabel('Пароль').fill('weak');
+    await passwordField(page).fill('weak');
     await page.getByRole('button', { name: 'Зарегистрироваться' }).click();
 
     await expect(page.locator('main [role="alert"]').first()).toBeVisible();
