@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-05T10:38:53.215Z",
+  "generated_at": "2026-08-05T10:46:34.071Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 152,
-    "open_issues": 28,
+    "total_issues": 153,
+    "open_issues": 29,
     "in_progress_issues": 0,
     "closed_issues": 124,
     "blocked_issues": 0,
-    "ready_issues": 28
+    "ready_issues": 29
   },
   "epics": [
     {
@@ -442,12 +442,12 @@
       "title": "Auth",
       "status": "closed",
       "priority": 1,
-      "children_total": 11,
+      "children_total": 12,
       "children_closed": 11,
       "children_in_progress": 0,
-      "children_open": 0,
-      "progress": "11 / 11",
-      "percent_closed": 100,
+      "children_open": 1,
+      "progress": "11 / 12",
+      "percent_closed": 92,
       "children": [
         {
           "id": "bd-8jk",
@@ -511,6 +511,13 @@
           "status": "closed",
           "type": "task",
           "priority": 3
+        },
+        {
+          "id": "bd-957.9",
+          "title": "UI: скрыть вход через Google и Яндекс на /login и /register",
+          "status": "open",
+          "type": "task",
+          "priority": 2
         },
         {
           "id": "bd-v2y",
@@ -1280,6 +1287,15 @@
       "priority": 1,
       "parent": "bd-957",
       "updated_at": "2026-07-20T07:30:07Z"
+    },
+    {
+      "id": "bd-957.9",
+      "title": "UI: скрыть вход через Google и Яндекс на /login и /register",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-957",
+      "updated_at": "2026-08-05T10:43:02Z"
     },
     {
       "id": "bd-a12.2",
