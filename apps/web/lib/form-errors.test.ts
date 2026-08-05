@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { z } from 'zod';
+import { AddLibraryItemInputSchema } from '@bookspace/schemas';
 import { getFriendlyZodIssueMessage } from './form-errors';
 
 describe('getFriendlyZodIssueMessage', () => {
@@ -39,5 +40,22 @@ describe('getFriendlyZodIssueMessage', () => {
     expect(getFriendlyZodIssueMessage(result.error.issues[0])).toBe(
       'Минимум 3 символов',
     );
+  });
+
+  it('keeps workSlug empty validation in Russian for library form', () => {
+    const result = AddLibraryItemInputSchema.safeParse({
+      workSlug: '',
+      status: 'WANT',
+    });
+
+    expect(result.success).toBe(false);
+    if (result.success) {
+      throw new Error('Expected schema to fail for empty workSlug');
+    }
+
+    const workSlugIssue = result.error.issues.find(
+      (issue) => issue.path[0] === 'workSlug',
+    );
+    expect(workSlugIssue?.message).toBe('Укажите слаг произведения');
   });
 });

@@ -142,6 +142,19 @@ test.describe('Library page smoke (S12 / bd-wus.15 + bd-cq7.4)', () => {
       }),
     ).toBeVisible();
   });
+
+  test('guest: empty workSlug shows Russian validation message', async ({
+    page,
+  }) => {
+    await page.goto('/library');
+    await page.getByLabel('Слаг произведения').fill('');
+    await page.getByRole('button', { name: 'Сохранить в библиотеку' }).click();
+
+    await expect(page.getByText('Укажите слаг произведения')).toBeVisible();
+    await expect(
+      page.getByText('Too small: expected string to have >=1 characters'),
+    ).toHaveCount(0);
+  });
 });
 
 test.describe('Library / Profile empty-page fix (bd-cq7.6)', () => {

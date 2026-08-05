@@ -151,7 +151,7 @@ CRUD каталога, merge дублей, импорт, рейтинги/под
 **Цель:** агенты пишут код/docs в одном стиле со спекой.
 
 **Артефакты (ориентир):**
-- `.cursor/rules/` — продукт, стек, схема, RU UI, запреты (нет правок каталога user’ом и т.д.); TDD-флоу — `agent-dev-flow.mdc` → [docs/tech/agent-dev-flow.md](docs/tech/agent-dev-flow.md); приём запросов от человека — `human-intake.mdc` → [docs/tech/human-intake-workflow.md](docs/tech/human-intake-workflow.md); slash **`/task`** / **`/задача`** → `.cursor/skills/task/SKILL.md`
+- `.cursor/rules/` — продукт, стек, схема, RU UI, запреты (нет правок каталога user’ом и т.д.); TDD-флоу — `agent-dev-flow.mdc` → [docs/tech/agent-dev-flow.md](docs/tech/agent-dev-flow.md); приём запросов от человека — `human-intake.mdc` → [docs/tech/human-intake-workflow.md](docs/tech/human-intake-workflow.md); slash **`/task`** / **`/задача`** → `.cursor/skills/task/SKILL.md`; пакетный оркестратор **`/orchestrate`** / **`/оркестратор`** → `.cursor/skills/orchestrate/SKILL.md`
 - Skills при необходимости (импорт, LLM-пайплайн, ADR)
 - Опционально `AGENTS.md`
 
