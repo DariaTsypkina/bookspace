@@ -1,4 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
+import { selectUserBookStatus } from '../helpers/select-user-book-status';
 
 function uniqueEmail() {
   return `user-lib-${Date.now()}-${Math.random().toString(36).slice(2, 8)}@example.com`;
@@ -47,7 +48,7 @@ test.describe('User library cabinet (bd-cq7.4)', () => {
     await page
       .getByRole('button', { name: 'Гарри Поттер и философский камень' })
       .click();
-    await page.getByLabel('Статус книги').selectOption('READING');
+    await selectUserBookStatus(page, 'READING');
     await page.getByRole('button', { name: 'Сохранить в библиотеку' }).click();
     await expect(
       page.getByRole('status').filter({ hasText: 'Статус сохранён' }),

@@ -7,6 +7,7 @@ alwaysApply: true
 
 - `apps/web`: Next.js + TypeScript — UI, PWA, `/admin` pages
 - UI-слой web: **Tailwind CSS + shadcn/ui (Radix) + Lucide** — [ADR 0003](../../docs/adr/0003-tailwind-shadcn.md) **accepted**; миграция — [plan](../../docs/tech/migration-tailwind-shadcn.md)
+- Выпадающие списки: **только** shadcn `components/ui/select` (`@radix-ui/react-select`); native `<select>` в прод-UI запрещён ([ui-ru](ui-ru.mdc))
 - UI-шрифт: **Baskerville** (кириллица) через `next/font/local`, файлы `apps/web/fonts/Baskerville-*.woff2`, CSS var `--font-baskerville`, Tailwind `font-sans` — [ui-typography](../../docs/features/ui-typography.md); **не** подключать Roboto / Google Fonts / другой typeface без явной задачи
 - Новый UI / новые экраны — **только** стек ADR 0003; **не** добавлять legacy-правила в `globals.css` под новый UI (см. [stack-and-architecture § UI-конвенция](../../docs/tech/stack-and-architecture.md), [ui-ru](ui-ru.mdc))
 - `apps/api`: NestJS + TypeScript + Prisma + PostgreSQL + FTS

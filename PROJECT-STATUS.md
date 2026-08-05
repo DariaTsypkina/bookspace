@@ -61,7 +61,7 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 | Статус | ID         | Задача                                                                                          |
 | ------ | ---------- | ----------------------------------------------------------------------------------------------- |
 | ✅     | `bd-a12.1` | UI: все user-facing ошибки на русском (+ маппинг API) · слито в `feat/bookspace-bd-a12`         |
-| ⬜     | `bd-a12.2` | UI: shadcn Select + замена native select                                                        |
+| 🔄     | `bd-a12.2` | UI: shadcn Select + замена native select · `task/bd-a12.2-shadcn-select`                        |
 
 ### DX — Tailwind + shadcn — ✅ · epic `bd-wus` · 18 / 18 · ADR [0003](docs/adr/0003-tailwind-shadcn.md) **accepted**
 
@@ -252,6 +252,9 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 
 ## Последние действия
 
+- 2026-08-05: `bd-a12.2` ready close: shadcn Select (`@radix-ui/react-select`) + замена native `<select>`; unit **369**; PW library/status **26/26** + related **12/12** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); docs ui-ru/stack/ADR; ветка `task/bd-a12.2-shadcn-select`; сборочная `feat/bookspace-bd-a12`; `bd close` — оркестратор
+- 2026-08-05: `bd-a12.2` in progress: TDD Select (`@radix-ui/react-select` + замена native `<select>`); ветка `task/bd-a12.2-shadcn-select`; сборочная `feat/bookspace-bd-a12`
+- 2026-08-05: claim `bd-a12.2` → `task/bd-a12.2-shadcn-select` (сборочная `feat/bookspace-bd-a12`)
 - 2026-08-05: close `bd-a12.1` (RU user-facing errors) → merge `--no-ff` в `feat/bookspace-bd-a12`; unit 21; PW 12/12
 - 2026-08-05: `bd-a12.1` ready close: EN→RU mappers (`user-facing-errors` + FormMessage + http); unit **21**; PW ru-errors **12/12** + library **18** + auth-email **8** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); docs ui-ru/AGENTS; ветка `task/bd-a12.1-ru-user-facing-errors`; сборочная `feat/bookspace-bd-a12`; `bd close` — оркестратор
 - 2026-08-05: `bd-a12.1` in progress: EN→RU API/Zod mappers (`user-facing-errors`, FormMessage, http); unit green; Playwright smoke `ru-user-facing-errors`; ветка `task/bd-a12.1-ru-user-facing-errors`; сборочная `feat/bookspace-bd-a12`; `bd close` — оркестратор

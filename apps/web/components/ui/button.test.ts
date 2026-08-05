@@ -32,12 +32,15 @@ describe('Input form control typography (bd-p3l)', () => {
 describe('shadcn baseline UI modules', () => {
   const uiDir = path.join(__dirname);
 
-  it.each(['button.tsx', 'input.tsx', 'label.tsx', 'card.tsx'] as const)(
-    'exports %s',
-    (file) => {
-      expect(existsSync(path.join(uiDir, file))).toBe(true);
-    },
-  );
+  it.each([
+    'button.tsx',
+    'input.tsx',
+    'label.tsx',
+    'card.tsx',
+    'select.tsx',
+  ] as const)('exports %s', (file) => {
+    expect(existsSync(path.join(uiDir, file))).toBe(true);
+  });
 });
 
 describe('shadcn baseline package deps (ADR 0003 F2)', () => {
@@ -60,5 +63,6 @@ describe('shadcn baseline package deps (ADR 0003 F2)', () => {
     expect(all['tailwind-merge']).toBeDefined();
     expect(all['@radix-ui/react-slot']).toBeDefined();
     expect(all['@radix-ui/react-label']).toBeDefined();
+    expect(all['@radix-ui/react-select']).toBeDefined();
   });
 });

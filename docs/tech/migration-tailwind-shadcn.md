@@ -58,6 +58,8 @@ flowchart TD
 | F1 | `bd-wus.1` | Tailwind + tokens | PostCSS/Tailwind в `apps/web`; theme из текущих CSS variables; `globals.css` — base + legacy |
 | F2 | `bd-wus.2` | shadcn baseline | `components.json`, `lib/utils.ts` (`cn`), `components/ui` для Button/Input/Label/Card; Lucide; короткий story/smoke что theme «читальня» |
 
+Дополнение (эпик `bd-a12`, не блокер F2): **Select** — `components/ui/select` на `@radix-ui/react-select` (bd-a12.2); native `<select>` в прод-UI запрещён.
+
 ### Оболочка
 
 | # | Issue | Задача | Путь / файлы |
@@ -99,6 +101,7 @@ flowchart TD
 ## DoD на задачу экрана / меню
 
 - [ ] Разметка и стили экрана на Tailwind; интерактивные контролы из `components/ui` (или осознанный exception в notes issue).
+- [ ] Выпадающие списки — только `components/ui/select` (`@radix-ui/react-select`), не native `<select>`.
 - [ ] Иконки — Lucide, если нужны.
 - [ ] Нет регрессии RU-копирайта и поведения (auth, spoiler, admin-only).
 - [ ] Unit и/или Playwright по экрану зелёные.

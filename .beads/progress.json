@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-05T11:01:37.269Z",
+  "generated_at": "2026-08-05T11:08:38.661Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 153,
-    "open_issues": 28,
-    "in_progress_issues": 0,
+    "open_issues": 27,
+    "in_progress_issues": 1,
     "closed_issues": 125,
     "blocked_issues": 0,
-    "ready_issues": 28
+    "ready_issues": 27
   },
   "epics": [
     {
@@ -542,8 +542,8 @@
       "priority": 2,
       "children_total": 2,
       "children_closed": 1,
-      "children_in_progress": 0,
-      "children_open": 1,
+      "children_in_progress": 1,
+      "children_open": 0,
       "progress": "1 / 2",
       "percent_closed": 50,
       "children": [
@@ -557,7 +557,7 @@
         {
           "id": "bd-a12.2",
           "title": "UI: shadcn Select + замена native select",
-          "status": "open",
+          "status": "in_progress",
           "type": "task",
           "priority": 2
         }
@@ -1300,11 +1300,11 @@
     {
       "id": "bd-a12.2",
       "title": "UI: shadcn Select + замена native select",
-      "status": "open",
+      "status": "in_progress",
       "type": "task",
       "priority": 2,
       "parent": "bd-a12",
-      "updated_at": "2026-08-05T10:37:53Z"
+      "updated_at": "2026-08-05T11:06:45Z"
     },
     {
       "id": "bd-a12.1",
