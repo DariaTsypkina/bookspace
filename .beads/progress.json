@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-05T11:09:34.336Z",
+  "generated_at": "2026-08-05T11:13:06.638Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 153,
-    "open_issues": 27,
+    "open_issues": 26,
     "in_progress_issues": 0,
-    "closed_issues": 126,
+    "closed_issues": 127,
     "blocked_issues": 0,
-    "ready_issues": 27
+    "ready_issues": 26
   },
   "epics": [
     {
@@ -538,7 +538,7 @@
     {
       "id": "bd-a12",
       "title": "DX: UI-конвенции (RU ошибки + shadcn Select)",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
       "children_total": 2,
       "children_closed": 2,
@@ -1318,11 +1318,11 @@
     {
       "id": "bd-a12",
       "title": "DX: UI-конвенции (RU ошибки + shadcn Select)",
-      "status": "open",
+      "status": "closed",
       "type": "epic",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-08-05T10:35:18Z"
+      "updated_at": "2026-08-05T11:13:01Z"
     },
     {
       "id": "bd-1wv",
