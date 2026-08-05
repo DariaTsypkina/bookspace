@@ -16,6 +16,13 @@ describe('UserBookTagsForm (bd-cq7.3)', () => {
     expect(source).toMatch(/Назначить тег/);
   });
 
+  it('defers setLoaded out of useEffect sync body (react-hooks/set-state-in-effect)', () => {
+    expect(source).toMatch(/queueMicrotask\s*\(\s*\(\s*\)\s*=>\s*\{/);
+    expect(source).not.toMatch(
+      /useEffect\s*\(\s*\(\s*\)\s*=>\s*\{\s*if\s*\([\s\S]*?\)\s*\{\s*setLoaded\s*\(/,
+    );
+  });
+
   it('shows guest login prompt and RU feedback', () => {
     expect(source).toMatch(/Войдите/);
     expect(source).toMatch(/Тег назначен/);

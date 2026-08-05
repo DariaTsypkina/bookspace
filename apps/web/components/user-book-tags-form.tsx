@@ -25,33 +25,36 @@ export function UserBookTagsForm({ workSlug }: UserBookTagsFormProps) {
   } | null>(null);
 
   useEffect(() => {
-    if (authStatus === 'pending' || !user) {
-      setLoaded(true);
-      return;
-    }
     let cancelled = false;
-    (async () => {
-      try {
-        const { data } = await api.get<{ item: UserBookResponse | null }>(
-          `/api/me/library/works/${encodeURIComponent(workSlug)}`,
-        );
-        if (cancelled) return;
-        if (data.item) {
-          setHasUserBook(true);
-          setTags(data.item.tags ?? []);
-        } else {
-          setHasUserBook(false);
-          setTags([]);
-        }
-      } catch {
-        if (!cancelled) {
-          setHasUserBook(false);
-          setTags([]);
-        }
-      } finally {
-        if (!cancelled) setLoaded(true);
+    queueMicrotask(() => {
+      if (cancelled) return;
+      if (authStatus === 'pending' || !user) {
+        setLoaded(true);
+        return;
       }
-    })();
+      void (async () => {
+        try {
+          const { data } = await api.get<{ item: UserBookResponse | null }>(
+            `/api/me/library/works/${encodeURIComponent(workSlug)}`,
+          );
+          if (cancelled) return;
+          if (data.item) {
+            setHasUserBook(true);
+            setTags(data.item.tags ?? []);
+          } else {
+            setHasUserBook(false);
+            setTags([]);
+          }
+        } catch {
+          if (!cancelled) {
+            setHasUserBook(false);
+            setTags([]);
+          }
+        } finally {
+          if (!cancelled) setLoaded(true);
+        }
+      })();
+    });
     return () => {
       cancelled = true;
     };

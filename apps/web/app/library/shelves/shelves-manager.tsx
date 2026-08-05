@@ -61,7 +61,9 @@ export function ShelvesManager() {
   }, []);
 
   useEffect(() => {
-    void load();
+    queueMicrotask(() => {
+      void load();
+    });
   }, [load]);
 
   async function handleCreate(values: CreateShelfFormValues) {

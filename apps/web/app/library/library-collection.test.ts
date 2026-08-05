@@ -13,6 +13,15 @@ describe('LibraryCollection (bd-cq7.4)', () => {
     expect(source).toMatch(/api\.get/);
   });
 
+  it('defers load setState out of useEffect sync body (react-hooks/set-state-in-effect)', () => {
+    expect(source).toMatch(
+      /useEffect\s*\(\s*\(\s*\)\s*=>\s*\{\s*queueMicrotask\s*\(/,
+    );
+    expect(source).not.toMatch(
+      /useEffect\s*\(\s*\(\s*\)\s*=>\s*\{\s*void\s+load\s*\(/,
+    );
+  });
+
   it('filters by status query param WANT|READING|READ|ABANDONED', () => {
     expect(source).toMatch(/status=/);
     expect(source).toMatch(/USER_BOOK_STATUS_OPTIONS/);

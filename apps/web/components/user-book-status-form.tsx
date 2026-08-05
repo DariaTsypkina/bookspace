@@ -50,29 +50,32 @@ export function UserBookStatusForm({ workSlug }: UserBookStatusFormProps) {
   });
 
   useEffect(() => {
-    if (authStatus === 'pending' || !user) {
-      setLoaded(true);
-      return;
-    }
     let cancelled = false;
-    (async () => {
-      try {
-        const { data } = await api.get<{ item: UserBookResponse | null }>(
-          `/api/me/library/works/${encodeURIComponent(workSlug)}`,
-        );
-        if (cancelled) return;
-        if (data.item) {
-          form.reset({
-            status: data.item.status,
-            rating: data.item.rating,
-          });
-        }
-      } catch {
-        // leave defaults
-      } finally {
-        if (!cancelled) setLoaded(true);
+    queueMicrotask(() => {
+      if (cancelled) return;
+      if (authStatus === 'pending' || !user) {
+        setLoaded(true);
+        return;
       }
-    })();
+      void (async () => {
+        try {
+          const { data } = await api.get<{ item: UserBookResponse | null }>(
+            `/api/me/library/works/${encodeURIComponent(workSlug)}`,
+          );
+          if (cancelled) return;
+          if (data.item) {
+            form.reset({
+              status: data.item.status,
+              rating: data.item.rating,
+            });
+          }
+        } catch {
+          // leave defaults
+        } finally {
+          if (!cancelled) setLoaded(true);
+        }
+      })();
+    });
     return () => {
       cancelled = true;
     };
