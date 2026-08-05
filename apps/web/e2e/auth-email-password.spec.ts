@@ -1,7 +1,12 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
 
 const uniqueEmail = () =>
   `e2e-${Date.now()}-${Math.random().toString(36).slice(2)}@bookspace.local`;
+
+function passwordField(page: Page) {
+  // Avoid getByLabel('Пароль') — also matches «Показать пароль» toggle.
+  return page.getByRole('textbox', { name: 'Пароль' });
+}
 
 test.describe('Auth email/password e2e', () => {
   test('register then login sets session cookie via API', async ({
@@ -13,13 +18,13 @@ test.describe('Auth email/password e2e', () => {
 
     await page.goto('/register');
     await page.getByLabel('Email').fill(email);
-    await page.getByLabel('Пароль').fill(password);
+    await passwordField(page).fill(password);
     await page.getByRole('button', { name: 'Зарегистрироваться' }).click();
 
     await expect(page).toHaveURL('/login');
 
     await page.getByLabel('Email').fill(email);
-    await page.getByLabel('Пароль').fill(password);
+    await passwordField(page).fill(password);
     await page.getByRole('button', { name: 'Войти' }).click();
 
     await expect(page).toHaveURL('/');
@@ -35,7 +40,7 @@ test.describe('Auth email/password e2e', () => {
 
     await page.goto('/register');
     await page.getByLabel('Email').fill(email);
-    await page.getByLabel('Пароль').fill('weak');
+    await passwordField(page).fill('weak');
     await page.getByRole('button', { name: 'Зарегистрироваться' }).click();
 
     await expect(page.locator('main').getByRole('alert')).toContainText(
@@ -46,7 +51,7 @@ test.describe('Auth email/password e2e', () => {
   test('login shows error for invalid credentials', async ({ page }) => {
     await page.goto('/login');
     await page.getByLabel('Email').fill('missing@bookspace.local');
-    await page.getByLabel('Пароль').fill('Wrong123!');
+    await passwordField(page).fill('Wrong123!');
     await page.getByRole('button', { name: 'Войти' }).click();
 
     await expect(page.locator('main').getByRole('alert')).toContainText(
@@ -60,13 +65,13 @@ test.describe('Auth email/password e2e', () => {
 
     await page.goto('/register');
     await page.getByLabel('Email').fill(email);
-    await page.getByLabel('Пароль').fill(password);
+    await passwordField(page).fill(password);
     await page.getByRole('button', { name: 'Зарегистрироваться' }).click();
     await expect(page).toHaveURL('/login');
 
     await page.goto('/register');
     await page.getByLabel('Email').fill(email);
-    await page.getByLabel('Пароль').fill(password);
+    await passwordField(page).fill(password);
     await page.getByRole('button', { name: 'Зарегистрироваться' }).click();
 
     await expect(page.locator('main').getByRole('alert')).toContainText(

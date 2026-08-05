@@ -58,4 +58,35 @@ describe('getFriendlyZodIssueMessage', () => {
     );
     expect(workSlugIssue?.message).toBe('Укажите слаг произведения');
   });
+
+  it('never returns raw English Zod too_small message', () => {
+    const schema = z.object({
+      password: z.string().min(8),
+    });
+    const result = schema.safeParse({ password: 'short' });
+    expect(result.success).toBe(false);
+    if (result.success) {
+      throw new Error('Expected schema to fail for short password');
+    }
+
+    const friendly = getFriendlyZodIssueMessage(result.error.issues[0]);
+    expect(friendly).not.toMatch(/Too small/i);
+    expect(friendly).toBe('Минимум 8 символов');
+  });
+
+  it('maps invalid_value / unrecognized enum-like codes to RU fallback', () => {
+    const schema = z.object({
+      status: z.enum(['WANT', 'READING']),
+    });
+    const result = schema.safeParse({ status: 'NOPE' });
+    expect(result.success).toBe(false);
+    if (result.success) {
+      throw new Error('Expected schema to fail for invalid enum');
+    }
+
+    const friendly = getFriendlyZodIssueMessage(result.error.issues[0]);
+    expect(friendly).not.toMatch(/Invalid|expected|Options/i);
+    expect(friendly.length).toBeGreaterThan(0);
+    expect(/[А-Яа-яЁё]/.test(friendly)).toBe(true);
+  });
 });

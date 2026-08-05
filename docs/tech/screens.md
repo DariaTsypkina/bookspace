@@ -1,6 +1,7 @@
 # Карта экранов (MVP)
 
-Mobile first. UI на русском. SEO: title/description для публичных страниц.  
+Mobile first. UI на русском. SEO: title/description для публичных страниц.
+User-facing ошибки (FormMessage, alert, toast, ответы API на экране) — только русский; EN Nest/Zod маппить на UI (`apps/web/lib/user-facing-errors.ts`).
 Стек UI: Next.js — [stack-and-architecture](stack-and-architecture.md).
 
 ## Навигация (публичная оболочка)

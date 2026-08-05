@@ -1,9 +1,13 @@
 import axios, { type AxiosError } from 'axios';
+import {
+  FALLBACK_USER_MESSAGE,
+  mapApiErrorMessage,
+} from './user-facing-errors';
 
 /** Default request timeout for app HTTP via BFF (ms). */
 export const DEFAULT_API_TIMEOUT_MS = 30_000;
 
-const FALLBACK_MESSAGE = 'Произошла ошибка. Попробуйте снова.';
+const FALLBACK_MESSAGE = FALLBACK_USER_MESSAGE;
 
 /**
  * App-level HTTP error: Nest-style body.message (string | string[]) or RU fallback.
@@ -20,6 +24,7 @@ export class ApiError extends Error {
 
 /**
  * Extract user-facing message from Nest / BFF error JSON body.
+ * English Nest/Zod leftovers are mapped to Russian before UI display.
  */
 export function messageFromResponseData(data: unknown): string {
   if (data && typeof data === 'object' && 'message' in data) {
@@ -29,10 +34,10 @@ export function messageFromResponseData(data: unknown): string {
         .filter((m) => typeof m === 'string' && m)
         .join(', ');
       if (joined) {
-        return joined;
+        return mapApiErrorMessage(joined);
       }
     } else if (typeof message === 'string' && message) {
-      return message;
+      return mapApiErrorMessage(message);
     }
   }
   return FALLBACK_MESSAGE;

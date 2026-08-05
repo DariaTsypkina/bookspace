@@ -32,6 +32,7 @@
 - Коллекция публична; notes — PUBLIC/PRIVATE
 - ContextReading источники только admin; блок только если есть PUBLISHED
 - UI и display-названия — русский
+- User-facing ошибки (формы, API, auth) — только русский и понятные пользователю; EN с бэка/Zod маппить на UI (`apps/web/lib/user-facing-errors.ts`, `form-errors.ts`); правило — [ui-ru.mdc](.cursor/rules/ui-ru.mdc)
 - UI typeface — Baskerville (`--font-baskerville` / `font-sans`); form controls — явно наследовать/задавать шрифт
 - MVP без подписок/ленты, графа, таймлайна, биллинга
 - Новые или заменённые npm/pnpm-зависимости — только после явного согласования с пользователем ([agent-dev-flow §2.1](docs/tech/agent-dev-flow.md))
