@@ -13,10 +13,13 @@ import {
 import type {
   PatchUserBookInput,
   PublicLibraryResponse,
+  PublicUserBookDetail,
   UpsertUserBookInput,
   UserBookResponse,
 } from '@bookspace/schemas';
 import { PrismaService } from '../prisma/prisma.service';
+import { filterPublicNotes } from './public-notes';
+import { toPublicReadingGoal } from './public-reading-goal';
 
 type UserBookWithWork = UserBook & {
   work: Pick<Work, 'id' | 'slug' | 'titleRu' | 'status' | 'deletedAt'>;
@@ -195,6 +198,10 @@ export class MeLibraryService {
       orderBy: [{ updatedAt: 'desc' }],
     });
 
+    // Note / ReadingGoal models — bd-sf4; контракт: PUBLIC notes + goal only if showOnProfile
+    const notes = filterPublicNotes([]);
+    const goal = toPublicReadingGoal(null);
+
     return {
       slug: user.slug,
       items: rows.map((row) => ({
@@ -205,6 +212,53 @@ export class MeLibraryService {
         finishedAt: row.finishedAt ? row.finishedAt.toISOString() : null,
         tags: row.tags.map((link) => ({ name: link.tag.name })),
       })),
+      notes,
+      goal,
+    };
+  }
+
+  async getPublicBySlugAndWorkSlug(
+    slug: string,
+    workSlug: string,
+  ): Promise<PublicUserBookDetail> {
+    const user = await this.prisma.user.findFirst({
+      where: { slug, deletedAt: null },
+    });
+    if (!user) {
+      throw new NotFoundException('Пользователь не найден');
+    }
+
+    const work = await this.prisma.work.findFirst({
+      where: {
+        slug: workSlug,
+        deletedAt: null,
+        status: WorkStatus.PUBLISHED,
+      },
+    });
+    if (!work) {
+      throw new NotFoundException('Произведение не найдено');
+    }
+
+    const row = await this.prisma.userBook.findUnique({
+      where: { userId_workId: { userId: user.id, workId: work.id } },
+      include: {
+        work: { select: workSelect },
+        tags: tagsInclude,
+      },
+    });
+    if (!row) {
+      throw new NotFoundException('Книга не найдена в коллекции');
+    }
+
+    return {
+      slug: user.slug,
+      workSlug: row.work.slug,
+      titleRu: row.work.titleRu,
+      status: row.status,
+      rating: row.rating,
+      finishedAt: row.finishedAt ? row.finishedAt.toISOString() : null,
+      tags: row.tags.map((link) => ({ name: link.tag.name })),
+      notes: filterPublicNotes([]),
     };
   }
 

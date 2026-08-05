@@ -221,6 +221,60 @@ describe('MeLibraryService', () => {
     expect(pub.items).toHaveLength(0);
   });
 
+  it('listPublicBySlug returns empty PUBLIC notes and null goal (no Note/ReadingGoal yet)', async () => {
+    const { user, work } = await seedUserAndWork();
+    await service.upsert(user.id, {
+      workSlug: work.slug,
+      status: 'READING',
+    });
+    const pub = await service.listPublicBySlug(user.slug);
+    expect(pub.notes).toEqual([]);
+    expect(pub.goal).toBeNull();
+  });
+
+  it('getPublicBySlugAndWorkSlug returns owner status/rating/tags; 404 missing', async () => {
+    const { user, work } = await seedUserAndWork();
+    await service.upsert(user.id, {
+      workSlug: work.slug,
+      status: 'READ',
+      rating: 8,
+    });
+
+    const detail = await service.getPublicBySlugAndWorkSlug(
+      user.slug,
+      work.slug,
+    );
+    expect(detail).toMatchObject({
+      slug: user.slug,
+      workSlug: work.slug,
+      titleRu: 'Тестовая книга',
+      status: 'READ',
+      rating: 8,
+      tags: [],
+      notes: [],
+    });
+    expect(detail.finishedAt).toBeTruthy();
+
+    await expect(
+      service.getPublicBySlugAndWorkSlug(user.slug, `${TEST_PREFIX}-nope`),
+    ).rejects.toBeInstanceOf(NotFoundException);
+
+    await expect(
+      service.getPublicBySlugAndWorkSlug(`${TEST_PREFIX}-nope`, work.slug),
+    ).rejects.toBeInstanceOf(NotFoundException);
+
+    const otherWork = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-other`,
+        titleRu: 'Другая',
+        status: WorkStatus.PUBLISHED,
+      },
+    });
+    await expect(
+      service.getPublicBySlugAndWorkSlug(user.slug, otherWork.slug),
+    ).rejects.toBeInstanceOf(NotFoundException);
+  });
+
   it('list returns owner collection; filters by status; hides drafts', async () => {
     const user = await prisma.user.create({
       data: {
