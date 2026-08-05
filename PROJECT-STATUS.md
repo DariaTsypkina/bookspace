@@ -170,7 +170,9 @@
 | ✅     | `bd-cq7.4` | Библиотека: Моя библиотека                                                                                 |
 | 🔄     | `bd-cq7.5` | Библиотека: Публичный профиль · ветка `task/bd-cq7.5-public-profile`                                       |
 | ✅     | `bd-cq7.6` | Bug: iOS Chrome — пустая страница Профиль `/library` (human-reported) · сборочная `feat/bookspace-bd-bugs` |
-| 🔄     | `bd-2qm`   | [bug] lint: set-state-in-effect в library UI (cq7 push blocker) · discovered-from `bd-cq7.4`/`bd-cq7.1` · сборочная `feat/bookspace-bd-cq7` · ветка `task/bd-2qm-lint-set-state-in-effect` |
+| ✅     | `bd-2qm`   | [bug] lint: set-state-in-effect в library UI (cq7 push blocker) · сборочная `feat/bookspace-bd-cq7` |
+| ⬜     | `bd-cq7.7` | [bug] UI: английская ошибка Zod в поле «Слаг произведения» (human-reported `/task`) · сборочная `feat/bookspace-bd-cq7` |
+| ⬜     | `bd-cq7.8` | [bug] Библиотека/полки: не находит произведение при вводе названия (human-reported `/task`) · сборочная `feat/bookspace-bd-cq7` |
 
 ### 6. Заметки и цель — 🔒 · epic `bd-sf4` · 0 / 2
 
@@ -240,6 +242,8 @@
 
 | Дата       | Действие                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-08-05 | `/task`: `bd-cq7.8` — добавление на полку/в коллекцию не находит книгу по названию (UI только slug; seed `garri-potter-taynaya-komnata`); epic `bd-cq7` |
+| 2026-08-05 | `/task`: `bd-cq7.7` — английский Zod в поле «Слаг произведения» на `/library`; human-reported; epic `bd-cq7` · feature-doc `user-library-page.md` |
 | 2026-08-05 | `bd-2qm` in progress: queueMicrotask defer для load/setLoaded (library + user-book forms); lint **0 errors**; unit library/user-book **30/30**; ветка `task/bd-2qm-lint-set-state-in-effect`; `bd close` — оркестратор |
 | 2026-08-05 | `bd-cq7.5` ready close: public profile notes/goal contract + GET `/users/:slug/library/works/:workSlug` + UI `/u/[slug]/books/[workSlug]`; API unit public-notes/goal+me-library **15** + e2e **2**; web unit **340**; PW public-profile **4/4** mobile+desktop (`PLAYWRIGHT_CHROME_CHANNEL=0`); manual `e2e/manual/public-profile.md`; ветка `task/bd-cq7.5-public-profile`; `bd close` — оркестратор |
 | 2026-08-04 | `bd-cq7.5` in progress: claim + bd-conventions (design/acceptance Критерии+Проверка/notes/labels); ветка `task/bd-cq7.5-public-profile`; sync origin/develop OK; старт TDD публичный профиль + `/u/.../books/[workSlug]` |

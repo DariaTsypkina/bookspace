@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-05T07:27:56.295Z",
+  "generated_at": "2026-08-05T08:06:49.398Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 144,
-    "open_issues": 25,
+    "total_issues": 146,
+    "open_issues": 27,
     "in_progress_issues": 0,
     "closed_issues": 119,
     "blocked_issues": 0,
-    "ready_issues": 25
+    "ready_issues": 27
   },
   "epics": [
     {
@@ -652,12 +652,12 @@
       "title": "Библиотека и профиль",
       "status": "closed",
       "priority": 2,
-      "children_total": 6,
+      "children_total": 8,
       "children_closed": 6,
       "children_in_progress": 0,
-      "children_open": 0,
-      "progress": "6 / 6",
-      "percent_closed": 100,
+      "children_open": 2,
+      "progress": "6 / 8",
+      "percent_closed": 75,
       "children": [
         {
           "id": "bd-cq7.1",
@@ -700,6 +700,20 @@
           "status": "closed",
           "type": "bug",
           "priority": 1
+        },
+        {
+          "id": "bd-cq7.7",
+          "title": "UI: английская ошибка Zod в поле «Слаг произведения»",
+          "status": "open",
+          "type": "bug",
+          "priority": 2
+        },
+        {
+          "id": "bd-cq7.8",
+          "title": "Библиотека/полки: не находит произведение при вводе названия (только slug)",
+          "status": "open",
+          "type": "bug",
+          "priority": 2
         }
       ]
     },
@@ -1238,6 +1252,24 @@
       "priority": 1,
       "parent": "bd-957",
       "updated_at": "2026-07-20T07:30:07Z"
+    },
+    {
+      "id": "bd-cq7.8",
+      "title": "Библиотека/полки: не находит произведение при вводе названия (только slug)",
+      "status": "open",
+      "type": "bug",
+      "priority": 2,
+      "parent": "bd-cq7",
+      "updated_at": "2026-08-05T08:02:07Z"
+    },
+    {
+      "id": "bd-cq7.7",
+      "title": "UI: английская ошибка Zod в поле «Слаг произведения»",
+      "status": "open",
+      "type": "bug",
+      "priority": 2,
+      "parent": "bd-cq7",
+      "updated_at": "2026-08-05T07:59:12Z"
     },
     {
       "id": "bd-957.6",
