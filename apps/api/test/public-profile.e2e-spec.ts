@@ -78,7 +78,7 @@ describe('Public profile (e2e) bd-cq7.5', () => {
     const login = await authPost('/auth/login')
       .send({ email, password: 'Secure123!' })
       .expect(200);
-    return login.headers['set-cookie'] as string[];
+    return login.headers['set-cookie'] as unknown as string[];
   }
 
   it('guest can read library + work detail without auth; notes empty; goal null', async () => {

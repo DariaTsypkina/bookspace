@@ -59,7 +59,7 @@ describe('Me library list (e2e) bd-cq7.4', () => {
     const login = await authPost('/auth/login')
       .send({ email, password: 'Secure123!' })
       .expect(200);
-    return login.headers['set-cookie'] as string[];
+    return login.headers['set-cookie'] as unknown as string[];
   }
 
   it('guest 401; owner lists all and filters by status', async () => {

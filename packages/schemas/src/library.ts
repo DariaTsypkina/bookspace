@@ -45,7 +45,7 @@ export const UpsertUserBookInputSchema = z
     path: ['workId'],
   });
 
-export type UpsertUserBookInput = z.infer<typeof UpsertUserBookInputSchema>;
+export type UpsertUserBookInput = z.input<typeof UpsertUserBookInputSchema>;
 
 /**
  * PUT `/me/library/works/:workSlug` — upsert по slug (status обязателен).
@@ -132,7 +132,7 @@ export const AssignTagInputSchema = z
     path: ['tagId'],
   });
 
-export type AssignTagInput = z.infer<typeof AssignTagInputSchema>;
+export type AssignTagInput = z.input<typeof AssignTagInputSchema>;
 
 /** Элемент публичной коллекции. */
 export const PublicUserBookItemSchema = z.object({
@@ -263,7 +263,7 @@ export const CreateShelfInputSchema = z.object({
     ),
 });
 
-export type CreateShelfInput = z.infer<typeof CreateShelfInputSchema>;
+export type CreateShelfInput = z.input<typeof CreateShelfInputSchema>;
 
 /** PATCH полки: хотя бы одно поле. description: null — сбросить. */
 export const UpdateShelfInputSchema = z
@@ -322,7 +322,7 @@ export const AddShelfItemInputSchema = z
     path: ['workId'],
   });
 
-export type AddShelfItemInput = z.infer<typeof AddShelfItemInputSchema>;
+export type AddShelfItemInput = z.input<typeof AddShelfItemInputSchema>;
 
 export const ShelfItemResponseSchema = z.object({
   workId: z.string(),
