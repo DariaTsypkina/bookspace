@@ -109,12 +109,13 @@ describe('User tags (e2e) bd-cq7.3', () => {
       .expect(201);
 
     expect(created.body).toMatchObject({ name: `${TEST_PREFIX}-fantasy` });
+    const createdBody = created.body as { id: string; name: string };
 
     await api()
       .post(`/me/library/works/${work.slug}/tags`)
       .set('Cookie', cookie)
       .set('X-E2E', '1')
-      .send({ tagId: created.body.id })
+      .send({ tagId: createdBody.id })
       .expect(400);
 
     await api()
@@ -130,25 +131,32 @@ describe('User tags (e2e) bd-cq7.3', () => {
       .set('X-E2E', '1')
       .send({ name: `${TEST_PREFIX}-classic` })
       .expect(201);
-
-    expect(assigned.body.tags).toEqual(
+    const assignedBody = assigned.body as {
+      tags: Array<{ name: string }>;
+    };
+    expect(assignedBody.tags).toEqual(
       expect.arrayContaining([
         expect.objectContaining({ name: `${TEST_PREFIX}-classic` }),
       ]),
     );
 
     const pub = await api().get(`/users/${user.slug}/library`).expect(200);
-    expect(pub.body.items).toEqual([
-      expect.objectContaining({
-        workSlug: work.slug,
-        tags: expect.arrayContaining([
-          expect.objectContaining({ name: `${TEST_PREFIX}-classic` }),
-        ]),
-      }),
-    ]);
+    const pubBody = pub.body as {
+      items: Array<{
+        workSlug: string;
+        tags: Array<{ name: string }>;
+      }>;
+    };
+    expect(pubBody.items).toHaveLength(1);
+    expect(pubBody.items[0].workSlug).toBe(work.slug);
+    expect(pubBody.items[0].tags).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ name: `${TEST_PREFIX}-classic` }),
+      ]),
+    );
 
     await api()
-      .delete(`/me/tags/${created.body.id}`)
+      .delete(`/me/tags/${createdBody.id}`)
       .set('Cookie', cookie)
       .set('X-E2E', '1')
       .expect(204);
@@ -162,7 +170,7 @@ describe('User tags (e2e) bd-cq7.3', () => {
 
   it('ADMIN can create tag; missing public user → 404', async () => {
     const email = `${TEST_PREFIX}-admin@bookspace.local`;
-    const cookie = await registerAndLogin(email);
+    await registerAndLogin(email);
     await prisma.user.update({
       where: { email },
       data: { role: UserRole.ADMIN },

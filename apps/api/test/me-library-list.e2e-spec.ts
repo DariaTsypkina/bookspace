@@ -102,7 +102,10 @@ describe('Me library list (e2e) bd-cq7.4', () => {
       .set('Cookie', cookie)
       .set('X-E2E', '1')
       .expect(200);
-    expect(all.body.items).toHaveLength(2);
+    const allBody = all.body as {
+      items: Array<{ workSlug: string; status: string; titleRu: string }>;
+    };
+    expect(allBody.items).toHaveLength(2);
 
     const want = await api()
       .get('/me/library')
@@ -110,8 +113,11 @@ describe('Me library list (e2e) bd-cq7.4', () => {
       .set('Cookie', cookie)
       .set('X-E2E', '1')
       .expect(200);
-    expect(want.body.items).toHaveLength(1);
-    expect(want.body.items[0]).toMatchObject({
+    const wantBody = want.body as {
+      items: Array<{ workSlug: string; status: string; titleRu: string }>;
+    };
+    expect(wantBody.items).toHaveLength(1);
+    expect(wantBody.items[0]).toMatchObject({
       workSlug: workA.slug,
       status: 'WANT',
       titleRu: 'Книга А',
