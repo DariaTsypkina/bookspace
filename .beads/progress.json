@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-05T07:25:03.804Z",
+  "generated_at": "2026-08-05T07:25:28.754Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 143,
     "open_issues": 25,
-    "in_progress_issues": 1,
-    "closed_issues": 117,
+    "in_progress_issues": 0,
+    "closed_issues": 118,
     "blocked_issues": 0,
     "ready_issues": 25
   },
@@ -981,11 +981,11 @@
     {
       "id": "bd-4td",
       "title": "lint: unsafe any в API e2e library (cq7 push blocker)",
-      "status": "in_progress",
+      "status": "closed",
       "type": "bug",
       "priority": 1,
       "parent": null,
-      "updated_at": "2026-08-05T07:23:44Z"
+      "updated_at": "2026-08-05T07:25:24Z"
     },
     {
       "id": "bd-2qm",
