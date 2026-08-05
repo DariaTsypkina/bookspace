@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-05T11:13:06.638Z",
+  "generated_at": "2026-08-05T13:03:18.015Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 153,
-    "open_issues": 26,
+    "total_issues": 154,
+    "open_issues": 27,
     "in_progress_issues": 0,
     "closed_issues": 127,
     "blocked_issues": 0,
-    "ready_issues": 26
+    "ready_issues": 27
   },
   "epics": [
     {
@@ -225,12 +225,12 @@
       "title": "Каталог",
       "status": "closed",
       "priority": 1,
-      "children_total": 11,
+      "children_total": 12,
       "children_closed": 11,
       "children_in_progress": 0,
-      "children_open": 0,
-      "progress": "11 / 11",
-      "percent_closed": 100,
+      "children_open": 1,
+      "progress": "11 / 12",
+      "percent_closed": 92,
       "children": [
         {
           "id": "bd-6v0.1",
@@ -252,6 +252,13 @@
           "status": "closed",
           "type": "bug",
           "priority": 1
+        },
+        {
+          "id": "bd-6v0.12",
+          "title": "Каталог: аннотация (краткое содержание) на карточке книги",
+          "status": "open",
+          "type": "feature",
+          "priority": 2
         },
         {
           "id": "bd-6v0.2",
@@ -1287,6 +1294,15 @@
       "priority": 1,
       "parent": "bd-957",
       "updated_at": "2026-07-20T07:30:07Z"
+    },
+    {
+      "id": "bd-6v0.12",
+      "title": "Каталог: аннотация (краткое содержание) на карточке книги",
+      "status": "open",
+      "type": "feature",
+      "priority": 2,
+      "parent": "bd-6v0",
+      "updated_at": "2026-08-05T12:42:02Z"
     },
     {
       "id": "bd-957.9",

@@ -139,7 +139,7 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 | ✅     | `bd-957.7` | [bug] mobile: login progressive POST `/api/login` (не GET с credentials в query) · merged → `fix/bookspace-bd-bugs`                                                                             |
 | ⬜     | `bd-957.9` | UI: скрыть вход через Google и Яндекс на `/login` и `/register` (human-reported `/task`) · сборочная `feat/bookspace-bd-common`                                                                  |
 
-### 2. Каталог — ✅ · epic `bd-6v0` · 6 / 6 (эпик закрыт)
+### 2. Каталог — ✅ · epic `bd-6v0` · 6 / 6 (эпик закрыт; follow-up open)
 
 | Статус | ID          | Задача                                                                                                  |
 | ------ | ----------- | ------------------------------------------------------------------------------------------------------- |
@@ -152,6 +152,7 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 | ✅     | `bd-6v0.9`  | Поиск: восстановить FTS search_vector после drift Prisma                                                |
 | ✅     | `bd-6v0.10` | Поиск: префикс `роул` не находит «Роулинг» (human-reported)                                             |
 | ✅     | `bd-6v0.11` | [bug] mobile: поиск «Найти» → native `?q=` + server fallback `query` · merged → `fix/bookspace-bd-bugs` |
+| ⬜     | `bd-6v0.12` | Каталог: аннотация (краткое содержание) на `/books/[slug]` (human-reported `/task`) · сборочная `feat/bookspace-bd-6v0` |
 
 ### 3. Связи и порядок — ✅ · epic `bd-azl` · 4 / 4 · сборочная `feat/bookspace-bd-azl`
 
@@ -252,6 +253,7 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 
 ## Последние действия
 
+- 2026-08-05: `/task`: `bd-6v0.12` — аннотация (краткое содержание) на карточке книги `/books/[slug]`; epic `bd-6v0` · feature-doc `work-page` · сборочная `feat/bookspace-bd-6v0`
 - 2026-08-05: `/orchestrate` финал `bd-a12` — epic closed; сборочная `feat/bookspace-bd-a12` запушена; develop НЕ влит (ЗАЛИВАТЬ=Нет); target PW 38/38, vitest 369
 - 2026-08-05: close `bd-a12.2` (shadcn Select) → merge `--no-ff` в `feat/bookspace-bd-a12`; vitest select 5; PW library/status 26/26
 - 2026-08-05: `bd-a12.2` ready close: shadcn Select (`@radix-ui/react-select`) + замена native `<select>`; unit **369**; PW library/status **26/26** + related **12/12** desktop+mobile (`PLAYWRIGHT_CHROME_CHANNEL=0`); docs ui-ru/stack/ADR; ветка `task/bd-a12.2-shadcn-select`; сборочная `feat/bookspace-bd-a12`; `bd close` — оркестратор
@@ -264,6 +266,7 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 
 | Дата       | Действие                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-08-05 | `/task`: `bd-6v0.12` — аннотация на `/books/[slug]` (Work.descriptionRu + API + UI); epic `bd-6v0` · `work-page` · сборочная `feat/bookspace-bd-6v0` |
 | 2026-08-05 | `bd-a12.2` ready close: shadcn Select + native replace; unit 369; PW 26+12 desktop/mobile; ветка `task/bd-a12.2-shadcn-select`; `bd close` — оркестратор |
 | 2026-08-05 | `bd-a12.1` ready close: RU user-facing errors — mapper + FormMessage; unit 21; PW 12/12 + auth/library regression; ветка `task/bd-a12.1-ru-user-facing-errors`; `bd close` — оркестратор |
 | 2026-08-05 | `bd-a12.1` in progress: TDD RU user-facing errors — `mapApiErrorMessage`/`toUserFacingErrorMessage`, FormMessage, ui-ru/AGENTS; unit mappers; PW smoke; ветка `task/bd-a12.1-ru-user-facing-errors` |
