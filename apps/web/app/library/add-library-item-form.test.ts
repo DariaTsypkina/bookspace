@@ -48,3 +48,12 @@ describe('AddLibraryItemForm axios client (bd-707.7)', () => {
     expect(source).toMatch(/Введите название книги или slug/);
   });
 });
+
+describe('AddLibraryItemForm Select (bd-a12.2)', () => {
+  it('uses shadcn Select, not native <select>', () => {
+    expect(source).toMatch(/from ['"]@\/components\/ui\/select['"]/);
+    expect(source).toMatch(/\bSelectTrigger\b/);
+    expect(source).toMatch(/\bSelectItem\b/);
+    expect(source).not.toMatch(/<select[\s>]/);
+  });
+});

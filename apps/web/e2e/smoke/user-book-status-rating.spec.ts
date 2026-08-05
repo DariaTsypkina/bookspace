@@ -1,4 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
+import { selectUserBookStatus } from '../helpers/select-user-book-status';
 
 function uniqueEmail() {
   return `ubook-${Date.now()}-${Math.random().toString(36).slice(2, 8)}@example.com`;
@@ -38,7 +39,7 @@ test.describe('User book status/rating (bd-cq7.1)', () => {
 
     const section = page.getByRole('region', { name: 'Статус и оценка' });
     await expect(section).toBeVisible();
-    await section.getByLabel('Статус книги').selectOption('READ');
+    await selectUserBookStatus(page, 'READ', section);
     await section.getByLabel('Оценка книги').fill('9');
     await section.getByRole('button', { name: 'Сохранить' }).click();
     await expect(

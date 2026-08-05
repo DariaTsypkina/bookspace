@@ -37,4 +37,11 @@ describe('UserBookStatusForm (bd-cq7.1)', () => {
     expect(source).toMatch(/\bfont-sans\b/);
     expect(source).not.toMatch(/globals\.css/);
   });
+
+  it('uses shadcn Select for status, not native <select> (bd-a12.2)', () => {
+    expect(source).toMatch(/from ['"]@\/components\/ui\/select['"]/);
+    expect(source).toMatch(/\bSelectTrigger\b/);
+    expect(source).toMatch(/\bSelectItem\b/);
+    expect(source).not.toMatch(/<select[\s>]/);
+  });
 });

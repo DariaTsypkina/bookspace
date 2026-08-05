@@ -21,6 +21,13 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { ApiError, api } from '@/lib/http';
 import {
   USER_BOOK_STATUS_LABELS,
@@ -183,22 +190,22 @@ export function UserBookStatusForm({ workSlug }: UserBookStatusFormProps) {
                   <FormLabel className="font-normal text-muted">
                     Статус
                   </FormLabel>
-                  <FormControl>
-                    <select
-                      className="flex h-10 w-full rounded-md border border-border bg-surface px-3 py-2 font-sans text-sm text-foreground shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-                      {...field}
-                      value={field.value}
-                      aria-label="Статус книги"
-                    >
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <FormControl>
+                      <SelectTrigger aria-label="Статус книги">
+                        <SelectValue placeholder="Статус" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
                       {USER_BOOK_STATUS_OPTIONS.map(
                         (status: UserBookStatus) => (
-                          <option key={status} value={status}>
+                          <SelectItem key={status} value={status}>
                             {USER_BOOK_STATUS_LABELS[status]}
-                          </option>
+                          </SelectItem>
                         ),
                       )}
-                    </select>
-                  </FormControl>
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}

@@ -17,6 +17,13 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { getFriendlyZodIssueMessage } from '@/lib/form-errors';
 import { ApiError, api } from '@/lib/http';
 import {
@@ -172,20 +179,20 @@ export function AddLibraryItemForm({ onSuccess }: AddLibraryItemFormProps) {
           render={({ field }) => (
             <FormItem>
               <FormLabel className="font-normal text-muted">Статус</FormLabel>
-              <FormControl>
-                <select
-                  className="flex h-10 w-full rounded-md border border-border bg-surface px-3 py-2 font-sans text-sm text-foreground shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-                  aria-label="Статус книги"
-                  {...field}
-                  value={field.value}
-                >
+              <Select onValueChange={field.onChange} value={field.value}>
+                <FormControl>
+                  <SelectTrigger aria-label="Статус книги">
+                    <SelectValue placeholder="Статус" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
                   {USER_BOOK_STATUS_OPTIONS.map((s) => (
-                    <option key={s} value={s}>
+                    <SelectItem key={s} value={s}>
                       {USER_BOOK_STATUS_LABELS[s]}
-                    </option>
+                    </SelectItem>
                   ))}
-                </select>
-              </FormControl>
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}
