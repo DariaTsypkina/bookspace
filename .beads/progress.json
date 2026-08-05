@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-05T09:49:57.307Z",
+  "generated_at": "2026-08-05T09:50:57.272Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 147,
     "open_issues": 26,
-    "in_progress_issues": 1,
-    "closed_issues": 120,
+    "in_progress_issues": 0,
+    "closed_issues": 121,
     "blocked_issues": 0,
     "ready_issues": 26
   },
@@ -653,11 +653,11 @@
       "status": "closed",
       "priority": 2,
       "children_total": 8,
-      "children_closed": 6,
-      "children_in_progress": 1,
+      "children_closed": 7,
+      "children_in_progress": 0,
       "children_open": 1,
-      "progress": "6 / 8",
-      "percent_closed": 75,
+      "progress": "7 / 8",
+      "percent_closed": 88,
       "children": [
         {
           "id": "bd-cq7.1",
@@ -704,7 +704,7 @@
         {
           "id": "bd-cq7.7",
           "title": "UI: английская ошибка Zod в поле «Слаг произведения»",
-          "status": "in_progress",
+          "status": "closed",
           "type": "bug",
           "priority": 2
         },
@@ -1274,11 +1274,11 @@
     {
       "id": "bd-cq7.7",
       "title": "UI: английская ошибка Zod в поле «Слаг произведения»",
-      "status": "in_progress",
+      "status": "closed",
       "type": "bug",
       "priority": 2,
       "parent": "bd-cq7",
-      "updated_at": "2026-08-05T09:44:30Z"
+      "updated_at": "2026-08-05T09:50:23Z"
     },
     {
       "id": "bd-957.6",
