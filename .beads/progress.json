@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-05T07:22:41.734Z",
+  "generated_at": "2026-08-05T07:23:05.552Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 142,
     "open_issues": 25,
-    "in_progress_issues": 1,
-    "closed_issues": 116,
+    "in_progress_issues": 0,
+    "closed_issues": 117,
     "blocked_issues": 0,
     "ready_issues": 25
   },
@@ -981,11 +981,11 @@
     {
       "id": "bd-2qm",
       "title": "lint: set-state-in-effect в library UI (cq7 push blocker)",
-      "status": "in_progress",
+      "status": "closed",
       "type": "bug",
       "priority": 1,
       "parent": null,
-      "updated_at": "2026-08-05T07:22:22Z"
+      "updated_at": "2026-08-05T07:23:01Z"
     },
     {
       "id": "bd-3h3",
