@@ -60,7 +60,9 @@ export function LibraryCollection({ reloadToken = 0 }: LibraryCollectionProps) {
   }, []);
 
   useEffect(() => {
-    void load(filter);
+    queueMicrotask(() => {
+      void load(filter);
+    });
   }, [load, filter, reloadToken]);
 
   if (authRequired) {

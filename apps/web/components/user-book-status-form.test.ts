@@ -16,6 +16,13 @@ describe('UserBookStatusForm (bd-cq7.1)', () => {
     expect(source).toMatch(/\bapi\.put\b/);
   });
 
+  it('defers setLoaded out of useEffect sync body (react-hooks/set-state-in-effect)', () => {
+    expect(source).toMatch(/queueMicrotask\s*\(\s*\(\s*\)\s*=>\s*\{/);
+    expect(source).not.toMatch(
+      /useEffect\s*\(\s*\(\s*\)\s*=>\s*\{\s*if\s*\([\s\S]*?\)\s*\{\s*setLoaded\s*\(/,
+    );
+  });
+
   it('shows RU status labels and guest login prompt', () => {
     expect(source).toMatch(/USER_BOOK_STATUS_LABELS/);
     expect(source).toMatch(/Войдите/);

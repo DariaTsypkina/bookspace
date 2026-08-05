@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-05T07:19:14.778Z",
+  "generated_at": "2026-08-05T07:23:05.552Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 141,
+    "total_issues": 142,
     "open_issues": 25,
     "in_progress_issues": 0,
-    "closed_issues": 116,
+    "closed_issues": 117,
     "blocked_issues": 0,
     "ready_issues": 25
   },
@@ -978,6 +978,15 @@
     }
   ],
   "issues": [
+    {
+      "id": "bd-2qm",
+      "title": "lint: set-state-in-effect в library UI (cq7 push blocker)",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": null,
+      "updated_at": "2026-08-05T07:23:01Z"
+    },
     {
       "id": "bd-3h3",
       "title": "lint: admin-only setState in effect (react-hooks/set-state-in-effect)",
