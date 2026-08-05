@@ -29,27 +29,38 @@ export function WorkSearchInput({
   const shouldShowSuggestions = hasValue && suggestions.length > 0;
 
   useEffect(() => {
+    let cancelled = false;
+
     if (!hasValue) {
-      setSuggestions([]);
-      setErrorMessage(null);
-      return;
+      queueMicrotask(() => {
+        if (cancelled) return;
+        setSuggestions([]);
+        setErrorMessage(null);
+        setLoading(false);
+      });
+      return () => {
+        cancelled = true;
+      };
     }
 
     const timeoutId = window.setTimeout(async () => {
       try {
         setLoading(true);
         const result = await fetchCatalogSearch(value);
+        if (cancelled) return;
         setSuggestions(getWorkSuggestions(result.items));
         setErrorMessage(null);
       } catch {
+        if (cancelled) return;
         setSuggestions([]);
         setErrorMessage('Не удалось загрузить подсказки поиска');
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     }, 250);
 
     return () => {
+      cancelled = true;
       window.clearTimeout(timeoutId);
     };
   }, [hasValue, value]);

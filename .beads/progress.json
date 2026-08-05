@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-05T10:08:53.387Z",
+  "generated_at": "2026-08-05T10:17:03.922Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 147,
-    "open_issues": 25,
-    "in_progress_issues": 0,
+    "total_issues": 149,
+    "open_issues": 26,
+    "in_progress_issues": 1,
     "closed_issues": 122,
     "blocked_issues": 0,
-    "ready_issues": 25
+    "ready_issues": 26
   },
   "epics": [
     {
@@ -1252,6 +1252,24 @@
       "priority": 1,
       "parent": "bd-957",
       "updated_at": "2026-07-20T07:30:07Z"
+    },
+    {
+      "id": "bd-1wv",
+      "title": "[bug] cq7: smoke library-page использует устаревший slug-only сценарий",
+      "status": "open",
+      "type": "bug",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-08-05T10:15:10Z"
+    },
+    {
+      "id": "bd-k7i",
+      "title": "[bug] cq7: lint react-hooks/set-state-in-effect в work-search-input",
+      "status": "in_progress",
+      "type": "bug",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-08-05T10:15:19Z"
     },
     {
       "id": "bd-fr9",
