@@ -7,6 +7,7 @@ alwaysApply: false
 # UI / UX
 
 - Язык UI: русский; локаль дат/чисел `ru`
+- **User-facing ошибки только на русском** (FormMessage, alert, toast, auth/error, API `message` на экране). Английские Nest/Zod defaults (`Unauthorized`, `Too small:…`) маппить через `apps/web/lib/user-facing-errors.ts` (`mapApiErrorMessage` / `toUserFacingErrorMessage`) и `getFriendlyZodIssueMessage` — не показывать сырой EN текст. Кастомные сообщения бэка — тоже писать по-русски.
 - Tab-bar: Главная · Поиск · Рейтинги · Подборки · Профиль
 - Минимализм «читальня»; mobile first
 - Не показывать пользователю источники рейтингов/LLM
