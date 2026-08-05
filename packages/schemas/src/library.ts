@@ -146,12 +146,65 @@ export const PublicUserBookItemSchema = z.object({
 
 export type PublicUserBookItem = z.infer<typeof PublicUserBookItemSchema>;
 
+/** Note.visibility — публичные заметки на профиле только PUBLIC. */
+export const NoteVisibilitySchema = z.enum(['PUBLIC', 'PRIVATE']);
+
+export type NoteVisibility = z.infer<typeof NoteVisibilitySchema>;
+
+export const NoteTypeSchema = z.enum(['NOTE', 'QUOTE']);
+
+export type NoteType = z.infer<typeof NoteTypeSchema>;
+
+/** Публичная заметка/цитата (без PRIVATE). */
+export const PublicNoteItemSchema = z.object({
+  id: z.string(),
+  type: NoteTypeSchema,
+  body: z.string(),
+  workSlug: z.string().optional(),
+  pageRef: z.string().nullable().optional(),
+});
+
+export type PublicNoteItem = z.infer<typeof PublicNoteItemSchema>;
+
+/**
+ * Цель чтения на публичном профиле.
+ * Появляется только если `showOnProfile === true` (иначе API отдаёт `null`).
+ */
+export const PublicReadingGoalSchema = z.object({
+  year: z.number().int(),
+  targetCount: z.number().int().positive(),
+  progressCount: z.number().int().nonnegative(),
+});
+
+export type PublicReadingGoal = z.infer<typeof PublicReadingGoalSchema>;
+
 export const PublicLibraryResponseSchema = z.object({
   slug: z.string(),
   items: z.array(PublicUserBookItemSchema),
+  /** Только visibility=PUBLIC; пустой массив пока нет модели Note. */
+  notes: z.array(PublicNoteItemSchema),
+  /** null если цели нет или showOnProfile=false. */
+  goal: PublicReadingGoalSchema.nullable(),
 });
 
 export type PublicLibraryResponse = z.infer<typeof PublicLibraryResponseSchema>;
+
+/**
+ * GET `/users/:slug/library/works/:workSlug` —
+ * книга в контексте владельца профиля (статус/оценка/теги + PUBLIC notes).
+ */
+export const PublicUserBookDetailSchema = z.object({
+  slug: z.string(),
+  workSlug: z.string(),
+  titleRu: z.string(),
+  status: UserBookStatusSchema,
+  rating: UserBookRatingSchema.nullable(),
+  finishedAt: z.string().datetime().nullable(),
+  tags: z.array(z.object({ name: z.string() })),
+  notes: z.array(PublicNoteItemSchema),
+});
+
+export type PublicUserBookDetail = z.infer<typeof PublicUserBookDetailSchema>;
 
 export const UserBookResponseSchema = z.object({
   id: z.string(),
