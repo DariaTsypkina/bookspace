@@ -72,6 +72,8 @@ export default async function ProfileStubPage({ params }: ProfilePageProps) {
 
   const items = library?.items ?? [];
   const shelfList = shelves?.shelves ?? [];
+  const notes = library?.notes ?? [];
+  const goal = library?.goal ?? null;
 
   return (
     <main className="mx-auto flex w-full max-w-xl flex-1 flex-col gap-5 px-4 pb-8 pt-5">
@@ -96,7 +98,7 @@ export default async function ProfileStubPage({ params }: ProfilePageProps) {
               {items.map((item) => (
                 <li key={item.workSlug}>
                   <Link
-                    href={`/books/${item.workSlug}`}
+                    href={`/u/${slug}/books/${item.workSlug}`}
                     className="text-[1.05rem] font-medium no-underline underline-offset-2 hover:underline"
                   >
                     {item.titleRu}
@@ -146,9 +148,46 @@ export default async function ProfileStubPage({ params }: ProfilePageProps) {
               ))}
             </ul>
           )}
-          <LogoutButton />
         </CardContent>
       </Card>
+
+      {notes.length > 0 ? (
+        <Card>
+          <CardContent className="flex flex-col gap-4 px-4 py-3.5 font-sans">
+            <h2 className="text-[1.15rem] font-medium text-foreground">
+              Заметки
+            </h2>
+            <ul
+              className="flex list-none flex-col gap-3 p-0"
+              aria-label="Публичные заметки"
+            >
+              {notes.map((note) => (
+                <li key={note.id}>
+                  <p className="text-[0.95rem] text-foreground">{note.body}</p>
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      ) : null}
+
+      {goal ? (
+        <Card>
+          <CardContent className="flex flex-col gap-2 px-4 py-3.5 font-sans">
+            <h2 className="text-[1.15rem] font-medium text-foreground">
+              Цель на {goal.year}
+            </h2>
+            <p
+              className="text-[0.95rem] text-muted"
+              aria-label="Цель чтения на год"
+            >
+              Прогресс: {goal.progressCount} из {goal.targetCount}
+            </p>
+          </CardContent>
+        </Card>
+      ) : null}
+
+      <LogoutButton />
     </main>
   );
 }

@@ -167,8 +167,8 @@
 | ✅     | `bd-cq7.1` | Библиотека: Статус и оценка книги                                                                          |
 | ✅     | `bd-cq7.2` | Библиотека: Пользовательские полки                                                                         |
 | ✅     | `bd-cq7.3` | Библиотека: Теги пользователя                                                                              |
-| 🔄     | `bd-cq7.4` | Библиотека: Моя библиотека                                                                                 |
-| ⬜     | `bd-cq7.5` | Библиотека: Публичный профиль                                                                              |
+| ✅     | `bd-cq7.4` | Библиотека: Моя библиотека                                                                                 |
+| 🔄     | `bd-cq7.5` | Библиотека: Публичный профиль · ветка `task/bd-cq7.5-public-profile`                                       |
 | ✅     | `bd-cq7.6` | Bug: iOS Chrome — пустая страница Профиль `/library` (human-reported) · сборочная `feat/bookspace-bd-bugs` |
 
 ### 6. Заметки и цель — 🔒 · epic `bd-sf4` · 0 / 2
@@ -239,6 +239,7 @@
 
 | Дата       | Действие                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-08-04 | `bd-cq7.5` in progress: claim + bd-conventions (design/acceptance Критерии+Проверка/notes/labels); ветка `task/bd-cq7.5-public-profile`; sync origin/develop OK; старт TDD публичный профиль + `/u/.../books/[workSlug]` |
 | 2026-08-04 | `bd-cq7.4` ready close: GET `/me/library?status=` + UI кабинет `/library` (коллекция, фильтры WANT\|READING\|READ\|ABANDONED, полки + placeholder цели); API unit me-library **18** + e2e list **1**; web library unit **19**; PW user-library+library-page **20/20** mobile+desktop (`PLAYWRIGHT_CHROME_CHANNEL=0`); manual `e2e/manual/user-library.md`; ветка `task/bd-cq7.4-user-library-page`; `bd close` — оркестратор |
 | 2026-08-04 | `bd-cq7.4` in progress: claim + bd-conventions; ветка `task/bd-cq7.4-user-library-page`; sync origin/develop OK; GET `/me/library?status=` + UI кабинет `/library` (коллекция, фильтры, полки/цель placeholder) |
 | 2026-08-04 | `bd-cq7.3` ready close: Tag/UserBookTag Prisma+API CRUD + assign `/me/library/works/:slug/tags` + public library tags; UI `/books` tags form + `/u/[slug]` display; unit api me-tags+dto **7** + e2e **2**; web unit **334**; PW user-tags **4/4** mobile+desktop (`PLAYWRIGHT_CHROME_CHANNEL=0`); manual `e2e/manual/user-tags.md`; ветка `task/bd-cq7.3-user-tags`; `bd close` — оркестратор |

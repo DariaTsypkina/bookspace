@@ -1,4 +1,7 @@
-import type { PublicLibraryResponse } from '@bookspace/schemas';
+import type {
+  PublicLibraryResponse,
+  PublicUserBookDetail,
+} from '@bookspace/schemas';
 import { parseCatalogEntitySlug } from './catalog-entity-slug';
 import { ApiError, api, noStoreConfig } from './http';
 import { tryParseProfileSlug } from './profile-slug';
@@ -29,6 +32,35 @@ export async function fetchPublicLibrary(
     }
     if (error instanceof ApiError) {
       throw new Error(`Public library fetch failed: ${error.status}`);
+    }
+    throw error;
+  }
+}
+
+export async function fetchPublicUserBook(
+  slug: string,
+  workSlug: string,
+): Promise<PublicUserBookDetail> {
+  const safeSlug = tryParseProfileSlug(slug);
+  if (!safeSlug) {
+    throw new PublicLibraryNotFoundError(slug);
+  }
+  let safeWork: string;
+  try {
+    safeWork = parseCatalogEntitySlug(workSlug);
+  } catch {
+    throw new PublicLibraryNotFoundError(`${slug}/${workSlug}`);
+  }
+  const url = `${API_URL}/users/${encodeURIComponent(safeSlug)}/library/works/${encodeURIComponent(safeWork)}`;
+  try {
+    const { data } = await api.get<PublicUserBookDetail>(url, noStoreConfig);
+    return data;
+  } catch (error) {
+    if (error instanceof ApiError && error.status === 404) {
+      throw new PublicLibraryNotFoundError(`${safeSlug}/${safeWork}`);
+    }
+    if (error instanceof ApiError) {
+      throw new Error(`Public user book fetch failed: ${error.status}`);
     }
     throw error;
   }
