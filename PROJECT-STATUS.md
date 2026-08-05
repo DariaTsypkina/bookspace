@@ -16,7 +16,7 @@
 | 2   | Каталог                          | ✅     | 6 / 6    | `bd-6v0` |
 | 3   | Связи и порядок                  | ✅     | 4 / 4    | `bd-azl` |
 | 4   | ContextReading                   | ✅     | 4 / 4    | `bd-8s4` |
-| 5   | Библиотека и профиль             | 🔄     | 4 / 5    | `bd-cq7` |
+| 5   | Библиотека и профиль             | ✅     | 5 / 5    | `bd-cq7` |
 | 6   | Заметки и цель                   | 🔒     | 0 / 2    | `bd-sf4` |
 | 7   | Рейтинги                         | ⬜     | 0 / 3    | `bd-es5` |
 | 8   | Подборки                         | ⬜     | 0 / 3    | `bd-b75` |
@@ -161,7 +161,7 @@
 | ✅     | `bd-8s4.3` | ContextReading: Пайплайн extract ContextReading |
 | ✅     | `bd-8s4.4` | ContextReading: Админка ContextReading          |
 
-### 5. Библиотека и профиль — 🔄 · epic `bd-cq7` · 4 / 5 · сборочная `feat/bookspace-bd-cq7`
+### 5. Библиотека и профиль — ✅ · epic `bd-cq7` · 5 / 5 · сборочная `feat/bookspace-bd-cq7`
 
 | Статус | ID         | Задача                                                                                                     |
 | ------ | ---------- | ---------------------------------------------------------------------------------------------------------- |
@@ -173,7 +173,7 @@
 | ✅     | `bd-cq7.6` | Bug: iOS Chrome — пустая страница Профиль `/library` (human-reported) · сборочная `feat/bookspace-bd-bugs` |
 | ✅     | `bd-2qm`   | [bug] lint: set-state-in-effect в library UI (cq7 push blocker) · сборочная `feat/bookspace-bd-cq7` |
 | ✅     | `bd-cq7.7` | [bug] UI: английская ошибка Zod в поле «Слаг произведения» (human-reported `/task`) · сборочная `feat/bookspace-bd-cq7` |
-| ⬜     | `bd-cq7.8` | [bug] Библиотека/полки: не находит произведение при вводе названия (human-reported `/task`) · сборочная `feat/bookspace-bd-cq7` |
+| ✅     | `bd-cq7.8` | [bug] Библиотека/полки: не находит произведение при вводе названия (human-reported `/task`) · сборочная `feat/bookspace-bd-cq7` |
 
 ### 6. Заметки и цель — 🔒 · epic `bd-sf4` · 0 / 2
 
@@ -243,6 +243,7 @@
 
 | Дата       | Действие                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-08-05 | `bd-cq7.8` ✅ closed+merged: поиск по названию и подсказки для добавления на `/library` и `/library/shelves/[shelfId]` + slug fallback; unit **70 passed** + Playwright smoke **8 passed** (mobile+desktop); ветка `task/bd-cq7.8-title-search-library-shelves`; сборочная `feat/bookspace-bd-cq7` |
 | 2026-08-05 | `bd-cq7.7` ✅ closed+merged: RU-валидация `workSlug` на `/library` (без англ. Zod текста); unit `form-errors` + Playwright smoke `library-page` desktop/mobile **18 passed**; ветка `task/bd-cq7.7-ru-zod-workslug`; сборочная `feat/bookspace-bd-cq7` |
 | 2026-08-05 | `bd-fr9` ✅: skill `/orchestrate` / `/оркестратор` — `.cursor/skills/orchestrate/` (SKILL.md + orchestrator-prompt.md); ссылки в AGENTS.md, feature-workflow.md, чеклист этапа 8 |
 | 2026-08-05 | `/task`: `bd-cq7.8` — добавление на полку/в коллекцию не находит книгу по названию (UI только slug; seed `garri-potter-taynaya-komnata`); epic `bd-cq7` |
