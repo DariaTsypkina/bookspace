@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-04T15:47:57.509Z",
+  "generated_at": "2026-08-05T07:12:08.513Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 140,
-    "open_issues": 26,
+    "open_issues": 25,
     "in_progress_issues": 0,
-    "closed_issues": 114,
+    "closed_issues": 115,
     "blocked_issues": 7,
-    "ready_issues": 19
+    "ready_issues": 18
   },
   "epics": [
     {
@@ -653,11 +653,11 @@
       "status": "open",
       "priority": 2,
       "children_total": 6,
-      "children_closed": 5,
+      "children_closed": 6,
       "children_in_progress": 0,
-      "children_open": 1,
-      "progress": "5 / 6",
-      "percent_closed": 83,
+      "children_open": 0,
+      "progress": "6 / 6",
+      "percent_closed": 100,
       "children": [
         {
           "id": "bd-cq7.1",
@@ -690,7 +690,7 @@
         {
           "id": "bd-cq7.5",
           "title": "Библиотека: Публичный профиль",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 2
         },
@@ -1980,11 +1980,11 @@
     {
       "id": "bd-cq7.5",
       "title": "Библиотека: Публичный профиль",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-cq7",
-      "updated_at": "2026-07-17T12:36:14Z"
+      "updated_at": "2026-08-05T07:12:04Z"
     },
     {
       "id": "bd-cq7.4",

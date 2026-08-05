@@ -47,6 +47,14 @@ describe('Profile page Tailwind+shadcn migration (S11 / bd-wus.14)', () => {
     expect(logoutSource).toMatch(/method=["']post["']/);
   });
 
+  it('links books to user-context page and gates notes/goal (bd-cq7.5)', () => {
+    expect(pageSource).toMatch(/\/u\/\$\{slug\}\/books\/\$\{item\.workSlug\}/);
+    expect(pageSource).toMatch(/Публичные заметки/);
+    expect(pageSource).toMatch(/Цель чтения на год/);
+    expect(pageSource).toMatch(/\{goal \?/);
+    expect(pageSource).toMatch(/notes\.length/);
+  });
+
   it('validates slug via shared ProfileSlugParamSchema helper', () => {
     expect(pageSource).toMatch(/tryParseProfileSlug/);
     expect(pageSource).toMatch(/from ['"]@\/lib\/profile-slug['"]/);

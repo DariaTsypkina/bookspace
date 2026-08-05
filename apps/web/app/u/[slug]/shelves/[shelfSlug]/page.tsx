@@ -94,7 +94,7 @@ export default async function PublicShelfPage({
               {shelf.items.map((item) => (
                 <li key={item.workSlug}>
                   <Link
-                    href={`/books/${item.workSlug}`}
+                    href={`/u/${slug}/books/${item.workSlug}`}
                     className="text-[1.05rem] font-medium no-underline underline-offset-2 hover:underline"
                   >
                     {item.titleRu}
