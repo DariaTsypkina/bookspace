@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-05T07:12:08.513Z",
+  "generated_at": "2026-08-05T07:19:14.778Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 140,
+    "total_issues": 141,
     "open_issues": 25,
     "in_progress_issues": 0,
-    "closed_issues": 115,
-    "blocked_issues": 7,
-    "ready_issues": 18
+    "closed_issues": 116,
+    "blocked_issues": 0,
+    "ready_issues": 25
   },
   "epics": [
     {
@@ -650,7 +650,7 @@
     {
       "id": "bd-cq7",
       "title": "Библиотека и профиль",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
       "children_total": 6,
       "children_closed": 6,
@@ -2034,11 +2034,11 @@
     {
       "id": "bd-cq7",
       "title": "Библиотека и профиль",
-      "status": "open",
+      "status": "closed",
       "type": "epic",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-07-17T12:36:09Z"
+      "updated_at": "2026-08-05T07:19:10Z"
     },
     {
       "id": "bd-8s4.3",
@@ -2174,6 +2174,15 @@
       "priority": 2,
       "parent": null,
       "updated_at": "2026-07-23T08:23:12Z"
+    },
+    {
+      "id": "bd-lgl",
+      "title": "E2E: убедиться что API стартует с E2E_THROTTLE_BYPASS для Playwright",
+      "status": "open",
+      "type": "chore",
+      "priority": 3,
+      "parent": null,
+      "updated_at": "2026-08-05T07:19:09Z"
     },
     {
       "id": "bd-957.8",
