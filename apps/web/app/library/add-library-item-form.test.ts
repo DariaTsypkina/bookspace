@@ -26,7 +26,7 @@ describe('AddLibraryItemForm RHF + Zod (bd-0t0.8 / bd-cq7.1)', () => {
   it('posts through first-party BFF /api/me/library/items with status', () => {
     expect(source).toMatch(/\/api\/me\/library\/items/);
     expect(source).toMatch(/status/);
-    expect(source).toMatch(/Слаг произведения/);
+    expect(source).toMatch(/Книга \(название или slug\)/);
   });
 });
 
@@ -40,5 +40,11 @@ describe('AddLibraryItemForm axios client (bd-707.7)', () => {
   it('handles errors via ApiError', () => {
     expect(source).toMatch(/\bApiError\b/);
     expect(source).toMatch(/instanceof ApiError/);
+  });
+
+  it('uses catalog work suggestions with slug fallback', () => {
+    expect(source).toMatch(/WorkSearchInput/);
+    expect(source).toMatch(/resolveWorkSelectionPayload/);
+    expect(source).toMatch(/Введите название книги или slug/);
   });
 });

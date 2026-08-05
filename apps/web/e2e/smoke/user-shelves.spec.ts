@@ -31,8 +31,11 @@ test.describe('User shelves (bd-cq7.2)', () => {
 
     await page.goto('/library');
     await page
-      .getByLabel('Слаг произведения')
-      .fill('garri-potter-filosofskiy-kamen');
+      .getByLabel('Книга для библиотеки')
+      .fill('Гарри Поттер и философский камень');
+    await page
+      .getByRole('button', { name: 'Гарри Поттер и философский камень' })
+      .click();
     await page.getByLabel('Статус книги').selectOption('READING');
     await page.getByRole('button', { name: 'Сохранить в библиотеку' }).click();
     await expect(
@@ -58,8 +61,11 @@ test.describe('User shelves (bd-cq7.2)', () => {
     ).toBeVisible();
 
     await page
-      .getByLabel('Слаг произведения')
-      .fill('garri-potter-filosofskiy-kamen');
+      .getByLabel('Книга для полки')
+      .fill('Гарри Поттер и философский камень');
+    await page
+      .getByRole('button', { name: 'Гарри Поттер и философский камень' })
+      .click();
     await page.getByRole('button', { name: 'Добавить на полку' }).click();
     await expect(
       page.getByRole('status').filter({ hasText: 'Книга добавлена на полку' }),
