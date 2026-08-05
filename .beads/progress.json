@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-05T10:17:03.922Z",
+  "generated_at": "2026-08-05T10:17:22.990Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 149,
     "open_issues": 26,
-    "in_progress_issues": 1,
-    "closed_issues": 122,
+    "in_progress_issues": 0,
+    "closed_issues": 123,
     "blocked_issues": 0,
     "ready_issues": 26
   },
@@ -1265,11 +1265,11 @@
     {
       "id": "bd-k7i",
       "title": "[bug] cq7: lint react-hooks/set-state-in-effect в work-search-input",
-      "status": "in_progress",
+      "status": "closed",
       "type": "bug",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-08-05T10:15:19Z"
+      "updated_at": "2026-08-05T10:17:18Z"
     },
     {
       "id": "bd-fr9",
