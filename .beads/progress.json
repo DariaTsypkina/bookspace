@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-05T07:27:29.720Z",
+  "generated_at": "2026-08-05T07:27:56.295Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 144,
     "open_issues": 25,
-    "in_progress_issues": 1,
-    "closed_issues": 118,
+    "in_progress_issues": 0,
+    "closed_issues": 119,
     "blocked_issues": 0,
     "ready_issues": 25
   },
@@ -981,11 +981,11 @@
     {
       "id": "bd-g6v",
       "title": "typecheck: Zod input types в me-library/shelves/tags specs + e2e cookies",
-      "status": "in_progress",
+      "status": "closed",
       "type": "bug",
       "priority": 1,
       "parent": null,
-      "updated_at": "2026-08-05T07:26:02Z"
+      "updated_at": "2026-08-05T07:27:51Z"
     },
     {
       "id": "bd-4td",
