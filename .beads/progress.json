@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-08-05T07:25:28.754Z",
+  "generated_at": "2026-08-05T07:26:08.732Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 143,
+    "total_issues": 144,
     "open_issues": 25,
-    "in_progress_issues": 0,
+    "in_progress_issues": 1,
     "closed_issues": 118,
     "blocked_issues": 0,
     "ready_issues": 25
@@ -978,6 +978,15 @@
     }
   ],
   "issues": [
+    {
+      "id": "bd-g6v",
+      "title": "typecheck: Zod input types в me-library/shelves/tags specs + e2e cookies",
+      "status": "in_progress",
+      "type": "bug",
+      "priority": 1,
+      "parent": null,
+      "updated_at": "2026-08-05T07:26:02Z"
+    },
     {
       "id": "bd-4td",
       "title": "lint: unsafe any в API e2e library (cq7 push blocker)",
