@@ -64,7 +64,7 @@ describe('User book status/rating (e2e) bd-cq7.1', () => {
     const login = await authPost('/auth/login')
       .send({ email, password: 'Secure123!' })
       .expect(200);
-    return login.headers['set-cookie'] as string[];
+    return login.headers['set-cookie'] as unknown as string[];
   }
 
   async function seedWork(slug = `${TEST_PREFIX}-work`) {
@@ -155,7 +155,7 @@ describe('User book status/rating (e2e) bd-cq7.1', () => {
     const adminLogin = await authPost('/auth/login')
       .send({ email, password: 'Secure123!' })
       .expect(200);
-    const adminCookie = adminLogin.headers['set-cookie'] as string[];
+    const adminCookie = adminLogin.headers['set-cookie'] as unknown as string[];
 
     await api()
       .put(`/me/library/works/${work.slug}`)
