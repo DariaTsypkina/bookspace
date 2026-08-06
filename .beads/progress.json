@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-06T12:05:47.266Z",
+  "generated_at": "2026-08-06T12:18:09.397Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 154,
-    "open_issues": 22,
+    "open_issues": 21,
     "in_progress_issues": 0,
-    "closed_issues": 132,
+    "closed_issues": 133,
     "blocked_issues": 0,
-    "ready_issues": 22
+    "ready_issues": 21
   },
   "epics": [
     {
@@ -800,11 +800,11 @@
       "status": "open",
       "priority": 2,
       "children_total": 8,
-      "children_closed": 3,
+      "children_closed": 4,
       "children_in_progress": 0,
-      "children_open": 5,
-      "progress": "3 / 8",
-      "percent_closed": 38,
+      "children_open": 4,
+      "progress": "4 / 8",
+      "percent_closed": 50,
       "children": [
         {
           "id": "bd-i5b.1",
@@ -830,7 +830,7 @@
         {
           "id": "bd-i5b.4",
           "title": "Админка: Админ UI импорта каталога",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 2
         },
@@ -1973,11 +1973,11 @@
     {
       "id": "bd-i5b.4",
       "title": "Админка: Админ UI импорта каталога",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-i5b",
-      "updated_at": "2026-07-17T12:36:31Z"
+      "updated_at": "2026-08-06T12:18:02Z"
     },
     {
       "id": "bd-i5b.3",

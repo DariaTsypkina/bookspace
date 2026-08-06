@@ -10,6 +10,7 @@ export const AUDIT_ACTION = {
   WORK_PUBLISH: 'WORK_PUBLISH',
   WORK_SOFT_DELETE: 'WORK_SOFT_DELETE',
   WORK_MERGE: 'WORK_MERGE',
+  CATALOG_IMPORT_START: 'CATALOG_IMPORT_START',
 } as const;
 
 export type AuditAction = (typeof AUDIT_ACTION)[keyof typeof AUDIT_ACTION];
