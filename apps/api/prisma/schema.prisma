@@ -418,3 +418,24 @@ model Account {
   @@unique([provider, providerAccountId])
   @@index([userId])
 }
+
+enum ExternalIdEntityType {
+  WORK
+  AUTHOR
+  EDITION
+}
+
+/// Polymorphic external identifier (Open Library, ISBN, Wikidata, …).
+/// No FK to Work/Author/Edition — entityType + entityId pair.
+model ExternalId {
+  id          String               @id @default(uuid())
+  entityType  ExternalIdEntityType
+  entityId    String
+  source      String
+  externalKey String
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+
+  @@unique([source, externalKey])
+  @@index([entityType, entityId])
+}

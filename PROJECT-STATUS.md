@@ -21,7 +21,7 @@
 | 7   | Рейтинги                         | ⬜     | 0 / 3    | `bd-es5` |
 | 8   | Подборки                         | ⬜     | 0 / 3    | `bd-b75` |
 | 9   | Рекомендации                     | 🔒     | 0 / 3    | `bd-ada` |
-| 10  | Админка                          | 🔄     | 1 / 8    | `bd-i5b` |
+| 10  | Админка                          | 🔄     | 2 / 8    | `bd-i5b` |
 | 11  | PWA и оболочка                   | ✅     | 4 / 4    | `bd-6b7` |
 
 ---
@@ -218,12 +218,12 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 | ⬜     | `bd-ada.2` | Рекомендации на главной              |
 | ⬜     | `bd-ada.3` | Рекомендации: Эвристики рекомендаций |
 
-### 10. Админка — 🔄 · epic `bd-i5b` · 1 / 8 · сборочная `feat/bookspace-bd-i5b`
+### 10. Админка — 🔄 · epic `bd-i5b` · 2 / 8 · сборочная `feat/bookspace-bd-i5b`
 
 | Статус | ID         | Задача                             |
 | ------ | ---------- | ---------------------------------- |
 | ✅     | `bd-i5b.1` | Админка: Админ-дашборд             |
-| ⬜     | `bd-i5b.2` | Админка: Админ CRUD каталога       |
+| ✅     | `bd-i5b.2` | Админка: Админ CRUD каталога       |
 | ⬜     | `bd-i5b.3` | Админка: Merge дублей Work         |
 | ⬜     | `bd-i5b.4` | Админка: Админ UI импорта каталога |
 | ⬜     | `bd-i5b.5` | Админка: Админ UI рейтингов        |
@@ -253,6 +253,9 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 
 ## Последние действия
 
+- 2026-08-06: close `bd-i5b.2` (admin catalog CRUD) → merge `--no-ff` в `feat/bookspace-bd-i5b`; api unit 13, e2e 3, PW 4/4; Series/… CRUD отложены
+- 2026-08-06: `bd-i5b.2` ready close: ExternalId + admin Work CRUD + `/admin/catalog`; api unit **13**, e2e **3**, vitest **12**, PW smoke **4/4** desktop+mobile; BFF DELETE; Series/Places/… CRUD отложены; ветка `task/bd-i5b.2-admin-catalog-crud`; `bd close` — оркестратор
+- 2026-08-06: `bd-i5b.2` in progress: админ CRUD каталога (Work+ExternalId+publish+soft-delete); ветка `task/bd-i5b.2-admin-catalog-crud`; сборочная `feat/bookspace-bd-i5b`; sync `origin/develop` OK
 - 2026-08-06: close `bd-i5b.1` (админ-дашборд) → merge `--no-ff` в `feat/bookspace-bd-i5b`; api unit 4, e2e 3, PW smoke 6/6; `/orchestrate` набор `.1–.4`
 - 2026-08-06: `bd-i5b.1` ready close: GET `/admin/dashboard/summary` + UI `/admin`; api unit **4**, e2e **3**, vitest **379** (admin-dashboard), PW smoke **6/6** desktop+mobile; ветка `task/bd-i5b.1-admin-dashboard`; `bd close` — оркестратор
 - 2026-08-06: `bd-i5b.1` in progress: админ-дашборд `/admin` (summary API + UI); ветка `task/bd-i5b.1-admin-dashboard`; сборочная `feat/bookspace-bd-i5b`
