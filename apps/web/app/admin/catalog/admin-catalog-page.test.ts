@@ -53,4 +53,11 @@ describe('Admin catalog page', () => {
     expect(entitiesSource).toMatch(/Опубликовать/);
     expect(entitiesSource).toMatch(/soft-delete/);
   });
+
+  it('remounts entities panel on tab change without setState-in-effect', () => {
+    expect(panelSource).toMatch(/<AdminCatalogEntitiesPanel\s+key=\{tab\}/);
+    expect(entitiesSource).not.toMatch(
+      /useEffect\(\s*\(\)\s*=>\s*\{\s*setSelectedId\(null\)/,
+    );
+  });
 });
