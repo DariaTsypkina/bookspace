@@ -8,19 +8,19 @@
 
 ## Сценарии
 
-1. **Первый вход**
-   - [ ] `/login` → «Войти через Яндекс»
+1. **Первый вход** (CTA на `/login`/`/register` скрыты — bd-957.9; BFF жив)
+   - [ ] Прямой переход на `/api/auth/yandex` (или test-mode callback)
    - [ ] Согласие у Яндекс (или test mode)
    - [ ] Редирект на `/`, cookie `session` (HttpOnly)
    - [ ] В БД: User + Account (provider=yandex)
 
 2. **Повторный вход**
-   - [ ] Logout → снова Яндекс
+   - [ ] Logout → снова `/api/auth/yandex`
    - [ ] Тот же User / Account (не дубликат)
 
 3. **Склейка по email**
    - [ ] Зарегистрировать email+пароль
-   - [ ] Войти через Яндекс с тем же email
+   - [ ] Войти через `/api/auth/yandex` с тем же email
    - [ ] Account привязан к существующему User
 
 4. **Отмена**

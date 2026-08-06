@@ -1,18 +1,18 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('Google OAuth', () => {
-  test('login page shows Google button', async ({ page }) => {
+  test('login and register pages hide Google button (bd-957.9)', async ({
+    page,
+  }) => {
     await page.goto('/login');
     await expect(
       page.getByRole('link', { name: 'Войти через Google' }),
-    ).toBeVisible();
-  });
+    ).toHaveCount(0);
 
-  test('register page shows Google button', async ({ page }) => {
     await page.goto('/register');
     await expect(
       page.getByRole('link', { name: 'Войти через Google' }),
-    ).toBeVisible();
+    ).toHaveCount(0);
   });
 
   test('successful Google login via test mode sets session cookie', async ({

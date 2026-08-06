@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-06T10:32:44.248Z",
+  "generated_at": "2026-08-06T10:51:21.168Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 154,
-    "open_issues": 26,
+    "open_issues": 25,
     "in_progress_issues": 0,
-    "closed_issues": 128,
+    "closed_issues": 129,
     "blocked_issues": 0,
-    "ready_issues": 26
+    "ready_issues": 25
   },
   "epics": [
     {
@@ -450,11 +450,11 @@
       "status": "closed",
       "priority": 1,
       "children_total": 12,
-      "children_closed": 11,
+      "children_closed": 12,
       "children_in_progress": 0,
-      "children_open": 1,
-      "progress": "11 / 12",
-      "percent_closed": 92,
+      "children_open": 0,
+      "progress": "12 / 12",
+      "percent_closed": 100,
       "children": [
         {
           "id": "bd-8jk",
@@ -522,7 +522,7 @@
         {
           "id": "bd-957.9",
           "title": "UI: скрыть вход через Google и Яндекс на /login и /register",
-          "status": "open",
+          "status": "closed",
           "type": "task",
           "priority": 2
         },
@@ -1307,11 +1307,11 @@
     {
       "id": "bd-957.9",
       "title": "UI: скрыть вход через Google и Яндекс на /login и /register",
-      "status": "open",
+      "status": "closed",
       "type": "task",
       "priority": 2,
       "parent": "bd-957",
-      "updated_at": "2026-08-05T10:43:02Z"
+      "updated_at": "2026-08-06T10:48:47Z"
     },
     {
       "id": "bd-a12.2",

@@ -136,18 +136,6 @@ function LoginForm() {
           </Form>
         </CardContent>
       </Card>
-      <p className="text-sm text-muted">или</p>
-      <div className="flex w-full flex-col gap-2">
-        {/* Full navigation required for OAuth redirect + Set-Cookie via BFF */}
-        <Button asChild variant="outline" className="w-full">
-          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-          <a href="/api/auth/google">Войти через Google</a>
-        </Button>
-        <Button asChild variant="outline" className="w-full">
-          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-          <a href="/api/auth/yandex">Войти через Яндекс</a>
-        </Button>
-      </div>
       <p className="text-[0.95rem] text-muted">
         Нет аккаунта? <Link href="/register">Зарегистрироваться</Link>
       </p>

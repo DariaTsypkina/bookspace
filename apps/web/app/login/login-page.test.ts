@@ -62,8 +62,13 @@ describe('Login page Tailwind+shadcn migration (S2 / bd-wus.5)', () => {
     expect(pageSource).toMatch(/\blogin\b/);
     expect(pageSource).toMatch(/method=["']post["']/);
     expect(pageSource).toMatch(/action=["']\/api\/login["']/);
-    expect(pageSource).toMatch(/\/api\/auth\/google/);
-    expect(pageSource).toMatch(/\/api\/auth\/yandex/);
     expect(pageSource).toMatch(/href=["']\/register["']/);
+  });
+
+  it('hides Google and Yandex OAuth CTAs from the page (bd-957.9)', () => {
+    expect(pageSource).not.toMatch(/\/api\/auth\/google/);
+    expect(pageSource).not.toMatch(/\/api\/auth\/yandex/);
+    expect(pageSource).not.toMatch(/Войти через Google/);
+    expect(pageSource).not.toMatch(/Войти через Яндекс/);
   });
 });
