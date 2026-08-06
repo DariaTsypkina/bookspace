@@ -237,6 +237,8 @@ function WorkEditor({
     defaultValues: { source: 'openlibrary', externalKey: '' },
   });
 
+  const [confirmDelete, setConfirmDelete] = useState(false);
+
   const load = useCallback(async () => {
     setLoading(true);
     onError(null);
@@ -298,13 +300,6 @@ function WorkEditor({
   }
 
   async function remove() {
-    if (
-      !window.confirm(
-        'Скрыть произведение из публичного каталога (soft-delete)?',
-      )
-    ) {
-      return;
-    }
     onBusyChange(true);
     onError(null);
     try {
@@ -316,6 +311,7 @@ function WorkEditor({
       );
     } finally {
       onBusyChange(false);
+      setConfirmDelete(false);
     }
   }
 
@@ -403,9 +399,15 @@ function WorkEditor({
               variant="destructive"
               className="font-sans"
               disabled={busy}
-              onClick={() => void remove()}
+              onClick={() => {
+                if (!confirmDelete) {
+                  setConfirmDelete(true);
+                  return;
+                }
+                void remove();
+              }}
             >
-              Скрыть (soft-delete)
+              {confirmDelete ? 'Подтвердить скрытие' : 'Скрыть (soft-delete)'}
             </Button>
           </div>
         </CardHeader>

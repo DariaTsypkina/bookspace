@@ -29,7 +29,7 @@ async function proxyAdmin(
   }
 
   const method = request.method.toUpperCase();
-  const hasBody = method !== 'GET' && method !== 'HEAD';
+  const hasBody = method !== 'GET' && method !== 'HEAD' && method !== 'DELETE';
   const body = hasBody ? await request.text() : undefined;
 
   const upstream = await fetch(targetUrl, {
@@ -73,6 +73,11 @@ export async function POST(request: NextRequest, context: RouteContext) {
 }
 
 export async function PATCH(request: NextRequest, context: RouteContext) {
+  const { path } = await context.params;
+  return proxyAdmin(request, path);
+}
+
+export async function DELETE(request: NextRequest, context: RouteContext) {
   const { path } = await context.params;
   return proxyAdmin(request, path);
 }

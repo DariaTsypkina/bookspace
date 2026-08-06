@@ -71,7 +71,7 @@ export const AdminListWorksQuerySchema = z.object({
   status: z.enum(['DRAFT', 'PUBLISHED', 'MERGED']).optional(),
   includeDeleted: z
     .enum(['true', 'false'])
-    .optional()
+    .default('false')
     .transform((v) => v === 'true'),
 });
 

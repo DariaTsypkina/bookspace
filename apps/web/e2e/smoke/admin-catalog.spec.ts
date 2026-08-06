@@ -51,10 +51,8 @@ test.describe('Admin catalog CRUD smoke', () => {
 
     await page.goto('/admin/catalog');
     await page.getByRole('button', { name: new RegExp(title) }).click();
-    page.once('dialog', (dialog) => {
-      void dialog.accept();
-    });
     await page.getByRole('button', { name: 'Скрыть (soft-delete)' }).click();
+    await page.getByRole('button', { name: 'Подтвердить скрытие' }).click();
 
     await expect(
       page.getByRole('button', { name: new RegExp(title) }),

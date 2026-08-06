@@ -67,7 +67,7 @@ export class AdminCatalogService {
     private readonly audit: AuditService,
   ) {}
 
-  async listWorks(query: AdminListWorksQuery = {}) {
+  async listWorks(query: AdminListWorksQuery) {
     const where: Prisma.WorkWhereInput = {};
     if (!query.includeDeleted) {
       where.deletedAt = null;
