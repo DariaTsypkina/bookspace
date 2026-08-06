@@ -253,6 +253,7 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 
 ## Последние действия
 
+- 2026-08-06: `/orchestrate` финал `bd-6v0.12` — closed+merged в `feat/bookspace-bd-6v0`; target API 15+8, vitest 17, PW 6/6; сборочная → develop (ЗАЛИВАТЬ=Да)
 - 2026-08-06: close `bd-6v0.12` (аннотация Work.descriptionRu + API + UI) → merge `--no-ff` в `feat/bookspace-bd-6v0`; API unit 15, e2e 8, vitest 17, PW work-page 6/6; ЗАЛИВАТЬ develop=Да после target check
 - 2026-08-06: `bd-6v0.12` in progress: аннотация (descriptionRu) на `/books/[slug]`; ветка `task/bd-6v0.12-work-annotation`; сборочная `feat/bookspace-bd-6v0`
 - 2026-08-05: `/task`: `bd-6v0.12` — аннотация (краткое содержание) на карточке книги `/books/[slug]`; epic `bd-6v0` · feature-doc `work-page` · сборочная `feat/bookspace-bd-6v0`
