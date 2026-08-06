@@ -181,3 +181,11 @@ export const AdminExternalIdFormSchema = z.object({
 });
 
 export type AdminExternalIdForm = z.infer<typeof AdminExternalIdFormSchema>;
+
+/** API POST /admin/works/merge body. */
+export const AdminMergeWorksInputSchema = z.object({
+  canonicalId: z.string().trim().min(1).max(128),
+  duplicateIds: z.array(z.string().trim().min(1).max(128)).min(1).max(20),
+});
+
+export type AdminMergeWorksInput = z.infer<typeof AdminMergeWorksInputSchema>;

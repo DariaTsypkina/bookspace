@@ -6,6 +6,7 @@ import {
   AdminExternalIdParamSchema,
   AdminLinkWorkAuthorInputSchema,
   AdminListWorksQuerySchema,
+  AdminMergeWorksInputSchema,
   AdminUpdateWorkInputSchema,
   AdminWorkIdParamSchema,
 } from '@bookspace/schemas';
@@ -45,4 +46,8 @@ export class AdminCreateEditionDto extends createZodDto(
 
 export class AdminCatalogWorkIdParamDto extends createZodDto(
   AdminWorkIdParamSchema,
+) {}
+
+export class AdminMergeWorksDto extends createZodDto(
+  AdminMergeWorksInputSchema,
 ) {}

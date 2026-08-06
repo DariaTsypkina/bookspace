@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-06T11:54:26.281Z",
+  "generated_at": "2026-08-06T12:05:47.266Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 154,
-    "open_issues": 23,
+    "open_issues": 22,
     "in_progress_issues": 0,
-    "closed_issues": 131,
+    "closed_issues": 132,
     "blocked_issues": 0,
-    "ready_issues": 23
+    "ready_issues": 22
   },
   "epics": [
     {
@@ -800,11 +800,11 @@
       "status": "open",
       "priority": 2,
       "children_total": 8,
-      "children_closed": 2,
+      "children_closed": 3,
       "children_in_progress": 0,
-      "children_open": 6,
-      "progress": "2 / 8",
-      "percent_closed": 25,
+      "children_open": 5,
+      "progress": "3 / 8",
+      "percent_closed": 38,
       "children": [
         {
           "id": "bd-i5b.1",
@@ -823,7 +823,7 @@
         {
           "id": "bd-i5b.3",
           "title": "Админка: Merge дублей Work",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 2
         },
@@ -1982,11 +1982,11 @@
     {
       "id": "bd-i5b.3",
       "title": "Админка: Merge дублей Work",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-i5b",
-      "updated_at": "2026-07-17T12:36:30Z"
+      "updated_at": "2026-08-06T12:05:40Z"
     },
     {
       "id": "bd-i5b.1",

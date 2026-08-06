@@ -5,11 +5,17 @@ import { PrismaModule } from '../prisma/prisma.module';
 import { AdminCatalogAuthorsController } from './admin-catalog-authors.controller';
 import { AdminCatalogWorksController } from './admin-catalog-works.controller';
 import { AdminCatalogService } from './admin-catalog.service';
+import { AdminWorkMergeController } from './admin-work-merge.controller';
+import { AdminWorkMergeService } from './admin-work-merge.service';
 
 @Module({
   imports: [PrismaModule, AuthModule],
-  controllers: [AdminCatalogWorksController, AdminCatalogAuthorsController],
-  providers: [AdminCatalogService, AuditService],
-  exports: [AdminCatalogService],
+  controllers: [
+    AdminWorkMergeController,
+    AdminCatalogWorksController,
+    AdminCatalogAuthorsController,
+  ],
+  providers: [AdminCatalogService, AdminWorkMergeService, AuditService],
+  exports: [AdminCatalogService, AdminWorkMergeService],
 })
 export class AdminCatalogModule {}

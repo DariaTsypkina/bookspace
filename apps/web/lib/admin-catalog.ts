@@ -133,6 +133,22 @@ export async function deleteAdminWorkExternalId(
   return data;
 }
 
+export type AdminMergeResult = {
+  canonicalId: string;
+  mergedIds: string[];
+};
+
+export async function mergeAdminWorks(
+  canonicalId: string,
+  duplicateIds: string[],
+): Promise<AdminMergeResult> {
+  const { data } = await api.post<AdminMergeResult>(
+    `${ADMIN_BFF_BASE}/works/merge`,
+    { canonicalId, duplicateIds },
+  );
+  return data;
+}
+
 export function statusLabel(status: AdminWorkListItem['status']): string {
   switch (status) {
     case 'DRAFT':
