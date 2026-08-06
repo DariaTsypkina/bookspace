@@ -1,5 +1,7 @@
+import { HttpService } from '@nestjs/axios';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { firstValueFrom } from 'rxjs';
 import { OAUTH_TEST_CODE_PREFIX } from './oauth.constants';
 import {
   GOOGLE_AUTH_URL,
@@ -21,7 +23,10 @@ export type GoogleOAuthConfig = {
 
 @Injectable()
 export class GoogleOAuthClient {
-  constructor(private readonly config: ConfigService) {}
+  constructor(
+    private readonly config: ConfigService,
+    private readonly http: HttpService,
+  ) {}
 
   getConfig(): GoogleOAuthConfig {
     const testMode = this.config.get<string>('OAUTH_TEST_MODE') === 'true';
@@ -118,28 +123,28 @@ export class GoogleOAuthClient {
       grant_type: 'authorization_code',
     });
 
-    const response = await fetch(GOOGLE_TOKEN_URL, {
-      method: 'POST',
-      headers: { 'content-type': 'application/x-www-form-urlencoded' },
-      body,
-    });
-
-    if (!response.ok) {
+    try {
+      const { data } = await firstValueFrom(
+        this.http.post<GoogleTokenResponse>(GOOGLE_TOKEN_URL, body.toString(), {
+          headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        }),
+      );
+      return data;
+    } catch {
       throw new UnauthorizedException('Не удалось обменять код Google OAuth');
     }
-
-    return (await response.json()) as GoogleTokenResponse;
   }
 
   private async fetchUserInfo(accessToken: string): Promise<GoogleUserInfo> {
-    const response = await fetch(GOOGLE_USERINFO_URL, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
-
-    if (!response.ok) {
+    try {
+      const { data } = await firstValueFrom(
+        this.http.get<GoogleUserInfo>(GOOGLE_USERINFO_URL, {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }),
+      );
+      return data;
+    } catch {
       throw new UnauthorizedException('Не удалось получить профиль Google');
     }
-
-    return (await response.json()) as GoogleUserInfo;
   }
 }

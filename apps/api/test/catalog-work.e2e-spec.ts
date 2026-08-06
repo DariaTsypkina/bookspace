@@ -1,16 +1,30 @@
-import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import cookieParser from 'cookie-parser';
 import request from 'supertest';
 import { App } from 'supertest/types';
 import { PrismaClient, WorkStatus } from '@prisma/client';
 import { AppModule } from '../src/app.module';
+import { configureApp } from '../src/bootstrap';
 import type { CatalogWorkResponse } from '../src/catalog/catalog-work.types';
+
+type ValidationErrorItem = { code: string; path: string; message: string };
+type ValidationErrorResponse = {
+  code: string;
+  errors: ValidationErrorItem[];
+};
 
 const prisma = new PrismaClient();
 const TEST_PREFIX = 'catalog-work-e2e';
 
 async function cleanup() {
+  await prisma.workRelation.deleteMany({
+    where: {
+      OR: [
+        { fromWork: { slug: { startsWith: TEST_PREFIX } } },
+        { toWork: { slug: { startsWith: TEST_PREFIX } } },
+      ],
+    },
+  });
   await prisma.edition.deleteMany({
     where: { work: { slug: { startsWith: TEST_PREFIX } } },
   });
@@ -18,12 +32,20 @@ async function cleanup() {
     where: { work: { slug: { startsWith: TEST_PREFIX } } },
   });
   await prisma.workSeries.deleteMany({
-    where: { work: { slug: { startsWith: TEST_PREFIX } } },
+    where: {
+      OR: [
+        { work: { slug: { startsWith: TEST_PREFIX } } },
+        { series: { slug: { startsWith: TEST_PREFIX } } },
+      ],
+    },
   });
   await prisma.work.deleteMany({
     where: { slug: { startsWith: TEST_PREFIX } },
   });
   await prisma.author.deleteMany({
+    where: { slug: { startsWith: TEST_PREFIX } },
+  });
+  await prisma.series.deleteMany({
     where: { slug: { startsWith: TEST_PREFIX } },
   });
 }
@@ -37,14 +59,7 @@ describe('Catalog work (e2e)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
-    app.use(cookieParser());
-    app.useGlobalPipes(
-      new ValidationPipe({
-        whitelist: true,
-        forbidNonWhitelisted: true,
-        transform: true,
-      }),
-    );
+    configureApp(app);
     await app.init();
   });
 
@@ -100,7 +115,148 @@ describe('Catalog work (e2e)', () => {
           isbn13: '9785179999999',
         }),
       ],
+      relations: [],
+      readingOrder: [],
     });
+    expect(body.descriptionRu).toBeUndefined();
+  });
+
+  it('GET /catalog/works/:slug returns descriptionRu when set (bd-6v0.12)', async () => {
+    const work = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-with-annotation`,
+        titleRu: 'Книга с аннотацией',
+        status: WorkStatus.PUBLISHED,
+        descriptionRu:
+          'Мальчик узнаёт, что он волшебник, и отправляется в школу магии.',
+      },
+    });
+
+    const response = await request(app.getHttpServer())
+      .get(`/catalog/works/${work.slug}`)
+      .expect(200);
+
+    const body = response.body as CatalogWorkResponse;
+    expect(body.descriptionRu).toBe(
+      'Мальчик узнаёт, что он волшебник, и отправляется в школу магии.',
+    );
+  });
+
+  it('GET /catalog/works/:slug omits blank descriptionRu (bd-6v0.12)', async () => {
+    const work = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-blank-annotation`,
+        titleRu: 'Пустая аннотация',
+        status: WorkStatus.PUBLISHED,
+        descriptionRu: '   ',
+      },
+    });
+
+    const response = await request(app.getHttpServer())
+      .get(`/catalog/works/${work.slug}`)
+      .expect(200);
+
+    const body = response.body as CatalogWorkResponse;
+    expect(body.descriptionRu).toBeUndefined();
+  });
+
+  it('GET /catalog/works/:slug returns sequential readingOrder from series (bd-azl.3)', async () => {
+    const series = await prisma.series.create({
+      data: {
+        slug: `${TEST_PREFIX}-ro-series`,
+        nameRu: 'Серия порядка',
+        status: 'PUBLISHED',
+      },
+    });
+    const first = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-ro-first`,
+        titleRu: 'Первая',
+        status: WorkStatus.PUBLISHED,
+        seriesLinks: {
+          create: { seriesId: series.id, positionInSeries: 1 },
+        },
+      },
+    });
+    await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-ro-second`,
+        titleRu: 'Вторая',
+        status: WorkStatus.PUBLISHED,
+        seriesLinks: {
+          create: { seriesId: series.id, positionInSeries: 2 },
+        },
+      },
+    });
+
+    const response = await request(app.getHttpServer())
+      .get(`/catalog/works/${first.slug}`)
+      .expect(200);
+
+    const body = response.body as CatalogWorkResponse;
+    expect(body.readingOrder).toEqual([
+      {
+        step: 1,
+        slug: `${TEST_PREFIX}-ro-first`,
+        titleRu: 'Первая',
+      },
+      {
+        step: 2,
+        slug: `${TEST_PREFIX}-ro-second`,
+        titleRu: 'Вторая',
+      },
+    ]);
+  });
+
+  it('GET /catalog/works/:slug returns only PUBLISHED relation targets', async () => {
+    const source = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-rel-source`,
+        titleRu: 'Источник',
+        status: WorkStatus.PUBLISHED,
+      },
+    });
+    const publishedTarget = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-rel-target`,
+        titleRu: 'Продолжение',
+        status: WorkStatus.PUBLISHED,
+      },
+    });
+    const draftTarget = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-rel-draft-target`,
+        titleRu: 'Черновик-цель',
+        status: WorkStatus.DRAFT,
+      },
+    });
+    await prisma.workRelation.createMany({
+      data: [
+        {
+          fromWorkId: source.id,
+          toWorkId: publishedTarget.id,
+          type: 'SEQUEL',
+        },
+        {
+          fromWorkId: source.id,
+          toWorkId: draftTarget.id,
+          type: 'RELATED',
+        },
+      ],
+    });
+
+    const response = await request(app.getHttpServer())
+      .get(`/catalog/works/${source.slug}`)
+      .expect(200);
+
+    const body = response.body as CatalogWorkResponse;
+    expect(body.relations).toEqual([
+      {
+        slug: publishedTarget.slug,
+        titleRu: 'Продолжение',
+        type: 'SEQUEL',
+      },
+    ]);
   });
 
   it('GET /catalog/works/:slug returns 404 for draft work', async () => {
@@ -121,5 +277,17 @@ describe('Catalog work (e2e)', () => {
     await request(app.getHttpServer())
       .get(`/catalog/works/${TEST_PREFIX}-missing`)
       .expect(404);
+  });
+
+  it('GET /catalog/works/:slug returns 400 VALIDATION_FAILED for oversized slug', async () => {
+    const response = await request(app.getHttpServer())
+      .get(`/catalog/works/${'a'.repeat(201)}`)
+      .expect(400);
+
+    const body = response.body as ValidationErrorResponse;
+    expect(body.code).toBe('VALIDATION_FAILED');
+    expect(body.errors).toEqual(
+      expect.arrayContaining([expect.objectContaining({ path: 'slug' })]),
+    );
   });
 });

@@ -43,7 +43,7 @@ test.describe('Yandex OAuth', () => {
     await expect(
       page.getByRole('heading', { name: 'Ошибка входа' }),
     ).toBeVisible();
-    await expect(page.locator('.auth-error')).toContainText(
+    await expect(page.locator('main [role=alert]')).toContainText(
       'Вход через Яндекс отменён',
     );
     await expect(

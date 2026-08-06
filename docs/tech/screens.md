@@ -1,6 +1,7 @@
 # Карта экранов (MVP)
 
-Mobile first. UI на русском. SEO: title/description для публичных страниц.  
+Mobile first. UI на русском. SEO: title/description для публичных страниц.
+User-facing ошибки (FormMessage, alert, toast, ответы API на экране) — только русский; EN Nest/Zod маппить на UI (`apps/web/lib/user-facing-errors.ts`).
 Стек UI: Next.js — [stack-and-architecture](stack-and-architecture.md).
 
 ## Навигация (публичная оболочка)
@@ -72,13 +73,14 @@ Desktop: та же информационная архитектура (гори
 ## Страница книги `/books/[slug]` — блоки
 
 1. Заголовок (`titleRu`), авторы, год, серия.
-2. User: статус, оценка 1–10.
-3. Издания/переводы.
-4. Порядок чтения / sequel–prequel — за **spoiler gate**.
-5. Персонажи, места/мир — за spoiler gate.
-6. «Для понимания» — **только** при PUBLISHED ContextReading.
-7. Рекомендации (эвристики; ≠ ContextReading).
-8. Дисклеймер у context: «список составлен автоматически» (без URL источников).
+2. Аннотация (`descriptionRu`) — только если текст непустой; без spoiler gate.
+3. User: статус, оценка 1–10.
+4. Издания/переводы.
+5. Порядок чтения / sequel–prequel — за **spoiler gate**.
+6. Персонажи, места/мир — за spoiler gate.
+7. «Для понимания» — **только** при PUBLISHED ContextReading.
+8. Рекомендации (эвристики; ≠ ContextReading).
+9. Дисклеймер у context: «список составлен автоматически» (без URL источников).
 
 ## Spoiler gate
 

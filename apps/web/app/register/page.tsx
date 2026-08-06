@@ -2,92 +2,153 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { FormEvent, useState } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { RegisterInputSchema } from '@bookspace/schemas';
+import { useForm } from 'react-hook-form';
 import { GuestOnly } from '../../components/guest-only';
-import { register, validatePassword } from '../../lib/auth';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { PasswordInput } from '@/components/ui/password-input';
+import { useAuth } from '../../components/auth-provider';
+import { getFriendlyZodIssueMessage } from '@/lib/form-errors';
+import { register } from '../../lib/auth';
+import { toUserFacingErrorMessage } from '@/lib/user-facing-errors';
+
+type RegisterFormValues = {
+  email: string;
+  password: string;
+};
 
 function RegisterForm() {
   const router = useRouter();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const { refresh } = useAuth();
+  const form = useForm<RegisterFormValues>({
+    resolver: zodResolver(RegisterInputSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setError(null);
-
-    const passwordError = validatePassword(password);
-    if (passwordError) {
-      setError(passwordError);
-      return;
-    }
-
-    setLoading(true);
+  async function handleValidSubmit(values: RegisterFormValues) {
+    form.clearErrors('root');
 
     try {
-      await register(email, password);
+      await register(values.email, values.password);
+      await refresh();
       router.push('/login');
     } catch (submitError) {
-      setError(
-        submitError instanceof Error
-          ? submitError.message
-          : 'Не удалось зарегистрироваться',
-      );
-    } finally {
-      setLoading(false);
+      form.setError('root', {
+        message:
+          submitError instanceof Error
+            ? toUserFacingErrorMessage(submitError.message)
+            : 'Не удалось зарегистрироваться',
+      });
+    }
+  }
+
+  function handleInvalidSubmit() {
+    const result = RegisterInputSchema.safeParse(form.getValues());
+    if (result.success) {
+      return;
+    }
+    for (const issue of result.error.issues) {
+      const fieldName = issue.path[0];
+      if (fieldName === 'email' || fieldName === 'password') {
+        form.setError(fieldName, {
+          type: issue.code,
+          message: getFriendlyZodIssueMessage(issue),
+        });
+      }
     }
   }
 
   return (
-    <main className="auth-page">
-      <h1>Регистрация</h1>
-      <form onSubmit={handleSubmit} className="auth-form">
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          autoComplete="email"
-          required
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        />
+    <main className="mx-auto flex w-full max-w-sm flex-1 flex-col items-center justify-center gap-4 px-4 py-8">
+      <h1 className="text-[1.75rem] font-normal tracking-[0.02em] text-foreground">
+        Регистрация
+      </h1>
+      <Card className="w-full">
+        <CardContent className="p-5">
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(
+                handleValidSubmit,
+                handleInvalidSubmit,
+              )}
+              className="flex flex-col gap-3"
+            >
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="font-normal text-muted">
+                      Email
+                    </FormLabel>
+                    <FormControl>
+                      <Input type="email" autoComplete="email" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-        <label htmlFor="password">Пароль</label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          autoComplete="new-password"
-          required
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="font-normal text-muted">
+                      Пароль
+                    </FormLabel>
+                    <PasswordInput autoComplete="new-password" {...field} />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-        {error ? (
-          <p role="alert" className="auth-error">
-            {error}
-          </p>
-        ) : null}
+              {form.formState.errors.root?.message ? (
+                <p role="alert" className="text-sm text-[color:var(--error)]">
+                  {form.formState.errors.root.message}
+                </p>
+              ) : null}
 
-        <button type="submit" disabled={loading}>
-          {loading ? 'Регистрация…' : 'Зарегистрироваться'}
-        </button>
-      </form>
-      <p className="auth-divider">или</p>
-      <div className="auth-oauth-list">
+              <Button
+                type="submit"
+                disabled={form.formState.isSubmitting}
+                className="mt-2 w-full"
+              >
+                {form.formState.isSubmitting
+                  ? 'Регистрация…'
+                  : 'Зарегистрироваться'}
+              </Button>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
+      <p className="text-sm text-muted">или</p>
+      <div className="flex w-full flex-col gap-2">
         {/* Full navigation required for OAuth redirect + Set-Cookie via BFF */}
-        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-        <a className="auth-oauth" href="/api/auth/google">
-          Войти через Google
-        </a>
-        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-        <a className="auth-oauth" href="/api/auth/yandex">
-          Войти через Яндекс
-        </a>
+        <Button asChild variant="outline" className="w-full">
+          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+          <a href="/api/auth/google">Войти через Google</a>
+        </Button>
+        <Button asChild variant="outline" className="w-full">
+          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+          <a href="/api/auth/yandex">Войти через Яндекс</a>
+        </Button>
       </div>
-      <p>
+      <p className="text-[0.95rem] text-muted">
         Уже есть аккаунт? <Link href="/login">Войти</Link>
       </p>
     </main>

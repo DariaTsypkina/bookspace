@@ -1,0 +1,137 @@
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+import { describe, expect, it } from 'vitest';
+
+const pageSource = readFileSync(path.join(__dirname, 'page.tsx'), 'utf8');
+const notFoundSource = readFileSync(
+  path.join(__dirname, 'not-found.tsx'),
+  'utf8',
+);
+const contextSectionSource = readFileSync(
+  path.join(__dirname, '../../../components/work-context-reading-section.tsx'),
+  'utf8',
+);
+const globalsSource = readFileSync(
+  path.join(__dirname, '../../globals.css'),
+  'utf8',
+);
+
+describe('Books page Tailwind+shadcn migration (S6 / bd-wus.9)', () => {
+  it('does not use legacy work-* / edition-* class names on the page', () => {
+    expect(pageSource).not.toMatch(/className=["']work-page["']/);
+    expect(pageSource).not.toMatch(/\bwork-header\b/);
+    expect(pageSource).not.toMatch(/\bwork-authors\b/);
+    expect(pageSource).not.toMatch(/\bwork-year\b/);
+    expect(pageSource).not.toMatch(/\bwork-series\b/);
+    expect(pageSource).not.toMatch(/\bwork-editions\b/);
+    expect(pageSource).not.toMatch(/\bedition-language\b/);
+    expect(pageSource).not.toMatch(/\bedition-translator\b/);
+    expect(pageSource).not.toMatch(/\bedition-isbn\b/);
+    expect(pageSource).not.toMatch(/\bedition-publisher\b/);
+    expect(pageSource).not.toMatch(/\bedition-year\b/);
+  });
+
+  it('does not use legacy work-* class names on not-found', () => {
+    expect(notFoundSource).not.toMatch(/className=["'][^"']*work-page/);
+    expect(notFoundSource).not.toMatch(/\bwork-not-found\b/);
+  });
+
+  it('does not use legacy work-context-reading class names', () => {
+    expect(contextSectionSource).not.toMatch(/\bwork-context-reading\b/);
+    expect(contextSectionSource).not.toMatch(
+      /\bwork-context-reading-disclaimer\b/,
+    );
+    expect(contextSectionSource).not.toMatch(/\bwork-context-reading-title\b/);
+    expect(contextSectionSource).not.toMatch(/\bwork-context-reading-why\b/);
+  });
+
+  it('uses Tailwind layout utilities and theme tokens on the page', () => {
+    expect(pageSource).toMatch(/\bflex\b/);
+    expect(pageSource).toMatch(/\bflex-1\b/);
+    expect(pageSource).toMatch(/text-foreground/);
+    expect(pageSource).toMatch(/text-muted/);
+  });
+
+  it('uses shadcn Card for editions and ContextReading items', () => {
+    expect(pageSource).toMatch(/from ['"]@\/components\/ui\/card['"]/);
+    expect(pageSource).toMatch(/\bCard\b/);
+    expect(contextSectionSource).toMatch(
+      /from ['"]@\/components\/ui\/card['"]/,
+    );
+    expect(contextSectionSource).toMatch(/\bCard\b/);
+  });
+
+  it('keeps work page UX: RU copy, editions region, ContextReading wiring', () => {
+    expect(pageSource).toMatch(/work\.titleRu/);
+    expect(pageSource).toMatch(/Год первого издания/);
+    expect(pageSource).toMatch(/Издания и переводы/);
+    expect(pageSource).toMatch(/aria-label=["']Издания и переводы["']/);
+    expect(pageSource).toMatch(/WorkContextReadingSection/);
+    expect(pageSource).toMatch(/fetchCatalogContextReadings/);
+    expect(pageSource).toMatch(/fetchCatalogWork/);
+    expect(notFoundSource).toMatch(/Произведение не найдено/);
+    expect(notFoundSource).toMatch(/Вернуться к поиску/);
+    expect(contextSectionSource).toMatch(/aria-label=["']Для понимания["']/);
+    expect(contextSectionSource).toMatch(/Для понимания/);
+    expect(contextSectionSource).toMatch(/CONTEXT_READING_DISCLAIMER/);
+  });
+
+  it('shows work relations behind SpoilerGate when present (bd-azl.2)', () => {
+    expect(pageSource).toMatch(/from ['"]@\/components\/spoiler-gate['"]/);
+    expect(pageSource).toMatch(/\bSpoilerGate\b/);
+    expect(pageSource).toMatch(/WORK_RELATION_LABELS/);
+    expect(pageSource).toMatch(/aria-label=["']Связи произведений["']/);
+    expect(pageSource).toMatch(/work\.relations\.length > 0/);
+    expect(pageSource).toMatch(/href=\{`\/books\/\$\{relation\.slug\}`\}/);
+    expect(pageSource).toMatch(/hasSpoilersConsent/);
+    expect(pageSource).toMatch(/SPOILERS_OK_COOKIE/);
+  });
+
+  it('shows reading order behind SpoilerGate as numbered steps (bd-azl.3)', () => {
+    expect(pageSource).toMatch(/aria-label=["']Порядок чтения["']/);
+    expect(pageSource).toMatch(/Порядок чтения/);
+    expect(pageSource).toMatch(/work\.readingOrder\.length > 0/);
+    expect(pageSource).toMatch(/Шаг \{step\.step\}/);
+    expect(pageSource).toMatch(/href=\{`\/books\/\$\{step\.slug\}`\}/);
+    // Distinct from relations dump (type labels vs numbered steps)
+    expect(pageSource).toMatch(/aria-label=["']Связи произведений["']/);
+    expect(pageSource).toMatch(
+      /work\.relations\.length > 0 \|\| work\.readingOrder\.length > 0/,
+    );
+  });
+
+  it('shows annotation section when descriptionRu is present (bd-6v0.12)', () => {
+    expect(pageSource).toMatch(/aria-label=["']Аннотация["']/);
+    expect(pageSource).toMatch(/Аннотация/);
+    expect(pageSource).toMatch(/work\.descriptionRu/);
+    // After header, before editions
+    const headerEnd = pageSource.indexOf('</header>');
+    const annotationIdx = pageSource.indexOf('aria-label="Аннотация"');
+    const editionsIdx = pageSource.indexOf('aria-label="Издания и переводы"');
+    expect(headerEnd).toBeGreaterThan(-1);
+    expect(annotationIdx).toBeGreaterThan(headerEnd);
+    expect(editionsIdx).toBeGreaterThan(annotationIdx);
+    // No spoiler gate around annotation
+    const spoilerIdx = pageSource.indexOf('<SpoilerGate');
+    expect(annotationIdx).toBeLessThan(spoilerIdx);
+  });
+
+  it('removes orphan .work-* / .edition-* rules from globals.css', () => {
+    expect(globalsSource).not.toMatch(/\.work-page\b/);
+    expect(globalsSource).not.toMatch(/\.work-header\b/);
+    expect(globalsSource).not.toMatch(/\.work-authors\b/);
+    expect(globalsSource).not.toMatch(/\.work-year\b/);
+    expect(globalsSource).not.toMatch(/\.work-series\b/);
+    expect(globalsSource).not.toMatch(/\.work-editions\b/);
+    expect(globalsSource).not.toMatch(/\.work-context-reading\b/);
+    expect(globalsSource).not.toMatch(/\.work-context-reading-disclaimer\b/);
+    expect(globalsSource).not.toMatch(/\.work-context-reading-title\b/);
+    expect(globalsSource).not.toMatch(/\.work-context-reading-why\b/);
+    expect(globalsSource).not.toMatch(/\.work-not-found\b/);
+    expect(globalsSource).not.toMatch(/\.edition-language\b/);
+    expect(globalsSource).not.toMatch(/\.edition-translator\b/);
+    expect(globalsSource).not.toMatch(/\.edition-isbn\b/);
+    expect(globalsSource).not.toMatch(/\.edition-publisher\b/);
+    expect(globalsSource).not.toMatch(/\.edition-year\b/);
+  });
+});

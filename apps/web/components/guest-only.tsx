@@ -1,41 +1,29 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { ReactNode, useEffect, useState } from 'react';
-import { getCurrentUser, profilePath } from '../lib/auth';
+import { ReactNode, useEffect, useRef } from 'react';
+import { profilePath } from '../lib/auth';
+import { useAuth } from './auth-provider';
 
 /**
  * For guest-only pages (/login, /register).
- * Does not render children while checking session; redirects auth users to /u/[slug].
- * Cookie session is first-party via BFF `/api/auth/*` (Nest `/auth/*`).
+ * Renders children immediately; redirects users who arrive already authenticated.
+ * Does not steal navigation after login/register on this page (saw guest first).
  */
 export function GuestOnly({ children }: { children: ReactNode }) {
   const router = useRouter();
-  const [ready, setReady] = useState(false);
+  const { user, status } = useAuth();
+  const sawGuest = useRef(false);
 
   useEffect(() => {
-    let cancelled = false;
+    if (status === 'guest') {
+      sawGuest.current = true;
+      return;
+    }
+    if (status === 'authenticated' && user && !sawGuest.current) {
+      router.replace(profilePath(user.slug));
+    }
+  }, [status, user, router]);
 
-    void (async () => {
-      const user = await getCurrentUser();
-      if (cancelled) {
-        return;
-      }
-      if (user) {
-        router.replace(profilePath(user.slug));
-        return;
-      }
-      setReady(true);
-    })();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [router]);
-
-  if (!ready) {
-    return null;
-  }
-
-  return children;
+  return <>{children}</>;
 }

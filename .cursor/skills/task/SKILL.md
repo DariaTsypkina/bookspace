@@ -2,7 +2,7 @@
 name: task
 description: >-
   Use /task or /задача to submit a human request (bug, enhancement, feature tweak).
-  Classify epic and feature-doc, add to Beads plan, separate branch from develop.
+  Classify epic and feature-doc, add to Beads plan, branch from assembly (not develop).
   Bookspace human intake workflow.
 disable-model-invocation: true
 ---
@@ -11,7 +11,8 @@ disable-model-invocation: true
 
 Использовать **только** при явном вызове `/task` или `/задача`.
 
-Канон: [docs/tech/human-intake-workflow.md](../../docs/tech/human-intake-workflow.md).
+Канон: [docs/tech/human-intake-workflow.md](../../docs/tech/human-intake-workflow.md).  
+Close/merge: [feature-workflow § Close + merge](../../docs/tech/feature-workflow.md).
 
 ## Ввод
 
@@ -46,15 +47,16 @@ disable-model-invocation: true
    - **Эпик:** … (`bd-…`)
    - **Feature-doc:** docs/features/….
    - **Issue:** `bd-…` — заголовок
-   - **Ветка (когда начнём):** fix/bd-…/… или feature/bd-…/…
+   - **Ветка (когда начнём):** `task/bd-…-…` от сборочной `feat/bookspace-bd-…`
 
-   Начать реализацию сейчас? (отдельная ветка от develop)
+   Начать реализацию сейчас? (ветка от сборочной; close → merge в сборочную, не в develop)
    ```
 
 6. **Реализация** — только после явного «да» от человека:
-   - `git checkout develop` → `git checkout -b fix/…` или `feature/…`
+   - `git checkout feat/bookspace-bd-<epic>` → `git checkout -b task/bd-<id>-<slug>`
    - `bd update <id> --claim`
    - TDD по [agent-dev-flow.md](../../docs/tech/agent-dev-flow.md)
+   - После handoff: оркестратор — протокол close + merge в сборочную
 
 ## Крупная новая цель
 
@@ -63,5 +65,5 @@ disable-model-invocation: true
 ## Запреты
 
 - Не писать prod-код до `bd create` и (при согласии) claim.
-- Не коммитить в `develop` / `master`.
+- Не коммитить / не мержить задачу в `develop` / `master`.
 - Не угадывать эпик молча.

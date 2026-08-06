@@ -2,7 +2,7 @@
 
 Связано: [feature-workflow](feature-workflow.md) (эпик → plan), [agent-dev-flow](agent-dev-flow.md) (TDD), [git-flow](../../.cursor/rules/git-flow-develop-master.mdc), [PROJECT-STATUS.md](../../PROJECT-STATUS.md), [карта feature-docs](../features/README.md).
 
-Человек описывает **что нужно сделать**. Агент **классифицирует** запрос, **ставит задачу в план** и **реализует в отдельной ветке** от `develop`. Без ясной привязки к эпику/фиче — **остановиться и уточнить у человека**.
+Человек описывает **что нужно сделать**. Агент **классифицирует** запрос, **ставит задачу в план** и **реализует на ветке задачи от сборочной**. Без ясной привязки к эпику/фиче — **остановиться и уточнить у человека**.
 
 **Быстрый ввод в чате:** `/task` или `/задача` + описание в том же сообщении (skill `.cursor/skills/task/SKILL.md`).
 
@@ -10,9 +10,9 @@
 
 | Тип запроса | Пример | Тип issue в bd | Ветка |
 |-------------|--------|----------------|-------|
-| **Баг** (найден человеком) | «На странице работы не показывается рейтинг после обновления» | `bug` | `fix/bd-<id>/<slug>` |
-| **Доработка** существующей фичи | «Добавить сортировку на полке» | `feature` или `task` | `feature/bd-<id>/<slug>` |
-| **Расширение** в рамках эпика | «В auth ещё нужен сброс пароля» | `feature` | `feature/bd-<id>/<slug>` |
+| **Баг** (найден человеком) | «На странице работы не показывается рейтинг после обновления» | `bug` | `task/bd-<id>-<slug>` (от сборочной) |
+| **Доработка** существующей фичи | «Добавить сортировку на полке» | `feature` или `task` | `task/bd-<id>-<slug>` |
+| **Расширение** в рамках эпика | «В auth ещё нужен сброс пароля» | `feature` | `task/bd-<id>-<slug>` |
 | **Новая крупная цель** | «Целиком модуль уведомлений» | `epic` + дети | см. [feature-workflow](feature-workflow.md) |
 
 Если запрос — **новый эпик** (крупная цель вне текущих фаз), не подменяйте его одной task: пройдите полный epic-workflow (brainstorm → plan → children).
@@ -30,8 +30,8 @@
 | 2 | Классификация | Определить эпик, feature-doc, тип (`bug` / `feature` / `task`) |
 | 3 | Уточнение | Если привязка неочевидна — **стоп**, сообщить человеку (см. ниже) |
 | 4 | Постановка в план | `bd create` + `--parent=<epic-id>`; обновить `PROJECT-STATUS.md` |
-| 5 | Изоляция | Ветка от `develop`; worktree при нетривиальной работе |
-| 6 | Реализация | `bd update --claim` → TDD → review → verify → finish → PR в `develop` |
+| 5 | Изоляция | Ветка от **сборочной**; worktree при нетривиальной работе |
+| 6 | Реализация | `bd update --claim` → TDD → handoff → оркестратор: close + merge в **сборочную** |
 
 Шаги 5–6 — тот же TDD и DoD, что в [agent-dev-flow](agent-dev-flow.md) и [feature-workflow §DoD](feature-workflow.md). Epic-level brainstorm/plan **не повторять**, если эпик уже существует и запрос — дочерняя доработка или баг.
 
@@ -104,29 +104,28 @@ bd create "Краткий заголовок" \
 - Обновить [PROJECT-STATUS.md](../../PROJECT-STATUS.md): новая строка в таблице фазы + запись в «Последние действия».
 - Если меняются продуктовые критерии — обновить соответствующий feature-doc (skill `bookspace-write-feature-doc`).
 
-## Шаг 5: Отдельная ветка от develop
+## Шаг 5: Ветка задачи (от сборочной)
 
-Каждый запрос — **отдельная задача и отдельная ветка**. Не коммитить в `develop` / `master` напрямую.
+Каждый запрос — **отдельная задача и отдельная ветка**. Не коммитить в `develop` / `master` напрямую. Не мержить задачу в `develop`.
 
 ```bash
-git checkout develop
-git pull   # когда разрешено профилем
-git checkout -b fix/bd-<id>/<slug>      # баг
-# или
-git checkout -b feature/bd-<id>/<slug>  # доработка
+# сборочная эпика уже есть: feat/bookspace-bd-<epic>
+git checkout feat/bookspace-bd-<epic>
+git checkout -b task/bd-<id>-<slug>   # или fix/… по типу
 ```
 
-- Slug — короткий kebab-case на английском ([git-flow](../../.cursor/rules/git-flow-develop-master.mdc)).
+- Если сборочной ещё нет — создать от `develop`: `feat/bookspace-bd-<epic>` ([git-flow](../../.cursor/rules/git-flow-develop-master.mdc)).
+- Slug — короткий kebab-case на английском.
 - Нетривиальная работа — изолированный worktree (skill `superpowers:using-git-worktrees`).
-- PR только в **`develop`**, merge commit (`--no-ff`).
+- В `develop` попадает только сборочная в финале ([feature-workflow §6](feature-workflow.md#6-финал-сборочная--develop)).
 
 ## Шаг 6: Реализация и закрытие
 
-1. `bd update <id> --claim`
-2. Вертикальный TDD-срез — [agent-dev-flow §5](agent-dev-flow.md)
-3. Review → verify → finish branch (superpowers skills)
-4. Handoff: тесты / результаты / изменённые файлы
-5. После merge и ok человека: `bd close <id>`
+1. `bd update <id> --claim` (оркестратор или по его поручению)
+2. Main feature subagent: вертикальный TDD-срез — [agent-dev-flow §5](agent-dev-flow.md)
+3. Review → verify
+4. Handoff сабагента: тесты / результаты / изменённые файлы (**без** `bd close`)
+5. **Оркестратор** после приёмки handoff: полный протокол [Close + merge в сборочную](feature-workflow.md#close--merge-в-сборочную) (close на ветке задачи → commit `.beads` → `--no-ff` в сборочную → Dolt-страховка)
 
 Политика **1 feature = 1 main subagent** сохраняется для runtime-изменений ([agent-dev-flow §1.1](agent-dev-flow.md)).
 
@@ -138,14 +137,14 @@ git checkout -b feature/bd-<id>/<slug>  # доработка
 | Brainstorm эпика | обязателен | не нужен (эпик уже есть) |
 | Writing-plans | на весь эпик | достаточно описания + acceptance в issue |
 | `bd create` | epic + children | один child с `--parent` |
-| Ветка | `feature/bd-<id>/…` | `feature/…` или `fix/…` от `develop` |
+| Ветка | `task/bd-<id>-…` от сборочной | `task/bd-<id>-…` (или fix) от сборочной эпика |
 
 ## Запреты
 
 - Не начинать код без классификации и `bd create` (кроме чистого исследования для классификации).
 - Не гадать эпик/feature-doc молча — при сомнении спросить человека.
 - Не смешивать несколько несвязанных запросов в одной ветке/issue.
-- Не пушить при красных тестах; не мержить в `develop` без PR.
+- Не пушить при красных тестах; не мержить задачу в `develop` (только сборочная → `develop` в §6).
 
 ## Context Loading
 

@@ -1,3 +1,5 @@
+import { ApiError, api, noStoreConfig } from './http';
+
 export type CatalogSearchEntityType =
   'WORK' | 'AUTHOR' | 'SERIES' | 'CHARACTER' | 'WORLD' | 'PLACE';
 
@@ -37,9 +39,13 @@ export async function fetchCatalogSearch(
     params.set('q', query.trim());
   }
   const url = `${API_URL}/catalog/search?${params.toString()}`;
-  const response = await fetch(url, { cache: 'no-store' });
-  if (!response.ok) {
-    throw new Error(`Catalog search failed: ${response.status}`);
+  try {
+    const { data } = await api.get<CatalogSearchResponse>(url, noStoreConfig);
+    return data;
+  } catch (error) {
+    if (error instanceof ApiError) {
+      throw new Error(`Catalog search failed: ${error.status}`);
+    }
+    throw error;
   }
-  return response.json() as Promise<CatalogSearchResponse>;
 }

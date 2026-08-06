@@ -1,7 +1,26 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { ApiError, api, noStoreConfig } from './http';
 import { CatalogWorldNotFoundError, fetchCatalogWorld } from './catalog-world';
 
+vi.mock('./http', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('./http')>();
+  return {
+    ...actual,
+    api: {
+      get: vi.fn(),
+    },
+  };
+});
+
 describe('fetchCatalogWorld', () => {
+  beforeEach(() => {
+    vi.mocked(api.get).mockReset();
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
   it('returns parsed world response from API', async () => {
     const mockResponse = {
       slug: 'volshebnyy-mir',
@@ -24,32 +43,19 @@ describe('fetchCatalogWorld', () => {
       ],
     };
 
-    vi.stubGlobal(
-      'fetch',
-      vi.fn().mockResolvedValue({
-        ok: true,
-        status: 200,
-        json: async () => mockResponse,
-      }),
-    );
+    vi.mocked(api.get).mockResolvedValue({ data: mockResponse });
 
     const result = await fetchCatalogWorld('volshebnyy-mir');
 
     expect(result).toEqual(mockResponse);
-    expect(fetch).toHaveBeenCalledWith(
+    expect(api.get).toHaveBeenCalledWith(
       expect.stringContaining('/catalog/worlds/volshebnyy-mir'),
-      { cache: 'no-store' },
+      noStoreConfig,
     );
   });
 
   it('throws CatalogWorldNotFoundError on 404', async () => {
-    vi.stubGlobal(
-      'fetch',
-      vi.fn().mockResolvedValue({
-        ok: false,
-        status: 404,
-      }),
-    );
+    vi.mocked(api.get).mockRejectedValue(new ApiError(404, 'Not Found'));
 
     await expect(fetchCatalogWorld('missing')).rejects.toBeInstanceOf(
       CatalogWorldNotFoundError,

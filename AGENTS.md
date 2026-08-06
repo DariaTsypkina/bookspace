@@ -19,6 +19,8 @@
 ## Стек (кратко)
 
 - Frontend: Next.js + TypeScript (отдельное app)
+- UI-kit: Tailwind + shadcn/Radix + Lucide ([ADR 0003](docs/adr/0003-tailwind-shadcn.md) **accepted**); новый UI / новые экраны — только этот стек, без новых legacy-правил в `globals.css`
+- UI-шрифт: **Baskerville** (кириллица, self-host woff2) — [docs/features/ui-typography.md](docs/features/ui-typography.md); не менять typeface без задачи
 - Backend: NestJS + TypeScript + Prisma + PostgreSQL (FTS)
 - Jobs: BullMQ + Redis
 - Auth на Nest; LLM: OpenAI через `LlmProvider`
@@ -30,6 +32,8 @@
 - Коллекция публична; notes — PUBLIC/PRIVATE
 - ContextReading источники только admin; блок только если есть PUBLISHED
 - UI и display-названия — русский
+- User-facing ошибки (формы, API, auth) — только русский и понятные пользователю; EN с бэка/Zod маппить на UI (`apps/web/lib/user-facing-errors.ts`, `form-errors.ts`); правило — [ui-ru.mdc](.cursor/rules/ui-ru.mdc)
+- UI typeface — Baskerville (`--font-baskerville` / `font-sans`); form controls — явно наследовать/задавать шрифт
 - MVP без подписок/ленты, графа, таймлайна, биллинга
 - Новые или заменённые npm/pnpm-зависимости — только после явного согласования с пользователем ([agent-dev-flow §2.1](docs/tech/agent-dev-flow.md))
 
@@ -37,7 +41,7 @@
 
 Rules: `.cursor/rules/`. Skills (project-only): `.cursor/skills/`.
 
-Обязательная политика исполнения фич: оркестрация по `docs/tech/feature-workflow.md` (скипать шаги нельзя); для каждого `bd`-issue с runtime-изменениями — `1 feature = 1 main subagent` и handoff (tests / results / changed files) по `docs/tech/agent-dev-flow.md`. **Запросы от человека:** классифицировать по эпику/feature-doc, поставить в план, отдельная ветка от `develop` — `docs/tech/human-intake-workflow.md`. Быстрый ввод: **`/task`** или **`/задача`** + описание в чате. Живой дашборд: `PROJECT-STATUS.md` — обновлять при claim/close/новой задаче.
+Обязательная политика исполнения фич: оркестрация по `docs/tech/feature-workflow.md` (скипать шаги нельзя); для каждого `bd`-issue с runtime-изменениями — `1 feature = 1 main subagent` и handoff (tests / results / changed files) по `docs/tech/agent-dev-flow.md`. **Запросы от человека:** классифицировать по эпику/feature-doc, поставить в план, ветка от сборочной — `docs/tech/human-intake-workflow.md`. Close: на ветке задачи → merge в сборочную (не в `develop`). Быстрый ввод: **`/task`** или **`/задача`** + описание в чате; **пакетный прогон по списку bd-ключей:** **`/orchestrate`** или **`/оркестратор`** → `.cursor/skills/orchestrate/SKILL.md`. Живой дашборд: `PROJECT-STATUS.md` — обновлять при claim/close/новой задаче.
 
 <!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:970c3bf2 -->
 

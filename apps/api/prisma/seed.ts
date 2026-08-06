@@ -57,12 +57,34 @@ async function seedCatalogDemo() {
       yearFirst: 1997,
       status: WorkStatus.PUBLISHED,
       deletedAt: null,
+      descriptionRu:
+        'Мальчик-сирота Гарри Поттер узнаёт в одиннадцать лет, что он волшебник, и отправляется в школу Хогвартс — где его ждут друзья, тайны и встреча с прошлым.',
     },
     create: {
       slug: 'garri-potter-filosofskiy-kamen',
       titleRu: 'Гарри Поттер и философский камень',
       titleOrig: 'Harry Potter and the Philosopher Stone',
       yearFirst: 1997,
+      status: WorkStatus.PUBLISHED,
+      descriptionRu:
+        'Мальчик-сирота Гарри Поттер узнаёт в одиннадцать лет, что он волшебник, и отправляется в школу Хогвартс — где его ждут друзья, тайны и встреча с прошлым.',
+    },
+  });
+
+  const sequelWork = await prisma.work.upsert({
+    where: { slug: 'garri-potter-taynaya-komnata' },
+    update: {
+      titleRu: 'Гарри Поттер и Тайная комната',
+      titleOrig: 'Harry Potter and the Chamber of Secrets',
+      yearFirst: 1998,
+      status: WorkStatus.PUBLISHED,
+      deletedAt: null,
+    },
+    create: {
+      slug: 'garri-potter-taynaya-komnata',
+      titleRu: 'Гарри Поттер и Тайная комната',
+      titleOrig: 'Harry Potter and the Chamber of Secrets',
+      yearFirst: 1998,
       status: WorkStatus.PUBLISHED,
     },
   });
@@ -82,6 +104,21 @@ async function seedCatalogDemo() {
     },
   });
 
+  await prisma.workAuthor.upsert({
+    where: {
+      workId_authorId: {
+        workId: sequelWork.id,
+        authorId: author.id,
+      },
+    },
+    update: { position: 0 },
+    create: {
+      workId: sequelWork.id,
+      authorId: author.id,
+      position: 0,
+    },
+  });
+
   await prisma.workSeries.upsert({
     where: {
       workId_seriesId: {
@@ -94,6 +131,38 @@ async function seedCatalogDemo() {
       workId: publishedWork.id,
       seriesId: series.id,
       positionInSeries: 1,
+    },
+  });
+
+  await prisma.workSeries.upsert({
+    where: {
+      workId_seriesId: {
+        workId: sequelWork.id,
+        seriesId: series.id,
+      },
+    },
+    update: { positionInSeries: 2 },
+    create: {
+      workId: sequelWork.id,
+      seriesId: series.id,
+      positionInSeries: 2,
+    },
+  });
+
+  await prisma.workRelation.upsert({
+    where: {
+      fromWorkId_toWorkId_type: {
+        fromWorkId: publishedWork.id,
+        toWorkId: sequelWork.id,
+        type: 'SEQUEL',
+      },
+    },
+    update: { readingOrder: 2 },
+    create: {
+      fromWorkId: publishedWork.id,
+      toWorkId: sequelWork.id,
+      type: 'SEQUEL',
+      readingOrder: 2,
     },
   });
 

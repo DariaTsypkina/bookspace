@@ -1,0 +1,248 @@
+import { expect, test, type Page } from '@playwright/test';
+import { selectUserBookStatus } from '../helpers/select-user-book-status';
+
+async function expectMainNav(page: Page) {
+  const nav = page.getByRole('navigation', { name: 'Основное меню' });
+  await expect(nav).toBeVisible();
+  return nav;
+}
+
+function uniqueEmail() {
+  return `library-${Date.now()}-${Math.random().toString(36).slice(2, 8)}@example.com`;
+}
+
+test.describe('Library page smoke (S12 / bd-wus.15 + bd-cq7.4)', () => {
+  test('guest: /library without legacy library-stub class', async ({
+    page,
+  }) => {
+    await page.goto('/library');
+
+    const heading = page.getByRole('heading', {
+      name: 'Моя библиотека',
+      level: 1,
+    });
+    await expect(heading).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Мои полки' })).toHaveAttribute(
+      'href',
+      '/library/shelves',
+    );
+    await expect(
+      page.getByRole('link', { name: 'Цель на год' }),
+    ).toHaveAttribute('href', '/library/goal');
+    await expect(page.getByRole('link', { name: 'Войдите' })).toBeVisible();
+
+    const main = page.locator('main');
+    await expect(main).toBeVisible();
+    const className = (await main.getAttribute('class')) ?? '';
+    expect(className.split(/\s+/)).not.toContain('library-stub');
+    expect(className).toMatch(/\bflex\b/);
+
+    const nav = await expectMainNav(page);
+    await expect(nav.getByRole('link', { name: 'Профиль' })).toHaveAttribute(
+      'href',
+      '/login',
+    );
+  });
+
+  test('guest: keeps reading-room foreground color on heading', async ({
+    page,
+  }) => {
+    await page.goto('/library');
+
+    const heading = page.getByRole('heading', {
+      name: 'Моя библиотека',
+      level: 1,
+    });
+    await expect(heading).toBeVisible();
+
+    const color = await heading.evaluate((el) => getComputedStyle(el).color);
+    // --foreground #1c1917
+    expect(color).toBe('rgb(28, 25, 23)');
+  });
+
+  test('authenticated user: Профиль → /library, aria-current', async ({
+    page,
+  }) => {
+    const email = uniqueEmail();
+    const password = 'Secure123!';
+
+    await page.goto('/register');
+    await page.getByLabel('Email').fill(email);
+    await page.getByLabel('Пароль', { exact: true }).fill(password);
+    await page.getByRole('button', { name: 'Зарегистрироваться' }).click();
+    await expect(page).toHaveURL('/login');
+
+    await page.getByLabel('Email').fill(email);
+    await page.getByLabel('Пароль', { exact: true }).fill(password);
+    await page.getByRole('button', { name: 'Войти' }).click();
+    await expect(page).toHaveURL('/');
+
+    const nav = await expectMainNav(page);
+    await expect(nav.getByRole('link', { name: 'Профиль' })).toHaveAttribute(
+      'href',
+      '/library',
+    );
+    await nav.getByRole('link', { name: 'Профиль' }).click();
+    await expect(page).toHaveURL('/library');
+    await expect(
+      page.getByRole('heading', { name: 'Моя библиотека', level: 1 }),
+    ).toBeVisible();
+    await expect(
+      page.getByText('В коллекции пока пусто', { exact: false }),
+    ).toBeVisible();
+
+    const main = page.locator('main');
+    const className = (await main.getAttribute('class')) ?? '';
+    expect(className.split(/\s+/)).not.toContain('library-stub');
+
+    await expect(nav.getByRole('link', { name: 'Профиль' })).toHaveAttribute(
+      'aria-current',
+      'page',
+    );
+  });
+
+  test('authenticated user: add library item form via BFF', async ({
+    page,
+  }) => {
+    const email = uniqueEmail();
+    const password = 'Secure123!';
+
+    await page.goto('/register');
+    await page.getByLabel('Email').fill(email);
+    await page.getByLabel('Пароль', { exact: true }).fill(password);
+    await page.getByRole('button', { name: 'Зарегистрироваться' }).click();
+    await expect(page).toHaveURL('/login');
+
+    await page.getByLabel('Email').fill(email);
+    await page.getByLabel('Пароль', { exact: true }).fill(password);
+    await page.getByRole('button', { name: 'Войти' }).click();
+    await expect(page).toHaveURL('/');
+
+    await page.goto('/library');
+    // Title search + autocomplete suggestion (bd-cq7.8 / bd-1wv)
+    await page
+      .getByLabel('Книга для библиотеки')
+      .fill('Гарри Поттер и философский камень');
+    await page
+      .getByRole('button', { name: 'Гарри Поттер и философский камень' })
+      .click();
+    await selectUserBookStatus(page, 'READING');
+    await page.getByRole('button', { name: 'Сохранить в библиотеку' }).click();
+    await expect(
+      page.getByRole('status').filter({
+        hasText: 'Статус сохранён',
+      }),
+    ).toBeVisible();
+  });
+
+  test('guest: add library item form asks to log in', async ({ page }) => {
+    await page.goto('/library');
+    // Slug fallback without selecting a suggestion
+    await page
+      .getByLabel('Книга для библиотеки')
+      .fill('garri-potter-filosofskiy-kamen');
+    await page.getByRole('button', { name: 'Сохранить в библиотеку' }).click();
+    await expect(
+      page.getByRole('status').filter({
+        hasText: 'Войдите, чтобы добавить книгу в библиотеку',
+      }),
+    ).toBeVisible();
+  });
+
+  test('guest: empty workSlug shows Russian validation message', async ({
+    page,
+  }) => {
+    await page.goto('/library');
+    await page.getByLabel('Книга для библиотеки').fill('');
+    await page.getByRole('button', { name: 'Сохранить в библиотеку' }).click();
+
+    await expect(page.getByText('Укажите слаг произведения')).toBeVisible();
+    await expect(
+      page.getByText('Too small: expected string to have >=1 characters'),
+    ).toHaveCount(0);
+  });
+});
+
+test.describe('Library / Profile empty-page fix (bd-cq7.6)', () => {
+  test('slow /api/auth/me: /login shows guest form immediately (never blank)', async ({
+    page,
+  }) => {
+    await page.route('**/api/auth/me', async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      await route.fulfill({
+        status: 401,
+        contentType: 'application/json',
+        body: JSON.stringify({ message: 'Unauthorized' }),
+      });
+    });
+
+    await page.goto('/login');
+
+    await expect(page.locator('body')).not.toBeEmpty();
+    await expect(
+      page.getByRole('heading', { name: 'Вход', level: 1 }),
+    ).toBeVisible();
+    await expect(page.getByLabel('Email')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Войти' })).toBeVisible();
+  });
+
+  test('slow /api/auth/me: /library heading stays visible (no blank cabinet)', async ({
+    page,
+  }) => {
+    await page.route('**/api/auth/me', async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await route.fulfill({
+        status: 401,
+        contentType: 'application/json',
+        body: JSON.stringify({ message: 'Unauthorized' }),
+      });
+    });
+    await page.route('**/api/me/library**', async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await route.fulfill({
+        status: 401,
+        contentType: 'application/json',
+        body: JSON.stringify({ message: 'Unauthorized' }),
+      });
+    });
+
+    await page.goto('/library');
+
+    const heading = page.getByRole('heading', {
+      name: 'Моя библиотека',
+      level: 1,
+    });
+    await expect(heading).toBeVisible();
+    const box = await heading.boundingBox();
+    expect(box).not.toBeNull();
+    const viewport = page.viewportSize();
+    expect(viewport).not.toBeNull();
+    if (box && viewport) {
+      expect(box.height).toBeGreaterThan(8);
+      expect(box.y).toBeGreaterThanOrEqual(0);
+      expect(box.y + box.height).toBeLessThan(viewport.height);
+    }
+    await expect(page.getByRole('link', { name: 'Мои полки' })).toBeVisible();
+  });
+
+  test('iPhone viewport: /library heading and body stay visible', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 393, height: 852 }); // iPhone 17-ish
+    await page.goto('/library');
+
+    const heading = page.getByRole('heading', {
+      name: 'Моя библиотека',
+      level: 1,
+    });
+    await expect(heading).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Мои полки' })).toBeVisible();
+
+    const box = await heading.boundingBox();
+    expect(box).not.toBeNull();
+    if (box) {
+      expect(box.height).toBeGreaterThan(8);
+      expect(box.y).toBeLessThan(200);
+    }
+  });
+});

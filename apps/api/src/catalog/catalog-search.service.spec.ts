@@ -182,4 +182,68 @@ describe('CatalogSearchService', () => {
       .map((item) => item.slug);
     expect(slugs).toEqual([]);
   });
+
+  it('finds published author by nameRu prefix (роул → Роулинг)', async () => {
+    const author = await prisma.author.create({
+      data: {
+        slug: `${TEST_PREFIX}-rowling`,
+        nameRu: 'Дж. К. Роулинг',
+        nameOrig: 'J. K. Rowling',
+        status: 'PUBLISHED',
+      },
+    });
+
+    await prisma.author.create({
+      data: {
+        slug: `${TEST_PREFIX}-rowling-draft`,
+        nameRu: 'Черновик Роулинг',
+        status: 'DRAFT',
+      },
+    });
+
+    const result = await service.search('роул');
+
+    expect(result.items).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          type: 'AUTHOR',
+          id: author.id,
+          slug: author.slug,
+          title: 'Дж. К. Роулинг',
+          path: `/authors/${author.slug}`,
+        }),
+      ]),
+    );
+
+    const scoped = result.items.filter((item) =>
+      item.slug.startsWith(TEST_PREFIX),
+    );
+    expect(scoped).toHaveLength(1);
+    expect(scoped[0]?.slug).toBe(author.slug);
+  });
+
+  it('finds work by titleOrig prefix without dumping on punctuation-only q', async () => {
+    await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-rowling-work`,
+        titleRu: 'Гарри Поттер и узник Азкабана',
+        titleOrig: 'Harry Potter and the Prisoner of Azkaban',
+        status: WorkStatus.PUBLISHED,
+      },
+    });
+
+    const prefixResult = await service.search('Harr');
+    expect(prefixResult.items).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          type: 'WORK',
+          slug: `${TEST_PREFIX}-rowling-work`,
+        }),
+      ]),
+    );
+
+    const junk = await service.search('!!!');
+    expect(junk.query).toBe('!!!');
+    expect(junk.items).toEqual([]);
+  });
 });

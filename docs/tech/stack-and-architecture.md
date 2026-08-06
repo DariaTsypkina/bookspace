@@ -1,19 +1,23 @@
 # Стек и архитектура (MVP)
 
-Связано: [ADR 0001](../adr/0001-stack-mvp.md), [продуктовая спека](../product/mvp-spec.md).
+Связано: [ADR 0001](../adr/0001-stack-mvp.md), [ADR 0003](../adr/0003-tailwind-shadcn.md) (UI-слой), [ADR 0004](../adr/0004-rhf-zod-full-contour.md) (формы и валидация), [ADR 0005](../adr/0005-axios-http-client.md) (HTTP-клиент, **accepted**), [продуктовая спека](../product/mvp-spec.md), [миграция Tailwind + shadcn](migration-tailwind-shadcn.md), [миграция RHF + Zod](migration-rhf-zod.md), [миграция axios](migration-axios.md).
 
 ## Решения
 
 | Слой | Выбор | Notes |
 |------|--------|--------|
 | Frontend | Next.js (App Router) + TypeScript + React | Отдельное приложение; SSR/SEO публичных страниц; PWA |
+| Формы (web) | React Hook Form + Zod (`zodResolver`) | Канон после ADR 0004 / bd-0t0 (миграция завершена) |
+| UI-kit | Tailwind CSS + shadcn/ui (Radix) + Lucide | **Канон** ([ADR 0003](../adr/0003-tailwind-shadcn.md) **accepted**): copy-in-repo `components/ui`; токены «читальня»; см. конвенцию ниже |
+| HTTP-клиент (app) | axios (web); axios + `@nestjs/axios` (api outbound) | **Канон** ([ADR 0005](../adr/0005-axios-http-client.md) **accepted**); миграция [completed](migration-axios.md); `fetch` — только SW + BFF-proxy (eslint guardrails) |
 | Backend | NestJS + TypeScript | Отдельный API + workers |
+| Валидация API | Zod + `nestjs-zod` | Канон после ADR 0004 / bd-0t0; `class-validator` удалён из runtime deps |
 | ORM / БД | Prisma + PostgreSQL | |
 | Поиск | PostgreSQL Full-Text Search (русский конфиг) | Meilisearch — отдельный ADR при росте |
 | Auth | На Nest (Passport / стратегии credentials + Google + Yandex); сессия или JWT в httpOnly cookie для Next | Вариант A: бэкенд — источник истины по identity |
 | Jobs | BullMQ + Redis | Импорт, агрегация рейтингов, LLM |
 | LLM | OpenAI API за абстракцией `LlmProvider` | Смена модели без переписывания пайплайнов |
-| Админка | UI во фронте (`/admin`), данные через admin API Nest | Role check только на бэкенде |
+| Админка | UI во фронте (`/admin`), данные через admin API Nest | Role check только на бэкенде; UI на том же kit |
 | Деплой MVP | Local first (Docker Compose: Next, Nest, Postgres, Redis); cloud позже без привязки к вендору | |
 
 ## Переменные окружения
@@ -44,11 +48,37 @@ flowchart LR
 ```
 apps/web/          # Next.js — UI, PWA, /admin pages
 apps/api/          # NestJS — REST API, auth, BullMQ processors
-packages/…         # опционально shared types / zod-схемы
+packages/schemas/  # shared Zod-схемы и типы контрактов
 docker-compose.yml # postgres, redis, api, web (dev)
 ```
 
 Фронт **не** milкает в БД: только HTTP к Nest.
+
+## UI-конвенция (apps/web)
+
+Канон: [ADR 0003](../adr/0003-tailwind-shadcn.md) (**accepted**), план [migration-tailwind-shadcn.md](migration-tailwind-shadcn.md), правила [`stack.mdc`](../../.cursor/rules/stack.mdc) / [`ui-ru.mdc`](../../.cursor/rules/ui-ru.mdc).
+
+| Правило | Смысл |
+|---------|--------|
+| Новый UI и новые экраны | Только **Tailwind** + примитивы `components/ui` (shadcn/Radix) + **Lucide** |
+| Выпадающие списки | Только `components/ui/select` (`@radix-ui/react-select`); native `<select>` запрещён в прод-UI |
+| UI-шрифт | **Baskerville** (кириллица): `next/font/local`, `apps/web/fonts/Baskerville-*.woff2`, `--font-baskerville`, Tailwind `font-sans` — [ui-typography](../features/ui-typography.md). Не подключать другой typeface / Google Fonts без задачи |
+| Legacy `globals.css` | Допустим только для ещё не мигрированных экранов; **запрещено** добавлять новые селекторы/блоки под новые экраны или новый UI |
+| On touch | При рефакторе экрана — перенос на стек ADR 0003 и вычистка мёртвых селекторов этого экрана из `globals.css` |
+| Другой UI-kit | Только новый ADR + согласование зависимостей |
+
+## Конвенция форм и валидации (web/api)
+
+Канон: [ADR 0004](../adr/0004-rhf-zod-full-contour.md) (**accepted**), план [migration-rhf-zod.md](migration-rhf-zod.md), правила [`stack.mdc`](../../.cursor/rules/stack.mdc).
+
+| Правило | Смысл |
+|---------|--------|
+| Shared schema first | Контракты входных данных задаются в `packages/schemas` |
+| Web forms | Новые формы делаются на RHF + `zodResolver` + `shadcn Form` |
+| API validation | Новые endpoint-валидации делаются на Zod v4 + `nestjs-zod` |
+| API error contract | `400 validation errors` возвращаются в едином JSON-формате (`code`/`path`/`message`) |
+| UX messages | Web может показывать friendly/localized тексты, не меняя shared-схему и API-контракт |
+| End state | ✅ Runtime без `class-validator` (bd-0t0.11); новый код только RHF+Zod / nestjs-zod |
 
 ## Auth
 

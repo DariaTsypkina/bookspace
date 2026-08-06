@@ -1,60 +1,235 @@
 {
-  "generated_at": "2026-07-20T15:28:32.437Z",
+  "generated_at": "2026-08-06T10:39:57.152Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 68,
-    "open_issues": 42,
-    "in_progress_issues": 4,
-    "closed_issues": 22,
-    "blocked_issues": 41,
-    "ready_issues": 1
+    "total_issues": 154,
+    "open_issues": 26,
+    "in_progress_issues": 0,
+    "closed_issues": 128,
+    "blocked_issues": 0,
+    "ready_issues": 26
   },
   "epics": [
     {
+      "id": "bd-0t0",
+      "title": "DX: RHF + Zod full contour",
+      "status": "closed",
+      "priority": 2,
+      "children_total": 13,
+      "children_closed": 13,
+      "children_in_progress": 0,
+      "children_open": 0,
+      "progress": "13 / 13",
+      "percent_closed": 100,
+      "children": [
+        {
+          "id": "bd-0t0.1",
+          "title": "RHF/Zod foundation: packages/schemas + naming",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.10",
+          "title": "Wave 2: миграция домена Rankings/Collections/Admin DTO/forms",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.11",
+          "title": "Finalization: remove class-validator and legacy cleanup",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.12",
+          "title": "Playwright rankings/collections smoke: button count ловит Next.js Dev Tools",
+          "status": "closed",
+          "type": "bug",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.13",
+          "title": "fix: api e2e eslint unsafe any в validation asserts",
+          "status": "closed",
+          "type": "bug",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.2",
+          "title": "RHF/Zod foundation: web form pattern on shadcn Form",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.3",
+          "title": "RHF/Zod foundation: api validation pipe + OpenAPI",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.4",
+          "title": "Wave 1: миграция login/register end-to-end",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.5",
+          "title": "Wave 1: миграция catalog search end-to-end",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.6",
+          "title": "Wave 1: миграция admin context end-to-end",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.7",
+          "title": "Wave 2: миграция домена Catalog pages DTO/forms",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.8",
+          "title": "Wave 2: миграция домена Library/Profile DTO/forms",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-0t0.9",
+          "title": "Wave 2: миграция домена Relations/Spoiler DTO/forms",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        }
+      ]
+    },
+    {
       "id": "bd-6b7",
       "title": "PWA и оболочка",
-      "status": "open",
+      "status": "closed",
       "priority": 3,
-      "children_total": 3,
-      "children_closed": 0,
+      "children_total": 13,
+      "children_closed": 13,
       "children_in_progress": 0,
-      "children_open": 3,
-      "progress": "0 / 3",
-      "percent_closed": 0,
+      "children_open": 0,
+      "progress": "13 / 13",
+      "percent_closed": 100,
       "children": [
         {
           "id": "bd-6b7.1",
           "title": "PWA: установка",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 3
         },
         {
+          "id": "bd-6b7.10",
+          "title": "PWA SW: stale /_next/static cache → AppNav hydration mismatch (asChild)",
+          "status": "closed",
+          "type": "bug",
+          "priority": 1
+        },
+        {
+          "id": "bd-6b7.11",
+          "title": "mobile: «Выйти» не срабатывает (нужен progressive form POST)",
+          "status": "closed",
+          "type": "bug",
+          "priority": 1
+        },
+        {
+          "id": "bd-6b7.12",
+          "title": "mobile: logout 303 редиректит на localhost (ERR_CONNECTION_FAILED по LAN)",
+          "status": "closed",
+          "type": "bug",
+          "priority": 1
+        },
+        {
+          "id": "bd-6b7.13",
+          "title": "mobile: после logout /login зависает на «Загрузка…» при ошибке /api/auth/me",
+          "status": "closed",
+          "type": "bug",
+          "priority": 1
+        },
+        {
           "id": "bd-6b7.2",
           "title": "PWA: offline shell",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 3
         },
         {
           "id": "bd-6b7.3",
           "title": "PWA: App shell и tab-bar",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 3
+        },
+        {
+          "id": "bd-6b7.4",
+          "title": "UI: строка меню (Главная · Поиск · Профиль)",
+          "status": "closed",
+          "type": "feature",
+          "priority": 2
+        },
+        {
+          "id": "bd-6b7.5",
+          "title": "UI: кнопки Войти / Выйти в меню",
+          "status": "closed",
+          "type": "feature",
+          "priority": 2
+        },
+        {
+          "id": "bd-6b7.6",
+          "title": "UI: одинаковый font-weight у всех пунктов меню (как у активного)",
+          "status": "closed",
+          "type": "bug",
+          "priority": 2
+        },
+        {
+          "id": "bd-6b7.7",
+          "title": "UI: Войти/Выйти пропадает + hydration mismatch в AppNav",
+          "status": "closed",
+          "type": "bug",
+          "priority": 1
+        },
+        {
+          "id": "bd-6b7.8",
+          "title": "UI: Войти/Выйти из меню в раздел Профиля",
+          "status": "closed",
+          "type": "feature",
+          "priority": 2
+        },
+        {
+          "id": "bd-6b7.9",
+          "title": "mobile: «Выйти» в профиле не редиректит на /login",
+          "status": "closed",
+          "type": "bug",
+          "priority": 1
         }
       ]
     },
     {
       "id": "bd-6v0",
       "title": "Каталог",
-      "status": "open",
+      "status": "closed",
       "priority": 1,
-      "children_total": 8,
-      "children_closed": 8,
+      "children_total": 12,
+      "children_closed": 12,
       "children_in_progress": 0,
       "children_open": 0,
-      "progress": "8 / 8",
+      "progress": "12 / 12",
       "percent_closed": 100,
       "children": [
         {
@@ -63,6 +238,27 @@
           "status": "closed",
           "type": "feature",
           "priority": 1
+        },
+        {
+          "id": "bd-6v0.10",
+          "title": "Поиск: префикс запроса не находит полные совпадения (роул → Роулинг)",
+          "status": "closed",
+          "type": "bug",
+          "priority": 1
+        },
+        {
+          "id": "bd-6v0.11",
+          "title": "mobile: поиск «Найти» уходит с ?query= вместо ?q= — выдача пустая",
+          "status": "closed",
+          "type": "bug",
+          "priority": 1
+        },
+        {
+          "id": "bd-6v0.12",
+          "title": "Каталог: аннотация (краткое содержание) на карточке книги",
+          "status": "closed",
+          "type": "feature",
+          "priority": 2
         },
         {
           "id": "bd-6v0.2",
@@ -112,13 +308,104 @@
           "status": "closed",
           "type": "bug",
           "priority": 2
+        },
+        {
+          "id": "bd-6v0.9",
+          "title": "Поиск: восстановить FTS search_vector после drift Prisma",
+          "status": "closed",
+          "type": "bug",
+          "priority": 2
+        }
+      ]
+    },
+    {
+      "id": "bd-707",
+      "title": "DX: axios HTTP-клиент (web + api)",
+      "status": "closed",
+      "priority": 2,
+      "children_total": 10,
+      "children_closed": 10,
+      "children_in_progress": 0,
+      "children_open": 0,
+      "progress": "10 / 10",
+      "percent_closed": 100,
+      "children": [
+        {
+          "id": "bd-707.1",
+          "title": "Axios F0: deps + docs sync",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.10",
+          "title": "Axios D1: DoD guardrails + docs",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.2",
+          "title": "Axios F1: web http + ApiError foundation",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.3",
+          "title": "Axios F2: api HttpModule foundation",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.4",
+          "title": "Axios W1: migrate web lib/auth",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.5",
+          "title": "Axios W2: migrate web catalog libs",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.6",
+          "title": "Axios W3: migrate web admin-context lib",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.7",
+          "title": "Axios W4: migrate web client forms fetch",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.8",
+          "title": "Axios W5: web regression smoke",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-707.9",
+          "title": "Axios A1: OAuth clients → HttpService",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
         }
       ]
     },
     {
       "id": "bd-8s4",
       "title": "ContextReading",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
       "children_total": 4,
       "children_closed": 4,
@@ -160,14 +447,14 @@
     {
       "id": "bd-957",
       "title": "Auth",
-      "status": "open",
+      "status": "closed",
       "priority": 1,
-      "children_total": 7,
-      "children_closed": 7,
+      "children_total": 12,
+      "children_closed": 11,
       "children_in_progress": 0,
-      "children_open": 0,
-      "progress": "7 / 7",
-      "percent_closed": 100,
+      "children_open": 1,
+      "progress": "11 / 12",
+      "percent_closed": 92,
       "children": [
         {
           "id": "bd-8jk",
@@ -205,6 +492,41 @@
           "priority": 1
         },
         {
+          "id": "bd-957.5",
+          "title": "UI: показать/скрыть пароль (кнопка глаза) на полях пароля",
+          "status": "closed",
+          "type": "feature",
+          "priority": 2
+        },
+        {
+          "id": "bd-957.6",
+          "title": "web: общий Auth Context — один /api/auth/me на сессию клиента",
+          "status": "closed",
+          "type": "feature",
+          "priority": 2
+        },
+        {
+          "id": "bd-957.7",
+          "title": "mobile: /login form уходит GET с credential query; нужен progressive POST fallback",
+          "status": "closed",
+          "type": "bug",
+          "priority": 1
+        },
+        {
+          "id": "bd-957.8",
+          "title": "UI: кнопка глаза пароля — только иконка без хрома",
+          "status": "closed",
+          "type": "task",
+          "priority": 3
+        },
+        {
+          "id": "bd-957.9",
+          "title": "UI: скрыть вход через Google и Яндекс на /login и /register",
+          "status": "open",
+          "type": "task",
+          "priority": 2
+        },
+        {
           "id": "bd-v2y",
           "title": "Auth: сессия и защита маршрутов",
           "status": "closed",
@@ -214,6 +536,34 @@
         {
           "id": "bd-wlw",
           "title": "Auth: rate limit на register/login",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        }
+      ]
+    },
+    {
+      "id": "bd-a12",
+      "title": "DX: UI-конвенции (RU ошибки + shadcn Select)",
+      "status": "closed",
+      "priority": 2,
+      "children_total": 2,
+      "children_closed": 2,
+      "children_in_progress": 0,
+      "children_open": 0,
+      "progress": "2 / 2",
+      "percent_closed": 100,
+      "children": [
+        {
+          "id": "bd-a12.1",
+          "title": "UI: все user-facing ошибки на русском (+ маппинг API)",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-a12.2",
+          "title": "UI: shadcn Select + замена native select",
           "status": "closed",
           "type": "task",
           "priority": 2
@@ -258,42 +608,49 @@
     {
       "id": "bd-azl",
       "title": "Связи и порядок",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
-      "children_total": 4,
-      "children_closed": 0,
+      "children_total": 5,
+      "children_closed": 5,
       "children_in_progress": 0,
-      "children_open": 4,
-      "progress": "0 / 4",
-      "percent_closed": 0,
+      "children_open": 0,
+      "progress": "5 / 5",
+      "percent_closed": 100,
       "children": [
         {
           "id": "bd-azl.1",
           "title": "Связи: Карточка серии",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 2
         },
         {
           "id": "bd-azl.2",
           "title": "Связи произведений",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 2
         },
         {
           "id": "bd-azl.3",
           "title": "Связи: Порядок чтения",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 2
         },
         {
           "id": "bd-azl.4",
           "title": "Связи: Spoiler gate",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 2
+        },
+        {
+          "id": "bd-azl.5",
+          "title": "iOS Chrome: кнопка «Показать» не снимает spoiler gate",
+          "status": "closed",
+          "type": "bug",
+          "priority": 1
         }
       ]
     },
@@ -335,48 +692,69 @@
     {
       "id": "bd-cq7",
       "title": "Библиотека и профиль",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
-      "children_total": 5,
-      "children_closed": 0,
+      "children_total": 8,
+      "children_closed": 8,
       "children_in_progress": 0,
-      "children_open": 5,
-      "progress": "0 / 5",
-      "percent_closed": 0,
+      "children_open": 0,
+      "progress": "8 / 8",
+      "percent_closed": 100,
       "children": [
         {
           "id": "bd-cq7.1",
           "title": "Библиотека: Статус и оценка книги",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 2
         },
         {
           "id": "bd-cq7.2",
           "title": "Библиотека: Пользовательские полки",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 2
         },
         {
           "id": "bd-cq7.3",
           "title": "Библиотека: Теги пользователя",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 2
         },
         {
           "id": "bd-cq7.4",
           "title": "Библиотека: Моя библиотека",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
           "priority": 2
         },
         {
           "id": "bd-cq7.5",
           "title": "Библиотека: Публичный профиль",
-          "status": "open",
+          "status": "closed",
           "type": "feature",
+          "priority": 2
+        },
+        {
+          "id": "bd-cq7.6",
+          "title": "iOS Chrome: пустая страница Профиль (/library)",
+          "status": "closed",
+          "type": "bug",
+          "priority": 1
+        },
+        {
+          "id": "bd-cq7.7",
+          "title": "UI: английская ошибка Zod в поле «Слаг произведения»",
+          "status": "closed",
+          "type": "bug",
+          "priority": 2
+        },
+        {
+          "id": "bd-cq7.8",
+          "title": "Библиотека/полки: не находит произведение при вводе названия (только slug)",
+          "status": "closed",
+          "type": "bug",
           "priority": 2
         }
       ]
@@ -513,9 +891,302 @@
           "priority": 2
         }
       ]
+    },
+    {
+      "id": "bd-wus",
+      "title": "DX: Tailwind + shadcn",
+      "status": "closed",
+      "priority": 2,
+      "children_total": 18,
+      "children_closed": 18,
+      "children_in_progress": 0,
+      "children_open": 0,
+      "progress": "18 / 18",
+      "percent_closed": 100,
+      "children": [
+        {
+          "id": "bd-wus.1",
+          "title": "UI: Foundation Tailwind + design tokens",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.10",
+          "title": "UI: миграция карточки автора /authors/[slug]",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.11",
+          "title": "UI: миграция карточки персонажа /characters/[slug]",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.12",
+          "title": "UI: миграция карточки мира /worlds/[slug]",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.13",
+          "title": "UI: миграция карточки локации /places/[slug]",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.14",
+          "title": "UI: миграция публичного профиля /u/[slug]",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.15",
+          "title": "UI: миграция экрана Библиотека /library",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.16",
+          "title": "UI: миграция Admin Context /admin/context",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.17",
+          "title": "UI: конвенция новый UI только Tailwind+shadcn",
+          "status": "closed",
+          "type": "chore",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.18",
+          "title": "UI: корневой layout на Tailwind (app-shell/app-content)",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.2",
+          "title": "UI: shadcn baseline + Lucide",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.3",
+          "title": "UI: миграция app-nav (tab-bar) на Tailwind+shadcn",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.4",
+          "title": "UI: миграция экрана Главная /",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.5",
+          "title": "UI: миграция экрана Вход /login",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.6",
+          "title": "UI: миграция экрана Регистрация /register",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.7",
+          "title": "UI: миграция экрана Auth error /auth/error",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.8",
+          "title": "UI: миграция экрана Поиск /search",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        },
+        {
+          "id": "bd-wus.9",
+          "title": "UI: миграция карточки произведения /books/[slug]",
+          "status": "closed",
+          "type": "task",
+          "priority": 2
+        }
+      ]
     }
   ],
   "issues": [
+    {
+      "id": "bd-g6v",
+      "title": "typecheck: Zod input types в me-library/shelves/tags specs + e2e cookies",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": null,
+      "updated_at": "2026-08-05T07:27:51Z"
+    },
+    {
+      "id": "bd-4td",
+      "title": "lint: unsafe any в API e2e library (cq7 push blocker)",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": null,
+      "updated_at": "2026-08-05T07:25:24Z"
+    },
+    {
+      "id": "bd-2qm",
+      "title": "lint: set-state-in-effect в library UI (cq7 push blocker)",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": null,
+      "updated_at": "2026-08-05T07:23:01Z"
+    },
+    {
+      "id": "bd-3h3",
+      "title": "lint: admin-only setState in effect (react-hooks/set-state-in-effect)",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": null,
+      "updated_at": "2026-08-04T10:57:28Z"
+    },
+    {
+      "id": "bd-957.7",
+      "title": "mobile: /login form уходит GET с credential query; нужен progressive POST fallback",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": "bd-957",
+      "updated_at": "2026-08-04T10:19:32Z"
+    },
+    {
+      "id": "bd-6b7.13",
+      "title": "mobile: после logout /login зависает на «Загрузка…» при ошибке /api/auth/me",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": "bd-6b7",
+      "updated_at": "2026-08-04T10:19:31Z"
+    },
+    {
+      "id": "bd-6b7.12",
+      "title": "mobile: logout 303 редиректит на localhost (ERR_CONNECTION_FAILED по LAN)",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": "bd-6b7",
+      "updated_at": "2026-08-03T14:00:16Z"
+    },
+    {
+      "id": "bd-6b7.11",
+      "title": "mobile: «Выйти» не срабатывает (нужен progressive form POST)",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": "bd-6b7",
+      "updated_at": "2026-08-03T12:38:41Z"
+    },
+    {
+      "id": "bd-6b7.10",
+      "title": "PWA SW: stale /_next/static cache → AppNav hydration mismatch (asChild)",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": "bd-6b7",
+      "updated_at": "2026-08-03T11:31:10Z"
+    },
+    {
+      "id": "bd-6v0.11",
+      "title": "mobile: поиск «Найти» уходит с ?query= вместо ?q= — выдача пустая",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": "bd-6v0",
+      "updated_at": "2026-08-03T11:12:52Z"
+    },
+    {
+      "id": "bd-6b7.9",
+      "title": "mobile: «Выйти» в профиле не редиректит на /login",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": "bd-6b7",
+      "updated_at": "2026-08-03T11:09:24Z"
+    },
+    {
+      "id": "bd-9p1",
+      "title": "web: spoiler-gate.test Storage mock fails typecheck",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": null,
+      "updated_at": "2026-08-03T10:30:43Z"
+    },
+    {
+      "id": "bd-jtw",
+      "title": "web: spoiler-gate setState-in-effect lint fail (react-hooks)",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": null,
+      "updated_at": "2026-08-03T10:27:22Z"
+    },
+    {
+      "id": "bd-6b7.7",
+      "title": "UI: Войти/Выйти пропадает + hydration mismatch в AppNav",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": "bd-6b7",
+      "updated_at": "2026-07-29T19:24:09Z"
+    },
+    {
+      "id": "bd-cq7.6",
+      "title": "iOS Chrome: пустая страница Профиль (/library)",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": "bd-cq7",
+      "updated_at": "2026-08-03T09:32:00Z"
+    },
+    {
+      "id": "bd-azl.5",
+      "title": "iOS Chrome: кнопка «Показать» не снимает spoiler gate",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": "bd-azl",
+      "updated_at": "2026-08-03T10:14:36Z"
+    },
+    {
+      "id": "bd-6v0.10",
+      "title": "Поиск: префикс запроса не находит полные совпадения (роул → Роулинг)",
+      "status": "closed",
+      "type": "bug",
+      "priority": 1,
+      "parent": "bd-6v0",
+      "updated_at": "2026-07-27T09:57:41Z"
+    },
     {
       "id": "bd-957.4",
       "title": "AuthModule: ConfigService не импортирован — e2e AppModule падает",
@@ -582,11 +1253,11 @@
     {
       "id": "bd-6v0",
       "title": "Каталог",
-      "status": "open",
+      "status": "closed",
       "type": "epic",
       "priority": 1,
       "parent": null,
-      "updated_at": "2026-07-17T12:35:56Z"
+      "updated_at": "2026-07-20T15:51:43Z"
     },
     {
       "id": "bd-957.1",
@@ -600,11 +1271,11 @@
     {
       "id": "bd-957",
       "title": "Auth",
-      "status": "open",
+      "status": "closed",
       "type": "epic",
       "priority": 1,
       "parent": null,
-      "updated_at": "2026-07-17T12:36:57Z"
+      "updated_at": "2026-07-20T15:51:42Z"
     },
     {
       "id": "bd-v2y",
@@ -623,6 +1294,609 @@
       "priority": 1,
       "parent": "bd-957",
       "updated_at": "2026-07-20T07:30:07Z"
+    },
+    {
+      "id": "bd-6v0.12",
+      "title": "Каталог: аннотация (краткое содержание) на карточке книги",
+      "status": "closed",
+      "type": "feature",
+      "priority": 2,
+      "parent": "bd-6v0",
+      "updated_at": "2026-08-06T10:27:39Z"
+    },
+    {
+      "id": "bd-957.9",
+      "title": "UI: скрыть вход через Google и Яндекс на /login и /register",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-957",
+      "updated_at": "2026-08-05T10:43:02Z"
+    },
+    {
+      "id": "bd-a12.2",
+      "title": "UI: shadcn Select + замена native select",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-a12",
+      "updated_at": "2026-08-05T11:09:29Z"
+    },
+    {
+      "id": "bd-a12.1",
+      "title": "UI: все user-facing ошибки на русском (+ маппинг API)",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-a12",
+      "updated_at": "2026-08-05T11:01:33Z"
+    },
+    {
+      "id": "bd-a12",
+      "title": "DX: UI-конвенции (RU ошибки + shadcn Select)",
+      "status": "closed",
+      "type": "epic",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-08-05T11:13:01Z"
+    },
+    {
+      "id": "bd-1wv",
+      "title": "[bug] cq7: smoke library-page использует устаревший slug-only сценарий",
+      "status": "closed",
+      "type": "bug",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-08-05T10:19:54Z"
+    },
+    {
+      "id": "bd-k7i",
+      "title": "[bug] cq7: lint react-hooks/set-state-in-effect в work-search-input",
+      "status": "closed",
+      "type": "bug",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-08-05T10:17:18Z"
+    },
+    {
+      "id": "bd-fr9",
+      "title": "Docs: orchestrate skill и пакетный оркестратор",
+      "status": "closed",
+      "type": "chore",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-08-05T08:45:40Z"
+    },
+    {
+      "id": "bd-cq7.8",
+      "title": "Библиотека/полки: не находит произведение при вводе названия (только slug)",
+      "status": "closed",
+      "type": "bug",
+      "priority": 2,
+      "parent": "bd-cq7",
+      "updated_at": "2026-08-05T10:08:35Z"
+    },
+    {
+      "id": "bd-cq7.7",
+      "title": "UI: английская ошибка Zod в поле «Слаг произведения»",
+      "status": "closed",
+      "type": "bug",
+      "priority": 2,
+      "parent": "bd-cq7",
+      "updated_at": "2026-08-05T09:50:23Z"
+    },
+    {
+      "id": "bd-957.6",
+      "title": "web: общий Auth Context — один /api/auth/me на сессию клиента",
+      "status": "closed",
+      "type": "feature",
+      "priority": 2,
+      "parent": "bd-957",
+      "updated_at": "2026-08-04T10:52:06Z"
+    },
+    {
+      "id": "bd-957.5",
+      "title": "UI: показать/скрыть пароль (кнопка глаза) на полях пароля",
+      "status": "closed",
+      "type": "feature",
+      "priority": 2,
+      "parent": "bd-957",
+      "updated_at": "2026-08-04T10:41:45Z"
+    },
+    {
+      "id": "bd-6b7.8",
+      "title": "UI: Войти/Выйти из меню в раздел Профиля",
+      "status": "closed",
+      "type": "feature",
+      "priority": 2,
+      "parent": "bd-6b7",
+      "updated_at": "2026-07-29T19:34:06Z"
+    },
+    {
+      "id": "bd-6b7.6",
+      "title": "UI: одинаковый font-weight у всех пунктов меню (как у активного)",
+      "status": "closed",
+      "type": "bug",
+      "priority": 2,
+      "parent": "bd-6b7",
+      "updated_at": "2026-07-29T19:10:54Z"
+    },
+    {
+      "id": "bd-p3l",
+      "title": "UI: Baskerville не применяется к кнопкам и инпутам",
+      "status": "closed",
+      "type": "bug",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-08-03T10:17:21Z"
+    },
+    {
+      "id": "bd-v3x",
+      "title": "web: work-page-context-reading.integration stubs fetch, code uses axios",
+      "status": "closed",
+      "type": "bug",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-08-03T10:20:06Z"
+    },
+    {
+      "id": "bd-23j",
+      "title": "UI: Baskerville (woff2, кириллица) на весь UI",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-29T18:38:12Z"
+    },
+    {
+      "id": "bd-707.10",
+      "title": "Axios D1: DoD guardrails + docs",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T17:18:53Z"
+    },
+    {
+      "id": "bd-707.9",
+      "title": "Axios A1: OAuth clients → HttpService",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T17:15:55Z"
+    },
+    {
+      "id": "bd-707.8",
+      "title": "Axios W5: web regression smoke",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T17:11:56Z"
+    },
+    {
+      "id": "bd-707.7",
+      "title": "Axios W4: migrate web client forms fetch",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T17:07:53Z"
+    },
+    {
+      "id": "bd-707.6",
+      "title": "Axios W3: migrate web admin-context lib",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T17:02:31Z"
+    },
+    {
+      "id": "bd-707.5",
+      "title": "Axios W2: migrate web catalog libs",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T17:00:04Z"
+    },
+    {
+      "id": "bd-707.3",
+      "title": "Axios F2: api HttpModule foundation",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T16:50:04Z"
+    },
+    {
+      "id": "bd-707.4",
+      "title": "Axios W1: migrate web lib/auth",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T16:54:35Z"
+    },
+    {
+      "id": "bd-707.2",
+      "title": "Axios F1: web http + ApiError foundation",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T16:46:40Z"
+    },
+    {
+      "id": "bd-707.1",
+      "title": "Axios F0: deps + docs sync",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-707",
+      "updated_at": "2026-07-29T16:42:14Z"
+    },
+    {
+      "id": "bd-707",
+      "title": "DX: axios HTTP-клиент (web + api)",
+      "status": "closed",
+      "type": "epic",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-29T17:21:08Z"
+    },
+    {
+      "id": "bd-82j",
+      "title": "UI: подключить Google Fonts Roboto (весь UI)",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-29T17:46:14Z"
+    },
+    {
+      "id": "bd-6b7.5",
+      "title": "UI: кнопки Войти / Выйти в меню",
+      "status": "closed",
+      "type": "feature",
+      "priority": 2,
+      "parent": "bd-6b7",
+      "updated_at": "2026-07-29T19:07:15Z"
+    },
+    {
+      "id": "bd-0t0.13",
+      "title": "fix: api e2e eslint unsafe any в validation asserts",
+      "status": "closed",
+      "type": "bug",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T12:53:10Z"
+    },
+    {
+      "id": "bd-0t0.12",
+      "title": "Playwright rankings/collections smoke: button count ловит Next.js Dev Tools",
+      "status": "closed",
+      "type": "bug",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T12:49:03Z"
+    },
+    {
+      "id": "bd-0t0.11",
+      "title": "Finalization: remove class-validator and legacy cleanup",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T12:43:57Z"
+    },
+    {
+      "id": "bd-0t0.10",
+      "title": "Wave 2: миграция домена Rankings/Collections/Admin DTO/forms",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T12:27:23Z"
+    },
+    {
+      "id": "bd-0t0.8",
+      "title": "Wave 2: миграция домена Library/Profile DTO/forms",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T12:12:34Z"
+    },
+    {
+      "id": "bd-0t0.9",
+      "title": "Wave 2: миграция домена Relations/Spoiler DTO/forms",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T12:21:56Z"
+    },
+    {
+      "id": "bd-0t0.7",
+      "title": "Wave 2: миграция домена Catalog pages DTO/forms",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T12:01:24Z"
+    },
+    {
+      "id": "bd-0t0.6",
+      "title": "Wave 1: миграция admin context end-to-end",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T10:56:35Z"
+    },
+    {
+      "id": "bd-0t0.5",
+      "title": "Wave 1: миграция catalog search end-to-end",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T10:46:01Z"
+    },
+    {
+      "id": "bd-0t0.4",
+      "title": "Wave 1: миграция login/register end-to-end",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T10:39:35Z"
+    },
+    {
+      "id": "bd-0t0.3",
+      "title": "RHF/Zod foundation: api validation pipe + OpenAPI",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T10:23:32Z"
+    },
+    {
+      "id": "bd-0t0.2",
+      "title": "RHF/Zod foundation: web form pattern on shadcn Form",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T10:13:52Z"
+    },
+    {
+      "id": "bd-0t0.1",
+      "title": "RHF/Zod foundation: packages/schemas + naming",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-0t0",
+      "updated_at": "2026-07-29T10:04:36Z"
+    },
+    {
+      "id": "bd-0t0",
+      "title": "DX: RHF + Zod full contour",
+      "status": "closed",
+      "type": "epic",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-29T12:51:09Z"
+    },
+    {
+      "id": "bd-v3k",
+      "title": "Docs: протокол bd close на ветке задачи + merge в сборочную",
+      "status": "closed",
+      "type": "chore",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-23T10:17:38Z"
+    },
+    {
+      "id": "bd-wus.18",
+      "title": "UI: корневой layout на Tailwind (app-shell/app-content)",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-23T08:01:55Z"
+    },
+    {
+      "id": "bd-5po",
+      "title": "e2e: spoiler cookie domain совпадать с page hostname",
+      "status": "closed",
+      "type": "chore",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-08-04T10:38:09Z"
+    },
+    {
+      "id": "bd-wus.17",
+      "title": "UI: конвенция новый UI только Tailwind+shadcn",
+      "status": "closed",
+      "type": "chore",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T15:13:54Z"
+    },
+    {
+      "id": "bd-wus.16",
+      "title": "UI: миграция Admin Context /admin/context",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T15:10:44Z"
+    },
+    {
+      "id": "bd-wus.15",
+      "title": "UI: миграция экрана Библиотека /library",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T15:06:28Z"
+    },
+    {
+      "id": "bd-wus.14",
+      "title": "UI: миграция публичного профиля /u/[slug]",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T15:03:47Z"
+    },
+    {
+      "id": "bd-wus.13",
+      "title": "UI: миграция карточки локации /places/[slug]",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T14:59:54Z"
+    },
+    {
+      "id": "bd-wus.12",
+      "title": "UI: миграция карточки мира /worlds/[slug]",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T14:56:16Z"
+    },
+    {
+      "id": "bd-wus.11",
+      "title": "UI: миграция карточки персонажа /characters/[slug]",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T14:53:39Z"
+    },
+    {
+      "id": "bd-wus.10",
+      "title": "UI: миграция карточки автора /authors/[slug]",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T14:45:37Z"
+    },
+    {
+      "id": "bd-wus.8",
+      "title": "UI: миграция экрана Поиск /search",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T14:33:22Z"
+    },
+    {
+      "id": "bd-wus.9",
+      "title": "UI: миграция карточки произведения /books/[slug]",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T14:37:42Z"
+    },
+    {
+      "id": "bd-wus.7",
+      "title": "UI: миграция экрана Auth error /auth/error",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T14:22:18Z"
+    },
+    {
+      "id": "bd-wus.6",
+      "title": "UI: миграция экрана Регистрация /register",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T14:17:08Z"
+    },
+    {
+      "id": "bd-wus.5",
+      "title": "UI: миграция экрана Вход /login",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T13:48:51Z"
+    },
+    {
+      "id": "bd-wus.4",
+      "title": "UI: миграция экрана Главная /",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T13:31:51Z"
+    },
+    {
+      "id": "bd-wus.3",
+      "title": "UI: миграция app-nav (tab-bar) на Tailwind+shadcn",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T13:27:50Z"
+    },
+    {
+      "id": "bd-wus.2",
+      "title": "UI: shadcn baseline + Lucide",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T13:23:06Z"
+    },
+    {
+      "id": "bd-wus.1",
+      "title": "UI: Foundation Tailwind + design tokens",
+      "status": "closed",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-wus",
+      "updated_at": "2026-07-22T13:18:10Z"
+    },
+    {
+      "id": "bd-wus",
+      "title": "DX: Tailwind + shadcn",
+      "status": "closed",
+      "type": "epic",
+      "priority": 2,
+      "parent": null,
+      "updated_at": "2026-07-22T15:33:09Z"
+    },
+    {
+      "id": "bd-6b7.4",
+      "title": "UI: строка меню (Главная · Поиск · Профиль)",
+      "status": "closed",
+      "type": "feature",
+      "priority": 2,
+      "parent": "bd-6b7",
+      "updated_at": "2026-07-22T10:53:45Z"
+    },
+    {
+      "id": "bd-6v0.9",
+      "title": "Поиск: восстановить FTS search_vector после drift Prisma",
+      "status": "closed",
+      "type": "bug",
+      "priority": 2,
+      "parent": "bd-6v0",
+      "updated_at": "2026-07-23T08:23:11Z"
     },
     {
       "id": "bd-6v0.8",
@@ -645,20 +1919,20 @@
     {
       "id": "bd-ky6",
       "title": "Chore: синхронизировать beads interactions.jsonl",
-      "status": "in_progress",
+      "status": "closed",
       "type": "chore",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-07-20T07:17:49Z"
+      "updated_at": "2026-07-23T08:23:11Z"
     },
     {
       "id": "bd-0e6",
       "title": "Docs: согласование зависимостей агентом",
-      "status": "in_progress",
+      "status": "closed",
       "type": "chore",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-07-20T07:10:52Z"
+      "updated_at": "2026-07-23T08:23:11Z"
     },
     {
       "id": "bd-i5b.8",
@@ -879,47 +2153,47 @@
     {
       "id": "bd-cq7.5",
       "title": "Библиотека: Публичный профиль",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-cq7",
-      "updated_at": "2026-07-17T12:36:14Z"
+      "updated_at": "2026-08-05T07:12:04Z"
     },
     {
       "id": "bd-cq7.4",
       "title": "Библиотека: Моя библиотека",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-cq7",
-      "updated_at": "2026-07-17T12:36:13Z"
+      "updated_at": "2026-08-04T15:47:40Z"
     },
     {
       "id": "bd-cq7.2",
       "title": "Библиотека: Пользовательские полки",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-cq7",
-      "updated_at": "2026-07-17T12:36:12Z"
+      "updated_at": "2026-08-04T15:12:20Z"
     },
     {
       "id": "bd-cq7.3",
       "title": "Библиотека: Теги пользователя",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-cq7",
-      "updated_at": "2026-07-17T12:36:12Z"
+      "updated_at": "2026-08-04T15:21:42Z"
     },
     {
       "id": "bd-cq7.1",
       "title": "Библиотека: Статус и оценка книги",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-cq7",
-      "updated_at": "2026-07-17T12:36:11Z"
+      "updated_at": "2026-08-04T15:01:32Z"
     },
     {
       "id": "bd-8s4.4",
@@ -933,11 +2207,11 @@
     {
       "id": "bd-cq7",
       "title": "Библиотека и профиль",
-      "status": "open",
+      "status": "closed",
       "type": "epic",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-07-17T12:36:09Z"
+      "updated_at": "2026-08-05T07:19:10Z"
     },
     {
       "id": "bd-8s4.3",
@@ -969,56 +2243,56 @@
     {
       "id": "bd-8s4",
       "title": "ContextReading",
-      "status": "open",
+      "status": "closed",
       "type": "epic",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-07-17T12:36:05Z"
+      "updated_at": "2026-07-23T09:19:51Z"
     },
     {
       "id": "bd-azl.4",
       "title": "Связи: Spoiler gate",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-azl",
-      "updated_at": "2026-07-17T12:36:05Z"
+      "updated_at": "2026-08-04T11:43:21Z"
     },
     {
       "id": "bd-azl.3",
       "title": "Связи: Порядок чтения",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-azl",
-      "updated_at": "2026-07-17T12:36:04Z"
+      "updated_at": "2026-08-04T11:38:55Z"
     },
     {
       "id": "bd-azl.2",
       "title": "Связи произведений",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-azl",
-      "updated_at": "2026-07-17T12:36:03Z"
+      "updated_at": "2026-08-04T11:29:44Z"
     },
     {
       "id": "bd-azl.1",
       "title": "Связи: Карточка серии",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-azl",
-      "updated_at": "2026-07-17T12:36:02Z"
+      "updated_at": "2026-08-04T11:19:50Z"
     },
     {
       "id": "bd-azl",
       "title": "Связи и порядок",
-      "status": "open",
+      "status": "closed",
       "type": "epic",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-07-17T12:36:01Z"
+      "updated_at": "2026-08-04T11:43:47Z"
     },
     {
       "id": "bd-957.3",
@@ -1041,11 +2315,11 @@
     {
       "id": "bd-rtp",
       "title": "Docs: human intake workflow и /task skill",
-      "status": "in_progress",
+      "status": "closed",
       "type": "task",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-07-17T12:14:54Z"
+      "updated_at": "2026-07-23T08:23:12Z"
     },
     {
       "id": "bd-384",
@@ -1068,11 +2342,29 @@
     {
       "id": "bd-nvi",
       "title": "Scaffold monorepo dev baseline",
-      "status": "in_progress",
+      "status": "closed",
       "type": "task",
       "priority": 2,
       "parent": null,
-      "updated_at": "2026-07-16T09:26:54Z"
+      "updated_at": "2026-07-23T08:23:12Z"
+    },
+    {
+      "id": "bd-lgl",
+      "title": "E2E: убедиться что API стартует с E2E_THROTTLE_BYPASS для Playwright",
+      "status": "open",
+      "type": "chore",
+      "priority": 3,
+      "parent": null,
+      "updated_at": "2026-08-05T07:19:09Z"
+    },
+    {
+      "id": "bd-957.8",
+      "title": "UI: кнопка глаза пароля — только иконка без хрома",
+      "status": "closed",
+      "type": "task",
+      "priority": 3,
+      "parent": "bd-957",
+      "updated_at": "2026-08-04T11:04:14Z"
     },
     {
       "id": "bd-aud",
@@ -1095,38 +2387,38 @@
     {
       "id": "bd-6b7.2",
       "title": "PWA: offline shell",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 3,
       "parent": "bd-6b7",
-      "updated_at": "2026-07-17T12:36:37Z"
+      "updated_at": "2026-07-23T10:35:29Z"
     },
     {
       "id": "bd-6b7.3",
       "title": "PWA: App shell и tab-bar",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 3,
       "parent": "bd-6b7",
-      "updated_at": "2026-07-17T12:36:37Z"
+      "updated_at": "2026-07-23T10:43:32Z"
     },
     {
       "id": "bd-6b7.1",
       "title": "PWA: установка",
-      "status": "open",
+      "status": "closed",
       "type": "feature",
       "priority": 3,
       "parent": "bd-6b7",
-      "updated_at": "2026-07-17T12:36:36Z"
+      "updated_at": "2026-07-23T10:29:57Z"
     },
     {
       "id": "bd-6b7",
       "title": "PWA и оболочка",
-      "status": "open",
+      "status": "closed",
       "type": "epic",
       "priority": 3,
       "parent": null,
-      "updated_at": "2026-07-17T12:36:35Z"
+      "updated_at": "2026-07-23T10:45:02Z"
     }
   ]
 }
