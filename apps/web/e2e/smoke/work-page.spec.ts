@@ -1,7 +1,9 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('Work page smoke', () => {
-  test('published work shows title, authors and editions', async ({ page }) => {
+  test('published work shows title, authors, annotation and editions', async ({
+    page,
+  }) => {
     await page.goto('/books/garri-potter-filosofskiy-kamen');
     await expect(
       page.getByRole('heading', {
@@ -10,6 +12,10 @@ test.describe('Work page smoke', () => {
     ).toBeVisible();
     await expect(
       page.getByRole('link', { name: 'Дж. К. Роулинг' }),
+    ).toBeVisible();
+    await expect(page.getByRole('region', { name: 'Аннотация' })).toBeVisible();
+    await expect(
+      page.getByText(/Мальчик-сирота Гарри Поттер узнаёт/),
     ).toBeVisible();
     await expect(
       page.getByRole('region', { name: 'Издания и переводы' }),
