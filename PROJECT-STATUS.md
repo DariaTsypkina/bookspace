@@ -253,6 +253,7 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 
 ## Последние действия
 
+- 2026-08-06: `bd-i5b.1` ready close: GET `/admin/dashboard/summary` + UI `/admin`; api unit **4**, e2e **3**, vitest **379** (admin-dashboard), PW smoke **6/6** desktop+mobile; ветка `task/bd-i5b.1-admin-dashboard`; `bd close` — оркестратор
 - 2026-08-06: `bd-i5b.1` in progress: админ-дашборд `/admin` (summary API + UI); ветка `task/bd-i5b.1-admin-dashboard`; сборочная `feat/bookspace-bd-i5b`
 - 2026-08-06: `/orchestrate` финал `bd-957.9` — closed+merged в `feat/bookspace-bd-957`; target unit 22, PW smoke 22/22; сборочная → develop (ЗАЛИВАТЬ=Да)
 - 2026-08-06: close `bd-957.9` (скрыть OAuth UI) → merge `--no-ff` в `feat/bookspace-bd-957`; unit 16; PW smoke 22 + oauth e2e 12; ЗАЛИВАТЬ develop=Да после target check
