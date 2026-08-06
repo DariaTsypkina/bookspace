@@ -9,10 +9,10 @@ test.describe('Auth pages smoke', () => {
     await expect(page.getByRole('button', { name: 'Войти' })).toBeVisible();
     await expect(
       page.getByRole('link', { name: 'Войти через Google' }),
-    ).toBeVisible();
+    ).toHaveCount(0);
     await expect(
       page.getByRole('link', { name: 'Войти через Яндекс' }),
-    ).toBeVisible();
+    ).toHaveCount(0);
     await expect(
       page.getByRole('link', { name: 'Зарегистрироваться' }),
     ).toBeVisible();
@@ -30,10 +30,10 @@ test.describe('Auth pages smoke', () => {
     ).toBeVisible();
     await expect(
       page.getByRole('link', { name: 'Войти через Google' }),
-    ).toBeVisible();
+    ).toHaveCount(0);
     await expect(
       page.getByRole('link', { name: 'Войти через Яндекс' }),
-    ).toBeVisible();
+    ).toHaveCount(0);
     await expect(
       page.getByRole('link', { name: 'Войти', exact: true }),
     ).toBeVisible();

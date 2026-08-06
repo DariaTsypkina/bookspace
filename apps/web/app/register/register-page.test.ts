@@ -61,8 +61,13 @@ describe('Register page Tailwind+shadcn migration (S3 / bd-wus.6)', () => {
     expect(pageSource).toMatch(/GuestOnly/);
     expect(pageSource).toMatch(/\bregister\b/);
     expect(pageSource).toMatch(/RegisterInputSchema/);
-    expect(pageSource).toMatch(/\/api\/auth\/google/);
-    expect(pageSource).toMatch(/\/api\/auth\/yandex/);
     expect(pageSource).toMatch(/href=["']\/login["']/);
+  });
+
+  it('hides Google and Yandex OAuth CTAs from the page (bd-957.9)', () => {
+    expect(pageSource).not.toMatch(/\/api\/auth\/google/);
+    expect(pageSource).not.toMatch(/\/api\/auth\/yandex/);
+    expect(pageSource).not.toMatch(/Войти через Google/);
+    expect(pageSource).not.toMatch(/Войти через Яндекс/);
   });
 });

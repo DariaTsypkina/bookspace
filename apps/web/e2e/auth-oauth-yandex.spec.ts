@@ -1,18 +1,18 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('Yandex OAuth', () => {
-  test('login page shows Yandex button', async ({ page }) => {
+  test('login and register pages hide Yandex button (bd-957.9)', async ({
+    page,
+  }) => {
     await page.goto('/login');
     await expect(
       page.getByRole('link', { name: 'Войти через Яндекс' }),
-    ).toBeVisible();
-  });
+    ).toHaveCount(0);
 
-  test('register page shows Yandex button', async ({ page }) => {
     await page.goto('/register');
     await expect(
       page.getByRole('link', { name: 'Войти через Яндекс' }),
-    ).toBeVisible();
+    ).toHaveCount(0);
   });
 
   test('successful Yandex login via test mode sets session cookie', async ({

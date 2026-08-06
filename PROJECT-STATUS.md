@@ -137,7 +137,7 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 | ✅     | `bd-957.6` | web: Auth Context — один `/api/auth/me` на сессию клиента (human-reported) · сборочная `feat/bookspace-bd-common`                                                                               |
 | 🔄     | `bd-3h3`   | [bug] lint: AdminOnly setState-in-effect (`react-hooks/set-state-in-effect`) · discovered-from `bd-957.6` · сборочная `feat/bookspace-bd-common` · ветка `task/bd-3h3-admin-only-lint-setstate` |
 | ✅     | `bd-957.7` | [bug] mobile: login progressive POST `/api/login` (не GET с credentials в query) · merged → `fix/bookspace-bd-bugs`                                                                             |
-| ⬜     | `bd-957.9` | UI: скрыть вход через Google и Яндекс на `/login` и `/register` (human-reported `/task`) · сборочная `feat/bookspace-bd-common`                                                                  |
+| 🔄     | `bd-957.9` | UI: скрыть вход через Google и Яндекс на `/login` и `/register` (human-reported `/task`) · сборочная `feat/bookspace-bd-957` · ветка `task/bd-957.9-hide-oauth-ui`                               |
 
 ### 2. Каталог — ✅ · epic `bd-6v0` · 6 / 6 (эпик закрыт; follow-up open)
 
@@ -253,6 +253,8 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 
 ## Последние действия
 
+- 2026-08-06: `bd-957.9` in progress: скрыты OAuth CTA на `/login`+`/register`; unit 16/16; PW smoke обновлены; BFF OAuth не тронут; ветка `task/bd-957.9-hide-oauth-ui`
+- 2026-08-06: `/orchestrate` claim `bd-957.9` — скрыть OAuth Google/Яндекс из UI; ветка `task/bd-957.9-hide-oauth-ui`; сборочная `feat/bookspace-bd-957` (после merge origin/develop); ЗАЛИВАТЬ develop=Да
 - 2026-08-06: `/orchestrate` финал `bd-6v0.12` — closed+merged в `feat/bookspace-bd-6v0`; target API 15+8, vitest 17, PW 6/6; сборочная → develop (ЗАЛИВАТЬ=Да)
 - 2026-08-06: close `bd-6v0.12` (аннотация Work.descriptionRu + API + UI) → merge `--no-ff` в `feat/bookspace-bd-6v0`; API unit 15, e2e 8, vitest 17, PW work-page 6/6; ЗАЛИВАТЬ develop=Да после target check
 - 2026-08-06: `bd-6v0.12` in progress: аннотация (descriptionRu) на `/books/[slug]`; ветка `task/bd-6v0.12-work-annotation`; сборочная `feat/bookspace-bd-6v0`

@@ -18,10 +18,10 @@ test.describe('Register page smoke (S3 / bd-wus.6)', () => {
     ).toBeVisible();
     await expect(
       page.getByRole('link', { name: 'Войти через Google' }),
-    ).toBeVisible();
+    ).toHaveCount(0);
     await expect(
       page.getByRole('link', { name: 'Войти через Яндекс' }),
-    ).toBeVisible();
+    ).toHaveCount(0);
     await expect(
       page.getByRole('link', { name: 'Войти', exact: true }),
     ).toBeVisible();
@@ -47,14 +47,12 @@ test.describe('Register page smoke (S3 / bd-wus.6)', () => {
     expect(color).toBe('rgb(28, 25, 23)');
   });
 
-  test('OAuth links keep BFF hrefs for full navigation', async ({ page }) => {
+  test('does not expose OAuth BFF hrefs in page markup (bd-957.9)', async ({
+    page,
+  }) => {
     await page.goto('/register');
 
-    await expect(
-      page.getByRole('link', { name: 'Войти через Google' }),
-    ).toHaveAttribute('href', '/api/auth/google');
-    await expect(
-      page.getByRole('link', { name: 'Войти через Яндекс' }),
-    ).toHaveAttribute('href', '/api/auth/yandex');
+    await expect(page.locator('a[href="/api/auth/google"]')).toHaveCount(0);
+    await expect(page.locator('a[href="/api/auth/yandex"]')).toHaveCount(0);
   });
 });
