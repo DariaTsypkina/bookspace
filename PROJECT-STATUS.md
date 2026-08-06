@@ -21,7 +21,7 @@
 | 7   | Рейтинги                         | ⬜     | 0 / 3    | `bd-es5` |
 | 8   | Подборки                         | ⬜     | 0 / 3    | `bd-b75` |
 | 9   | Рекомендации                     | 🔒     | 0 / 3    | `bd-ada` |
-| 10  | Админка                          | 🔄     | 5 / 8    | `bd-i5b` |
+| 10  | Админка                          | 🔄     | 6 / 8    | `bd-i5b` |
 | 11  | PWA и оболочка                   | ✅     | 4 / 4    | `bd-6b7` |
 
 ---
@@ -218,7 +218,7 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 | ⬜     | `bd-ada.2` | Рекомендации на главной              |
 | ⬜     | `bd-ada.3` | Рекомендации: Эвристики рекомендаций |
 
-### 10. Админка — 🔄 · epic `bd-i5b` · 5 / 8 · сборочная `feat/bookspace-bd-i5b`
+### 10. Админка — 🔄 · epic `bd-i5b` · 6 / 8 · сборочная `feat/bookspace-bd-i5b`
 
 | Статус | ID         | Задача                             |
 | ------ | ---------- | ---------------------------------- |
@@ -226,7 +226,7 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 | ✅     | `bd-i5b.2` | Админка: Админ CRUD каталога       |
 | ✅     | `bd-i5b.3` | Админка: Merge дублей Work         |
 | ✅     | `bd-i5b.4` | Админка: Админ UI импорта каталога |
-| ⬜     | `bd-i5b.9` | Админка: CRUD Series/Characters/Worlds/Places (follow-up .2) |
+| ✅     | `bd-i5b.9` | Админка: CRUD Series/Characters/Worlds/Places (follow-up .2) |
 | ⬜     | `bd-i5b.10`| Импорт: live OL/Wikidata adapters (follow-up .4) |
 | ⬜     | `bd-i5b.5` | Админка: Админ UI рейтингов        |
 | ⬜     | `bd-i5b.6` | Админка: Админ UI подборок         |
@@ -255,6 +255,9 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 
 ## Последние действия
 
+- 2026-08-06: close `bd-i5b.9` (CRUD Series/Characters/Worlds/Places) → merge `--no-ff` в `feat/bookspace-bd-i5b`; unit 20, e2e 3, PW 4/4
+- 2026-08-06: `bd-i5b.9` ready close: Admin CRUD Series/Characters/Worlds/Places + вкладки `/admin/catalog`; api unit **20**, e2e **3**, vitest admin-catalog green, PW smoke **4/4** desktop+mobile; ветка `task/bd-i5b.9-catalog-entities-crud`; `bd close` — оркестратор
+- 2026-08-06: claim `bd-i5b.9` → `task/bd-i5b.9-catalog-entities-crud`; сборочная `feat/bookspace-bd-i5b`
 - 2026-08-06: close `bd-i5b.7` (MatchQueue) → merge `--no-ff` в `feat/bookspace-bd-i5b`; unit 4, e2e 3, vitest 3, PW 4/4
 - 2026-08-06: `bd-i5b.7` MatchQueue admin — реализация + тесты green; ветка `task/bd-i5b.7-match-queue`; 🔄 ready close (оркестратор)
 - 2026-08-06: `/orchestrate` набор `bd-i5b.7`+`.9` — старт; сборочная `feat/bookspace-bd-i5b`; ЗАЛИВАТЬ develop=Нет; claim `bd-i5b.7` → `task/bd-i5b.7-match-queue`
