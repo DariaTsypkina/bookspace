@@ -2,6 +2,7 @@ import { BullModule } from '@nestjs/bullmq';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AdminCatalogModule } from './admin/admin-catalog.module';
+import { AdminMatchQueueModule } from './admin/admin-match-queue.module';
 import { AdminDashboardModule } from './admin/admin-dashboard.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -32,6 +33,7 @@ function redisConnection() {
     CatalogImportModule,
     ContextModule,
     AdminDashboardModule,
+    AdminMatchQueueModule,
     AdminCatalogModule,
   ],
   controllers: [AppController],

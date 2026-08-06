@@ -253,3 +253,66 @@ export const AdminCatalogImportReportSchema = z.object({
 export type AdminCatalogImportReport = z.infer<
   typeof AdminCatalogImportReportSchema
 >;
+
+/** GET /admin/match-queue query. */
+export const AdminMatchQueueListQuerySchema = z.object({
+  status: z.enum(['OPEN', 'RESOLVED', 'DISMISSED']).optional(),
+  id: z.string().trim().min(1).max(128).optional(),
+});
+
+export type AdminMatchQueueListQuery = z.infer<
+  typeof AdminMatchQueueListQuerySchema
+>;
+
+export const AdminMatchQueueIdParamSchema = z.object({
+  id: z.string().trim().min(1).max(128),
+});
+
+export type AdminMatchQueueIdParam = z.infer<
+  typeof AdminMatchQueueIdParamSchema
+>;
+
+/** POST /admin/match-queue/:id/resolve */
+export const AdminMatchQueueResolveInputSchema = z.object({
+  workId: z.string().trim().min(1).max(128),
+});
+
+export type AdminMatchQueueResolveInput = z.infer<
+  typeof AdminMatchQueueResolveInputSchema
+>;
+
+export const AdminMatchQueueSuggestionSchema = z.object({
+  workId: z.string(),
+  titleRu: z.string(),
+  titleOrig: z.string().nullable().optional(),
+  yearFirst: z.number().int().nullable().optional(),
+  score: z.number(),
+});
+
+export const AdminMatchQueueItemSchema = z.object({
+  id: z.string(),
+  kind: z.enum(['RANKING_ENTRY', 'CONTEXT_CANDIDATE', 'IMPORT_ROW']),
+  status: z.enum(['OPEN', 'RESOLVED', 'DISMISSED']),
+  payload: z.record(z.string(), z.unknown()),
+  resolvedWorkId: z.string().nullable(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+  suggestions: z.array(AdminMatchQueueSuggestionSchema),
+  resolvedWork: z
+    .object({
+      id: z.string(),
+      slug: z.string(),
+      titleRu: z.string(),
+      status: z.string(),
+    })
+    .nullable()
+    .optional(),
+  followUp: z
+    .object({
+      contextPublished: z.boolean().optional(),
+      importRowApplied: z.boolean().optional(),
+    })
+    .optional(),
+});
+
+export type AdminMatchQueueItem = z.infer<typeof AdminMatchQueueItemSchema>;

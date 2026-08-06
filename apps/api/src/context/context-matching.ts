@@ -85,3 +85,39 @@ export function findBestWorkMatch(
 
   return best;
 }
+
+export function scoreWorkMatch(
+  candidate: MatchCandidateInput,
+  work: MatchableWork,
+): number {
+  const titleScore = Math.max(
+    titleSimilarity(candidate.title, work.titleRu),
+    work.titleOrig ? titleSimilarity(candidate.title, work.titleOrig) : 0,
+  );
+
+  let score = titleScore;
+  if (
+    candidate.year != null &&
+    work.yearFirst != null &&
+    Math.abs(candidate.year - work.yearFirst) <= 1
+  ) {
+    score = Math.min(1, score + 0.05);
+  }
+  return score;
+}
+
+export function findWorkMatchSuggestions(
+  candidate: MatchCandidateInput,
+  works: MatchableWork[],
+  minScore: number,
+  limit: number,
+): WorkMatchResult[] {
+  const matches: WorkMatchResult[] = [];
+  for (const work of works) {
+    const score = scoreWorkMatch(candidate, work);
+    if (score >= minScore) {
+      matches.push({ work, score });
+    }
+  }
+  return matches.sort((a, b) => b.score - a.score).slice(0, limit);
+}
