@@ -152,7 +152,7 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 | ✅     | `bd-6v0.9`  | Поиск: восстановить FTS search_vector после drift Prisma                                                |
 | ✅     | `bd-6v0.10` | Поиск: префикс `роул` не находит «Роулинг» (human-reported)                                             |
 | ✅     | `bd-6v0.11` | [bug] mobile: поиск «Найти» → native `?q=` + server fallback `query` · merged → `fix/bookspace-bd-bugs` |
-| ⬜     | `bd-6v0.12` | Каталог: аннотация (краткое содержание) на `/books/[slug]` (human-reported `/task`) · сборочная `feat/bookspace-bd-6v0` |
+| 🔄     | `bd-6v0.12` | Каталог: аннотация (краткое содержание) на `/books/[slug]` (human-reported `/task`) · сборочная `feat/bookspace-bd-6v0` · in progress |
 
 ### 3. Связи и порядок — ✅ · epic `bd-azl` · 4 / 4 · сборочная `feat/bookspace-bd-azl`
 
@@ -253,6 +253,9 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 
 ## Последние действия
 
+- 2026-08-06: `/orchestrate` финал `bd-6v0.12` — closed+merged в `feat/bookspace-bd-6v0`; target API 15+8, vitest 17, PW 6/6; сборочная → develop (ЗАЛИВАТЬ=Да)
+- 2026-08-06: close `bd-6v0.12` (аннотация Work.descriptionRu + API + UI) → merge `--no-ff` в `feat/bookspace-bd-6v0`; API unit 15, e2e 8, vitest 17, PW work-page 6/6; ЗАЛИВАТЬ develop=Да после target check
+- 2026-08-06: `bd-6v0.12` in progress: аннотация (descriptionRu) на `/books/[slug]`; ветка `task/bd-6v0.12-work-annotation`; сборочная `feat/bookspace-bd-6v0`
 - 2026-08-05: `/task`: `bd-6v0.12` — аннотация (краткое содержание) на карточке книги `/books/[slug]`; epic `bd-6v0` · feature-doc `work-page` · сборочная `feat/bookspace-bd-6v0`
 - 2026-08-05: `/orchestrate` финал `bd-a12` — epic closed; сборочная `feat/bookspace-bd-a12` запушена; develop НЕ влит (ЗАЛИВАТЬ=Нет); target PW 38/38, vitest 369
 - 2026-08-05: close `bd-a12.2` (shadcn Select) → merge `--no-ff` в `feat/bookspace-bd-a12`; vitest select 5; PW library/status 26/26

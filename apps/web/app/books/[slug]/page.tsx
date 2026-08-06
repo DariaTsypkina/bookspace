@@ -102,6 +102,17 @@ export default async function WorkPage({ params }: WorkPageProps) {
           )}
         </header>
 
+        {work.descriptionRu ? (
+          <section aria-label="Аннотация">
+            <h2 className="mb-3 font-sans text-[1.15rem] font-medium text-foreground">
+              Аннотация
+            </h2>
+            <p className="font-sans text-[0.95rem] leading-relaxed text-foreground whitespace-pre-wrap">
+              {work.descriptionRu}
+            </p>
+          </section>
+        ) : null}
+
         {work.editions.length > 0 && (
           <section aria-label="Издания и переводы">
             <h2 className="mb-3 font-sans text-[1.15rem] font-medium text-foreground">

@@ -31,6 +31,8 @@ describe('fetchCatalogWork', () => {
     const mockResponse = {
       slug: 'garri-potter',
       titleRu: 'Гарри Поттер',
+      descriptionRu:
+        'Мальчик узнаёт, что он волшебник, и отправляется в школу магии.',
       authors: [{ slug: 'rouling', nameRu: 'Дж. К. Роулинг' }],
       editions: [{ language: 'ru', translator: 'М. Спивак' }],
       relations: [
@@ -59,6 +61,9 @@ describe('fetchCatalogWork', () => {
     const result = await fetchCatalogWork('garri-potter');
 
     expect(result).toEqual(mockResponse);
+    expect(result.descriptionRu).toBe(
+      'Мальчик узнаёт, что он волшебник, и отправляется в школу магии.',
+    );
     expect(api.get).toHaveBeenCalledWith(
       expect.stringContaining('/catalog/works/garri-potter'),
       noStoreConfig,
