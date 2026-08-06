@@ -564,7 +564,6 @@ export function AdminCatalogEntitiesPanel({
   }, [kind]);
 
   useEffect(() => {
-    setSelectedId(null);
     queueMicrotask(() => {
       void reloadList();
     });

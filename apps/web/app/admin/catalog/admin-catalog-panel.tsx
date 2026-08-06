@@ -781,7 +781,7 @@ export function AdminCatalogPanel() {
       {tab === 'works' ? (
         <WorksCatalogSection />
       ) : (
-        <AdminCatalogEntitiesPanel kind={tab as CatalogEntityKind} />
+        <AdminCatalogEntitiesPanel key={tab} kind={tab as CatalogEntityKind} />
       )}
     </main>
   );
