@@ -128,27 +128,29 @@ export function AdminWorkMergePanel() {
 
   useEffect(() => {
     if (!canonicalId) {
-      setCanonical(null);
       return;
     }
     let cancelled = false;
-    setLoadingCanon(true);
-    void fetchAdminWork(canonicalId)
-      .then((w) => {
-        if (!cancelled) setCanonical(w);
-      })
-      .catch((err: unknown) => {
-        if (!cancelled) {
-          setError(
-            err instanceof Error
-              ? err.message
-              : 'Не удалось загрузить каноническое произведение',
-          );
-        }
-      })
-      .finally(() => {
-        if (!cancelled) setLoadingCanon(false);
-      });
+    queueMicrotask(() => {
+      if (cancelled) return;
+      setLoadingCanon(true);
+      void fetchAdminWork(canonicalId)
+        .then((w) => {
+          if (!cancelled) setCanonical(w);
+        })
+        .catch((err: unknown) => {
+          if (!cancelled) {
+            setError(
+              err instanceof Error
+                ? err.message
+                : 'Не удалось загрузить каноническое произведение',
+            );
+          }
+        })
+        .finally(() => {
+          if (!cancelled) setLoadingCanon(false);
+        });
+    });
     return () => {
       cancelled = true;
     };
@@ -156,27 +158,29 @@ export function AdminWorkMergePanel() {
 
   useEffect(() => {
     if (!duplicateId) {
-      setDuplicate(null);
       return;
     }
     let cancelled = false;
-    setLoadingDup(true);
-    void fetchAdminWork(duplicateId)
-      .then((w) => {
-        if (!cancelled) setDuplicate(w);
-      })
-      .catch((err: unknown) => {
-        if (!cancelled) {
-          setError(
-            err instanceof Error
-              ? err.message
-              : 'Не удалось загрузить дубликат',
-          );
-        }
-      })
-      .finally(() => {
-        if (!cancelled) setLoadingDup(false);
-      });
+    queueMicrotask(() => {
+      if (cancelled) return;
+      setLoadingDup(true);
+      void fetchAdminWork(duplicateId)
+        .then((w) => {
+          if (!cancelled) setDuplicate(w);
+        })
+        .catch((err: unknown) => {
+          if (!cancelled) {
+            setError(
+              err instanceof Error
+                ? err.message
+                : 'Не удалось загрузить дубликат',
+            );
+          }
+        })
+        .finally(() => {
+          if (!cancelled) setLoadingDup(false);
+        });
+    });
     return () => {
       cancelled = true;
     };
@@ -217,6 +221,9 @@ export function AdminWorkMergePanel() {
 
   const selectableForDup = works.filter((w) => w.id !== canonicalId);
   const selectableForCanon = works.filter((w) => w.id !== duplicateId);
+  // Derive null when id cleared — avoid sync setState in effect (react-hooks/set-state-in-effect)
+  const canonicalView = canonicalId ? canonical : null;
+  const duplicateView = duplicateId ? duplicate : null;
 
   return (
     <main className="mx-auto flex w-full max-w-4xl flex-1 flex-col gap-8 px-4 pb-12 pt-8">
@@ -290,6 +297,7 @@ export function AdminWorkMergePanel() {
             value={canonicalId || undefined}
             onValueChange={(v) => {
               setCanonicalId(v);
+              setCanonical(null);
               setConfirmMerge(false);
               setSuccess(null);
             }}
@@ -324,6 +332,7 @@ export function AdminWorkMergePanel() {
             value={duplicateId || undefined}
             onValueChange={(v) => {
               setDuplicateId(v);
+              setDuplicate(null);
               setConfirmMerge(false);
               setSuccess(null);
             }}
@@ -348,8 +357,16 @@ export function AdminWorkMergePanel() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <WorkSideCard label="Канон" work={canonical} loading={loadingCanon} />
-        <WorkSideCard label="Дубликат" work={duplicate} loading={loadingDup} />
+        <WorkSideCard
+          label="Канон"
+          work={canonicalView}
+          loading={Boolean(canonicalId) && loadingCanon}
+        />
+        <WorkSideCard
+          label="Дубликат"
+          work={duplicateView}
+          loading={Boolean(duplicateId) && loadingDup}
+        />
       </div>
 
       <div className="flex flex-wrap items-center gap-3">
