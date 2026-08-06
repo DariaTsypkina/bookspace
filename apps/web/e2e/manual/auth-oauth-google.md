@@ -8,19 +8,19 @@
 
 ## Сценарии
 
-1. **Первый вход**
-   - [ ] `/login` → «Войти через Google»
+1. **Первый вход** (CTA на `/login`/`/register` скрыты — bd-957.9; BFF жив)
+   - [ ] Прямой переход на `/api/auth/google` (или test-mode callback)
    - [ ] Согласие у Google (или test mode)
    - [ ] Редирект на `/`, cookie `session` (HttpOnly)
    - [ ] В БД: User + Account (provider=google)
 
 2. **Повторный вход**
-   - [ ] Logout → снова Google
+   - [ ] Logout → снова `/api/auth/google`
    - [ ] Тот же User / Account (не дубликат)
 
 3. **Склейка по email**
    - [ ] Зарегистрировать email+пароль
-   - [ ] Войти через Google с тем же email
+   - [ ] Войти через `/api/auth/google` с тем же email
    - [ ] Account привязан к существующему User
 
 4. **Отмена**
