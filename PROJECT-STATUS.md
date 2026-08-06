@@ -224,7 +224,7 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 | ------ | ---------- | ---------------------------------- |
 | ✅     | `bd-i5b.1` | Админка: Админ-дашборд             |
 | ✅     | `bd-i5b.2` | Админка: Админ CRUD каталога       |
-| ⬜     | `bd-i5b.3` | Админка: Merge дублей Work         |
+| 🔄     | `bd-i5b.3` | Админка: Merge дублей Work         |
 | ⬜     | `bd-i5b.4` | Админка: Админ UI импорта каталога |
 | ⬜     | `bd-i5b.5` | Админка: Админ UI рейтингов        |
 | ⬜     | `bd-i5b.6` | Админка: Админ UI подборок         |
@@ -253,6 +253,8 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 
 ## Последние действия
 
+- 2026-08-06: `bd-i5b.3` ready close: Work.mergedIntoId + POST `/admin/works/merge` + UI `/admin/catalog/merge`; api unit **6**, e2e **2**, vitest **4**, PW smoke **4/4** desktop+mobile; UserBook conflict=keep canonical; ветка `task/bd-i5b.3-admin-work-merge`; `bd close` — оркестратор
+- 2026-08-06: `bd-i5b.3` in progress: Merge дублей Work (`mergedIntoId` + POST `/admin/works/merge` + UI `/admin/catalog/merge`); ветка `task/bd-i5b.3-admin-work-merge`; сборочная `feat/bookspace-bd-i5b`; sync `origin/develop` OK
 - 2026-08-06: close `bd-i5b.2` (admin catalog CRUD) → merge `--no-ff` в `feat/bookspace-bd-i5b`; api unit 13, e2e 3, PW 4/4; Series/… CRUD отложены
 - 2026-08-06: `bd-i5b.2` ready close: ExternalId + admin Work CRUD + `/admin/catalog`; api unit **13**, e2e **3**, vitest **12**, PW smoke **4/4** desktop+mobile; BFF DELETE; Series/Places/… CRUD отложены; ветка `task/bd-i5b.2-admin-catalog-crud`; `bd close` — оркестратор
 - 2026-08-06: `bd-i5b.2` in progress: админ CRUD каталога (Work+ExternalId+publish+soft-delete); ветка `task/bd-i5b.2-admin-catalog-crud`; сборочная `feat/bookspace-bd-i5b`; sync `origin/develop` OK
