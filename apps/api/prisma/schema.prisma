@@ -72,11 +72,15 @@ model Work {
   status                 WorkStatus   @default(DRAFT)
   needsContext           NeedsContext @default(UNKNOWN)
   needsContextAdminSetAt DateTime?
+  /// Set when status=MERGED; points to the surviving canonical Work.
+  mergedIntoId           String?
   deletedAt              DateTime?
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
   /// PostgreSQL FTS (GENERATED STORED); DDL in prisma/migrations/*_catalog_entities_fts*
   searchVector Unsupported("tsvector")? @map("search_vector")
+  mergedInto             Work?        @relation("WorkMerge", fields: [mergedIntoId], references: [id], onDelete: SetNull)
+  mergedFrom             Work[]       @relation("WorkMerge")
   authors              WorkAuthor[]
   seriesLinks          WorkSeries[]
   editions             Edition[]
@@ -91,6 +95,7 @@ model Work {
   shelfItems                   ShelfItem[]
 
   @@index([status, deletedAt])
+  @@index([mergedIntoId])
 }
 
 enum WorkRelationType {

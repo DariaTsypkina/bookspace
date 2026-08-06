@@ -9,6 +9,7 @@ export const AUDIT_ACTION = {
   CONTEXT_REJECT: 'CONTEXT_REJECT',
   WORK_PUBLISH: 'WORK_PUBLISH',
   WORK_SOFT_DELETE: 'WORK_SOFT_DELETE',
+  WORK_MERGE: 'WORK_MERGE',
 } as const;
 
 export type AuditAction = (typeof AUDIT_ACTION)[keyof typeof AUDIT_ACTION];
