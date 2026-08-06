@@ -649,6 +649,17 @@ export function AdminCatalogPanel() {
           Создание и публикация произведений, внешние идентификаторы,
           soft-delete.
         </p>
+        <p className="mt-3">
+          <Link
+            href="/admin/catalog/merge"
+            className={cn(
+              buttonVariants({ variant: 'outline', size: 'sm' }),
+              'font-sans',
+            )}
+          >
+            Объединить дубли
+          </Link>
+        </p>
       </header>
 
       {error ? (
