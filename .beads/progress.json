@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-06T20:36:08.079Z",
+  "generated_at": "2026-08-06T20:36:39.748Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 157,
     "open_issues": 21,
-    "in_progress_issues": 1,
-    "closed_issues": 135,
+    "in_progress_issues": 0,
+    "closed_issues": 136,
     "blocked_issues": 0,
     "ready_issues": 21
   },
@@ -800,11 +800,11 @@
       "status": "open",
       "priority": 2,
       "children_total": 11,
-      "children_closed": 6,
-      "children_in_progress": 1,
+      "children_closed": 7,
+      "children_in_progress": 0,
       "children_open": 4,
-      "progress": "6 / 11",
-      "percent_closed": 55,
+      "progress": "7 / 11",
+      "percent_closed": 64,
       "children": [
         {
           "id": "bd-i5b.1",
@@ -823,7 +823,7 @@
         {
           "id": "bd-i5b.11",
           "title": "[bug] admin catalog entities: setState-in-effect lint",
-          "status": "in_progress",
+          "status": "closed",
           "type": "bug",
           "priority": 1
         },
@@ -1058,11 +1058,11 @@
     {
       "id": "bd-i5b.11",
       "title": "[bug] admin catalog entities: setState-in-effect lint",
-      "status": "in_progress",
+      "status": "closed",
       "type": "bug",
       "priority": 1,
       "parent": "bd-i5b",
-      "updated_at": "2026-08-06T20:35:02Z"
+      "updated_at": "2026-08-06T20:36:35Z"
     },
     {
       "id": "bd-g6v",
