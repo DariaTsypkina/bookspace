@@ -255,6 +255,7 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 
 ## Последние действия
 
+- 2026-08-06: `/orchestrate` финал набора `bd-i5b.7`+`.9` — оба closed+merged в `feat/bookspace-bd-i5b`; target: api unit 24, e2e 6, vitest 18, PW 8/8; ЗАЛИВАТЬ develop=Нет
 - 2026-08-06: close `bd-i5b.9` (CRUD Series/Characters/Worlds/Places) → merge `--no-ff` в `feat/bookspace-bd-i5b`; unit 20, e2e 3, PW 4/4
 - 2026-08-06: `bd-i5b.9` ready close: Admin CRUD Series/Characters/Worlds/Places + вкладки `/admin/catalog`; api unit **20**, e2e **3**, vitest admin-catalog green, PW smoke **4/4** desktop+mobile; ветка `task/bd-i5b.9-catalog-entities-crud`; `bd close` — оркестратор
 - 2026-08-06: claim `bd-i5b.9` → `task/bd-i5b.9-catalog-entities-crud`; сборочная `feat/bookspace-bd-i5b`
