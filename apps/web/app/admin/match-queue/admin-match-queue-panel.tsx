@@ -26,12 +26,16 @@ import { cn } from '@/lib/utils';
 
 type StatusFilter = AdminMatchQueueItem['status'] | 'OPEN';
 
+function nonEmptyString(value: unknown): string | undefined {
+  return typeof value === 'string' && value ? value : undefined;
+}
+
 function payloadTitle(item: AdminMatchQueueItem): string {
   const p = item.payload;
   const title =
-    (typeof p.titleRu === 'string' && p.titleRu) ||
-    (typeof p.title === 'string' && p.title) ||
-    (typeof p.titleOrig === 'string' && p.titleOrig);
+    nonEmptyString(p.titleRu) ??
+    nonEmptyString(p.title) ??
+    nonEmptyString(p.titleOrig);
   return title?.trim() || 'Без названия';
 }
 

@@ -23,4 +23,17 @@ describe('admin match-queue page', () => {
     expect(panelSource).toMatch(/dismissAdminMatchQueueItem/);
     expect(panelSource).toMatch(/font-sans/);
   });
+
+  it('payloadTitle coerces payload fields to string|undefined (not string|false)', () => {
+    // Avoid `(typeof x === 'string' && x) || …` — TS widens to string|false and breaks .trim().
+    expect(panelSource).toMatch(
+      /function nonEmptyString\(value: unknown\): string \| undefined/,
+    );
+    expect(panelSource).toMatch(
+      /nonEmptyString\(p\.titleRu\)\s*\?\?\s*nonEmptyString\(p\.title\)\s*\?\?\s*nonEmptyString\(p\.titleOrig\)/,
+    );
+    expect(panelSource).not.toMatch(
+      /typeof p\.titleRu === 'string' && p\.titleRu\)/,
+    );
+  });
 });
