@@ -118,6 +118,46 @@ describe('Catalog work (e2e)', () => {
       relations: [],
       readingOrder: [],
     });
+    expect(body.descriptionRu).toBeUndefined();
+  });
+
+  it('GET /catalog/works/:slug returns descriptionRu when set (bd-6v0.12)', async () => {
+    const work = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-with-annotation`,
+        titleRu: 'Книга с аннотацией',
+        status: WorkStatus.PUBLISHED,
+        descriptionRu:
+          'Мальчик узнаёт, что он волшебник, и отправляется в школу магии.',
+      },
+    });
+
+    const response = await request(app.getHttpServer())
+      .get(`/catalog/works/${work.slug}`)
+      .expect(200);
+
+    const body = response.body as CatalogWorkResponse;
+    expect(body.descriptionRu).toBe(
+      'Мальчик узнаёт, что он волшебник, и отправляется в школу магии.',
+    );
+  });
+
+  it('GET /catalog/works/:slug omits blank descriptionRu (bd-6v0.12)', async () => {
+    const work = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-blank-annotation`,
+        titleRu: 'Пустая аннотация',
+        status: WorkStatus.PUBLISHED,
+        descriptionRu: '   ',
+      },
+    });
+
+    const response = await request(app.getHttpServer())
+      .get(`/catalog/works/${work.slug}`)
+      .expect(200);
+
+    const body = response.body as CatalogWorkResponse;
+    expect(body.descriptionRu).toBeUndefined();
   });
 
   it('GET /catalog/works/:slug returns sequential readingOrder from series (bd-azl.3)', async () => {

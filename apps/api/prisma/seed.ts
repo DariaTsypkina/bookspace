@@ -57,6 +57,8 @@ async function seedCatalogDemo() {
       yearFirst: 1997,
       status: WorkStatus.PUBLISHED,
       deletedAt: null,
+      descriptionRu:
+        'Мальчик-сирота Гарри Поттер узнаёт в одиннадцать лет, что он волшебник, и отправляется в школу Хогвартс — где его ждут друзья, тайны и встреча с прошлым.',
     },
     create: {
       slug: 'garri-potter-filosofskiy-kamen',
@@ -64,6 +66,8 @@ async function seedCatalogDemo() {
       titleOrig: 'Harry Potter and the Philosopher Stone',
       yearFirst: 1997,
       status: WorkStatus.PUBLISHED,
+      descriptionRu:
+        'Мальчик-сирота Гарри Поттер узнаёт в одиннадцать лет, что он волшебник, и отправляется в школу Хогвартс — где его ждут друзья, тайны и встреча с прошлым.',
     },
   });
 

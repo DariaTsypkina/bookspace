@@ -100,6 +100,22 @@ describe('Books page Tailwind+shadcn migration (S6 / bd-wus.9)', () => {
     );
   });
 
+  it('shows annotation section when descriptionRu is present (bd-6v0.12)', () => {
+    expect(pageSource).toMatch(/aria-label=["']Аннотация["']/);
+    expect(pageSource).toMatch(/Аннотация/);
+    expect(pageSource).toMatch(/work\.descriptionRu/);
+    // After header, before editions
+    const headerEnd = pageSource.indexOf('</header>');
+    const annotationIdx = pageSource.indexOf('aria-label="Аннотация"');
+    const editionsIdx = pageSource.indexOf('aria-label="Издания и переводы"');
+    expect(headerEnd).toBeGreaterThan(-1);
+    expect(annotationIdx).toBeGreaterThan(headerEnd);
+    expect(editionsIdx).toBeGreaterThan(annotationIdx);
+    // No spoiler gate around annotation
+    const spoilerIdx = pageSource.indexOf('<SpoilerGate');
+    expect(annotationIdx).toBeLessThan(spoilerIdx);
+  });
+
   it('removes orphan .work-* / .edition-* rules from globals.css', () => {
     expect(globalsSource).not.toMatch(/\.work-page\b/);
     expect(globalsSource).not.toMatch(/\.work-header\b/);
