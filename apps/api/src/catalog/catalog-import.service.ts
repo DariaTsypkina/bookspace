@@ -135,7 +135,7 @@ export class CatalogImportService {
       return { kind: 'queued', id: queued.id };
     }
 
-    const workId = await this.createDraftWork(row);
+    await this.createDraftWork(row);
     return 'created';
   }
 

@@ -73,7 +73,7 @@ export class AdminCatalogService {
       where.deletedAt = null;
     }
     if (query.status) {
-      where.status = query.status as WorkStatus;
+      where.status = query.status;
     }
     if (query.q) {
       where.OR = [
@@ -152,9 +152,7 @@ export class AdminCatalogService {
         yearFirst: input.yearFirst,
         descriptionRu: input.descriptionRu,
         status: WorkStatus.DRAFT,
-        needsContext:
-          (input.needsContext as NeedsContext | undefined) ??
-          NeedsContext.UNKNOWN,
+        needsContext: input.needsContext ?? NeedsContext.UNKNOWN,
       },
     });
   }
@@ -170,7 +168,7 @@ export class AdminCatalogService {
       data.descriptionRu = input.descriptionRu;
     }
     if (input.needsContext !== undefined) {
-      data.needsContext = input.needsContext as NeedsContext;
+      data.needsContext = input.needsContext;
       data.needsContextAdminSetAt = new Date();
     }
 

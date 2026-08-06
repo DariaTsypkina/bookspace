@@ -154,8 +154,9 @@ describe('Admin catalog import (e2e)', () => {
       })
       .expect(201);
 
-    expect(start.body.jobId).toBe(`${TEST_PREFIX}-isbn-1`);
-    expect(start.body.status).toBe('completed');
+    const startBody = start.body as { jobId: string; status: string };
+    expect(startBody.jobId).toBe(`${TEST_PREFIX}-isbn-1`);
+    expect(startBody.status).toBe('completed');
 
     const status = await request(app.getHttpServer())
       .get(`/admin/import/jobs/${TEST_PREFIX}-isbn-1`)
@@ -163,8 +164,18 @@ describe('Admin catalog import (e2e)', () => {
       .set('X-E2E', '1')
       .expect(200);
 
-    expect(status.body.status).toBe('completed');
-    expect(status.body.report).toMatchObject({
+    const statusBody = status.body as {
+      status: string;
+      report: {
+        created: number;
+        updated: number;
+        queued: number;
+        drafts: number;
+        failed: number;
+      };
+    };
+    expect(statusBody.status).toBe('completed');
+    expect(statusBody.report).toMatchObject({
       created: 1,
       updated: 0,
       queued: 0,
@@ -191,16 +202,20 @@ describe('Admin catalog import (e2e)', () => {
       })
       .expect(201);
 
-    expect(start.body.status).toBe('completed');
+    const startBody = start.body as { jobId: string; status: string };
+    expect(startBody.status).toBe('completed');
 
     const status = await request(app.getHttpServer())
-      .get(`/admin/import/jobs/${start.body.jobId}`)
+      .get(`/admin/import/jobs/${startBody.jobId}`)
       .set('Cookie', adminCookie)
       .set('X-E2E', '1')
       .expect(200);
 
-    expect(status.body.report.queued).toBe(1);
-    expect(status.body.report.matchQueueIds).toHaveLength(1);
+    const statusBody = status.body as {
+      report: { queued: number; matchQueueIds: string[] };
+    };
+    expect(statusBody.report.queued).toBe(1);
+    expect(statusBody.report.matchQueueIds).toHaveLength(1);
   });
 
   it('non-admin receives 403', async () => {

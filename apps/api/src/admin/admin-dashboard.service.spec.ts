@@ -54,9 +54,10 @@ describe('AdminDashboardService', () => {
     await service.getSummary();
     const after = Date.now();
 
-    const call = prisma.contextReading.count.mock.calls[0][0] as {
-      where: { publishedAt: { gte: Date } };
-    };
+    const calls = prisma.contextReading.count.mock.calls as Array<
+      [{ where: { publishedAt: { gte: Date } } }]
+    >;
+    const call = calls[0][0];
     const gte = call.where.publishedAt.gte.getTime();
     const sevenDaysMs = 7 * 24 * 60 * 60 * 1000;
     expect(gte).toBeGreaterThanOrEqual(before - sevenDaysMs - 1000);

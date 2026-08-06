@@ -139,9 +139,14 @@ describe('Admin catalog CRUD (e2e)', () => {
       })
       .expect(201);
 
-    expect(create.body.status).toBe(WorkStatus.DRAFT);
-    expect(create.body.slug).toBe(`${TEST_PREFIX}-book`);
-    const workId = create.body.id as string;
+    const created = create.body as {
+      id: string;
+      status: WorkStatus;
+      slug: string;
+    };
+    expect(created.status).toBe(WorkStatus.DRAFT);
+    expect(created.slug).toBe(`${TEST_PREFIX}-book`);
+    const workId = created.id;
 
     await request(app.getHttpServer())
       .patch(`/admin/works/${workId}`)
@@ -157,7 +162,8 @@ describe('Admin catalog CRUD (e2e)', () => {
       .send({ source: 'openlibrary', externalKey: `${TEST_PREFIX}-OL1` })
       .expect(201);
 
-    expect(ext.body.externalKey).toBe(`${TEST_PREFIX}-OL1`);
+    const extBody = ext.body as { externalKey: string };
+    expect(extBody.externalKey).toBe(`${TEST_PREFIX}-OL1`);
 
     const published = await request(app.getHttpServer())
       .post(`/admin/works/${workId}/publish`)
@@ -165,13 +171,15 @@ describe('Admin catalog CRUD (e2e)', () => {
       .set('X-E2E', '1')
       .expect(201);
 
-    expect(published.body.status).toBe(WorkStatus.PUBLISHED);
+    const publishedBody = published.body as { status: WorkStatus };
+    expect(publishedBody.status).toBe(WorkStatus.PUBLISHED);
 
     const publicOk = await request(app.getHttpServer())
       .get(`/catalog/works/${TEST_PREFIX}-book`)
       .set('X-E2E', '1')
       .expect(200);
-    expect(publicOk.body.titleRu).toBe('Тестовая книга каталога');
+    const publicBody = publicOk.body as { titleRu: string };
+    expect(publicBody.titleRu).toBe('Тестовая книга каталога');
 
     await request(app.getHttpServer())
       .delete(`/admin/works/${workId}`)
@@ -221,29 +229,37 @@ describe('Admin catalog CRUD (e2e)', () => {
       })
       .expect(201);
 
+    const workBody = work.body as { id: string };
+    const authorBody = author.body as { id: string };
+
     await request(app.getHttpServer())
-      .post(`/admin/works/${work.body.id}/authors`)
+      .post(`/admin/works/${workBody.id}/authors`)
       .set('Cookie', adminCookie)
       .set('X-E2E', '1')
-      .send({ authorId: author.body.id, role: 'author' })
+      .send({ authorId: authorBody.id, role: 'author' })
       .expect(201);
 
     const edition = await request(app.getHttpServer())
-      .post(`/admin/works/${work.body.id}/editions`)
+      .post(`/admin/works/${workBody.id}/editions`)
       .set('Cookie', adminCookie)
       .set('X-E2E', '1')
       .send({ language: 'ru', title: 'Издание RU' })
       .expect(201);
 
-    expect(edition.body.language).toBe('ru');
+    const editionBody = edition.body as { language: string };
+    expect(editionBody.language).toBe('ru');
 
     const detail = await request(app.getHttpServer())
-      .get(`/admin/works/${work.body.id}`)
+      .get(`/admin/works/${workBody.id}`)
       .set('Cookie', adminCookie)
       .set('X-E2E', '1')
       .expect(200);
 
-    expect(detail.body.authors).toHaveLength(1);
-    expect(detail.body.editions).toHaveLength(1);
+    const detailBody = detail.body as {
+      authors: unknown[];
+      editions: unknown[];
+    };
+    expect(detailBody.authors).toHaveLength(1);
+    expect(detailBody.editions).toHaveLength(1);
   });
 });

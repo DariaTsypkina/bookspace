@@ -2,6 +2,7 @@ import {
   ExternalIdEntityType,
   MatchQueueKind,
   MatchQueueStatus,
+  Prisma,
   WorkStatus,
 } from '@prisma/client';
 import {
@@ -99,8 +100,8 @@ describe('CatalogImportService', () => {
         data: expect.objectContaining({
           status: WorkStatus.DRAFT,
           titleRu: 'ISBN 9780306406157',
-        }),
-      }),
+        }) as Prisma.WorkCreateInput,
+      }) as Prisma.WorkCreateArgs,
     );
     expect(prisma.externalId.create).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -109,8 +110,8 @@ describe('CatalogImportService', () => {
           entityId: 'work-1',
           source: 'isbn',
           externalKey: '9780306406157',
-        }),
-      }),
+        }) as Prisma.ExternalIdCreateInput,
+      }) as Prisma.ExternalIdCreateArgs,
     );
   });
 
@@ -166,8 +167,8 @@ describe('CatalogImportService', () => {
         data: expect.objectContaining({
           kind: MatchQueueKind.IMPORT_ROW,
           status: MatchQueueStatus.OPEN,
-        }),
-      }),
+        }) as Prisma.MatchQueueCreateInput,
+      }) as Prisma.MatchQueueCreateArgs,
     );
   });
 

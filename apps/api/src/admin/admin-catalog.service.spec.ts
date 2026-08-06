@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { ExternalIdEntityType, NeedsContext, WorkStatus } from '@prisma/client';
 import { AUDIT_ACTION, AUDIT_ENTITY } from '../audit/audit.constants';
+import type { AuditLogInput } from '../audit/audit.service';
 import { AdminCatalogService } from './admin-catalog.service';
 
 describe('AdminCatalogService', () => {
@@ -145,8 +146,12 @@ describe('AdminCatalogService', () => {
         action: AUDIT_ACTION.WORK_PUBLISH,
         entityType: AUDIT_ENTITY.WORK,
         entityId: 'w1',
-        before: expect.objectContaining({ status: WorkStatus.DRAFT }),
-        after: expect.objectContaining({ status: WorkStatus.PUBLISHED }),
+        before: expect.objectContaining({
+          status: WorkStatus.DRAFT,
+        }) as AuditLogInput['before'],
+        after: expect.objectContaining({
+          status: WorkStatus.PUBLISHED,
+        }) as AuditLogInput['after'],
       });
     });
 
@@ -203,10 +208,12 @@ describe('AdminCatalogService', () => {
         action: AUDIT_ACTION.WORK_SOFT_DELETE,
         entityType: AUDIT_ENTITY.WORK,
         entityId: 'w1',
-        before: expect.objectContaining({ deletedAt: null }),
+        before: expect.objectContaining({
+          deletedAt: null,
+        }) as AuditLogInput['before'],
         after: expect.objectContaining({
           deletedAt: expect.any(String) as string,
-        }),
+        }) as AuditLogInput['after'],
       });
     });
   });

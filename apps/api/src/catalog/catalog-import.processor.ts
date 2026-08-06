@@ -21,8 +21,7 @@ export class CatalogImportProcessor extends WorkerHost {
     if (job.name !== CATALOG_IMPORT_BATCH_JOB) {
       throw new Error(`Unknown catalog job: ${job.name}`);
     }
-    const { actorUserId: _actor, ...input } = job.data;
-    const report = await this.importService.runBatch(input);
+    const report = await this.importService.runBatch(job.data);
     return { report };
   }
 }

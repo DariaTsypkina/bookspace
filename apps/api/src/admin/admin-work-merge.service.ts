@@ -109,12 +109,12 @@ export class AdminWorkMergeService {
           action: AUDIT_ACTION.WORK_MERGE,
           entityType: AUDIT_ENTITY.WORK,
           entityId: canonicalId,
-          before: before as Prisma.InputJsonValue,
+          before,
           after: {
             canonicalId,
             mergedIds: uniqueDupes,
             duplicatesStatus: WorkStatus.MERGED,
-          } as Prisma.InputJsonValue,
+          },
         },
       });
     });
