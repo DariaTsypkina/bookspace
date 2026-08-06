@@ -1,6 +1,7 @@
 import { BullModule } from '@nestjs/bullmq';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { AdminDashboardModule } from './admin/admin-dashboard.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
@@ -27,6 +28,7 @@ function redisConnection() {
     AuthModule,
     CatalogModule,
     ContextModule,
+    AdminDashboardModule,
   ],
   controllers: [AppController],
   providers: [AppService],

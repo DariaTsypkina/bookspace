@@ -21,7 +21,7 @@
 | 7   | Рейтинги                         | ⬜     | 0 / 3    | `bd-es5` |
 | 8   | Подборки                         | ⬜     | 0 / 3    | `bd-b75` |
 | 9   | Рекомендации                     | 🔒     | 0 / 3    | `bd-ada` |
-| 10  | Админка                          | ⬜     | 0 / 8    | `bd-i5b` |
+| 10  | Админка                          | 🔄     | 0 / 8    | `bd-i5b` |
 | 11  | PWA и оболочка                   | ✅     | 4 / 4    | `bd-6b7` |
 
 ---
@@ -218,11 +218,11 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 | ⬜     | `bd-ada.2` | Рекомендации на главной              |
 | ⬜     | `bd-ada.3` | Рекомендации: Эвристики рекомендаций |
 
-### 10. Админка — ⬜ · epic `bd-i5b` · 0 / 8
+### 10. Админка — 🔄 · epic `bd-i5b` · 0 / 8 · сборочная `feat/bookspace-bd-i5b`
 
 | Статус | ID         | Задача                             |
 | ------ | ---------- | ---------------------------------- |
-| ⬜     | `bd-i5b.1` | Админка: Админ-дашборд             |
+| 🔄     | `bd-i5b.1` | Админка: Админ-дашборд             |
 | ⬜     | `bd-i5b.2` | Админка: Админ CRUD каталога       |
 | ⬜     | `bd-i5b.3` | Админка: Merge дублей Work         |
 | ⬜     | `bd-i5b.4` | Админка: Админ UI импорта каталога |
@@ -253,6 +253,7 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 
 ## Последние действия
 
+- 2026-08-06: `bd-i5b.1` in progress: админ-дашборд `/admin` (summary API + UI); ветка `task/bd-i5b.1-admin-dashboard`; сборочная `feat/bookspace-bd-i5b`
 - 2026-08-06: `/orchestrate` финал `bd-957.9` — closed+merged в `feat/bookspace-bd-957`; target unit 22, PW smoke 22/22; сборочная → develop (ЗАЛИВАТЬ=Да)
 - 2026-08-06: close `bd-957.9` (скрыть OAuth UI) → merge `--no-ff` в `feat/bookspace-bd-957`; unit 16; PW smoke 22 + oauth e2e 12; ЗАЛИВАТЬ develop=Да после target check
 - 2026-08-06: `bd-957.9` ready close: OAuth CTA скрыты на `/login`+`/register`; unit **16/16**; PW smoke **22/22** + oauth e2e **12/12** (desktop+mobile, `PLAYWRIGHT_CHROME_CHANNEL=0`); BFF `/api/auth/google|yandex` живы (302); ветка `task/bd-957.9-hide-oauth-ui`; `bd close` — оркестратор

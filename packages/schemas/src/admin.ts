@@ -15,3 +15,12 @@ export const AdminContextReadingIdParamSchema = z.object({
 export type AdminContextReadingIdParam = z.infer<
   typeof AdminContextReadingIdParamSchema
 >;
+
+/** API GET /admin/dashboard/summary query params (recent context window). */
+export const AdminDashboardSummaryQuerySchema = z.object({
+  days: z.coerce.number().int().min(1).max(90).optional(),
+});
+
+export type AdminDashboardSummaryQuery = z.infer<
+  typeof AdminDashboardSummaryQuerySchema
+>;
