@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-06T10:27:18.836Z",
+  "generated_at": "2026-08-06T10:27:43.730Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 154,
     "open_issues": 26,
-    "in_progress_issues": 1,
-    "closed_issues": 127,
+    "in_progress_issues": 0,
+    "closed_issues": 128,
     "blocked_issues": 0,
     "ready_issues": 26
   },
@@ -226,11 +226,11 @@
       "status": "closed",
       "priority": 1,
       "children_total": 12,
-      "children_closed": 11,
-      "children_in_progress": 1,
+      "children_closed": 12,
+      "children_in_progress": 0,
       "children_open": 0,
-      "progress": "11 / 12",
-      "percent_closed": 92,
+      "progress": "12 / 12",
+      "percent_closed": 100,
       "children": [
         {
           "id": "bd-6v0.1",
@@ -256,7 +256,7 @@
         {
           "id": "bd-6v0.12",
           "title": "Каталог: аннотация (краткое содержание) на карточке книги",
-          "status": "in_progress",
+          "status": "closed",
           "type": "feature",
           "priority": 2
         },
@@ -1298,11 +1298,11 @@
     {
       "id": "bd-6v0.12",
       "title": "Каталог: аннотация (краткое содержание) на карточке книги",
-      "status": "in_progress",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-6v0",
-      "updated_at": "2026-08-06T10:19:31Z"
+      "updated_at": "2026-08-06T10:27:39Z"
     },
     {
       "id": "bd-957.9",
