@@ -109,7 +109,11 @@ export function AdminImportPanel() {
       const status = await fetchAdminImportJob(started.jobId);
       setJob(status);
     } catch (err) {
-      setError(toUserFacingErrorMessage(err));
+      setError(
+        toUserFacingErrorMessage(
+          err instanceof Error ? err.message : undefined,
+        ),
+      );
     } finally {
       setBusy(false);
     }
