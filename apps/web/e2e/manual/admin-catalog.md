@@ -17,5 +17,5 @@
 
 ## Не покрыто в этом срезе
 
-- Series / Characters / Worlds / Places full CRUD (отложено)
+- Series / Characters / Worlds / Places full CRUD — см. `admin-catalog-entities.md` (bd-i5b.9)
 - Merge Works (`bd-i5b.3`)

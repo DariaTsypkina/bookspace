@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-06T19:56:56.613Z",
+  "generated_at": "2026-08-06T20:27:21.124Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 156,
-    "open_issues": 22,
-    "in_progress_issues": 0,
+    "open_issues": 21,
+    "in_progress_issues": 1,
     "closed_issues": 134,
     "blocked_issues": 0,
-    "ready_issues": 22
+    "ready_issues": 21
   },
   "epics": [
     {
@@ -801,8 +801,8 @@
       "priority": 2,
       "children_total": 10,
       "children_closed": 5,
-      "children_in_progress": 0,
-      "children_open": 5,
+      "children_in_progress": 1,
+      "children_open": 4,
       "progress": "5 / 10",
       "percent_closed": 50,
       "children": [
@@ -872,7 +872,7 @@
         {
           "id": "bd-i5b.9",
           "title": "Админка: CRUD Series/Characters/Worlds/Places",
-          "status": "open",
+          "status": "in_progress",
           "type": "task",
           "priority": 2
         }
@@ -1321,11 +1321,11 @@
     {
       "id": "bd-i5b.9",
       "title": "Админка: CRUD Series/Characters/Worlds/Places",
-      "status": "open",
+      "status": "in_progress",
       "type": "task",
       "priority": 2,
       "parent": "bd-i5b",
-      "updated_at": "2026-08-06T12:20:16Z"
+      "updated_at": "2026-08-06T19:59:00Z"
     },
     {
       "id": "bd-6v0.12",

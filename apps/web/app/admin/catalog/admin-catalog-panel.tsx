@@ -45,6 +45,8 @@ import {
 } from '@/lib/admin-catalog';
 import { getFriendlyZodIssueMessage } from '@/lib/form-errors';
 import { cn } from '@/lib/utils';
+import { AdminCatalogEntitiesPanel } from './admin-catalog-entities-panel';
+import type { CatalogEntityKind } from '@/lib/admin-catalog-entities';
 
 const EXTERNAL_SOURCE_LABELS: Record<string, string> = {
   openlibrary: 'Open Library',
@@ -601,7 +603,18 @@ function WorkEditor({
   );
 }
 
-export function AdminCatalogPanel() {
+export type CatalogTab =
+  'works' | 'series' | 'characters' | 'worlds' | 'places';
+
+const CATALOG_TABS: Array<{ id: CatalogTab; label: string }> = [
+  { id: 'works', label: 'Произведения' },
+  { id: 'series', label: 'Серии' },
+  { id: 'characters', label: 'Персонажи' },
+  { id: 'worlds', label: 'Миры' },
+  { id: 'places', label: 'Локации' },
+];
+
+function WorksCatalogSection() {
   const [works, setWorks] = useState<AdminWorkListItem[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -629,39 +642,7 @@ export function AdminCatalogPanel() {
   }, [reloadList]);
 
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-4 pb-12 pt-8">
-      <header>
-        <p className="mb-2">
-          <Link
-            href="/admin"
-            className={cn(
-              buttonVariants({ variant: 'ghost', size: 'sm' }),
-              'font-sans px-0',
-            )}
-          >
-            ← Дашборд
-          </Link>
-        </p>
-        <h1 className="text-[1.75rem] font-normal tracking-[0.02em] text-foreground">
-          Каталог
-        </h1>
-        <p className="mt-2 font-sans text-[0.95rem] text-muted">
-          Создание и публикация произведений, внешние идентификаторы,
-          soft-delete.
-        </p>
-        <p className="mt-3">
-          <Link
-            href="/admin/catalog/merge"
-            className={cn(
-              buttonVariants({ variant: 'outline', size: 'sm' }),
-              'font-sans',
-            )}
-          >
-            Объединить дубли
-          </Link>
-        </p>
-      </header>
-
+    <div className="flex flex-col gap-8">
       {error ? (
         <p
           role="alert"
@@ -731,6 +712,77 @@ export function AdminCatalogPanel() {
           />
         </section>
       ) : null}
+    </div>
+  );
+}
+
+export function AdminCatalogPanel() {
+  const [tab, setTab] = useState<CatalogTab>('works');
+
+  return (
+    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-4 pb-12 pt-8">
+      <header>
+        <p className="mb-2">
+          <Link
+            href="/admin"
+            className={cn(
+              buttonVariants({ variant: 'ghost', size: 'sm' }),
+              'font-sans px-0',
+            )}
+          >
+            ← Дашборд
+          </Link>
+        </p>
+        <h1 className="text-[1.75rem] font-normal tracking-[0.02em] text-foreground">
+          Каталог
+        </h1>
+        <p className="mt-2 font-sans text-[0.95rem] text-muted">
+          CRUD произведений, серий, персонажей, миров и локаций: черновик →
+          публикация, soft-delete.
+        </p>
+        <p className="mt-3">
+          <Link
+            href="/admin/catalog/merge"
+            className={cn(
+              buttonVariants({ variant: 'outline', size: 'sm' }),
+              'font-sans',
+            )}
+          >
+            Объединить дубли
+          </Link>
+        </p>
+      </header>
+
+      <div
+        role="tablist"
+        aria-label="Разделы каталога"
+        className="flex flex-wrap gap-2"
+      >
+        {CATALOG_TABS.map((item) => (
+          <button
+            key={item.id}
+            type="button"
+            role="tab"
+            aria-selected={tab === item.id}
+            className={cn(
+              buttonVariants({
+                variant: tab === item.id ? 'default' : 'outline',
+                size: 'sm',
+              }),
+              'font-sans',
+            )}
+            onClick={() => setTab(item.id)}
+          >
+            {item.label}
+          </button>
+        ))}
+      </div>
+
+      {tab === 'works' ? (
+        <WorksCatalogSection />
+      ) : (
+        <AdminCatalogEntitiesPanel kind={tab as CatalogEntityKind} />
+      )}
     </main>
   );
 }

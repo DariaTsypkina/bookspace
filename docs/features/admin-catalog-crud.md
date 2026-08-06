@@ -31,6 +31,7 @@ Admin REST.
 - [ ] Admin создаёт и публикует Work
 - [ ] ExternalId задаётся вручную
 - [ ] Soft-delete скрывает из public
+- [ ] Admin CRUD Series / Characters / Worlds / Places (DRAFT→publish, soft-delete)
 
 ## Ссылки
 

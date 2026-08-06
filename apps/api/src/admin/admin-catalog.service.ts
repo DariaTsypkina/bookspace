@@ -13,11 +13,20 @@ import {
 } from '@prisma/client';
 import type {
   AdminCreateAuthorInput,
+  AdminCreateCharacterInput,
   AdminCreateEditionInput,
   AdminCreateExternalIdInput,
+  AdminCreatePlaceInput,
+  AdminCreateSeriesInput,
+  AdminCreateWorldInput,
   AdminCreateWorkInput,
   AdminLinkWorkAuthorInput,
+  AdminListCatalogEntitiesQuery,
   AdminListWorksQuery,
+  AdminUpdateCharacterInput,
+  AdminUpdatePlaceInput,
+  AdminUpdateSeriesInput,
+  AdminUpdateWorldInput,
   AdminUpdateWorkInput,
 } from '@bookspace/schemas';
 import { AUDIT_ACTION, AUDIT_ENTITY } from '../audit/audit.constants';
@@ -59,6 +68,8 @@ const CYRILLIC_TO_LATIN: Record<string, string> = {
   ю: 'yu',
   я: 'ya',
 };
+
+type NamedEntityKind = 'series' | 'character' | 'world' | 'place';
 
 @Injectable()
 export class AdminCatalogService {
@@ -375,6 +386,473 @@ export class AdminCatalogService {
     });
   }
 
+  async listSeries(query: AdminListCatalogEntitiesQuery) {
+    return this.listNamedEntities('series', query);
+  }
+
+  async getSeries(seriesId: string) {
+    return this.requireActiveNamedEntity(
+      'series',
+      seriesId,
+      'Серия не найдена',
+    );
+  }
+
+  async createSeries(input: AdminCreateSeriesInput) {
+    const baseSlug = input.slug ?? this.slugify(input.nameRu, 'series');
+    const slug = await this.ensureUniqueNamedSlug('series', baseSlug);
+    return this.prisma.series.create({
+      data: {
+        slug,
+        nameRu: input.nameRu,
+        nameOrig: input.nameOrig,
+        status: CatalogEntityStatus.DRAFT,
+      },
+    });
+  }
+
+  async updateSeries(seriesId: string, input: AdminUpdateSeriesInput) {
+    await this.requireActiveNamedEntity('series', seriesId, 'Серия не найдена');
+    const data: Prisma.SeriesUpdateInput = {};
+    if (input.nameRu !== undefined) data.nameRu = input.nameRu;
+    if (input.nameOrig !== undefined) data.nameOrig = input.nameOrig;
+    return this.prisma.series.update({ where: { id: seriesId }, data });
+  }
+
+  async publishSeries(seriesId: string, actorUserId: string) {
+    return this.publishNamedEntity({
+      kind: 'series',
+      id: seriesId,
+      notFound: 'Серия не найдена',
+      publishAction: AUDIT_ACTION.SERIES_PUBLISH,
+      entityType: AUDIT_ENTITY.SERIES,
+      actorUserId,
+    });
+  }
+
+  async softDeleteSeries(seriesId: string, actorUserId: string) {
+    return this.softDeleteNamedEntity({
+      kind: 'series',
+      id: seriesId,
+      notFound: 'Серия не найдена',
+      deleteAction: AUDIT_ACTION.SERIES_SOFT_DELETE,
+      entityType: AUDIT_ENTITY.SERIES,
+      actorUserId,
+    });
+  }
+
+  async listCharacters(query: AdminListCatalogEntitiesQuery) {
+    return this.listNamedEntities('character', query);
+  }
+
+  async getCharacter(characterId: string) {
+    return this.requireActiveNamedEntity(
+      'character',
+      characterId,
+      'Персонаж не найден',
+    );
+  }
+
+  async createCharacter(input: AdminCreateCharacterInput) {
+    const baseSlug = input.slug ?? this.slugify(input.nameRu, 'character');
+    const slug = await this.ensureUniqueNamedSlug('character', baseSlug);
+    return this.prisma.character.create({
+      data: {
+        slug,
+        nameRu: input.nameRu,
+        nameOrig: input.nameOrig,
+        status: CatalogEntityStatus.DRAFT,
+      },
+    });
+  }
+
+  async updateCharacter(characterId: string, input: AdminUpdateCharacterInput) {
+    await this.requireActiveNamedEntity(
+      'character',
+      characterId,
+      'Персонаж не найден',
+    );
+    const data: Prisma.CharacterUpdateInput = {};
+    if (input.nameRu !== undefined) data.nameRu = input.nameRu;
+    if (input.nameOrig !== undefined) data.nameOrig = input.nameOrig;
+    return this.prisma.character.update({ where: { id: characterId }, data });
+  }
+
+  async publishCharacter(characterId: string, actorUserId: string) {
+    return this.publishNamedEntity({
+      kind: 'character',
+      id: characterId,
+      notFound: 'Персонаж не найден',
+      publishAction: AUDIT_ACTION.CHARACTER_PUBLISH,
+      entityType: AUDIT_ENTITY.CHARACTER,
+      actorUserId,
+    });
+  }
+
+  async softDeleteCharacter(characterId: string, actorUserId: string) {
+    return this.softDeleteNamedEntity({
+      kind: 'character',
+      id: characterId,
+      notFound: 'Персонаж не найден',
+      deleteAction: AUDIT_ACTION.CHARACTER_SOFT_DELETE,
+      entityType: AUDIT_ENTITY.CHARACTER,
+      actorUserId,
+    });
+  }
+
+  async listWorlds(query: AdminListCatalogEntitiesQuery) {
+    return this.listNamedEntities('world', query);
+  }
+
+  async getWorld(worldId: string) {
+    return this.requireActiveNamedEntity('world', worldId, 'Мир не найден');
+  }
+
+  async createWorld(input: AdminCreateWorldInput) {
+    const baseSlug = input.slug ?? this.slugify(input.nameRu, 'world');
+    const slug = await this.ensureUniqueNamedSlug('world', baseSlug);
+    return this.prisma.world.create({
+      data: {
+        slug,
+        nameRu: input.nameRu,
+        nameOrig: input.nameOrig,
+        descriptionRu: input.descriptionRu,
+        status: CatalogEntityStatus.DRAFT,
+      },
+    });
+  }
+
+  async updateWorld(worldId: string, input: AdminUpdateWorldInput) {
+    await this.requireActiveNamedEntity('world', worldId, 'Мир не найден');
+    const data: Prisma.WorldUpdateInput = {};
+    if (input.nameRu !== undefined) data.nameRu = input.nameRu;
+    if (input.nameOrig !== undefined) data.nameOrig = input.nameOrig;
+    if (input.descriptionRu !== undefined) {
+      data.descriptionRu = input.descriptionRu;
+    }
+    return this.prisma.world.update({ where: { id: worldId }, data });
+  }
+
+  async publishWorld(worldId: string, actorUserId: string) {
+    return this.publishNamedEntity({
+      kind: 'world',
+      id: worldId,
+      notFound: 'Мир не найден',
+      publishAction: AUDIT_ACTION.WORLD_PUBLISH,
+      entityType: AUDIT_ENTITY.WORLD,
+      actorUserId,
+    });
+  }
+
+  async softDeleteWorld(worldId: string, actorUserId: string) {
+    return this.softDeleteNamedEntity({
+      kind: 'world',
+      id: worldId,
+      notFound: 'Мир не найден',
+      deleteAction: AUDIT_ACTION.WORLD_SOFT_DELETE,
+      entityType: AUDIT_ENTITY.WORLD,
+      actorUserId,
+    });
+  }
+
+  async listPlaces(query: AdminListCatalogEntitiesQuery) {
+    const where: Prisma.PlaceWhereInput = {};
+    if (!query.includeDeleted) {
+      where.deletedAt = null;
+    }
+    if (query.status) {
+      where.status = query.status;
+    }
+    if (query.q) {
+      where.OR = [
+        { nameRu: { contains: query.q, mode: 'insensitive' } },
+        { nameOrig: { contains: query.q, mode: 'insensitive' } },
+        { slug: { contains: query.q, mode: 'insensitive' } },
+      ];
+    }
+
+    return this.prisma.place.findMany({
+      where,
+      orderBy: { updatedAt: 'desc' },
+      take: 100,
+      select: {
+        id: true,
+        slug: true,
+        nameRu: true,
+        nameOrig: true,
+        worldId: true,
+        status: true,
+        deletedAt: true,
+        updatedAt: true,
+        createdAt: true,
+        world: { select: { id: true, slug: true, nameRu: true } },
+      },
+    });
+  }
+
+  async getPlace(placeId: string) {
+    const place = await this.prisma.place.findUnique({
+      where: { id: placeId },
+      include: {
+        world: { select: { id: true, slug: true, nameRu: true, status: true } },
+      },
+    });
+    if (!place || place.deletedAt) {
+      throw new NotFoundException('Локация не найдена');
+    }
+    return place;
+  }
+
+  async createPlace(input: AdminCreatePlaceInput) {
+    if (input.worldId) {
+      await this.requireActiveNamedEntity(
+        'world',
+        input.worldId,
+        'Мир не найден',
+      );
+    }
+    const baseSlug = input.slug ?? this.slugify(input.nameRu, 'place');
+    const slug = await this.ensureUniqueNamedSlug('place', baseSlug);
+    return this.prisma.place.create({
+      data: {
+        slug,
+        nameRu: input.nameRu,
+        nameOrig: input.nameOrig,
+        worldId: input.worldId,
+        status: CatalogEntityStatus.DRAFT,
+      },
+    });
+  }
+
+  async updatePlace(placeId: string, input: AdminUpdatePlaceInput) {
+    await this.requireActiveNamedEntity('place', placeId, 'Локация не найдена');
+    if (input.worldId) {
+      await this.requireActiveNamedEntity(
+        'world',
+        input.worldId,
+        'Мир не найден',
+      );
+    }
+    const data: Prisma.PlaceUpdateInput = {};
+    if (input.nameRu !== undefined) data.nameRu = input.nameRu;
+    if (input.nameOrig !== undefined) data.nameOrig = input.nameOrig;
+    if (input.worldId !== undefined) {
+      data.world =
+        input.worldId === null
+          ? { disconnect: true }
+          : { connect: { id: input.worldId } };
+    }
+    return this.prisma.place.update({ where: { id: placeId }, data });
+  }
+
+  async publishPlace(placeId: string, actorUserId: string) {
+    return this.publishNamedEntity({
+      kind: 'place',
+      id: placeId,
+      notFound: 'Локация не найдена',
+      publishAction: AUDIT_ACTION.PLACE_PUBLISH,
+      entityType: AUDIT_ENTITY.PLACE,
+      actorUserId,
+    });
+  }
+
+  async softDeletePlace(placeId: string, actorUserId: string) {
+    return this.softDeleteNamedEntity({
+      kind: 'place',
+      id: placeId,
+      notFound: 'Локация не найдена',
+      deleteAction: AUDIT_ACTION.PLACE_SOFT_DELETE,
+      entityType: AUDIT_ENTITY.PLACE,
+      actorUserId,
+    });
+  }
+
+  // Prisma model delegates are incompatible as a union; cast for shared helpers.
+  private namedDelegate(kind: NamedEntityKind): {
+    findMany: (args: never) => Promise<Array<Record<string, unknown>>>;
+    findUnique: (args: {
+      where: { id: string };
+      include?: unknown;
+    }) => Promise<{
+      id: string;
+      slug: string;
+      nameRu: string;
+      nameOrig: string | null;
+      status: CatalogEntityStatus;
+      deletedAt: Date | null;
+    } | null>;
+    findFirst: (args: {
+      where: { slug: string };
+      select: { id: true };
+    }) => Promise<{ id: string } | null>;
+    create: (args: never) => Promise<Record<string, unknown>>;
+    update: (args: {
+      where: { id: string };
+      data: Record<string, unknown>;
+    }) => Promise<{
+      id: string;
+      slug: string;
+      nameRu: string;
+      nameOrig: string | null;
+      status: CatalogEntityStatus;
+      deletedAt: Date | null;
+    }>;
+  } {
+    switch (kind) {
+      case 'series':
+        return this.prisma.series as never;
+      case 'character':
+        return this.prisma.character as never;
+      case 'world':
+        return this.prisma.world as never;
+      case 'place':
+        return this.prisma.place as never;
+    }
+  }
+
+  private async listNamedEntities(
+    kind: NamedEntityKind,
+    query: AdminListCatalogEntitiesQuery,
+  ) {
+    const where: Record<string, unknown> = {};
+    if (!query.includeDeleted) {
+      where.deletedAt = null;
+    }
+    if (query.status) {
+      where.status = query.status;
+    }
+    if (query.q) {
+      where.OR = [
+        { nameRu: { contains: query.q, mode: 'insensitive' } },
+        { nameOrig: { contains: query.q, mode: 'insensitive' } },
+        { slug: { contains: query.q, mode: 'insensitive' } },
+      ];
+    }
+
+    return this.namedDelegate(kind).findMany({
+      where,
+      orderBy: { updatedAt: 'desc' },
+      take: 100,
+      select: {
+        id: true,
+        slug: true,
+        nameRu: true,
+        nameOrig: true,
+        status: true,
+        deletedAt: true,
+        updatedAt: true,
+        createdAt: true,
+        ...(kind === 'world' ? { descriptionRu: true } : {}),
+        ...(kind === 'place' ? { worldId: true } : {}),
+      },
+    } as never);
+  }
+
+  private async requireActiveNamedEntity(
+    kind: NamedEntityKind,
+    id: string,
+    notFound: string,
+  ) {
+    const row = await this.namedDelegate(kind).findUnique({ where: { id } });
+    if (!row || row.deletedAt) {
+      throw new NotFoundException(notFound);
+    }
+    return row;
+  }
+
+  private async publishNamedEntity(args: {
+    kind: NamedEntityKind;
+    id: string;
+    notFound: string;
+    publishAction: (typeof AUDIT_ACTION)[keyof typeof AUDIT_ACTION];
+    entityType: string;
+    actorUserId: string;
+  }) {
+    const row = await this.requireActiveNamedEntity(
+      args.kind,
+      args.id,
+      args.notFound,
+    );
+    if (row.status !== CatalogEntityStatus.DRAFT) {
+      throw new BadRequestException(
+        'Опубликовать можно только сущность в статусе DRAFT',
+      );
+    }
+
+    const updated = await this.namedDelegate(args.kind).update({
+      where: { id: args.id },
+      data: { status: CatalogEntityStatus.PUBLISHED },
+    });
+
+    await this.audit.log({
+      actorUserId: args.actorUserId,
+      action: args.publishAction,
+      entityType: args.entityType,
+      entityId: args.id,
+      before: { status: row.status, nameRu: row.nameRu },
+      after: { status: updated.status, nameRu: updated.nameRu },
+    });
+
+    return updated;
+  }
+
+  private async softDeleteNamedEntity(args: {
+    kind: NamedEntityKind;
+    id: string;
+    notFound: string;
+    deleteAction: (typeof AUDIT_ACTION)[keyof typeof AUDIT_ACTION];
+    entityType: string;
+    actorUserId: string;
+  }) {
+    const row = await this.requireActiveNamedEntity(
+      args.kind,
+      args.id,
+      args.notFound,
+    );
+
+    const updated = await this.namedDelegate(args.kind).update({
+      where: { id: args.id },
+      data: { deletedAt: new Date() },
+    });
+
+    await this.audit.log({
+      actorUserId: args.actorUserId,
+      action: args.deleteAction,
+      entityType: args.entityType,
+      entityId: args.id,
+      before: {
+        deletedAt: null,
+        status: row.status,
+        nameRu: row.nameRu,
+      },
+      after: {
+        deletedAt: updated.deletedAt?.toISOString() ?? null,
+        status: updated.status,
+        nameRu: updated.nameRu,
+      },
+    });
+
+    return updated;
+  }
+
+  private async ensureUniqueNamedSlug(
+    kind: NamedEntityKind,
+    base: string,
+  ): Promise<string> {
+    let candidate = base;
+    let n = 2;
+    while (
+      await this.namedDelegate(kind).findFirst({
+        where: { slug: candidate },
+        select: { id: true },
+      })
+    ) {
+      candidate = `${base}-${n}`;
+      n += 1;
+    }
+    return candidate;
+  }
+
   private async requireActiveWork(workId: string) {
     const work = await this.prisma.work.findUnique({ where: { id: workId } });
     if (!work || work.deletedAt) {
@@ -413,7 +891,7 @@ export class AdminCatalogService {
     return candidate;
   }
 
-  slugify(text: string): string {
+  slugify(text: string, fallback = 'work'): string {
     const lowered = text.trim().toLowerCase();
     let out = '';
     for (const char of lowered) {
@@ -431,6 +909,6 @@ export class AdminCatalogService {
       .replace(/-+/g, '-')
       .replace(/^-|-$/g, '')
       .slice(0, 200);
-    return normalized.length > 0 ? normalized : 'work';
+    return normalized.length > 0 ? normalized : fallback;
   }
 }

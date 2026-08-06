@@ -7,6 +7,10 @@ const panelSource = readFileSync(
   join(__dirname, 'admin-catalog-panel.tsx'),
   'utf8',
 );
+const entitiesSource = readFileSync(
+  join(__dirname, 'admin-catalog-entities-panel.tsx'),
+  'utf8',
+);
 
 describe('Admin catalog page', () => {
   it('gates the page with AdminOnly and mounts the panel', () => {
@@ -31,5 +35,22 @@ describe('Admin catalog page', () => {
   it('uses Link + buttonVariants, not Button asChild', () => {
     expect(panelSource).toMatch(/buttonVariants/);
     expect(panelSource).not.toMatch(/Button[\s\S]*asChild[\s\S]*Link/);
+  });
+
+  it('exposes tabs for Series/Characters/Worlds/Places', () => {
+    expect(panelSource).toMatch(/role="tablist"/);
+    expect(panelSource).toMatch(/Серии/);
+    expect(panelSource).toMatch(/Персонажи/);
+    expect(panelSource).toMatch(/Миры/);
+    expect(panelSource).toMatch(/Локации/);
+    expect(panelSource).toMatch(/AdminCatalogEntitiesPanel/);
+  });
+
+  it('entities panel uses shadcn Select for place world and RU labels', () => {
+    expect(entitiesSource).toMatch(/\bSelectTrigger\b/);
+    expect(entitiesSource).not.toMatch(/<select[\s>]/);
+    expect(entitiesSource).toMatch(/Создать черновик/);
+    expect(entitiesSource).toMatch(/Опубликовать/);
+    expect(entitiesSource).toMatch(/soft-delete/);
   });
 });

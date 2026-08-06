@@ -222,7 +222,10 @@ export function assertCatalogImportStartPayload(
   ) {
     throw new Error('Укажите поисковый запрос');
   }
-  if (value.source === 'isbn_list' && (!value.isbns || value.isbns.length === 0)) {
+  if (
+    value.source === 'isbn_list' &&
+    (!value.isbns || value.isbns.length === 0)
+  ) {
     throw new Error('Укажите хотя бы один ISBN');
   }
   if (
@@ -316,3 +319,214 @@ export const AdminMatchQueueItemSchema = z.object({
 });
 
 export type AdminMatchQueueItem = z.infer<typeof AdminMatchQueueItemSchema>;
+
+const CatalogEntityStatusSchema = z.enum(['DRAFT', 'PUBLISHED']);
+
+const optionalSlugSchema = z
+  .string()
+  .trim()
+  .min(1)
+  .max(200)
+  .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)
+  .optional();
+
+const AdminListCatalogEntitiesQuerySchema = z.object({
+  q: z.string().trim().min(1).max(200).optional(),
+  status: CatalogEntityStatusSchema.optional(),
+  includeDeleted: z
+    .enum(['true', 'false'])
+    .default('false')
+    .transform((v) => v === 'true'),
+});
+
+export type AdminListCatalogEntitiesQuery = z.infer<
+  typeof AdminListCatalogEntitiesQuerySchema
+>;
+
+export const AdminListSeriesQuerySchema = AdminListCatalogEntitiesQuerySchema;
+export type AdminListSeriesQuery = AdminListCatalogEntitiesQuery;
+
+export const AdminListCharactersQuerySchema =
+  AdminListCatalogEntitiesQuerySchema;
+export type AdminListCharactersQuery = AdminListCatalogEntitiesQuery;
+
+export const AdminListWorldsQuerySchema = AdminListCatalogEntitiesQuerySchema;
+export type AdminListWorldsQuery = AdminListCatalogEntitiesQuery;
+
+export const AdminListPlacesQuerySchema = AdminListCatalogEntitiesQuerySchema;
+export type AdminListPlacesQuery = AdminListCatalogEntitiesQuery;
+
+/** API POST /admin/series body. */
+export const AdminCreateSeriesInputSchema = z.object({
+  nameRu: z.string().trim().min(1).max(500),
+  nameOrig: z.string().trim().min(1).max(500).optional(),
+  slug: optionalSlugSchema,
+});
+export type AdminCreateSeriesInput = z.infer<
+  typeof AdminCreateSeriesInputSchema
+>;
+
+export const AdminUpdateSeriesInputSchema = z.object({
+  nameRu: z.string().trim().min(1).max(500).optional(),
+  nameOrig: z.string().trim().min(1).max(500).nullable().optional(),
+});
+export type AdminUpdateSeriesInput = z.infer<
+  typeof AdminUpdateSeriesInputSchema
+>;
+
+export const AdminSeriesIdParamSchema = z.object({
+  seriesId: z.string().trim().min(1).max(128),
+});
+export type AdminSeriesIdParam = z.infer<typeof AdminSeriesIdParamSchema>;
+
+/** API POST /admin/characters body. */
+export const AdminCreateCharacterInputSchema = z.object({
+  nameRu: z.string().trim().min(1).max(500),
+  nameOrig: z.string().trim().min(1).max(500).optional(),
+  slug: optionalSlugSchema,
+});
+export type AdminCreateCharacterInput = z.infer<
+  typeof AdminCreateCharacterInputSchema
+>;
+
+export const AdminUpdateCharacterInputSchema = z.object({
+  nameRu: z.string().trim().min(1).max(500).optional(),
+  nameOrig: z.string().trim().min(1).max(500).nullable().optional(),
+});
+export type AdminUpdateCharacterInput = z.infer<
+  typeof AdminUpdateCharacterInputSchema
+>;
+
+export const AdminCharacterIdParamSchema = z.object({
+  characterId: z.string().trim().min(1).max(128),
+});
+export type AdminCharacterIdParam = z.infer<typeof AdminCharacterIdParamSchema>;
+
+/** API POST /admin/worlds body. */
+export const AdminCreateWorldInputSchema = z.object({
+  nameRu: z.string().trim().min(1).max(500),
+  nameOrig: z.string().trim().min(1).max(500).optional(),
+  descriptionRu: z.string().trim().min(1).max(10_000).optional(),
+  slug: optionalSlugSchema,
+});
+export type AdminCreateWorldInput = z.infer<typeof AdminCreateWorldInputSchema>;
+
+export const AdminUpdateWorldInputSchema = z.object({
+  nameRu: z.string().trim().min(1).max(500).optional(),
+  nameOrig: z.string().trim().min(1).max(500).nullable().optional(),
+  descriptionRu: z.string().trim().min(1).max(10_000).nullable().optional(),
+});
+export type AdminUpdateWorldInput = z.infer<typeof AdminUpdateWorldInputSchema>;
+
+export const AdminWorldIdParamSchema = z.object({
+  worldId: z.string().trim().min(1).max(128),
+});
+export type AdminWorldIdParam = z.infer<typeof AdminWorldIdParamSchema>;
+
+/** API POST /admin/places body. */
+export const AdminCreatePlaceInputSchema = z.object({
+  nameRu: z.string().trim().min(1).max(500),
+  nameOrig: z.string().trim().min(1).max(500).optional(),
+  worldId: z.string().trim().min(1).max(128).optional(),
+  slug: optionalSlugSchema,
+});
+export type AdminCreatePlaceInput = z.infer<typeof AdminCreatePlaceInputSchema>;
+
+export const AdminUpdatePlaceInputSchema = z.object({
+  nameRu: z.string().trim().min(1).max(500).optional(),
+  nameOrig: z.string().trim().min(1).max(500).nullable().optional(),
+  worldId: z.string().trim().min(1).max(128).nullable().optional(),
+});
+export type AdminUpdatePlaceInput = z.infer<typeof AdminUpdatePlaceInputSchema>;
+
+export const AdminPlaceIdParamSchema = z.object({
+  placeId: z.string().trim().min(1).max(128),
+});
+export type AdminPlaceIdParam = z.infer<typeof AdminPlaceIdParamSchema>;
+
+/** Web form: named catalog entities (Series/Character/World/Place). */
+export const AdminCatalogEntityFormSchema = z.object({
+  nameRu: z.string().trim().min(1, 'Укажите название').max(500),
+  nameOrig: z.string().trim().max(500).optional(),
+  descriptionRu: z.string().trim().max(10_000).optional(),
+  worldId: z.string().trim().max(128).optional(),
+});
+export type AdminCatalogEntityForm = z.infer<
+  typeof AdminCatalogEntityFormSchema
+>;
+
+export function toAdminCreateSeriesInput(
+  form: AdminCatalogEntityForm,
+): AdminCreateSeriesInput {
+  return {
+    nameRu: form.nameRu,
+    nameOrig: form.nameOrig?.trim() || undefined,
+  };
+}
+
+export function toAdminUpdateSeriesInput(
+  form: AdminCatalogEntityForm,
+): AdminUpdateSeriesInput {
+  return {
+    nameRu: form.nameRu,
+    nameOrig: form.nameOrig?.trim() || null,
+  };
+}
+
+export function toAdminCreateCharacterInput(
+  form: AdminCatalogEntityForm,
+): AdminCreateCharacterInput {
+  return {
+    nameRu: form.nameRu,
+    nameOrig: form.nameOrig?.trim() || undefined,
+  };
+}
+
+export function toAdminUpdateCharacterInput(
+  form: AdminCatalogEntityForm,
+): AdminUpdateCharacterInput {
+  return {
+    nameRu: form.nameRu,
+    nameOrig: form.nameOrig?.trim() || null,
+  };
+}
+
+export function toAdminCreateWorldInput(
+  form: AdminCatalogEntityForm,
+): AdminCreateWorldInput {
+  return {
+    nameRu: form.nameRu,
+    nameOrig: form.nameOrig?.trim() || undefined,
+    descriptionRu: form.descriptionRu?.trim() || undefined,
+  };
+}
+
+export function toAdminUpdateWorldInput(
+  form: AdminCatalogEntityForm,
+): AdminUpdateWorldInput {
+  return {
+    nameRu: form.nameRu,
+    nameOrig: form.nameOrig?.trim() || null,
+    descriptionRu: form.descriptionRu?.trim() || null,
+  };
+}
+
+export function toAdminCreatePlaceInput(
+  form: AdminCatalogEntityForm,
+): AdminCreatePlaceInput {
+  return {
+    nameRu: form.nameRu,
+    nameOrig: form.nameOrig?.trim() || undefined,
+    worldId: form.worldId?.trim() || undefined,
+  };
+}
+
+export function toAdminUpdatePlaceInput(
+  form: AdminCatalogEntityForm,
+): AdminUpdatePlaceInput {
+  return {
+    nameRu: form.nameRu,
+    nameOrig: form.nameOrig?.trim() || null,
+    worldId: form.worldId?.trim() || null,
+  };
+}
