@@ -230,7 +230,7 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 | ⬜     | `bd-i5b.10`| Импорт: live OL/Wikidata adapters (follow-up .4) |
 | ⬜     | `bd-i5b.5` | Админка: Админ UI рейтингов        |
 | ⬜     | `bd-i5b.6` | Админка: Админ UI подборок         |
-| ⬜     | `bd-i5b.7` | Админка: Очередь не сматченного    |
+| 🔄     | `bd-i5b.7` | Админка: Очередь не сматченного    |
 | ⬜     | `bd-i5b.8` | Админка: Журнал аудита             |
 
 ### 11. PWA и оболочка — ✅ · epic `bd-6b7` · 4 / 4 (+ human follow-up)
@@ -255,6 +255,8 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 
 ## Последние действия
 
+- 2026-08-06: `bd-i5b.7` MatchQueue admin — реализация + тесты green; ветка `task/bd-i5b.7-match-queue`; 🔄 ready close (оркестратор)
+- 2026-08-06: `/orchestrate` набор `bd-i5b.7`+`.9` — старт; сборочная `feat/bookspace-bd-i5b`; ЗАЛИВАТЬ develop=Нет; claim `bd-i5b.7` → `task/bd-i5b.7-match-queue`
 - 2026-08-06: `/orchestrate` финал набора `bd-i5b.1–.4` — все closed+merged в `feat/bookspace-bd-i5b`; target: api unit 33, e2e 11, vitest 25, PW 18/18; ЗАЛИВАТЬ develop=Нет; follow-up `bd-i5b.9`, `bd-i5b.10`
 - 2026-08-06: close `bd-i5b.4` (admin catalog import) → merge `--no-ff` в `feat/bookspace-bd-i5b`; unit 10, e2e 3, PW 4/4; OL/WD stub
 - 2026-08-06: `bd-i5b.4` ready close: `catalog.import.batch` + POST/GET `/admin/import/jobs` + UI `/admin/import`; OL/WD stub; api unit **10**, e2e **3**, vitest **5**, PW smoke **4/4** desktop+mobile; ветка `task/bd-i5b.4-admin-catalog-import`; `bd close` — оркестратор
