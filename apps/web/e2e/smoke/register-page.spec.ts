@@ -12,7 +12,7 @@ test.describe('Register page smoke (S3 / bd-wus.6)', () => {
     });
     await expect(heading).toBeVisible();
     await expect(page.getByLabel('Email')).toBeVisible();
-    await expect(page.getByLabel('Пароль')).toBeVisible();
+    await expect(page.getByLabel('Пароль', { exact: true })).toBeVisible();
     await expect(
       page.getByRole('button', { name: 'Зарегистрироваться' }),
     ).toBeVisible();

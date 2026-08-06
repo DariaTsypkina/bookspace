@@ -7,7 +7,7 @@ test.describe('Login page smoke (S2 / bd-wus.5)', () => {
     const heading = page.getByRole('heading', { name: 'Вход', level: 1 });
     await expect(heading).toBeVisible();
     await expect(page.getByLabel('Email')).toBeVisible();
-    await expect(page.getByLabel('Пароль')).toBeVisible();
+    await expect(page.getByLabel('Пароль', { exact: true })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Войти' })).toBeVisible();
     await expect(
       page.getByRole('link', { name: 'Войти через Google' }),

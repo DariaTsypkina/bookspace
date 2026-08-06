@@ -253,6 +253,7 @@ Human `/task` 2026-08-05. `/orchestrate`: общая сборочная `feat/bo
 
 ## Последние действия
 
+- 2026-08-06: `bd-957.9` ready close: OAuth CTA скрыты на `/login`+`/register`; unit **16/16**; PW smoke **22/22** + oauth e2e **12/12** (desktop+mobile, `PLAYWRIGHT_CHROME_CHANNEL=0`); BFF `/api/auth/google|yandex` живы (302); ветка `task/bd-957.9-hide-oauth-ui`; `bd close` — оркестратор
 - 2026-08-06: `bd-957.9` in progress: скрыты OAuth CTA на `/login`+`/register`; unit 16/16; PW smoke обновлены; BFF OAuth не тронут; ветка `task/bd-957.9-hide-oauth-ui`
 - 2026-08-06: `/orchestrate` claim `bd-957.9` — скрыть OAuth Google/Яндекс из UI; ветка `task/bd-957.9-hide-oauth-ui`; сборочная `feat/bookspace-bd-957` (после merge origin/develop); ЗАЛИВАТЬ develop=Да
 - 2026-08-06: `/orchestrate` финал `bd-6v0.12` — closed+merged в `feat/bookspace-bd-6v0`; target API 15+8, vitest 17, PW 6/6; сборочная → develop (ЗАЛИВАТЬ=Да)
