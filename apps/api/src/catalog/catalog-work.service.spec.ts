@@ -89,6 +89,48 @@ describe('CatalogWorkService', () => {
     });
   });
 
+  it('returns descriptionRu for published work when set (bd-6v0.12)', async () => {
+    const work = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-with-annotation`,
+        titleRu: 'Книга с аннотацией',
+        status: WorkStatus.PUBLISHED,
+        descriptionRu:
+          'Мальчик узнаёт, что он волшебник, и отправляется в школу магии.',
+      },
+    });
+
+    const result = await service.getBySlug(work.slug);
+
+    expect(result.descriptionRu).toBe(
+      'Мальчик узнаёт, что он волшебник, и отправляется в школу магии.',
+    );
+  });
+
+  it('omits descriptionRu when null or blank (bd-6v0.12)', async () => {
+    const without = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-no-annotation`,
+        titleRu: 'Без аннотации',
+        status: WorkStatus.PUBLISHED,
+      },
+    });
+    const blank = await prisma.work.create({
+      data: {
+        slug: `${TEST_PREFIX}-blank-annotation`,
+        titleRu: 'Пустая аннотация',
+        status: WorkStatus.PUBLISHED,
+        descriptionRu: '   ',
+      },
+    });
+
+    const withoutResult = await service.getBySlug(without.slug);
+    const blankResult = await service.getBySlug(blank.slug);
+
+    expect(withoutResult.descriptionRu).toBeUndefined();
+    expect(blankResult.descriptionRu).toBeUndefined();
+  });
+
   it('returns editions with language, translator and isbn13', async () => {
     const work = await prisma.work.create({
       data: {

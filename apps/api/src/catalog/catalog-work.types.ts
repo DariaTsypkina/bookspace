@@ -33,6 +33,8 @@ export interface CatalogWorkResponse {
   titleRu: string;
   titleOrig?: string;
   yearFirst?: number;
+  /** Краткое содержание / аннотация; omit if empty. */
+  descriptionRu?: string;
   authors: CatalogWorkAuthor[];
   series?: CatalogWorkSeries;
   editions: CatalogWorkEdition[];

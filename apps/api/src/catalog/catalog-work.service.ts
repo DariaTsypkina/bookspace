@@ -86,11 +86,14 @@ export class CatalogWorkService {
 
     const readingOrder = await this.buildReadingOrder(work, seriesLink);
 
+    const descriptionRu = work.descriptionRu?.trim() || undefined;
+
     return {
       slug: work.slug,
       titleRu: work.titleRu,
       titleOrig: work.titleOrig ?? undefined,
       yearFirst: work.yearFirst ?? undefined,
+      descriptionRu,
       authors: publishedAuthors,
       series: seriesLink
         ? {
