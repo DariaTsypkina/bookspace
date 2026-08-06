@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-06T11:39:07.855Z",
+  "generated_at": "2026-08-06T11:40:11.438Z",
   "source": "bd list --all + bd stats",
   "summary": {
     "total_issues": 154,
     "open_issues": 24,
-    "in_progress_issues": 1,
-    "closed_issues": 129,
+    "in_progress_issues": 0,
+    "closed_issues": 130,
     "blocked_issues": 0,
     "ready_issues": 24
   },
@@ -800,16 +800,16 @@
       "status": "open",
       "priority": 2,
       "children_total": 8,
-      "children_closed": 0,
-      "children_in_progress": 1,
+      "children_closed": 1,
+      "children_in_progress": 0,
       "children_open": 7,
-      "progress": "0 / 8",
-      "percent_closed": 0,
+      "progress": "1 / 8",
+      "percent_closed": 13,
       "children": [
         {
           "id": "bd-i5b.1",
           "title": "Админка: Админ-дашборд",
-          "status": "in_progress",
+          "status": "closed",
           "type": "feature",
           "priority": 2
         },
@@ -1991,11 +1991,11 @@
     {
       "id": "bd-i5b.1",
       "title": "Админка: Админ-дашборд",
-      "status": "in_progress",
+      "status": "closed",
       "type": "feature",
       "priority": 2,
       "parent": "bd-i5b",
-      "updated_at": "2026-08-06T11:31:52Z"
+      "updated_at": "2026-08-06T11:39:43Z"
     },
     {
       "id": "bd-i5b.2",
