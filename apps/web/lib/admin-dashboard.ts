@@ -21,6 +21,11 @@ export async function fetchAdminDashboardSummary(
 
 export const ADMIN_DASHBOARD_QUICK_ACTIONS = [
   {
+    href: '/admin/catalog',
+    label: 'Каталог',
+    description: 'CRUD произведений, ExternalId, публикация',
+  },
+  {
     href: '/admin/import',
     label: 'Импорт каталога',
     description: 'Запуск и мониторинг import jobs',

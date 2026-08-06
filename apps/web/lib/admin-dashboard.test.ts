@@ -59,6 +59,7 @@ describe('fetchAdminDashboardSummary', () => {
 describe('ADMIN_DASHBOARD_QUICK_ACTIONS', () => {
   it('links to future admin sections without Button asChild', () => {
     expect(ADMIN_DASHBOARD_QUICK_ACTIONS.map((a) => a.href)).toEqual([
+      '/admin/catalog',
       '/admin/import',
       '/admin/rankings',
       '/admin/context',

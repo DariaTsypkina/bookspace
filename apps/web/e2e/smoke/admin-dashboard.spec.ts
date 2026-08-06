@@ -42,6 +42,10 @@ test.describe('Admin dashboard smoke', () => {
     await expect(
       page.getByRole('heading', { name: 'Быстрые действия' }),
     ).toBeVisible();
+    await expect(page.getByRole('link', { name: /Каталог/ })).toHaveAttribute(
+      'href',
+      '/admin/catalog',
+    );
     await expect(
       page.getByRole('link', { name: /Импорт каталога/ }),
     ).toHaveAttribute('href', '/admin/import');
