@@ -189,3 +189,67 @@ export const AdminMergeWorksInputSchema = z.object({
 });
 
 export type AdminMergeWorksInput = z.infer<typeof AdminMergeWorksInputSchema>;
+
+const CatalogImportSourceSchema = z.enum([
+  'openlibrary',
+  'wikidata',
+  'isbn_list',
+  'json_upload',
+]);
+
+export type CatalogImportSource = z.infer<typeof CatalogImportSourceSchema>;
+
+/** API POST /admin/import/jobs body. */
+export const AdminCatalogImportStartSchema = z.object({
+  source: CatalogImportSourceSchema,
+  query: z.string().trim().min(1).max(500).optional(),
+  isbns: z.array(z.string().trim().min(1).max(32)).min(1).max(500).optional(),
+  rows: z.array(z.unknown()).min(1).max(500).optional(),
+  idempotencyKey: z.string().trim().min(1).max(128).optional(),
+});
+
+export type AdminCatalogImportStart = z.infer<
+  typeof AdminCatalogImportStartSchema
+>;
+
+/** Validates source-specific required fields (call after schema parse). */
+export function assertCatalogImportStartPayload(
+  value: AdminCatalogImportStart,
+): void {
+  if (
+    (value.source === 'openlibrary' || value.source === 'wikidata') &&
+    !value.query?.trim()
+  ) {
+    throw new Error('Укажите поисковый запрос');
+  }
+  if (value.source === 'isbn_list' && (!value.isbns || value.isbns.length === 0)) {
+    throw new Error('Укажите хотя бы один ISBN');
+  }
+  if (
+    value.source === 'json_upload' &&
+    (!value.rows || value.rows.length === 0)
+  ) {
+    throw new Error('Укажите хотя бы одну строку');
+  }
+}
+
+export const AdminCatalogImportJobIdParamSchema = z.object({
+  jobId: z.string().trim().min(1).max(128),
+});
+
+export type AdminCatalogImportJobIdParam = z.infer<
+  typeof AdminCatalogImportJobIdParamSchema
+>;
+
+export const AdminCatalogImportReportSchema = z.object({
+  created: z.number().int().nonnegative(),
+  updated: z.number().int().nonnegative(),
+  queued: z.number().int().nonnegative(),
+  drafts: z.number().int().nonnegative(),
+  failed: z.number().int().nonnegative(),
+  matchQueueIds: z.array(z.string()).optional(),
+});
+
+export type AdminCatalogImportReport = z.infer<
+  typeof AdminCatalogImportReportSchema
+>;

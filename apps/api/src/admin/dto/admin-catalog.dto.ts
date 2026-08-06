@@ -1,4 +1,6 @@
 import {
+  AdminCatalogImportJobIdParamSchema,
+  AdminCatalogImportStartSchema,
   AdminCreateAuthorInputSchema,
   AdminCreateEditionInputSchema,
   AdminCreateExternalIdInputSchema,
@@ -50,4 +52,12 @@ export class AdminCatalogWorkIdParamDto extends createZodDto(
 
 export class AdminMergeWorksDto extends createZodDto(
   AdminMergeWorksInputSchema,
+) {}
+
+export class AdminCatalogImportStartDto extends createZodDto(
+  AdminCatalogImportStartSchema,
+) {}
+
+export class AdminCatalogImportJobIdParamDto extends createZodDto(
+  AdminCatalogImportJobIdParamSchema,
 ) {}
