@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-06T12:18:09.397Z",
+  "generated_at": "2026-08-06T12:20:35.336Z",
   "source": "bd list --all + bd stats",
   "summary": {
-    "total_issues": 154,
-    "open_issues": 21,
+    "total_issues": 156,
+    "open_issues": 23,
     "in_progress_issues": 0,
     "closed_issues": 133,
     "blocked_issues": 0,
-    "ready_issues": 21
+    "ready_issues": 23
   },
   "epics": [
     {
@@ -799,18 +799,25 @@
       "title": "Админка",
       "status": "open",
       "priority": 2,
-      "children_total": 8,
+      "children_total": 10,
       "children_closed": 4,
       "children_in_progress": 0,
-      "children_open": 4,
-      "progress": "4 / 8",
-      "percent_closed": 50,
+      "children_open": 6,
+      "progress": "4 / 10",
+      "percent_closed": 40,
       "children": [
         {
           "id": "bd-i5b.1",
           "title": "Админка: Админ-дашборд",
           "status": "closed",
           "type": "feature",
+          "priority": 2
+        },
+        {
+          "id": "bd-i5b.10",
+          "title": "Импорт каталога: live HTTP адаптеры Open Library / Wikidata",
+          "status": "open",
+          "type": "task",
           "priority": 2
         },
         {
@@ -860,6 +867,13 @@
           "title": "Админка: Журнал аудита",
           "status": "open",
           "type": "feature",
+          "priority": 2
+        },
+        {
+          "id": "bd-i5b.9",
+          "title": "Админка: CRUD Series/Characters/Worlds/Places",
+          "status": "open",
+          "type": "task",
           "priority": 2
         }
       ]
@@ -1294,6 +1308,24 @@
       "priority": 1,
       "parent": "bd-957",
       "updated_at": "2026-07-20T07:30:07Z"
+    },
+    {
+      "id": "bd-i5b.10",
+      "title": "Импорт каталога: live HTTP адаптеры Open Library / Wikidata",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-i5b",
+      "updated_at": "2026-08-06T12:20:17Z"
+    },
+    {
+      "id": "bd-i5b.9",
+      "title": "Админка: CRUD Series/Characters/Worlds/Places",
+      "status": "open",
+      "type": "task",
+      "priority": 2,
+      "parent": "bd-i5b",
+      "updated_at": "2026-08-06T12:20:16Z"
     },
     {
       "id": "bd-6v0.12",
